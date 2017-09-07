@@ -20,14 +20,14 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-"undefined" == typeof self && (self = {}),
-  (self.onmessage = function(e) {
-    "use strict";
+typeof self === 'undefined' && (self = {}),
+  (self.onmessage = function (e) {
+    'use strict'
     var s = e.data.array,
-      a = self.webkitPostMessage || self.postMessage;
+      a = self.webkitPostMessage || self.postMessage
     try {
-      a({ array: s }, [s.buffer]);
+      a({ array: s }, [s.buffer])
     } catch (e) {
-      a({});
+      a({})
     }
-  });
+  })

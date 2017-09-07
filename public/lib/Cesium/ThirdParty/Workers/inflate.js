@@ -29,8 +29,8 @@
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
 
- 2. Redistributions in binary form must reproduce the above copyright 
- notice, this list of conditions and the following disclaimer in 
+ 2. Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in
  the documentation and/or other materials provided with the distribution.
 
  3. The names of the authors may not be used to endorse or promote products
@@ -48,50 +48,47 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-!(function(i) {
-  function e() {
-    function i(i, e, t, n, s, o, f, u, w, v, h) {
+!(function (i) {
+  function e () {
+    function i (i, e, t, n, s, o, f, u, w, v, h) {
       var k, m, y, g, p, A, I, E, U, z, D, M, L, P, j;
-      (z = 0), (p = t);
-      do a[i[e + z]]++, z++, p--;
-      while (0 !== p);
-      if (a[0] == t) return (f[0] = -1), (u[0] = 0), d;
-      for (E = u[0], A = 1; A <= S && 0 === a[A]; A++);
-      for (I = A, E < A && (E = A), p = S; 0 !== p && 0 === a[p]; p--);
-      for (y = p, E > p && (E = p), u[0] = E, P = 1 << A; A < p; A++, P <<= 1)
-        if ((P -= a[A]) < 0) return b;
-      if ((P -= a[p]) < 0) return b;
-      for (a[p] += P, l[1] = A = 0, z = 1, L = 2; 0 !== --p; )
-        (l[L] = A += a[z]), L++, z++;
-      (p = 0), (z = 0);
-      do 0 !== (A = i[e + z]) && (h[l[A]++] = p), z++;
-      while (++p < t);
+      (z = 0), (p = t)
+      do a[i[e + z]]++, z++, p--
+      while (p !== 0)
+      if (a[0] == t) return (f[0] = -1), (u[0] = 0), d
+      for (E = u[0], A = 1; A <= S && a[A] === 0; A++);
+      for (I = A, E < A && (E = A), p = S; p !== 0 && a[p] === 0; p--);
+      for (y = p, E > p && (E = p), u[0] = E, P = 1 << A; A < p; A++, P <<= 1) { if ((P -= a[A]) < 0) return b }
+      if ((P -= a[p]) < 0) return b
+      for (a[p] += P, l[1] = A = 0, z = 1, L = 2; --p !== 0;) { (l[L] = A += a[z]), L++, z++ }
+      (p = 0), (z = 0)
+      do (A = i[e + z]) !== 0 && (h[l[A]++] = p), z++
+      while (++p < t)
       for (
         t = l[y], l[0] = p = 0, z = 0, g = -1, M = -E, _[0] = 0, D = 0, j = 0;
         I <= y;
         I++
-      )
-        for (k = a[I]; 0 !== k--; ) {
-          for (; I > M + E; ) {
+      ) {
+        for (k = a[I]; k-- !== 0;) {
+          for (; I > M + E;) {
             if (
               (g++,
               (M += E),
               (j = y - M),
               (j = j > E ? E : j),
               (m = 1 << (A = I - M)) > k + 1 && ((m -= k + 1), (L = I), A < j))
-            )
-              for (; ++A < j && !((m <<= 1) <= a[++L]); ) m -= a[L];
+            ) { for (; ++A < j && !((m <<= 1) <= a[++L]);) m -= a[L] }
             if (((j = 1 << A), v[0] + j > c)) return b;
             (_[g] = D = v[0]),
               (v[0] += j),
-              0 !== g
+              g !== 0
                 ? ((l[g] = p),
                   (r[0] = A),
                   (r[1] = E),
                   (A = p >>> (M - E)),
                   (r[2] = D - _[g - 1] - A),
                   w.set(r, 3 * (_[g - 1] + A)))
-                : (f[0] = D);
+                : (f[0] = D)
           }
           for (
             r[1] = I - M,
@@ -104,16 +101,15 @@
               A = p >>> M;
             A < j;
             A += m
-          )
-            w.set(r, 3 * (D + A));
-          for (A = 1 << (I - 1); 0 !== (p & A); A >>>= 1) p ^= A;
-          for (p ^= A, U = (1 << M) - 1; (p & U) != l[g]; )
-            g--, (M -= E), (U = (1 << M) - 1);
+          ) { w.set(r, 3 * (D + A)) }
+          for (A = 1 << (I - 1); (p & A) !== 0; A >>>= 1) p ^= A
+          for (p ^= A, U = (1 << M) - 1; (p & U) != l[g];) { g--, (M -= E), (U = (1 << M) - 1) }
         }
-      return 0 !== P && 1 != y ? x : d;
+      }
+      return P !== 0 && y != 1 ? x : d
     }
-    function e(i) {
-      var e;
+    function e (i) {
+      var e
       for (
         t ||
           ((t = []),
@@ -126,11 +122,10 @@
           e = 0;
         e < i;
         e++
-      )
-        n[e] = 0;
-      for (e = 0; e < S + 1; e++) a[e] = 0;
-      for (e = 0; e < 3; e++) r[e] = 0;
-      _.set(a.subarray(0, S), 0), l.set(a.subarray(0, S + 1), 0);
+      ) { n[e] = 0 }
+      for (e = 0; e < S + 1; e++) a[e] = 0
+      for (e = 0; e < 3; e++) r[e] = 0
+      _.set(a.subarray(0, S), 0), l.set(a.subarray(0, S + 1), 0)
     }
     var t,
       n,
@@ -139,47 +134,47 @@
       _,
       l,
       s = this;
-    (s.inflate_trees_bits = function(a, r, _, l, d) {
-      var s;
+    (s.inflate_trees_bits = function (a, r, _, l, d) {
+      var s
       return (
         e(19),
         (t[0] = 0),
         (s = i(a, 0, 19, 19, null, null, _, r, l, t, n)),
         s == b
-          ? (d.msg = "oversubscribed dynamic bit lengths tree")
-          : (s != x && 0 !== r[0]) ||
-            ((d.msg = "incomplete dynamic bit lengths tree"), (s = b)),
+          ? (d.msg = 'oversubscribed dynamic bit lengths tree')
+          : (s != x && r[0] !== 0) ||
+            ((d.msg = 'incomplete dynamic bit lengths tree'), (s = b)),
         s
-      );
+      )
     }),
-      (s.inflate_trees_dynamic = function(a, r, _, l, s, o, f, w, c) {
-        var v;
+      (s.inflate_trees_dynamic = function (a, r, _, l, s, o, f, w, c) {
+        var v
         return (
           e(288),
           (t[0] = 0),
           (v = i(_, 0, a, 257, p, A, o, l, w, t, n)),
-          v != d || 0 === l[0]
+          v != d || l[0] === 0
             ? (v == b
-                ? (c.msg = "oversubscribed literal/length tree")
+                ? (c.msg = 'oversubscribed literal/length tree')
                 : v != u &&
-                  ((c.msg = "incomplete literal/length tree"), (v = b)),
+                  ((c.msg = 'incomplete literal/length tree'), (v = b)),
               v)
             : (e(288),
               (v = i(_, a, r, 0, I, E, f, s, w, t, n)),
-              v != d || (0 === s[0] && a > 257)
+              v != d || (s[0] === 0 && a > 257)
                 ? (v == b
-                    ? (c.msg = "oversubscribed distance tree")
+                    ? (c.msg = 'oversubscribed distance tree')
                     : v == x
-                      ? ((c.msg = "incomplete distance tree"), (v = b))
+                      ? ((c.msg = 'incomplete distance tree'), (v = b))
                       : v != u &&
-                        ((c.msg = "empty distance tree with lengths"), (v = b)),
+                        ((c.msg = 'empty distance tree with lengths'), (v = b)),
                   v)
                 : d)
-        );
-      });
+        )
+      })
   }
-  function t() {
-    function i(i, e, t, n, a, r, _, l) {
+  function t () {
+    function i (i, e, t, n, a, r, _, l) {
       var o, f, u, x, c, v, h, k, m, y, g, p, A, I, E, S;
       (h = l.next_in_index),
         (k = l.avail_in),
@@ -188,69 +183,69 @@
         (m = _.write),
         (y = m < _.read ? _.read - m - 1 : _.end - m),
         (g = w[i]),
-        (p = w[e]);
+        (p = w[e])
       do {
-        for (; v < 20; ) k--, (c |= (255 & l.read_byte(h++)) << v), (v += 8);
+        for (; v < 20;) k--, (c |= (255 & l.read_byte(h++)) << v), (v += 8)
         if (
-          ((o = c & g), (f = t), (u = n), (S = 3 * (u + o)), 0 !== (x = f[S]))
-        )
+          ((o = c & g), (f = t), (u = n), (S = 3 * (u + o)), (x = f[S]) !== 0)
+        ) {
           for (;;) {
-            if (((c >>= f[S + 1]), (v -= f[S + 1]), 0 !== (16 & x))) {
+            if (((c >>= f[S + 1]), (v -= f[S + 1]), (16 & x) !== 0)) {
               for (
                 x &= 15, A = f[S + 2] + (c & w[x]), c >>= x, v -= x;
                 v < 15;
 
-              )
-                k--, (c |= (255 & l.read_byte(h++)) << v), (v += 8);
-              for (o = c & p, f = a, u = r, S = 3 * (u + o), x = f[S]; ; ) {
-                if (((c >>= f[S + 1]), (v -= f[S + 1]), 0 !== (16 & x))) {
-                  for (x &= 15; v < x; )
-                    k--, (c |= (255 & l.read_byte(h++)) << v), (v += 8);
+              ) { k--, (c |= (255 & l.read_byte(h++)) << v), (v += 8) }
+              for (o = c & p, f = a, u = r, S = 3 * (u + o), x = f[S]; ;) {
+                if (((c >>= f[S + 1]), (v -= f[S + 1]), (16 & x) !== 0)) {
+                  for (x &= 15; v < x;) { k--, (c |= (255 & l.read_byte(h++)) << v), (v += 8) }
                   if (
                     ((I = f[S + 2] + (c & w[x])),
                     (c >>= x),
                     (v -= x),
                     (y -= A),
                     m >= I)
-                  )
+                  ) {
                     (E = m - I),
-                      m - E > 0 && 2 > m - E
+                      m - E > 0 && m - E < 2
                         ? ((_.window[m++] = _.window[E++]),
                           (_.window[m++] = _.window[E++]),
                           (A -= 2))
                         : (_.window.set(_.window.subarray(E, E + 2), m),
                           (m += 2),
                           (E += 2),
-                          (A -= 2));
-                  else {
-                    E = m - I;
-                    do E += _.end;
-                    while (E < 0);
+                          (A -= 2))
+                  } else {
+                    E = m - I
+                    do E += _.end
+                    while (E < 0)
                     if (((x = _.end - E), A > x)) {
                       if (((A -= x), m - E > 0 && x > m - E)) {
-                        do _.window[m++] = _.window[E++];
-                        while (0 !== --x);
-                      } else
+                        do _.window[m++] = _.window[E++]
+                        while (--x !== 0)
+                      } else {
                         _.window.set(_.window.subarray(E, E + x), m),
                           (m += x),
                           (E += x),
-                          (x = 0);
-                      E = 0;
+                          (x = 0)
+                      }
+                      E = 0
                     }
                   }
                   if (m - E > 0 && A > m - E) {
-                    do _.window[m++] = _.window[E++];
-                    while (0 !== --A);
-                  } else
+                    do _.window[m++] = _.window[E++]
+                    while (--A !== 0)
+                  } else {
                     _.window.set(_.window.subarray(E, E + A), m),
                       (m += A),
                       (E += A),
-                      (A = 0);
-                  break;
+                      (A = 0)
+                  }
+                  break
                 }
-                if (0 !== (64 & x))
+                if ((64 & x) !== 0) {
                   return (
-                    (l.msg = "invalid distance code"),
+                    (l.msg = 'invalid distance code'),
                     (A = l.avail_in - k),
                     (A = v >> 3 < A ? v >> 3 : A),
                     (k += A),
@@ -263,13 +258,14 @@
                     (l.next_in_index = h),
                     (_.write = m),
                     b
-                  );
-                (o += f[S + 2]), (o += c & w[x]), (S = 3 * (u + o)), (x = f[S]);
+                  )
+                }
+                (o += f[S + 2]), (o += c & w[x]), (S = 3 * (u + o)), (x = f[S])
               }
-              break;
+              break
             }
-            if (0 !== (64 & x))
-              return 0 !== (32 & x)
+            if ((64 & x) !== 0) {
+              return (32 & x) !== 0
                 ? ((A = l.avail_in - k),
                   (A = v >> 3 < A ? v >> 3 : A),
                   (k += A),
@@ -282,7 +278,7 @@
                   (l.next_in_index = h),
                   (_.write = m),
                   s)
-                : ((l.msg = "invalid literal/length code"),
+                : ((l.msg = 'invalid literal/length code'),
                   (A = l.avail_in - k),
                   (A = v >> 3 < A ? v >> 3 : A),
                   (k += A),
@@ -294,22 +290,23 @@
                   (l.total_in += h - l.next_in_index),
                   (l.next_in_index = h),
                   (_.write = m),
-                  b);
+                  b)
+            }
             if (
               ((o += f[S + 2]),
               (o += c & w[x]),
               (S = 3 * (u + o)),
-              0 === (x = f[S]))
+              (x = f[S]) === 0)
             ) {
               (c >>= f[S + 1]),
                 (v -= f[S + 1]),
                 (_.window[m++] = f[S + 2]),
-                y--;
-              break;
+                y--
+              break
             }
           }
-        else (c >>= f[S + 1]), (v -= f[S + 1]), (_.window[m++] = f[S + 2]), y--;
-      } while (y >= 258 && k >= 10);
+        } else (c >>= f[S + 1]), (v -= f[S + 1]), (_.window[m++] = f[S + 2]), y--
+      } while (y >= 258 && k >= 10)
       return (
         (A = l.avail_in - k),
         (A = v >> 3 < A ? v >> 3 : A),
@@ -323,7 +320,7 @@
         (l.next_in_index = h),
         (_.write = m),
         d
-      );
+      )
     }
     var e,
       t,
@@ -340,10 +337,10 @@
       h = 0,
       k = 0,
       m = 0;
-    (r.init = function(i, r, _, l, d, s) {
-      (e = U), (v = i), (h = r), (n = _), (k = l), (a = d), (m = s), (t = null);
+    (r.init = function (i, r, _, l, d, s) {
+      (e = U), (v = i), (h = r), (n = _), (k = l), (a = d), (m = s), (t = null)
     }),
-      (r.proc = function(r, y, g) {
+      (r.proc = function (r, y, g) {
         var p,
           A,
           I,
@@ -353,7 +350,7 @@
           G,
           H = 0,
           J = 0,
-          K = 0;
+          K = 0
         for (
           K = y.next_in_index,
             E = y.avail_in,
@@ -363,7 +360,7 @@
             F = S < r.read ? r.read - S - 1 : r.end - S;
           ;
 
-        )
+        ) {
           switch (e) {
             case U:
               if (
@@ -384,13 +381,13 @@
                 (F = S < r.read ? r.read - S - 1 : r.end - S),
                 g != d)
               ) {
-                e = g == s ? q : C;
-                break;
+                e = g == s ? q : C
+                break
               }
-              (o = v), (t = n), (l = k), (e = z);
+              (o = v), (t = n), (l = k), (e = z)
             case z:
-              for (p = o; J < p; ) {
-                if (0 === E)
+              for (p = o; J < p;) {
+                if (E === 0) {
                   return (
                     (r.bitb = H),
                     (r.bitk = J),
@@ -399,34 +396,35 @@
                     (y.next_in_index = K),
                     (r.write = S),
                     r.inflate_flush(y, g)
-                  );
-                (g = d), E--, (H |= (255 & y.read_byte(K++)) << J), (J += 8);
+                  )
+                }
+                (g = d), E--, (H |= (255 & y.read_byte(K++)) << J), (J += 8)
               }
               if (
                 ((A = 3 * (l + (H & w[p]))),
                 (H >>>= t[A + 1]),
                 (J -= t[A + 1]),
                 (I = t[A]),
-                0 === I)
+                I === 0)
               ) {
-                (u = t[A + 2]), (e = j);
-                break;
+                (u = t[A + 2]), (e = j)
+                break
               }
-              if (0 !== (16 & I)) {
-                (x = 15 & I), (_ = t[A + 2]), (e = D);
-                break;
+              if ((16 & I) !== 0) {
+                (x = 15 & I), (_ = t[A + 2]), (e = D)
+                break
               }
-              if (0 === (64 & I)) {
-                (o = I), (l = A / 3 + t[A + 2]);
-                break;
+              if ((64 & I) === 0) {
+                (o = I), (l = A / 3 + t[A + 2])
+                break
               }
-              if (0 !== (32 & I)) {
-                e = q;
-                break;
+              if ((32 & I) !== 0) {
+                e = q
+                break
               }
               return (
                 (e = C),
-                (y.msg = "invalid literal/length code"),
+                (y.msg = 'invalid literal/length code'),
                 (g = b),
                 (r.bitb = H),
                 (r.bitk = J),
@@ -435,10 +433,10 @@
                 (y.next_in_index = K),
                 (r.write = S),
                 r.inflate_flush(y, g)
-              );
+              )
             case D:
-              for (p = x; J < p; ) {
-                if (0 === E)
+              for (p = x; J < p;) {
+                if (E === 0) {
                   return (
                     (r.bitb = H),
                     (r.bitk = J),
@@ -447,8 +445,9 @@
                     (y.next_in_index = K),
                     (r.write = S),
                     r.inflate_flush(y, g)
-                  );
-                (g = d), E--, (H |= (255 & y.read_byte(K++)) << J), (J += 8);
+                  )
+                }
+                (g = d), E--, (H |= (255 & y.read_byte(K++)) << J), (J += 8)
               }
               (_ += H & w[p]),
                 (H >>= p),
@@ -456,10 +455,10 @@
                 (o = h),
                 (t = a),
                 (l = m),
-                (e = M);
+                (e = M)
             case M:
-              for (p = o; J < p; ) {
-                if (0 === E)
+              for (p = o; J < p;) {
+                if (E === 0) {
                   return (
                     (r.bitb = H),
                     (r.bitk = J),
@@ -468,26 +467,27 @@
                     (y.next_in_index = K),
                     (r.write = S),
                     r.inflate_flush(y, g)
-                  );
-                (g = d), E--, (H |= (255 & y.read_byte(K++)) << J), (J += 8);
+                  )
+                }
+                (g = d), E--, (H |= (255 & y.read_byte(K++)) << J), (J += 8)
               }
               if (
                 ((A = 3 * (l + (H & w[p]))),
                 (H >>= t[A + 1]),
                 (J -= t[A + 1]),
                 (I = t[A]),
-                0 !== (16 & I))
+                (16 & I) !== 0)
               ) {
-                (x = 15 & I), (c = t[A + 2]), (e = L);
-                break;
+                (x = 15 & I), (c = t[A + 2]), (e = L)
+                break
               }
-              if (0 === (64 & I)) {
-                (o = I), (l = A / 3 + t[A + 2]);
-                break;
+              if ((64 & I) === 0) {
+                (o = I), (l = A / 3 + t[A + 2])
+                break
               }
               return (
                 (e = C),
-                (y.msg = "invalid distance code"),
+                (y.msg = 'invalid distance code'),
                 (g = b),
                 (r.bitb = H),
                 (r.bitk = J),
@@ -496,10 +496,10 @@
                 (y.next_in_index = K),
                 (r.write = S),
                 r.inflate_flush(y, g)
-              );
+              )
             case L:
-              for (p = x; J < p; ) {
-                if (0 === E)
+              for (p = x; J < p;) {
+                if (E === 0) {
                   return (
                     (r.bitb = H),
                     (r.bitk = J),
@@ -508,28 +508,29 @@
                     (y.next_in_index = K),
                     (r.write = S),
                     r.inflate_flush(y, g)
-                  );
-                (g = d), E--, (H |= (255 & y.read_byte(K++)) << J), (J += 8);
+                  )
+                }
+                (g = d), E--, (H |= (255 & y.read_byte(K++)) << J), (J += 8)
               }
-              (c += H & w[p]), (H >>= p), (J -= p), (e = P);
+              (c += H & w[p]), (H >>= p), (J -= p), (e = P)
             case P:
-              for (G = S - c; G < 0; ) G += r.end;
-              for (; 0 !== _; ) {
+              for (G = S - c; G < 0;) G += r.end
+              for (; _ !== 0;) {
                 if (
-                  0 === F &&
+                  F === 0 &&
                   (S == r.end &&
-                    0 !== r.read &&
+                    r.read !== 0 &&
                     ((S = 0), (F = S < r.read ? r.read - S - 1 : r.end - S)),
-                  0 === F &&
+                  F === 0 &&
                     ((r.write = S),
                     (g = r.inflate_flush(y, g)),
                     (S = r.write),
                     (F = S < r.read ? r.read - S - 1 : r.end - S),
                     S == r.end &&
-                      0 !== r.read &&
+                      r.read !== 0 &&
                       ((S = 0), (F = S < r.read ? r.read - S - 1 : r.end - S)),
-                    0 === F))
-                )
+                    F === 0))
+                ) {
                   return (
                     (r.bitb = H),
                     (r.bitk = J),
@@ -538,30 +539,31 @@
                     (y.next_in_index = K),
                     (r.write = S),
                     r.inflate_flush(y, g)
-                  );
+                  )
+                }
                 (r.window[S++] = r.window[G++]),
                   F--,
                   G == r.end && (G = 0),
-                  _--;
+                  _--
               }
-              e = U;
-              break;
+              e = U
+              break
             case j:
               if (
-                0 === F &&
+                F === 0 &&
                 (S == r.end &&
-                  0 !== r.read &&
+                  r.read !== 0 &&
                   ((S = 0), (F = S < r.read ? r.read - S - 1 : r.end - S)),
-                0 === F &&
+                F === 0 &&
                   ((r.write = S),
                   (g = r.inflate_flush(y, g)),
                   (S = r.write),
                   (F = S < r.read ? r.read - S - 1 : r.end - S),
                   S == r.end &&
-                    0 !== r.read &&
+                    r.read !== 0 &&
                     ((S = 0), (F = S < r.read ? r.read - S - 1 : r.end - S)),
-                  0 === F))
-              )
+                  F === 0))
+              ) {
                 return (
                   (r.bitb = H),
                   (r.bitk = J),
@@ -570,9 +572,10 @@
                   (y.next_in_index = K),
                   (r.write = S),
                   r.inflate_flush(y, g)
-                );
-              (g = d), (r.window[S++] = u), F--, (e = U);
-              break;
+                )
+              }
+              (g = d), (r.window[S++] = u), F--, (e = U)
+              break
             case q:
               if (
                 (J > 7 && ((J -= 8), E++, K--),
@@ -581,7 +584,7 @@
                 (S = r.write),
                 (F = S < r.read ? r.read - S - 1 : r.end - S),
                 r.read != r.write)
-              )
+              ) {
                 return (
                   (r.bitb = H),
                   (r.bitk = J),
@@ -590,8 +593,9 @@
                   (y.next_in_index = K),
                   (r.write = S),
                   r.inflate_flush(y, g)
-                );
-              e = B;
+                )
+              }
+              e = B
             case B:
               return (
                 (g = s),
@@ -602,7 +606,7 @@
                 (y.next_in_index = K),
                 (r.write = S),
                 r.inflate_flush(y, g)
-              );
+              )
             case C:
               return (
                 (g = b),
@@ -613,7 +617,7 @@
                 (y.next_in_index = K),
                 (r.write = S),
                 r.inflate_flush(y, g)
-              );
+              )
             default:
               return (
                 (g = f),
@@ -624,12 +628,13 @@
                 (y.next_in_index = K),
                 (r.write = S),
                 r.inflate_flush(y, g)
-              );
+              )
           }
+        }
       }),
-      (r.free = function() {});
+      (r.free = function () {})
   }
-  function n(i, n) {
+  function n (i, n) {
     var a,
       r = this,
       _ = G,
@@ -649,23 +654,23 @@
       (r.end = n),
       (r.read = 0),
       (r.write = 0),
-      (r.reset = function(i, e) {
+      (r.reset = function (i, e) {
         e && (e[0] = g),
           _ == Q && k.free(i),
           (_ = G),
           (r.bitk = 0),
           (r.bitb = 0),
-          (r.read = r.write = 0);
+          (r.read = r.write = 0)
       }),
       r.reset(i, null),
-      (r.inflate_flush = function(i, e) {
-        var t, n, a;
+      (r.inflate_flush = function (i, e) {
+        var t, n, a
         return (
           (n = i.next_out_index),
           (a = r.read),
           (t = (a <= r.write ? r.write : r.end) - a),
           t > i.avail_out && (t = i.avail_out),
-          0 !== t && e == x && (e = d),
+          t !== 0 && e == x && (e = d),
           (i.avail_out -= t),
           (i.total_out += t),
           i.next_out.set(r.window.subarray(a, a + t), n),
@@ -676,7 +681,7 @@
             r.write == r.end && (r.write = 0),
             (t = r.write - a),
             t > i.avail_out && (t = i.avail_out),
-            0 !== t && e == x && (e = d),
+            t !== 0 && e == x && (e = d),
             (i.avail_out -= t),
             (i.total_out += t),
             i.next_out.set(r.window.subarray(a, a + t), n),
@@ -685,10 +690,10 @@
           (i.next_out_index = n),
           (r.read = a),
           e
-        );
+        )
       }),
-      (r.proc = function(i, t) {
-        var n, x, c, g, A, I, E, S;
+      (r.proc = function (i, t) {
+        var n, x, c, g, A, I, E, S
         for (
           g = i.next_in_index,
             A = i.avail_in,
@@ -698,11 +703,11 @@
             E = I < r.read ? r.read - I - 1 : r.end - I;
           ;
 
-        )
+        ) {
           switch (_) {
             case G:
-              for (; c < 3; ) {
-                if (0 === A)
+              for (; c < 3;) {
+                if (A === 0) {
                   return (
                     (r.bitb = x),
                     (r.bitk = c),
@@ -711,8 +716,9 @@
                     (i.next_in_index = g),
                     (r.write = I),
                     r.inflate_flush(i, t)
-                  );
-                (t = d), A--, (x |= (255 & i.read_byte(g++)) << c), (c += 8);
+                  )
+                }
+                (t = d), A--, (x |= (255 & i.read_byte(g++)) << c), (c += 8)
               }
               switch (((n = 7 & x), (m = 1 & n), n >>> 1)) {
                 case 0:
@@ -721,28 +727,28 @@
                     (n = 7 & c),
                     (x >>>= n),
                     (c -= n),
-                    (_ = H);
-                  break;
+                    (_ = H)
+                  break
                 case 1:
                   var U = [],
                     z = [],
                     D = [[]],
-                    M = [[]];
+                    M = [[]]
                   e.inflate_trees_fixed(U, z, D, M),
                     k.init(U[0], z[0], D[0], 0, M[0], 0),
                     (x >>>= 3),
                     (c -= 3),
-                    (_ = Q);
-                  break;
+                    (_ = Q)
+                  break
                 case 2:
-                  (x >>>= 3), (c -= 3), (_ = K);
-                  break;
+                  (x >>>= 3), (c -= 3), (_ = K)
+                  break
                 case 3:
                   return (
                     (x >>>= 3),
                     (c -= 3),
                     (_ = V),
-                    (i.msg = "invalid block type"),
+                    (i.msg = 'invalid block type'),
                     (t = b),
                     (r.bitb = x),
                     (r.bitk = c),
@@ -751,12 +757,12 @@
                     (i.next_in_index = g),
                     (r.write = I),
                     r.inflate_flush(i, t)
-                  );
+                  )
               }
-              break;
+              break
             case H:
-              for (; c < 32; ) {
-                if (0 === A)
+              for (; c < 32;) {
+                if (A === 0) {
                   return (
                     (r.bitb = x),
                     (r.bitk = c),
@@ -765,13 +771,14 @@
                     (i.next_in_index = g),
                     (r.write = I),
                     r.inflate_flush(i, t)
-                  );
-                (t = d), A--, (x |= (255 & i.read_byte(g++)) << c), (c += 8);
+                  )
+                }
+                (t = d), A--, (x |= (255 & i.read_byte(g++)) << c), (c += 8)
               }
-              if (((~x >>> 16) & 65535) != (65535 & x))
+              if (((~x >>> 16) & 65535) != (65535 & x)) {
                 return (
                   (_ = V),
-                  (i.msg = "invalid stored block lengths"),
+                  (i.msg = 'invalid stored block lengths'),
                   (t = b),
                   (r.bitb = x),
                   (r.bitk = c),
@@ -780,11 +787,12 @@
                   (i.next_in_index = g),
                   (r.write = I),
                   r.inflate_flush(i, t)
-                );
-              (l = 65535 & x), (x = c = 0), (_ = 0 !== l ? J : 0 !== m ? R : G);
-              break;
+                )
+              }
+              (l = 65535 & x), (x = c = 0), (_ = l !== 0 ? J : m !== 0 ? R : G)
+              break
             case J:
-              if (0 === A)
+              if (A === 0) {
                 return (
                   (r.bitb = x),
                   (r.bitk = c),
@@ -793,22 +801,23 @@
                   (i.next_in_index = g),
                   (r.write = I),
                   r.inflate_flush(i, t)
-                );
+                )
+              }
               if (
-                0 === E &&
+                E === 0 &&
                 (I == r.end &&
-                  0 !== r.read &&
+                  r.read !== 0 &&
                   ((I = 0), (E = I < r.read ? r.read - I - 1 : r.end - I)),
-                0 === E &&
+                E === 0 &&
                   ((r.write = I),
                   (t = r.inflate_flush(i, t)),
                   (I = r.write),
                   (E = I < r.read ? r.read - I - 1 : r.end - I),
                   I == r.end &&
-                    0 !== r.read &&
+                    r.read !== 0 &&
                     ((I = 0), (E = I < r.read ? r.read - I - 1 : r.end - I)),
-                  0 === E))
-              )
+                  E === 0))
+              ) {
                 return (
                   (r.bitb = x),
                   (r.bitk = c),
@@ -817,7 +826,8 @@
                   (i.next_in_index = g),
                   (r.write = I),
                   r.inflate_flush(i, t)
-                );
+                )
+              }
               if (
                 ((t = d),
                 (n = l),
@@ -828,14 +838,13 @@
                 (A -= n),
                 (I += n),
                 (E -= n),
-                0 !== (l -= n))
-              )
-                break;
-              _ = 0 !== m ? R : G;
-              break;
+                (l -= n) !== 0)
+              ) { break }
+              _ = m !== 0 ? R : G
+              break
             case K:
-              for (; c < 14; ) {
-                if (0 === A)
+              for (; c < 14;) {
+                if (A === 0) {
                   return (
                     (r.bitb = x),
                     (r.bitk = c),
@@ -844,13 +853,14 @@
                     (i.next_in_index = g),
                     (r.write = I),
                     r.inflate_flush(i, t)
-                  );
-                (t = d), A--, (x |= (255 & i.read_byte(g++)) << c), (c += 8);
+                  )
+                }
+                (t = d), A--, (x |= (255 & i.read_byte(g++)) << c), (c += 8)
               }
-              if (((o = n = 16383 & x), (31 & n) > 29 || ((n >> 5) & 31) > 29))
+              if (((o = n = 16383 & x), (31 & n) > 29 || ((n >> 5) & 31) > 29)) {
                 return (
                   (_ = V),
-                  (i.msg = "too many length or distance symbols"),
+                  (i.msg = 'too many length or distance symbols'),
                   (t = b),
                   (r.bitb = x),
                   (r.bitk = c),
@@ -859,15 +869,14 @@
                   (i.next_in_index = g),
                   (r.write = I),
                   r.inflate_flush(i, t)
-                );
-              if (((n = 258 + (31 & n) + ((n >> 5) & 31)), !a || a.length < n))
-                a = [];
-              else for (S = 0; S < n; S++) a[S] = 0;
-              (x >>>= 14), (c -= 14), (u = 0), (_ = N);
+                )
+              }
+              if (((n = 258 + (31 & n) + ((n >> 5) & 31)), !a || a.length < n)) { a = [] } else for (S = 0; S < n; S++) a[S] = 0;
+              (x >>>= 14), (c -= 14), (u = 0), (_ = N)
             case N:
-              for (; u < 4 + (o >>> 10); ) {
-                for (; c < 3; ) {
-                  if (0 === A)
+              for (; u < 4 + (o >>> 10);) {
+                for (; c < 3;) {
+                  if (A === 0) {
                     return (
                       (r.bitb = x),
                       (r.bitk = c),
@@ -876,15 +885,16 @@
                       (i.next_in_index = g),
                       (r.write = I),
                       r.inflate_flush(i, t)
-                    );
-                  (t = d), A--, (x |= (255 & i.read_byte(g++)) << c), (c += 8);
+                    )
+                  }
+                  (t = d), A--, (x |= (255 & i.read_byte(g++)) << c), (c += 8)
                 }
-                (a[F[u++]] = 7 & x), (x >>>= 3), (c -= 3);
+                (a[F[u++]] = 7 & x), (x >>>= 3), (c -= 3)
               }
-              for (; u < 19; ) a[F[u++]] = 0;
+              for (; u < 19;) a[F[u++]] = 0
               if (
                 ((v[0] = 7), (n = p.inflate_trees_bits(a, v, h, y, i)), n != d)
-              )
+              ) {
                 return (
                   (t = n),
                   t == b && ((a = null), (_ = V)),
@@ -895,14 +905,15 @@
                   (i.next_in_index = g),
                   (r.write = I),
                   r.inflate_flush(i, t)
-                );
-              (u = 0), (_ = O);
+                )
+              }
+              (u = 0), (_ = O)
             case O:
               for (;;) {
-                if (((n = o), !(u < 258 + (31 & n) + ((n >> 5) & 31)))) break;
-                var L, P;
-                for (n = v[0]; c < n; ) {
-                  if (0 === A)
+                if (((n = o), !(u < 258 + (31 & n) + ((n >> 5) & 31)))) break
+                var L, P
+                for (n = v[0]; c < n;) {
+                  if (A === 0) {
                     return (
                       (r.bitb = x),
                       (r.bitk = c),
@@ -911,22 +922,21 @@
                       (i.next_in_index = g),
                       (r.write = I),
                       r.inflate_flush(i, t)
-                    );
-                  (t = d), A--, (x |= (255 & i.read_byte(g++)) << c), (c += 8);
+                    )
+                  }
+                  (t = d), A--, (x |= (255 & i.read_byte(g++)) << c), (c += 8)
                 }
                 if (
                   ((n = y[3 * (h[0] + (x & w[n])) + 1]),
                   (P = y[3 * (h[0] + (x & w[n])) + 2]),
                   P < 16)
-                )
-                  (x >>>= n), (c -= n), (a[u++] = P);
-                else {
+                ) { (x >>>= n), (c -= n), (a[u++] = P) } else {
                   for (
-                    S = 18 == P ? 7 : P - 14, L = 18 == P ? 11 : 3;
+                    S = P == 18 ? 7 : P - 14, L = P == 18 ? 11 : 3;
                     c < n + S;
 
                   ) {
-                    if (0 === A)
+                    if (A === 0) {
                       return (
                         (r.bitb = x),
                         (r.bitk = c),
@@ -935,11 +945,12 @@
                         (i.next_in_index = g),
                         (r.write = I),
                         r.inflate_flush(i, t)
-                      );
+                      )
+                    }
                     (t = d),
                       A--,
                       (x |= (255 & i.read_byte(g++)) << c),
-                      (c += 8);
+                      (c += 8)
                   }
                   if (
                     ((x >>>= n),
@@ -950,12 +961,12 @@
                     (S = u),
                     (n = o),
                     S + L > 258 + (31 & n) + ((n >> 5) & 31) ||
-                      (16 == P && S < 1))
-                  )
+                      (P == 16 && S < 1))
+                  ) {
                     return (
                       (a = null),
                       (_ = V),
-                      (i.msg = "invalid bit length repeat"),
+                      (i.msg = 'invalid bit length repeat'),
                       (t = b),
                       (r.bitb = x),
                       (r.bitk = c),
@@ -964,18 +975,19 @@
                       (i.next_in_index = g),
                       (r.write = I),
                       r.inflate_flush(i, t)
-                    );
-                  P = 16 == P ? a[S - 1] : 0;
-                  do a[S++] = P;
-                  while (0 !== --L);
-                  u = S;
+                    )
+                  }
+                  P = P == 16 ? a[S - 1] : 0
+                  do a[S++] = P
+                  while (--L !== 0)
+                  u = S
                 }
               }
-              h[0] = -1;
+              h[0] = -1
               var j = [],
                 q = [],
                 B = [],
-                C = [];
+                C = []
               if (
                 ((j[0] = 9),
                 (q[0] = 6),
@@ -992,7 +1004,7 @@
                   i
                 )),
                 n != d)
-              )
+              ) {
                 return (
                   n == b && ((a = null), (_ = V)),
                   (t = n),
@@ -1003,8 +1015,9 @@
                   (i.next_in_index = g),
                   (r.write = I),
                   r.inflate_flush(i, t)
-                );
-              k.init(j[0], q[0], y, B[0], y, C[0]), (_ = Q);
+                )
+              }
+              k.init(j[0], q[0], y, B[0], y, C[0]), (_ = Q)
             case Q:
               if (
                 ((r.bitb = x),
@@ -1014,8 +1027,7 @@
                 (i.next_in_index = g),
                 (r.write = I),
                 (t = k.proc(r, i, t)) != s)
-              )
-                return r.inflate_flush(i, t);
+              ) { return r.inflate_flush(i, t) }
               if (
                 ((t = d),
                 k.free(i),
@@ -1025,12 +1037,12 @@
                 (c = r.bitk),
                 (I = r.write),
                 (E = I < r.read ? r.read - I - 1 : r.end - I),
-                0 === m)
+                m === 0)
               ) {
-                _ = G;
-                break;
+                _ = G
+                break
               }
-              _ = R;
+              _ = R
             case R:
               if (
                 ((r.write = I),
@@ -1038,7 +1050,7 @@
                 (I = r.write),
                 (E = I < r.read ? r.read - I - 1 : r.end - I),
                 r.read != r.write)
-              )
+              ) {
                 return (
                   (r.bitb = x),
                   (r.bitk = c),
@@ -1047,8 +1059,9 @@
                   (i.next_in_index = g),
                   (r.write = I),
                   r.inflate_flush(i, t)
-                );
-              _ = T;
+                )
+              }
+              _ = T
             case T:
               return (
                 (t = s),
@@ -1059,7 +1072,7 @@
                 (i.next_in_index = g),
                 (r.write = I),
                 r.inflate_flush(i, t)
-              );
+              )
             case V:
               return (
                 (t = b),
@@ -1070,7 +1083,7 @@
                 (i.next_in_index = g),
                 (r.write = I),
                 r.inflate_flush(i, t)
-              );
+              )
             default:
               return (
                 (t = f),
@@ -1081,28 +1094,29 @@
                 (i.next_in_index = g),
                 (r.write = I),
                 r.inflate_flush(i, t)
-              );
+              )
           }
+        }
       }),
-      (r.free = function(i) {
-        r.reset(i, null), (r.window = null), (y = null);
+      (r.free = function (i) {
+        r.reset(i, null), (r.window = null), (y = null)
       }),
-      (r.set_dictionary = function(i, e, t) {
-        r.window.set(i.subarray(e, e + t), 0), (r.read = r.write = t);
+      (r.set_dictionary = function (i, e, t) {
+        r.window.set(i.subarray(e, e + t), 0), (r.read = r.write = t)
       }),
-      (r.sync_point = function() {
-        return _ == H ? 1 : 0;
-      });
+      (r.sync_point = function () {
+        return _ == H ? 1 : 0
+      })
   }
-  function a() {
-    function i(i) {
+  function a () {
+    function i (i) {
       return i && i.istate
         ? ((i.total_in = i.total_out = 0),
           (i.msg = null),
           (i.istate.mode = ai),
           i.istate.blocks.reset(i, null),
           d)
-        : f;
+        : f
     }
     var e = this;
     (e.mode = 0),
@@ -1111,25 +1125,25 @@
       (e.need = 0),
       (e.marker = 0),
       (e.wbits = 0),
-      (e.inflateEnd = function(i) {
-        return e.blocks && e.blocks.free(i), (e.blocks = null), d;
+      (e.inflateEnd = function (i) {
+        return e.blocks && e.blocks.free(i), (e.blocks = null), d
       }),
-      (e.inflateInit = function(t, a) {
+      (e.inflateInit = function (t, a) {
         return (
           (t.msg = null),
           (e.blocks = null),
           a < 8 || a > 15
             ? (e.inflateEnd(t), f)
             : ((e.wbits = a), (t.istate.blocks = new n(t, 1 << a)), i(t), d)
-        );
+        )
       }),
-      (e.inflate = function(i, e) {
-        var t, n;
-        if (!i || !i.istate || !i.next_in) return f;
-        for (e = e == h ? x : d, t = x; ; )
+      (e.inflate = function (i, e) {
+        var t, n
+        if (!i || !i.istate || !i.next_in) return f
+        for (e = e == h ? x : d, t = x; ;) {
           switch (i.istate.mode) {
             case Y:
-              if (0 === i.avail_in) return t;
+              if (i.avail_in === 0) return t
               if (
                 ((t = e),
                 i.avail_in--,
@@ -1137,19 +1151,19 @@
                 (15 & (i.istate.method = i.read_byte(i.next_in_index++))) != X)
               ) {
                 (i.istate.mode = _i),
-                  (i.msg = "unknown compression method"),
-                  (i.istate.marker = 5);
-                break;
+                  (i.msg = 'unknown compression method'),
+                  (i.istate.marker = 5)
+                break
               }
               if ((i.istate.method >> 4) + 8 > i.istate.wbits) {
                 (i.istate.mode = _i),
-                  (i.msg = "invalid window size"),
-                  (i.istate.marker = 5);
-                break;
+                  (i.msg = 'invalid window size'),
+                  (i.istate.marker = 5)
+                break
               }
-              i.istate.mode = Z;
+              i.istate.mode = Z
             case Z:
-              if (0 === i.avail_in) return t;
+              if (i.avail_in === 0) return t
               if (
                 ((t = e),
                 i.avail_in--,
@@ -1158,103 +1172,104 @@
                 ((i.istate.method << 8) + n) % 31 !== 0)
               ) {
                 (i.istate.mode = _i),
-                  (i.msg = "incorrect header check"),
-                  (i.istate.marker = 5);
-                break;
+                  (i.msg = 'incorrect header check'),
+                  (i.istate.marker = 5)
+                break
               }
-              if (0 === (n & W)) {
-                i.istate.mode = ai;
-                break;
+              if ((n & W) === 0) {
+                i.istate.mode = ai
+                break
               }
-              i.istate.mode = $;
+              i.istate.mode = $
             case $:
-              if (0 === i.avail_in) return t;
+              if (i.avail_in === 0) return t;
               (t = e),
                 i.avail_in--,
                 i.total_in++,
                 (i.istate.need =
                   ((255 & i.read_byte(i.next_in_index++)) << 24) & 4278190080),
-                (i.istate.mode = ii);
+                (i.istate.mode = ii)
             case ii:
-              if (0 === i.avail_in) return t;
+              if (i.avail_in === 0) return t;
               (t = e),
                 i.avail_in--,
                 i.total_in++,
                 (i.istate.need +=
                   ((255 & i.read_byte(i.next_in_index++)) << 16) & 16711680),
-                (i.istate.mode = ei);
+                (i.istate.mode = ei)
             case ei:
-              if (0 === i.avail_in) return t;
+              if (i.avail_in === 0) return t;
               (t = e),
                 i.avail_in--,
                 i.total_in++,
                 (i.istate.need +=
                   ((255 & i.read_byte(i.next_in_index++)) << 8) & 65280),
-                (i.istate.mode = ti);
+                (i.istate.mode = ti)
             case ti:
-              return 0 === i.avail_in
+              return i.avail_in === 0
                 ? t
                 : ((t = e),
                   i.avail_in--,
                   i.total_in++,
                   (i.istate.need += 255 & i.read_byte(i.next_in_index++)),
                   (i.istate.mode = ni),
-                  o);
+                  o)
             case ni:
               return (
                 (i.istate.mode = _i),
-                (i.msg = "need dictionary"),
+                (i.msg = 'need dictionary'),
                 (i.istate.marker = 0),
                 f
-              );
+              )
             case ai:
               if (((t = i.istate.blocks.proc(i, t)), t == b)) {
-                (i.istate.mode = _i), (i.istate.marker = 0);
-                break;
+                (i.istate.mode = _i), (i.istate.marker = 0)
+                break
               }
               if ((t == d && (t = e), t != s)) return t;
               (t = e),
                 i.istate.blocks.reset(i, i.istate.was),
-                (i.istate.mode = ri);
+                (i.istate.mode = ri)
             case ri:
-              return s;
+              return s
             case _i:
-              return b;
+              return b
             default:
-              return f;
+              return f
           }
+        }
       }),
-      (e.inflateSetDictionary = function(i, e, t) {
+      (e.inflateSetDictionary = function (i, e, t) {
         var n = 0,
-          a = t;
+          a = t
         return i && i.istate && i.istate.mode == ni
           ? (a >= 1 << i.istate.wbits &&
               ((a = (1 << i.istate.wbits) - 1), (n = t - a)),
             i.istate.blocks.set_dictionary(e, n, a),
             (i.istate.mode = ai),
             d)
-          : f;
+          : f
       }),
-      (e.inflateSync = function(e) {
-        var t, n, a, r, _;
-        if (!e || !e.istate) return f;
+      (e.inflateSync = function (e) {
+        var t, n, a, r, _
+        if (!e || !e.istate) return f
         if (
           (e.istate.mode != _i && ((e.istate.mode = _i), (e.istate.marker = 0)),
-          0 === (t = e.avail_in))
-        )
-          return x;
-        for (n = e.next_in_index, a = e.istate.marker; 0 !== t && a < 4; )
+          (t = e.avail_in) === 0)
+        ) { return x }
+        for (n = e.next_in_index, a = e.istate.marker; t !== 0 && a < 4;) {
           e.read_byte(n) == li[a]
             ? a++
-            : (a = 0 !== e.read_byte(n) ? 0 : 4 - a),
+            : (a = e.read_byte(n) !== 0 ? 0 : 4 - a),
             n++,
-            t--;
+            t--
+        }
         return (
           (e.total_in += n - e.next_in_index),
           (e.next_in_index = n),
           (e.avail_in = t),
           (e.istate.marker = a),
-          4 != a
+          a != 4
             ? b
             : ((r = e.total_in),
               (_ = e.total_out),
@@ -1263,44 +1278,43 @@
               (e.total_out = _),
               (e.istate.mode = ai),
               d)
-        );
+        )
       }),
-      (e.inflateSyncPoint = function(i) {
+      (e.inflateSyncPoint = function (i) {
         return i && i.istate && i.istate.blocks
           ? i.istate.blocks.sync_point()
-          : f;
-      });
+          : f
+      })
   }
-  function r() {}
-  function _() {
+  function r () {}
+  function _ () {
     var i = this,
       e = new r(),
       t = 512,
       n = v,
       a = new Uint8Array(t),
-      _ = !1;
+      _ = !1
     e.inflateInit(),
       (e.next_out = a),
-      (i.append = function(i, r) {
+      (i.append = function (i, r) {
         var l,
           o,
           f = [],
           b = 0,
           u = 0,
-          w = 0;
-        if (0 !== i.length) {
-          (e.next_in_index = 0), (e.next_in = i), (e.avail_in = i.length);
+          w = 0
+        if (i.length !== 0) {
+          (e.next_in_index = 0), (e.next_in = i), (e.avail_in = i.length)
           do {
             if (
               ((e.next_out_index = 0),
               (e.avail_out = t),
-              0 !== e.avail_in || _ || ((e.next_in_index = 0), (_ = !0)),
+              e.avail_in !== 0 || _ || ((e.next_in_index = 0), (_ = !0)),
               (l = e.inflate(n)),
               _ && l == x)
-            )
-              return -1;
-            if (l != d && l != s) throw "inflating: " + e.msg;
-            if ((_ || l == s) && e.avail_in == i.length) return -1;
+            ) { return -1 }
+            if (l != d && l != s) throw 'inflating: ' + e.msg
+            if ((_ || l == s) && e.avail_in == i.length) return -1
             e.next_out_index &&
               (e.next_out_index == t
                 ? f.push(new Uint8Array(a))
@@ -1309,20 +1323,20 @@
               r &&
                 e.next_in_index > 0 &&
                 e.next_in_index != b &&
-                (r(e.next_in_index), (b = e.next_in_index));
-          } while (e.avail_in > 0 || 0 === e.avail_out);
+                (r(e.next_in_index), (b = e.next_in_index))
+          } while (e.avail_in > 0 || e.avail_out === 0)
           return (
             (o = new Uint8Array(w)),
-            f.forEach(function(i) {
-              o.set(i, u), (u += i.length);
+            f.forEach(function (i) {
+              o.set(i, u), (u += i.length)
             }),
             o
-          );
+          )
         }
       }),
-      (i.flush = function() {
-        e.inflateEnd();
-      });
+      (i.flush = function () {
+        e.inflateEnd()
+      })
   }
   var l = 15,
     d = 0,
@@ -3122,10 +3136,10 @@
       13,
       13
     ],
-    S = 15;
-  e.inflate_trees_fixed = function(i, e, t, n) {
-    return (i[0] = k), (e[0] = m), (t[0] = y), (n[0] = g), d;
-  };
+    S = 15
+  e.inflate_trees_fixed = function (i, e, t, n) {
+    return (i[0] = k), (e[0] = m), (t[0] = y), (n[0] = g), d
+  }
   var U = 0,
     z = 1,
     D = 2,
@@ -3159,56 +3173,56 @@
     ai = 7,
     ri = 12,
     _i = 13,
-    li = [0, 0, 255, 255];
+    li = [0, 0, 255, 255]
   r.prototype = {
-    inflateInit: function(i) {
-      var e = this;
-      return (e.istate = new a()), i || (i = l), e.istate.inflateInit(e, i);
+    inflateInit: function (i) {
+      var e = this
+      return (e.istate = new a()), i || (i = l), e.istate.inflateInit(e, i)
     },
-    inflate: function(i) {
-      var e = this;
-      return e.istate ? e.istate.inflate(e, i) : f;
+    inflate: function (i) {
+      var e = this
+      return e.istate ? e.istate.inflate(e, i) : f
     },
-    inflateEnd: function() {
-      var i = this;
-      if (!i.istate) return f;
-      var e = i.istate.inflateEnd(i);
-      return (i.istate = null), e;
+    inflateEnd: function () {
+      var i = this
+      if (!i.istate) return f
+      var e = i.istate.inflateEnd(i)
+      return (i.istate = null), e
     },
-    inflateSync: function() {
-      var i = this;
-      return i.istate ? i.istate.inflateSync(i) : f;
+    inflateSync: function () {
+      var i = this
+      return i.istate ? i.istate.inflateSync(i) : f
     },
-    inflateSetDictionary: function(i, e) {
-      var t = this;
-      return t.istate ? t.istate.inflateSetDictionary(t, i, e) : f;
+    inflateSetDictionary: function (i, e) {
+      var t = this
+      return t.istate ? t.istate.inflateSetDictionary(t, i, e) : f
     },
-    read_byte: function(i) {
-      var e = this;
-      return e.next_in.subarray(i, i + 1)[0];
+    read_byte: function (i) {
+      var e = this
+      return e.next_in.subarray(i, i + 1)[0]
     },
-    read_buf: function(i, e) {
-      var t = this;
-      return t.next_in.subarray(i, i + e);
+    read_buf: function (i, e) {
+      var t = this
+      return t.next_in.subarray(i, i + e)
     }
-  };
-  var di;
+  }
+  var di
   i.zip
     ? (i.zip.Inflater = _)
     : ((di = new _()),
       i.addEventListener(
-        "message",
-        function(e) {
-          var t = e.data;
+        'message',
+        function (e) {
+          var t = e.data
           t.append &&
             i.postMessage({
               onappend: !0,
-              data: di.append(t.data, function(e) {
-                i.postMessage({ progress: !0, current: e });
+              data: di.append(t.data, function (e) {
+                i.postMessage({ progress: !0, current: e })
               })
             }),
-            t.flush && (di.flush(), i.postMessage({ onflush: !0 }));
+            t.flush && (di.flush(), i.postMessage({ onflush: !0 }))
         },
         !1
-      ));
-})(this);
+      ))
+})(this)

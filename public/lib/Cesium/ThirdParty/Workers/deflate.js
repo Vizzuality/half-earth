@@ -29,8 +29,8 @@
  1. Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
 
- 2. Redistributions in binary form must reproduce the above copyright 
- notice, this list of conditions and the following disclaimer in 
+ 2. Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in
  the documentation and/or other materials provided with the distribution.
 
  3. The names of the authors may not be used to endorse or promote products
@@ -48,9 +48,9 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-!(function(e) {
-  function t() {
-    function e(e) {
+!(function (e) {
+  function t () {
+    function e (e) {
       var t,
         n,
         i,
@@ -62,9 +62,9 @@
         l = a.stat_desc.extra_bits,
         s = a.stat_desc.extra_base,
         c = a.stat_desc.max_length,
-        p = 0;
-      for (r = 0; r <= u; r++) e.bl_count[r] = 0;
-      for (d[2 * e.heap[e.heap_max] + 1] = 0, t = e.heap_max + 1; t < h; t++)
+        p = 0
+      for (r = 0; r <= u; r++) e.bl_count[r] = 0
+      for (d[2 * e.heap[e.heap_max] + 1] = 0, t = e.heap_max + 1; t < h; t++) {
         (n = e.heap[t]),
           (r = d[2 * d[2 * n + 1] + 1] + 1),
           r > c && ((r = c), p++),
@@ -75,61 +75,64 @@
             n >= s && (_ = l[n - s]),
             (o = d[2 * n]),
             (e.opt_len += o * (r + _)),
-            f && (e.static_len += o * (f[2 * n + 1] + _)));
-      if (0 !== p) {
+            f && (e.static_len += o * (f[2 * n + 1] + _)))
+      }
+      if (p !== 0) {
         do {
-          for (r = c - 1; 0 === e.bl_count[r]; ) r--;
-          e.bl_count[r]--, (e.bl_count[r + 1] += 2), e.bl_count[c]--, (p -= 2);
-        } while (p > 0);
-        for (r = c; 0 !== r; r--)
-          for (n = e.bl_count[r]; 0 !== n; )
+          for (r = c - 1; e.bl_count[r] === 0;) r--
+          e.bl_count[r]--, (e.bl_count[r + 1] += 2), e.bl_count[c]--, (p -= 2)
+        } while (p > 0)
+        for (r = c; r !== 0; r--) {
+          for (n = e.bl_count[r]; n !== 0;) {
             (i = e.heap[--t]),
               i > a.max_code ||
                 (d[2 * i + 1] != r &&
                   ((e.opt_len += (r - d[2 * i + 1]) * d[2 * i]),
                   (d[2 * i + 1] = r)),
-                n--);
+                n--)
+          }
+        }
       }
     }
-    function t(e, t) {
-      var n = 0;
-      do (n |= 1 & e), (e >>>= 1), (n <<= 1);
-      while (--t > 0);
-      return n >>> 1;
+    function t (e, t) {
+      var n = 0
+      do (n |= 1 & e), (e >>>= 1), (n <<= 1)
+      while (--t > 0)
+      return n >>> 1
     }
-    function n(e, n, a) {
+    function n (e, n, a) {
       var i,
         r,
         _,
         o = [],
-        d = 0;
-      for (i = 1; i <= u; i++) o[i] = d = (d + a[i - 1]) << 1;
-      for (r = 0; r <= n; r++)
-        (_ = e[2 * r + 1]), 0 !== _ && (e[2 * r] = t(o[_]++, _));
+        d = 0
+      for (i = 1; i <= u; i++) o[i] = d = (d + a[i - 1]) << 1
+      for (r = 0; r <= n; r++) { (_ = e[2 * r + 1]), _ !== 0 && (e[2 * r] = t(o[_]++, _)) }
     }
-    var a = this;
-    a.build_tree = function(t) {
+    var a = this
+    a.build_tree = function (t) {
       var i,
         r,
         _,
         o = a.dyn_tree,
         u = a.stat_desc.static_tree,
         d = a.stat_desc.elems,
-        f = -1;
-      for (t.heap_len = 0, t.heap_max = h, i = 0; i < d; i++)
-        0 !== o[2 * i]
+        f = -1
+      for (t.heap_len = 0, t.heap_max = h, i = 0; i < d; i++) {
+        o[2 * i] !== 0
           ? ((t.heap[++t.heap_len] = f = i), (t.depth[i] = 0))
-          : (o[2 * i + 1] = 0);
-      for (; t.heap_len < 2; )
+          : (o[2 * i + 1] = 0)
+      }
+      for (; t.heap_len < 2;) {
         (_ = t.heap[++t.heap_len] = f < 2 ? ++f : 0),
           (o[2 * _] = 1),
           (t.depth[_] = 0),
           t.opt_len--,
-          u && (t.static_len -= u[2 * _ + 1]);
-      for (a.max_code = f, i = Math.floor(t.heap_len / 2); i >= 1; i--)
-        t.pqdownheap(o, i);
-      _ = d;
-      do
+          u && (t.static_len -= u[2 * _ + 1])
+      }
+      for (a.max_code = f, i = Math.floor(t.heap_len / 2); i >= 1; i--) { t.pqdownheap(o, i) }
+      _ = d
+      do {
         (i = t.heap[1]),
           (t.heap[1] = t.heap[t.heap_len--]),
           t.pqdownheap(o, 1),
@@ -140,35 +143,36 @@
           (t.depth[_] = Math.max(t.depth[i], t.depth[r]) + 1),
           (o[2 * i + 1] = o[2 * r + 1] = _),
           (t.heap[1] = _++),
-          t.pqdownheap(o, 1);
+          t.pqdownheap(o, 1)
+      }
       while (t.heap_len >= 2);
-      (t.heap[--t.heap_max] = t.heap[1]), e(t), n(o, a.max_code, t.bl_count);
-    };
+      (t.heap[--t.heap_max] = t.heap[1]), e(t), n(o, a.max_code, t.bl_count)
+    }
   }
-  function n(e, t, n, a, i) {
+  function n (e, t, n, a, i) {
     var r = this;
     (r.static_tree = e),
       (r.extra_bits = t),
       (r.extra_base = n),
       (r.elems = a),
-      (r.max_length = i);
+      (r.max_length = i)
   }
-  function a(e, t, n, a, i) {
+  function a (e, t, n, a, i) {
     var r = this;
     (r.good_length = e),
       (r.max_lazy = t),
       (r.nice_length = n),
       (r.max_chain = a),
-      (r.func = i);
+      (r.func = i)
   }
-  function i(e, t, n, a) {
+  function i (e, t, n, a) {
     var i = e[2 * t],
-      r = e[2 * n];
-    return i < r || (i == r && a[t] <= a[n]);
+      r = e[2 * n]
+    return i < r || (i == r && a[t] <= a[n])
   }
-  function r() {
-    function e() {
-      var e;
+  function r () {
+    function e () {
+      var e
       for (De = 2 * Ee, Pe[Le - 1] = 0, e = 0; e < Le - 1; e++) Pe[e] = 0;
       (Te = J[Ve].max_lazy),
         (Xe = J[Ve].good_length),
@@ -179,16 +183,16 @@
         (Oe = 0),
         (Ge = Qe = te - 1),
         (Je = 0),
-        (Se = 0);
+        (Se = 0)
     }
-    function a() {
-      var e;
-      for (e = 0; e < c; e++) Ze[2 * e] = 0;
-      for (e = 0; e < d; e++) $e[2 * e] = 0;
+    function a () {
+      var e
+      for (e = 0; e < c; e++) Ze[2 * e] = 0
+      for (e = 0; e < d; e++) $e[2 * e] = 0
       for (e = 0; e < f; e++) et[2 * e] = 0;
-      (Ze[2 * p] = 1), (tt.opt_len = tt.static_len = 0), (ot = dt = 0);
+      (Ze[2 * p] = 1), (tt.opt_len = tt.static_len = 0), (ot = dt = 0)
     }
-    function r() {
+    function r () {
       (nt.dyn_tree = Ze),
         (nt.stat_desc = n.static_l_desc),
         (at.dyn_tree = $e),
@@ -198,176 +202,178 @@
         (lt = 0),
         (st = 0),
         (ft = 8),
-        a();
+        a()
     }
-    function _(e, t) {
+    function _ (e, t) {
       var n,
         a,
         i = -1,
         r = e[1],
         _ = 0,
         o = 7,
-        u = 4;
+        u = 4
       for (
-        0 === r && ((o = 138), (u = 3)), e[2 * (t + 1) + 1] = 65535, n = 0;
+        r === 0 && ((o = 138), (u = 3)), e[2 * (t + 1) + 1] = 65535, n = 0;
         n <= t;
         n++
-      )
+      ) {
         (a = r),
           (r = e[2 * (n + 1) + 1]),
           (++_ < o && a == r) ||
             (_ < u
               ? (et[2 * a] += _)
-              : 0 !== a
+              : a !== 0
                 ? (a != i && et[2 * a]++, et[2 * v]++)
                 : _ <= 10 ? et[2 * b]++ : et[2 * g]++,
             (_ = 0),
             (i = a),
-            0 === r
+            r === 0
               ? ((o = 138), (u = 3))
-              : a == r ? ((o = 6), (u = 3)) : ((o = 7), (u = 4)));
+              : a == r ? ((o = 6), (u = 3)) : ((o = 7), (u = 4)))
+      }
     }
-    function o() {
-      var e;
+    function o () {
+      var e
       for (
         _(Ze, nt.max_code), _($e, at.max_code), it.build_tree(tt), e = f - 1;
-        e >= 3 && 0 === et[2 * t.bl_order[e] + 1];
+        e >= 3 && et[2 * t.bl_order[e] + 1] === 0;
         e--
       );
-      return (tt.opt_len += 3 * (e + 1) + 5 + 5 + 4), e;
+      return (tt.opt_len += 3 * (e + 1) + 5 + 5 + 4), e
     }
-    function u(e) {
-      tt.pending_buf[tt.pending++] = e;
+    function u (e) {
+      tt.pending_buf[tt.pending++] = e
     }
-    function l(e) {
-      u(255 & e), u((e >>> 8) & 255);
+    function l (e) {
+      u(255 & e), u((e >>> 8) & 255)
     }
-    function h(e) {
-      u((e >> 8) & 255), u(255 & e & 255);
+    function h (e) {
+      u((e >> 8) & 255), u(255 & e & 255)
     }
-    function x(e, t) {
+    function x (e, t) {
       var n,
-        a = t;
+        a = t
       st > w - a
         ? ((n = e),
           (lt |= (n << st) & 65535),
           l(lt),
           (lt = n >>> (w - st)),
           (st += a - w))
-        : ((lt |= (e << st) & 65535), (st += a));
+        : ((lt |= (e << st) & 65535), (st += a))
     }
-    function j(e, t) {
-      var n = 2 * e;
-      x(65535 & t[n], 65535 & t[n + 1]);
+    function j (e, t) {
+      var n = 2 * e
+      x(65535 & t[n], 65535 & t[n + 1])
     }
-    function ie(e, t) {
+    function ie (e, t) {
       var n,
         a,
         i = -1,
         r = e[1],
         _ = 0,
         o = 7,
-        u = 4;
-      for (0 === r && ((o = 138), (u = 3)), n = 0; n <= t; n++)
+        u = 4
+      for (r === 0 && ((o = 138), (u = 3)), n = 0; n <= t; n++) {
         if (((a = r), (r = e[2 * (n + 1) + 1]), !(++_ < o && a == r))) {
           if (_ < u) {
-            do j(a, et);
-            while (0 !== --_);
-          } else
-            0 !== a
+            do j(a, et)
+            while (--_ !== 0)
+          } else {
+            a !== 0
               ? (a != i && (j(a, et), _--), j(v, et), x(_ - 3, 2))
-              : _ <= 10 ? (j(b, et), x(_ - 3, 3)) : (j(g, et), x(_ - 11, 7));
+              : _ <= 10 ? (j(b, et), x(_ - 3, 3)) : (j(g, et), x(_ - 11, 7))
+          }
           (_ = 0),
             (i = a),
-            0 === r
+            r === 0
               ? ((o = 138), (u = 3))
-              : a == r ? ((o = 6), (u = 3)) : ((o = 7), (u = 4));
+              : a == r ? ((o = 6), (u = 3)) : ((o = 7), (u = 4))
         }
+      }
     }
-    function re(e, n, a) {
-      var i;
-      for (x(e - 257, 5), x(n - 1, 5), x(a - 4, 4), i = 0; i < a; i++)
-        x(et[2 * t.bl_order[i] + 1], 3);
-      ie(Ze, e - 1), ie($e, n - 1);
+    function re (e, n, a) {
+      var i
+      for (x(e - 257, 5), x(n - 1, 5), x(a - 4, 4), i = 0; i < a; i++) { x(et[2 * t.bl_order[i] + 1], 3) }
+      ie(Ze, e - 1), ie($e, n - 1)
     }
-    function _e() {
-      16 == st
+    function _e () {
+      st == 16
         ? (l(lt), (lt = 0), (st = 0))
-        : st >= 8 && (u(255 & lt), (lt >>>= 8), (st -= 8));
+        : st >= 8 && (u(255 & lt), (lt >>>= 8), (st -= 8))
     }
-    function oe() {
+    function oe () {
       x($ << 1, 3),
         j(p, n.static_ltree),
         _e(),
         1 + ft + 10 - st < 9 && (x($ << 1, 3), j(p, n.static_ltree), _e()),
-        (ft = 7);
+        (ft = 7)
     }
-    function ue(e, n) {
-      var a, i, r;
+    function ue (e, n) {
+      var a, i, r
       if (
         ((tt.pending_buf[ut + 2 * ot] = (e >>> 8) & 255),
         (tt.pending_buf[ut + 2 * ot + 1] = 255 & e),
         (tt.pending_buf[rt + ot] = 255 & n),
         ot++,
-        0 === e
+        e === 0
           ? Ze[2 * n]++
           : (dt++,
             e--,
             Ze[2 * (t._length_code[n] + s + 1)]++,
             $e[2 * t.d_code(e)]++),
-        0 === (8191 & ot) && Ve > 2)
+        (8191 & ot) === 0 && Ve > 2)
       ) {
-        for (a = 8 * ot, i = Ke - Fe, r = 0; r < d; r++)
-          a += $e[2 * r] * (5 + t.extra_dbits[r]);
-        if (((a >>>= 3), dt < Math.floor(ot / 2) && a < Math.floor(i / 2)))
-          return !0;
+        for (a = 8 * ot, i = Ke - Fe, r = 0; r < d; r++) { a += $e[2 * r] * (5 + t.extra_dbits[r]) }
+        if (((a >>>= 3), dt < Math.floor(ot / 2) && a < Math.floor(i / 2))) { return !0 }
       }
-      return ot == _t - 1;
+      return ot == _t - 1
     }
-    function de(e, n) {
+    function de (e, n) {
       var a,
         i,
         r,
         _,
-        o = 0;
-      if (0 !== ot)
-        do
+        o = 0
+      if (ot !== 0) {
+        do {
           (a =
             ((tt.pending_buf[ut + 2 * o] << 8) & 65280) |
             (255 & tt.pending_buf[ut + 2 * o + 1])),
             (i = 255 & tt.pending_buf[rt + o]),
             o++,
-            0 === a
+            a === 0
               ? j(i, e)
               : ((r = t._length_code[i]),
                 j(r + s + 1, e),
                 (_ = t.extra_lbits[r]),
-                0 !== _ && ((i -= t.base_length[r]), x(i, _)),
+                _ !== 0 && ((i -= t.base_length[r]), x(i, _)),
                 a--,
                 (r = t.d_code(a)),
                 j(r, n),
                 (_ = t.extra_dbits[r]),
-                0 !== _ && ((a -= t.base_dist[r]), x(a, _)));
-        while (o < ot);
-      j(p, e), (ft = e[2 * p + 1]);
+                _ !== 0 && ((a -= t.base_dist[r]), x(a, _)))
+        }
+        while (o < ot)
+      }
+      j(p, e), (ft = e[2 * p + 1])
     }
-    function fe() {
-      st > 8 ? l(lt) : st > 0 && u(255 & lt), (lt = 0), (st = 0);
+    function fe () {
+      st > 8 ? l(lt) : st > 0 && u(255 & lt), (lt = 0), (st = 0)
     }
-    function le(e, t, n) {
+    function le (e, t, n) {
       fe(),
         (ft = 8),
         n && (l(t), l(~t)),
         tt.pending_buf.set(qe.subarray(e, e + t), tt.pending),
-        (tt.pending += t);
+        (tt.pending += t)
     }
-    function se(e, t, n) {
-      x((Z << 1) + (n ? 1 : 0), 3), le(e, t, !0);
+    function se (e, t, n) {
+      x((Z << 1) + (n ? 1 : 0), 3), le(e, t, !0)
     }
-    function ce(e, t, i) {
+    function ce (e, t, i) {
       var r,
         _,
-        u = 0;
+        u = 0
       Ve > 0
         ? (nt.build_tree(tt),
           at.build_tree(tt),
@@ -384,59 +390,58 @@
               re(nt.max_code + 1, at.max_code + 1, u + 1),
               de(Ze, $e)),
         a(),
-        i && fe();
+        i && fe()
     }
-    function he(e) {
-      ce(Fe >= 0 ? Fe : -1, Ke - Fe, e), (Fe = Ke), me.flush_pending();
+    function he (e) {
+      ce(Fe >= 0 ? Fe : -1, Ke - Fe, e), (Fe = Ke), me.flush_pending()
     }
-    function pe() {
-      var e, t, n, a;
+    function pe () {
+      var e, t, n, a
       do {
-        if (((a = De - Oe - Ke), 0 === a && 0 === Ke && 0 === Oe)) a = Ee;
-        else if (a == -1) a--;
+        if (((a = De - Oe - Ke), a === 0 && Ke === 0 && Oe === 0)) a = Ee
+        else if (a == -1) a--
         else if (Ke >= Ee + Ee - ae) {
           qe.set(qe.subarray(Ee, Ee + Ee), 0),
             (Ne -= Ee),
             (Ke -= Ee),
             (Fe -= Ee),
             (e = Le),
-            (n = e);
-          do (t = 65535 & Pe[--n]), (Pe[n] = t >= Ee ? t - Ee : 0);
-          while (0 !== --e);
-          (e = Ee), (n = e);
-          do (t = 65535 & Ie[--n]), (Ie[n] = t >= Ee ? t - Ee : 0);
-          while (0 !== --e);
-          a += Ee;
+            (n = e)
+          do (t = 65535 & Pe[--n]), (Pe[n] = t >= Ee ? t - Ee : 0)
+          while (--e !== 0);
+          (e = Ee), (n = e)
+          do (t = 65535 & Ie[--n]), (Ie[n] = t >= Ee ? t - Ee : 0)
+          while (--e !== 0)
+          a += Ee
         }
-        if (0 === me.avail_in) return;
+        if (me.avail_in === 0) return;
         (e = me.read_buf(qe, Ke + Oe, a)),
           (Oe += e),
           Oe >= te &&
             ((Se = 255 & qe[Ke]),
-            (Se = ((Se << Ce) ^ (255 & qe[Ke + 1])) & Be));
-      } while (Oe < ae && 0 !== me.avail_in);
+            (Se = ((Se << Ce) ^ (255 & qe[Ke + 1])) & Be))
+      } while (Oe < ae && me.avail_in !== 0)
     }
-    function xe(e) {
+    function xe (e) {
       var t,
-        n = 65535;
-      for (n > Me - 5 && (n = Me - 5); ; ) {
+        n = 65535
+      for (n > Me - 5 && (n = Me - 5); ;) {
         if (Oe <= 1) {
-          if ((pe(), 0 === Oe && e == U)) return N;
-          if (0 === Oe) break;
+          if ((pe(), Oe === 0 && e == U)) return N
+          if (Oe === 0) break
         }
         if (
           ((Ke += Oe),
           (Oe = 0),
           (t = Fe + n),
-          (0 === Ke || Ke >= t) &&
-            ((Oe = Ke - t), (Ke = t), he(!1), 0 === me.avail_out))
-        )
-          return N;
-        if (Ke - Fe >= Ee - ae && (he(!1), 0 === me.avail_out)) return N;
+          (Ke === 0 || Ke >= t) &&
+            ((Oe = Ke - t), (Ke = t), he(!1), me.avail_out === 0))
+        ) { return N }
+        if (Ke - Fe >= Ee - ae && (he(!1), me.avail_out === 0)) return N
       }
-      return he(e == z), 0 === me.avail_out ? (e == z ? Q : N) : e == z ? R : O;
+      return he(e == z), me.avail_out === 0 ? (e == z ? Q : N) : e == z ? R : O
     }
-    function ve(e) {
+    function ve (e) {
       var t,
         n,
         a = Re,
@@ -447,9 +452,9 @@
         u = ze,
         d = Ke + ne,
         f = qe[i + r - 1],
-        l = qe[i + r];
-      Qe >= Xe && (a >>= 2), o > Oe && (o = Oe);
-      do
+        l = qe[i + r]
+      Qe >= Xe && (a >>= 2), o > Oe && (o = Oe)
+      do {
         if (
           ((t = e),
           qe[t + r] == l &&
@@ -457,7 +462,7 @@
             qe[t] == qe[i] &&
             qe[++t] == qe[i + 1])
         ) {
-          (i += 2), t++;
+          (i += 2), t++
           do;
           while (
             qe[++i] == qe[++t] &&
@@ -469,20 +474,21 @@
             qe[++i] == qe[++t] &&
             qe[++i] == qe[++t] &&
             i < d
-          );
+          )
           if (((n = ne - (d - i)), (i = d - ne), n > r)) {
             if (((Ne = e), (r = n), n >= o)) break;
-            (f = qe[i + r - 1]), (l = qe[i + r]);
+            (f = qe[i + r - 1]), (l = qe[i + r])
           }
         }
-      while ((e = 65535 & Ie[e & u]) > _ && 0 !== --a);
-      return r <= Oe ? r : Oe;
+      }
+      while ((e = 65535 & Ie[e & u]) > _ && --a !== 0)
+      return r <= Oe ? r : Oe
     }
-    function be(e) {
-      for (var t, n = 0; ; ) {
+    function be (e) {
+      for (var t, n = 0; ;) {
         if (Oe < ae) {
-          if ((pe(), Oe < ae && e == U)) return N;
-          if (0 === Oe) break;
+          if ((pe(), Oe < ae && e == U)) return N
+          if (Oe === 0) break
         }
         if (
           (Oe >= te &&
@@ -490,34 +496,36 @@
             (n = 65535 & Pe[Se]),
             (Ie[Ke & ze] = Pe[Se]),
             (Pe[Se] = Ke)),
-          0 !== n && ((Ke - n) & 65535) <= Ee - ae && We != M && (Ge = ve(n)),
+          n !== 0 && ((Ke - n) & 65535) <= Ee - ae && We != M && (Ge = ve(n)),
           Ge >= te)
-        )
+        ) {
           if (((t = ue(Ke - Ne, Ge - te)), (Oe -= Ge), Ge <= Te && Oe >= te)) {
-            Ge--;
-            do
+            Ge--
+            do {
               Ke++,
                 (Se = ((Se << Ce) ^ (255 & qe[Ke + (te - 1)])) & Be),
                 (n = 65535 & Pe[Se]),
                 (Ie[Ke & ze] = Pe[Se]),
-                (Pe[Se] = Ke);
-            while (0 !== --Ge);
-            Ke++;
-          } else
+                (Pe[Se] = Ke)
+            }
+            while (--Ge !== 0)
+            Ke++
+          } else {
             (Ke += Ge),
               (Ge = 0),
               (Se = 255 & qe[Ke]),
-              (Se = ((Se << Ce) ^ (255 & qe[Ke + 1])) & Be);
-        else (t = ue(0, 255 & qe[Ke])), Oe--, Ke++;
-        if (t && (he(!1), 0 === me.avail_out)) return N;
+              (Se = ((Se << Ce) ^ (255 & qe[Ke + 1])) & Be)
+          }
+        } else (t = ue(0, 255 & qe[Ke])), Oe--, Ke++
+        if (t && (he(!1), me.avail_out === 0)) return N
       }
-      return he(e == z), 0 === me.avail_out ? (e == z ? Q : N) : e == z ? R : O;
+      return he(e == z), me.avail_out === 0 ? (e == z ? Q : N) : e == z ? R : O
     }
-    function ge(e) {
-      for (var t, n, a = 0; ; ) {
+    function ge (e) {
+      for (var t, n, a = 0; ;) {
         if (Oe < ae) {
-          if ((pe(), Oe < ae && e == U)) return N;
-          if (0 === Oe) break;
+          if ((pe(), Oe < ae && e == U)) return N
+          if (Oe === 0) break
         }
         if (
           (Oe >= te &&
@@ -528,7 +536,7 @@
           (Qe = Ge),
           (He = Ne),
           (Ge = te - 1),
-          0 !== a &&
+          a !== 0 &&
             Qe < Te &&
             ((Ke - a) & 65535) <= Ee - ae &&
             (We != M && (Ge = ve(a)),
@@ -540,36 +548,35 @@
           (n = Ke + Oe - te),
             (t = ue(Ke - 1 - He, Qe - te)),
             (Oe -= Qe - 1),
-            (Qe -= 2);
-          do
+            (Qe -= 2)
+          do {
             ++Ke <= n &&
               ((Se = ((Se << Ce) ^ (255 & qe[Ke + (te - 1)])) & Be),
               (a = 65535 & Pe[Se]),
               (Ie[Ke & ze] = Pe[Se]),
-              (Pe[Se] = Ke));
-          while (0 !== --Qe);
+              (Pe[Se] = Ke))
+          }
+          while (--Qe !== 0)
           if (
-            ((Je = 0), (Ge = te - 1), Ke++, t && (he(!1), 0 === me.avail_out))
-          )
-            return N;
-        } else if (0 !== Je) {
+            ((Je = 0), (Ge = te - 1), Ke++, t && (he(!1), me.avail_out === 0))
+          ) { return N }
+        } else if (Je !== 0) {
           if (
             ((t = ue(0, 255 & qe[Ke - 1])),
             t && he(!1),
             Ke++,
             Oe--,
-            0 === me.avail_out)
-          )
-            return N;
-        } else (Je = 1), Ke++, Oe--;
+            me.avail_out === 0)
+          ) { return N }
+        } else (Je = 1), Ke++, Oe--
       }
       return (
-        0 !== Je && ((t = ue(0, 255 & qe[Ke - 1])), (Je = 0)),
+        Je !== 0 && ((t = ue(0, 255 & qe[Ke - 1])), (Je = 0)),
         he(e == z),
-        0 === me.avail_out ? (e == z ? Q : N) : e == z ? R : O
-      );
+        me.avail_out === 0 ? (e == z ? Q : N) : e == z ? R : O
+      )
     }
-    function we(t) {
+    function we (t) {
       return (
         (t.total_in = t.total_out = 0),
         (t.msg = null),
@@ -580,7 +587,7 @@
         r(),
         e(),
         q
-      );
+      )
     }
     var me,
       ye,
@@ -619,26 +626,25 @@
       tt = this,
       nt = new t(),
       at = new t(),
-      it = new t();
-    tt.depth = [];
+      it = new t()
+    tt.depth = []
     var rt, _t, ot, ut, dt, ft, lt, st;
     (tt.bl_count = []),
       (tt.heap = []),
       (Ze = []),
       ($e = []),
       (et = []),
-      (tt.pqdownheap = function(e, t) {
+      (tt.pqdownheap = function (e, t) {
         for (
           var n = tt.heap, a = n[t], r = t << 1;
           r <= tt.heap_len &&
           (r < tt.heap_len && i(e, n[r + 1], n[r], tt.depth) && r++,
           !i(e, a, n[r], tt.depth));
 
-        )
-          (n[t] = n[r]), (t = r), (r <<= 1);
-        n[t] = a;
+        ) { (n[t] = n[r]), (t = r), (r <<= 1) }
+        n[t] = a
       }),
-      (tt.deflateInit = function(e, t, n, a, i, r) {
+      (tt.deflateInit = function (e, t, n, a, i, r) {
         return (
           a || (a = Y),
           i || (i = C),
@@ -675,9 +681,9 @@
               (We = r),
               (Ae = 255 & a),
               we(e))
-        );
+        )
       }),
-      (tt.deflateEnd = function() {
+      (tt.deflateEnd = function () {
         return ye != V && ye != W && ye != X
           ? P
           : ((tt.pending_buf = null),
@@ -685,16 +691,16 @@
             (Ie = null),
             (qe = null),
             (tt.dstate = null),
-            ye == W ? S : q);
+            ye == W ? S : q)
       }),
-      (tt.deflateParams = function(e, t, n) {
-        var a = q;
+      (tt.deflateParams = function (e, t, n) {
+        var a = q
         return (
           t == m && (t = 6),
           t < 0 || t > 9 || n < 0 || n > M
             ? P
             : (J[Ve].func != J[t].func &&
-                0 !== e.total_in &&
+                e.total_in !== 0 &&
                 (a = e.deflate(E)),
               Ve != t &&
                 ((Ve = t),
@@ -704,14 +710,14 @@
                 (Re = J[Ve].max_chain)),
               (We = n),
               a)
-        );
+        )
       }),
-      (tt.deflateSetDictionary = function(e, t, n) {
+      (tt.deflateSetDictionary = function (e, t, n) {
         var a,
           i = n,
-          r = 0;
-        if (!t || ye != V) return P;
-        if (i < te) return q;
+          r = 0
+        if (!t || ye != V) return P
+        if (i < te) return q
         for (
           i > Ee - ae && ((i = Ee - ae), (r = n - i)),
             qe.set(t.subarray(r, r + i), 0),
@@ -722,22 +728,22 @@
             a = 0;
           a <= i - te;
           a++
-        )
+        ) {
           (Se = ((Se << Ce) ^ (255 & qe[a + (te - 1)])) & Be),
             (Ie[a & ze] = Pe[Se]),
-            (Pe[Se] = a);
-        return q;
+            (Pe[Se] = a)
+        }
+        return q
       }),
-      (tt.deflate = function(e, t) {
-        var n, a, i, r, _;
-        if (t > z || t < 0) return P;
+      (tt.deflate = function (e, t) {
+        var n, a, i, r, _
+        if (t > z || t < 0) return P
         if (
           !e.next_out ||
-          (!e.next_in && 0 !== e.avail_in) ||
+          (!e.next_in && e.avail_in !== 0) ||
           (ye == X && t != z)
-        )
-          return (e.msg = K[I - P]), P;
-        if (0 === e.avail_out) return (e.msg = K[I - L]), L;
+        ) { return (e.msg = K[I - P]), P }
+        if (e.avail_out === 0) return (e.msg = K[I - L]), L
         if (
           ((me = e),
           (r = Ue),
@@ -747,73 +753,70 @@
             (i = ((Ve - 1) & 255) >> 1),
             i > 3 && (i = 3),
             (a |= i << 6),
-            0 !== Ke && (a |= T),
+            Ke !== 0 && (a |= T),
             (a += 31 - a % 31),
             (ye = W),
             h(a)),
-          0 !== tt.pending)
+          tt.pending !== 0)
         ) {
-          if ((me.flush_pending(), 0 === me.avail_out)) return (Ue = -1), q;
-        } else if (0 === me.avail_in && t <= r && t != z)
-          return (me.msg = K[I - L]), L;
-        if (ye == X && 0 !== me.avail_in) return (e.msg = K[I - L]), L;
-        if (0 !== me.avail_in || 0 !== Oe || (t != U && ye != X)) {
+          if ((me.flush_pending(), me.avail_out === 0)) return (Ue = -1), q
+        } else if (me.avail_in === 0 && t <= r && t != z) { return (me.msg = K[I - L]), L }
+        if (ye == X && me.avail_in !== 0) return (e.msg = K[I - L]), L
+        if (me.avail_in !== 0 || Oe !== 0 || (t != U && ye != X)) {
           switch (((_ = -1), J[Ve].func)) {
             case F:
-              _ = xe(t);
-              break;
+              _ = xe(t)
+              break
             case G:
-              _ = be(t);
-              break;
+              _ = be(t)
+              break
             case H:
-              _ = ge(t);
+              _ = ge(t)
           }
-          if (((_ != Q && _ != R) || (ye = X), _ == N || _ == Q))
-            return 0 === me.avail_out && (Ue = -1), q;
+          if (((_ != Q && _ != R) || (ye = X), _ == N || _ == Q)) { return me.avail_out === 0 && (Ue = -1), q }
           if (_ == O) {
-            if (t == E) oe();
-            else if ((se(0, 0, !1), t == k)) for (n = 0; n < Le; n++) Pe[n] = 0;
-            if ((me.flush_pending(), 0 === me.avail_out)) return (Ue = -1), q;
+            if (t == E) oe()
+            else if ((se(0, 0, !1), t == k)) for (n = 0; n < Le; n++) Pe[n] = 0
+            if ((me.flush_pending(), me.avail_out === 0)) return (Ue = -1), q
           }
         }
-        return t != z ? q : D;
-      });
+        return t != z ? q : D
+      })
   }
-  function _() {
+  function _ () {
     var e = this;
     (e.next_in_index = 0),
       (e.next_out_index = 0),
       (e.avail_in = 0),
       (e.total_in = 0),
       (e.avail_out = 0),
-      (e.total_out = 0);
+      (e.total_out = 0)
   }
-  function o(e) {
+  function o (e) {
     var t = this,
       n = new _(),
       a = 512,
       i = U,
-      r = new Uint8Array(a);
-    "undefined" == typeof e && (e = m),
+      r = new Uint8Array(a)
+    typeof e === 'undefined' && (e = m),
       n.deflateInit(e),
       (n.next_out = r),
-      (t.append = function(e, t) {
+      (t.append = function (e, t) {
         var _,
           o,
           u = [],
           d = 0,
           f = 0,
-          l = 0;
+          l = 0
         if (e.length) {
-          (n.next_in_index = 0), (n.next_in = e), (n.avail_in = e.length);
+          (n.next_in_index = 0), (n.next_in = e), (n.avail_in = e.length)
           do {
             if (
               ((n.next_out_index = 0),
               (n.avail_out = a),
               (_ = n.deflate(i)),
               _ != q)
-            )
-              throw "deflating: " + n.msg;
+            ) { throw 'deflating: ' + n.msg }
             n.next_out_index &&
               (n.next_out_index == a
                 ? u.push(new Uint8Array(r))
@@ -822,44 +825,43 @@
               t &&
                 n.next_in_index > 0 &&
                 n.next_in_index != d &&
-                (t(n.next_in_index), (d = n.next_in_index));
-          } while (n.avail_in > 0 || 0 === n.avail_out);
+                (t(n.next_in_index), (d = n.next_in_index))
+          } while (n.avail_in > 0 || n.avail_out === 0)
           return (
             (o = new Uint8Array(l)),
-            u.forEach(function(e) {
-              o.set(e, f), (f += e.length);
+            u.forEach(function (e) {
+              o.set(e, f), (f += e.length)
             }),
             o
-          );
+          )
         }
       }),
-      (t.flush = function() {
+      (t.flush = function () {
         var e,
           t,
           i = [],
           _ = 0,
-          o = 0;
+          o = 0
         do {
           if (
             ((n.next_out_index = 0),
             (n.avail_out = a),
             (e = n.deflate(z)),
             e != D && e != q)
-          )
-            throw "deflating: " + n.msg;
+          ) { throw 'deflating: ' + n.msg }
           a - n.avail_out > 0 &&
             i.push(new Uint8Array(r.subarray(0, n.next_out_index))),
-            (o += n.next_out_index);
-        } while (n.avail_in > 0 || 0 === n.avail_out);
+            (o += n.next_out_index)
+        } while (n.avail_in > 0 || n.avail_out === 0)
         return (
           n.deflateEnd(),
           (t = new Uint8Array(o)),
-          i.forEach(function(e) {
-            t.set(e, _), (_ += e.length);
+          i.forEach(function (e) {
+            t.set(e, _), (_ += e.length)
           }),
           t
-        );
-      });
+        )
+      })
   }
   var u = 15,
     d = 30,
@@ -1723,8 +1725,8 @@
       16384,
       24576
     ]),
-    (t.d_code = function(e) {
-      return e < 256 ? j[e] : j[256 + (e >>> 7)];
+    (t.d_code = function (e) {
+      return e < 256 ? j[e] : j[256 + (e >>> 7)]
     }),
     (t.extra_lbits = [
       0,
@@ -2473,7 +2475,7 @@
     ]),
     (n.static_l_desc = new n(n.static_ltree, t.extra_lbits, s + 1, c, u)),
     (n.static_d_desc = new n(n.static_dtree, t.extra_dbits, 0, d, u)),
-    (n.static_bl_desc = new n(null, t.extra_blbits, 0, f, x));
+    (n.static_bl_desc = new n(null, t.extra_blbits, 0, f, x))
   var B = 9,
     C = 8,
     F = 0,
@@ -2492,16 +2494,16 @@
       new a(32, 258, 258, 4096, H)
     ],
     K = [
-      "need dictionary",
-      "stream end",
-      "",
-      "",
-      "stream error",
-      "data error",
-      "",
-      "buffer error",
-      "",
-      ""
+      'need dictionary',
+      'stream end',
+      '',
+      '',
+      'stream error',
+      'data error',
+      '',
+      'buffer error',
+      '',
+      ''
     ],
     N = 0,
     O = 1,
@@ -2517,49 +2519,49 @@
     ee = 2,
     te = 3,
     ne = 258,
-    ae = ne + te + 1;
+    ae = ne + te + 1
   _.prototype = {
-    deflateInit: function(e, t) {
-      var n = this;
-      return (n.dstate = new r()), t || (t = u), n.dstate.deflateInit(n, e, t);
+    deflateInit: function (e, t) {
+      var n = this
+      return (n.dstate = new r()), t || (t = u), n.dstate.deflateInit(n, e, t)
     },
-    deflate: function(e) {
-      var t = this;
-      return t.dstate ? t.dstate.deflate(t, e) : P;
+    deflate: function (e) {
+      var t = this
+      return t.dstate ? t.dstate.deflate(t, e) : P
     },
-    deflateEnd: function() {
-      var e = this;
-      if (!e.dstate) return P;
-      var t = e.dstate.deflateEnd();
-      return (e.dstate = null), t;
+    deflateEnd: function () {
+      var e = this
+      if (!e.dstate) return P
+      var t = e.dstate.deflateEnd()
+      return (e.dstate = null), t
     },
-    deflateParams: function(e, t) {
-      var n = this;
-      return n.dstate ? n.dstate.deflateParams(n, e, t) : P;
+    deflateParams: function (e, t) {
+      var n = this
+      return n.dstate ? n.dstate.deflateParams(n, e, t) : P
     },
-    deflateSetDictionary: function(e, t) {
-      var n = this;
-      return n.dstate ? n.dstate.deflateSetDictionary(n, e, t) : P;
+    deflateSetDictionary: function (e, t) {
+      var n = this
+      return n.dstate ? n.dstate.deflateSetDictionary(n, e, t) : P
     },
-    read_buf: function(e, t, n) {
+    read_buf: function (e, t, n) {
       var a = this,
-        i = a.avail_in;
+        i = a.avail_in
       return (
         i > n && (i = n),
-        0 === i
+        i === 0
           ? 0
           : ((a.avail_in -= i),
             e.set(a.next_in.subarray(a.next_in_index, a.next_in_index + i), t),
             (a.next_in_index += i),
             (a.total_in += i),
             i)
-      );
+      )
     },
-    flush_pending: function() {
+    flush_pending: function () {
       var e = this,
-        t = e.dstate.pending;
+        t = e.dstate.pending
       t > e.avail_out && (t = e.avail_out),
-        0 !== t &&
+        t !== 0 &&
           (e.next_out.set(
             e.dstate.pending_buf.subarray(
               e.dstate.pending_out,
@@ -2572,27 +2574,27 @@
           (e.total_out += t),
           (e.avail_out -= t),
           (e.dstate.pending -= t),
-          0 === e.dstate.pending && (e.dstate.pending_out = 0));
+          e.dstate.pending === 0 && (e.dstate.pending_out = 0))
     }
-  };
-  var ie;
+  }
+  var ie
   e.zip
     ? (e.zip.Deflater = o)
     : ((ie = new o()),
       e.addEventListener(
-        "message",
-        function(t) {
-          var n = t.data;
+        'message',
+        function (t) {
+          var n = t.data
           n.init && ((ie = new o(n.level)), e.postMessage({ oninit: !0 })),
             n.append &&
               e.postMessage({
                 onappend: !0,
-                data: ie.append(n.data, function(t) {
-                  e.postMessage({ progress: !0, current: t });
+                data: ie.append(n.data, function (t) {
+                  e.postMessage({ progress: !0, current: t })
                 })
               }),
-            n.flush && e.postMessage({ onflush: !0, data: ie.flush() });
+            n.flush && e.postMessage({ onflush: !0, data: ie.flush() })
         },
         !1
-      ));
-})(this);
+      ))
+})(this)

@@ -55,152 +55,157 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-!(function() {
-  define("Core/defined", [], function() {
-    "use strict";
-    function e(e) {
-      return void 0 !== e && null !== e;
+!(function () {
+  define('Core/defined', [], function () {
+    'use strict'
+    function e (e) {
+      return void 0 !== e && e !== null
     }
-    return e;
+    return e
   }),
-    define("Core/DeveloperError", ["./defined"], function(e) {
-      "use strict";
-      function t(e) {
-        (this.name = "DeveloperError"), (this.message = e);
-        var t;
+    define('Core/DeveloperError', ['./defined'], function (e) {
+      'use strict'
+      function t (e) {
+        (this.name = 'DeveloperError'), (this.message = e)
+        var t
         try {
-          throw new Error();
+          throw new Error()
         } catch (e) {
-          t = e.stack;
+          t = e.stack
         }
-        this.stack = t;
+        this.stack = t
       }
       return (
         e(Object.create) &&
           ((t.prototype = Object.create(Error.prototype)),
           (t.prototype.constructor = t)),
-        (t.prototype.toString = function() {
-          var t = this.name + ": " + this.message;
-          return e(this.stack) && (t += "\n" + this.stack.toString()), t;
+        (t.prototype.toString = function () {
+          var t = this.name + ': ' + this.message
+          return e(this.stack) && (t += '\n' + this.stack.toString()), t
         }),
-        (t.throwInstantiationError = function() {
+        (t.throwInstantiationError = function () {
           throw new t(
-            "This function defines an interface and should not be called directly."
-          );
+            'This function defines an interface and should not be called directly.'
+          )
         }),
         t
-      );
+      )
     }),
-    define("Core/Check", ["./defined", "./DeveloperError"], function(e, t) {
-      "use strict";
-      function n(e) {
-        return e + " is required, actual value was undefined";
+    define('Core/Check', ['./defined', './DeveloperError'], function (e, t) {
+      'use strict'
+      function n (e) {
+        return e + ' is required, actual value was undefined'
       }
-      function r(e, t, n) {
+      function r (e, t, n) {
         return (
-          "Expected " + n + " to be typeof " + t + ", actual typeof was " + e
-        );
+          'Expected ' + n + ' to be typeof ' + t + ', actual typeof was ' + e
+        )
       }
-      var i = {};
+      var i = {}
       return (
         (i.typeOf = {}),
-        (i.defined = function(r, i) {
-          if (!e(i)) throw new t(n(r));
+        (i.defined = function (r, i) {
+          if (!e(i)) throw new t(n(r))
         }),
-        (i.typeOf.func = function(e, n) {
-          if ("function" != typeof n) throw new t(r(typeof n, "function", e));
+        (i.typeOf.func = function (e, n) {
+          if (typeof n !== 'function') throw new t(r(typeof n, 'function', e))
         }),
-        (i.typeOf.string = function(e, n) {
-          if ("string" != typeof n) throw new t(r(typeof n, "string", e));
+        (i.typeOf.string = function (e, n) {
+          if (typeof n !== 'string') throw new t(r(typeof n, 'string', e))
         }),
-        (i.typeOf.number = function(e, n) {
-          if ("number" != typeof n) throw new t(r(typeof n, "number", e));
+        (i.typeOf.number = function (e, n) {
+          if (typeof n !== 'number') throw new t(r(typeof n, 'number', e))
         }),
-        (i.typeOf.number.lessThan = function(e, n, r) {
-          if ((i.typeOf.number(e, n), n >= r))
+        (i.typeOf.number.lessThan = function (e, n, r) {
+          if ((i.typeOf.number(e, n), n >= r)) {
             throw new t(
-              "Expected " +
+              'Expected ' +
                 e +
-                " to be less than " +
+                ' to be less than ' +
                 r +
-                ", actual value was " +
+                ', actual value was ' +
                 n
-            );
+            )
+          }
         }),
-        (i.typeOf.number.lessThanOrEquals = function(e, n, r) {
-          if ((i.typeOf.number(e, n), n > r))
+        (i.typeOf.number.lessThanOrEquals = function (e, n, r) {
+          if ((i.typeOf.number(e, n), n > r)) {
             throw new t(
-              "Expected " +
+              'Expected ' +
                 e +
-                " to be less than or equal to " +
+                ' to be less than or equal to ' +
                 r +
-                ", actual value was " +
+                ', actual value was ' +
                 n
-            );
+            )
+          }
         }),
-        (i.typeOf.number.greaterThan = function(e, n, r) {
-          if ((i.typeOf.number(e, n), n <= r))
+        (i.typeOf.number.greaterThan = function (e, n, r) {
+          if ((i.typeOf.number(e, n), n <= r)) {
             throw new t(
-              "Expected " +
+              'Expected ' +
                 e +
-                " to be greater than " +
+                ' to be greater than ' +
                 r +
-                ", actual value was " +
+                ', actual value was ' +
                 n
-            );
+            )
+          }
         }),
-        (i.typeOf.number.greaterThanOrEquals = function(e, n, r) {
-          if ((i.typeOf.number(e, n), n < r))
+        (i.typeOf.number.greaterThanOrEquals = function (e, n, r) {
+          if ((i.typeOf.number(e, n), n < r)) {
             throw new t(
-              "Expected " +
+              'Expected ' +
                 e +
-                " to be greater than or equal to" +
+                ' to be greater than or equal to' +
                 r +
-                ", actual value was " +
+                ', actual value was ' +
                 n
-            );
+            )
+          }
         }),
-        (i.typeOf.object = function(e, n) {
-          if ("object" != typeof n) throw new t(r(typeof n, "object", e));
+        (i.typeOf.object = function (e, n) {
+          if (typeof n !== 'object') throw new t(r(typeof n, 'object', e))
         }),
-        (i.typeOf.bool = function(e, n) {
-          if ("boolean" != typeof n) throw new t(r(typeof n, "boolean", e));
+        (i.typeOf.bool = function (e, n) {
+          if (typeof n !== 'boolean') throw new t(r(typeof n, 'boolean', e))
         }),
-        (i.typeOf.number.equals = function(e, n, r, a) {
-          if ((i.typeOf.number(e, r), i.typeOf.number(n, a), r !== a))
+        (i.typeOf.number.equals = function (e, n, r, a) {
+          if ((i.typeOf.number(e, r), i.typeOf.number(n, a), r !== a)) {
             throw new t(
               e +
-                " must be equal to " +
+                ' must be equal to ' +
                 n +
-                ", the actual values are " +
+                ', the actual values are ' +
                 r +
-                " and " +
+                ' and ' +
                 a
-            );
+            )
+          }
         }),
         i
-      );
+      )
     }),
-    define("Core/freezeObject", ["./defined"], function(e) {
-      "use strict";
-      var t = Object.freeze;
+    define('Core/freezeObject', ['./defined'], function (e) {
+      'use strict'
+      var t = Object.freeze
       return (
         e(t) ||
-          (t = function(e) {
-            return e;
+          (t = function (e) {
+            return e
           }),
         t
-      );
+      )
     }),
-    define("Core/defaultValue", ["./freezeObject"], function(e) {
-      "use strict";
-      function t(e, t) {
-        return void 0 !== e && null !== e ? e : t;
+    define('Core/defaultValue', ['./freezeObject'], function (e) {
+      'use strict'
+      function t (e, t) {
+        return void 0 !== e && e !== null ? e : t
       }
-      return (t.EMPTY_OBJECT = e({})), t;
+      return (t.EMPTY_OBJECT = e({})), t
     }),
-    define("ThirdParty/mersenne-twister", [], function() {
-      var e = function(e) {
+    define('ThirdParty/mersenne-twister', [], function () {
+      var e = function (e) {
         void 0 == e && (e = new Date().getTime()),
           (this.N = 624),
           (this.M = 397),
@@ -209,10 +214,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           (this.LOWER_MASK = 2147483647),
           (this.mt = new Array(this.N)),
           (this.mti = this.N + 1),
-          this.init_genrand(e);
-      };
+          this.init_genrand(e)
+      }
       return (
-        (e.prototype.init_genrand = function(e) {
+        (e.prototype.init_genrand = function (e) {
           for (
             this.mt[0] = e >>> 0, this.mti = 1;
             this.mti < this.N;
@@ -223,35 +228,37 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               ((1812433253 * ((4294901760 & e) >>> 16)) << 16) +
               1812433253 * (65535 & e) +
               this.mti),
-              (this.mt[this.mti] >>>= 0);
+              (this.mt[this.mti] >>>= 0)
           }
         }),
-        (e.prototype.genrand_int32 = function() {
+        (e.prototype.genrand_int32 = function () {
           var e,
-            t = new Array(0, this.MATRIX_A);
+            t = new Array(0, this.MATRIX_A)
           if (this.mti >= this.N) {
-            var n;
+            var n
             for (
               this.mti == this.N + 1 && this.init_genrand(5489), n = 0;
               n < this.N - this.M;
               n++
-            )
+            ) {
               (e =
                 (this.mt[n] & this.UPPER_MASK) |
                 (this.mt[n + 1] & this.LOWER_MASK)),
-                (this.mt[n] = this.mt[n + this.M] ^ (e >>> 1) ^ t[1 & e]);
-            for (; n < this.N - 1; n++)
+                (this.mt[n] = this.mt[n + this.M] ^ (e >>> 1) ^ t[1 & e])
+            }
+            for (; n < this.N - 1; n++) {
               (e =
                 (this.mt[n] & this.UPPER_MASK) |
                 (this.mt[n + 1] & this.LOWER_MASK)),
                 (this.mt[n] =
-                  this.mt[n + (this.M - this.N)] ^ (e >>> 1) ^ t[1 & e]);
+                  this.mt[n + (this.M - this.N)] ^ (e >>> 1) ^ t[1 & e])
+            }
             (e =
               (this.mt[this.N - 1] & this.UPPER_MASK) |
               (this.mt[0] & this.LOWER_MASK)),
               (this.mt[this.N - 1] =
                 this.mt[this.M - 1] ^ (e >>> 1) ^ t[1 & e]),
-              (this.mti = 0);
+              (this.mti = 0)
           }
           return (
             (e = this.mt[this.mti++]),
@@ -260,24 +267,24 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             (e ^= (e << 15) & 4022730752),
             (e ^= e >>> 18),
             e >>> 0
-          );
+          )
         }),
-        (e.prototype.random = function() {
-          return this.genrand_int32() * (1 / 4294967296);
+        (e.prototype.random = function () {
+          return this.genrand_int32() * (1 / 4294967296)
         }),
         e
-      );
+      )
     }),
     define(
-      "Core/Math",
+      'Core/Math',
       [
-        "../ThirdParty/mersenne-twister",
-        "./defaultValue",
-        "./defined",
-        "./DeveloperError"
+        '../ThirdParty/mersenne-twister',
+        './defaultValue',
+        './defined',
+        './DeveloperError'
       ],
-      function(e, t, n, r) {
-        "use strict";
+      function (e, t, n, r) {
+        'use strict'
         var i = {};
         (i.EPSILON1 = 0.1),
           (i.EPSILON2 = 0.01),
@@ -303,32 +310,32 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           (i.SOLAR_RADIUS = 6955e5),
           (i.LUNAR_RADIUS = 1737400),
           (i.SIXTY_FOUR_KILOBYTES = 65536),
-          (i.sign = function(e) {
-            return e > 0 ? 1 : e < 0 ? -1 : 0;
+          (i.sign = function (e) {
+            return e > 0 ? 1 : e < 0 ? -1 : 0
           }),
-          (i.signNotZero = function(e) {
-            return e < 0 ? -1 : 1;
+          (i.signNotZero = function (e) {
+            return e < 0 ? -1 : 1
           }),
-          (i.toSNorm = function(e, n) {
+          (i.toSNorm = function (e, n) {
             return (
               (n = t(n, 255)), Math.round((0.5 * i.clamp(e, -1, 1) + 0.5) * n)
-            );
+            )
           }),
-          (i.fromSNorm = function(e, n) {
-            return (n = t(n, 255)), i.clamp(e, 0, n) / n * 2 - 1;
+          (i.fromSNorm = function (e, n) {
+            return (n = t(n, 255)), i.clamp(e, 0, n) / n * 2 - 1
           }),
-          (i.sinh = function(e) {
+          (i.sinh = function (e) {
             var t = Math.pow(Math.E, e),
-              n = Math.pow(Math.E, -1 * e);
-            return 0.5 * (t - n);
+              n = Math.pow(Math.E, -1 * e)
+            return 0.5 * (t - n)
           }),
-          (i.cosh = function(e) {
+          (i.cosh = function (e) {
             var t = Math.pow(Math.E, e),
-              n = Math.pow(Math.E, -1 * e);
-            return 0.5 * (t + n);
+              n = Math.pow(Math.E, -1 * e)
+            return 0.5 * (t + n)
           }),
-          (i.lerp = function(e, t, n) {
-            return (1 - n) * e + n * t;
+          (i.lerp = function (e, t, n) {
+            return (1 - n) * e + n * t
           }),
           (i.PI = Math.PI),
           (i.ONE_OVER_PI = 1 / Math.PI),
@@ -342,50 +349,50 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           (i.RADIANS_PER_DEGREE = Math.PI / 180),
           (i.DEGREES_PER_RADIAN = 180 / Math.PI),
           (i.RADIANS_PER_ARCSECOND = i.RADIANS_PER_DEGREE / 3600),
-          (i.toRadians = function(e) {
-            return e * i.RADIANS_PER_DEGREE;
+          (i.toRadians = function (e) {
+            return e * i.RADIANS_PER_DEGREE
           }),
-          (i.toDegrees = function(e) {
-            return e * i.DEGREES_PER_RADIAN;
+          (i.toDegrees = function (e) {
+            return e * i.DEGREES_PER_RADIAN
           }),
-          (i.convertLongitudeRange = function(e) {
+          (i.convertLongitudeRange = function (e) {
             var t = i.TWO_PI,
-              n = e - Math.floor(e / t) * t;
-            return n < -Math.PI ? n + t : n >= Math.PI ? n - t : n;
+              n = e - Math.floor(e / t) * t
+            return n < -Math.PI ? n + t : n >= Math.PI ? n - t : n
           }),
-          (i.clampToLatitudeRange = function(e) {
-            return i.clamp(e, -1 * i.PI_OVER_TWO, i.PI_OVER_TWO);
+          (i.clampToLatitudeRange = function (e) {
+            return i.clamp(e, -1 * i.PI_OVER_TWO, i.PI_OVER_TWO)
           }),
-          (i.negativePiToPi = function(e) {
-            return i.zeroToTwoPi(e + i.PI) - i.PI;
+          (i.negativePiToPi = function (e) {
+            return i.zeroToTwoPi(e + i.PI) - i.PI
           }),
-          (i.zeroToTwoPi = function(e) {
-            var t = i.mod(e, i.TWO_PI);
+          (i.zeroToTwoPi = function (e) {
+            var t = i.mod(e, i.TWO_PI)
             return Math.abs(t) < i.EPSILON14 && Math.abs(e) > i.EPSILON14
               ? i.TWO_PI
-              : t;
+              : t
           }),
-          (i.mod = function(e, t) {
-            return (e % t + t) % t;
+          (i.mod = function (e, t) {
+            return (e % t + t) % t
           }),
-          (i.equalsEpsilon = function(e, n, r, i) {
-            i = t(i, r);
-            var a = Math.abs(e - n);
-            return a <= i || a <= r * Math.max(Math.abs(e), Math.abs(n));
-          });
+          (i.equalsEpsilon = function (e, n, r, i) {
+            i = t(i, r)
+            var a = Math.abs(e - n)
+            return a <= i || a <= r * Math.max(Math.abs(e), Math.abs(n))
+          })
         var a = [1];
-        (i.factorial = function(e) {
-          var t = a.length;
-          if (e >= t) for (var n = a[t - 1], r = t; r <= e; r++) a.push(n * r);
-          return a[e];
+        (i.factorial = function (e) {
+          var t = a.length
+          if (e >= t) for (var n = a[t - 1], r = t; r <= e; r++) a.push(n * r)
+          return a[e]
         }),
-          (i.incrementWrap = function(e, n, r) {
-            return (r = t(r, 0)), ++e, e > n && (e = r), e;
+          (i.incrementWrap = function (e, n, r) {
+            return (r = t(r, 0)), ++e, e > n && (e = r), e
           }),
-          (i.isPowerOfTwo = function(e) {
-            return 0 !== e && 0 === (e & (e - 1));
+          (i.isPowerOfTwo = function (e) {
+            return e !== 0 && (e & (e - 1)) === 0
           }),
-          (i.nextPowerOfTwo = function(e) {
+          (i.nextPowerOfTwo = function (e) {
             return (
               --e,
               (e |= e >> 1),
@@ -395,87 +402,88 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (e |= e >> 16),
               ++e,
               e
-            );
+            )
           }),
-          (i.clamp = function(e, t, n) {
-            return e < t ? t : e > n ? n : e;
-          });
-        var o = new e();
+          (i.clamp = function (e, t, n) {
+            return e < t ? t : e > n ? n : e
+          })
+        var o = new e()
         return (
-          (i.setRandomNumberSeed = function(t) {
-            o = new e(t);
+          (i.setRandomNumberSeed = function (t) {
+            o = new e(t)
           }),
-          (i.nextRandomNumber = function() {
-            return o.random();
+          (i.nextRandomNumber = function () {
+            return o.random()
           }),
-          (i.randomBetween = function(e, t) {
-            return i.nextRandomNumber() * (t - e) + e;
+          (i.randomBetween = function (e, t) {
+            return i.nextRandomNumber() * (t - e) + e
           }),
-          (i.acosClamped = function(e) {
-            return Math.acos(i.clamp(e, -1, 1));
+          (i.acosClamped = function (e) {
+            return Math.acos(i.clamp(e, -1, 1))
           }),
-          (i.asinClamped = function(e) {
-            return Math.asin(i.clamp(e, -1, 1));
+          (i.asinClamped = function (e) {
+            return Math.asin(i.clamp(e, -1, 1))
           }),
-          (i.chordLength = function(e, t) {
-            return 2 * t * Math.sin(0.5 * e);
+          (i.chordLength = function (e, t) {
+            return 2 * t * Math.sin(0.5 * e)
           }),
-          (i.logBase = function(e, t) {
-            return Math.log(e) / Math.log(t);
+          (i.logBase = function (e, t) {
+            return Math.log(e) / Math.log(t)
           }),
-          (i.fog = function(e, t) {
-            var n = e * t;
-            return 1 - Math.exp(-(n * n));
+          (i.fog = function (e, t) {
+            var n = e * t
+            return 1 - Math.exp(-(n * n))
           }),
           i
-        );
+        )
       }
     ),
     define(
-      "Core/Cartesian3",
+      'Core/Cartesian3',
       [
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./DeveloperError",
-        "./freezeObject",
-        "./Math"
+        './Check',
+        './defaultValue',
+        './defined',
+        './DeveloperError',
+        './freezeObject',
+        './Math'
       ],
-      function(e, t, n, r, i, a) {
-        "use strict";
-        function o(e, n, r) {
-          (this.x = t(e, 0)), (this.y = t(n, 0)), (this.z = t(r, 0));
+      function (e, t, n, r, i, a) {
+        'use strict'
+        function o (e, n, r) {
+          (this.x = t(e, 0)), (this.y = t(n, 0)), (this.z = t(r, 0))
         }
-        (o.fromSpherical = function(e, r) {
-          n(r) || (r = new o());
+        (o.fromSpherical = function (e, r) {
+          n(r) || (r = new o())
           var i = e.clock,
             a = e.cone,
             u = t(e.magnitude, 1),
-            s = u * Math.sin(a);
+            s = u * Math.sin(a)
           return (
             (r.x = s * Math.cos(i)),
             (r.y = s * Math.sin(i)),
             (r.z = u * Math.cos(a)),
             r
-          );
+          )
         }),
-          (o.fromElements = function(e, t, r, i) {
-            return n(i) ? ((i.x = e), (i.y = t), (i.z = r), i) : new o(e, t, r);
+          (o.fromElements = function (e, t, r, i) {
+            return n(i) ? ((i.x = e), (i.y = t), (i.z = r), i) : new o(e, t, r)
           }),
-          (o.clone = function(e, t) {
-            if (n(e))
+          (o.clone = function (e, t) {
+            if (n(e)) {
               return n(t)
                 ? ((t.x = e.x), (t.y = e.y), (t.z = e.z), t)
-                : new o(e.x, e.y, e.z);
+                : new o(e.x, e.y, e.z)
+            }
           }),
           (o.fromCartesian4 = o.clone),
           (o.packedLength = 3),
-          (o.pack = function(e, n, r) {
+          (o.pack = function (e, n, r) {
             return (
               (r = t(r, 0)), (n[r++] = e.x), (n[r++] = e.y), (n[r] = e.z), n
-            );
+            )
           }),
-          (o.unpack = function(e, r, i) {
+          (o.unpack = function (e, r, i) {
             return (
               (r = t(r, 0)),
               n(i) || (i = new o()),
@@ -483,132 +491,132 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (i.y = e[r++]),
               (i.z = e[r]),
               i
-            );
+            )
           }),
-          (o.packArray = function(e, t) {
-            var r = e.length;
-            n(t) ? (t.length = 3 * r) : (t = new Array(3 * r));
-            for (var i = 0; i < r; ++i) o.pack(e[i], t, 3 * i);
-            return t;
+          (o.packArray = function (e, t) {
+            var r = e.length
+            n(t) ? (t.length = 3 * r) : (t = new Array(3 * r))
+            for (var i = 0; i < r; ++i) o.pack(e[i], t, 3 * i)
+            return t
           }),
-          (o.unpackArray = function(e, t) {
-            var r = e.length;
-            n(t) ? (t.length = r / 3) : (t = new Array(r / 3));
+          (o.unpackArray = function (e, t) {
+            var r = e.length
+            n(t) ? (t.length = r / 3) : (t = new Array(r / 3))
             for (var i = 0; i < r; i += 3) {
-              var a = i / 3;
-              t[a] = o.unpack(e, i, t[a]);
+              var a = i / 3
+              t[a] = o.unpack(e, i, t[a])
             }
-            return t;
+            return t
           }),
           (o.fromArray = o.unpack),
-          (o.maximumComponent = function(e) {
-            return Math.max(e.x, e.y, e.z);
+          (o.maximumComponent = function (e) {
+            return Math.max(e.x, e.y, e.z)
           }),
-          (o.minimumComponent = function(e) {
-            return Math.min(e.x, e.y, e.z);
+          (o.minimumComponent = function (e) {
+            return Math.min(e.x, e.y, e.z)
           }),
-          (o.minimumByComponent = function(e, t, n) {
+          (o.minimumByComponent = function (e, t, n) {
             return (
               (n.x = Math.min(e.x, t.x)),
               (n.y = Math.min(e.y, t.y)),
               (n.z = Math.min(e.z, t.z)),
               n
-            );
+            )
           }),
-          (o.maximumByComponent = function(e, t, n) {
+          (o.maximumByComponent = function (e, t, n) {
             return (
               (n.x = Math.max(e.x, t.x)),
               (n.y = Math.max(e.y, t.y)),
               (n.z = Math.max(e.z, t.z)),
               n
-            );
+            )
           }),
-          (o.magnitudeSquared = function(e) {
-            return e.x * e.x + e.y * e.y + e.z * e.z;
+          (o.magnitudeSquared = function (e) {
+            return e.x * e.x + e.y * e.y + e.z * e.z
           }),
-          (o.magnitude = function(e) {
-            return Math.sqrt(o.magnitudeSquared(e));
-          });
+          (o.magnitude = function (e) {
+            return Math.sqrt(o.magnitudeSquared(e))
+          })
         var u = new o();
-        (o.distance = function(e, t) {
-          return o.subtract(e, t, u), o.magnitude(u);
+        (o.distance = function (e, t) {
+          return o.subtract(e, t, u), o.magnitude(u)
         }),
-          (o.distanceSquared = function(e, t) {
-            return o.subtract(e, t, u), o.magnitudeSquared(u);
+          (o.distanceSquared = function (e, t) {
+            return o.subtract(e, t, u), o.magnitudeSquared(u)
           }),
-          (o.normalize = function(e, t) {
-            var n = o.magnitude(e);
-            return (t.x = e.x / n), (t.y = e.y / n), (t.z = e.z / n), t;
+          (o.normalize = function (e, t) {
+            var n = o.magnitude(e)
+            return (t.x = e.x / n), (t.y = e.y / n), (t.z = e.z / n), t
           }),
-          (o.dot = function(e, t) {
-            return e.x * t.x + e.y * t.y + e.z * t.z;
+          (o.dot = function (e, t) {
+            return e.x * t.x + e.y * t.y + e.z * t.z
           }),
-          (o.multiplyComponents = function(e, t, n) {
-            return (n.x = e.x * t.x), (n.y = e.y * t.y), (n.z = e.z * t.z), n;
+          (o.multiplyComponents = function (e, t, n) {
+            return (n.x = e.x * t.x), (n.y = e.y * t.y), (n.z = e.z * t.z), n
           }),
-          (o.divideComponents = function(e, t, n) {
-            return (n.x = e.x / t.x), (n.y = e.y / t.y), (n.z = e.z / t.z), n;
+          (o.divideComponents = function (e, t, n) {
+            return (n.x = e.x / t.x), (n.y = e.y / t.y), (n.z = e.z / t.z), n
           }),
-          (o.add = function(e, t, n) {
-            return (n.x = e.x + t.x), (n.y = e.y + t.y), (n.z = e.z + t.z), n;
+          (o.add = function (e, t, n) {
+            return (n.x = e.x + t.x), (n.y = e.y + t.y), (n.z = e.z + t.z), n
           }),
-          (o.subtract = function(e, t, n) {
-            return (n.x = e.x - t.x), (n.y = e.y - t.y), (n.z = e.z - t.z), n;
+          (o.subtract = function (e, t, n) {
+            return (n.x = e.x - t.x), (n.y = e.y - t.y), (n.z = e.z - t.z), n
           }),
-          (o.multiplyByScalar = function(e, t, n) {
-            return (n.x = e.x * t), (n.y = e.y * t), (n.z = e.z * t), n;
+          (o.multiplyByScalar = function (e, t, n) {
+            return (n.x = e.x * t), (n.y = e.y * t), (n.z = e.z * t), n
           }),
-          (o.divideByScalar = function(e, t, n) {
-            return (n.x = e.x / t), (n.y = e.y / t), (n.z = e.z / t), n;
+          (o.divideByScalar = function (e, t, n) {
+            return (n.x = e.x / t), (n.y = e.y / t), (n.z = e.z / t), n
           }),
-          (o.negate = function(e, t) {
-            return (t.x = -e.x), (t.y = -e.y), (t.z = -e.z), t;
+          (o.negate = function (e, t) {
+            return (t.x = -e.x), (t.y = -e.y), (t.z = -e.z), t
           }),
-          (o.abs = function(e, t) {
+          (o.abs = function (e, t) {
             return (
               (t.x = Math.abs(e.x)),
               (t.y = Math.abs(e.y)),
               (t.z = Math.abs(e.z)),
               t
-            );
-          });
-        var s = new o();
-        o.lerp = function(e, t, n, r) {
+            )
+          })
+        var s = new o()
+        o.lerp = function (e, t, n, r) {
           return (
             o.multiplyByScalar(t, n, s),
             (r = o.multiplyByScalar(e, 1 - n, r)),
             o.add(s, r, r)
-          );
-        };
+          )
+        }
         var E = new o(),
-          c = new o();
-        o.angleBetween = function(e, t) {
-          o.normalize(e, E), o.normalize(t, c);
+          c = new o()
+        o.angleBetween = function (e, t) {
+          o.normalize(e, E), o.normalize(t, c)
           var n = o.dot(E, c),
-            r = o.magnitude(o.cross(E, c, E));
-          return Math.atan2(r, n);
-        };
+            r = o.magnitude(o.cross(E, c, E))
+          return Math.atan2(r, n)
+        }
         var _ = new o();
-        (o.mostOrthogonalAxis = function(e, t) {
-          var n = o.normalize(e, _);
+        (o.mostOrthogonalAxis = function (e, t) {
+          var n = o.normalize(e, _)
           return (
             o.abs(n, n),
             (t =
               n.x <= n.y
                 ? n.x <= n.z ? o.clone(o.UNIT_X, t) : o.clone(o.UNIT_Z, t)
                 : n.y <= n.z ? o.clone(o.UNIT_Y, t) : o.clone(o.UNIT_Z, t))
-          );
+          )
         }),
-          (o.equals = function(e, t) {
+          (o.equals = function (e, t) {
             return (
               e === t ||
               (n(e) && n(t) && e.x === t.x && e.y === t.y && e.z === t.z)
-            );
+            )
           }),
-          (o.equalsArray = function(e, t, n) {
-            return e.x === t[n] && e.y === t[n + 1] && e.z === t[n + 2];
+          (o.equalsArray = function (e, t, n) {
+            return e.x === t[n] && e.y === t[n + 1] && e.z === t[n + 2]
           }),
-          (o.equalsEpsilon = function(e, t, r, i) {
+          (o.equalsEpsilon = function (e, t, r, i) {
             return (
               e === t ||
               (n(e) &&
@@ -616,9 +624,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 a.equalsEpsilon(e.x, t.x, r, i) &&
                 a.equalsEpsilon(e.y, t.y, r, i) &&
                 a.equalsEpsilon(e.z, t.z, r, i))
-            );
+            )
           }),
-          (o.cross = function(e, t, n) {
+          (o.cross = function (e, t, n) {
             var r = e.x,
               i = e.y,
               a = e.z,
@@ -627,109 +635,109 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               s = t.z,
               E = i * s - a * u,
               c = a * o - r * s,
-              _ = r * u - i * o;
-            return (n.x = E), (n.y = c), (n.z = _), n;
+              _ = r * u - i * o
+            return (n.x = E), (n.y = c), (n.z = _), n
           }),
-          (o.fromDegrees = function(e, t, n, r, i) {
+          (o.fromDegrees = function (e, t, n, r, i) {
             return (
               (e = a.toRadians(e)),
               (t = a.toRadians(t)),
               o.fromRadians(e, t, n, r, i)
-            );
-          });
+            )
+          })
         var l = new o(),
           T = new o(),
-          R = new o(40680631590769, 40680631590769, 40408299984661.445);
+          R = new o(40680631590769, 40680631590769, 40408299984661.445)
         return (
-          (o.fromRadians = function(e, r, i, a, u) {
-            i = t(i, 0);
+          (o.fromRadians = function (e, r, i, a, u) {
+            i = t(i, 0)
             var s = n(a) ? a.radiiSquared : R,
               E = Math.cos(r);
             (l.x = E * Math.cos(e)),
               (l.y = E * Math.sin(e)),
               (l.z = Math.sin(r)),
               (l = o.normalize(l, l)),
-              o.multiplyComponents(s, l, T);
-            var c = Math.sqrt(o.dot(l, T));
+              o.multiplyComponents(s, l, T)
+            var c = Math.sqrt(o.dot(l, T))
             return (
               (T = o.divideByScalar(T, c, T)),
               (l = o.multiplyByScalar(l, i, l)),
               n(u) || (u = new o()),
               o.add(T, l, u)
-            );
+            )
           }),
-          (o.fromDegreesArray = function(e, t, r) {
-            var i = e.length;
-            n(r) ? (r.length = i / 2) : (r = new Array(i / 2));
+          (o.fromDegreesArray = function (e, t, r) {
+            var i = e.length
+            n(r) ? (r.length = i / 2) : (r = new Array(i / 2))
             for (var a = 0; a < i; a += 2) {
               var u = e[a],
                 s = e[a + 1],
-                E = a / 2;
-              r[E] = o.fromDegrees(u, s, 0, t, r[E]);
+                E = a / 2
+              r[E] = o.fromDegrees(u, s, 0, t, r[E])
             }
-            return r;
+            return r
           }),
-          (o.fromRadiansArray = function(e, t, r) {
-            var i = e.length;
-            n(r) ? (r.length = i / 2) : (r = new Array(i / 2));
+          (o.fromRadiansArray = function (e, t, r) {
+            var i = e.length
+            n(r) ? (r.length = i / 2) : (r = new Array(i / 2))
             for (var a = 0; a < i; a += 2) {
               var u = e[a],
                 s = e[a + 1],
-                E = a / 2;
-              r[E] = o.fromRadians(u, s, 0, t, r[E]);
+                E = a / 2
+              r[E] = o.fromRadians(u, s, 0, t, r[E])
             }
-            return r;
+            return r
           }),
-          (o.fromDegreesArrayHeights = function(e, t, r) {
-            var i = e.length;
-            n(r) ? (r.length = i / 3) : (r = new Array(i / 3));
+          (o.fromDegreesArrayHeights = function (e, t, r) {
+            var i = e.length
+            n(r) ? (r.length = i / 3) : (r = new Array(i / 3))
             for (var a = 0; a < i; a += 3) {
               var u = e[a],
                 s = e[a + 1],
                 E = e[a + 2],
-                c = a / 3;
-              r[c] = o.fromDegrees(u, s, E, t, r[c]);
+                c = a / 3
+              r[c] = o.fromDegrees(u, s, E, t, r[c])
             }
-            return r;
+            return r
           }),
-          (o.fromRadiansArrayHeights = function(e, t, r) {
-            var i = e.length;
-            n(r) ? (r.length = i / 3) : (r = new Array(i / 3));
+          (o.fromRadiansArrayHeights = function (e, t, r) {
+            var i = e.length
+            n(r) ? (r.length = i / 3) : (r = new Array(i / 3))
             for (var a = 0; a < i; a += 3) {
               var u = e[a],
                 s = e[a + 1],
                 E = e[a + 2],
-                c = a / 3;
-              r[c] = o.fromRadians(u, s, E, t, r[c]);
+                c = a / 3
+              r[c] = o.fromRadians(u, s, E, t, r[c])
             }
-            return r;
+            return r
           }),
           (o.ZERO = i(new o(0, 0, 0))),
           (o.UNIT_X = i(new o(1, 0, 0))),
           (o.UNIT_Y = i(new o(0, 1, 0))),
           (o.UNIT_Z = i(new o(0, 0, 1))),
-          (o.prototype.clone = function(e) {
-            return o.clone(this, e);
+          (o.prototype.clone = function (e) {
+            return o.clone(this, e)
           }),
-          (o.prototype.equals = function(e) {
-            return o.equals(this, e);
+          (o.prototype.equals = function (e) {
+            return o.equals(this, e)
           }),
-          (o.prototype.equalsEpsilon = function(e, t, n) {
-            return o.equalsEpsilon(this, e, t, n);
+          (o.prototype.equalsEpsilon = function (e, t, n) {
+            return o.equalsEpsilon(this, e, t, n)
           }),
-          (o.prototype.toString = function() {
-            return "(" + this.x + ", " + this.y + ", " + this.z + ")";
+          (o.prototype.toString = function () {
+            return '(' + this.x + ', ' + this.y + ', ' + this.z + ')'
           }),
           o
-        );
+        )
       }
     ),
     define(
-      "Core/scaleToGeodeticSurface",
-      ["./Cartesian3", "./defined", "./DeveloperError", "./Math"],
-      function(e, t, n, r) {
-        "use strict";
-        function i(n, i, u, s, E) {
+      'Core/scaleToGeodeticSurface',
+      ['./Cartesian3', './defined', './DeveloperError', './Math'],
+      function (e, t, n, r) {
+        'use strict'
+        function i (n, i, u, s, E) {
           var c = n.x,
             _ = n.y,
             l = n.z,
@@ -741,13 +749,13 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             d = l * l * h * h,
             N = f + A + d,
             I = Math.sqrt(1 / N),
-            S = e.multiplyByScalar(n, I, a);
-          if (N < s) return isFinite(I) ? e.clone(S, E) : void 0;
+            S = e.multiplyByScalar(n, I, a)
+          if (N < s) return isFinite(I) ? e.clone(S, E) : void 0
           var M = u.x,
             y = u.y,
             m = u.z,
             O = o;
-          (O.x = S.x * M * 2), (O.y = S.y * y * 2), (O.z = S.z * m * 2);
+          (O.x = S.x * M * 2), (O.y = S.y * y * 2), (O.z = S.z * m * 2)
           var p,
             C,
             g,
@@ -760,7 +768,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             F,
             B,
             D = (1 - I) * e.magnitude(n) / (0.5 * e.magnitude(O)),
-            z = 0;
+            z = 0
           do {
             (D -= z),
               (g = 1 / (1 + D * M)),
@@ -773,52 +781,52 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (F = L * w),
               (B = P * U),
               (p = f * x + A * L + d * P - 1),
-              (C = f * v * M + A * F * y + d * B * m);
-            var G = -2 * C;
-            z = p / G;
-          } while (Math.abs(p) > r.EPSILON12);
+              (C = f * v * M + A * F * y + d * B * m)
+            var G = -2 * C
+            z = p / G
+          } while (Math.abs(p) > r.EPSILON12)
           return t(E)
             ? ((E.x = c * g), (E.y = _ * w), (E.z = l * U), E)
-            : new e(c * g, _ * w, l * U);
+            : new e(c * g, _ * w, l * U)
         }
         var a = new e(),
-          o = new e();
-        return i;
+          o = new e()
+        return i
       }
     ),
     define(
-      "Core/Cartographic",
+      'Core/Cartographic',
       [
-        "./Cartesian3",
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./freezeObject",
-        "./Math",
-        "./scaleToGeodeticSurface"
+        './Cartesian3',
+        './Check',
+        './defaultValue',
+        './defined',
+        './freezeObject',
+        './Math',
+        './scaleToGeodeticSurface'
       ],
-      function(e, t, n, r, i, a, o) {
-        "use strict";
-        function u(e, t, r) {
+      function (e, t, n, r, i, a, o) {
+        'use strict'
+        function u (e, t, r) {
           (this.longitude = n(e, 0)),
             (this.latitude = n(t, 0)),
-            (this.height = n(r, 0));
+            (this.height = n(r, 0))
         }
-        (u.fromRadians = function(e, t, i, a) {
+        (u.fromRadians = function (e, t, i, a) {
           return (
             (i = n(i, 0)),
             r(a)
               ? ((a.longitude = e), (a.latitude = t), (a.height = i), a)
               : new u(e, t, i)
-          );
+          )
         }),
-          (u.fromDegrees = function(e, t, n, r) {
+          (u.fromDegrees = function (e, t, n, r) {
             return (
               (e = a.toRadians(e)),
               (t = a.toRadians(t)),
               u.fromRadians(e, t, n, r)
-            );
-          });
+            )
+          })
         var s = new e(),
           E = new e(),
           c = new e(),
@@ -828,35 +836,36 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             1 / 40680631590769,
             1 / 40408299984661.445
           ),
-          T = a.EPSILON1;
+          T = a.EPSILON1
         return (
-          (u.fromCartesian = function(t, n, i) {
+          (u.fromCartesian = function (t, n, i) {
             var R = r(n) ? n.oneOverRadii : _,
               h = r(n) ? n.oneOverRadiiSquared : l,
               f = r(n) ? n._centerToleranceSquared : T,
-              A = o(t, R, h, f, E);
+              A = o(t, R, h, f, E)
             if (r(A)) {
-              var d = e.multiplyComponents(A, h, s);
-              d = e.normalize(d, d);
+              var d = e.multiplyComponents(A, h, s)
+              d = e.normalize(d, d)
               var N = e.subtract(t, A, c),
                 I = Math.atan2(d.y, d.x),
                 S = Math.asin(d.z),
-                M = a.sign(e.dot(N, t)) * e.magnitude(N);
+                M = a.sign(e.dot(N, t)) * e.magnitude(N)
               return r(i)
                 ? ((i.longitude = I), (i.latitude = S), (i.height = M), i)
-                : new u(I, S, M);
+                : new u(I, S, M)
             }
           }),
-          (u.clone = function(e, t) {
-            if (r(e))
+          (u.clone = function (e, t) {
+            if (r(e)) {
               return r(t)
                 ? ((t.longitude = e.longitude),
                   (t.latitude = e.latitude),
                   (t.height = e.height),
                   t)
-                : new u(e.longitude, e.latitude, e.height);
+                : new u(e.longitude, e.latitude, e.height)
+            }
           }),
-          (u.equals = function(e, t) {
+          (u.equals = function (e, t) {
             return (
               e === t ||
               (r(e) &&
@@ -864,9 +873,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 e.longitude === t.longitude &&
                 e.latitude === t.latitude &&
                 e.height === t.height)
-            );
+            )
           }),
-          (u.equalsEpsilon = function(e, t, n) {
+          (u.equalsEpsilon = function (e, t, n) {
             return (
               e === t ||
               (r(e) &&
@@ -874,68 +883,68 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 Math.abs(e.longitude - t.longitude) <= n &&
                 Math.abs(e.latitude - t.latitude) <= n &&
                 Math.abs(e.height - t.height) <= n)
-            );
+            )
           }),
           (u.ZERO = i(new u(0, 0, 0))),
-          (u.prototype.clone = function(e) {
-            return u.clone(this, e);
+          (u.prototype.clone = function (e) {
+            return u.clone(this, e)
           }),
-          (u.prototype.equals = function(e) {
-            return u.equals(this, e);
+          (u.prototype.equals = function (e) {
+            return u.equals(this, e)
           }),
-          (u.prototype.equalsEpsilon = function(e, t) {
-            return u.equalsEpsilon(this, e, t);
+          (u.prototype.equalsEpsilon = function (e, t) {
+            return u.equalsEpsilon(this, e, t)
           }),
-          (u.prototype.toString = function() {
+          (u.prototype.toString = function () {
             return (
-              "(" +
+              '(' +
               this.longitude +
-              ", " +
+              ', ' +
               this.latitude +
-              ", " +
+              ', ' +
               this.height +
-              ")"
-            );
+              ')'
+            )
           }),
           u
-        );
+        )
       }
     ),
-    define("Core/defineProperties", ["./defined"], function(e) {
-      "use strict";
-      var t = (function() {
+    define('Core/defineProperties', ['./defined'], function (e) {
+      'use strict'
+      var t = (function () {
           try {
-            return "x" in Object.defineProperty({}, "x", {});
+            return 'x' in Object.defineProperty({}, 'x', {})
           } catch (e) {
-            return !1;
+            return !1
           }
         })(),
-        n = Object.defineProperties;
+        n = Object.defineProperties
       return (
         (t && e(n)) ||
-          (n = function(e) {
-            return e;
+          (n = function (e) {
+            return e
           }),
         n
-      );
+      )
     }),
     define(
-      "Core/Ellipsoid",
+      'Core/Ellipsoid',
       [
-        "./Cartesian3",
-        "./Cartographic",
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./defineProperties",
-        "./DeveloperError",
-        "./freezeObject",
-        "./Math",
-        "./scaleToGeodeticSurface"
+        './Cartesian3',
+        './Cartographic',
+        './Check',
+        './defaultValue',
+        './defined',
+        './defineProperties',
+        './DeveloperError',
+        './freezeObject',
+        './Math',
+        './scaleToGeodeticSurface'
       ],
-      function(e, t, n, r, i, a, o, u, s, E) {
-        "use strict";
-        function c(t, n, i, a) {
+      function (e, t, n, r, i, a, o, u, s, E) {
+        'use strict'
+        function c (t, n, i, a) {
           (n = r(n, 0)),
             (i = r(i, 0)),
             (a = r(a, 0)),
@@ -947,22 +956,22 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               a * a * a * a
             )),
             (t._oneOverRadii = new e(
-              0 === n ? 0 : 1 / n,
-              0 === i ? 0 : 1 / i,
-              0 === a ? 0 : 1 / a
+              n === 0 ? 0 : 1 / n,
+              i === 0 ? 0 : 1 / i,
+              a === 0 ? 0 : 1 / a
             )),
             (t._oneOverRadiiSquared = new e(
-              0 === n ? 0 : 1 / (n * n),
-              0 === i ? 0 : 1 / (i * i),
-              0 === a ? 0 : 1 / (a * a)
+              n === 0 ? 0 : 1 / (n * n),
+              i === 0 ? 0 : 1 / (i * i),
+              a === 0 ? 0 : 1 / (a * a)
             )),
             (t._minimumRadius = Math.min(n, i, a)),
             (t._maximumRadius = Math.max(n, i, a)),
             (t._centerToleranceSquared = s.EPSILON1),
-            0 !== t._radiiSquared.z &&
-              (t._squaredXOverSquaredZ = t._radiiSquared.x / t._radiiSquared.z);
+            t._radiiSquared.z !== 0 &&
+              (t._squaredXOverSquaredZ = t._radiiSquared.x / t._radiiSquared.z)
         }
-        function _(e, t, n) {
+        function _ (e, t, n) {
           (this._radii = void 0),
             (this._radiiSquared = void 0),
             (this._radiiToTheFourth = void 0),
@@ -972,48 +981,48 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             (this._maximumRadius = void 0),
             (this._centerToleranceSquared = void 0),
             (this._squaredXOverSquaredZ = void 0),
-            c(this, e, t, n);
+            c(this, e, t, n)
         }
         a(_.prototype, {
           radii: {
-            get: function() {
-              return this._radii;
+            get: function () {
+              return this._radii
             }
           },
           radiiSquared: {
-            get: function() {
-              return this._radiiSquared;
+            get: function () {
+              return this._radiiSquared
             }
           },
           radiiToTheFourth: {
-            get: function() {
-              return this._radiiToTheFourth;
+            get: function () {
+              return this._radiiToTheFourth
             }
           },
           oneOverRadii: {
-            get: function() {
-              return this._oneOverRadii;
+            get: function () {
+              return this._oneOverRadii
             }
           },
           oneOverRadiiSquared: {
-            get: function() {
-              return this._oneOverRadiiSquared;
+            get: function () {
+              return this._oneOverRadiiSquared
             }
           },
           minimumRadius: {
-            get: function() {
-              return this._minimumRadius;
+            get: function () {
+              return this._minimumRadius
             }
           },
           maximumRadius: {
-            get: function() {
-              return this._maximumRadius;
+            get: function () {
+              return this._maximumRadius
             }
           }
         }),
-          (_.clone = function(t, n) {
+          (_.clone = function (t, n) {
             if (i(t)) {
-              var r = t._radii;
+              var r = t._radii
               return i(n)
                 ? (e.clone(r, n._radii),
                   e.clone(t._radiiSquared, n._radiiSquared),
@@ -1024,224 +1033,221 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                   (n._maximumRadius = t._maximumRadius),
                   (n._centerToleranceSquared = t._centerToleranceSquared),
                   n)
-                : new _(r.x, r.y, r.z);
+                : new _(r.x, r.y, r.z)
             }
           }),
-          (_.fromCartesian3 = function(e, t) {
-            return i(t) || (t = new _()), i(e) ? (c(t, e.x, e.y, e.z), t) : t;
+          (_.fromCartesian3 = function (e, t) {
+            return i(t) || (t = new _()), i(e) ? (c(t, e.x, e.y, e.z), t) : t
           }),
           (_.WGS84 = u(new _(6378137, 6378137, 6356752.314245179))),
           (_.UNIT_SPHERE = u(new _(1, 1, 1))),
           (_.MOON = u(new _(s.LUNAR_RADIUS, s.LUNAR_RADIUS, s.LUNAR_RADIUS))),
-          (_.prototype.clone = function(e) {
-            return _.clone(this, e);
+          (_.prototype.clone = function (e) {
+            return _.clone(this, e)
           }),
           (_.packedLength = e.packedLength),
-          (_.pack = function(t, n, i) {
-            return (i = r(i, 0)), e.pack(t._radii, n, i), n;
+          (_.pack = function (t, n, i) {
+            return (i = r(i, 0)), e.pack(t._radii, n, i), n
           }),
-          (_.unpack = function(t, n, i) {
-            n = r(n, 0);
-            var a = e.unpack(t, n);
-            return _.fromCartesian3(a, i);
+          (_.unpack = function (t, n, i) {
+            n = r(n, 0)
+            var a = e.unpack(t, n)
+            return _.fromCartesian3(a, i)
           }),
           (_.prototype.geocentricSurfaceNormal = e.normalize),
-          (_.prototype.geodeticSurfaceNormalCartographic = function(t, n) {
+          (_.prototype.geodeticSurfaceNormalCartographic = function (t, n) {
             var r = t.longitude,
               a = t.latitude,
               o = Math.cos(a),
               u = o * Math.cos(r),
               s = o * Math.sin(r),
-              E = Math.sin(a);
+              E = Math.sin(a)
             return (
               i(n) || (n = new e()),
               (n.x = u),
               (n.y = s),
               (n.z = E),
               e.normalize(n, n)
-            );
+            )
           }),
-          (_.prototype.geodeticSurfaceNormal = function(t, n) {
+          (_.prototype.geodeticSurfaceNormal = function (t, n) {
             return (
               i(n) || (n = new e()),
               (n = e.multiplyComponents(t, this._oneOverRadiiSquared, n)),
               e.normalize(n, n)
-            );
-          });
+            )
+          })
         var l = new e(),
           T = new e();
-        (_.prototype.cartographicToCartesian = function(t, n) {
+        (_.prototype.cartographicToCartesian = function (t, n) {
           var r = l,
-            a = T;
+            a = T
           this.geodeticSurfaceNormalCartographic(t, r),
-            e.multiplyComponents(this._radiiSquared, r, a);
-          var o = Math.sqrt(e.dot(r, a));
+            e.multiplyComponents(this._radiiSquared, r, a)
+          var o = Math.sqrt(e.dot(r, a))
           return (
             e.divideByScalar(a, o, a),
             e.multiplyByScalar(r, t.height, r),
             i(n) || (n = new e()),
             e.add(a, r, n)
-          );
+          )
         }),
-          (_.prototype.cartographicArrayToCartesianArray = function(e, t) {
-            var n = e.length;
-            i(t) ? (t.length = n) : (t = new Array(n));
-            for (var r = 0; r < n; r++)
-              t[r] = this.cartographicToCartesian(e[r], t[r]);
-            return t;
-          });
+          (_.prototype.cartographicArrayToCartesianArray = function (e, t) {
+            var n = e.length
+            i(t) ? (t.length = n) : (t = new Array(n))
+            for (var r = 0; r < n; r++) { t[r] = this.cartographicToCartesian(e[r], t[r]) }
+            return t
+          })
         var R = new e(),
           h = new e(),
-          f = new e();
+          f = new e()
         return (
-          (_.prototype.cartesianToCartographic = function(n, r) {
-            var a = this.scaleToGeodeticSurface(n, h);
+          (_.prototype.cartesianToCartographic = function (n, r) {
+            var a = this.scaleToGeodeticSurface(n, h)
             if (i(a)) {
               var o = this.geodeticSurfaceNormal(a, R),
                 u = e.subtract(n, a, f),
                 E = Math.atan2(o.y, o.x),
                 c = Math.asin(o.z),
-                _ = s.sign(e.dot(u, n)) * e.magnitude(u);
+                _ = s.sign(e.dot(u, n)) * e.magnitude(u)
               return i(r)
                 ? ((r.longitude = E), (r.latitude = c), (r.height = _), r)
-                : new t(E, c, _);
+                : new t(E, c, _)
             }
           }),
-          (_.prototype.cartesianArrayToCartographicArray = function(e, t) {
-            var n = e.length;
-            i(t) ? (t.length = n) : (t = new Array(n));
-            for (var r = 0; r < n; ++r)
-              t[r] = this.cartesianToCartographic(e[r], t[r]);
-            return t;
+          (_.prototype.cartesianArrayToCartographicArray = function (e, t) {
+            var n = e.length
+            i(t) ? (t.length = n) : (t = new Array(n))
+            for (var r = 0; r < n; ++r) { t[r] = this.cartesianToCartographic(e[r], t[r]) }
+            return t
           }),
-          (_.prototype.scaleToGeodeticSurface = function(e, t) {
+          (_.prototype.scaleToGeodeticSurface = function (e, t) {
             return E(
               e,
               this._oneOverRadii,
               this._oneOverRadiiSquared,
               this._centerToleranceSquared,
               t
-            );
+            )
           }),
-          (_.prototype.scaleToGeocentricSurface = function(t, n) {
-            i(n) || (n = new e());
+          (_.prototype.scaleToGeocentricSurface = function (t, n) {
+            i(n) || (n = new e())
             var r = t.x,
               a = t.y,
               o = t.z,
               u = this._oneOverRadiiSquared,
-              s = 1 / Math.sqrt(r * r * u.x + a * a * u.y + o * o * u.z);
-            return e.multiplyByScalar(t, s, n);
+              s = 1 / Math.sqrt(r * r * u.x + a * a * u.y + o * o * u.z)
+            return e.multiplyByScalar(t, s, n)
           }),
-          (_.prototype.transformPositionToScaledSpace = function(t, n) {
+          (_.prototype.transformPositionToScaledSpace = function (t, n) {
             return (
               i(n) || (n = new e()),
               e.multiplyComponents(t, this._oneOverRadii, n)
-            );
+            )
           }),
-          (_.prototype.transformPositionFromScaledSpace = function(t, n) {
+          (_.prototype.transformPositionFromScaledSpace = function (t, n) {
             return (
               i(n) || (n = new e()), e.multiplyComponents(t, this._radii, n)
-            );
+            )
           }),
-          (_.prototype.equals = function(t) {
-            return this === t || (i(t) && e.equals(this._radii, t._radii));
+          (_.prototype.equals = function (t) {
+            return this === t || (i(t) && e.equals(this._radii, t._radii))
           }),
-          (_.prototype.toString = function() {
-            return this._radii.toString();
+          (_.prototype.toString = function () {
+            return this._radii.toString()
           }),
-          (_.prototype.getSurfaceNormalIntersectionWithZAxis = function(
+          (_.prototype.getSurfaceNormalIntersectionWithZAxis = function (
             t,
             n,
             a
           ) {
-            n = r(n, 0);
-            var o = this._squaredXOverSquaredZ;
+            n = r(n, 0)
+            var o = this._squaredXOverSquaredZ
             if (
               (i(a) || (a = new e()),
               (a.x = 0),
               (a.y = 0),
               (a.z = t.z * (1 - o)),
               !(Math.abs(a.z) >= this._radii.z - n))
-            )
-              return a;
+            ) { return a }
           }),
           _
-        );
+        )
       }
     ),
     define(
-      "Core/GeographicProjection",
+      'Core/GeographicProjection',
       [
-        "./Cartesian3",
-        "./Cartographic",
-        "./defaultValue",
-        "./defined",
-        "./defineProperties",
-        "./DeveloperError",
-        "./Ellipsoid"
+        './Cartesian3',
+        './Cartographic',
+        './defaultValue',
+        './defined',
+        './defineProperties',
+        './DeveloperError',
+        './Ellipsoid'
       ],
-      function(e, t, n, r, i, a, o) {
-        "use strict";
-        function u(e) {
+      function (e, t, n, r, i, a, o) {
+        'use strict'
+        function u (e) {
           (this._ellipsoid = n(e, o.WGS84)),
             (this._semimajorAxis = this._ellipsoid.maximumRadius),
-            (this._oneOverSemimajorAxis = 1 / this._semimajorAxis);
+            (this._oneOverSemimajorAxis = 1 / this._semimajorAxis)
         }
         return (
           i(u.prototype, {
             ellipsoid: {
-              get: function() {
-                return this._ellipsoid;
+              get: function () {
+                return this._ellipsoid
               }
             }
           }),
-          (u.prototype.project = function(t, n) {
+          (u.prototype.project = function (t, n) {
             var i = this._semimajorAxis,
               a = t.longitude * i,
               o = t.latitude * i,
-              u = t.height;
-            return r(n) ? ((n.x = a), (n.y = o), (n.z = u), n) : new e(a, o, u);
+              u = t.height
+            return r(n) ? ((n.x = a), (n.y = o), (n.z = u), n) : new e(a, o, u)
           }),
-          (u.prototype.unproject = function(e, n) {
+          (u.prototype.unproject = function (e, n) {
             var i = this._oneOverSemimajorAxis,
               a = e.x * i,
               o = e.y * i,
-              u = e.z;
+              u = e.z
             return r(n)
               ? ((n.longitude = a), (n.latitude = o), (n.height = u), n)
-              : new t(a, o, u);
+              : new t(a, o, u)
           }),
           u
-        );
+        )
       }
     ),
-    define("Core/Intersect", ["./freezeObject"], function(e) {
-      "use strict";
-      var t = { OUTSIDE: -1, INTERSECTING: 0, INSIDE: 1 };
-      return e(t);
+    define('Core/Intersect', ['./freezeObject'], function (e) {
+      'use strict'
+      var t = { OUTSIDE: -1, INTERSECTING: 0, INSIDE: 1 }
+      return e(t)
     }),
-    define("Core/Interval", ["./defaultValue"], function(e) {
-      "use strict";
-      function t(t, n) {
-        (this.start = e(t, 0)), (this.stop = e(n, 0));
+    define('Core/Interval', ['./defaultValue'], function (e) {
+      'use strict'
+      function t (t, n) {
+        (this.start = e(t, 0)), (this.stop = e(n, 0))
       }
-      return t;
+      return t
     }),
     define(
-      "Core/Matrix3",
+      'Core/Matrix3',
       [
-        "./Cartesian3",
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./defineProperties",
-        "./DeveloperError",
-        "./freezeObject",
-        "./Math"
+        './Cartesian3',
+        './Check',
+        './defaultValue',
+        './defined',
+        './defineProperties',
+        './DeveloperError',
+        './freezeObject',
+        './Math'
       ],
-      function(e, t, n, r, i, a, o, u) {
-        "use strict";
-        function s(e, t, r, i, a, o, u, s, E) {
+      function (e, t, n, r, i, a, o, u) {
+        'use strict'
+        function s (e, t, r, i, a, o, u, s, E) {
           (this[0] = n(e, 0)),
             (this[1] = n(i, 0)),
             (this[2] = n(u, 0)),
@@ -1250,31 +1256,31 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             (this[5] = n(s, 0)),
             (this[6] = n(r, 0)),
             (this[7] = n(o, 0)),
-            (this[8] = n(E, 0));
+            (this[8] = n(E, 0))
         }
-        function E(e) {
+        function E (e) {
           for (var t = 0, n = 0; n < 9; ++n) {
-            var r = e[n];
-            t += r * r;
+            var r = e[n]
+            t += r * r
           }
-          return Math.sqrt(t);
+          return Math.sqrt(t)
         }
-        function c(e) {
+        function c (e) {
           for (var t = 0, n = 0; n < 3; ++n) {
-            var r = e[s.getElementIndex(h[n], R[n])];
-            t += 2 * r * r;
+            var r = e[s.getElementIndex(h[n], R[n])]
+            t += 2 * r * r
           }
-          return Math.sqrt(t);
+          return Math.sqrt(t)
         }
-        function _(e, t) {
+        function _ (e, t) {
           for (var n = u.EPSILON15, r = 0, i = 1, a = 0; a < 3; ++a) {
-            var o = Math.abs(e[s.getElementIndex(h[a], R[a])]);
-            o > r && ((i = a), (r = o));
+            var o = Math.abs(e[s.getElementIndex(h[a], R[a])])
+            o > r && ((i = a), (r = o))
           }
           var E = 1,
             c = 0,
             _ = R[i],
-            l = h[i];
+            l = h[i]
           if (Math.abs(e[s.getElementIndex(l, _)]) > n) {
             var T,
               f = e[s.getElementIndex(l, l)],
@@ -1286,7 +1292,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 ? -1 / (-N + Math.sqrt(1 + N * N))
                 : 1 / (N + Math.sqrt(1 + N * N))),
               (E = 1 / Math.sqrt(1 + T * T)),
-              (c = T * E);
+              (c = T * E)
           }
           return (
             (t = s.clone(s.IDENTITY, t)),
@@ -1294,10 +1300,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             (t[s.getElementIndex(l, _)] = c),
             (t[s.getElementIndex(_, l)] = -c),
             t
-          );
+          )
         }
         (s.packedLength = 9),
-          (s.pack = function(e, t, r) {
+          (s.pack = function (e, t, r) {
             return (
               (r = n(r, 0)),
               (t[r++] = e[0]),
@@ -1310,9 +1316,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[r++] = e[7]),
               (t[r++] = e[8]),
               t
-            );
+            )
           }),
-          (s.unpack = function(e, t, i) {
+          (s.unpack = function (e, t, i) {
             return (
               (t = n(t, 0)),
               r(i) || (i = new s()),
@@ -1326,10 +1332,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (i[7] = e[t++]),
               (i[8] = e[t++]),
               i
-            );
+            )
           }),
-          (s.clone = function(e, t) {
-            if (r(e))
+          (s.clone = function (e, t) {
+            if (r(e)) {
               return r(t)
                 ? ((t[0] = e[0]),
                   (t[1] = e[1]),
@@ -1341,9 +1347,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                   (t[7] = e[7]),
                   (t[8] = e[8]),
                   t)
-                : new s(e[0], e[3], e[6], e[1], e[4], e[7], e[2], e[5], e[8]);
+                : new s(e[0], e[3], e[6], e[1], e[4], e[7], e[2], e[5], e[8])
+            }
           }),
-          (s.fromArray = function(e, t, i) {
+          (s.fromArray = function (e, t, i) {
             return (
               (t = n(t, 0)),
               r(i) || (i = new s()),
@@ -1357,12 +1364,12 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (i[7] = e[t + 7]),
               (i[8] = e[t + 8]),
               i
-            );
+            )
           }),
-          (s.fromColumnMajorArray = function(e, t) {
-            return s.clone(e, t);
+          (s.fromColumnMajorArray = function (e, t) {
+            return s.clone(e, t)
           }),
-          (s.fromRowMajorArray = function(e, t) {
+          (s.fromRowMajorArray = function (e, t) {
             return r(t)
               ? ((t[0] = e[0]),
                 (t[1] = e[3]),
@@ -1374,9 +1381,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[7] = e[5]),
                 (t[8] = e[8]),
                 t)
-              : new s(e[0], e[1], e[2], e[3], e[4], e[5], e[6], e[7], e[8]);
+              : new s(e[0], e[1], e[2], e[3], e[4], e[5], e[6], e[7], e[8])
           }),
-          (s.fromQuaternion = function(e, t) {
+          (s.fromQuaternion = function (e, t) {
             var n = e.x * e.x,
               i = e.x * e.y,
               a = e.x * e.z,
@@ -1395,7 +1402,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               N = 2 * (E - o),
               I = 2 * (a - c),
               S = 2 * (E + o),
-              M = -n - u + _ + T;
+              M = -n - u + _ + T
             return r(t)
               ? ((t[0] = R),
                 (t[1] = A),
@@ -1407,9 +1414,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[7] = N),
                 (t[8] = M),
                 t)
-              : new s(R, h, f, A, d, N, I, S, M);
+              : new s(R, h, f, A, d, N, I, S, M)
           }),
-          (s.fromHeadingPitchRoll = function(e, t) {
+          (s.fromHeadingPitchRoll = function (e, t) {
             var n = Math.cos(-e.pitch),
               i = Math.cos(-e.heading),
               a = Math.cos(e.roll),
@@ -1424,7 +1431,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               h = -E * i + a * o * u,
               f = -o,
               A = E * n,
-              d = a * n;
+              d = a * n
             return r(t)
               ? ((t[0] = c),
                 (t[1] = T),
@@ -1436,9 +1443,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[7] = h),
                 (t[8] = d),
                 t)
-              : new s(c, _, l, T, R, h, f, A, d);
+              : new s(c, _, l, T, R, h, f, A, d)
           }),
-          (s.fromScale = function(e, t) {
+          (s.fromScale = function (e, t) {
             return r(t)
               ? ((t[0] = e.x),
                 (t[1] = 0),
@@ -1450,9 +1457,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[7] = 0),
                 (t[8] = e.z),
                 t)
-              : new s(e.x, 0, 0, 0, e.y, 0, 0, 0, e.z);
+              : new s(e.x, 0, 0, 0, e.y, 0, 0, 0, e.z)
           }),
-          (s.fromUniformScale = function(e, t) {
+          (s.fromUniformScale = function (e, t) {
             return r(t)
               ? ((t[0] = e),
                 (t[1] = 0),
@@ -1464,9 +1471,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[7] = 0),
                 (t[8] = e),
                 t)
-              : new s(e, 0, 0, 0, e, 0, 0, 0, e);
+              : new s(e, 0, 0, 0, e, 0, 0, 0, e)
           }),
-          (s.fromCrossProduct = function(e, t) {
+          (s.fromCrossProduct = function (e, t) {
             return r(t)
               ? ((t[0] = 0),
                 (t[1] = e.z),
@@ -1478,11 +1485,11 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[7] = -e.x),
                 (t[8] = 0),
                 t)
-              : new s(0, -e.z, e.y, e.z, 0, -e.x, -e.y, e.x, 0);
+              : new s(0, -e.z, e.y, e.z, 0, -e.x, -e.y, e.x, 0)
           }),
-          (s.fromRotationX = function(e, t) {
+          (s.fromRotationX = function (e, t) {
             var n = Math.cos(e),
-              i = Math.sin(e);
+              i = Math.sin(e)
             return r(t)
               ? ((t[0] = 1),
                 (t[1] = 0),
@@ -1494,11 +1501,11 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[7] = -i),
                 (t[8] = n),
                 t)
-              : new s(1, 0, 0, 0, n, -i, 0, i, n);
+              : new s(1, 0, 0, 0, n, -i, 0, i, n)
           }),
-          (s.fromRotationY = function(e, t) {
+          (s.fromRotationY = function (e, t) {
             var n = Math.cos(e),
-              i = Math.sin(e);
+              i = Math.sin(e)
             return r(t)
               ? ((t[0] = n),
                 (t[1] = 0),
@@ -1510,11 +1517,11 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[7] = 0),
                 (t[8] = n),
                 t)
-              : new s(n, 0, i, 0, 1, 0, -i, 0, n);
+              : new s(n, 0, i, 0, 1, 0, -i, 0, n)
           }),
-          (s.fromRotationZ = function(e, t) {
+          (s.fromRotationZ = function (e, t) {
             var n = Math.cos(e),
-              i = Math.sin(e);
+              i = Math.sin(e)
             return r(t)
               ? ((t[0] = n),
                 (t[1] = i),
@@ -1526,9 +1533,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[7] = 0),
                 (t[8] = 1),
                 t)
-              : new s(n, -i, 0, i, n, 0, 0, 0, 1);
+              : new s(n, -i, 0, i, n, 0, 0, 0, 1)
           }),
-          (s.toArray = function(e, t) {
+          (s.toArray = function (e, t) {
             return r(t)
               ? ((t[0] = e[0]),
                 (t[1] = e[1]),
@@ -1540,52 +1547,52 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[7] = e[7]),
                 (t[8] = e[8]),
                 t)
-              : [e[0], e[1], e[2], e[3], e[4], e[5], e[6], e[7], e[8]];
+              : [e[0], e[1], e[2], e[3], e[4], e[5], e[6], e[7], e[8]]
           }),
-          (s.getElementIndex = function(e, t) {
-            return 3 * e + t;
+          (s.getElementIndex = function (e, t) {
+            return 3 * e + t
           }),
-          (s.getColumn = function(e, t, n) {
+          (s.getColumn = function (e, t, n) {
             var r = 3 * t,
               i = e[r],
               a = e[r + 1],
-              o = e[r + 2];
-            return (n.x = i), (n.y = a), (n.z = o), n;
+              o = e[r + 2]
+            return (n.x = i), (n.y = a), (n.z = o), n
           }),
-          (s.setColumn = function(e, t, n, r) {
-            r = s.clone(e, r);
-            var i = 3 * t;
-            return (r[i] = n.x), (r[i + 1] = n.y), (r[i + 2] = n.z), r;
+          (s.setColumn = function (e, t, n, r) {
+            r = s.clone(e, r)
+            var i = 3 * t
+            return (r[i] = n.x), (r[i + 1] = n.y), (r[i + 2] = n.z), r
           }),
-          (s.getRow = function(e, t, n) {
+          (s.getRow = function (e, t, n) {
             var r = e[t],
               i = e[t + 3],
-              a = e[t + 6];
-            return (n.x = r), (n.y = i), (n.z = a), n;
+              a = e[t + 6]
+            return (n.x = r), (n.y = i), (n.z = a), n
           }),
-          (s.setRow = function(e, t, n, r) {
+          (s.setRow = function (e, t, n, r) {
             return (
               (r = s.clone(e, r)),
               (r[t] = n.x),
               (r[t + 3] = n.y),
               (r[t + 6] = n.z),
               r
-            );
-          });
-        var l = new e();
-        s.getScale = function(t, n) {
+            )
+          })
+        var l = new e()
+        s.getScale = function (t, n) {
           return (
             (n.x = e.magnitude(e.fromElements(t[0], t[1], t[2], l))),
             (n.y = e.magnitude(e.fromElements(t[3], t[4], t[5], l))),
             (n.z = e.magnitude(e.fromElements(t[6], t[7], t[8], l))),
             n
-          );
-        };
+          )
+        }
         var T = new e();
-        (s.getMaximumScale = function(t) {
-          return s.getScale(t, T), e.maximumComponent(T);
+        (s.getMaximumScale = function (t) {
+          return s.getScale(t, T), e.maximumComponent(T)
         }),
-          (s.multiply = function(e, t, n) {
+          (s.multiply = function (e, t, n) {
             var r = e[0] * t[0] + e[3] * t[1] + e[6] * t[2],
               i = e[1] * t[0] + e[4] * t[1] + e[7] * t[2],
               a = e[2] * t[0] + e[5] * t[1] + e[8] * t[2],
@@ -1594,7 +1601,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               s = e[2] * t[3] + e[5] * t[4] + e[8] * t[5],
               E = e[0] * t[6] + e[3] * t[7] + e[6] * t[8],
               c = e[1] * t[6] + e[4] * t[7] + e[7] * t[8],
-              _ = e[2] * t[6] + e[5] * t[7] + e[8] * t[8];
+              _ = e[2] * t[6] + e[5] * t[7] + e[8] * t[8]
             return (
               (n[0] = r),
               (n[1] = i),
@@ -1606,9 +1613,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[7] = c),
               (n[8] = _),
               n
-            );
+            )
           }),
-          (s.add = function(e, t, n) {
+          (s.add = function (e, t, n) {
             return (
               (n[0] = e[0] + t[0]),
               (n[1] = e[1] + t[1]),
@@ -1620,9 +1627,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[7] = e[7] + t[7]),
               (n[8] = e[8] + t[8]),
               n
-            );
+            )
           }),
-          (s.subtract = function(e, t, n) {
+          (s.subtract = function (e, t, n) {
             return (
               (n[0] = e[0] - t[0]),
               (n[1] = e[1] - t[1]),
@@ -1634,18 +1641,18 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[7] = e[7] - t[7]),
               (n[8] = e[8] - t[8]),
               n
-            );
+            )
           }),
-          (s.multiplyByVector = function(e, t, n) {
+          (s.multiplyByVector = function (e, t, n) {
             var r = t.x,
               i = t.y,
               a = t.z,
               o = e[0] * r + e[3] * i + e[6] * a,
               u = e[1] * r + e[4] * i + e[7] * a,
-              s = e[2] * r + e[5] * i + e[8] * a;
-            return (n.x = o), (n.y = u), (n.z = s), n;
+              s = e[2] * r + e[5] * i + e[8] * a
+            return (n.x = o), (n.y = u), (n.z = s), n
           }),
-          (s.multiplyByScalar = function(e, t, n) {
+          (s.multiplyByScalar = function (e, t, n) {
             return (
               (n[0] = e[0] * t),
               (n[1] = e[1] * t),
@@ -1657,9 +1664,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[7] = e[7] * t),
               (n[8] = e[8] * t),
               n
-            );
+            )
           }),
-          (s.multiplyByScale = function(e, t, n) {
+          (s.multiplyByScale = function (e, t, n) {
             return (
               (n[0] = e[0] * t.x),
               (n[1] = e[1] * t.x),
@@ -1671,9 +1678,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[7] = e[7] * t.z),
               (n[8] = e[8] * t.z),
               n
-            );
+            )
           }),
-          (s.negate = function(e, t) {
+          (s.negate = function (e, t) {
             return (
               (t[0] = -e[0]),
               (t[1] = -e[1]),
@@ -1685,9 +1692,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[7] = -e[7]),
               (t[8] = -e[8]),
               t
-            );
+            )
           }),
-          (s.transpose = function(e, t) {
+          (s.transpose = function (e, t) {
             var n = e[0],
               r = e[3],
               i = e[6],
@@ -1696,7 +1703,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               u = e[7],
               s = e[2],
               E = e[5],
-              c = e[8];
+              c = e[8]
             return (
               (t[0] = n),
               (t[1] = r),
@@ -1708,35 +1715,36 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[7] = E),
               (t[8] = c),
               t
-            );
-          });
+            )
+          })
         var R = [1, 0, 0],
           h = [2, 2, 1],
           f = new s(),
-          A = new s();
+          A = new s()
         return (
-          (s.computeEigenDecomposition = function(e, t) {
+          (s.computeEigenDecomposition = function (e, t) {
             var n = u.EPSILON20,
               i = 10,
               a = 0,
-              o = 0;
-            r(t) || (t = {});
+              o = 0
+            r(t) || (t = {})
             for (
               var l = (t.unitary = s.clone(s.IDENTITY, t.unitary)),
                 T = (t.diagonal = s.clone(e, t.diagonal)),
                 R = n * E(T);
               o < i && c(T) > R;
 
-            )
+            ) {
               _(T, f),
                 s.transpose(f, A),
                 s.multiply(T, f, T),
                 s.multiply(A, T, T),
                 s.multiply(l, f, l),
-                ++a > 2 && (++o, (a = 0));
-            return t;
+                ++a > 2 && (++o, (a = 0))
+            }
+            return t
           }),
-          (s.abs = function(e, t) {
+          (s.abs = function (e, t) {
             return (
               (t[0] = Math.abs(e[0])),
               (t[1] = Math.abs(e[1])),
@@ -1748,9 +1756,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[7] = Math.abs(e[7])),
               (t[8] = Math.abs(e[8])),
               t
-            );
+            )
           }),
-          (s.determinant = function(e) {
+          (s.determinant = function (e) {
             var t = e[0],
               n = e[3],
               r = e[6],
@@ -1759,12 +1767,12 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               o = e[7],
               u = e[2],
               s = e[5],
-              E = e[8];
+              E = e[8]
             return (
               t * (a * E - s * o) + i * (s * r - n * E) + u * (n * o - a * r)
-            );
+            )
           }),
-          (s.inverse = function(e, t) {
+          (s.inverse = function (e, t) {
             var n = e[0],
               r = e[1],
               i = e[2],
@@ -1783,11 +1791,11 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[5] = a * i - n * u),
               (t[6] = a * c - E * o),
               (t[7] = E * r - n * c),
-              (t[8] = n * o - a * r);
-            var T = 1 / l;
-            return s.multiplyByScalar(t, T, t);
+              (t[8] = n * o - a * r)
+            var T = 1 / l
+            return s.multiplyByScalar(t, T, t)
           }),
-          (s.equals = function(e, t) {
+          (s.equals = function (e, t) {
             return (
               e === t ||
               (r(e) &&
@@ -1801,9 +1809,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 e[6] === t[6] &&
                 e[7] === t[7] &&
                 e[8] === t[8])
-            );
+            )
           }),
-          (s.equalsEpsilon = function(e, t, n) {
+          (s.equalsEpsilon = function (e, t, n) {
             return (
               e === t ||
               (r(e) &&
@@ -1817,7 +1825,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 Math.abs(e[6] - t[6]) <= n &&
                 Math.abs(e[7] - t[7]) <= n &&
                 Math.abs(e[8] - t[8]) <= n)
-            );
+            )
           }),
           (s.IDENTITY = o(new s(1, 0, 0, 0, 1, 0, 0, 0, 1))),
           (s.ZERO = o(new s(0, 0, 0, 0, 0, 0, 0, 0, 0))),
@@ -1832,18 +1840,18 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           (s.COLUMN2ROW2 = 8),
           i(s.prototype, {
             length: {
-              get: function() {
-                return s.packedLength;
+              get: function () {
+                return s.packedLength
               }
             }
           }),
-          (s.prototype.clone = function(e) {
-            return s.clone(this, e);
+          (s.prototype.clone = function (e) {
+            return s.clone(this, e)
           }),
-          (s.prototype.equals = function(e) {
-            return s.equals(this, e);
+          (s.prototype.equals = function (e) {
+            return s.equals(this, e)
           }),
-          (s.equalsArray = function(e, t, n) {
+          (s.equalsArray = function (e, t, n) {
             return (
               e[0] === t[n] &&
               e[1] === t[n + 1] &&
@@ -1854,78 +1862,79 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               e[6] === t[n + 6] &&
               e[7] === t[n + 7] &&
               e[8] === t[n + 8]
-            );
+            )
           }),
-          (s.prototype.equalsEpsilon = function(e, t) {
-            return s.equalsEpsilon(this, e, t);
+          (s.prototype.equalsEpsilon = function (e, t) {
+            return s.equalsEpsilon(this, e, t)
           }),
-          (s.prototype.toString = function() {
+          (s.prototype.toString = function () {
             return (
-              "(" +
+              '(' +
               this[0] +
-              ", " +
+              ', ' +
               this[3] +
-              ", " +
+              ', ' +
               this[6] +
-              ")\n(" +
+              ')\n(' +
               this[1] +
-              ", " +
+              ', ' +
               this[4] +
-              ", " +
+              ', ' +
               this[7] +
-              ")\n(" +
+              ')\n(' +
               this[2] +
-              ", " +
+              ', ' +
               this[5] +
-              ", " +
+              ', ' +
               this[8] +
-              ")"
-            );
+              ')'
+            )
           }),
           s
-        );
+        )
       }
     ),
     define(
-      "Core/Cartesian4",
+      'Core/Cartesian4',
       [
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./DeveloperError",
-        "./freezeObject",
-        "./Math"
+        './Check',
+        './defaultValue',
+        './defined',
+        './DeveloperError',
+        './freezeObject',
+        './Math'
       ],
-      function(e, t, n, r, i, a) {
-        "use strict";
-        function o(e, n, r, i) {
+      function (e, t, n, r, i, a) {
+        'use strict'
+        function o (e, n, r, i) {
           (this.x = t(e, 0)),
             (this.y = t(n, 0)),
             (this.z = t(r, 0)),
-            (this.w = t(i, 0));
+            (this.w = t(i, 0))
         }
-        (o.fromElements = function(e, t, r, i, a) {
+        (o.fromElements = function (e, t, r, i, a) {
           return n(a)
             ? ((a.x = e), (a.y = t), (a.z = r), (a.w = i), a)
-            : new o(e, t, r, i);
+            : new o(e, t, r, i)
         }),
-          (o.fromColor = function(e, t) {
+          (o.fromColor = function (e, t) {
             return n(t)
               ? ((t.x = e.red),
                 (t.y = e.green),
                 (t.z = e.blue),
                 (t.w = e.alpha),
                 t)
-              : new o(e.red, e.green, e.blue, e.alpha);
+              : new o(e.red, e.green, e.blue, e.alpha)
           }),
-          (o.clone = function(e, t) {
-            if (n(e))
+          (o.clone = function (e, t) {
+            if (n(e)) {
               return n(t)
                 ? ((t.x = e.x), (t.y = e.y), (t.z = e.z), (t.w = e.w), t)
-                : new o(e.x, e.y, e.z, e.w);
+                : new o(e.x, e.y, e.z, e.w)
+            }
           }),
           (o.packedLength = 4),
-          (o.pack = function(e, n, r) {
+          (o.pack = function (e, n, r) {
             return (
               (r = t(r, 0)),
               (n[r++] = e.x),
@@ -1933,9 +1942,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[r++] = e.z),
               (n[r] = e.w),
               n
-            );
+            )
           }),
-          (o.unpack = function(e, r, i) {
+          (o.unpack = function (e, r, i) {
             return (
               (r = t(r, 0)),
               n(i) || (i = new o()),
@@ -1944,152 +1953,152 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (i.z = e[r++]),
               (i.w = e[r]),
               i
-            );
+            )
           }),
-          (o.packArray = function(e, t) {
-            var r = e.length;
-            n(t) ? (t.length = 4 * r) : (t = new Array(4 * r));
-            for (var i = 0; i < r; ++i) o.pack(e[i], t, 4 * i);
-            return t;
+          (o.packArray = function (e, t) {
+            var r = e.length
+            n(t) ? (t.length = 4 * r) : (t = new Array(4 * r))
+            for (var i = 0; i < r; ++i) o.pack(e[i], t, 4 * i)
+            return t
           }),
-          (o.unpackArray = function(e, t) {
-            var r = e.length;
-            n(t) ? (t.length = r / 4) : (t = new Array(r / 4));
+          (o.unpackArray = function (e, t) {
+            var r = e.length
+            n(t) ? (t.length = r / 4) : (t = new Array(r / 4))
             for (var i = 0; i < r; i += 4) {
-              var a = i / 4;
-              t[a] = o.unpack(e, i, t[a]);
+              var a = i / 4
+              t[a] = o.unpack(e, i, t[a])
             }
-            return t;
+            return t
           }),
           (o.fromArray = o.unpack),
-          (o.maximumComponent = function(e) {
-            return Math.max(e.x, e.y, e.z, e.w);
+          (o.maximumComponent = function (e) {
+            return Math.max(e.x, e.y, e.z, e.w)
           }),
-          (o.minimumComponent = function(e) {
-            return Math.min(e.x, e.y, e.z, e.w);
+          (o.minimumComponent = function (e) {
+            return Math.min(e.x, e.y, e.z, e.w)
           }),
-          (o.minimumByComponent = function(e, t, n) {
+          (o.minimumByComponent = function (e, t, n) {
             return (
               (n.x = Math.min(e.x, t.x)),
               (n.y = Math.min(e.y, t.y)),
               (n.z = Math.min(e.z, t.z)),
               (n.w = Math.min(e.w, t.w)),
               n
-            );
+            )
           }),
-          (o.maximumByComponent = function(e, t, n) {
+          (o.maximumByComponent = function (e, t, n) {
             return (
               (n.x = Math.max(e.x, t.x)),
               (n.y = Math.max(e.y, t.y)),
               (n.z = Math.max(e.z, t.z)),
               (n.w = Math.max(e.w, t.w)),
               n
-            );
+            )
           }),
-          (o.magnitudeSquared = function(e) {
-            return e.x * e.x + e.y * e.y + e.z * e.z + e.w * e.w;
+          (o.magnitudeSquared = function (e) {
+            return e.x * e.x + e.y * e.y + e.z * e.z + e.w * e.w
           }),
-          (o.magnitude = function(e) {
-            return Math.sqrt(o.magnitudeSquared(e));
-          });
+          (o.magnitude = function (e) {
+            return Math.sqrt(o.magnitudeSquared(e))
+          })
         var u = new o();
-        (o.distance = function(e, t) {
-          return o.subtract(e, t, u), o.magnitude(u);
+        (o.distance = function (e, t) {
+          return o.subtract(e, t, u), o.magnitude(u)
         }),
-          (o.distanceSquared = function(e, t) {
-            return o.subtract(e, t, u), o.magnitudeSquared(u);
+          (o.distanceSquared = function (e, t) {
+            return o.subtract(e, t, u), o.magnitudeSquared(u)
           }),
-          (o.normalize = function(e, t) {
-            var n = o.magnitude(e);
+          (o.normalize = function (e, t) {
+            var n = o.magnitude(e)
             return (
               (t.x = e.x / n),
               (t.y = e.y / n),
               (t.z = e.z / n),
               (t.w = e.w / n),
               t
-            );
+            )
           }),
-          (o.dot = function(e, t) {
-            return e.x * t.x + e.y * t.y + e.z * t.z + e.w * t.w;
+          (o.dot = function (e, t) {
+            return e.x * t.x + e.y * t.y + e.z * t.z + e.w * t.w
           }),
-          (o.multiplyComponents = function(e, t, n) {
+          (o.multiplyComponents = function (e, t, n) {
             return (
               (n.x = e.x * t.x),
               (n.y = e.y * t.y),
               (n.z = e.z * t.z),
               (n.w = e.w * t.w),
               n
-            );
+            )
           }),
-          (o.divideComponents = function(e, t, n) {
+          (o.divideComponents = function (e, t, n) {
             return (
               (n.x = e.x / t.x),
               (n.y = e.y / t.y),
               (n.z = e.z / t.z),
               (n.w = e.w / t.w),
               n
-            );
+            )
           }),
-          (o.add = function(e, t, n) {
+          (o.add = function (e, t, n) {
             return (
               (n.x = e.x + t.x),
               (n.y = e.y + t.y),
               (n.z = e.z + t.z),
               (n.w = e.w + t.w),
               n
-            );
+            )
           }),
-          (o.subtract = function(e, t, n) {
+          (o.subtract = function (e, t, n) {
             return (
               (n.x = e.x - t.x),
               (n.y = e.y - t.y),
               (n.z = e.z - t.z),
               (n.w = e.w - t.w),
               n
-            );
+            )
           }),
-          (o.multiplyByScalar = function(e, t, n) {
+          (o.multiplyByScalar = function (e, t, n) {
             return (
               (n.x = e.x * t),
               (n.y = e.y * t),
               (n.z = e.z * t),
               (n.w = e.w * t),
               n
-            );
+            )
           }),
-          (o.divideByScalar = function(e, t, n) {
+          (o.divideByScalar = function (e, t, n) {
             return (
               (n.x = e.x / t),
               (n.y = e.y / t),
               (n.z = e.z / t),
               (n.w = e.w / t),
               n
-            );
+            )
           }),
-          (o.negate = function(e, t) {
-            return (t.x = -e.x), (t.y = -e.y), (t.z = -e.z), (t.w = -e.w), t;
+          (o.negate = function (e, t) {
+            return (t.x = -e.x), (t.y = -e.y), (t.z = -e.z), (t.w = -e.w), t
           }),
-          (o.abs = function(e, t) {
+          (o.abs = function (e, t) {
             return (
               (t.x = Math.abs(e.x)),
               (t.y = Math.abs(e.y)),
               (t.z = Math.abs(e.z)),
               (t.w = Math.abs(e.w)),
               t
-            );
-          });
-        var s = new o();
-        o.lerp = function(e, t, n, r) {
+            )
+          })
+        var s = new o()
+        o.lerp = function (e, t, n, r) {
           return (
             o.multiplyByScalar(t, n, s),
             (r = o.multiplyByScalar(e, 1 - n, r)),
             o.add(s, r, r)
-          );
-        };
-        var E = new o();
+          )
+        }
+        var E = new o()
         return (
-          (o.mostOrthogonalAxis = function(e, t) {
-            var n = o.normalize(e, E);
+          (o.mostOrthogonalAxis = function (e, t) {
+            var n = o.normalize(e, E)
             return (
               o.abs(n, n),
               (t =
@@ -2100,9 +2109,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                   : n.y <= n.z
                     ? n.y <= n.w ? o.clone(o.UNIT_Y, t) : o.clone(o.UNIT_W, t)
                     : n.z <= n.w ? o.clone(o.UNIT_Z, t) : o.clone(o.UNIT_W, t))
-            );
+            )
           }),
-          (o.equals = function(e, t) {
+          (o.equals = function (e, t) {
             return (
               e === t ||
               (n(e) &&
@@ -2111,17 +2120,17 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 e.y === t.y &&
                 e.z === t.z &&
                 e.w === t.w)
-            );
+            )
           }),
-          (o.equalsArray = function(e, t, n) {
+          (o.equalsArray = function (e, t, n) {
             return (
               e.x === t[n] &&
               e.y === t[n + 1] &&
               e.z === t[n + 2] &&
               e.w === t[n + 3]
-            );
+            )
           }),
-          (o.equalsEpsilon = function(e, t, r, i) {
+          (o.equalsEpsilon = function (e, t, r, i) {
             return (
               e === t ||
               (n(e) &&
@@ -2130,71 +2139,71 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 a.equalsEpsilon(e.y, t.y, r, i) &&
                 a.equalsEpsilon(e.z, t.z, r, i) &&
                 a.equalsEpsilon(e.w, t.w, r, i))
-            );
+            )
           }),
           (o.ZERO = i(new o(0, 0, 0, 0))),
           (o.UNIT_X = i(new o(1, 0, 0, 0))),
           (o.UNIT_Y = i(new o(0, 1, 0, 0))),
           (o.UNIT_Z = i(new o(0, 0, 1, 0))),
           (o.UNIT_W = i(new o(0, 0, 0, 1))),
-          (o.prototype.clone = function(e) {
-            return o.clone(this, e);
+          (o.prototype.clone = function (e) {
+            return o.clone(this, e)
           }),
-          (o.prototype.equals = function(e) {
-            return o.equals(this, e);
+          (o.prototype.equals = function (e) {
+            return o.equals(this, e)
           }),
-          (o.prototype.equalsEpsilon = function(e, t, n) {
-            return o.equalsEpsilon(this, e, t, n);
+          (o.prototype.equalsEpsilon = function (e, t, n) {
+            return o.equalsEpsilon(this, e, t, n)
           }),
-          (o.prototype.toString = function() {
+          (o.prototype.toString = function () {
             return (
-              "(" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + ")"
-            );
+              '(' + this.x + ', ' + this.y + ', ' + this.z + ', ' + this.w + ')'
+            )
           }),
           o
-        );
+        )
       }
     ),
-    define("Core/RuntimeError", ["./defined"], function(e) {
-      "use strict";
-      function t(e) {
-        (this.name = "RuntimeError"), (this.message = e);
-        var t;
+    define('Core/RuntimeError', ['./defined'], function (e) {
+      'use strict'
+      function t (e) {
+        (this.name = 'RuntimeError'), (this.message = e)
+        var t
         try {
-          throw new Error();
+          throw new Error()
         } catch (e) {
-          t = e.stack;
+          t = e.stack
         }
-        this.stack = t;
+        this.stack = t
       }
       return (
         e(Object.create) &&
           ((t.prototype = Object.create(Error.prototype)),
           (t.prototype.constructor = t)),
-        (t.prototype.toString = function() {
-          var t = this.name + ": " + this.message;
-          return e(this.stack) && (t += "\n" + this.stack.toString()), t;
+        (t.prototype.toString = function () {
+          var t = this.name + ': ' + this.message
+          return e(this.stack) && (t += '\n' + this.stack.toString()), t
         }),
         t
-      );
+      )
     }),
     define(
-      "Core/Matrix4",
+      'Core/Matrix4',
       [
-        "./Cartesian3",
-        "./Cartesian4",
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./defineProperties",
-        "./freezeObject",
-        "./Math",
-        "./Matrix3",
-        "./RuntimeError"
+        './Cartesian3',
+        './Cartesian4',
+        './Check',
+        './defaultValue',
+        './defined',
+        './defineProperties',
+        './freezeObject',
+        './Math',
+        './Matrix3',
+        './RuntimeError'
       ],
-      function(e, t, n, r, i, a, o, u, s, E) {
-        "use strict";
-        function c(e, t, n, i, a, o, u, s, E, c, _, l, T, R, h, f) {
+      function (e, t, n, r, i, a, o, u, s, E) {
+        'use strict'
+        function c (e, t, n, i, a, o, u, s, E, c, _, l, T, R, h, f) {
           (this[0] = r(e, 0)),
             (this[1] = r(a, 0)),
             (this[2] = r(E, 0)),
@@ -2210,10 +2219,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             (this[12] = r(i, 0)),
             (this[13] = r(s, 0)),
             (this[14] = r(l, 0)),
-            (this[15] = r(f, 0));
+            (this[15] = r(f, 0))
         }
         (c.packedLength = 16),
-          (c.pack = function(e, t, n) {
+          (c.pack = function (e, t, n) {
             return (
               (n = r(n, 0)),
               (t[n++] = e[0]),
@@ -2233,9 +2242,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[n++] = e[14]),
               (t[n] = e[15]),
               t
-            );
+            )
           }),
-          (c.unpack = function(e, t, n) {
+          (c.unpack = function (e, t, n) {
             return (
               (t = r(t, 0)),
               i(n) || (n = new c()),
@@ -2256,10 +2265,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = e[t++]),
               (n[15] = e[t]),
               n
-            );
+            )
           }),
-          (c.clone = function(e, t) {
-            if (i(e))
+          (c.clone = function (e, t) {
+            if (i(e)) {
               return i(t)
                 ? ((t[0] = e[0]),
                   (t[1] = e[1]),
@@ -2295,13 +2304,14 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                     e[7],
                     e[11],
                     e[15]
-                  );
+                  )
+            }
           }),
           (c.fromArray = c.unpack),
-          (c.fromColumnMajorArray = function(e, t) {
-            return c.clone(e, t);
+          (c.fromColumnMajorArray = function (e, t) {
+            return c.clone(e, t)
           }),
-          (c.fromRowMajorArray = function(e, t) {
+          (c.fromRowMajorArray = function (e, t) {
             return i(t)
               ? ((t[0] = e[0]),
                 (t[1] = e[4]),
@@ -2337,9 +2347,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                   e[13],
                   e[14],
                   e[15]
-                );
+                )
           }),
-          (c.fromRotationTranslation = function(t, n, a) {
+          (c.fromRotationTranslation = function (t, n, a) {
             return (
               (n = r(n, e.ZERO)),
               i(a)
@@ -2378,10 +2388,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                     0,
                     1
                   )
-            );
+            )
           }),
-          (c.fromTranslationQuaternionRotationScale = function(e, t, n, r) {
-            i(r) || (r = new c());
+          (c.fromTranslationQuaternionRotationScale = function (e, t, n, r) {
+            i(r) || (r = new c())
             var a = n.x,
               o = n.y,
               u = n.z,
@@ -2403,7 +2413,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               m = 2 * (R - l),
               O = 2 * (_ - h),
               p = 2 * (R + l),
-              C = -s - T + f + d;
+              C = -s - T + f + d
             return (
               (r[0] = N * a),
               (r[1] = M * a),
@@ -2422,20 +2432,20 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (r[14] = e.z),
               (r[15] = 1),
               r
-            );
+            )
           }),
-          (c.fromTranslationRotationScale = function(e, t) {
+          (c.fromTranslationRotationScale = function (e, t) {
             return c.fromTranslationQuaternionRotationScale(
               e.translation,
               e.rotation,
               e.scale,
               t
-            );
+            )
           }),
-          (c.fromTranslation = function(e, t) {
-            return c.fromRotationTranslation(s.IDENTITY, e, t);
+          (c.fromTranslation = function (e, t) {
+            return c.fromRotationTranslation(s.IDENTITY, e, t)
           }),
-          (c.fromScale = function(e, t) {
+          (c.fromScale = function (e, t) {
             return i(t)
               ? ((t[0] = e.x),
                 (t[1] = 0),
@@ -2454,9 +2464,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[14] = 0),
                 (t[15] = 1),
                 t)
-              : new c(e.x, 0, 0, 0, 0, e.y, 0, 0, 0, 0, e.z, 0, 0, 0, 0, 1);
+              : new c(e.x, 0, 0, 0, 0, e.y, 0, 0, 0, 0, e.z, 0, 0, 0, 0, 1)
           }),
-          (c.fromUniformScale = function(e, t) {
+          (c.fromUniformScale = function (e, t) {
             return i(t)
               ? ((t[0] = e),
                 (t[1] = 0),
@@ -2475,18 +2485,18 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[14] = 0),
                 (t[15] = 1),
                 t)
-              : new c(e, 0, 0, 0, 0, e, 0, 0, 0, 0, e, 0, 0, 0, 0, 1);
-          });
+              : new c(e, 0, 0, 0, 0, e, 0, 0, 0, 0, e, 0, 0, 0, 0, 1)
+          })
         var _ = new e(),
           l = new e(),
           T = new e();
-        (c.fromCamera = function(t, n) {
+        (c.fromCamera = function (t, n) {
           var r = t.position,
             a = t.direction,
-            o = t.up;
+            o = t.up
           e.normalize(a, _),
             e.normalize(e.cross(_, o, l), l),
-            e.normalize(e.cross(l, _, T), T);
+            e.normalize(e.cross(l, _, T), T)
           var u = l.x,
             s = l.y,
             E = l.z,
@@ -2501,7 +2511,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             M = r.z,
             y = u * -I + s * -S + E * -M,
             m = A * -I + d * -S + N * -M,
-            O = R * I + h * S + f * M;
+            O = R * I + h * S + f * M
           return i(n)
             ? ((n[0] = u),
               (n[1] = A),
@@ -2520,14 +2530,14 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = O),
               (n[15] = 1),
               n)
-            : new c(u, s, E, y, A, d, N, m, -R, -h, -f, O, 0, 0, 0, 1);
+            : new c(u, s, E, y, A, d, N, m, -R, -h, -f, O, 0, 0, 0, 1)
         }),
-          (c.computePerspectiveFieldOfView = function(e, t, n, r, i) {
+          (c.computePerspectiveFieldOfView = function (e, t, n, r, i) {
             var a = Math.tan(0.5 * e),
               o = 1 / a,
               u = o / t,
               s = (r + n) / (n - r),
-              E = 2 * r * n / (n - r);
+              E = 2 * r * n / (n - r)
             return (
               (i[0] = u),
               (i[1] = 0),
@@ -2546,15 +2556,15 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (i[14] = E),
               (i[15] = 0),
               i
-            );
+            )
           }),
-          (c.computeOrthographicOffCenter = function(e, t, n, r, i, a, o) {
+          (c.computeOrthographicOffCenter = function (e, t, n, r, i, a, o) {
             var u = 1 / (t - e),
               s = 1 / (r - n),
               E = 1 / (a - i),
               c = -(t + e) * u,
               _ = -(r + n) * s,
-              l = -(a + i) * E;
+              l = -(a + i) * E
             return (
               (u *= 2),
               (s *= 2),
@@ -2576,16 +2586,16 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (o[14] = l),
               (o[15] = 1),
               o
-            );
+            )
           }),
-          (c.computePerspectiveOffCenter = function(e, t, n, r, i, a, o) {
+          (c.computePerspectiveOffCenter = function (e, t, n, r, i, a, o) {
             var u = 2 * i / (t - e),
               s = 2 * i / (r - n),
               E = (t + e) / (t - e),
               c = (r + n) / (r - n),
               _ = -(a + i) / (a - i),
               l = -1,
-              T = -2 * a * i / (a - i);
+              T = -2 * a * i / (a - i)
             return (
               (o[0] = u),
               (o[1] = 0),
@@ -2604,16 +2614,16 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (o[14] = T),
               (o[15] = 0),
               o
-            );
+            )
           }),
-          (c.computeInfinitePerspectiveOffCenter = function(e, t, n, r, i, a) {
+          (c.computeInfinitePerspectiveOffCenter = function (e, t, n, r, i, a) {
             var o = 2 * i / (t - e),
               u = 2 * i / (r - n),
               s = (t + e) / (t - e),
               E = (r + n) / (r - n),
               c = -1,
               _ = -1,
-              l = -2 * i;
+              l = -2 * i
             return (
               (a[0] = o),
               (a[1] = 0),
@@ -2632,15 +2642,15 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (a[14] = l),
               (a[15] = 0),
               a
-            );
+            )
           }),
-          (c.computeViewportTransformation = function(e, t, n, i) {
-            e = r(e, r.EMPTY_OBJECT);
+          (c.computeViewportTransformation = function (e, t, n, i) {
+            e = r(e, r.EMPTY_OBJECT)
             var a = r(e.x, 0),
               o = r(e.y, 0),
               u = r(e.width, 0),
               s = r(e.height, 0);
-            (t = r(t, 0)), (n = r(n, 1));
+            (t = r(t, 0)), (n = r(n, 1))
             var E = 0.5 * u,
               c = 0.5 * s,
               _ = 0.5 * (n - t),
@@ -2650,7 +2660,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               h = a + E,
               f = o + c,
               A = t + _,
-              d = 1;
+              d = 1
             return (
               (i[0] = l),
               (i[1] = 0),
@@ -2669,9 +2679,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (i[14] = A),
               (i[15] = d),
               i
-            );
+            )
           }),
-          (c.computeView = function(t, n, r, i, a) {
+          (c.computeView = function (t, n, r, i, a) {
             return (
               (a[0] = i.x),
               (a[1] = r.x),
@@ -2690,9 +2700,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (a[14] = e.dot(n, t)),
               (a[15] = 1),
               a
-            );
+            )
           }),
-          (c.toArray = function(e, t) {
+          (c.toArray = function (e, t) {
             return i(t)
               ? ((t[0] = e[0]),
                 (t[1] = e[1]),
@@ -2712,47 +2722,47 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (t[15] = e[15]),
                 t)
               : [
-                  e[0],
-                  e[1],
-                  e[2],
-                  e[3],
-                  e[4],
-                  e[5],
-                  e[6],
-                  e[7],
-                  e[8],
-                  e[9],
-                  e[10],
-                  e[11],
-                  e[12],
-                  e[13],
-                  e[14],
-                  e[15]
-                ];
+                e[0],
+                e[1],
+                e[2],
+                e[3],
+                e[4],
+                e[5],
+                e[6],
+                e[7],
+                e[8],
+                e[9],
+                e[10],
+                e[11],
+                e[12],
+                e[13],
+                e[14],
+                e[15]
+              ]
           }),
-          (c.getElementIndex = function(e, t) {
-            return 4 * e + t;
+          (c.getElementIndex = function (e, t) {
+            return 4 * e + t
           }),
-          (c.getColumn = function(e, t, n) {
+          (c.getColumn = function (e, t, n) {
             var r = 4 * t,
               i = e[r],
               a = e[r + 1],
               o = e[r + 2],
-              u = e[r + 3];
-            return (n.x = i), (n.y = a), (n.z = o), (n.w = u), n;
+              u = e[r + 3]
+            return (n.x = i), (n.y = a), (n.z = o), (n.w = u), n
           }),
-          (c.setColumn = function(e, t, n, r) {
-            r = c.clone(e, r);
-            var i = 4 * t;
+          (c.setColumn = function (e, t, n, r) {
+            r = c.clone(e, r)
+            var i = 4 * t
             return (
               (r[i] = n.x),
               (r[i + 1] = n.y),
               (r[i + 2] = n.z),
               (r[i + 3] = n.w),
               r
-            );
+            )
           }),
-          (c.setTranslation = function(e, t, n) {
+          (c.setTranslation = function (e, t, n) {
             return (
               (n[0] = e[0]),
               (n[1] = e[1]),
@@ -2771,16 +2781,16 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = t.z),
               (n[15] = e[15]),
               n
-            );
+            )
           }),
-          (c.getRow = function(e, t, n) {
+          (c.getRow = function (e, t, n) {
             var r = e[t],
               i = e[t + 4],
               a = e[t + 8],
-              o = e[t + 12];
-            return (n.x = r), (n.y = i), (n.z = a), (n.w = o), n;
+              o = e[t + 12]
+            return (n.x = r), (n.y = i), (n.z = a), (n.w = o), n
           }),
-          (c.setRow = function(e, t, n, r) {
+          (c.setRow = function (e, t, n, r) {
             return (
               (r = c.clone(e, r)),
               (r[t] = n.x),
@@ -2788,22 +2798,22 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (r[t + 8] = n.z),
               (r[t + 12] = n.w),
               r
-            );
-          });
-        var R = new e();
-        c.getScale = function(t, n) {
+            )
+          })
+        var R = new e()
+        c.getScale = function (t, n) {
           return (
             (n.x = e.magnitude(e.fromElements(t[0], t[1], t[2], R))),
             (n.y = e.magnitude(e.fromElements(t[4], t[5], t[6], R))),
             (n.z = e.magnitude(e.fromElements(t[8], t[9], t[10], R))),
             n
-          );
-        };
+          )
+        }
         var h = new e();
-        (c.getMaximumScale = function(t) {
-          return c.getScale(t, h), e.maximumComponent(h);
+        (c.getMaximumScale = function (t) {
+          return c.getScale(t, h), e.maximumComponent(h)
         }),
-          (c.multiply = function(e, t, n) {
+          (c.multiply = function (e, t, n) {
             var r = e[0],
               i = e[1],
               a = e[2],
@@ -2851,7 +2861,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               k = r * x + u * L + _ * P + h * v,
               K = i * x + s * L + l * P + f * v,
               j = a * x + E * L + T * P + A * v,
-              Z = o * x + c * L + R * P + d * v;
+              Z = o * x + c * L + R * P + d * v
             return (
               (n[0] = F),
               (n[1] = B),
@@ -2870,9 +2880,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = j),
               (n[15] = Z),
               n
-            );
+            )
           }),
-          (c.add = function(e, t, n) {
+          (c.add = function (e, t, n) {
             return (
               (n[0] = e[0] + t[0]),
               (n[1] = e[1] + t[1]),
@@ -2891,9 +2901,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = e[14] + t[14]),
               (n[15] = e[15] + t[15]),
               n
-            );
+            )
           }),
-          (c.subtract = function(e, t, n) {
+          (c.subtract = function (e, t, n) {
             return (
               (n[0] = e[0] - t[0]),
               (n[1] = e[1] - t[1]),
@@ -2912,9 +2922,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = e[14] - t[14]),
               (n[15] = e[15] - t[15]),
               n
-            );
+            )
           }),
-          (c.multiplyTransformation = function(e, t, n) {
+          (c.multiplyTransformation = function (e, t, n) {
             var r = e[0],
               i = e[1],
               a = e[2],
@@ -2950,7 +2960,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               F = a * S + s * M + _ * y,
               B = r * m + o * O + E * p + l,
               D = i * m + u * O + c * p + T,
-              z = a * m + s * O + _ * p + R;
+              z = a * m + s * O + _ * p + R
             return (
               (n[0] = C),
               (n[1] = g),
@@ -2969,9 +2979,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = z),
               (n[15] = 1),
               n
-            );
+            )
           }),
-          (c.multiplyByMatrix3 = function(e, t, n) {
+          (c.multiplyByMatrix3 = function (e, t, n) {
             var r = e[0],
               i = e[1],
               a = e[2],
@@ -2998,7 +3008,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               p = a * h + s * f + _ * A,
               C = r * d + o * N + E * I,
               g = i * d + u * N + c * I,
-              w = a * d + s * N + _ * I;
+              w = a * d + s * N + _ * I
             return (
               (n[0] = S),
               (n[1] = M),
@@ -3017,15 +3027,15 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = e[14]),
               (n[15] = e[15]),
               n
-            );
+            )
           }),
-          (c.multiplyByTranslation = function(e, t, n) {
+          (c.multiplyByTranslation = function (e, t, n) {
             var r = t.x,
               i = t.y,
               a = t.z,
               o = r * e[0] + i * e[4] + a * e[8] + e[12],
               u = r * e[1] + i * e[5] + a * e[9] + e[13],
-              s = r * e[2] + i * e[6] + a * e[10] + e[14];
+              s = r * e[2] + i * e[6] + a * e[10] + e[14]
             return (
               (n[0] = e[0]),
               (n[1] = e[1]),
@@ -3044,17 +3054,17 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = s),
               (n[15] = e[15]),
               n
-            );
-          });
+            )
+          })
         var f = new e();
-        (c.multiplyByUniformScale = function(e, t, n) {
-          return (f.x = t), (f.y = t), (f.z = t), c.multiplyByScale(e, f, n);
+        (c.multiplyByUniformScale = function (e, t, n) {
+          return (f.x = t), (f.y = t), (f.z = t), c.multiplyByScale(e, f, n)
         }),
-          (c.multiplyByScale = function(e, t, n) {
+          (c.multiplyByScale = function (e, t, n) {
             var r = t.x,
               i = t.y,
-              a = t.z;
-            return 1 === r && 1 === i && 1 === a
+              a = t.z
+            return r === 1 && i === 1 && a === 1
               ? c.clone(e, n)
               : ((n[0] = r * e[0]),
                 (n[1] = r * e[1]),
@@ -3072,9 +3082,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (n[13] = e[13]),
                 (n[14] = e[14]),
                 (n[15] = 1),
-                n);
+                n)
           }),
-          (c.multiplyByVector = function(e, t, n) {
+          (c.multiplyByVector = function (e, t, n) {
             var r = t.x,
               i = t.y,
               a = t.z,
@@ -3082,28 +3092,28 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               u = e[0] * r + e[4] * i + e[8] * a + e[12] * o,
               s = e[1] * r + e[5] * i + e[9] * a + e[13] * o,
               E = e[2] * r + e[6] * i + e[10] * a + e[14] * o,
-              c = e[3] * r + e[7] * i + e[11] * a + e[15] * o;
-            return (n.x = u), (n.y = s), (n.z = E), (n.w = c), n;
+              c = e[3] * r + e[7] * i + e[11] * a + e[15] * o
+            return (n.x = u), (n.y = s), (n.z = E), (n.w = c), n
           }),
-          (c.multiplyByPointAsVector = function(e, t, n) {
+          (c.multiplyByPointAsVector = function (e, t, n) {
             var r = t.x,
               i = t.y,
               a = t.z,
               o = e[0] * r + e[4] * i + e[8] * a,
               u = e[1] * r + e[5] * i + e[9] * a,
-              s = e[2] * r + e[6] * i + e[10] * a;
-            return (n.x = o), (n.y = u), (n.z = s), n;
+              s = e[2] * r + e[6] * i + e[10] * a
+            return (n.x = o), (n.y = u), (n.z = s), n
           }),
-          (c.multiplyByPoint = function(e, t, n) {
+          (c.multiplyByPoint = function (e, t, n) {
             var r = t.x,
               i = t.y,
               a = t.z,
               o = e[0] * r + e[4] * i + e[8] * a + e[12],
               u = e[1] * r + e[5] * i + e[9] * a + e[13],
-              s = e[2] * r + e[6] * i + e[10] * a + e[14];
-            return (n.x = o), (n.y = u), (n.z = s), n;
+              s = e[2] * r + e[6] * i + e[10] * a + e[14]
+            return (n.x = o), (n.y = u), (n.z = s), n
           }),
-          (c.multiplyByScalar = function(e, t, n) {
+          (c.multiplyByScalar = function (e, t, n) {
             return (
               (n[0] = e[0] * t),
               (n[1] = e[1] * t),
@@ -3122,9 +3132,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = e[14] * t),
               (n[15] = e[15] * t),
               n
-            );
+            )
           }),
-          (c.negate = function(e, t) {
+          (c.negate = function (e, t) {
             return (
               (t[0] = -e[0]),
               (t[1] = -e[1]),
@@ -3143,15 +3153,15 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[14] = -e[14]),
               (t[15] = -e[15]),
               t
-            );
+            )
           }),
-          (c.transpose = function(e, t) {
+          (c.transpose = function (e, t) {
             var n = e[1],
               r = e[2],
               i = e[3],
               a = e[6],
               o = e[7],
-              u = e[11];
+              u = e[11]
             return (
               (t[0] = e[0]),
               (t[1] = e[4]),
@@ -3170,9 +3180,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[14] = u),
               (t[15] = e[15]),
               t
-            );
+            )
           }),
-          (c.abs = function(e, t) {
+          (c.abs = function (e, t) {
             return (
               (t[0] = Math.abs(e[0])),
               (t[1] = Math.abs(e[1])),
@@ -3191,9 +3201,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[14] = Math.abs(e[14])),
               (t[15] = Math.abs(e[15])),
               t
-            );
+            )
           }),
-          (c.equals = function(e, t) {
+          (c.equals = function (e, t) {
             return (
               e === t ||
               (i(e) &&
@@ -3214,9 +3224,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 e[7] === t[7] &&
                 e[11] === t[11] &&
                 e[15] === t[15])
-            );
+            )
           }),
-          (c.equalsEpsilon = function(e, t, n) {
+          (c.equalsEpsilon = function (e, t, n) {
             return (
               e === t ||
               (i(e) &&
@@ -3237,12 +3247,12 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 Math.abs(e[13] - t[13]) <= n &&
                 Math.abs(e[14] - t[14]) <= n &&
                 Math.abs(e[15] - t[15]) <= n)
-            );
+            )
           }),
-          (c.getTranslation = function(e, t) {
-            return (t.x = e[12]), (t.y = e[13]), (t.z = e[14]), t;
+          (c.getTranslation = function (e, t) {
+            return (t.x = e[12]), (t.y = e[13]), (t.z = e[14]), t
           }),
-          (c.getRotation = function(e, t) {
+          (c.getRotation = function (e, t) {
             return (
               (t[0] = e[0]),
               (t[1] = e[1]),
@@ -3254,18 +3264,18 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[7] = e[9]),
               (t[8] = e[10]),
               t
-            );
-          });
+            )
+          })
         var A = new s(),
           d = new s(),
           N = new t(),
-          I = new t(0, 0, 0, 1);
+          I = new t(0, 0, 0, 1)
         return (
-          (c.inverse = function(e, n) {
+          (c.inverse = function (e, n) {
             if (
               s.equalsEpsilon(c.getRotation(e, A), d, u.EPSILON7) &&
               t.equals(c.getRow(e, 3, N), I)
-            )
+            ) {
               return (
                 (n[0] = 0),
                 (n[1] = 0),
@@ -3284,7 +3294,8 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (n[14] = -e[14]),
                 (n[15] = 1),
                 n
-              );
+              )
+            }
             var r = e[0],
               i = e[4],
               a = e[8],
@@ -3332,7 +3343,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (F = r * T),
               (B = a * _),
               (D = r * l),
-              (z = i * _);
+              (z = i * _)
             var k = C * m + U * O + x * p - (g * m + w * O + L * p),
               K = g * y + P * O + B * p - (C * y + v * O + F * p),
               j = w * y + v * m + D * p - (U * y + P * m + z * p),
@@ -3341,11 +3352,12 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               J = F * M + C * h + v * S - (P * S + B * M + g * h),
               $ = P * f + z * M + U * h - (D * M + w * h + v * f),
               ee = D * S + x * h + B * f - (F * f + z * S + L * h),
-              te = r * G + i * b + a * V + o * X;
-            if (Math.abs(te) < u.EPSILON20)
+              te = r * G + i * b + a * V + o * X
+            if (Math.abs(te) < u.EPSILON20) {
               throw new E(
-                "matrix is not invertible because its determinate is zero."
-              );
+                'matrix is not invertible because its determinate is zero.'
+              )
+            }
             return (
               (te = 1 / te),
               (n[0] = G * te),
@@ -3365,9 +3377,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[14] = $ * te),
               (n[15] = ee * te),
               n
-            );
+            )
           }),
-          (c.inverseTransformation = function(e, t) {
+          (c.inverseTransformation = function (e, t) {
             var n = e[0],
               r = e[1],
               i = e[2],
@@ -3382,7 +3394,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               T = e[14],
               R = -n * _ - r * l - i * T,
               h = -a * _ - o * l - u * T,
-              f = -s * _ - E * l - c * T;
+              f = -s * _ - E * l - c * T
             return (
               (t[0] = n),
               (t[1] = a),
@@ -3401,7 +3413,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[14] = f),
               (t[15] = 1),
               t
-            );
+            )
           }),
           (c.IDENTITY = o(
             new c(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
@@ -3425,18 +3437,18 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           (c.COLUMN3ROW3 = 15),
           a(c.prototype, {
             length: {
-              get: function() {
-                return c.packedLength;
+              get: function () {
+                return c.packedLength
               }
             }
           }),
-          (c.prototype.clone = function(e) {
-            return c.clone(this, e);
+          (c.prototype.clone = function (e) {
+            return c.clone(this, e)
           }),
-          (c.prototype.equals = function(e) {
-            return c.equals(this, e);
+          (c.prototype.equals = function (e) {
+            return c.equals(this, e)
           }),
-          (c.equalsArray = function(e, t, n) {
+          (c.equalsArray = function (e, t, n) {
             return (
               e[0] === t[n] &&
               e[1] === t[n + 1] &&
@@ -3454,86 +3466,86 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               e[13] === t[n + 13] &&
               e[14] === t[n + 14] &&
               e[15] === t[n + 15]
-            );
+            )
           }),
-          (c.prototype.equalsEpsilon = function(e, t) {
-            return c.equalsEpsilon(this, e, t);
+          (c.prototype.equalsEpsilon = function (e, t) {
+            return c.equalsEpsilon(this, e, t)
           }),
-          (c.prototype.toString = function() {
+          (c.prototype.toString = function () {
             return (
-              "(" +
+              '(' +
               this[0] +
-              ", " +
+              ', ' +
               this[4] +
-              ", " +
+              ', ' +
               this[8] +
-              ", " +
+              ', ' +
               this[12] +
-              ")\n(" +
+              ')\n(' +
               this[1] +
-              ", " +
+              ', ' +
               this[5] +
-              ", " +
+              ', ' +
               this[9] +
-              ", " +
+              ', ' +
               this[13] +
-              ")\n(" +
+              ')\n(' +
               this[2] +
-              ", " +
+              ', ' +
               this[6] +
-              ", " +
+              ', ' +
               this[10] +
-              ", " +
+              ', ' +
               this[14] +
-              ")\n(" +
+              ')\n(' +
               this[3] +
-              ", " +
+              ', ' +
               this[7] +
-              ", " +
+              ', ' +
               this[11] +
-              ", " +
+              ', ' +
               this[15] +
-              ")"
-            );
+              ')'
+            )
           }),
           c
-        );
+        )
       }
     ),
     define(
-      "Core/Rectangle",
+      'Core/Rectangle',
       [
-        "./Cartographic",
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./defineProperties",
-        "./Ellipsoid",
-        "./freezeObject",
-        "./Math"
+        './Cartographic',
+        './Check',
+        './defaultValue',
+        './defined',
+        './defineProperties',
+        './Ellipsoid',
+        './freezeObject',
+        './Math'
       ],
-      function(e, t, n, r, i, a, o, u) {
-        "use strict";
-        function s(e, t, r, i) {
+      function (e, t, n, r, i, a, o, u) {
+        'use strict'
+        function s (e, t, r, i) {
           (this.west = n(e, 0)),
             (this.south = n(t, 0)),
             (this.east = n(r, 0)),
-            (this.north = n(i, 0));
+            (this.north = n(i, 0))
         }
         i(s.prototype, {
           width: {
-            get: function() {
-              return s.computeWidth(this);
+            get: function () {
+              return s.computeWidth(this)
             }
           },
           height: {
-            get: function() {
-              return s.computeHeight(this);
+            get: function () {
+              return s.computeHeight(this)
             }
           }
         }),
           (s.packedLength = 4),
-          (s.pack = function(e, t, r) {
+          (s.pack = function (e, t, r) {
             return (
               (r = n(r, 0)),
               (t[r++] = e.west),
@@ -3541,9 +3553,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[r++] = e.east),
               (t[r] = e.north),
               t
-            );
+            )
           }),
-          (s.unpack = function(e, t, i) {
+          (s.unpack = function (e, t, i) {
             return (
               (t = n(t, 0)),
               r(i) || (i = new s()),
@@ -3552,17 +3564,17 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (i.east = e[t++]),
               (i.north = e[t]),
               i
-            );
+            )
           }),
-          (s.computeWidth = function(e) {
+          (s.computeWidth = function (e) {
             var t = e.east,
-              n = e.west;
-            return t < n && (t += u.TWO_PI), t - n;
+              n = e.west
+            return t < n && (t += u.TWO_PI), t - n
           }),
-          (s.computeHeight = function(e) {
-            return e.north - e.south;
+          (s.computeHeight = function (e) {
+            return e.north - e.south
           }),
-          (s.fromDegrees = function(e, t, i, a, o) {
+          (s.fromDegrees = function (e, t, i, a, o) {
             return (
               (e = u.toRadians(n(e, 0))),
               (t = u.toRadians(n(t, 0))),
@@ -3571,18 +3583,18 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               r(o)
                 ? ((o.west = e), (o.south = t), (o.east = i), (o.north = a), o)
                 : new s(e, t, i, a)
-            );
+            )
           }),
-          (s.fromRadians = function(e, t, i, a, o) {
+          (s.fromRadians = function (e, t, i, a, o) {
             return r(o)
               ? ((o.west = n(e, 0)),
                 (o.south = n(t, 0)),
                 (o.east = n(i, 0)),
                 (o.north = n(a, 0)),
                 o)
-              : new s(e, t, i, a);
+              : new s(e, t, i, a)
           }),
-          (s.fromCartographicArray = function(e, t) {
+          (s.fromCartographicArray = function (e, t) {
             for (
               var n = Number.MAX_VALUE,
                 i = -Number.MAX_VALUE,
@@ -3599,9 +3611,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n = Math.min(n, T.longitude)),
                 (i = Math.max(i, T.longitude)),
                 (E = Math.min(E, T.latitude)),
-                (c = Math.max(c, T.latitude));
+                (c = Math.max(c, T.latitude))
               var R = T.longitude >= 0 ? T.longitude : T.longitude + u.TWO_PI;
-              (a = Math.min(a, R)), (o = Math.max(o, R));
+              (a = Math.min(a, R)), (o = Math.max(o, R))
             }
             return (
               i - n > o - a &&
@@ -3612,10 +3624,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               r(t)
                 ? ((t.west = n), (t.south = E), (t.east = i), (t.north = c), t)
                 : new s(n, E, i, c)
-            );
+            )
           }),
-          (s.fromCartesianArray = function(e, t, i) {
-            t = n(t, a.WGS84);
+          (s.fromCartesianArray = function (e, t, i) {
+            t = n(t, a.WGS84)
             for (
               var o = Number.MAX_VALUE,
                 E = -Number.MAX_VALUE,
@@ -3632,9 +3644,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (o = Math.min(o, f.longitude)),
                 (E = Math.max(E, f.longitude)),
                 (l = Math.min(l, f.latitude)),
-                (T = Math.max(T, f.latitude));
+                (T = Math.max(T, f.latitude))
               var A = f.longitude >= 0 ? f.longitude : f.longitude + u.TWO_PI;
-              (c = Math.min(c, A)), (_ = Math.max(_, A));
+              (c = Math.min(c, A)), (_ = Math.max(_, A))
             }
             return (
               E - o > _ - c &&
@@ -3645,25 +3657,26 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               r(i)
                 ? ((i.west = o), (i.south = l), (i.east = E), (i.north = T), i)
                 : new s(o, l, E, T)
-            );
+            )
           }),
-          (s.clone = function(e, t) {
-            if (r(e))
+          (s.clone = function (e, t) {
+            if (r(e)) {
               return r(t)
                 ? ((t.west = e.west),
                   (t.south = e.south),
                   (t.east = e.east),
                   (t.north = e.north),
                   t)
-                : new s(e.west, e.south, e.east, e.north);
+                : new s(e.west, e.south, e.east, e.north)
+            }
           }),
-          (s.prototype.clone = function(e) {
-            return s.clone(this, e);
+          (s.prototype.clone = function (e) {
+            return s.clone(this, e)
           }),
-          (s.prototype.equals = function(e) {
-            return s.equals(this, e);
+          (s.prototype.equals = function (e) {
+            return s.equals(this, e)
           }),
-          (s.equals = function(e, t) {
+          (s.equals = function (e, t) {
             return (
               e === t ||
               (r(e) &&
@@ -3672,119 +3685,121 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 e.south === t.south &&
                 e.east === t.east &&
                 e.north === t.north)
-            );
+            )
           }),
-          (s.prototype.equalsEpsilon = function(e, t) {
+          (s.prototype.equalsEpsilon = function (e, t) {
             return (
               r(e) &&
               Math.abs(this.west - e.west) <= t &&
               Math.abs(this.south - e.south) <= t &&
               Math.abs(this.east - e.east) <= t &&
               Math.abs(this.north - e.north) <= t
-            );
+            )
           }),
-          (s.validate = function(e) {}),
-          (s.southwest = function(t, n) {
+          (s.validate = function (e) {}),
+          (s.southwest = function (t, n) {
             return r(n)
               ? ((n.longitude = t.west),
                 (n.latitude = t.south),
                 (n.height = 0),
                 n)
-              : new e(t.west, t.south);
+              : new e(t.west, t.south)
           }),
-          (s.northwest = function(t, n) {
+          (s.northwest = function (t, n) {
             return r(n)
               ? ((n.longitude = t.west),
                 (n.latitude = t.north),
                 (n.height = 0),
                 n)
-              : new e(t.west, t.north);
+              : new e(t.west, t.north)
           }),
-          (s.northeast = function(t, n) {
+          (s.northeast = function (t, n) {
             return r(n)
               ? ((n.longitude = t.east),
                 (n.latitude = t.north),
                 (n.height = 0),
                 n)
-              : new e(t.east, t.north);
+              : new e(t.east, t.north)
           }),
-          (s.southeast = function(t, n) {
+          (s.southeast = function (t, n) {
             return r(n)
               ? ((n.longitude = t.east),
                 (n.latitude = t.south),
                 (n.height = 0),
                 n)
-              : new e(t.east, t.south);
+              : new e(t.east, t.south)
           }),
-          (s.center = function(t, n) {
+          (s.center = function (t, n) {
             var i = t.east,
-              a = t.west;
-            i < a && (i += u.TWO_PI);
+              a = t.west
+            i < a && (i += u.TWO_PI)
             var o = u.negativePiToPi(0.5 * (a + i)),
-              s = 0.5 * (t.south + t.north);
+              s = 0.5 * (t.south + t.north)
             return r(n)
               ? ((n.longitude = o), (n.latitude = s), (n.height = 0), n)
-              : new e(o, s);
+              : new e(o, s)
           }),
-          (s.intersection = function(e, t, n) {
+          (s.intersection = function (e, t, n) {
             var i = e.east,
               a = e.west,
               o = t.east,
-              E = t.west;
+              E = t.west
             i < a && o > 0
               ? (i += u.TWO_PI)
               : o < E && i > 0 && (o += u.TWO_PI),
               i < a && E < 0
                 ? (E += u.TWO_PI)
-                : o < E && a < 0 && (a += u.TWO_PI);
+                : o < E && a < 0 && (a += u.TWO_PI)
             var c = u.negativePiToPi(Math.max(a, E)),
-              _ = u.negativePiToPi(Math.min(i, o));
+              _ = u.negativePiToPi(Math.min(i, o))
             if (!((e.west < e.east || t.west < t.east) && _ <= c)) {
               var l = Math.max(e.south, t.south),
-                T = Math.min(e.north, t.north);
-              if (!(l >= T))
+                T = Math.min(e.north, t.north)
+              if (!(l >= T)) {
                 return r(n)
                   ? ((n.west = c),
                     (n.south = l),
                     (n.east = _),
                     (n.north = T),
                     n)
-                  : new s(c, l, _, T);
+                  : new s(c, l, _, T)
+              }
             }
           }),
-          (s.simpleIntersection = function(e, t, n) {
+          (s.simpleIntersection = function (e, t, n) {
             var i = Math.max(e.west, t.west),
               a = Math.max(e.south, t.south),
               o = Math.min(e.east, t.east),
-              u = Math.min(e.north, t.north);
-            if (!(a >= u || i >= o))
+              u = Math.min(e.north, t.north)
+            if (!(a >= u || i >= o)) {
               return r(n)
                 ? ((n.west = i), (n.south = a), (n.east = o), (n.north = u), n)
-                : new s(i, a, o, u);
+                : new s(i, a, o, u)
+            }
           }),
-          (s.union = function(e, t, n) {
-            r(n) || (n = new s());
+          (s.union = function (e, t, n) {
+            r(n) || (n = new s())
             var i = e.east,
               a = e.west,
               o = t.east,
-              E = t.west;
+              E = t.west
             i < a && o > 0
               ? (i += u.TWO_PI)
               : o < E && i > 0 && (o += u.TWO_PI),
               i < a && E < 0
                 ? (E += u.TWO_PI)
-                : o < E && a < 0 && (a += u.TWO_PI);
+                : o < E && a < 0 && (a += u.TWO_PI)
             var c = u.convertLongitudeRange(Math.min(a, E)),
-              _ = u.convertLongitudeRange(Math.max(i, o));
+              _ = u.convertLongitudeRange(Math.max(i, o))
             return (
               (n.west = c),
               (n.south = Math.min(e.south, t.south)),
               (n.east = _),
               (n.north = Math.max(e.north, t.north)),
               n
-            );
+            )
           }),
-          (s.expand = function(e, t, n) {
+          (s.expand = function (e, t, n) {
             return (
               r(n) || (n = new s()),
               (n.west = Math.min(e.west, t.longitude)),
@@ -3792,25 +3807,25 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n.east = Math.max(e.east, t.longitude)),
               (n.north = Math.max(e.north, t.latitude)),
               n
-            );
+            )
           }),
-          (s.contains = function(e, t) {
+          (s.contains = function (e, t) {
             var n = t.longitude,
               r = t.latitude,
               i = e.west,
-              a = e.east;
+              a = e.east
             return (
               a < i && ((a += u.TWO_PI), n < 0 && (n += u.TWO_PI)),
               (n > i || u.equalsEpsilon(n, i, u.EPSILON14)) &&
                 (n < a || u.equalsEpsilon(n, a, u.EPSILON14)) &&
                 r >= e.south &&
                 r <= e.north
-            );
-          });
-        var E = new e();
+            )
+          })
+        var E = new e()
         return (
-          (s.subsample = function(e, t, i, o) {
-            (t = n(t, a.WGS84)), (i = n(i, 0)), r(o) || (o = []);
+          (s.subsample = function (e, t, i, o) {
+            (t = n(t, a.WGS84)), (i = n(i, 0)), r(o) || (o = [])
             var c = 0,
               _ = e.north,
               l = e.south,
@@ -3833,13 +3848,14 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               c++,
               _ < 0
                 ? (h.latitude = _)
-                : l > 0 ? (h.latitude = l) : (h.latitude = 0);
-            for (var f = 1; f < 8; ++f)
+                : l > 0 ? (h.latitude = l) : (h.latitude = 0)
+            for (var f = 1; f < 8; ++f) {
               (h.longitude = -Math.PI + f * u.PI_OVER_TWO),
                 s.contains(e, h) &&
-                  ((o[c] = t.cartographicToCartesian(h, o[c])), c++);
+                  ((o[c] = t.cartographicToCartesian(h, o[c])), c++)
+            }
             return (
-              0 === h.latitude &&
+              h.latitude === 0 &&
                 ((h.longitude = R),
                 (o[c] = t.cartographicToCartesian(h, o[c])),
                 c++,
@@ -3848,35 +3864,35 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 c++),
               (o.length = c),
               o
-            );
+            )
           }),
           (s.MAX_VALUE = o(
             new s(-Math.PI, -u.PI_OVER_TWO, Math.PI, u.PI_OVER_TWO)
           )),
           s
-        );
+        )
       }
     ),
     define(
-      "Core/BoundingSphere",
+      'Core/BoundingSphere',
       [
-        "./Cartesian3",
-        "./Cartographic",
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./Ellipsoid",
-        "./GeographicProjection",
-        "./Intersect",
-        "./Interval",
-        "./Matrix3",
-        "./Matrix4",
-        "./Rectangle"
+        './Cartesian3',
+        './Cartographic',
+        './Check',
+        './defaultValue',
+        './defined',
+        './Ellipsoid',
+        './GeographicProjection',
+        './Intersect',
+        './Interval',
+        './Matrix3',
+        './Matrix4',
+        './Rectangle'
       ],
-      function(e, t, n, r, i, a, o, u, s, E, c, _) {
-        "use strict";
-        function l(t, n) {
-          (this.center = e.clone(r(t, e.ZERO))), (this.radius = r(n, 0));
+      function (e, t, n, r, i, a, o, u, s, E, c, _) {
+        'use strict'
+        function l (t, n) {
+          (this.center = e.clone(r(t, e.ZERO))), (this.radius = r(n, 0))
         }
         var T = new e(),
           R = new e(),
@@ -3889,10 +3905,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           S = new e(),
           M = new e(),
           y = new e(),
-          m = new e();
-        l.fromPoints = function(t, n) {
-          if ((i(n) || (n = new l()), !i(t) || 0 === t.length))
-            return (n.center = e.clone(e.ZERO, n.center)), (n.radius = 0), n;
+          m = new e()
+        l.fromPoints = function (t, n) {
+          if ((i(n) || (n = new l()), !i(t) || t.length === 0)) { return (n.center = e.clone(e.ZERO, n.center)), (n.radius = 0), n }
           var r,
             a = e.clone(t[0], N),
             o = e.clone(a, T),
@@ -3901,51 +3916,51 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             E = e.clone(a, f),
             c = e.clone(a, A),
             _ = e.clone(a, d),
-            O = t.length;
+            O = t.length
           for (r = 1; r < O; r++) {
-            e.clone(t[r], a);
+            e.clone(t[r], a)
             var p = a.x,
               C = a.y,
-              g = a.z;
+              g = a.z
             p < o.x && e.clone(a, o),
               p > E.x && e.clone(a, E),
               C < u.y && e.clone(a, u),
               C > c.y && e.clone(a, c),
               g < s.z && e.clone(a, s),
-              g > _.z && e.clone(a, _);
+              g > _.z && e.clone(a, _)
           }
           var w = e.magnitudeSquared(e.subtract(E, o, I)),
             U = e.magnitudeSquared(e.subtract(c, u, I)),
             x = e.magnitudeSquared(e.subtract(_, s, I)),
             L = o,
             P = E,
-            v = w;
+            v = w
           U > v && ((v = U), (L = u), (P = c)),
-            x > v && ((v = x), (L = s), (P = _));
+            x > v && ((v = x), (L = s), (P = _))
           var F = S;
           (F.x = 0.5 * (L.x + P.x)),
             (F.y = 0.5 * (L.y + P.y)),
-            (F.z = 0.5 * (L.z + P.z));
+            (F.z = 0.5 * (L.z + P.z))
           var B = e.magnitudeSquared(e.subtract(P, F, I)),
             D = Math.sqrt(B),
             z = M;
-          (z.x = o.x), (z.y = u.y), (z.z = s.z);
+          (z.x = o.x), (z.y = u.y), (z.z = s.z)
           var G = y;
-          (G.x = E.x), (G.y = c.y), (G.z = _.z);
+          (G.x = E.x), (G.y = c.y), (G.z = _.z)
           var b = e.multiplyByScalar(e.add(z, G, I), 0.5, m),
-            V = 0;
+            V = 0
           for (r = 0; r < O; r++) {
-            e.clone(t[r], a);
-            var X = e.magnitude(e.subtract(a, b, I));
-            X > V && (V = X);
-            var H = e.magnitudeSquared(e.subtract(a, F, I));
+            e.clone(t[r], a)
+            var X = e.magnitude(e.subtract(a, b, I))
+            X > V && (V = X)
+            var H = e.magnitudeSquared(e.subtract(a, F, I))
             if (H > B) {
               var q = Math.sqrt(H);
-              (D = 0.5 * (D + q)), (B = D * D);
+              (D = 0.5 * (D + q)), (B = D * D)
               var W = q - D;
               (F.x = (D * F.x + W * a.x) / q),
                 (F.y = (D * F.y + W * a.y) / q),
-                (F.z = (D * F.z + W * a.z) / q);
+                (F.z = (D * F.z + W * a.z) / q)
             }
           }
           return (
@@ -3953,50 +3968,48 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               ? (e.clone(F, n.center), (n.radius = D))
               : (e.clone(b, n.center), (n.radius = V)),
             n
-          );
-        };
+          )
+        }
         var O = new o(),
           p = new e(),
           C = new e(),
           g = new t(),
           w = new t();
-        (l.fromRectangle2D = function(e, t, n) {
-          return l.fromRectangleWithHeights2D(e, t, 0, 0, n);
+        (l.fromRectangle2D = function (e, t, n) {
+          return l.fromRectangleWithHeights2D(e, t, 0, 0, n)
         }),
-          (l.fromRectangleWithHeights2D = function(t, n, a, o, u) {
-            if ((i(u) || (u = new l()), !i(t)))
-              return (u.center = e.clone(e.ZERO, u.center)), (u.radius = 0), u;
+          (l.fromRectangleWithHeights2D = function (t, n, a, o, u) {
+            if ((i(u) || (u = new l()), !i(t))) { return (u.center = e.clone(e.ZERO, u.center)), (u.radius = 0), u }
             (n = r(n, O)),
               _.southwest(t, g),
               (g.height = a),
               _.northeast(t, w),
-              (w.height = o);
+              (w.height = o)
             var s = n.project(g, p),
               E = n.project(w, C),
               c = E.x - s.x,
               T = E.y - s.y,
-              R = E.z - s.z;
-            u.radius = 0.5 * Math.sqrt(c * c + T * T + R * R);
-            var h = u.center;
+              R = E.z - s.z
+            u.radius = 0.5 * Math.sqrt(c * c + T * T + R * R)
+            var h = u.center
             return (
               (h.x = s.x + 0.5 * c),
               (h.y = s.y + 0.5 * T),
               (h.z = s.z + 0.5 * R),
               u
-            );
-          });
+            )
+          })
         var U = [];
-        (l.fromRectangle3D = function(e, t, n, o) {
-          (t = r(t, a.WGS84)), (n = r(n, 0));
-          var u;
-          return i(e) && (u = _.subsample(e, t, n, U)), l.fromPoints(u, o);
+        (l.fromRectangle3D = function (e, t, n, o) {
+          (t = r(t, a.WGS84)), (n = r(n, 0))
+          var u
+          return i(e) && (u = _.subsample(e, t, n, U)), l.fromPoints(u, o)
         }),
-          (l.fromVertices = function(t, n, a, o) {
-            if ((i(o) || (o = new l()), !i(t) || 0 === t.length))
-              return (o.center = e.clone(e.ZERO, o.center)), (o.radius = 0), o;
-            (n = r(n, e.ZERO)), (a = r(a, 3));
+          (l.fromVertices = function (t, n, a, o) {
+            if ((i(o) || (o = new l()), !i(t) || t.length === 0)) { return (o.center = e.clone(e.ZERO, o.center)), (o.radius = 0), o }
+            (n = r(n, e.ZERO)), (a = r(a, 3))
             var u = N;
-            (u.x = t[0] + n.x), (u.y = t[1] + n.y), (u.z = t[2] + n.z);
+            (u.x = t[0] + n.x), (u.y = t[1] + n.y), (u.z = t[2] + n.z)
             var s,
               E = e.clone(u, T),
               c = e.clone(u, R),
@@ -4004,7 +4017,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               O = e.clone(u, f),
               p = e.clone(u, A),
               C = e.clone(u, d),
-              g = t.length;
+              g = t.length
             for (s = 0; s < g; s += a) {
               var w = t[s] + n.x,
                 U = t[s + 1] + n.y,
@@ -4017,42 +4030,42 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 U < c.y && e.clone(u, c),
                 U > p.y && e.clone(u, p),
                 x < _.z && e.clone(u, _),
-                x > C.z && e.clone(u, C);
+                x > C.z && e.clone(u, C)
             }
             var L = e.magnitudeSquared(e.subtract(O, E, I)),
               P = e.magnitudeSquared(e.subtract(p, c, I)),
               v = e.magnitudeSquared(e.subtract(C, _, I)),
               F = E,
               B = O,
-              D = L;
+              D = L
             P > D && ((D = P), (F = c), (B = p)),
-              v > D && ((D = v), (F = _), (B = C));
+              v > D && ((D = v), (F = _), (B = C))
             var z = S;
             (z.x = 0.5 * (F.x + B.x)),
               (z.y = 0.5 * (F.y + B.y)),
-              (z.z = 0.5 * (F.z + B.z));
+              (z.z = 0.5 * (F.z + B.z))
             var G = e.magnitudeSquared(e.subtract(B, z, I)),
               b = Math.sqrt(G),
               V = M;
-            (V.x = E.x), (V.y = c.y), (V.z = _.z);
+            (V.x = E.x), (V.y = c.y), (V.z = _.z)
             var X = y;
-            (X.x = O.x), (X.y = p.y), (X.z = C.z);
+            (X.x = O.x), (X.y = p.y), (X.z = C.z)
             var H = e.multiplyByScalar(e.add(V, X, I), 0.5, m),
-              q = 0;
+              q = 0
             for (s = 0; s < g; s += a) {
               (u.x = t[s] + n.x),
                 (u.y = t[s + 1] + n.y),
-                (u.z = t[s + 2] + n.z);
-              var W = e.magnitude(e.subtract(u, H, I));
-              W > q && (q = W);
-              var Y = e.magnitudeSquared(e.subtract(u, z, I));
+                (u.z = t[s + 2] + n.z)
+              var W = e.magnitude(e.subtract(u, H, I))
+              W > q && (q = W)
+              var Y = e.magnitudeSquared(e.subtract(u, z, I))
               if (Y > G) {
                 var k = Math.sqrt(Y);
-                (b = 0.5 * (b + k)), (G = b * b);
+                (b = 0.5 * (b + k)), (G = b * b)
                 var K = k - b;
                 (z.x = (b * z.x + K * u.x) / k),
                   (z.y = (b * z.y + K * u.y) / k),
-                  (z.z = (b * z.z + K * u.z) / k);
+                  (z.z = (b * z.z + K * u.z) / k)
               }
             }
             return (
@@ -4060,16 +4073,15 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 ? (e.clone(z, o.center), (o.radius = b))
                 : (e.clone(H, o.center), (o.radius = q)),
               o
-            );
+            )
           }),
-          (l.fromEncodedCartesianVertices = function(t, n, r) {
+          (l.fromEncodedCartesianVertices = function (t, n, r) {
             if (
               (i(r) || (r = new l()),
-              !i(t) || !i(n) || t.length !== n.length || 0 === t.length)
-            )
-              return (r.center = e.clone(e.ZERO, r.center)), (r.radius = 0), r;
+              !i(t) || !i(n) || t.length !== n.length || t.length === 0)
+            ) { return (r.center = e.clone(e.ZERO, r.center)), (r.radius = 0), r }
             var a = N;
-            (a.x = t[0] + n[0]), (a.y = t[1] + n[1]), (a.z = t[2] + n[2]);
+            (a.x = t[0] + n[0]), (a.y = t[1] + n[1]), (a.z = t[2] + n[2])
             var o,
               u = e.clone(a, T),
               s = e.clone(a, R),
@@ -4077,7 +4089,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               c = e.clone(a, f),
               _ = e.clone(a, A),
               O = e.clone(a, d),
-              p = t.length;
+              p = t.length
             for (o = 0; o < p; o += 3) {
               var C = t[o] + n[o],
                 g = t[o + 1] + n[o + 1],
@@ -4090,42 +4102,42 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 g < s.y && e.clone(a, s),
                 g > _.y && e.clone(a, _),
                 w < E.z && e.clone(a, E),
-                w > O.z && e.clone(a, O);
+                w > O.z && e.clone(a, O)
             }
             var U = e.magnitudeSquared(e.subtract(c, u, I)),
               x = e.magnitudeSquared(e.subtract(_, s, I)),
               L = e.magnitudeSquared(e.subtract(O, E, I)),
               P = u,
               v = c,
-              F = U;
+              F = U
             x > F && ((F = x), (P = s), (v = _)),
-              L > F && ((F = L), (P = E), (v = O));
+              L > F && ((F = L), (P = E), (v = O))
             var B = S;
             (B.x = 0.5 * (P.x + v.x)),
               (B.y = 0.5 * (P.y + v.y)),
-              (B.z = 0.5 * (P.z + v.z));
+              (B.z = 0.5 * (P.z + v.z))
             var D = e.magnitudeSquared(e.subtract(v, B, I)),
               z = Math.sqrt(D),
               G = M;
-            (G.x = u.x), (G.y = s.y), (G.z = E.z);
+            (G.x = u.x), (G.y = s.y), (G.z = E.z)
             var b = y;
-            (b.x = c.x), (b.y = _.y), (b.z = O.z);
+            (b.x = c.x), (b.y = _.y), (b.z = O.z)
             var V = e.multiplyByScalar(e.add(G, b, I), 0.5, m),
-              X = 0;
+              X = 0
             for (o = 0; o < p; o += 3) {
               (a.x = t[o] + n[o]),
                 (a.y = t[o + 1] + n[o + 1]),
-                (a.z = t[o + 2] + n[o + 2]);
-              var H = e.magnitude(e.subtract(a, V, I));
-              H > X && (X = H);
-              var q = e.magnitudeSquared(e.subtract(a, B, I));
+                (a.z = t[o + 2] + n[o + 2])
+              var H = e.magnitude(e.subtract(a, V, I))
+              H > X && (X = H)
+              var q = e.magnitudeSquared(e.subtract(a, B, I))
               if (q > D) {
                 var W = Math.sqrt(q);
-                (z = 0.5 * (z + W)), (D = z * z);
+                (z = 0.5 * (z + W)), (D = z * z)
                 var Y = W - z;
                 (B.x = (z * B.x + Y * a.x) / W),
                   (B.y = (z * B.y + Y * a.y) / W),
-                  (B.z = (z * B.z + Y * a.z) / W);
+                  (B.z = (z * B.z + Y * a.z) / W)
               }
             }
             return (
@@ -4133,150 +4145,150 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 ? (e.clone(B, r.center), (r.radius = z))
                 : (e.clone(V, r.center), (r.radius = X)),
               r
-            );
+            )
           }),
-          (l.fromCornerPoints = function(t, n, r) {
-            i(r) || (r = new l());
-            var a = r.center;
+          (l.fromCornerPoints = function (t, n, r) {
+            i(r) || (r = new l())
+            var a = r.center
             return (
               e.add(t, n, a),
               e.multiplyByScalar(a, 0.5, a),
               (r.radius = e.distance(a, n)),
               r
-            );
+            )
           }),
-          (l.fromEllipsoid = function(t, n) {
+          (l.fromEllipsoid = function (t, n) {
             return (
               i(n) || (n = new l()),
               e.clone(e.ZERO, n.center),
               (n.radius = t.maximumRadius),
               n
-            );
-          });
-        var x = new e();
-        l.fromBoundingSpheres = function(t, n) {
-          if ((i(n) || (n = new l()), !i(t) || 0 === t.length))
-            return (n.center = e.clone(e.ZERO, n.center)), (n.radius = 0), n;
-          var r = t.length;
-          if (1 === r) return l.clone(t[0], n);
-          if (2 === r) return l.union(t[0], t[1], n);
+            )
+          })
+        var x = new e()
+        l.fromBoundingSpheres = function (t, n) {
+          if ((i(n) || (n = new l()), !i(t) || t.length === 0)) { return (n.center = e.clone(e.ZERO, n.center)), (n.radius = 0), n }
+          var r = t.length
+          if (r === 1) return l.clone(t[0], n)
+          if (r === 2) return l.union(t[0], t[1], n)
           var a,
-            o = [];
-          for (a = 0; a < r; a++) o.push(t[a].center);
-          n = l.fromPoints(o, n);
+            o = []
+          for (a = 0; a < r; a++) o.push(t[a].center)
+          n = l.fromPoints(o, n)
           var u = n.center,
-            s = n.radius;
+            s = n.radius
           for (a = 0; a < r; a++) {
-            var E = t[a];
-            s = Math.max(s, e.distance(u, E.center, x) + E.radius);
+            var E = t[a]
+            s = Math.max(s, e.distance(u, E.center, x) + E.radius)
           }
-          return (n.radius = s), n;
-        };
+          return (n.radius = s), n
+        }
         var L = new e(),
           P = new e(),
           v = new e();
-        (l.fromOrientedBoundingBox = function(t, n) {
-          i(n) || (n = new l());
+        (l.fromOrientedBoundingBox = function (t, n) {
+          i(n) || (n = new l())
           var r = t.halfAxes,
             a = E.getColumn(r, 0, L),
             o = E.getColumn(r, 1, P),
-            u = E.getColumn(r, 2, v);
+            u = E.getColumn(r, 2, v)
           return (
             e.add(a, o, a),
             e.add(a, u, a),
             (n.center = e.clone(t.center, n.center)),
             (n.radius = e.magnitude(a)),
             n
-          );
+          )
         }),
-          (l.clone = function(t, n) {
-            if (i(t))
+          (l.clone = function (t, n) {
+            if (i(t)) {
               return i(n)
                 ? ((n.center = e.clone(t.center, n.center)),
                   (n.radius = t.radius),
                   n)
-                : new l(t.center, t.radius);
+                : new l(t.center, t.radius)
+            }
           }),
           (l.packedLength = 4),
-          (l.pack = function(e, t, n) {
-            n = r(n, 0);
-            var i = e.center;
+          (l.pack = function (e, t, n) {
+            n = r(n, 0)
+            var i = e.center
             return (
               (t[n++] = i.x),
               (t[n++] = i.y),
               (t[n++] = i.z),
               (t[n] = e.radius),
               t
-            );
+            )
           }),
-          (l.unpack = function(e, t, n) {
-            (t = r(t, 0)), i(n) || (n = new l());
-            var a = n.center;
+          (l.unpack = function (e, t, n) {
+            (t = r(t, 0)), i(n) || (n = new l())
+            var a = n.center
             return (
               (a.x = e[t++]),
               (a.y = e[t++]),
               (a.z = e[t++]),
               (n.radius = e[t]),
               n
-            );
-          });
+            )
+          })
         var F = new e(),
-          B = new e();
-        l.union = function(t, n, r) {
-          i(r) || (r = new l());
+          B = new e()
+        l.union = function (t, n, r) {
+          i(r) || (r = new l())
           var a = t.center,
             o = t.radius,
             u = n.center,
             s = n.radius,
             E = e.subtract(u, a, F),
-            c = e.magnitude(E);
-          if (o >= c + s) return t.clone(r), r;
-          if (s >= c + o) return n.clone(r), r;
+            c = e.magnitude(E)
+          if (o >= c + s) return t.clone(r), r
+          if (s >= c + o) return n.clone(r), r
           var _ = 0.5 * (o + c + s),
-            T = e.multiplyByScalar(E, (-o + _) / c, B);
-          return e.add(T, a, T), e.clone(T, r.center), (r.radius = _), r;
-        };
+            T = e.multiplyByScalar(E, (-o + _) / c, B)
+          return e.add(T, a, T), e.clone(T, r.center), (r.radius = _), r
+        }
         var D = new e();
-        (l.expand = function(t, n, r) {
-          r = l.clone(t, r);
-          var i = e.magnitude(e.subtract(n, r.center, D));
-          return i > r.radius && (r.radius = i), r;
+        (l.expand = function (t, n, r) {
+          r = l.clone(t, r)
+          var i = e.magnitude(e.subtract(n, r.center, D))
+          return i > r.radius && (r.radius = i), r
         }),
-          (l.intersectPlane = function(t, n) {
+          (l.intersectPlane = function (t, n) {
             var r = t.center,
               i = t.radius,
               a = n.normal,
-              o = e.dot(a, r) + n.distance;
-            return o < -i ? u.OUTSIDE : o < i ? u.INTERSECTING : u.INSIDE;
+              o = e.dot(a, r) + n.distance
+            return o < -i ? u.OUTSIDE : o < i ? u.INTERSECTING : u.INSIDE
           }),
-          (l.transform = function(e, t, n) {
+          (l.transform = function (e, t, n) {
             return (
               i(n) || (n = new l()),
               (n.center = c.multiplyByPoint(t, e.center, n.center)),
               (n.radius = c.getMaximumScale(t) * e.radius),
               n
-            );
-          });
+            )
+          })
         var z = new e();
-        (l.distanceSquaredTo = function(t, n) {
-          var r = e.subtract(t.center, n, z);
-          return e.magnitudeSquared(r) - t.radius * t.radius;
+        (l.distanceSquaredTo = function (t, n) {
+          var r = e.subtract(t.center, n, z)
+          return e.magnitudeSquared(r) - t.radius * t.radius
         }),
-          (l.transformWithoutScale = function(e, t, n) {
+          (l.transformWithoutScale = function (e, t, n) {
             return (
               i(n) || (n = new l()),
               (n.center = c.multiplyByPoint(t, e.center, n.center)),
               (n.radius = e.radius),
               n
-            );
-          });
-        var G = new e();
-        l.computePlaneDistances = function(t, n, r, a) {
-          i(a) || (a = new s());
+            )
+          })
+        var G = new e()
+        l.computePlaneDistances = function (t, n, r, a) {
+          i(a) || (a = new s())
           var o = e.subtract(t.center, n, G),
-            u = e.dot(r, o);
-          return (a.start = u - t.radius), (a.stop = u + t.radius), a;
-        };
+            u = e.dot(r, o)
+          return (a.start = u - t.radius), (a.stop = u + t.radius), a
+        }
         for (
           var b = new e(),
             V = new e(),
@@ -4288,27 +4300,26 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             k = 0;
           k < 8;
           ++k
-        )
-          Y[k] = new e();
-        var K = new o();
+        ) { Y[k] = new e() }
+        var K = new o()
         return (
-          (l.projectTo2D = function(t, n, i) {
-            n = r(n, K);
+          (l.projectTo2D = function (t, n, i) {
+            n = r(n, K)
             var a = n.ellipsoid,
               o = t.center,
               u = t.radius,
               s = a.geodeticSurfaceNormal(o, b),
-              E = e.cross(e.UNIT_Z, s, V);
-            e.normalize(E, E);
-            var c = e.cross(s, E, X);
+              E = e.cross(e.UNIT_Z, s, V)
+            e.normalize(E, E)
+            var c = e.cross(s, E, X)
             e.normalize(c, c),
               e.multiplyByScalar(s, u, s),
               e.multiplyByScalar(c, u, c),
-              e.multiplyByScalar(E, u, E);
+              e.multiplyByScalar(E, u, E)
             var _ = e.negate(c, q),
               T = e.negate(E, H),
               R = Y,
-              h = R[0];
+              h = R[0]
             e.add(s, c, h),
               e.add(h, E, h),
               (h = R[1]),
@@ -4332,58 +4343,58 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               e.add(h, T, h),
               (h = R[7]),
               e.add(s, _, h),
-              e.add(h, E, h);
+              e.add(h, E, h)
             for (var f = R.length, A = 0; A < f; ++A) {
-              var d = R[A];
-              e.add(o, d, d);
-              var N = a.cartesianToCartographic(d, W);
-              n.project(N, d);
+              var d = R[A]
+              e.add(o, d, d)
+              var N = a.cartesianToCartographic(d, W)
+              n.project(N, d)
             }
-            (i = l.fromPoints(R, i)), (o = i.center);
+            (i = l.fromPoints(R, i)), (o = i.center)
             var I = o.x,
               S = o.y,
-              M = o.z;
-            return (o.x = M), (o.y = I), (o.z = S), i;
+              M = o.z
+            return (o.x = M), (o.y = I), (o.z = S), i
           }),
-          (l.isOccluded = function(e, t) {
-            return !t.isBoundingSphereVisible(e);
+          (l.isOccluded = function (e, t) {
+            return !t.isBoundingSphereVisible(e)
           }),
-          (l.equals = function(t, n) {
+          (l.equals = function (t, n) {
             return (
               t === n ||
               (i(t) &&
                 i(n) &&
                 e.equals(t.center, n.center) &&
                 t.radius === n.radius)
-            );
+            )
           }),
-          (l.prototype.intersectPlane = function(e) {
-            return l.intersectPlane(this, e);
+          (l.prototype.intersectPlane = function (e) {
+            return l.intersectPlane(this, e)
           }),
-          (l.prototype.distanceSquaredTo = function(e) {
-            return l.distanceSquaredTo(this, e);
+          (l.prototype.distanceSquaredTo = function (e) {
+            return l.distanceSquaredTo(this, e)
           }),
-          (l.prototype.computePlaneDistances = function(e, t, n) {
-            return l.computePlaneDistances(this, e, t, n);
+          (l.prototype.computePlaneDistances = function (e, t, n) {
+            return l.computePlaneDistances(this, e, t, n)
           }),
-          (l.prototype.isOccluded = function(e) {
-            return l.isOccluded(this, e);
+          (l.prototype.isOccluded = function (e) {
+            return l.isOccluded(this, e)
           }),
-          (l.prototype.equals = function(e) {
-            return l.equals(this, e);
+          (l.prototype.equals = function (e) {
+            return l.equals(this, e)
           }),
-          (l.prototype.clone = function(e) {
-            return l.clone(this, e);
+          (l.prototype.clone = function (e) {
+            return l.clone(this, e)
           }),
           l
-        );
+        )
       }
     ),
-    define("Core/Fullscreen", ["./defined", "./defineProperties"], function(
+    define('Core/Fullscreen', ['./defined', './defineProperties'], function (
       e,
       t
     ) {
-      "use strict";
+      'use strict'
       var n,
         r = {
           requestFullscreen: void 0,
@@ -4393,210 +4404,210 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           fullscreenchange: void 0,
           fullscreenerror: void 0
         },
-        i = {};
+        i = {}
       return (
         t(i, {
           element: {
-            get: function() {
-              if (i.supportsFullscreen()) return document[r.fullscreenElement];
+            get: function () {
+              if (i.supportsFullscreen()) return document[r.fullscreenElement]
             }
           },
           changeEventName: {
-            get: function() {
-              if (i.supportsFullscreen()) return r.fullscreenchange;
+            get: function () {
+              if (i.supportsFullscreen()) return r.fullscreenchange
             }
           },
           errorEventName: {
-            get: function() {
-              if (i.supportsFullscreen()) return r.fullscreenerror;
+            get: function () {
+              if (i.supportsFullscreen()) return r.fullscreenerror
             }
           },
           enabled: {
-            get: function() {
-              if (i.supportsFullscreen()) return document[r.fullscreenEnabled];
+            get: function () {
+              if (i.supportsFullscreen()) return document[r.fullscreenEnabled]
             }
           },
           fullscreen: {
-            get: function() {
-              if (i.supportsFullscreen()) return null !== i.element;
+            get: function () {
+              if (i.supportsFullscreen()) return i.element !== null
             }
           }
         }),
-        (i.supportsFullscreen = function() {
-          if (e(n)) return n;
-          n = !1;
-          var t = document.body;
-          if ("function" == typeof t.requestFullscreen)
+        (i.supportsFullscreen = function () {
+          if (e(n)) return n
+          n = !1
+          var t = document.body
+          if (typeof t.requestFullscreen === 'function') {
             return (
-              (r.requestFullscreen = "requestFullscreen"),
-              (r.exitFullscreen = "exitFullscreen"),
-              (r.fullscreenEnabled = "fullscreenEnabled"),
-              (r.fullscreenElement = "fullscreenElement"),
-              (r.fullscreenchange = "fullscreenchange"),
-              (r.fullscreenerror = "fullscreenerror"),
+              (r.requestFullscreen = 'requestFullscreen'),
+              (r.exitFullscreen = 'exitFullscreen'),
+              (r.fullscreenEnabled = 'fullscreenEnabled'),
+              (r.fullscreenElement = 'fullscreenElement'),
+              (r.fullscreenchange = 'fullscreenchange'),
+              (r.fullscreenerror = 'fullscreenerror'),
               (n = !0)
-            );
+            )
+          }
           for (
             var i,
-              a = ["webkit", "moz", "o", "ms", "khtml"],
+              a = ['webkit', 'moz', 'o', 'ms', 'khtml'],
               o = 0,
               u = a.length;
             o < u;
             ++o
           ) {
             var s = a[o];
-            (i = s + "RequestFullscreen"),
-              "function" == typeof t[i]
+            (i = s + 'RequestFullscreen'),
+              typeof t[i] === 'function'
                 ? ((r.requestFullscreen = i), (n = !0))
-                : ((i = s + "RequestFullScreen"),
-                  "function" == typeof t[i] &&
+                : ((i = s + 'RequestFullScreen'),
+                  typeof t[i] === 'function' &&
                     ((r.requestFullscreen = i), (n = !0))),
-              (i = s + "ExitFullscreen"),
-              "function" == typeof document[i]
+              (i = s + 'ExitFullscreen'),
+              typeof document[i] === 'function'
                 ? (r.exitFullscreen = i)
-                : ((i = s + "CancelFullScreen"),
-                  "function" == typeof document[i] && (r.exitFullscreen = i)),
-              (i = s + "FullscreenEnabled"),
+                : ((i = s + 'CancelFullScreen'),
+                  typeof document[i] === 'function' && (r.exitFullscreen = i)),
+              (i = s + 'FullscreenEnabled'),
               void 0 !== document[i]
                 ? (r.fullscreenEnabled = i)
-                : ((i = s + "FullScreenEnabled"),
+                : ((i = s + 'FullScreenEnabled'),
                   void 0 !== document[i] && (r.fullscreenEnabled = i)),
-              (i = s + "FullscreenElement"),
+              (i = s + 'FullscreenElement'),
               void 0 !== document[i]
                 ? (r.fullscreenElement = i)
-                : ((i = s + "FullScreenElement"),
+                : ((i = s + 'FullScreenElement'),
                   void 0 !== document[i] && (r.fullscreenElement = i)),
-              (i = s + "fullscreenchange"),
-              void 0 !== document["on" + i] &&
-                ("ms" === s && (i = "MSFullscreenChange"),
+              (i = s + 'fullscreenchange'),
+              void 0 !== document['on' + i] &&
+                (s === 'ms' && (i = 'MSFullscreenChange'),
                 (r.fullscreenchange = i)),
-              (i = s + "fullscreenerror"),
-              void 0 !== document["on" + i] &&
-                ("ms" === s && (i = "MSFullscreenError"),
-                (r.fullscreenerror = i));
+              (i = s + 'fullscreenerror'),
+              void 0 !== document['on' + i] &&
+                (s === 'ms' && (i = 'MSFullscreenError'),
+                (r.fullscreenerror = i))
           }
-          return n;
+          return n
         }),
-        (i.requestFullscreen = function(e, t) {
-          i.supportsFullscreen() && e[r.requestFullscreen]({ vrDisplay: t });
+        (i.requestFullscreen = function (e, t) {
+          i.supportsFullscreen() && e[r.requestFullscreen]({ vrDisplay: t })
         }),
-        (i.exitFullscreen = function() {
-          i.supportsFullscreen() && document[r.exitFullscreen]();
+        (i.exitFullscreen = function () {
+          i.supportsFullscreen() && document[r.exitFullscreen]()
         }),
         i
-      );
+      )
     }),
     define(
-      "Core/FeatureDetection",
-      ["./defaultValue", "./defined", "./Fullscreen"],
-      function(e, t, n) {
-        "use strict";
-        function r(e) {
-          for (var t = e.split("."), n = 0, r = t.length; n < r; ++n)
-            t[n] = parseInt(t[n], 10);
-          return t;
+      'Core/FeatureDetection',
+      ['./defaultValue', './defined', './Fullscreen'],
+      function (e, t, n) {
+        'use strict'
+        function r (e) {
+          for (var t = e.split('.'), n = 0, r = t.length; n < r; ++n) { t[n] = parseInt(t[n], 10) }
+          return t
         }
-        function i() {
+        function i () {
           if (!t(S) && ((S = !1), !l())) {
-            var e = / Chrome\/([\.0-9]+)/.exec(I.userAgent);
-            null !== e && ((S = !0), (M = r(e[1])));
+            var e = / Chrome\/([\.0-9]+)/.exec(I.userAgent)
+            e !== null && ((S = !0), (M = r(e[1])))
           }
-          return S;
+          return S
         }
-        function a() {
-          return i() && M;
+        function a () {
+          return i() && M
         }
-        function o() {
+        function o () {
           if (
             !t(y) &&
             ((y = !1), !i() && !l() && / Safari\/[\.0-9]+/.test(I.userAgent))
           ) {
-            var e = / Version\/([\.0-9]+)/.exec(I.userAgent);
-            null !== e && ((y = !0), (m = r(e[1])));
+            var e = / Version\/([\.0-9]+)/.exec(I.userAgent)
+            e !== null && ((y = !0), (m = r(e[1])))
           }
-          return y;
+          return y
         }
-        function u() {
-          return o() && m;
+        function u () {
+          return o() && m
         }
-        function s() {
+        function s () {
           if (!t(O)) {
-            O = !1;
-            var e = / AppleWebKit\/([\.0-9]+)(\+?)/.exec(I.userAgent);
-            null !== e && ((O = !0), (p = r(e[1])), (p.isNightly = !!e[2]));
+            O = !1
+            var e = / AppleWebKit\/([\.0-9]+)(\+?)/.exec(I.userAgent)
+            e !== null && ((O = !0), (p = r(e[1])), (p.isNightly = !!e[2]))
           }
-          return O;
+          return O
         }
-        function E() {
-          return s() && p;
+        function E () {
+          return s() && p
         }
-        function c() {
+        function c () {
           if (!t(C)) {
-            C = !1;
-            var e;
-            "Microsoft Internet Explorer" === I.appName
+            C = !1
+            var e
+            I.appName === 'Microsoft Internet Explorer'
               ? ((e = /MSIE ([0-9]{1,}[\.0-9]{0,})/.exec(I.userAgent)),
-                null !== e && ((C = !0), (g = r(e[1]))))
-              : "Netscape" === I.appName &&
+                e !== null && ((C = !0), (g = r(e[1]))))
+              : I.appName === 'Netscape' &&
                 ((e = /Trident\/.*rv:([0-9]{1,}[\.0-9]{0,})/.exec(I.userAgent)),
-                null !== e && ((C = !0), (g = r(e[1]))));
+                e !== null && ((C = !0), (g = r(e[1]))))
           }
-          return C;
+          return C
         }
-        function _() {
-          return c() && g;
+        function _ () {
+          return c() && g
         }
-        function l() {
+        function l () {
           if (!t(w)) {
-            w = !1;
-            var e = / Edge\/([\.0-9]+)/.exec(I.userAgent);
-            null !== e && ((w = !0), (U = r(e[1])));
+            w = !1
+            var e = / Edge\/([\.0-9]+)/.exec(I.userAgent)
+            e !== null && ((w = !0), (U = r(e[1])))
           }
-          return w;
+          return w
         }
-        function T() {
-          return l() && U;
+        function T () {
+          return l() && U
         }
-        function R() {
+        function R () {
           if (!t(x)) {
-            x = !1;
-            var e = /Firefox\/([\.0-9]+)/.exec(I.userAgent);
-            null !== e && ((x = !0), (L = r(e[1])));
+            x = !1
+            var e = /Firefox\/([\.0-9]+)/.exec(I.userAgent)
+            e !== null && ((x = !0), (L = r(e[1])))
           }
-          return x;
+          return x
         }
-        function h() {
-          return t(P) || (P = /Windows/i.test(I.appVersion)), P;
+        function h () {
+          return t(P) || (P = /Windows/i.test(I.appVersion)), P
         }
-        function f() {
-          return R() && L;
+        function f () {
+          return R() && L
         }
-        function A() {
+        function A () {
           return (
             t(v) ||
               (v =
-                "undefined" != typeof PointerEvent &&
+                typeof PointerEvent !== 'undefined' &&
                 (!t(I.pointerEnabled) || I.pointerEnabled)),
             v
-          );
+          )
         }
-        function d() {
+        function d () {
           if (!t(B)) {
-            var e = document.createElement("canvas");
+            var e = document.createElement('canvas')
             e.setAttribute(
-              "style",
-              "image-rendering: -moz-crisp-edges;image-rendering: pixelated;"
-            );
+              'style',
+              'image-rendering: -moz-crisp-edges;image-rendering: pixelated;'
+            )
             var n = e.style.imageRendering;
-            (B = t(n) && "" !== n), B && (F = n);
+            (B = t(n) && n !== ''), B && (F = n)
           }
-          return B;
+          return B
         }
-        function N() {
-          return d() ? F : void 0;
+        function N () {
+          return d() ? F : void 0
         }
-        var I;
-        I = "undefined" != typeof navigator ? navigator : {};
+        var I
+        I = typeof navigator !== 'undefined' ? navigator : {}
         var S,
           M,
           y,
@@ -4631,23 +4642,23 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             supportsPointerEvents: A,
             supportsImageRenderingPixelated: d,
             imageRenderingValue: N
-          };
+          }
         return (
-          (D.supportsFullscreen = function() {
-            return n.supportsFullscreen();
+          (D.supportsFullscreen = function () {
+            return n.supportsFullscreen()
           }),
-          (D.supportsTypedArrays = function() {
-            return "undefined" != typeof ArrayBuffer;
+          (D.supportsTypedArrays = function () {
+            return typeof ArrayBuffer !== 'undefined'
           }),
-          (D.supportsWebWorkers = function() {
-            return "undefined" != typeof Worker;
+          (D.supportsWebWorkers = function () {
+            return typeof Worker !== 'undefined'
           }),
           D
-        );
+        )
       }
     ),
-    define("Core/WebGLConstants", ["./freezeObject"], function(e) {
-      "use strict";
+    define('Core/WebGLConstants', ['./freezeObject'], function (e) {
+      'use strict'
       var t = {
         DEPTH_BUFFER_BIT: 256,
         STENCIL_BUFFER_BIT: 1024,
@@ -5228,22 +5239,22 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
         MAX_ELEMENT_INDEX: 36203,
         TEXTURE_IMMUTABLE_LEVELS: 33503,
         MAX_TEXTURE_MAX_ANISOTROPY_EXT: 34047
-      };
-      return e(t);
+      }
+      return e(t)
     }),
     define(
-      "Core/ComponentDatatype",
+      'Core/ComponentDatatype',
       [
-        "./defaultValue",
-        "./defined",
-        "./DeveloperError",
-        "./FeatureDetection",
-        "./freezeObject",
-        "./WebGLConstants"
+        './defaultValue',
+        './defined',
+        './DeveloperError',
+        './FeatureDetection',
+        './freezeObject',
+        './WebGLConstants'
       ],
-      function(e, t, n, r, i, a) {
-        "use strict";
-        if (!r.supportsTypedArrays()) return {};
+      function (e, t, n, r, i, a) {
+        'use strict'
+        if (!r.supportsTypedArrays()) return {}
         var o = {
           BYTE: a.BYTE,
           UNSIGNED_BYTE: a.UNSIGNED_BYTE,
@@ -5253,29 +5264,29 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           UNSIGNED_INT: a.UNSIGNED_INT,
           FLOAT: a.FLOAT,
           DOUBLE: a.DOUBLE
-        };
+        }
         return (
-          (o.getSizeInBytes = function(e) {
+          (o.getSizeInBytes = function (e) {
             switch (e) {
               case o.BYTE:
-                return Int8Array.BYTES_PER_ELEMENT;
+                return Int8Array.BYTES_PER_ELEMENT
               case o.UNSIGNED_BYTE:
-                return Uint8Array.BYTES_PER_ELEMENT;
+                return Uint8Array.BYTES_PER_ELEMENT
               case o.SHORT:
-                return Int16Array.BYTES_PER_ELEMENT;
+                return Int16Array.BYTES_PER_ELEMENT
               case o.UNSIGNED_SHORT:
-                return Uint16Array.BYTES_PER_ELEMENT;
+                return Uint16Array.BYTES_PER_ELEMENT
               case o.INT:
-                return Int32Array.BYTES_PER_ELEMENT;
+                return Int32Array.BYTES_PER_ELEMENT
               case o.UNSIGNED_INT:
-                return Uint32Array.BYTES_PER_ELEMENT;
+                return Uint32Array.BYTES_PER_ELEMENT
               case o.FLOAT:
-                return Float32Array.BYTES_PER_ELEMENT;
+                return Float32Array.BYTES_PER_ELEMENT
               case o.DOUBLE:
-                return Float64Array.BYTES_PER_ELEMENT;
+                return Float64Array.BYTES_PER_ELEMENT
             }
           }),
-          (o.fromTypedArray = function(e) {
+          (o.fromTypedArray = function (e) {
             return e instanceof Int8Array
               ? o.BYTE
               : e instanceof Uint8Array
@@ -5290,9 +5301,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                         ? o.UNSIGNED_INT
                         : e instanceof Float32Array
                           ? o.FLOAT
-                          : e instanceof Float64Array ? o.DOUBLE : void 0;
+                          : e instanceof Float64Array ? o.DOUBLE : void 0
           }),
-          (o.validate = function(e) {
+          (o.validate = function (e) {
             return (
               t(e) &&
               (e === o.BYTE ||
@@ -5303,118 +5314,119 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 e === o.UNSIGNED_INT ||
                 e === o.FLOAT ||
                 e === o.DOUBLE)
-            );
+            )
           }),
-          (o.createTypedArray = function(e, t) {
+          (o.createTypedArray = function (e, t) {
             switch (e) {
               case o.BYTE:
-                return new Int8Array(t);
+                return new Int8Array(t)
               case o.UNSIGNED_BYTE:
-                return new Uint8Array(t);
+                return new Uint8Array(t)
               case o.SHORT:
-                return new Int16Array(t);
+                return new Int16Array(t)
               case o.UNSIGNED_SHORT:
-                return new Uint16Array(t);
+                return new Uint16Array(t)
               case o.INT:
-                return new Int32Array(t);
+                return new Int32Array(t)
               case o.UNSIGNED_INT:
-                return new Uint32Array(t);
+                return new Uint32Array(t)
               case o.FLOAT:
-                return new Float32Array(t);
+                return new Float32Array(t)
               case o.DOUBLE:
-                return new Float64Array(t);
+                return new Float64Array(t)
             }
           }),
-          (o.createArrayBufferView = function(t, n, r, i) {
+          (o.createArrayBufferView = function (t, n, r, i) {
             switch (((r = e(r, 0)),
             (i = e(i, (n.byteLength - r) / o.getSizeInBytes(t))),
             t)) {
               case o.BYTE:
-                return new Int8Array(n, r, i);
+                return new Int8Array(n, r, i)
               case o.UNSIGNED_BYTE:
-                return new Uint8Array(n, r, i);
+                return new Uint8Array(n, r, i)
               case o.SHORT:
-                return new Int16Array(n, r, i);
+                return new Int16Array(n, r, i)
               case o.UNSIGNED_SHORT:
-                return new Uint16Array(n, r, i);
+                return new Uint16Array(n, r, i)
               case o.INT:
-                return new Int32Array(n, r, i);
+                return new Int32Array(n, r, i)
               case o.UNSIGNED_INT:
-                return new Uint32Array(n, r, i);
+                return new Uint32Array(n, r, i)
               case o.FLOAT:
-                return new Float32Array(n, r, i);
+                return new Float32Array(n, r, i)
               case o.DOUBLE:
-                return new Float64Array(n, r, i);
+                return new Float64Array(n, r, i)
             }
           }),
-          (o.fromName = function(e) {
+          (o.fromName = function (e) {
             switch (e) {
-              case "BYTE":
-                return o.BYTE;
-              case "UNSIGNED_BYTE":
-                return o.UNSIGNED_BYTE;
-              case "SHORT":
-                return o.SHORT;
-              case "UNSIGNED_SHORT":
-                return o.UNSIGNED_SHORT;
-              case "INT":
-                return o.INT;
-              case "UNSIGNED_INT":
-                return o.UNSIGNED_INT;
-              case "FLOAT":
-                return o.FLOAT;
-              case "DOUBLE":
-                return o.DOUBLE;
+              case 'BYTE':
+                return o.BYTE
+              case 'UNSIGNED_BYTE':
+                return o.UNSIGNED_BYTE
+              case 'SHORT':
+                return o.SHORT
+              case 'UNSIGNED_SHORT':
+                return o.UNSIGNED_SHORT
+              case 'INT':
+                return o.INT
+              case 'UNSIGNED_INT':
+                return o.UNSIGNED_INT
+              case 'FLOAT':
+                return o.FLOAT
+              case 'DOUBLE':
+                return o.DOUBLE
             }
           }),
           i(o)
-        );
+        )
       }
     ),
     define(
-      "Core/HeadingPitchRoll",
-      ["./defaultValue", "./defined", "./DeveloperError", "./Math"],
-      function(e, t, n, r) {
-        "use strict";
-        function i(t, n, r) {
+      'Core/HeadingPitchRoll',
+      ['./defaultValue', './defined', './DeveloperError', './Math'],
+      function (e, t, n, r) {
+        'use strict'
+        function i (t, n, r) {
           (this.heading = e(t, 0)),
             (this.pitch = e(n, 0)),
-            (this.roll = e(r, 0));
+            (this.roll = e(r, 0))
         }
         return (
-          (i.fromQuaternion = function(e, n) {
-            t(n) || (n = new i());
+          (i.fromQuaternion = function (e, n) {
+            t(n) || (n = new i())
             var r = 2 * (e.w * e.y - e.z * e.x),
               a = 1 - 2 * (e.x * e.x + e.y * e.y),
               o = 2 * (e.w * e.x + e.y * e.z),
               u = 1 - 2 * (e.y * e.y + e.z * e.z),
-              s = 2 * (e.w * e.z + e.x * e.y);
+              s = 2 * (e.w * e.z + e.x * e.y)
             return (
               (n.heading = -Math.atan2(s, u)),
               (n.roll = Math.atan2(o, a)),
               (n.pitch = -Math.asin(r)),
               n
-            );
+            )
           }),
-          (i.fromDegrees = function(e, n, a, o) {
+          (i.fromDegrees = function (e, n, a, o) {
             return (
               t(o) || (o = new i()),
               (o.heading = e * r.RADIANS_PER_DEGREE),
               (o.pitch = n * r.RADIANS_PER_DEGREE),
               (o.roll = a * r.RADIANS_PER_DEGREE),
               o
-            );
+            )
           }),
-          (i.clone = function(e, n) {
-            if (t(e))
+          (i.clone = function (e, n) {
+            if (t(e)) {
               return t(n)
                 ? ((n.heading = e.heading),
                   (n.pitch = e.pitch),
                   (n.roll = e.roll),
                   n)
-                : new i(e.heading, e.pitch, e.roll);
+                : new i(e.heading, e.pitch, e.roll)
+            }
           }),
-          (i.equals = function(e, n) {
+          (i.equals = function (e, n) {
             return (
               e === n ||
               (t(e) &&
@@ -5422,9 +5434,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 e.heading === n.heading &&
                 e.pitch === n.pitch &&
                 e.roll === n.roll)
-            );
+            )
           }),
-          (i.equalsEpsilon = function(e, n, i, a) {
+          (i.equalsEpsilon = function (e, n, i, a) {
             return (
               e === n ||
               (t(e) &&
@@ -5432,63 +5444,63 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 r.equalsEpsilon(e.heading, n.heading, i, a) &&
                 r.equalsEpsilon(e.pitch, n.pitch, i, a) &&
                 r.equalsEpsilon(e.roll, n.roll, i, a))
-            );
+            )
           }),
-          (i.prototype.clone = function(e) {
-            return i.clone(this, e);
+          (i.prototype.clone = function (e) {
+            return i.clone(this, e)
           }),
-          (i.prototype.equals = function(e) {
-            return i.equals(this, e);
+          (i.prototype.equals = function (e) {
+            return i.equals(this, e)
           }),
-          (i.prototype.equalsEpsilon = function(e, t, n) {
-            return i.equalsEpsilon(this, e, t, n);
+          (i.prototype.equalsEpsilon = function (e, t, n) {
+            return i.equalsEpsilon(this, e, t, n)
           }),
-          (i.prototype.toString = function() {
+          (i.prototype.toString = function () {
             return (
-              "(" + this.heading + ", " + this.pitch + ", " + this.roll + ")"
-            );
+              '(' + this.heading + ', ' + this.pitch + ', ' + this.roll + ')'
+            )
           }),
           i
-        );
+        )
       }
     ),
     define(
-      "Core/Quaternion",
+      'Core/Quaternion',
       [
-        "./Cartesian3",
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./FeatureDetection",
-        "./freezeObject",
-        "./HeadingPitchRoll",
-        "./Math",
-        "./Matrix3"
+        './Cartesian3',
+        './Check',
+        './defaultValue',
+        './defined',
+        './FeatureDetection',
+        './freezeObject',
+        './HeadingPitchRoll',
+        './Math',
+        './Matrix3'
       ],
-      function(e, t, n, r, i, a, o, u, s) {
-        "use strict";
-        function E(e, t, r, i) {
+      function (e, t, n, r, i, a, o, u, s) {
+        'use strict'
+        function E (e, t, r, i) {
           (this.x = n(e, 0)),
             (this.y = n(t, 0)),
             (this.z = n(r, 0)),
-            (this.w = n(i, 0));
+            (this.w = n(i, 0))
         }
-        var c = new e();
-        E.fromAxisAngle = function(t, n, i) {
+        var c = new e()
+        E.fromAxisAngle = function (t, n, i) {
           var a = n / 2,
-            o = Math.sin(a);
-          c = e.normalize(t, c);
+            o = Math.sin(a)
+          c = e.normalize(t, c)
           var u = c.x * o,
             s = c.y * o,
             _ = c.z * o,
-            l = Math.cos(a);
+            l = Math.cos(a)
           return r(i)
             ? ((i.x = u), (i.y = s), (i.z = _), (i.w = l), i)
-            : new E(u, s, _, l);
-        };
+            : new E(u, s, _, l)
+        }
         var _ = [1, 2, 0],
-          l = new Array(3);
-        E.fromRotationMatrix = function(e, t) {
+          l = new Array(3)
+        E.fromRotationMatrix = function (e, t) {
           var n,
             i,
             a,
@@ -5497,26 +5509,26 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             c = e[s.COLUMN0ROW0],
             T = e[s.COLUMN1ROW1],
             R = e[s.COLUMN2ROW2],
-            h = c + T + R;
-          if (h > 0)
+            h = c + T + R
+          if (h > 0) {
             (n = Math.sqrt(h + 1)),
               (u = 0.5 * n),
               (n = 0.5 / n),
               (i = (e[s.COLUMN1ROW2] - e[s.COLUMN2ROW1]) * n),
               (a = (e[s.COLUMN2ROW0] - e[s.COLUMN0ROW2]) * n),
-              (o = (e[s.COLUMN0ROW1] - e[s.COLUMN1ROW0]) * n);
-          else {
+              (o = (e[s.COLUMN0ROW1] - e[s.COLUMN1ROW0]) * n)
+          } else {
             var f = _,
-              A = 0;
-            T > c && (A = 1), R > c && R > T && (A = 2);
+              A = 0
+            T > c && (A = 1), R > c && R > T && (A = 2)
             var d = f[A],
-              N = f[d];
+              N = f[d]
             n = Math.sqrt(
               e[s.getElementIndex(A, A)] -
                 e[s.getElementIndex(d, d)] -
                 e[s.getElementIndex(N, N)] +
                 1
-            );
+            )
             var I = l;
             (I[A] = 0.5 * n),
               (n = 0.5 / n),
@@ -5528,32 +5540,32 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (e[s.getElementIndex(N, A)] + e[s.getElementIndex(A, N)]) * n),
               (i = -I[0]),
               (a = -I[1]),
-              (o = -I[2]);
+              (o = -I[2])
           }
           return r(t)
             ? ((t.x = i), (t.y = a), (t.z = o), (t.w = u), t)
-            : new E(i, a, o, u);
-        };
+            : new E(i, a, o, u)
+        }
         var T = new E(),
           R = new E(),
           h = new E(),
-          f = new E();
-        E.fromHeadingPitchRoll = function(t, n) {
+          f = new E()
+        E.fromHeadingPitchRoll = function (t, n) {
           return (
             (f = E.fromAxisAngle(e.UNIT_X, t.roll, T)),
             (h = E.fromAxisAngle(e.UNIT_Y, -t.pitch, n)),
             (n = E.multiply(h, f, h)),
             (R = E.fromAxisAngle(e.UNIT_Z, -t.heading, T)),
             E.multiply(R, n, n)
-          );
-        };
+          )
+        }
         var A = new e(),
           d = new e(),
           N = new E(),
           I = new E(),
           S = new E();
         (E.packedLength = 4),
-          (E.pack = function(e, t, r) {
+          (E.pack = function (e, t, r) {
             return (
               (r = n(r, 0)),
               (t[r++] = e.x),
@@ -5561,9 +5573,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (t[r++] = e.z),
               (t[r] = e.w),
               t
-            );
+            )
           }),
-          (E.unpack = function(e, t, i) {
+          (E.unpack = function (e, t, i) {
             return (
               (t = n(t, 0)),
               r(i) || (i = new E()),
@@ -5572,82 +5584,83 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (i.z = e[t + 2]),
               (i.w = e[t + 3]),
               i
-            );
+            )
           }),
           (E.packedInterpolationLength = 3),
-          (E.convertPackedArrayForInterpolation = function(e, t, n, r) {
-            E.unpack(e, 4 * n, S), E.conjugate(S, S);
+          (E.convertPackedArrayForInterpolation = function (e, t, n, r) {
+            E.unpack(e, 4 * n, S), E.conjugate(S, S)
             for (var i = 0, a = n - t + 1; i < a; i++) {
-              var o = 3 * i;
+              var o = 3 * i
               E.unpack(e, 4 * (t + i), N),
                 E.multiply(N, S, N),
                 N.w < 0 && E.negate(N, N),
-                E.computeAxis(N, A);
+                E.computeAxis(N, A)
               var u = E.computeAngle(N);
-              (r[o] = A.x * u), (r[o + 1] = A.y * u), (r[o + 2] = A.z * u);
+              (r[o] = A.x * u), (r[o + 1] = A.y * u), (r[o + 2] = A.z * u)
             }
           }),
-          (E.unpackInterpolationResult = function(t, n, i, a, o) {
-            r(o) || (o = new E()), e.fromArray(t, 0, d);
-            var u = e.magnitude(d);
+          (E.unpackInterpolationResult = function (t, n, i, a, o) {
+            r(o) || (o = new E()), e.fromArray(t, 0, d)
+            var u = e.magnitude(d)
             return (
               E.unpack(n, 4 * a, I),
-              0 === u ? E.clone(E.IDENTITY, N) : E.fromAxisAngle(d, u, N),
+              u === 0 ? E.clone(E.IDENTITY, N) : E.fromAxisAngle(d, u, N),
               E.multiply(N, I, o)
-            );
+            )
           }),
-          (E.clone = function(e, t) {
-            if (r(e))
+          (E.clone = function (e, t) {
+            if (r(e)) {
               return r(t)
                 ? ((t.x = e.x), (t.y = e.y), (t.z = e.z), (t.w = e.w), t)
-                : new E(e.x, e.y, e.z, e.w);
+                : new E(e.x, e.y, e.z, e.w)
+            }
           }),
-          (E.conjugate = function(e, t) {
-            return (t.x = -e.x), (t.y = -e.y), (t.z = -e.z), (t.w = e.w), t;
+          (E.conjugate = function (e, t) {
+            return (t.x = -e.x), (t.y = -e.y), (t.z = -e.z), (t.w = e.w), t
           }),
-          (E.magnitudeSquared = function(e) {
-            return e.x * e.x + e.y * e.y + e.z * e.z + e.w * e.w;
+          (E.magnitudeSquared = function (e) {
+            return e.x * e.x + e.y * e.y + e.z * e.z + e.w * e.w
           }),
-          (E.magnitude = function(e) {
-            return Math.sqrt(E.magnitudeSquared(e));
+          (E.magnitude = function (e) {
+            return Math.sqrt(E.magnitudeSquared(e))
           }),
-          (E.normalize = function(e, t) {
+          (E.normalize = function (e, t) {
             var n = 1 / E.magnitude(e),
               r = e.x * n,
               i = e.y * n,
               a = e.z * n,
-              o = e.w * n;
-            return (t.x = r), (t.y = i), (t.z = a), (t.w = o), t;
+              o = e.w * n
+            return (t.x = r), (t.y = i), (t.z = a), (t.w = o), t
           }),
-          (E.inverse = function(e, t) {
-            var n = E.magnitudeSquared(e);
-            return (t = E.conjugate(e, t)), E.multiplyByScalar(t, 1 / n, t);
+          (E.inverse = function (e, t) {
+            var n = E.magnitudeSquared(e)
+            return (t = E.conjugate(e, t)), E.multiplyByScalar(t, 1 / n, t)
           }),
-          (E.add = function(e, t, n) {
+          (E.add = function (e, t, n) {
             return (
               (n.x = e.x + t.x),
               (n.y = e.y + t.y),
               (n.z = e.z + t.z),
               (n.w = e.w + t.w),
               n
-            );
+            )
           }),
-          (E.subtract = function(e, t, n) {
+          (E.subtract = function (e, t, n) {
             return (
               (n.x = e.x - t.x),
               (n.y = e.y - t.y),
               (n.z = e.z - t.z),
               (n.w = e.w - t.w),
               n
-            );
+            )
           }),
-          (E.negate = function(e, t) {
-            return (t.x = -e.x), (t.y = -e.y), (t.z = -e.z), (t.w = -e.w), t;
+          (E.negate = function (e, t) {
+            return (t.x = -e.x), (t.y = -e.y), (t.z = -e.z), (t.w = -e.w), t
           }),
-          (E.dot = function(e, t) {
-            return e.x * t.x + e.y * t.y + e.z * t.z + e.w * t.w;
+          (E.dot = function (e, t) {
+            return e.x * t.x + e.y * t.y + e.z * t.z + e.w * t.w
           }),
-          (E.multiply = function(e, t, n) {
+          (E.multiply = function (e, t, n) {
             var r = e.x,
               i = e.y,
               a = e.z,
@@ -5659,104 +5672,103 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               _ = o * u + r * c + i * E - a * s,
               l = o * s - r * E + i * c + a * u,
               T = o * E + r * s - i * u + a * c,
-              R = o * c - r * u - i * s - a * E;
-            return (n.x = _), (n.y = l), (n.z = T), (n.w = R), n;
+              R = o * c - r * u - i * s - a * E
+            return (n.x = _), (n.y = l), (n.z = T), (n.w = R), n
           }),
-          (E.multiplyByScalar = function(e, t, n) {
+          (E.multiplyByScalar = function (e, t, n) {
             return (
               (n.x = e.x * t),
               (n.y = e.y * t),
               (n.z = e.z * t),
               (n.w = e.w * t),
               n
-            );
+            )
           }),
-          (E.divideByScalar = function(e, t, n) {
+          (E.divideByScalar = function (e, t, n) {
             return (
               (n.x = e.x / t),
               (n.y = e.y / t),
               (n.z = e.z / t),
               (n.w = e.w / t),
               n
-            );
+            )
           }),
-          (E.computeAxis = function(e, t) {
-            var n = e.w;
-            if (Math.abs(n - 1) < u.EPSILON6) return (t.x = t.y = t.z = 0), t;
-            var r = 1 / Math.sqrt(1 - n * n);
-            return (t.x = e.x * r), (t.y = e.y * r), (t.z = e.z * r), t;
+          (E.computeAxis = function (e, t) {
+            var n = e.w
+            if (Math.abs(n - 1) < u.EPSILON6) return (t.x = t.y = t.z = 0), t
+            var r = 1 / Math.sqrt(1 - n * n)
+            return (t.x = e.x * r), (t.y = e.y * r), (t.z = e.z * r), t
           }),
-          (E.computeAngle = function(e) {
-            return Math.abs(e.w - 1) < u.EPSILON6 ? 0 : 2 * Math.acos(e.w);
-          });
-        var M = new E();
-        E.lerp = function(e, t, n, r) {
+          (E.computeAngle = function (e) {
+            return Math.abs(e.w - 1) < u.EPSILON6 ? 0 : 2 * Math.acos(e.w)
+          })
+        var M = new E()
+        E.lerp = function (e, t, n, r) {
           return (
             (M = E.multiplyByScalar(t, n, M)),
             (r = E.multiplyByScalar(e, 1 - n, r)),
             E.add(M, r, r)
-          );
-        };
+          )
+        }
         var y = new E(),
           m = new E(),
           O = new E();
-        (E.slerp = function(e, t, n, r) {
+        (E.slerp = function (e, t, n, r) {
           var i = E.dot(e, t),
-            a = t;
+            a = t
           if (
             (i < 0 && ((i = -i), (a = y = E.negate(t, y))), 1 - i < u.EPSILON6)
-          )
-            return E.lerp(e, a, n, r);
-          var o = Math.acos(i);
+          ) { return E.lerp(e, a, n, r) }
+          var o = Math.acos(i)
           return (
             (m = E.multiplyByScalar(e, Math.sin((1 - n) * o), m)),
             (O = E.multiplyByScalar(a, Math.sin(n * o), O)),
             (r = E.add(m, O, r)),
             E.multiplyByScalar(r, 1 / Math.sin(o), r)
-          );
+          )
         }),
-          (E.log = function(t, n) {
+          (E.log = function (t, n) {
             var r = u.acosClamped(t.w),
-              i = 0;
+              i = 0
             return (
-              0 !== r && (i = r / Math.sin(r)), e.multiplyByScalar(t, i, n)
-            );
+              r !== 0 && (i = r / Math.sin(r)), e.multiplyByScalar(t, i, n)
+            )
           }),
-          (E.exp = function(t, n) {
+          (E.exp = function (t, n) {
             var r = e.magnitude(t),
-              i = 0;
+              i = 0
             return (
-              0 !== r && (i = Math.sin(r) / r),
+              r !== 0 && (i = Math.sin(r) / r),
               (n.x = t.x * i),
               (n.y = t.y * i),
               (n.z = t.z * i),
               (n.w = Math.cos(r)),
               n
-            );
-          });
+            )
+          })
         var p = new e(),
           C = new e(),
           g = new E(),
           w = new E();
-        (E.computeInnerQuadrangle = function(t, n, r, i) {
-          var a = E.conjugate(n, g);
-          E.multiply(a, r, w);
-          var o = E.log(w, p);
-          E.multiply(a, t, w);
-          var u = E.log(w, C);
+        (E.computeInnerQuadrangle = function (t, n, r, i) {
+          var a = E.conjugate(n, g)
+          E.multiply(a, r, w)
+          var o = E.log(w, p)
+          E.multiply(a, t, w)
+          var u = E.log(w, C)
           return (
             e.add(o, u, o),
             e.multiplyByScalar(o, 0.25, o),
             e.negate(o, o),
             E.exp(o, g),
             E.multiply(n, g, i)
-          );
+          )
         }),
-          (E.squad = function(e, t, n, r, i, a) {
+          (E.squad = function (e, t, n, r, i, a) {
             var o = E.slerp(e, t, i, g),
-              u = E.slerp(n, r, i, w);
-            return E.slerp(o, u, 2 * i * (1 - i), a);
-          });
+              u = E.slerp(n, r, i, w)
+            return E.slerp(o, u, 2 * i * (1 - i), a)
+          })
         for (
           var U = new E(),
             x = 1.9011074535173003,
@@ -5770,21 +5782,20 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
         ) {
           var D = B + 1,
             z = 2 * D + 1;
-          (L[B] = 1 / (D * z)), (P[B] = D / z);
+          (L[B] = 1 / (D * z)), (P[B] = D / z)
         }
         return (
           (L[7] = x / 136),
           (P[7] = 8 * x / 17),
-          (E.fastSlerp = function(e, t, n, r) {
+          (E.fastSlerp = function (e, t, n, r) {
             var i,
-              a = E.dot(e, t);
-            a >= 0 ? (i = 1) : ((i = -1), (a = -a));
+              a = E.dot(e, t)
+            a >= 0 ? (i = 1) : ((i = -1), (a = -a))
             for (
               var o = a - 1, u = 1 - n, s = n * n, c = u * u, _ = 7;
               _ >= 0;
               --_
-            )
-              (v[_] = (L[_] * s - P[_]) * o), (F[_] = (L[_] * c - P[_]) * o);
+            ) { (v[_] = (L[_] * s - P[_]) * o), (F[_] = (L[_] * c - P[_]) * o) }
             var l =
                 i *
                 n *
@@ -5812,15 +5823,15 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                                 (1 +
                                   F[4] *
                                     (1 + F[5] * (1 + F[6] * (1 + F[7])))))))),
-              R = E.multiplyByScalar(e, T, U);
-            return E.multiplyByScalar(t, l, r), E.add(R, r, r);
+              R = E.multiplyByScalar(e, T, U)
+            return E.multiplyByScalar(t, l, r), E.add(R, r, r)
           }),
-          (E.fastSquad = function(e, t, n, r, i, a) {
+          (E.fastSquad = function (e, t, n, r, i, a) {
             var o = E.fastSlerp(e, t, i, g),
-              u = E.fastSlerp(n, r, i, w);
-            return E.fastSlerp(o, u, 2 * i * (1 - i), a);
+              u = E.fastSlerp(n, r, i, w)
+            return E.fastSlerp(o, u, 2 * i * (1 - i), a)
           }),
-          (E.equals = function(e, t) {
+          (E.equals = function (e, t) {
             return (
               e === t ||
               (r(e) &&
@@ -5829,9 +5840,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 e.y === t.y &&
                 e.z === t.z &&
                 e.w === t.w)
-            );
+            )
           }),
-          (E.equalsEpsilon = function(e, t, n) {
+          (E.equalsEpsilon = function (e, t, n) {
             return (
               e === t ||
               (r(e) &&
@@ -5840,44 +5851,44 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 Math.abs(e.y - t.y) <= n &&
                 Math.abs(e.z - t.z) <= n &&
                 Math.abs(e.w - t.w) <= n)
-            );
+            )
           }),
           (E.ZERO = a(new E(0, 0, 0, 0))),
           (E.IDENTITY = a(new E(0, 0, 0, 1))),
-          (E.prototype.clone = function(e) {
-            return E.clone(this, e);
+          (E.prototype.clone = function (e) {
+            return E.clone(this, e)
           }),
-          (E.prototype.equals = function(e) {
-            return E.equals(this, e);
+          (E.prototype.equals = function (e) {
+            return E.equals(this, e)
           }),
-          (E.prototype.equalsEpsilon = function(e, t) {
-            return E.equalsEpsilon(this, e, t);
+          (E.prototype.equalsEpsilon = function (e, t) {
+            return E.equalsEpsilon(this, e, t)
           }),
-          (E.prototype.toString = function() {
+          (E.prototype.toString = function () {
             return (
-              "(" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + ")"
-            );
+              '(' + this.x + ', ' + this.y + ', ' + this.z + ', ' + this.w + ')'
+            )
           }),
           E
-        );
+        )
       }
     ),
     define(
-      "Core/EllipseGeometryLibrary",
-      ["./Cartesian3", "./Math", "./Matrix3", "./Quaternion"],
-      function(e, t, n, r) {
-        "use strict";
-        function i(t, i, a, c, _, l, T, R, h, f) {
-          var A = t + i;
+      'Core/EllipseGeometryLibrary',
+      ['./Cartesian3', './Math', './Matrix3', './Quaternion'],
+      function (e, t, n, r) {
+        'use strict'
+        function i (t, i, a, c, _, l, T, R, h, f) {
+          var A = t + i
           e.multiplyByScalar(c, Math.cos(A), o),
             e.multiplyByScalar(a, Math.sin(A), u),
-            e.add(o, u, o);
-          var d = Math.cos(t);
-          d *= d;
-          var N = Math.sin(t);
-          N *= N;
+            e.add(o, u, o)
+          var d = Math.cos(t)
+          d *= d
+          var N = Math.sin(t)
+          N *= N
           var I = l / Math.sqrt(T * d + _ * N),
-            S = I / R;
+            S = I / R
           return (
             r.fromAxisAngle(o, S, s),
             n.fromQuaternion(s, E),
@@ -5885,7 +5896,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             e.normalize(f, f),
             e.multiplyByScalar(f, R, f),
             f
-          );
+          )
         }
         var a = {},
           o = new e(),
@@ -5895,8 +5906,8 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           c = new e(),
           _ = new e(),
           l = new e(),
-          T = new e();
-        a.raisePositionsToHeight = function(t, n, r) {
+          T = new e()
+        a.raisePositionsToHeight = function (t, n, r) {
           for (
             var i = n.ellipsoid,
               a = n.height,
@@ -5911,11 +5922,11 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           ) {
             var f = h + 1,
               A = h + 2,
-              d = e.fromArray(t, h, c);
-            i.scaleToGeodeticSurface(d, d);
+              d = e.fromArray(t, h, c)
+            i.scaleToGeodeticSurface(d, d)
             var N = e.clone(d, _),
               I = i.geodeticSurfaceNormal(d, T),
-              S = e.multiplyByScalar(I, a, l);
+              S = e.multiplyByScalar(I, a, l)
             e.add(d, S, d),
               r &&
                 (e.multiplyByScalar(I, o, S),
@@ -5925,15 +5936,15 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (s[A + R] = N.z)),
               (s[h] = d.x),
               (s[f] = d.y),
-              (s[A] = d.z);
+              (s[A] = d.z)
           }
-          return s;
-        };
+          return s
+        }
         var R = new e(),
           h = new e(),
-          f = new e();
+          f = new e()
         return (
-          (a.computeEllipsePositions = function(n, r, a) {
+          (a.computeEllipsePositions = function (n, r, a) {
             var o = n.semiMinorAxis,
               u = n.semiMajorAxis,
               s = n.rotation,
@@ -5944,13 +5955,13 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               N = u * o,
               I = e.magnitude(E),
               S = e.normalize(E, R),
-              M = e.cross(e.UNIT_Z, E, h);
-            M = e.normalize(M, M);
+              M = e.cross(e.UNIT_Z, E, h)
+            M = e.normalize(M, M)
             var y = e.cross(S, M, f),
               m = 1 + Math.ceil(t.PI_OVER_TWO / T),
               O = t.PI_OVER_TWO / (m - 1),
-              p = t.PI_OVER_TWO - m * O;
-            p < 0 && (m -= Math.ceil(Math.abs(p) / O));
+              p = t.PI_OVER_TWO - m * O
+            p < 0 && (m -= Math.ceil(Math.abs(p) / O))
             var C,
               g,
               w,
@@ -5964,7 +5975,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               D = 4 * m * 3,
               z = D - 1,
               G = 0,
-              b = a ? new Array(D) : void 0;
+              b = a ? new Array(D) : void 0
             for (
               p = t.PI_OVER_TWO,
                 F = i(p, s, y, M, A, N, d, I, S, F),
@@ -5988,13 +5999,14 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                     g = 1;
                   g < w - 1;
                   ++g
-                )
+                ) {
                   (U = g / (w - 1)),
                     (x = e.lerp(F, B, U, l)),
                     (P[v++] = x.x),
                     (P[v++] = x.y),
-                    (P[v++] = x.z);
-                (P[v++] = B.x), (P[v++] = B.y), (P[v++] = B.z);
+                    (P[v++] = x.z)
+                }
+                (P[v++] = B.x), (P[v++] = B.y), (P[v++] = B.z)
               }
               a &&
                 ((b[z--] = F.z),
@@ -6003,7 +6015,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (b[G++] = B.x),
                 (b[G++] = B.y),
                 (b[G++] = B.z)),
-                (p = t.PI_OVER_TWO - (C + 1) * O);
+                (p = t.PI_OVER_TWO - (C + 1) * O)
             }
             for (C = m; C > 1; --C) {
               if (
@@ -6020,13 +6032,14 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                     g = 1;
                   g < w - 1;
                   ++g
-                )
+                ) {
                   (U = g / (w - 1)),
                     (x = e.lerp(F, B, U, l)),
                     (P[v++] = x.x),
                     (P[v++] = x.y),
-                    (P[v++] = x.z);
-                (P[v++] = B.x), (P[v++] = B.y), (P[v++] = B.z);
+                    (P[v++] = x.z)
+                }
+                (P[v++] = B.x), (P[v++] = B.y), (P[v++] = B.z)
               }
               a &&
                 ((b[z--] = F.z),
@@ -6034,10 +6047,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (b[z--] = F.x),
                 (b[G++] = B.x),
                 (b[G++] = B.y),
-                (b[G++] = B.z));
+                (b[G++] = B.z))
             }
-            (p = t.PI_OVER_TWO), (F = i(-p, s, y, M, A, N, d, I, S, F));
-            var V = {};
+            (p = t.PI_OVER_TWO), (F = i(-p, s, y, M, A, N, d, I, S, F))
+            var V = {}
             return (
               r &&
                 ((P[v++] = F.x),
@@ -6051,22 +6064,22 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (b[z--] = F.x),
                 (V.outerPositions = b)),
               V
-            );
+            )
           }),
           a
-        );
+        )
       }
     ),
-    define("Core/GeometryType", ["./freezeObject"], function(e) {
-      "use strict";
-      var t = { NONE: 0, TRIANGLES: 1, LINES: 2, POLYLINES: 3 };
-      return e(t);
+    define('Core/GeometryType', ['./freezeObject'], function (e) {
+      'use strict'
+      var t = { NONE: 0, TRIANGLES: 1, LINES: 2, POLYLINES: 3 }
+      return e(t)
     }),
     define(
-      "Core/PrimitiveType",
-      ["./freezeObject", "./WebGLConstants"],
-      function(e, t) {
-        "use strict";
+      'Core/PrimitiveType',
+      ['./freezeObject', './WebGLConstants'],
+      function (e, t) {
+        'use strict'
         var n = {
           POINTS: t.POINTS,
           LINES: t.LINES,
@@ -6075,7 +6088,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
           TRIANGLES: t.TRIANGLES,
           TRIANGLE_STRIP: t.TRIANGLE_STRIP,
           TRIANGLE_FAN: t.TRIANGLE_FAN,
-          validate: function(e) {
+          validate: function (e) {
             return (
               e === n.POINTS ||
               e === n.LINES ||
@@ -6084,157 +6097,158 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               e === n.TRIANGLES ||
               e === n.TRIANGLE_STRIP ||
               e === n.TRIANGLE_FAN
-            );
+            )
           }
-        };
-        return e(n);
+        }
+        return e(n)
       }
     ),
     define(
-      "Core/Geometry",
+      'Core/Geometry',
       [
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./DeveloperError",
-        "./GeometryType",
-        "./PrimitiveType"
+        './Check',
+        './defaultValue',
+        './defined',
+        './DeveloperError',
+        './GeometryType',
+        './PrimitiveType'
       ],
-      function(e, t, n, r, i, a) {
-        "use strict";
-        function o(e) {
+      function (e, t, n, r, i, a) {
+        'use strict'
+        function o (e) {
           (e = t(e, t.EMPTY_OBJECT)),
             (this.attributes = e.attributes),
             (this.indices = e.indices),
             (this.primitiveType = t(e.primitiveType, a.TRIANGLES)),
             (this.boundingSphere = e.boundingSphere),
             (this.geometryType = t(e.geometryType, i.NONE)),
-            (this.boundingSphereCV = e.boundingSphereCV);
+            (this.boundingSphereCV = e.boundingSphereCV)
         }
         return (
-          (o.computeNumberOfVertices = function(e) {
-            var t = -1;
-            for (var r in e.attributes)
+          (o.computeNumberOfVertices = function (e) {
+            var t = -1
+            for (var r in e.attributes) {
               if (
                 e.attributes.hasOwnProperty(r) &&
                 n(e.attributes[r]) &&
                 n(e.attributes[r].values)
               ) {
                 var i = e.attributes[r],
-                  a = i.values.length / i.componentsPerAttribute;
-                t = a;
+                  a = i.values.length / i.componentsPerAttribute
+                t = a
               }
-            return t;
+            }
+            return t
           }),
           o
-        );
+        )
       }
     ),
     define(
-      "Core/GeometryAttribute",
-      ["./defaultValue", "./defined", "./DeveloperError"],
-      function(e, t, n) {
-        "use strict";
-        function r(t) {
+      'Core/GeometryAttribute',
+      ['./defaultValue', './defined', './DeveloperError'],
+      function (e, t, n) {
+        'use strict'
+        function r (t) {
           (t = e(t, e.EMPTY_OBJECT)),
             (this.componentDatatype = t.componentDatatype),
             (this.componentsPerAttribute = t.componentsPerAttribute),
             (this.normalize = e(t.normalize, !1)),
-            (this.values = t.values);
+            (this.values = t.values)
         }
-        return r;
+        return r
       }
     ),
-    define("Core/GeometryAttributes", ["./defaultValue"], function(e) {
-      "use strict";
-      function t(t) {
+    define('Core/GeometryAttributes', ['./defaultValue'], function (e) {
+      'use strict'
+      function t (t) {
         (t = e(t, e.EMPTY_OBJECT)),
           (this.position = t.position),
           (this.normal = t.normal),
           (this.st = t.st),
           (this.bitangent = t.bitangent),
           (this.tangent = t.tangent),
-          (this.color = t.color);
+          (this.color = t.color)
       }
-      return t;
+      return t
     }),
     define(
-      "Core/IndexDatatype",
+      'Core/IndexDatatype',
       [
-        "./defined",
-        "./DeveloperError",
-        "./freezeObject",
-        "./Math",
-        "./WebGLConstants"
+        './defined',
+        './DeveloperError',
+        './freezeObject',
+        './Math',
+        './WebGLConstants'
       ],
-      function(e, t, n, r, i) {
-        "use strict";
+      function (e, t, n, r, i) {
+        'use strict'
         var a = {
           UNSIGNED_BYTE: i.UNSIGNED_BYTE,
           UNSIGNED_SHORT: i.UNSIGNED_SHORT,
           UNSIGNED_INT: i.UNSIGNED_INT
-        };
+        }
         return (
-          (a.getSizeInBytes = function(e) {
+          (a.getSizeInBytes = function (e) {
             switch (e) {
               case a.UNSIGNED_BYTE:
-                return Uint8Array.BYTES_PER_ELEMENT;
+                return Uint8Array.BYTES_PER_ELEMENT
               case a.UNSIGNED_SHORT:
-                return Uint16Array.BYTES_PER_ELEMENT;
+                return Uint16Array.BYTES_PER_ELEMENT
               case a.UNSIGNED_INT:
-                return Uint32Array.BYTES_PER_ELEMENT;
+                return Uint32Array.BYTES_PER_ELEMENT
             }
           }),
-          (a.validate = function(t) {
+          (a.validate = function (t) {
             return (
               e(t) &&
               (t === a.UNSIGNED_BYTE ||
                 t === a.UNSIGNED_SHORT ||
                 t === a.UNSIGNED_INT)
-            );
+            )
           }),
-          (a.createTypedArray = function(e, t) {
+          (a.createTypedArray = function (e, t) {
             return e >= r.SIXTY_FOUR_KILOBYTES
               ? new Uint32Array(t)
-              : new Uint16Array(t);
+              : new Uint16Array(t)
           }),
-          (a.createTypedArrayFromArrayBuffer = function(e, t, n, i) {
+          (a.createTypedArrayFromArrayBuffer = function (e, t, n, i) {
             return e >= r.SIXTY_FOUR_KILOBYTES
               ? new Uint32Array(t, n, i)
-              : new Uint16Array(t, n, i);
+              : new Uint16Array(t, n, i)
           }),
           n(a)
-        );
+        )
       }
     ),
     define(
-      "Core/EllipseOutlineGeometry",
+      'Core/EllipseOutlineGeometry',
       [
-        "./BoundingSphere",
-        "./Cartesian3",
-        "./ComponentDatatype",
-        "./defaultValue",
-        "./defined",
-        "./DeveloperError",
-        "./EllipseGeometryLibrary",
-        "./Ellipsoid",
-        "./Geometry",
-        "./GeometryAttribute",
-        "./GeometryAttributes",
-        "./IndexDatatype",
-        "./Math",
-        "./PrimitiveType"
+        './BoundingSphere',
+        './Cartesian3',
+        './ComponentDatatype',
+        './defaultValue',
+        './defined',
+        './DeveloperError',
+        './EllipseGeometryLibrary',
+        './Ellipsoid',
+        './Geometry',
+        './GeometryAttribute',
+        './GeometryAttributes',
+        './IndexDatatype',
+        './Math',
+        './PrimitiveType'
       ],
-      function(e, t, n, r, i, a, o, u, s, E, c, _, l, T) {
-        "use strict";
-        function R(r) {
+      function (e, t, n, r, i, a, o, u, s, E, c, _, l, T) {
+        'use strict'
+        function R (r) {
           var i = r.center;
           (d = t.multiplyByScalar(
             r.ellipsoid.geodeticSurfaceNormal(i, d),
             r.height,
             d
           )),
-            (d = t.add(i, d, d));
+            (d = t.add(i, d, d))
           for (
             var a = new e(d, r.semiMajorAxis),
               u = o.computeEllipsePositions(r, !1, !0).outerPositions,
@@ -6251,11 +6265,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               h = 0;
             h < l;
             ++h
-          )
-            (T[R++] = h), (T[R++] = (h + 1) % l);
-          return { boundingSphere: a, attributes: s, indices: T };
+          ) { (T[R++] = h), (T[R++] = (h + 1) % l) }
+          return { boundingSphere: a, attributes: s, indices: T }
         }
-        function h(i) {
+        function h (i) {
           var a = i.center,
             u = i.ellipsoid,
             s = i.semiMajorAxis,
@@ -6268,7 +6281,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               T
             )),
             (I.center = t.add(a, T, I.center)),
-            (I.radius = s);
+            (I.radius = s)
           var R = o.computeEllipsePositions(i, !1, !0).outerPositions,
             h = new c({
               position: new E({
@@ -6276,32 +6289,33 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 componentsPerAttribute: 3,
                 values: o.raisePositionsToHeight(R, i, !0)
               })
-            });
-          R = h.position.values;
+            })
+          R = h.position.values
           var f = e.union(N, I),
             d = R.length / 3,
-            S = r(i.numberOfVerticalLines, 16);
-          S = l.clamp(S, 0, d / 2);
-          var M = _.createTypedArray(d, 2 * d + 2 * S);
-          d /= 2;
+            S = r(i.numberOfVerticalLines, 16)
+          S = l.clamp(S, 0, d / 2)
+          var M = _.createTypedArray(d, 2 * d + 2 * S)
+          d /= 2
           var y,
-            m = 0;
-          for (y = 0; y < d; ++y)
+            m = 0
+          for (y = 0; y < d; ++y) {
             (M[m++] = y),
               (M[m++] = (y + 1) % d),
               (M[m++] = y + d),
-              (M[m++] = (y + 1) % d + d);
-          var O;
-          if (S > 0) {
-            var p = Math.min(S, d);
-            O = Math.round(d / p);
-            var C = Math.min(O * S, d);
-            for (y = 0; y < C; y += O) (M[m++] = y), (M[m++] = y + d);
+              (M[m++] = (y + 1) % d + d)
           }
-          return { boundingSphere: f, attributes: h, indices: M };
+          var O
+          if (S > 0) {
+            var p = Math.min(S, d)
+            O = Math.round(d / p)
+            var C = Math.min(O * S, d)
+            for (y = 0; y < C; y += O) (M[m++] = y), (M[m++] = y + d)
+          }
+          return { boundingSphere: f, attributes: h, indices: M }
         }
-        function f(e) {
-          e = r(e, r.EMPTY_OBJECT);
+        function f (e) {
+          e = r(e, r.EMPTY_OBJECT)
           var n = e.center,
             a = r(e.ellipsoid, u.WGS84),
             o = e.semiMajorAxis,
@@ -6323,14 +6337,14 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               r(e.numberOfVerticalLines, 16),
               0
             )),
-            (this._workerName = "createEllipseOutlineGeometry");
+            (this._workerName = 'createEllipseOutlineGeometry')
         }
         var A = new t(),
           d = new t(),
           N = new e(),
           I = new e();
         (f.packedLength = t.packedLength + u.packedLength + 9),
-          (f.pack = function(e, n, a) {
+          (f.pack = function (e, n, a) {
             return (
               (a = r(a, 0)),
               t.pack(e._center, n, a),
@@ -6347,8 +6361,8 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               (n[a++] = e._extrude ? 1 : 0),
               (n[a] = e._numberOfVerticalLines),
               n
-            );
-          });
+            )
+          })
         var S = new t(),
           M = new u(),
           y = {
@@ -6361,14 +6375,14 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             granularity: void 0,
             extrudedHeight: void 0,
             numberOfVerticalLines: void 0
-          };
+          }
         return (
-          (f.unpack = function(e, n, a) {
-            n = r(n, 0);
-            var o = t.unpack(e, n, S);
-            n += t.packedLength;
-            var s = u.unpack(e, n, M);
-            n += u.packedLength;
+          (f.unpack = function (e, n, a) {
+            n = r(n, 0)
+            var o = t.unpack(e, n, S)
+            n += t.packedLength
+            var s = u.unpack(e, n, M)
+            n += u.packedLength
             var E = e[n++],
               c = e[n++],
               _ = e[n++],
@@ -6376,8 +6390,8 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               T = e[n++],
               R = e[n++],
               h = e[n++],
-              A = 1 === e[n++],
-              d = e[n];
+              A = e[n++] === 1,
+              d = e[n]
             return i(a)
               ? ((a._center = t.clone(o, a._center)),
                 (a._ellipsoid = u.clone(s, a._ellipsoid)),
@@ -6397,14 +6411,14 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                 (y.semiMajorAxis = E),
                 (y.semiMinorAxis = c),
                 (y.numberOfVerticalLines = d),
-                new f(y));
+                new f(y))
           }),
-          (f.createGeometry = function(e) {
+          (f.createGeometry = function (e) {
             if (!(e._semiMajorAxis <= 0 || e._semiMinorAxis <= 0)) {
               e._center = e._ellipsoid.scaleToGeodeticSurface(
                 e._center,
                 e._center
-              );
+              )
               var t,
                 n = {
                   center: e._center,
@@ -6416,7 +6430,7 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                   extrudedHeight: e._extrudedHeight,
                   granularity: e._granularity,
                   numberOfVerticalLines: e._numberOfVerticalLines
-                };
+                }
               return (
                 e._extrude
                   ? ((n.extrudedHeight = Math.min(
@@ -6432,27 +6446,27 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                   primitiveType: T.LINES,
                   boundingSphere: t.boundingSphere
                 })
-              );
+              )
             }
           }),
           f
-        );
+        )
       }
     ),
     define(
-      "Core/CircleOutlineGeometry",
+      'Core/CircleOutlineGeometry',
       [
-        "./Cartesian3",
-        "./Check",
-        "./defaultValue",
-        "./defined",
-        "./EllipseOutlineGeometry",
-        "./Ellipsoid"
+        './Cartesian3',
+        './Check',
+        './defaultValue',
+        './defined',
+        './EllipseOutlineGeometry',
+        './Ellipsoid'
       ],
-      function(e, t, n, r, i, a) {
-        "use strict";
-        function o(e) {
-          e = n(e, n.EMPTY_OBJECT);
+      function (e, t, n, r, i, a) {
+        'use strict'
+        function o (e) {
+          e = n(e, n.EMPTY_OBJECT)
           var t = e.radius,
             r = {
               center: e.center,
@@ -6465,12 +6479,12 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               numberOfVerticalLines: e.numberOfVerticalLines
             };
           (this._ellipseGeometry = new i(r)),
-            (this._workerName = "createCircleOutlineGeometry");
+            (this._workerName = 'createCircleOutlineGeometry')
         }
         (o.packedLength = i.packedLength),
-          (o.pack = function(e, t, n) {
-            return i.pack(e._ellipseGeometry, t, n);
-          });
+          (o.pack = function (e, t, n) {
+            return i.pack(e._ellipseGeometry, t, n)
+          })
         var u = new i({ center: new e(), semiMajorAxis: 1, semiMinorAxis: 1 }),
           s = {
             center: new e(),
@@ -6482,10 +6496,10 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
             numberOfVerticalLines: void 0,
             semiMajorAxis: void 0,
             semiMinorAxis: void 0
-          };
+          }
         return (
-          (o.unpack = function(t, n, E) {
-            var c = i.unpack(t, n, u);
+          (o.unpack = function (t, n, E) {
+            var c = i.unpack(t, n, u)
             return (
               (s.center = e.clone(c._center, s.center)),
               (s.ellipsoid = a.clone(c._ellipsoid, s.ellipsoid)),
@@ -6499,26 +6513,26 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
                   (E._ellipseGeometry = new i(s)),
                   E)
                 : ((s.radius = c._semiMajorAxis), new o(s))
-            );
+            )
           }),
-          (o.createGeometry = function(e) {
-            return i.createGeometry(e._ellipseGeometry);
+          (o.createGeometry = function (e) {
+            return i.createGeometry(e._ellipseGeometry)
           }),
           o
-        );
+        )
       }
     ),
     define(
-      "Workers/createCircleOutlineGeometry",
+      'Workers/createCircleOutlineGeometry',
       [
-        "../Core/Cartesian3",
-        "../Core/CircleOutlineGeometry",
-        "../Core/defined",
-        "../Core/Ellipsoid"
+        '../Core/Cartesian3',
+        '../Core/CircleOutlineGeometry',
+        '../Core/defined',
+        '../Core/Ellipsoid'
       ],
-      function(e, t, n, r) {
-        "use strict";
-        function i(i, a) {
+      function (e, t, n, r) {
+        'use strict'
+        function i (i, a) {
           return (
             n(a) && (i = t.unpack(i, a)),
             (i._ellipseGeometry._center = e.clone(i._ellipseGeometry._center)),
@@ -6526,9 +6540,9 @@ mersenne-twister.js - https://gist.github.com/banksean/300494
               i._ellipseGeometry._ellipsoid
             )),
             t.createGeometry(i)
-          );
+          )
         }
-        return i;
+        return i
       }
-    );
-})();
+    )
+})()
