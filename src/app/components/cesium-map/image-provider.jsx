@@ -9,11 +9,10 @@ class ImageProvider extends Component {
     this.layer = null
   }
 
-  componentWillReceiveProps ({ layers, url, visible }) {
+  componentWillReceiveProps ({ layers, visible, url, type }) {
     if (notEmpty(layers)) {
-      this.layer = layers.addImageryProvider(
-        new Cesium.UrlTemplateImageryProvider({ url })
-      )
+      const provider = new Cesium[`${type}ImageryProvider`]({ url })
+      this.layer = layers.addImageryProvider(provider)
       this.layer.show = Boolean(this.props.visible)
     }
   }

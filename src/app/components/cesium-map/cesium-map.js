@@ -34,33 +34,33 @@ class CesiumComponent extends Component {
     }
   }
 
-  mountMap () {
-    const viewer = disablePanning(
-      new Cesium.Viewer(mapId, {
-        geocoder: false,
-        homeButton: false,
-        sceneModePicker: false,
-        baseLayerPicker: false,
-        navigationHelpButton: false,
-        animation: false,
-        timeline: false,
-        creditsDisplay: false,
-        fullscreenButton: false,
-        skyAtmosphere: false,
-        imageryProvider: new Cesium.MapboxImageryProvider({
-          mapId: 'mapbox.satellite',
-          accessToken: MAPBOX_TOKEN
-        })
+  mountMap ({ lockNavigation }) {
+    let viewer = new Cesium.Viewer(mapId, {
+      geocoder: false,
+      homeButton: false,
+      sceneModePicker: false,
+      baseLayerPicker: false,
+      navigationHelpButton: false,
+      animation: false,
+      timeline: false,
+      creditsDisplay: false,
+      fullscreenButton: false,
+      skyAtmosphere: false,
+      imageryProvider: new Cesium.MapboxImageryProvider({
+        mapId: 'mapbox.satellite',
+        accessToken: MAPBOX_TOKEN
       })
-    )
+    })
 
     const flyTo = bindFlyTo(viewer)
     flyTo(...home)
+
+    if (lockNavigation) viewer = disablePanning(viewer)
     return viewer
   }
 
   componentDidMount () {
-    const viewer = this.mountMap()
+    const viewer = this.mountMap(this.props)
     const layers = viewer.imageryLayers
     this.setState({
       layers,
