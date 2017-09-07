@@ -1,8 +1,9 @@
+const { resolve } = require('path')
 const merge = require('webpack-merge')
-const base = require('./base')
+const { config, paths: { sourcePath, publicPath } } = require('./base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const config = merge(base, {
+module.exports = merge(config, {
   devtool: 'cheap-eval-source-map',
 
   module: {
@@ -26,7 +27,13 @@ const config = merge(base, {
     ]
   },
 
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: resolve(sourcePath, 'tpl.ejs'),
+      inject: 'body'
+    })
+  ],
 
   stats: {
     errorDetails: true
@@ -37,6 +44,7 @@ const config = merge(base, {
   },
 
   devServer: {
+    contentBase: publicPath,
     compress: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     watchOptions: {
@@ -44,5 +52,3 @@ const config = merge(base, {
     }
   }
 })
-
-module.exports = config
