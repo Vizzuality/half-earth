@@ -1,16 +1,17 @@
 /* global MAPBOX_TOKEN */
-import React, { Component } from 'react'
+import { Component, createElement } from 'react'
+import { connect } from 'react-redux'
+import CesiumMapComponent from './map-component'
+import bindZoomLevels from 'data/zoom-levels'
 const { Cesium } = window
 
+const zoomLevels = bindZoomLevels(Cesium)
 const mapId = `map-${new Date().getTime()}`
-const home = [-82.5, 35.09, 18490000.0]
 
 const bindFlyTo = v => (lat, long, z = 15000.0, rest = {}) =>
   v.camera.flyTo(
     Object.assign(
-      {
-        destination: Cesium.Cartesian3.fromDegrees(lat, long, z)
-      },
+      { destination: Cesium.Cartesian3.fromDegrees(lat, long, z) },
       rest
     )
   )
@@ -34,7 +35,7 @@ class CesiumComponent extends Component {
     }
   }
 
-  mountMap ({ lockNavigation }) {
+  mountMap ({ lockNavigation, zoomLevel }) {
     let viewer = new Cesium.Viewer(mapId, {
       geocoder: false,
       homeButton: false,
@@ -52,8 +53,8 @@ class CesiumComponent extends Component {
       })
     })
 
-    const flyTo = bindFlyTo(viewer)
-    flyTo(...home)
+    this.flyTo = bindFlyTo(viewer)
+    this.handleZoom(zoomLevel)
 
     if (lockNavigation) viewer = disablePanning(viewer)
     return viewer
@@ -68,16 +69,22 @@ class CesiumComponent extends Component {
     })
   }
 
+  handleZoom (zoom) {
+    const [zLevel, opts] = zoomLevels[zoom]
+    this.flyTo(...zLevel, opts)
+  }
+
+  componentWillReceiveProps (props) {
+    this.handleZoom(props.zoomLevel)
+  }
+
   render () {
     const { layers } = this.state
-    return (
-      <div id={mapId}>
-        {React.Children.map(this.props.children, ch =>
-          React.cloneElement(ch, { ...ch.props, layers })
-        )}
-      </div>
-    )
+    const { props } = this
+    return createElement(CesiumMapComponent, { mapId, layers, ...props })
   }
 }
 
-export default CesiumComponent
+const mapStateToProps = ({ zoom }) => ({ zoom })
+
+export default connect(mapStateToProps)(CesiumComponent)

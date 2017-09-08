@@ -4,16 +4,11 @@ const { Cesium } = window
 const notEmpty = o => o && Boolean(o._layers.length)
 
 class ImageProvider extends Component {
-  constructor (props) {
-    super(props)
-    this.layer = null
-  }
-
-  componentWillReceiveProps ({ layers, visible, url, type }) {
+  componentWillReceiveProps ({ layers, visible, url, type, ...rest }) {
     if (notEmpty(layers)) {
       const provider = new Cesium[`${type}ImageryProvider`]({ url })
-      this.layer = layers.addImageryProvider(provider)
-      this.layer.show = Boolean(this.props.visible)
+      const layer = layers.addImageryProvider(provider)
+      layer.show = Boolean(this.props.visible)
     }
   }
 
