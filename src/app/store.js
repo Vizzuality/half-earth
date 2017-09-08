@@ -1,16 +1,17 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
+import { routerMiddleware } from 'react-router-redux'
 
-import reducers from './reducers'
+import thunk from 'redux-thunk'
+import reducers from 'app/reducers'
+import initialState from 'app/data/initial-state'
+import createHistory from 'history/createBrowserHistory'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const middlewares = [thunk]
+export const history = createHistory()
+const middlewares = [thunk, routerMiddleware(history)]
 
-const store = (initialState = {}) =>
-  createStore(
-    reducers,
-    initialState,
-    composeEnhancers(applyMiddleware(...middlewares))
-  )
-
-export default store
+export default createStore(
+  reducers,
+  initialState,
+  composeEnhancers(applyMiddleware(...middlewares))
+)

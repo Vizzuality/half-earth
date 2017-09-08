@@ -1,20 +1,19 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Route, Router } from 'react-router-dom'
-import createBrowserHistory from 'history/createBrowserHistory'
 
-import store from 'app/store'
+import store, { history } from 'app/store'
+import routes from 'app/routes'
 import Layout from 'pages/layout'
-import routes from './routes'
 
-const history = createBrowserHistory()
-
-export default ({ data }) => (
-  <Provider store={store(data)}>
-    <Router history={history}>
-      <Layout>
-        {routes.map(route => <Route key={route.path} {...route} />)}
-      </Layout>
-    </Router>
-  </Provider>
-)
+export default () => {
+  return (
+    <Provider store={store}>
+      <Router history={history}>
+        <Layout>
+          {routes.map(route => <Route key={route.path} {...route} />)}
+        </Layout>
+      </Router>
+    </Provider>
+  )
+}

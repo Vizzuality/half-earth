@@ -1,10 +1,5 @@
+import { initialState as zoom } from 'components/zoom'
+
 export default {
-  countryExplorer: {
-    open: false
-  },
-  other: {
-    loading: false,
-    loaded: false,
-    data: null
-  }
+  zoom
 }

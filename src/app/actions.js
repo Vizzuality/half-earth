@@ -1,7 +1,5 @@
-import { actions as countryExplorerActions } from 'components/country-explorer'
-import { actions as otherActions } from 'pages/other'
+import { actions as zoomActions } from 'components/zoom'
 
 export default {
-  ...countryExplorerActions,
-  ...otherActions
+  ...zoomActions
 }

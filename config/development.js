@@ -46,6 +46,7 @@ module.exports = merge(config, {
   devServer: {
     contentBase: publicPath,
     compress: true,
+    historyApiFallback: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     watchOptions: {
       ignored: /node_modules/
