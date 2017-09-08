@@ -1,7 +1,10 @@
 import React from 'react'
+import cx from 'classnames'
 
-const CesiumMap = ({ layers, mapId, children }) => (
-  <div id={mapId}>
+import styles from './map-styles.scss'
+
+const CesiumMap = ({ className, layers, mapId, children }) => (
+  <div className={cx(className, styles.map)} id={mapId}>
     {React.Children.map(children, ch =>
       React.cloneElement(ch, { ...ch.props, layers })
     )}

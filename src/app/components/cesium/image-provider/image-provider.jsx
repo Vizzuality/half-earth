@@ -1,7 +1,7 @@
 import { Component } from 'react'
 const { Cesium } = window
 
-const notEmpty = o => o && Boolean(o._layers.length)
+const notEmpty = o => o && o._layers && Boolean(o._layers.length)
 
 class ImageProvider extends Component {
   componentWillReceiveProps ({ layers, visible, url, type, ...rest }) {

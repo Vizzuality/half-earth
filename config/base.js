@@ -10,12 +10,14 @@ const credentials = require('./credentials')
 const basePath = resolve(__dirname, '../')
 const sourcePath = resolve(basePath, 'src')
 const publicPath = join(basePath, 'public')
+const appPath = resolve(sourcePath, 'app')
 
 module.exports = {
   paths: {
     basePath,
     sourcePath,
-    publicPath
+    publicPath,
+    appPath
   },
   config: {
     entry: join(sourcePath, 'main.jsx'),

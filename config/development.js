@@ -1,6 +1,9 @@
 const { resolve } = require('path')
 const merge = require('webpack-merge')
-const { config, paths: { sourcePath, publicPath } } = require('./base')
+const {
+  config,
+  paths: { sourcePath, publicPath, appPath }
+} = require('./base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = merge(config, {
@@ -20,9 +23,9 @@ module.exports = merge(config, {
             }
           },
           { loader: 'postcss-loader' },
-          { loader: 'sass-loader' }
+          { loader: `sass-loader?includePaths[]='${appPath}'` }
         ],
-        exclude: /node_modules/
+        include: appPath
       }
     ]
   },

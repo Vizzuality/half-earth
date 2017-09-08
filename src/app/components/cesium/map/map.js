@@ -35,8 +35,10 @@ class CesiumComponent extends Component {
     }
   }
 
-  mountMap ({ lockNavigation, zoomLevel }) {
-    let viewer = new Cesium.Viewer(mapId, {
+  mountMap ({ lockNavigation, zoomLevel, globe }) {
+    const $globe = (this.globe = new Cesium.Globe())
+
+    const mapConfig = {
       geocoder: false,
       homeButton: false,
       sceneModePicker: false,
@@ -44,6 +46,7 @@ class CesiumComponent extends Component {
       navigationHelpButton: false,
       animation: false,
       timeline: false,
+      globe: $globe,
       creditsDisplay: false,
       fullscreenButton: false,
       skyAtmosphere: false,
@@ -51,22 +54,29 @@ class CesiumComponent extends Component {
         mapId: 'mapbox.satellite',
         accessToken: MAPBOX_TOKEN
       })
-    })
+    }
 
+    const viewer = new Cesium.Viewer(mapId, mapConfig)
     this.flyTo = bindFlyTo(viewer)
-    this.handleZoom(zoomLevel)
+    $globe.show = Boolean(globe)
 
-    if (lockNavigation) viewer = disablePanning(viewer)
+    if (zoomLevel) this.handleZoom(zoomLevel)
+    if (lockNavigation) return disablePanning(viewer)
     return viewer
   }
 
-  componentDidMount () {
-    const viewer = this.mountMap(this.props)
-    const layers = viewer.imageryLayers
+  bindMap (props) {
+    const { globe } = props
+    const viewer = this.mountMap(props)
+    const layers = !globe ? this.state.layers : viewer.imageryLayers
     this.setState({
       layers,
       viewer
     })
+  }
+
+  componentDidMount () {
+    this.bindMap(this.props)
   }
 
   handleZoom (zoom) {
@@ -75,7 +85,8 @@ class CesiumComponent extends Component {
   }
 
   componentWillReceiveProps (props) {
-    this.handleZoom(props.zoomLevel)
+    if (this.props.zoomLevel !== props.zoomLevel) { this.globe.show = Boolean(props.globe) }
+    if (props.zoomLevel) this.handleZoom(props.zoomLevel)
   }
 
   render () {
