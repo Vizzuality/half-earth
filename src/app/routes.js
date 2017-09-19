@@ -1,11 +1,13 @@
-import Home from 'sections/home'
-import Global from 'sections/global'
-import Regional from 'sections/regional'
-import Local from 'sections/local'
-import CesiumMap from 'sections/map'
-import Sidebar from 'sections/sidebar'
+import { assign } from 'utils'
 
-const { assign } = Object
+import Home from 'pages/home'
+import Global from 'pages/global'
+import Regional from 'pages/regional'
+import Local from 'pages/local'
+import CesiumMap from 'pages/map'
+
+import Sidebar from 'components/sidebar'
+import Earthometer from 'components/earthometer'
 
 const fadeProps = {
   animated: true,
@@ -22,7 +24,16 @@ export default [
   assign(
     {
       path: '/(global|regional|local)',
-      component: Sidebar
+      component: Sidebar,
+      key: 'Sidebar'
+    },
+    fadeProps
+  ),
+  assign(
+    {
+      path: '/(global|regional|local)',
+      component: Earthometer,
+      key: 'Earthometer'
     },
     fadeProps
   ),

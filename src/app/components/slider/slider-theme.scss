@@ -1,0 +1,38 @@
+
+$handle-size: 13px;
+$handle-border-width: 1px;
+$handle-border: $handle-border-width solid;
+$handle-color: lightgray;
+$handle-border-color: gray;
+
+$track-height: 3px;
+$track-color: lightgray;
+$track-border: 1px solid;
+$track-border-color: gray;
+
+$progress-color: lightSteelBlue;
+
+.range {
+  background: $track-color;
+  height: $track-height;
+  border-radius: 2px;
+  border: $track-border $track-border-color;
+
+  &.disabled {
+    opacity: 0.5;
+  }
+}
+
+.progress {
+  height: $track-height;
+  background-color: $progress-color;
+}
+
+.handle {
+  width: $handle-size;
+  height: $handle-size;
+  border-radius: 50%;
+  border: $handle-border $handle-border-color;
+  background-color: $handle-color;
+  transform: translateY(-$handle-size / 2 - (2 * $handle-border-width));
+}

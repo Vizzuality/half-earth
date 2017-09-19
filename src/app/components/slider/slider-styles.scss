@@ -1,0 +1,31 @@
+
+.range,
+.progress {
+  left: 0;
+}
+
+.range {
+  position: relative;
+  // display: flex;
+  // align-items: center;
+  width: 100%;
+
+  &.disabled {
+    pointer-events: none;
+  }
+}
+
+.progress {
+  z-index: 1;
+  height: 100%;
+  top: 0;
+  letter-spacing: 0;
+  pointer-events: none;
+}
+
+.handle {
+  z-index: 2;
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+}

@@ -54,6 +54,7 @@ module.exports = {
       extensions: ['.js', '.jsx', '.css', '.scss', '.sass'],
       modules: [
         resolve(sourcePath),
+        resolve(publicPath),
         resolve(sourcePath, 'app'),
         'node_modules'
       ],

@@ -2,6 +2,7 @@
 import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
 
+import { assign } from 'utils'
 import CesiumMapComponent from './map-component'
 import bindZoomLevels from 'data/zoom-levels'
 const { Cesium } = window
@@ -11,10 +12,7 @@ const mapId = `map-${new Date().getTime()}`
 
 const bindFlyTo = v => (lat, long, z = 15000.0, rest = {}) =>
   v.camera.flyTo(
-    Object.assign(
-      { destination: Cesium.Cartesian3.fromDegrees(lat, long, z) },
-      rest
-    )
+    assign({ destination: Cesium.Cartesian3.fromDegrees(lat, long, z) }, rest)
   )
 
 // const disablePanning = v => {

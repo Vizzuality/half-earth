@@ -1,0 +1,7 @@
+@import '~styles/variables.scss';
+
+.container {
+  height: 100vh;
+  z-index: $zforeground;
+  color: white;
+}

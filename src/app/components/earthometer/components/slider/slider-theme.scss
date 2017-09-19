@@ -1,0 +1,35 @@
+@import '~styles/variables.scss';
+
+$handle-size: 10px;
+$handle-border-width: 1px;
+$handle-border: $handle-border-width solid;
+$handle-color: $color-turquoise;
+$handle-border-color: $color-turquoise;
+
+$track-height: 3px;
+$track-color: $color-turquoise;
+$track-border: 1px solid;
+$track-border-color: $color-turquoise;
+
+$progress-color: $color-turquoise;
+
+.range {
+  background-image: url('/img/dash.svg');
+  background-repeat-y: no-repeat;
+  background-position: center;
+  border: none;
+}
+
+.progress {
+  height: $track-height;
+  background-color: $progress-color;
+}
+
+.handle {
+  width: $handle-size;
+  height: $handle-size;
+  border-radius: 50%;
+  border: $handle-border $handle-border-color;
+  background-color: $handle-color;
+  transform: translateY(-$handle-size / 2 - (2 * $handle-border-width));
+}

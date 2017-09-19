@@ -1,0 +1,28 @@
+@import '~styles/variables.scss';
+
+.container {
+  color: $color-wite;
+  background-color: $color-dark-blue;
+  position: relative;
+  z-index: $zforeground + 1;
+  display: flex;
+  justify-content: space-between;
+  height: 159px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  align-items: center;
+  padding: 0 5%;
+}
+
+.col,
+.colMiddle {
+  padding: 10px;
+  text-align: center;
+}
+
+.col {
+  width: 45%;
+}
+
+.colMiddle {
+  width: 10%;
+}

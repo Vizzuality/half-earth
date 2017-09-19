@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import styles from './zoom-styles.scss'
 
 import * as actions from './zoom-actions'
-import reducers from './zoom-reducer'
+import reducers from './zoom-reducers'
 import initialState from './initial-state'
 
 const ZoomContainer = props =>
