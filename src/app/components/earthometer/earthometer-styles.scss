@@ -7,10 +7,10 @@
   z-index: $zforeground + 1;
   display: flex;
   justify-content: space-between;
-  height: 159px;
+  height: 10rem;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   align-items: center;
-  padding: 0 5vw;
+  padding: 0 $site-padding;
 }
 
 .col,

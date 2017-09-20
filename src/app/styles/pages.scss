@@ -1,0 +1,48 @@
+@import '~styles/variables.scss';
+$width: calc(45vw - #{$site-padding});
+
+.container {
+  padding: 18rem $site-padding;
+  height: 100%;
+  width: $width;
+  z-index: $zforeground;
+  background-color: rgba($color-mid-blue, 0.96);
+  color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.scroller {
+  overflow-y: visible;
+
+  &::after {
+    content: '';
+    height: 20rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: calc(45vw + #{$site-padding});
+    z-index: 1000;
+    background-image:
+      linear-gradient(
+        rgba($color-mid-blue, 0),
+        rgba($color-mid-blue, 0.5),
+        rgba($color-mid-blue, 0.7),
+        $color-mid-blue
+      );
+  }
+}
+
+.titles {
+  text-transform: uppercase;
+  letter-spacing: 0.82rem;
+  line-height: 2em;
+}
+
+.content {
+  font-size: 1rem;
+  line-height: 2.7em;
+  font-smoothing: antialiased;
+}

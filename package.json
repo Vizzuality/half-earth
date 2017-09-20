@@ -7,8 +7,10 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "babel-plugin-transform-postcss": "^0.3.0",
     "classnames": "^2.2.5",
     "history": "^4.6.3",
+    "postcss-font-smoothing": "^0.1.0",
     "react": "^15.6.1",
     "react-click-outside": "tj/react-click-outside",
     "react-css-themr": "^2.1.2",

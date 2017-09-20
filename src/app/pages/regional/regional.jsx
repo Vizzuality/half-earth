@@ -1,6 +1,6 @@
 import React from 'react'
 
-import pageStyles from 'styles/themes/pages-themes.scss'
+import pageStyles from 'styles/pages.scss'
 
 const Regional = props => (
   <div className={pageStyles.container}>

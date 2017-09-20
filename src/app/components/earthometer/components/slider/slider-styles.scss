@@ -1,7 +1,7 @@
 @import '~styles/variables.scss';
 
 .wrap {
-  width: calc(100% - 5vw);
+  width: calc(100% - #{$site-padding});
 }
 
 .values,
