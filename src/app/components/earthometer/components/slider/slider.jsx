@@ -12,25 +12,27 @@ const showPercent = v => (hasPercent(v) ? '%' : '')
 
 const SliderComponent = ({ className, earthSaved, setEarthSaved }) => (
   <div className={cx(className, styles.container)}>
-    <div className={styles.labels}>
-      <h1 className={styles.title}>Earth Conserved</h1>
-      <h2>{Math.round(earthSaved)}%</h2>
-    </div>
-    <div>
-      <Slider
-        theme={theme}
-        value={earthSaved}
-        max={last(values)}
-        onChange={setEarthSaved}
-      />
-      <ul className={styles.values}>
-        {values.map(v => (
-          <li className={cx({ [styles.percent]: hasPercent(v) })} key={v}>
-            {v}
-            {showPercent(v)}
-          </li>
-        ))}
-      </ul>
+    <div className={styles.wrap}>
+      <div className={styles.labels}>
+        <h1 className={styles.title}>Earth Conserved</h1>
+        <h2>{Math.round(earthSaved)}%</h2>
+      </div>
+      <div>
+        <Slider
+          theme={theme}
+          value={earthSaved}
+          max={last(values)}
+          onChange={setEarthSaved}
+        />
+        <ul className={styles.values}>
+          {values.map(v => (
+            <li className={cx({ [styles.percent]: hasPercent(v) })} key={v}>
+              {v}
+              {showPercent(v)}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </div>
 )

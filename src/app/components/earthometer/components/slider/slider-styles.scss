@@ -1,6 +1,7 @@
 @import '~styles/variables.scss';
 
-.container {
+.wrap {
+  width: calc(100% - 5vw);
 }
 
 .values,
