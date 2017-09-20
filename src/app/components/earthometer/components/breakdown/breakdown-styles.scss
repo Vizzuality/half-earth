@@ -1,5 +1,4 @@
 @import '~styles/variables.scss';
-$radius: 57px;
 
 .items {
   list-style: none;
@@ -8,31 +7,25 @@ $radius: 57px;
   display: flex;
 }
 
-// .item {
-//   width: $radius;
-// }
+.item,
+.radialValue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-.dotValue {
+.item {
+  border: 1px solid;
+}
+
+.radialValue {
   position: relative;
 }
 
-.dots {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-size: calc(100% - 6px);
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 .value {
-  $center: $radius / 2;
-
   position: absolute;
   font-size: 1.2em;
-  left: calc(#{$center} - 1em);
-  top: calc(#{$center} - 0.5em);
-  z-index: $zforeground;
 }
 
 .label {
@@ -41,14 +34,35 @@ $radius: 57px;
   letter-spacing: 4px;
 }
 
-.mammals {
-  circle {
-    stroke: $color-green;
-  }
-}
+// Theme
+.radial {
+  $stroke-width: 3px;
+  $radius: 54px;
 
-.birds {
-  circle {
-    stroke: $color-yellow;
+  width: $radius;
+  height: $radius;
+
+  .svg {
+    background-size: calc(100% - #{2 * $stroke-width});
+  }
+
+  .circle {
+    stroke-width: $stroke-width;
+  }
+
+  &.mammals {
+    .svg {
+      background-image: url(/img/bird.png);
+    }
+
+    .circle {
+      stroke: $color-green;
+    }
+  }
+
+  &.birds {
+    .circle {
+      stroke: $color-yellow;
+    }
   }
 }

@@ -1,24 +1,22 @@
 import React from 'react'
 import cx from 'classnames'
 
-import Radial from './radial'
+import Radial from './components/radial'
 import styles from './breakdown-styles.scss'
 
 const groups = [
-  { name: 'mammals', url: '/img/mammals.png', getValue: v => Math.round(v) },
-  { name: 'birds', url: '/img/birds.png', getValue: v => Math.round(v) },
+  { name: 'mammals', getValue: v => Math.round(v) },
+  { name: 'birds', getValue: v => Math.round(v) },
   {
     name: 'amphibians',
-    url: '/img/amphibians.png',
     getValue: v => Math.round(v)
   },
-  { name: 'reptiles', url: '/img/reptiles.png', getValue: v => Math.round(v) },
+  { name: 'reptiles', getValue: v => Math.round(v) },
   {
     name: 'invertebrates',
-    url: '/img/invertebrates.png',
     getValue: v => Math.round(v)
   },
-  { name: 'plants', url: '/img/plants.png', getValue: v => Math.round(v) }
+  { name: 'plants', getValue: v => Math.round(v) }
 ]
 
 const Breakdown = ({ className, earthSaved }) => (
@@ -28,13 +26,12 @@ const Breakdown = ({ className, earthSaved }) => (
         return (
           <li key={name} className={styles.item}>
             <h1 className={styles.label}>{name}</h1>
-            <div className={styles.dotValue}>
+            <div className={styles.radialValue}>
               <h2 className={styles.value}>{getValue(earthSaved)}%</h2>
               <Radial
-                className={cx(styles.dots, styles.mammals)}
+                theme={styles}
+                className={cx(styles.radial, styles[name])}
                 background={url}
-                strokeWidth={3}
-                width={54}
                 progress={getValue(earthSaved)}
               />
             </div>
