@@ -2,8 +2,12 @@
 $width: calc(45vw - #{$site-padding});
 
 .container {
-  padding: 18rem $site-padding;
-  height: 100%;
+  $top: 10rem;
+  $pad: 8rem;
+
+  margin-top: $top;
+  padding: $pad $site-padding;
+  height: calc(100vh - #{$top + (2 * $pad)});
   width: $width;
   z-index: $zforeground;
   background-color: rgba($color-mid-blue, 0.96);
@@ -12,10 +16,6 @@ $width: calc(45vw - #{$site-padding});
   top: 0;
   left: 0;
   overflow-y: auto;
-}
-
-.scroller {
-  overflow-y: visible;
 
   &::after {
     content: '';
