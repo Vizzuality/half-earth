@@ -1,6 +1,7 @@
 .DS*
 node_modules
 config/credentials.js
+designs
 public/**/*json
 public/**/*tif
 public/**/*tf
