@@ -8,31 +8,51 @@
 
 .home {
   color: white;
+  $card-height: 420px;
+  $card-width: calc(33vw - #{$site-padding});
 
   &.items {
     $margin: 7vw;
-
-    justify-content: space-between;
-    margin: 0 $margin;
-    width: calc(100vw - #{(2 * $margin)});
+    // margin: calc(50vh - #{$card-height / 2}) $margin;
+    // margin: 0 $margin;
+    // width: calc(100vw - #{(2 * $margin)});
+    width: calc(3 * #{$card-width});
   }
 
   .item {
-    width: 33%;
-    height: 33vh;
-    background-color: white;
+    width: $card-width;
+    height: $card-height;
+    border-radius: 3%;
+    margin-right: $site-gutter;
+    max-width: 340px;
   }
 
   .link {
-    display: block;
-    text-align: center;
+    letter-spacing: 0.75em;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .label {
     display: inline-block;
-    margin-top: calc(100% - 3em);
-    color: black;
+    bottom: 3em;
+    color: white;
+    position: absolute;
+    font-size: 1.8em;
+    text-transform: uppercase;
+  }
+
+  .item-local {
+    background-image: url(/img/local.png);
+  }
+
+  .item-global {
+    background-image: url(/img/global.png);
+  }
+
+  .item-regional {
+    background-image: url(/img/regional.png);
   }
 }

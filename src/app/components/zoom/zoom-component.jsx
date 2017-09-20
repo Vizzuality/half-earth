@@ -14,7 +14,7 @@ const Zoom = ({ theme, className }) => (
     {Object.keys(zoomLevels)
       .filter(hidden)
       .map(l => (
-        <li className={theme.item} key={l}>
+        <li className={cx(theme[`item-${l}`], theme.item)} key={l}>
           <Link className={theme.link} to={l}>
             <span className={theme.label}>{l}</span>
           </Link>

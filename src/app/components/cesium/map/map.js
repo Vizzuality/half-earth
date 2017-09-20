@@ -131,6 +131,7 @@ class CesiumComponent extends Component {
 
   handleZoom (zoom) {
     if (!zoomLevels[zoom]) return
+    console.log(zoomLevels[zoom])
     const [zLevel, opts] = zoomLevels[zoom]
     this.flyTo(...zLevel, opts)
   }
@@ -143,7 +144,7 @@ class CesiumComponent extends Component {
   render () {
     const { layers, viewer } = this.state
     const { props } = this
-    const getPos = () => {
+    const getPos = (window.getPos = () => {
       const c = viewer.camera.positionCartographic
       console.log(
         Object.keys(c).reduce((a, k) => {
@@ -151,7 +152,7 @@ class CesiumComponent extends Component {
           return a
         }, {})
       ) //
-    }
+    })
     return createElement(CesiumMapComponent, {
       mapId,
       layers,

@@ -6,7 +6,7 @@ import pageStyles from 'styles/pages.scss'
 
 const Local = () => (
   <div className={cx(styles.container, pageStyles.container)}>
-    <h1 className={cx(styles.title, pageStyles.titles)}>
+    <h1 className={cx(styles.title, pageStyles.title)}>
       Okavango wilderness project
     </h1>
     <p className={cx(pageStyles.content)}>

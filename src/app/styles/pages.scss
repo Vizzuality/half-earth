@@ -35,13 +35,14 @@ $width: calc(45vw - #{$site-padding});
   }
 }
 
-.titles {
+.title {
   text-transform: uppercase;
-  letter-spacing: 0.82rem;
+  letter-spacing: 0.82em;
   line-height: 2em;
 }
 
 .content {
   font-size: 1rem;
   line-height: 2.7em;
+  z-index: $zforeground * 10;
 }

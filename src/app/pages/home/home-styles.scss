@@ -1,5 +1,24 @@
 @import '~styles/variables.scss';
 
-.map {
-  // z-index: $zbackground;
+.container {
+  position: relative;
+  justify-content: center;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 15rem;
+  color: white;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  margin-bottom: 5em;
+}
+
+.em {
+  text-transform: uppercase;
+  color: $color-turquoise;
 }
