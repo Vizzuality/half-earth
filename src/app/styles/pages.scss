@@ -5,13 +5,13 @@ $width: calc(45vw - #{$site-padding});
   $top: 10rem;
   $pad: 8rem;
 
+  color: white;
   margin-top: $top;
   padding: $pad $site-padding;
   height: calc(100vh - #{$top + (2 * $pad)});
   width: $width;
   z-index: $zforeground;
   background-color: rgba($color-mid-blue, 0.96);
-  color: black;
   position: absolute;
   top: 0;
   left: 0;
@@ -44,5 +44,4 @@ $width: calc(45vw - #{$site-padding});
 .content {
   font-size: 1rem;
   line-height: 2.7em;
-  font-smoothing: antialiased;
 }

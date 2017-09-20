@@ -24,16 +24,16 @@ export default [
   assign(
     {
       path: '/(global|regional|local)',
-      component: Sidebar,
-      key: 'Sidebar'
+      component: Earthometer,
+      key: 'Earthometer'
     },
     fadeProps
   ),
   assign(
     {
       path: '/(global|regional|local)',
-      component: Earthometer,
-      key: 'Earthometer'
+      component: Sidebar,
+      key: 'Sidebar'
     },
     fadeProps
   ),

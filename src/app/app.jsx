@@ -2,6 +2,7 @@ import React, { createElement } from 'react'
 import { Provider } from 'react-redux'
 import { Route, Router } from 'react-router-dom'
 import { AnimatedRoute } from 'react-router-transition'
+import 'app/styles/global.scss'
 
 import { assign } from 'utils'
 import store, { history } from 'app/store'
