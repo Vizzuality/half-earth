@@ -1,22 +1,28 @@
 @import '~styles/variables.scss';
 $width: calc(45vw - #{$site-padding});
 
-.container {
+.background {
+  background-color: rgba($color-mid-blue, 0.96);
+}
+
+.container,
+.background {
   $top: 10rem;
   $pad: 8rem;
 
-  color: white;
   margin-top: $top;
   padding: $pad $site-padding;
   height: calc(100vh - #{$top + (2 * $pad)});
   width: $width;
   z-index: $zforeground;
-  background-color: rgba($color-mid-blue, 0.96);
   position: absolute;
   top: 0;
   left: 0;
-  overflow-y: auto;
+}
 
+.container {
+  color: white;
+  
   &::after {
     content: '';
     height: 20rem;

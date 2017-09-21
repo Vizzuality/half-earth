@@ -7,6 +7,7 @@ import Local from 'pages/local'
 import CesiumMap from 'pages/map'
 
 import Sidebar from 'components/sidebar'
+import PageBackground from 'components/page-background'
 import Earthometer from 'components/earthometer'
 
 const fadeProps = {
@@ -34,6 +35,14 @@ export default [
       path: '/(global|regional|local)',
       component: Sidebar,
       key: 'Sidebar'
+    },
+    fadeProps
+  ),
+  assign(
+    {
+      path: '/(global|regional|local)',
+      component: PageBackground,
+      key: 'PageBackground'
     },
     fadeProps
   ),

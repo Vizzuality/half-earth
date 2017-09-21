@@ -9,12 +9,17 @@ import styles from './zoom-styles.scss'
 const zoomLevels = bindZoomLevels()
 const hidden = l => l !== 'hidden'
 
-const Zoom = ({ theme, className }) => (
+const Zoom = ({ theme, className, active }) => (
   <ul className={cx(className, theme.items)}>
     {Object.keys(zoomLevels)
       .filter(hidden)
       .map(l => (
-        <li className={cx(theme[`item-${l}`], theme.item)} key={l}>
+        <li
+          className={cx(theme[`item-${l}`], theme.item, {
+            [theme.itemActive]: l === active
+          })}
+          key={l}
+        >
           <Link className={theme.link} to={l}>
             <span className={theme.label}>{l}</span>
           </Link>

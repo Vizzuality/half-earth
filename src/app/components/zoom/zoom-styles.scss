@@ -10,6 +10,12 @@
   background-size: cover;
 }
 
+.itemActive {
+  .label {
+    color: green;
+  }
+}
+
 .link {
   text-decoration: none;
 }
