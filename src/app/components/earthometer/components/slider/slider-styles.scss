@@ -1,4 +1,5 @@
 @import '~styles/variables.scss';
+$offset: 0.1em;
 
 .wrap {
   width: calc(100% - #{$site-padding});
@@ -8,6 +9,11 @@
 .labels {
   display: flex;
   justify-content: space-between;
+}
+
+.labels,
+.values {
+  width: calc(100% + 10px);
 }
 
 .title {
@@ -22,17 +28,19 @@
 }
 
 .values {
-  $offset: 0.1em;
-
   font-size: 0.9rem;
   margin: 0;
   padding: 0;
   list-style: none;
   margin-top: 0.6em;
-  width: calc(100% + #{$offset * 5});
-  margin-left: - $offset;
+  // margin-left: - $offset;
+  margin-left: -4px;
 }
 
 .percent {
   margin-left: 1.7em;
+}
+
+.percentSaved {
+  color: $color-turquoise;
 }

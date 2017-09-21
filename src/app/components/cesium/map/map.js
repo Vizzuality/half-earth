@@ -131,7 +131,6 @@ class CesiumComponent extends Component {
 
   handleZoom (zoom) {
     if (!zoomLevels[zoom]) return
-    console.log(zoomLevels[zoom])
     const [zLevel, opts] = zoomLevels[zoom]
     this.flyTo(...zLevel, opts)
   }

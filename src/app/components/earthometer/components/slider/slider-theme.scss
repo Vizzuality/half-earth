@@ -15,8 +15,8 @@ $progress-color: $color-turquoise;
 
 .range {
   background-image: url('/img/dash.svg');
-  background-repeat-y: no-repeat;
-  background-position: center;
+  background-repeat: repeat no-repeat;
+  background-position: 4px center;
   border: none;
 }
 

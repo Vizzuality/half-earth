@@ -15,10 +15,11 @@ const SliderComponent = ({ className, earthSaved, setEarthSaved }) => (
     <div className={styles.wrap}>
       <div className={styles.labels}>
         <h1 className={styles.title}>Earth Conserved</h1>
-        <h2>{Math.round(earthSaved)}%</h2>
+        <h2 className={styles.percentSaved}>{Math.round(earthSaved)}%</h2>
       </div>
       <div>
         <Slider
+          className={styles.slider}
           theme={theme}
           value={earthSaved}
           max={last(values)}
