@@ -1,4 +1,5 @@
 .DS*
+.vscode
 node_modules
 config/credentials.js
 designs

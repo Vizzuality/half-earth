@@ -66,8 +66,10 @@ class CesiumComponent extends Component {
   }
 
   bindMap (props) {
-    const viewer = this.mountMap(props)
-    const layers = this.state.layers ? this.state.layers : viewer.imageryLayers
+    const viewer = (window.viwer = this.mountMap(props))
+    const layers = Object.keys(this.state.layers).length
+      ? this.state.layers
+      : viewer.imageryLayers
 
     // fetch('http://localhost:8080/tiles/0/0/0.geojson').then(d => d.json()).then(d => {
     //   console.log(d.features[0])

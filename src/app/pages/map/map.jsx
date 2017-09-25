@@ -9,7 +9,9 @@ import ModelProvider from 'components/cesium/model-provider'
 const styles = {}
 const birdsVisible = false
 const mammalsVisible = false
-const urbanExpansionVisible = false
+const urbanExpansionVisible = true
+const keyBiodiversityAreasVisible = true
+const protectedAreasVisible = true
 const lockNavigation = true
 
 const scope = path => path.replace('/', '') || 'hidden'
@@ -44,8 +46,22 @@ const Map = props => (
       visible={mammalsVisible}
     />
     <ImageProvider
+      type="UrlTemplate"
+      url="https://cartocdn-ashbu.global.ssl.fastly.net/simbiotica/api/v1/map/f270dbb613da2f1070ba58689f139d85:1506097102253/0/{z}/{x}/{y}.png"
+      visible={keyBiodiversityAreasVisible}
+    />
+    <ImageProvider
+      type="UrlTemplate"
+      url="https://cartocdn-ashbu.global.ssl.fastly.net/simbiotica/api/v1/map/7ee5af5d52cd4929232b8b60961cbd02:1462351287227/0/{z}/{x}/{y}.png"
+      visible={protectedAreasVisible}
+    />
+    <ImageProvider
       type="WebMapService"
-      url="https://geoservice.dlr.de/eoc/land/wms?service=WMS&request=GetMap&format=image/png&layers=GUF28_DLR_v1_Mosaic&SRS=EPSG:4326&TRANSPARENT=true"
+      format="image/png"
+      layers="GUF28_DLR_v1_Mosaic"
+      srs="EPSG:4326"
+      transparent
+      url="https://geoservice.dlr.de/eoc/land/wms?service=WMS&request=GetMap"
       visible={urbanExpansionVisible}
     />
   </CesiumMap>

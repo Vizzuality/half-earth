@@ -7,7 +7,7 @@ const CesiumMap = ({ className, layers, mapId, children, getPos, viewer }) => (
   <div>
     <div className={cx(className, styles.map)} id={mapId}>
       {React.Children.map(children, ch =>
-        React.cloneElement(ch, { ...ch.props, layers, viewer })
+        React.cloneElement(ch, { cLayers: layers, viewer })
       )}
     </div>
     <button
