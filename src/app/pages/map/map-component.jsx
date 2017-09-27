@@ -6,13 +6,7 @@ import ModelProvider from 'components/cesium/model-provider'
 
 // import styles from './home-styles.scss'
 const styles = {}
-// const birdsVisible = false
-// const mammalsVisible = false
-// const urbanExpansionVisible = true
-// const keyBiodiversityAreasVisible = true
-// const protectedAreasVisible = true
 const lockNavigation = true
-// const maximumLevel = 10
 
 const scope = path => path.replace('/', '') || 'hidden'
 const birdPosition = [22.606301200000004, -19.6, 10000.0]

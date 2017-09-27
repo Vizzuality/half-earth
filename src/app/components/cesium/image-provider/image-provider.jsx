@@ -15,13 +15,21 @@ const formatParams = (type, props) => {
 }
 
 class ImageProvider extends Component {
+  constructor (props) {
+    super(props)
+    this.layer = null
+  }
+
   componentWillReceiveProps ({ cLayers, visible, type, viewer, ...props }) {
     if (notEmpty(cLayers)) {
-      const provider = new Cesium[`${type}ImageryProvider`](
-        formatParams(type, props)
-      )
-      const layer = cLayers.addImageryProvider(provider)
-      layer.show = Boolean(visible)
+      if (!this.layer) {
+        const provider = new Cesium[`${type}ImageryProvider`](
+          formatParams(type, props)
+        )
+        this.layer = cLayers.addImageryProvider(provider)
+      }
+
+      this.layer.show = Boolean(visible)
     }
   }
 

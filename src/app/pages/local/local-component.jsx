@@ -5,13 +5,17 @@ import XToggle from 'components/explorable/toggle'
 import styles from './local-styles.scss'
 import pageStyles from 'styles/pages.scss'
 
-const Local = ({ toggleMammals }) => (
+const Local = ({ toggleLayer }) => (
   <div className={cx(styles.container, pageStyles.container)}>
     <h1 className={cx(styles.title, pageStyles.title)}>
       Okavango wilderness project
     </h1>
     <p className={cx(pageStyles.content)}>
-      <XToggle active onClick={toggleMammals} className={pageStyles.toggle}>
+      <XToggle
+        active
+        onClick={() => toggleLayer('mammals')}
+        className={pageStyles.toggle}
+      >
         lalaland
       </XToggle>
       <span>In September 2013</span>, we embarked on our most challenging

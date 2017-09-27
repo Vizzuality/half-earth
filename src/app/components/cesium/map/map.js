@@ -51,8 +51,7 @@ class CesiumComponent extends Component {
         accessToken: MAPBOX_TOKEN
       })
     }
-
-    const viewer = new Cesium.Viewer(mapId, mapConfig)
+    const viewer = this.state.viewer || new Cesium.Viewer(mapId, mapConfig)
     this.flyTo = bindFlyTo(viewer)
 
     // setInterval(function () {
@@ -66,7 +65,7 @@ class CesiumComponent extends Component {
   }
 
   bindMap (props) {
-    const viewer = (window.viwer = this.mountMap(props))
+    const viewer = (window.viewer = this.mountMap(props))
     const layers = Object.keys(this.state.layers).length
       ? this.state.layers
       : viewer.imageryLayers
@@ -143,8 +142,9 @@ class CesiumComponent extends Component {
   }
 
   render () {
-    const { layers, viewer } = this.state
-    const { props } = this
+    const { props, state } = this
+    const { layers, viewer } = state
+
     const getPos = (window.getPos = () => {
       const c = viewer.camera.positionCartographic
       console.log(
