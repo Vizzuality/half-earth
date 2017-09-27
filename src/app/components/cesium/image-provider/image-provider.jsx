@@ -3,24 +3,23 @@ const { Cesium } = window
 
 const notEmpty = o => o && o._layers && Boolean(o._layers.length)
 
+const formatParams = (type, props) => {
+  switch (type) {
+    case 'WebMapService':
+      const { url, layers, ...parameters } = props
+      return { url, layers, parameters }
+
+    default:
+      return props
+  }
+}
+
 class ImageProvider extends Component {
-  componentWillReceiveProps (props) {
-    const {
-      cLayers,
-      visible,
-      type,
-      viewer,
-      url,
-      layers,
-      ...parameters
-    } = props
+  componentWillReceiveProps ({ cLayers, visible, type, viewer, ...props }) {
     if (notEmpty(cLayers)) {
-      console.log({ url, layers, parameters })
-      const provider = new Cesium[`${type}ImageryProvider`]({
-        url,
-        layers,
-        parameters
-      })
+      const provider = new Cesium[`${type}ImageryProvider`](
+        formatParams(type, props)
+      )
       const layer = cLayers.addImageryProvider(provider)
       layer.show = Boolean(visible)
     }

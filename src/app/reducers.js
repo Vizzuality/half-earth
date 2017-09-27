@@ -6,6 +6,8 @@ import initialState from './data/initial-state'
 import allActions from './actions'
 import { reducers as zoomReducers } from 'components/zoom'
 import { reducers as earthometerReducers } from 'components/earthometer'
+import { reducers as localReducers } from 'pages/local'
+import { reducers as mapReducers } from 'pages/map'
 
 export default combineReducers({
   routing: routerReducer,
@@ -15,5 +17,7 @@ export default combineReducers({
     allActions,
     earthometerReducers,
     initialState
-  )
+  ),
+  local: handleActions('local', allActions, localReducers, initialState),
+  map: handleActions('map', allActions, mapReducers, initialState)
 })

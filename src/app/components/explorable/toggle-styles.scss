@@ -1,0 +1,14 @@
+@import '~styles/ui.scss';
+
+.toggle {
+  @extend %button;
+
+  border-width: 1px;
+  border-style: solid;
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+.active {
+  text-decoration: line-through;
+}

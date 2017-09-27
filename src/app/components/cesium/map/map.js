@@ -86,7 +86,7 @@ class CesiumComponent extends Component {
     //     })
     //   })
     // })
-    const file = 'sr_mammals_sa.json'
+    // const file = 'sr_mammals_sa.json'
     // const file = 'new_shapefile.geojson'
     // const file = 'protea-demo.geojson'
     // const file = 'restio_rarity_map_v1.tif.geojson'
@@ -94,27 +94,27 @@ class CesiumComponent extends Component {
     // const file = 'restio_raroty_1x1.geojson'
     // const file = 'restio_rarity_map.geojson'
 
-    Cesium.GeoJsonDataSource
-      .load(`http://localhost:3333/${file}`)
-      .then(dataSource => {
-        // console.log(dataSource.entities.values[0])
-        // var p = dataSource.entities.values
-        // for (var i = 0; i < p.length; i++) {
-        //   // console.log(Cesium.Color.WHITE, Object.assign(Cesium.Color.WHITE, { alpha: 0.1 }))
-        //   // const green = Cesium.Color.LAWNGREEN
-        //   // green.alpha = 0.5
-        //   p[i].polygon.outline = false
-        //   const color = new Cesium.Color(1, 0, 0, 0.4)
-        //   p[i].polygon.material = color
-        //   p[i].polygon.shadows = Cesium.ShadowMode.ENABLED
-        //   // p[i].polygon.extrudedHeight = p[i].properties.pvalue._value * 10000 // or height property
-        //   p[i].polygon.height = p[i].properties.pvalue._value * 9000 // or height property
-        //   // p[i].polygon.height = 200000 // or height property
-        // }
+    // Cesium.GeoJsonDataSource
+    //   .load(`http://localhost:3333/${file}`)
+    //   .then(dataSource => {
+    //     // console.log(dataSource.entities.values[0])
+    //     // var p = dataSource.entities.values
+    //     // for (var i = 0; i < p.length; i++) {
+    //     //   // console.log(Cesium.Color.WHITE, Object.assign(Cesium.Color.WHITE, { alpha: 0.1 }))
+    //     //   // const green = Cesium.Color.LAWNGREEN
+    //     //   // green.alpha = 0.5
+    //     //   p[i].polygon.outline = false
+    //     //   const color = new Cesium.Color(1, 0, 0, 0.4)
+    //     //   p[i].polygon.material = color
+    //     //   p[i].polygon.shadows = Cesium.ShadowMode.ENABLED
+    //     //   // p[i].polygon.extrudedHeight = p[i].properties.pvalue._value * 10000 // or height property
+    //     //   p[i].polygon.height = p[i].properties.pvalue._value * 9000 // or height property
+    //     //   // p[i].polygon.height = 200000 // or height property
+    //     // }
 
-        viewer.dataSources.add(dataSource)
-        // viewer.zoomTo(dataSource)
-      })
+    //     viewer.dataSources.add(dataSource)
+    //     // viewer.zoomTo(dataSource)
+    //   })
 
     // var dataSource = Cesium.GeoJsonDataSource.load('http://localhost:8080/tiles/0/0/0.geojson')
     // viewer.dataSources.add(dataSource)

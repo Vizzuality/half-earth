@@ -22,7 +22,8 @@ $width: calc(45vw - #{$site-padding});
 
 .container {
   color: white;
-  
+  overflow-y: auto;
+
   &::after {
     content: '';
     height: 20rem;
@@ -51,4 +52,8 @@ $width: calc(45vw - #{$site-padding});
   font-size: 1rem;
   line-height: 2.7em;
   z-index: $zforeground * 10;
+}
+
+.toggle {
+  border-color: red;
 }
