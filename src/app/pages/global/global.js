@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import find from 'lodash/find'
 import lowerCase from 'lodash/lowerCase'
+import kebabCase from 'lodash/kebabCase'
 
 import GlobalComponent from './global-component'
 import XToggle from 'components/explorable/toggle'
@@ -11,8 +12,7 @@ import { actions as mapActions } from 'pages/map'
 import pageStyles from 'styles/pages.scss'
 
 const renderToggle = layers => toggle => (label, n) => {
-  const name = n || lowerCase(label)
-
+  const name = n || kebabCase(lowerCase(label))
   return (
     <XToggle
       key={name}

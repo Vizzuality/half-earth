@@ -68,7 +68,7 @@ export default {
       visible: false
     },
     {
-      name: 'PA',
+      name: 'protected-areas',
       type: 'UrlTemplate',
       url: null,
       carto: cartoConfig(
