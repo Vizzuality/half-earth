@@ -38,14 +38,14 @@ export default {
               options: {
                 cartocss_version: '2.1.1',
                 cartocss: `#layer {
-              polygon-fill: #374C70;
-              polygon-opacity: 0.9;
-              ::outline {
-                line-color: #FFF;
-                line-width: 1;
-                line-opacity: 0.5;
-              }
-            }`,
+                  polygon-fill: #374C70;
+                  polygon-opacity: 0.9;
+                  ::outline {
+                    line-color: #FFF;
+                    line-width: 1;
+                    line-opacity: 0.5;
+                  }
+                }`,
                 sql: 'select * from kba_poly_2016_id'
               }
             }

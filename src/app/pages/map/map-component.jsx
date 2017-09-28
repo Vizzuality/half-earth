@@ -29,7 +29,10 @@ const Map = ({ map, location }) => (
         speed={3 + i / 10}
       />
     ))}
-    {map.layers.map(layer => <ImageProvider key={layer.name} {...layer} />)}
+    {map.layers.map(
+      layer =>
+        layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
+    )}
   </CesiumMap>
 )
 

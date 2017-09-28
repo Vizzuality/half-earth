@@ -3,29 +3,30 @@ import difference from 'lodash/difference'
 
 import { assign } from 'app/utils'
 import * as actions from './map-actions'
+import { actions as cartoActions } from 'providers/carto'
 
-// const showMammals = (state, { payload }) => ({ ...state })
+const updateLayer = (state, { payload, ...rest }) => {
+  const { name } = payload
+  const { layers } = state
+  const layer = find(layers, { name })
+  const filtered = difference(layers, [layer])
+
+  return {
+    ...state,
+    layers: filtered.concat([assign(layer, payload(layer))])
+  }
+}
 
 export default {
-  [actions.gotCartoTiles]: (state, { payload }) => {
-    const { name, url } = payload
-    const { layers } = state
+  [cartoActions.gotCartoTiles]: (state, { payload }) =>
+    updateLayer(state, {
+      ...payload,
+      payload: layer => ({ url: payload.url, carto: null })
+    }),
 
-    const layer = find(layers, { name })
-    const filtered = difference(layers, [layer])
-    return {
-      ...state,
-      layers: filtered.concat([assign(layer, { url, carto: null })])
-    }
-  },
-
-  [actions.toggleLayer]: (state, { payload }) => {
-    const { layers } = state
-    const layer = find(layers, { name: payload })
-    const filtered = difference(layers, [layer])
-    return {
-      ...state,
-      layers: filtered.concat([assign(layer, { visible: !layer.visible })])
-    }
-  }
+  [actions.toggleLayer]: (state, { payload }) =>
+    updateLayer(state, {
+      ...payload,
+      payload: layer => ({ visible: !layer.visible })
+    })
 }

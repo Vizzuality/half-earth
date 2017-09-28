@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import MapComponent from './map-component'
 import initialState from './initial-state'
 import * as actions from './map-actions'
+import { actions as cartoActions } from 'providers/carto'
 import reducers from './map-reducers'
 
 class MapContainer extends Component {
@@ -11,11 +12,11 @@ class MapContainer extends Component {
     this.requestCartos(props)
   }
 
-  requestCartos (props) {
-    props.map.layers.map(({ carto, name }) => {
-      if (carto) {
+  requestCartos ({ map, getCartoTiles }) {
+    map.layers.map(({ carto, name, url }) => {
+      if (carto && !url) {
         const { account, config, apiv, tileFormat } = carto
-        props.getCartoTiles({ account, config, apiv, name, tileFormat })
+        getCartoTiles({ account, config, apiv, name, tileFormat })
       }
     })
   }
@@ -28,4 +29,6 @@ class MapContainer extends Component {
 export { actions, reducers, initialState }
 const mapStateToProps = ({ map }) => ({ map })
 
-export default connect(mapStateToProps, actions)(MapContainer)
+export default connect(mapStateToProps, { ...actions, ...cartoActions })(
+  MapContainer
+)

@@ -12,17 +12,24 @@ const Global = ({ toggleLayer, map, ...props }) => (
     <h1>Global</h1>
     <XToggle
       active={find(map.layers, { name: 'mammals' }).visible}
-      onClick={() => toggleLayer('mammals')}
+      onClick={() => toggleLayer({ name: 'mammals' })}
       className={pageStyles.toggle}
     >
       Toggle Mammals
     </XToggle>
     <XToggle
       active={find(map.layers, { name: 'birds' }).visible}
-      onClick={() => toggleLayer('birds')}
+      onClick={() => toggleLayer({ name: 'birds' })}
       className={pageStyles.toggle}
     >
       Toggle birds
+    </XToggle>
+    <XToggle
+      active={find(map.layers, { name: 'KPA' }).visible}
+      onClick={() => toggleLayer({ name: 'KPA' })}
+      className={pageStyles.toggle}
+    >
+      Toggle KPA
     </XToggle>
   </div>
 )
