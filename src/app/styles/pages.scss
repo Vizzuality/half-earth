@@ -1,5 +1,5 @@
 @import '~styles/variables.scss';
-$width: calc(45vw - #{$site-padding});
+$width: calc(50vw - #{2 * $site-padding});
 
 .background {
   background-color: rgba($color-mid-blue, 0.96);
@@ -23,6 +23,9 @@ $width: calc(45vw - #{$site-padding});
 .container {
   color: white;
   overflow-y: auto;
+  font-family: 'PierSans';
+  font-size: 1rem;
+  line-height: 2em;
 
   &::after {
     content: '';
@@ -30,7 +33,7 @@ $width: calc(45vw - #{$site-padding});
     position: fixed;
     bottom: 0;
     left: 0;
-    width: calc(45vw + #{$site-padding});
+    width: 50vw;
     z-index: 1000;
     background-image:
       linear-gradient(
@@ -55,5 +58,7 @@ $width: calc(45vw - #{$site-padding});
 }
 
 .toggle {
-  border-color: red;
+  border-color: $color-turquoise;
+  line-height: 1.5em;
+  padding: 0 2px;
 }

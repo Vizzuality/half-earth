@@ -1,24 +1,6 @@
-import { assign } from 'app/utils'
+import { cartoConfig } from 'app/utils'
 
 let maximumLevel
-const cartoConfig = (account, cartocss, table, options = {}) => ({
-  account,
-  apiv: 'v1',
-  tileFormat: 'png',
-  config: {
-    version: '1.3.0',
-    layers: [
-      {
-        type: 'mapnik',
-        options: assign(options, {
-          cartocss_version: '2.3.0',
-          cartocss,
-          sql: `select * from ${table}`
-        })
-      }
-    ]
-  }
-})
 
 export default {
   layers: [
