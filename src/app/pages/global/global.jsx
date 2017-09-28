@@ -10,27 +10,19 @@ import pageStyles from 'styles/pages.scss'
 const Global = ({ toggleLayer, map, ...props }) => (
   <div className={pageStyles.container}>
     <h1>Global</h1>
-    <XToggle
-      active={find(map.layers, { name: 'mammals' }).visible}
-      onClick={() => toggleLayer({ name: 'mammals' })}
-      className={pageStyles.toggle}
-    >
-      Toggle Mammals
-    </XToggle>
-    <XToggle
-      active={find(map.layers, { name: 'birds' }).visible}
-      onClick={() => toggleLayer({ name: 'birds' })}
-      className={pageStyles.toggle}
-    >
-      Toggle birds
-    </XToggle>
-    <XToggle
-      active={find(map.layers, { name: 'KPA' }).visible}
-      onClick={() => toggleLayer({ name: 'KPA' })}
-      className={pageStyles.toggle}
-    >
-      Toggle KPA
-    </XToggle>
+    {map.layers
+      .map(d => d.name)
+      .sort()
+      .map(name => (
+        <XToggle
+          key={name}
+          active={find(map.layers, { name }).visible}
+          onClick={() => toggleLayer({ name })}
+          className={pageStyles.toggle}
+        >
+          Toggle {name}
+        </XToggle>
+      ))}
   </div>
 )
 

@@ -137,8 +137,7 @@ class CesiumComponent extends Component {
   }
 
   componentWillReceiveProps (props) {
-    // if (this.props.zoomLevel !== props.zoomLevel) { this.globe.show = Boolean(props.globe) }
-    if (props.zoomLevel) this.handleZoom(props.zoomLevel)
+    if (this.props.zoomLevel !== props.zoomLevel) { this.handleZoom(props.zoomLevel) }
   }
 
   render () {

@@ -1,64 +1,107 @@
 import { assign } from 'app/utils'
 
 let maximumLevel
-const cartoConfig = { version: '1.3.0' }
+const cartoConfig = (account, cartocss, table, options = {}) => ({
+  account,
+  apiv: 'v1',
+  tileFormat: 'png',
+  config: {
+    version: '1.3.0',
+    layers: [
+      {
+        type: 'mapnik',
+        options: assign(options, {
+          cartocss_version: '2.3.0',
+          cartocss,
+          sql: `select * from ${table}`
+        })
+      }
+    ]
+  }
+})
 
 export default {
   layers: [
     {
       name: 'birds',
       type: 'UrlTemplate',
-      // url: 'https://cartocdn-ashbu_d.global.ssl.fastly.net/jcalonso/api/v1/map/jcalonso@acf357ab@73d17c35d9d98144ff2a1e9005236bd2:1506440445299/1/{z}/{x}/{y}.png',
       url:
         'http://storage.googleapis.com/half-earth/v1/demo/mol-rgb/sr_birds/{z}/{x}/{y}.png',
       maximumLevel,
       visible: false
     },
     {
-      name: 'mammals',
-      type: 'UrlTemplate',
-      url:
-        'http://storage.googleapis.com/half-earth/v1/demo/mol-rgb/sr_mammals/{z}/{x}/{y}.png',
-      maximumLevel,
-      visible: false
-    },
-    {
-      name: 'KPA',
+      name: 'KBA',
       type: 'UrlTemplate',
       url: null,
       maximumLevel,
-      carto: {
-        account: 'simbiotica',
-        apiv: 'v1',
-        tileFormat: 'png',
-        config: assign(cartoConfig, {
-          layers: [
-            {
-              type: 'mapnik',
-              options: {
-                cartocss_version: '2.1.1',
-                cartocss: `#layer {
-                  polygon-fill: #374C70;
-                  polygon-opacity: 0.9;
-                  ::outline {
-                    line-color: #FFF;
-                    line-width: 1;
-                    line-opacity: 0.5;
-                  }
-                }`,
-                sql: 'select * from kba_poly_2016_id'
-              }
-            }
-          ]
-        })
-      },
+      carto: cartoConfig(
+        'simbiotica',
+        `#layer {
+          polygon-fill: #374C70;
+          polygon-opacity: 0.9;
+          ::outline {
+            line-color: #FFF;
+            line-width: 1;
+            line-opacity: 0.5;
+          }
+        }`,
+        'kba_poly_2016_id'
+      ),
+      visible: false
+    },
+    {
+      name: 'mammals',
+      type: 'UrlTemplate',
+      url: null,
+      maximumLevel,
+      carto: cartoConfig(
+        'jcalonso',
+        `#layer {
+            raster-opacity: 1; 
+            raster-colorizer-default-mode: linear; 
+            raster-colorizer-default-color: transparent;
+            raster-colorizer-stops: 
+                stop(-1, transparent)
+                stop(0, transparent)
+                stop(10, '#14131C')
+                stop(20, '#2A2839')
+                stop(50, '#35334C')
+                stop(75, '#413E60')
+                stop(100, '#4D4A75')
+                stop(125, '#59568B')
+                stop(150, '#6562A1')
+                stop(175, '#716EB8')
+                stop(200, '#7E7BCF')
+                stop(225, '#8B88E7')
+                stop(250, '#9895FF')
+            }`,
+        'mammals_1',
+        {
+          geom_column: 'the_raster_webmercator',
+          geom_type: 'raster',
+          raster_band: 1
+        }
+      ),
       visible: false
     },
     {
       name: 'PA',
       type: 'UrlTemplate',
-      url:
-        'https://cartocdn-ashbu.global.ssl.fastly.net/simbiotica/api/v1/map/7ee5af5d52cd4929232b8b60961cbd02:1462351287227/0/{z}/{x}/{y}.png',
+      url: null,
+      carto: cartoConfig(
+        'simbiotica',
+        `#layer {
+          polygon-fill: #000;
+          polygon-opacity: .5;
+        }
+        #layer::outline {
+          line-width: .5;
+          line-color: #000;
+          line-opacity: .5;
+        }`,
+        'wdpa_protected_areas'
+      ),
       maximumLevel,
       visible: false
     },
