@@ -1,5 +1,17 @@
 .container {
-  border: 1px solid white;
-  width: 527px;
-  height: 565px;
+  position: relative;
+  // width: 527px;
+  // height: 565px;
+  width: 720px;
+  height: 530px;
+}
+
+.spider {
+  width: calc(50vw - 9vw);
+  height: 100%;
+  position: absolute;
+  left: -4vw;
+  background-image: url('/img/spider.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }

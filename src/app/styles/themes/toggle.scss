@@ -1,0 +1,13 @@
+@import '~styles/variables.scss';
+
+.toggle {
+  border-color: $color-turquoise;
+  line-height: 1.5em;
+  padding: 0 2px;
+}
+
+.active {
+  text-decoration: none;
+  background-color: $color-turquoise;
+  color: $color-dark-blue;
+}

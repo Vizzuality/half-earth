@@ -28,6 +28,7 @@ $width: calc(50vw - #{2 * $site-padding});
   line-height: 2em;
 
   &::after {
+    pointer-events: none;
     content: '';
     height: 20rem;
     position: fixed;
@@ -55,10 +56,4 @@ $width: calc(50vw - #{2 * $site-padding});
   font-size: 1rem;
   line-height: 2.7em;
   z-index: $zforeground * 10;
-}
-
-.toggle {
-  border-color: $color-turquoise;
-  line-height: 1.5em;
-  padding: 0 2px;
 }

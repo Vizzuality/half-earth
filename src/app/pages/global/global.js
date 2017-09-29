@@ -9,16 +9,17 @@ import GlobalComponent from './global-component'
 import XToggle from 'components/explorable/toggle'
 
 import { actions as mapActions } from 'pages/map'
-import pageStyles from 'styles/pages.scss'
+import toggleTheme from 'styles/themes/toggle.scss'
 
 const renderToggle = layers => toggle => (label, n) => {
   const name = n || kebabCase(lowerCase(label))
   return (
     <XToggle
+      theme={toggleTheme}
       key={name}
       active={find(layers, { name }) && find(layers, { name }).visible}
       onClick={() => toggle({ name })}
-      className={pageStyles.toggle}
+      className={toggleTheme.toggle}
     >
       {label}
     </XToggle>
