@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "reinstall": "rm -rf ./node_modules && yarn install",
-    "dev": "webpack-dev-server --config ./config/development.js",
-    "build": "NODE_ENV=production && webpack --config ./config/production.js",
+    "clean:dist": "rm -rf public/scripts && rm -rf public/styles/main.css && rm -rf public/styles/main.css.gz && rm -rf public/index.html",
+    "dev": "yarn run clean:dist && webpack-dev-server --config ./config/development.js",
+    "build": "yarn run clean:dist && NODE_ENV=production && webpack --config ./config/production.js",
     "precommit": "lint-staged"
   },
   "dependencies": {

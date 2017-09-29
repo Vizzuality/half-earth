@@ -1,7 +1,3 @@
-// const ExtractTextPlugin = require('extract-text-webpack-plugin')
-
-// new ExtractTextPlugin(env.NODE_ENV === 'production' ? '[name]-[hash].css' : '[name].css'),
-
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CompressionPlugin = require('compression-webpack-plugin')
@@ -10,6 +6,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const { config, sassConfig } = require('./base')
 
 module.exports = merge(config, {
+  output: {
+    filename: 'scripts/[name].js',
+    publicPath: './'
+  },
   stats: 'normal',
   module: {
     rules: [
