@@ -9,3 +9,6 @@ public/**/*tf
 public/**/*xml
 public/**/*sh
 public/**/*glb
+public/scripts*
+public/styles*
+public/index.html

@@ -4,6 +4,7 @@
   "scripts": {
     "reinstall": "rm -rf ./node_modules && yarn install",
     "dev": "webpack-dev-server --config ./config/development.js",
+    "build": "NODE_ENV=production && webpack --config ./config/production.js",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -11,10 +12,10 @@
     "classnames": "^2.2.5",
     "history": "^4.6.3",
     "postcss-font-smoothing": "^0.1.0",
-    "react": "^15.6.1",
+    "react": "^16.0.0",
     "react-click-outside": "tj/react-click-outside",
     "react-css-themr": "^2.1.2",
-    "react-dom": "^15.6.1",
+    "react-dom": "^16.0.0",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-config": "^1.0.0-beta.3",

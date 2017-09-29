@@ -6,11 +6,25 @@
 const { join, resolve } = require('path')
 const webpack = require('webpack')
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 const credentials = require('./credentials')
 const basePath = resolve(__dirname, '../')
 const sourcePath = resolve(basePath, 'src')
 const publicPath = join(basePath, 'public')
 const appPath = resolve(sourcePath, 'app')
+
+const sassConfig = [
+  {
+    loader: 'css-loader',
+    query: {
+      modules: true,
+      localIdentName: '[name]__[local]__[hash:base64:5]'
+    }
+  },
+  { loader: 'postcss-loader' },
+  { loader: `sass-loader?includePaths[]='${appPath}'` }
+]
 
 module.exports = {
   paths: {
@@ -19,11 +33,12 @@ module.exports = {
     publicPath,
     appPath
   },
+  sassConfig,
   config: {
     entry: join(sourcePath, 'main.jsx'),
 
     output: {
-      filename: '[name].js',
+      filename: 'scripts/[name].js',
       path: publicPath,
       publicPath: '/'
     },
@@ -64,6 +79,11 @@ module.exports = {
     plugins: [
       new webpack.DefinePlugin({
         MAPBOX_TOKEN: JSON.stringify(credentials.MAPBOX_TOKEN)
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: resolve(sourcePath, 'tpl.ejs'),
+        inject: 'body'
       })
     ],
 
