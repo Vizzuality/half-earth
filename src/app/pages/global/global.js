@@ -11,8 +11,9 @@ import XToggle from 'components/explorable/toggle'
 import { actions as mapActions } from 'pages/map'
 import toggleTheme from 'styles/themes/toggle.scss'
 
-const renderToggle = layers => toggle => (label, n) => {
+const renderToggle = layers => toggle => (label, n, disabled = false) => {
   const name = n || kebabCase(lowerCase(label))
+  if (disabled) return <span>{label}</span>
   return (
     <XToggle
       theme={toggleTheme}

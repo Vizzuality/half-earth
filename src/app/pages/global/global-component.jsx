@@ -17,15 +17,16 @@ class Global extends Component {
         </p>
         <p>
           Thanks to them we now have data for all of the vertebrate species
-          known to science, including {t('amphibians')}, {t('reptiles')},{' '}
-          {t('birds')} and {t('mammals')}; as well as the major groups of{' '}
-          {t('invertebrates', 'invertebrates')}, including {t('Butterflies')},{' '}
-          {t('Dragonflies')}, {t('Moths')} and {t('Bumblebees')}. We also have
+          known to science, including {t('amphibians')},{' '}
+          {t('reptiles', '', true)}, {t('birds')} and {t('mammals')}; as well as
+          the major groups of {t('invertebrates', '', true)}, including{' '}
+          {t('Butterflies', '', true)}, {t('Dragonflies', '', true)},{' '}
+          {t('Moths', '', true)} and {t('Bumblebees', '', true)}. We also have
           comprehensive records for plant species in the {t('Conifers')},{' '}
-          {t('Palms')} and {t('Cacti')} families. There are countless more
-          species that haven’t been discovered or formally identified, but they
-          are an integral part of the network of life and are vulnerable to the
-          same threats as the species we have records for.
+          {t('Palms', '', true)} and {t('Cacti')} families. There are countless
+          more species that haven’t been discovered or formally identified, but
+          they are an integral part of the network of life and are vulnerable to
+          the same threats as the species we have records for.
         </p>
         <p>
           {t('Protected Areas')} have a key role in the conservation of this
