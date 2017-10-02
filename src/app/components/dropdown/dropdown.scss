@@ -1,0 +1,24 @@
+@import '~styles/variables.scss';
+
+.options {
+  border: 1px solid grey;
+  display: block;
+  font-weight: normal;
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  z-index: $zforeground;
+
+  &Closed {
+    display: none;
+  }
+
+  &Selected {
+    text-decoration: underline;
+  }
+}
+
+.option,
+.label {
+  cursor: pointer;
+}

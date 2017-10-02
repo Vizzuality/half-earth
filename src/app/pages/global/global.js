@@ -7,8 +7,11 @@ import kebabCase from 'lodash/kebabCase'
 
 import GlobalComponent from './global-component'
 import XToggle from 'components/explorable/toggle'
-
 import { actions as mapActions } from 'pages/map'
+
+import initialState from './initial-state'
+import * as actions from './global-actions'
+import reducers from './global-reducers'
 import toggleTheme from 'styles/themes/toggle.scss'
 
 const renderToggle = layers => toggle => (label, n, disabled = false) => {
@@ -27,9 +30,16 @@ const renderToggle = layers => toggle => (label, n, disabled = false) => {
   )
 }
 
-const mapStateToProps = ({ map }) => ({
-  map,
-  renderToggle: renderToggle(map.layers)
-})
+const mapStateToProps = ({ map, global }) => {
+  return {
+    map,
+    vertebrateSpeciesOptions: global.vertebrateSpecies.options,
+    vertebrateSpeciesSelected: global.vertebrateSpecies.selected,
+    renderToggle: renderToggle(map.layers)
+  }
+}
 
-export default connect(mapStateToProps, mapActions)(GlobalComponent)
+export { actions, reducers, initialState }
+export default connect(mapStateToProps, { ...mapActions, ...actions })(
+  GlobalComponent
+)
