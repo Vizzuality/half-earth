@@ -56,7 +56,7 @@ node {
         // Roll out to staging
         case "develop":
           sh("echo Deploying to STAGING cluster")
-          sh("kubectl config use-context vizz")
+          sh("kubectl config use-context ${VIZZ_CONTEXT}")
           def service = sh([returnStdout: true, script: "kubectl get deploy ${appName} || echo NotFound"]).trim()
           if ((service && service.indexOf("NotFound") > -1) || (forceCompleteDeploy)){
             sh("sed -i -e 's/{name}/${appName}/g' k8s/services/*.yaml")
@@ -89,7 +89,7 @@ node {
           }
           if (userInput == true && !didTimeout){
             sh("echo Deploying to PROD cluster")
-            sh("kubectl config use-context vizz")
+            sh("kubectl config use-context ${VIZZ_CONTEXT}")
             def service = sh([returnStdout: true, script: "kubectl get deploy ${appName} || echo NotFound"]).trim()
             if ((service && service.indexOf("NotFound") > -1) || (forceCompleteDeploy)){
               sh("sed -i -e 's/{name}/${appName}/g' k8s/services/*.yaml")
