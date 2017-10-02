@@ -4,11 +4,9 @@
 /* eslint import/no-dynamic-require: 0 */
 
 const { join, resolve } = require('path')
-const webpack = require('webpack')
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const credentials = require('./credentials')
 const basePath = resolve(__dirname, '../')
 const sourcePath = resolve(basePath, 'src')
 const publicPath = join(basePath, 'public')
@@ -77,9 +75,6 @@ module.exports = {
     },
 
     plugins: [
-      new webpack.DefinePlugin({
-        MAPBOX_TOKEN: JSON.stringify(credentials.MAPBOX_TOKEN)
-      }),
       new HtmlWebpackPlugin({
         filename: 'index.html',
         template: resolve(sourcePath, 'tpl.ejs'),

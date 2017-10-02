@@ -1,4 +1,3 @@
-/* global MAPBOX_TOKEN */
 import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
 
@@ -46,9 +45,8 @@ class CesiumComponent extends Component {
       creditsDisplay: false,
       fullscreenButton: false,
       // skyAtmosphere: false,
-      imageryProvider: new Cesium.MapboxImageryProvider({
-        mapId: 'mapbox.satellite',
-        accessToken: MAPBOX_TOKEN
+      imageryProvider: new Cesium.UrlTemplateImageryProvider({
+        url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNoYWxmZWFydGgiLCJhIjoiY2o4Mnh4aDN6MGNqazMzc2FkeTlnajBoeiJ9.5Su3_JeAsjM0slTkaGFihw`
       })
     }
     const viewer = this.state.viewer || new Cesium.Viewer(mapId, mapConfig)
@@ -137,7 +135,9 @@ class CesiumComponent extends Component {
   }
 
   componentWillReceiveProps (props) {
-    if (this.props.zoomLevel !== props.zoomLevel) { this.handleZoom(props.zoomLevel) }
+    if (this.props.zoomLevel !== props.zoomLevel) {
+      this.handleZoom(props.zoomLevel)
+    }
   }
 
   render () {
