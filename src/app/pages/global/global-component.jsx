@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import SpiderChart from 'components/spider-chart'
 import Placeholder from 'components/placeholder'
 import pageStyles from 'styles/pages.scss'
 import Earthometer from 'components/earthometer'
@@ -26,6 +25,12 @@ class Global extends Component {
           the use of remote sensing technology. The efforts of these dedicated
           people are what makes these maps possible.
         </p>
+        <Placeholder
+          name="multisparkline"
+          backgroundImage="url(/img/multisparkline.png)"
+          width="100%"
+          height="340px"
+        />
         <p>
           Thanks to them we now have data for all of the vertebrate species
           known to science, like {d('vertebrates')}; as well as the major groups
@@ -38,7 +43,6 @@ class Global extends Component {
           they are an integral part of the network of life and are vulnerable to
           the same threats as the species we have records for.
         </p>
-        <SpiderChart />
         <p>
           Globally, {t('Protected Areas')} have a key role in the conservation
           of this network of life. Within their boundaries, protected areas
@@ -46,10 +50,11 @@ class Global extends Component {
           global ocean, and 10.2% of coastal and marine areas.
         </p>
         <Placeholder
-          name="multisparkline"
-          width="100%"
-          height="300px"
-          border="1px solid white"
+          backgroundImage="url(/img/percentages.png)"
+          name="percentages"
+          width="calc(100% - (2 * 3vw))"
+          margin="0 3vw"
+          height="120px"
         />
         <p>
           The rate of extinction today is at least 1,000 times higher than at

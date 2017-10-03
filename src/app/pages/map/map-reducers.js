@@ -42,8 +42,11 @@ export default {
       payload: layer => ({ visible: true })
     }),
 
-  [actions.resetLayers]: (state, { payload }) =>
-    state.layers.map(l => {
+  [actions.resetLayers]: (state, { payload }) => ({
+    ...state,
+    layers: state.layers.map(l => {
       l.visible = false
+      return l
     })
+  })
 }

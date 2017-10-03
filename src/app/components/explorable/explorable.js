@@ -37,10 +37,10 @@ export const renderToggle = (layers, namespace = '') => toggle => (
   )
 }
 
-export const renderDropdown = (
-  layers,
-  namespace = ''
-) => selectOption => group => {
+export const renderDropdown = (layers, namespace = '') => selectOption => (
+  group,
+  defaultLayer = 'birds'
+) => {
   const groups = isArray(group) ? group : group.split()
   const found = filter(layers, l => {
     return l.groups.length
@@ -48,6 +48,7 @@ export const renderDropdown = (
         l.groups.length === groups.length
       : false
   })
+
   const foundSelected = find(found, 'visible')
   const options = found.sort((a, b) => b.name - a.name).reduce((ll, l) => {
     ll[l.name] = startCase(ns(l.name))
@@ -59,6 +60,7 @@ export const renderDropdown = (
     theme: dropdownTheme,
     onSelect: name => selectOption({ name }),
     options,
-    selected: (foundSelected && foundSelected.name) || `birds${namespace}`
+    selected:
+      (foundSelected && foundSelected.name) || `${defaultLayer}${namespace}`
   })
 }

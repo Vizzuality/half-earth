@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import Button from 'components/button'
 import Earthometer from 'components/earthometer'
+import Floodmap from 'components/floodmap'
+import Placeholder from 'components/placeholder'
 import styles from './local-styles.scss'
 import pageStyles from 'styles/pages.scss'
 
@@ -21,21 +23,29 @@ const Local = ({ toggleLayer, renderToggle }) => {
         seasonal rains and flooding. Any change to the natural heartbeat of the
         area is a warning call to all.
       </p>
+      <Floodmap />
       <p className={cx(pageStyles.content)}>
         The variety of life in the Okavango Delta is rich and diverse, earning
-        itself a place on the UNESCO World Heritage List. A mosaic of protected
-        lands that include a game reserve and a number of wildlife management
-        areas are managed by private and community groups, and receive legal
-        protection from the national government. Together these conservation
-        measures ensure thousands of species are protected, along with the
-        water, food and resources they, and the people living here, need to
-        survive.
+        itself a place on the UNESCO World Heritage List. A mosaic of{' '}
+        {t('protected areas')} that include a game reserve and a number of
+        wildlife management areas are managed by private and community groups,
+        and receive legal protection from the national government. Together
+        these conservation measures ensure thousands of species are protected,
+        along with the water, food and resources they, and the people living
+        here, need to survive.
       </p>
       <p className={cx(pageStyles.content)}>
-        For every species observed, there is a story to tell, for this stalk
-        (named 3456) tagged by a set of researchers from Germany as part of a
-        larger project to ….
+        For every species observed there is a story to tell. This stork, named{' '}
+        {t('91397A', false, true)}, was tagged by a group of German researchers
+        as they set out to track and map the migration patterns of White Storks
+        between Africa and Europe. 91397A belongs to a small White Storks
+        population breeding in South Africa.
       </p>
+      <Placeholder
+        backgroundImage="url(/img/paharo.png"
+        width="30%"
+        height="200px"
+      />
       <Link to="regional">
         <Button>Regional</Button>
       </Link>

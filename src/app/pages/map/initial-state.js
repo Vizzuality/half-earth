@@ -147,7 +147,7 @@ export default {
           polygon-opacity: 0.2;
         }
         #layer::outline {
-          line-width: 1;
+          line-width: .1;
           line-color: #1bcec7;
           line-opacity: 1;
         }`,
@@ -158,7 +158,28 @@ export default {
       groups: []
     },
     {
-      name: 'pressures',
+      name: 'road-building:regional',
+      type: 'UrlTemplate',
+      url: null,
+      carto: cartoConfig(
+        'simbiotica',
+        `#layer {
+          polygon-fill: #000000;
+          polygon-opacity: 0.2;
+        }
+        #layer::outline {
+          line-width: .3;
+          line-color: #000000;
+          line-opacity: 1;
+        }`,
+        'openstreetmaps_southern_africa_roads'
+      ),
+      maximumLevel,
+      visible: false,
+      groups: ['pressures', 'regional']
+    },
+    {
+      name: 'urban-development:regional',
       type: 'WebMapService',
       format: 'image/png',
       layers: 'GUF28_DLR_v1_Mosaic',
@@ -167,7 +188,7 @@ export default {
       url: 'https://geoservice.dlr.de/eoc/land/wms?service:WMS&request:GetMap',
       maximumLevel,
       visible: false,
-      groups: []
+      groups: ['pressures', 'regional']
     }
   ]
 }

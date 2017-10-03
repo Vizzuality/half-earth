@@ -1,7 +1,7 @@
 @import '~styles/variables.scss';
 $max-width: 600px;
 $width: 40vw;
-$pad: 8rem;
+$pad: 6rem;
 
 .background {
   background-color: rgba($color-mid-blue, 0.96);
@@ -45,6 +45,10 @@ $pad: 8rem;
         rgba($color-mid-blue, 0.7),
         $color-mid-blue
       );
+  }
+
+  p {
+    margin: 2rem 0;
   }
 }
 

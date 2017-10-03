@@ -7,6 +7,7 @@ import Local from 'pages/local'
 import CesiumMap from 'pages/map'
 
 import Locator from 'components/locator'
+import SidebarButton from 'components/sidebar/button.jsx'
 // import Sidebar from 'components/sidebar'
 import PageBackground from 'components/page-background'
 // import Earthometer from 'components/earthometer'
@@ -29,6 +30,14 @@ export default [
       path: '/(global|regional|local)',
       component: Header,
       key: 'Header'
+    },
+    fadeProps
+  ),
+  assign(
+    {
+      path: '/(global|regional|local)',
+      component: SidebarButton,
+      key: 'SidebarButton'
     },
     fadeProps
   ),
