@@ -1,5 +1,9 @@
 @import '~styles/variables.scss';
 
+* {
+  box-sizing: border-box;
+}
+
 body * {
   font-smoothing: antialiased;
 }

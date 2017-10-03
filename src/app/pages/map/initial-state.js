@@ -5,7 +5,7 @@ let maximumLevel
 export default {
   layers: [
     {
-      name: 'mammals',
+      name: 'mammals:global',
       type: 'UrlTemplate',
       url: 'https://cdn.mol.org/half-earth/tiles/richness/mammals/{z}/{x}/{y}',
       maximumLevel,
@@ -13,7 +13,25 @@ export default {
       groups: ['vertebrates']
     },
     {
-      name: 'birds',
+      name: 'mammals:regional',
+      type: 'UrlTemplate',
+      url:
+        'https://cdn.mol.org/half-earth/tiles/richness_1km/mammals/{z}/{x}/{y}',
+      maximumLevel,
+      visible: false,
+      groups: ['vertebrates', 'regional']
+    },
+    {
+      name: 'birds:regional',
+      type: 'UrlTemplate',
+      url:
+        'https://cdn.mol.org/half-earth/tiles/richness_1km/birds/{z}/{x}/{y}',
+      maximumLevel,
+      visible: false,
+      groups: ['vertebrates', 'regional']
+    },
+    {
+      name: 'birds:global',
       type: 'UrlTemplate',
       url: 'https://cdn.mol.org/half-earth/tiles/richness/birds/{z}/{x}/{y}',
       maximumLevel,

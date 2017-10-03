@@ -6,9 +6,11 @@ import Regional from 'pages/regional'
 import Local from 'pages/local'
 import CesiumMap from 'pages/map'
 
-import Sidebar from 'components/sidebar'
+import Locator from 'components/locator'
+// import Sidebar from 'components/sidebar'
 import PageBackground from 'components/page-background'
-import Earthometer from 'components/earthometer'
+// import Earthometer from 'components/earthometer'
+import Header from 'components/header'
 
 const fadeProps = {
   animated: true,
@@ -25,19 +27,35 @@ export default [
   assign(
     {
       path: '/(global|regional|local)',
-      component: Earthometer,
-      key: 'Earthometer'
+      component: Header,
+      key: 'Header'
     },
     fadeProps
   ),
+  // assign(
+  //   {
+  //     path: '/(global|regional|local)',
+  //     component: Earthometer,
+  //     key: 'Earthometer'
+  //   },
+  //   fadeProps
+  // ),
   assign(
     {
       path: '/(global|regional|local)',
-      component: Sidebar,
-      key: 'Sidebar'
+      component: Locator,
+      key: 'Locator'
     },
     fadeProps
   ),
+  // assign(
+  //   {
+  //     path: '/(global|regional|local)',
+  //     component: Sidebar,
+  //     key: 'Sidebar'
+  //   },
+  //   fadeProps
+  // ),
   assign(
     {
       path: '/(global|regional|local)',

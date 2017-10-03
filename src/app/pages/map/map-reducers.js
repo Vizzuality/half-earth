@@ -11,6 +11,7 @@ const updateLayer = (state, { payload, ...rest }) => {
   const { name, reset } = rest
   const { layers } = state
   const layer = find(layers, { name })
+  if (!layer) return state
   const filtered = difference(layers, [layer]).map(
     reset ? l => assign(l, { visible: false }) : identity
   )
@@ -39,5 +40,10 @@ export default {
       ...payload,
       reset: true,
       payload: layer => ({ visible: true })
+    }),
+
+  [actions.resetLayers]: (state, { payload }) =>
+    state.layers.map(l => {
+      l.visible = false
     })
 }

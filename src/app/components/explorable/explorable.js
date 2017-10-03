@@ -1,8 +1,11 @@
 import React, { createElement } from 'react'
+
+import first from 'lodash/first'
 import find from 'lodash/find'
+import isArray from 'lodash/isArray'
 import startCase from 'lodash/startCase'
 import filter from 'lodash/filter'
-import some from 'lodash/some'
+import difference from 'lodash/difference'
 import lowerCase from 'lodash/lowerCase'
 import kebabCase from 'lodash/kebabCase'
 
@@ -12,12 +15,14 @@ import dropdownTheme from 'styles/themes/dropdown.scss'
 import XToggle from 'components/explorable/toggle'
 import toggleTheme from 'styles/themes/toggle.scss'
 
-export const renderToggle = layers => toggle => (
+const ns = s => first(s.split(':'))
+
+export const renderToggle = (layers, namespace = '') => toggle => (
   label,
   n,
   disabled = false
 ) => {
-  const name = n || kebabCase(lowerCase(label))
+  const name = n || kebabCase(lowerCase(ns(label)))
   if (disabled) return <span>{label}</span>
   return (
     <XToggle
@@ -32,11 +37,20 @@ export const renderToggle = layers => toggle => (
   )
 }
 
-export const renderDropdown = layers => selectOption => group => {
-  const found = filter(layers, l => some(l.groups, v => v === group))
+export const renderDropdown = (
+  layers,
+  namespace = ''
+) => selectOption => group => {
+  const groups = isArray(group) ? group : group.split()
+  const found = filter(layers, l => {
+    return l.groups.length
+      ? difference(l.groups, groups).length === 0 &&
+        l.groups.length === groups.length
+      : false
+  })
   const foundSelected = find(found, 'visible')
   const options = found.sort((a, b) => b.name - a.name).reduce((ll, l) => {
-    ll[l.name] = startCase(l.name)
+    ll[l.name] = startCase(ns(l.name))
     return ll
   }, {})
 
@@ -45,6 +59,6 @@ export const renderDropdown = layers => selectOption => group => {
     theme: dropdownTheme,
     onSelect: name => selectOption({ name }),
     options,
-    selected: (foundSelected && foundSelected.name) || 'birds'
+    selected: (foundSelected && foundSelected.name) || `birds${namespace}`
   })
 }

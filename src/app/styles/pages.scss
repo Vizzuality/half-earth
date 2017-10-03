@@ -1,5 +1,7 @@
 @import '~styles/variables.scss';
-$width: calc(50vw - #{2 * $site-padding});
+$max-width: 600px;
+$width: 40vw;
+$pad: 8rem;
 
 .background {
   background-color: rgba($color-mid-blue, 0.96);
@@ -7,13 +9,12 @@ $width: calc(50vw - #{2 * $site-padding});
 
 .container,
 .background {
-  $top: 10rem;
-  $pad: 8rem;
-
-  margin-top: $top;
+  margin-top: $header-height;
   padding: $pad $site-padding;
-  height: calc(100vh - #{$top + (2 * $pad)});
+  padding-top: $pad / 2;
+  height: calc(100vh - #{$header-height});
   width: $width;
+  max-width: $max-width;
   z-index: $zforeground;
   position: absolute;
   top: 0;
@@ -30,11 +31,12 @@ $width: calc(50vw - #{2 * $site-padding});
   &::after {
     pointer-events: none;
     content: '';
-    height: 20rem;
+    height: 10rem;
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 50vw;
+    width: $width;
+    max-width: $max-width;
     z-index: 1000;
     background-image:
       linear-gradient(

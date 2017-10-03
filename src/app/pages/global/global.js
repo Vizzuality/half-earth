@@ -3,22 +3,22 @@ import { connect } from 'react-redux'
 
 import { assign } from 'utils'
 
-import { renderDropdown, renderToggle } from './global-helpers'
+import { renderDropdown, renderToggle } from 'components/explorable'
 import GlobalComponent from './global-component'
 import { actions as mapActions } from 'pages/map'
 
 const mapStateToProps = ({ map, global }) => {
   return {
     map,
-    renderToggle: renderToggle(map.layers),
-    renderDropdown: renderDropdown(map.layers)
+    renderToggle: renderToggle(map.layers, ':global'),
+    renderDropdown: renderDropdown(map.layers, ':global')
   }
 }
 
 class GlobalContainer extends Component {
   constructor (props) {
     super(props)
-    props.selectLayer({ name: 'birds' })
+    props.selectLayer({ name: 'birds:global' })
   }
   render () {
     return createElement(GlobalComponent, assign(this.props))

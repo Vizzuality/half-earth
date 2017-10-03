@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import SpiderChart from 'components/spider-chart'
 import Placeholder from 'components/placeholder'
 import pageStyles from 'styles/pages.scss'
+import Earthometer from 'components/earthometer'
+import Button from 'components/button'
 
 class Global extends Component {
   render () {
@@ -16,6 +19,7 @@ class Global extends Component {
     const d = renderDropdown(selectLayer)
     return (
       <div className={pageStyles.container}>
+        <Earthometer />
         <p>
           Scientists and enthusiastic nature-lovers have collected an enormous
           amount of data about life on Earth through recorded observations and
@@ -61,6 +65,9 @@ class Global extends Component {
           the details we need to scale up our conservation efforts to a global
           level that encompasses half of the Earth.
         </p>
+        <Link to="/">
+          <Button>Home</Button>
+        </Link>
       </div>
     )
   }
