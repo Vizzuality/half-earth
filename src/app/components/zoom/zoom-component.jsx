@@ -7,7 +7,7 @@ import bindZoomLevels from 'data/zoom-levels'
 import styles from './zoom-styles.scss'
 
 const zoomLevels = bindZoomLevels()
-const hidden = l => l !== 'hidden'
+const hidden = l => l !== 'home'
 
 const Zoom = ({ theme, className, active }) => (
   <ul className={cx(className, theme.items)}>

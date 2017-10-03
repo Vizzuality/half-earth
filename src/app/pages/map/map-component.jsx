@@ -8,7 +8,7 @@ import ModelProvider from 'components/cesium/model-provider'
 const styles = {}
 const lockNavigation = true
 
-const scope = path => path.replace('/', '') || 'hidden'
+const scope = path => path.replace('/', '') || 'home'
 const birdPosition = [22.606301200000004, -19.6, 10000.0]
 const displace = (x, y, z, amt = 0.1, i = 1) => [x, y + amt * (i / 10), z]
 const birds = [] // new Array(9).fill(0)

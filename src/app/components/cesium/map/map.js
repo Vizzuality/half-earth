@@ -49,7 +49,9 @@ class CesiumComponent extends Component {
         url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNoYWxmZWFydGgiLCJhIjoiY2o4Mnh4aDN6MGNqazMzc2FkeTlnajBoeiJ9.5Su3_JeAsjM0slTkaGFihw`
       })
     }
-    const viewer = this.state.viewer || new Cesium.Viewer(mapId, mapConfig)
+
+    const viewer = (window.viewer =
+      this.state.viewer || new Cesium.Viewer(mapId, mapConfig))
     this.flyTo = bindFlyTo(viewer)
 
     // setInterval(function () {
@@ -63,7 +65,7 @@ class CesiumComponent extends Component {
   }
 
   bindMap (props) {
-    const viewer = (window.viewer = this.mountMap(props))
+    const viewer = this.mountMap(props)
     const layers = Object.keys(this.state.layers).length
       ? this.state.layers
       : viewer.imageryLayers
@@ -115,7 +117,6 @@ class CesiumComponent extends Component {
 
     // var dataSource = Cesium.GeoJsonDataSource.load('http://localhost:8080/tiles/0/0/0.geojson')
     // viewer.dataSources.add(dataSource)
-
     this.setState({
       layers,
       viewer

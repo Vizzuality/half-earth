@@ -36,10 +36,10 @@ class Global extends Component {
         </p>
         <SpiderChart />
         <p>
-          {t('Protected Areas')} have a key role in the conservation of this
-          network of life. Within their boundaries, protected areas harbour
-          14.7% of terrestrial and inland water areas, 4.12% of the global
-          ocean, and 10.2% of coastal and marine areas.
+          Globally, {t('Protected Areas')} have a key role in the conservation
+          of this network of life. Within their boundaries, protected areas
+          harbour 14.7% of terrestrial and inland water areas, 4.12% of the
+          global ocean, and 10.2% of coastal and marine areas.
         </p>
         <Placeholder
           name="multisparkline"
