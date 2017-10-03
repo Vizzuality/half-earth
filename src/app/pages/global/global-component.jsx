@@ -1,31 +1,20 @@
 import React, { Component } from 'react'
 
-import Dropdown from 'components/dropdown'
 import SpiderChart from 'components/spider-chart'
 import pageStyles from 'styles/pages.scss'
-import dropdownTheme from 'styles/themes/dropdown.scss'
 
 class Global extends Component {
   render () {
     const {
       toggleLayer,
+      selectLayer,
       renderToggle,
-      selectVertebrateSpecies,
-      vertebrateSpeciesOptions,
-      vertebrateSpeciesSelected
+      renderDropdown
     } = this.props
     const t = renderToggle(toggleLayer)
+    const d = renderDropdown(selectLayer)
     return (
       <div className={pageStyles.container}>
-        <Dropdown
-          className={dropdownTheme.option}
-          theme={dropdownTheme}
-          onSelect={selectVertebrateSpecies}
-          {...{
-            options: vertebrateSpeciesOptions,
-            selected: vertebrateSpeciesSelected
-          }}
-        />
         <p>
           Scientists and enthusiastic nature-lovers have collected an enormous
           amount of data about life on Earth through recorded observations and
@@ -34,7 +23,7 @@ class Global extends Component {
         </p>
         <p>
           Thanks to them we now have data for all of the vertebrate species
-          known to science, including {t('amphibians')},{' '}
+          known to science, {d('vertebrates')} including, {t('amphibians')},{' '}
           {t('reptiles', '', true)}, {t('birds')} and {t('mammals')}; as well as
           the major groups of {t('invertebrates', '', true)}, including{' '}
           {t('Butterflies', '', true)}, {t('Dragonflies', '', true)},{' '}

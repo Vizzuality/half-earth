@@ -1,5 +1,10 @@
 @import '~styles/variables.scss';
 
+.dropdown {
+  display: block;
+  position: relative;
+}
+
 .options {
   border: 1px solid grey;
   display: block;
@@ -12,13 +17,13 @@
   &Closed {
     display: none;
   }
-
-  &Selected {
-    text-decoration: underline;
-  }
 }
 
 .option,
 .label {
   cursor: pointer;
+}
+
+.optionSelected {
+  text-decoration: underline;
 }

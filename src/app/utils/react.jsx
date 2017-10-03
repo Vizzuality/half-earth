@@ -32,9 +32,9 @@ export const clickOutside = Comp =>
       const getRef = el => (this.container = el)
 
       return (
-        <div ref={getRef}>
+        <span ref={getRef}>
           <Comp {...{ ...this.props, clickedOutside }} />
-        </div>
+        </span>
       )
     }
   }

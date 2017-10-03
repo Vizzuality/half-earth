@@ -9,14 +9,16 @@ export default {
       type: 'UrlTemplate',
       url: 'https://cdn.mol.org/half-earth/tiles/richness/mammals/{z}/{x}/{y}',
       maximumLevel,
-      visible: false
+      visible: false,
+      groups: ['vertebrates']
     },
     {
       name: 'birds',
       type: 'UrlTemplate',
       url: 'https://cdn.mol.org/half-earth/tiles/richness/birds/{z}/{x}/{y}',
       maximumLevel,
-      visible: false
+      visible: false,
+      groups: ['vertebrates']
     },
     {
       name: 'amphibians',
@@ -24,28 +26,40 @@ export default {
       url:
         'https://cdn.mol.org/half-earth/tiles/richness/amphibians/{z}/{x}/{y}',
       maximumLevel,
-      visible: false
+      visible: false,
+      groups: ['vertebrates']
+    },
+    {
+      name: 'reptiles',
+      type: 'UrlTemplate',
+      url: 'missing',
+      maximumLevel,
+      visible: false,
+      groups: ['vertebrates']
     },
     {
       name: 'turtles',
       type: 'UrlTemplate',
       url: 'https://cdn.mol.org/half-earth/tiles/richness/turtles/{z}/{x}/{y}',
       maximumLevel,
-      visible: false
+      visible: false,
+      groups: []
     },
     {
       name: 'cacti',
       type: 'UrlTemplate',
       url: 'https://cdn.mol.org/half-earth/tiles/richness/cacti/{z}/{x}/{y}',
       maximumLevel,
-      visible: false
+      visible: false,
+      groups: []
     },
     {
       name: 'conifers',
       type: 'UrlTemplate',
       url: 'https://cdn.mol.org/half-earth/tiles/richness/conifers/{z}/{x}/{y}',
       maximumLevel,
-      visible: false
+      visible: false,
+      groups: []
     },
     {
       name: 'KBA',
@@ -65,7 +79,8 @@ export default {
         }`,
         'kba_poly_2016_id'
       ),
-      visible: false
+      visible: false,
+      groups: []
     },
     // {
     //   name: 'mammals',
@@ -100,7 +115,8 @@ export default {
     //       raster_band: 1
     //     }
     //   ),
-    //   visible: false
+    //   visible: false,
+    // groups: []
     // },
     {
       name: 'protected-areas',
@@ -120,7 +136,8 @@ export default {
         'wdpa_protected_areas'
       ),
       maximumLevel,
-      visible: false
+      visible: false,
+      groups: []
     },
     {
       name: 'pressures',
@@ -131,7 +148,8 @@ export default {
       transparent: true,
       url: 'https://geoservice.dlr.de/eoc/land/wms?service:WMS&request:GetMap',
       maximumLevel,
-      visible: false
+      visible: false,
+      groups: []
     }
   ]
 }

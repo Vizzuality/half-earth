@@ -1,39 +1,44 @@
 @import '~styles/variables.scss';
 
+.dropdown {
+  display: inline-block;
+}
+
 .options {
-  background-color: white;
-  border: 1px solid grey;
+  top: -0.5em;
+  left: -0.5em;
+  background-color: $color-dark-blue;
+  border: none;
   display: block;
   font-weight: normal;
-  height: 8em;
   list-style: none;
-  margin: 0.5rem 0 0 !important;
+  margin: 0;
   padding: 10px;
+  padding-top: 2em;
   position: absolute;
-  width: 100%;
-  z-index: $zforeground;
+  z-index: $zforeground + 1000;
+  width: auto;
 
   &Closed {
     display: none;
   }
+}
+
+.option {
+  font-size: 0.9em;
+  margin: 0.7em 0;
+  color: rgba(255, 255, 255, 0.5);
 
   &Selected {
-    text-decoration: underline;
+    color: white;
+    text-decoration: none;
   }
+}
 
-  .options,
-  .label {
-    color: blue;
-  }
-
-  .option,
-  .label {
-    color: blue;
-    cursor: pointer;
-  }
-
-  .option {
-    font-size: 0.9em;
-    margin: 0.7em 0;
-  }
+.label {
+  position: relative;
+  z-index: $zforeground + 1010;
+  border-bottom: 1px solid $color-turquoise;
+  display: inline;
+  margin: 0;
 }

@@ -1,45 +1,28 @@
-import React from 'react'
+import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
 
-import find from 'lodash/find'
-import lowerCase from 'lodash/lowerCase'
-import kebabCase from 'lodash/kebabCase'
+import { assign } from 'utils'
 
+import { renderDropdown, renderToggle } from './global-helpers'
 import GlobalComponent from './global-component'
-import XToggle from 'components/explorable/toggle'
 import { actions as mapActions } from 'pages/map'
-
-import initialState from './initial-state'
-import * as actions from './global-actions'
-import reducers from './global-reducers'
-import toggleTheme from 'styles/themes/toggle.scss'
-
-const renderToggle = layers => toggle => (label, n, disabled = false) => {
-  const name = n || kebabCase(lowerCase(label))
-  if (disabled) return <span>{label}</span>
-  return (
-    <XToggle
-      theme={toggleTheme}
-      key={name}
-      active={find(layers, { name }) && find(layers, { name }).visible}
-      onClick={() => toggle({ name })}
-      className={toggleTheme.toggle}
-    >
-      {label}
-    </XToggle>
-  )
-}
 
 const mapStateToProps = ({ map, global }) => {
   return {
     map,
-    vertebrateSpeciesOptions: global.vertebrateSpecies.options,
-    vertebrateSpeciesSelected: global.vertebrateSpecies.selected,
-    renderToggle: renderToggle(map.layers)
+    renderToggle: renderToggle(map.layers),
+    renderDropdown: renderDropdown(map.layers)
   }
 }
 
-export { actions, reducers, initialState }
-export default connect(mapStateToProps, { ...mapActions, ...actions })(
-  GlobalComponent
-)
+class GlobalContainer extends Component {
+  constructor (props) {
+    super(props)
+    props.selectLayer({ name: 'birds' })
+  }
+  render () {
+    return createElement(GlobalComponent, assign(this.props))
+  }
+}
+
+export default connect(mapStateToProps, mapActions)(GlobalContainer)
