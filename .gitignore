@@ -3,9 +3,9 @@
 node_modules
 config/credentials.js
 designs
+public/data
 public/**/*json
 public/**/*tif
-public/**/*tf
 public/**/*xml
 public/**/*sh
 public/**/*glb
