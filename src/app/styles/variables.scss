@@ -1,8 +1,10 @@
 $zbackground: -10;
 $zground: 0;
 $zforeground: 10;
+
 $column-width: 40vw;
 $header-height: 6.3rem;
+$max-width: 600px;
 
 $color-wite: #fff;
 $color-dark-blue: #061420;
@@ -13,4 +15,5 @@ $color-yellow: #e9eca6;
 $color-green: #a6ecc0;
 
 $site-gutter: 20px;
-$site-padding: 3vw;
+$site-padding: 50px;
+$closed-container: calc(-#{$max-width - $site-padding});

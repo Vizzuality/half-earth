@@ -1,5 +1,4 @@
 @import '~styles/variables.scss';
-$max-width: 600px;
 $pad: 6rem;
 
 .background {
@@ -12,7 +11,8 @@ $pad: 6rem;
   padding: $pad $site-padding;
   padding-top: $pad / 2;
   height: calc(100vh - #{$header-height});
-  width: $column-width;
+  // width: $column-width;
+  width: $max-width;
   max-width: $max-width;
   z-index: $zforeground;
   position: absolute;
@@ -21,7 +21,7 @@ $pad: 6rem;
   transition: left 0.125s ease-in-out;
 
   &Closed {
-    left: calc(-#{$column-width} - #{-$site-padding});
+    left: $closed-container;
   }
 }
 
@@ -52,12 +52,8 @@ $pad: 6rem;
   }
 
   &Closed {
-    $left: calc(-#{$column-width} - #{-$site-padding});
-
-    left: $left;
-
     &::after {
-      left: $left;
+      left: $closed-container;
     }
   }
 

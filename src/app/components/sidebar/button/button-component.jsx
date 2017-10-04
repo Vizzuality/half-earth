@@ -5,11 +5,12 @@ import styles from './button-styles'
 
 const Button = ({ toggleSidebar, sidebar }) => (
   <div
-    onClick={toggleSidebar}
     className={cx(styles.container, {
       [styles.containerClosed]: !sidebar.open
     })}
-  />
+  >
+    <div className={styles.arrow} onClick={toggleSidebar} />
+  </div>
 )
 
 export default Button
