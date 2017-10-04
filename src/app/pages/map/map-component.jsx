@@ -16,11 +16,11 @@ const scope = path => path.replace('/', '') || 'home'
 const [lat, long] = zoomLevels(Cesium).local[0]
 const birdPosition = [lat - 0.07, long - 0.07, 150000]
 const displace = (x, y, z) => [
-  x + 0.1 + random(-0.05, 0.5, true),
-  y - 0.5 + random(-0.05, 0.5, true),
+  x + 0.1 + random(-0.8, 0.8, true),
+  y - 0.5 + random(-0.8, 0.8, true),
   z
 ]
-const birds = new Array(100).fill(0)
+const birds = new Array(1000).fill(0)
 
 const Map = ({ map, location }) => (
   <CesiumMap
