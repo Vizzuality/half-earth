@@ -7,9 +7,10 @@ import { renderDropdown, renderToggle } from 'components/explorable'
 import GlobalComponent from './global-component'
 import { actions as mapActions } from 'pages/map'
 
-const mapStateToProps = ({ map, global }) => {
+const mapStateToProps = ({ map, global, sidebar }) => {
   return {
     map,
+    sidebar,
     renderToggle: renderToggle(map.layers, ':global'),
     renderDropdown: renderDropdown(map.layers, ':global')
   }

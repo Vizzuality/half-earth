@@ -1,3 +1,4 @@
+import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
 
 import LocalComponent from './local-component'
@@ -7,11 +8,21 @@ import reducers from './local-reducers'
 import initialState from './initial-state'
 import { renderToggle } from 'components/explorable'
 
-export { actions, reducers, initialState }
+class LocalContainer extends Component {
+  constructor (props) {
+    super(props)
+    props.resetLayers()
+  }
+  render () {
+    return createElement(LocalComponent, this.props)
+  }
+}
 
-const mapStateToProps = ({ map, local }) => ({
+const mapStateToProps = ({ map, local, sidebar }) => ({
   local,
+  sidebar,
   renderToggle: renderToggle(map.layers)
 })
 
-export default connect(mapStateToProps, mapActions)(LocalComponent)
+export { actions, reducers, initialState }
+export default connect(mapStateToProps, mapActions)(LocalContainer)

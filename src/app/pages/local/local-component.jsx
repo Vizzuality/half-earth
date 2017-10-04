@@ -9,10 +9,14 @@ import Placeholder from 'components/placeholder'
 import styles from './local-styles.scss'
 import pageStyles from 'styles/pages.scss'
 
-const Local = ({ toggleLayer, renderToggle }) => {
+const Local = ({ toggleLayer, renderToggle, sidebar, ...props }) => {
   const t = renderToggle(toggleLayer)
   return (
-    <div className={cx(styles.container, pageStyles.container)}>
+    <div
+      className={cx(styles.container, pageStyles.container, {
+        [pageStyles.containerClosed]: !sidebar.open
+      })}
+    >
       <Earthometer />
       <p className={cx(pageStyles.content)}>
         Swooping over Botswana’s Okavango Delta, the white stork (Ciconia

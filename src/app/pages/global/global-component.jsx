@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import cx from 'classnames'
 
 import Placeholder from 'components/placeholder'
 import pageStyles from 'styles/pages.scss'
@@ -12,12 +13,17 @@ class Global extends Component {
       toggleLayer,
       selectLayer,
       renderToggle,
-      renderDropdown
+      renderDropdown,
+      sidebar
     } = this.props
     const t = renderToggle(toggleLayer)
     const d = renderDropdown(selectLayer)
     return (
-      <div className={pageStyles.container}>
+      <div
+        className={cx(pageStyles.container, {
+          [pageStyles.containerClosed]: !sidebar.open
+        })}
+      >
         <Earthometer />
         <p>
           Scientists and enthusiastic nature-lovers have collected an enormous

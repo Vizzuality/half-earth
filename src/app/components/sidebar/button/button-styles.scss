@@ -1,0 +1,24 @@
+@import '~styles/variables.scss';
+$width: $site-padding / 2;
+$margin: 1vw;
+
+.container {
+  width: $width;
+  height: $width;
+  position: absolute;
+  top: calc(#{$header-height} + #{$margin});
+  left: calc(#{$column-width} - #{$width} - #{$margin});
+  z-index: $zforeground + 10;
+  background-image: url('/img/arrow.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transform: rotate(90deg);
+  cursor: pointer;
+  transition: left 0.125s ease-in-out;
+
+  &Closed {
+    left: $width - ($margin / 1.75);
+    transform: rotate(270deg);
+  }
+}

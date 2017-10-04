@@ -7,6 +7,7 @@ import allActions from './actions'
 import { reducers as zoomReducers } from 'components/zoom'
 // import { reducers as earthometerReducers } from 'components/earthometer'
 import { reducers as mapReducers } from 'pages/map'
+import { reducers as sidebarReducers } from 'providers/sidebar'
 
 export default combineReducers({
   routing: routerReducer,
@@ -17,5 +18,6 @@ export default combineReducers({
   //   earthometerReducers,
   //   initialState
   // ),
+  sidebar: handleActions('sidebar', allActions, sidebarReducers, initialState),
   map: handleActions('map', allActions, mapReducers, initialState)
 })

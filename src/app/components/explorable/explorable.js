@@ -23,13 +23,12 @@ export const renderToggle = (layers, namespace = '') => toggle => (
   disabled = false
 ) => {
   const name = n || kebabCase(lowerCase(ns(label)))
-  if (disabled) return <span>{label}</span>
   return (
     <XToggle
       theme={toggleTheme}
       key={name}
       active={find(layers, { name }) && find(layers, { name }).visible}
-      onClick={() => toggle({ name })}
+      onClick={() => (disabled ? null : toggle({ name }))}
       className={toggleTheme.toggle}
     >
       {label}

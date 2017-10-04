@@ -15,9 +15,10 @@ class RegionalConTainer extends Component {
   }
 }
 
-const mapStateToProps = ({ map, global }) => {
+const mapStateToProps = ({ map, global, sidebar }) => {
   return {
     map,
+    sidebar,
     renderToggle: renderToggle(map.layers, ':regional'),
     renderDropdown: renderDropdown(map.layers, ':regional')
   }
