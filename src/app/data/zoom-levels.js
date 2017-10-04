@@ -20,13 +20,13 @@ export default Cesium => ({
     }
   ],
   local: [
-    [22.6063012, -19.4333746, 40000.0],
+    [21.9627154, -19.3472216, 290000],
     {
-      orientation: {
-        heading: (Cesium && Cesium.Math.toRadians(-15.0)) || null,
-        pitch: (Cesium && -Cesium.Math.PI_OVER_FOUR) || null,
-        roll: 0.0
-      }
+      // orientation: {
+      //   heading: (Cesium && Cesium.Math.toRadians(-15.0)) || null,
+      //   pitch: (Cesium && -Cesium.Math.PI_OVER_FOUR) || null,
+      //   roll: 0.0
+      // }
     }
   ],
 
