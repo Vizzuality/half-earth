@@ -50,9 +50,10 @@ const Local = ({ toggleLayer, renderToggle, sidebar, ...props }) => {
         width="30%"
         height="200px"
       />
-      <Link to="regional">
-        <Button>Regional</Button>
-      </Link>
+
+      <Button>
+        <Link to="regional">Regional</Link>
+      </Button>
     </div>
   )
 }

@@ -76,9 +76,10 @@ class Global extends Component {
           the details we need to scale up our conservation efforts to a global
           level that encompasses half of the Earth.
         </p>
-        <Link to="/">
-          <Button>Home</Button>
-        </Link>
+
+        <Button>
+          <Link to="/">Home</Link>
+        </Button>
       </div>
     )
   }

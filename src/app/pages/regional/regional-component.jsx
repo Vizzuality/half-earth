@@ -73,9 +73,9 @@ const Regional = ({
         have, we can confidently identify which areas should be protected and
         how.
       </p>
-      <Link to="global">
-        <Button>Global</Button>
-      </Link>
+      <Button>
+        <Link to="global">Global</Link>
+      </Button>
     </div>
   )
 }
