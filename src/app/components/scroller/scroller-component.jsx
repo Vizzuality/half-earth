@@ -37,11 +37,9 @@ class Scroller extends PureComponent {
       const top = rect.top - this.playheadPosition
       const bottom = rect.bottom - this.playheadPosition
 
-      if (top !== this.offset) {
-        if (top <= 0 && bottom >= 0) {
-          cb()
-          this.offset = top
-        }
+      if (top !== this.offset && top <= 0 && bottom >= 0) {
+        cb()
+        this.offset = top
       }
     })
   }
@@ -55,12 +53,15 @@ class Scroller extends PureComponent {
   }
 
   render () {
-    const { children, playhead } = this.props
+    const { children, playhead, className } = this.props
     return [
       <div
         key="playhead"
         id="playhead"
-        className={cx(styles.playHead, { [styles.playHeadVisible]: playhead })}
+        className={cx(styles.playHead, {
+          [className]: className,
+          [styles.playHeadVisible]: playhead
+        })}
       />,
       Children.map(children, ch => {
         const getRef = el => {

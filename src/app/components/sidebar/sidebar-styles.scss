@@ -24,18 +24,17 @@ $pad: 6rem;
     &::after {
       pointer-events: none;
       content: '';
-      height: 10rem;
       position: fixed;
-      bottom: 0;
+      top: $header-height;
+      height: calc(100% - #{$header-height});
       left: 0;
       width: $column-width;
-      max-width: $max-width;
-      z-index: 1000;
+      z-index: $zground;
       background-image:
         linear-gradient(
-          rgba($color-mid-blue, 0),
-          rgba($color-mid-blue, 0.5),
-          rgba($color-mid-blue, 0.7),
+          $color-mid-blue,
+          rgba($color-mid-blue, 0) 20%,
+          rgba($color-mid-blue, 0) 80%,
           $color-mid-blue
         );
     }
