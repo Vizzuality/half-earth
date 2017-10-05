@@ -2,7 +2,6 @@ import Home from 'pages/home'
 import Global from 'pages/global'
 import Regional from 'pages/regional'
 import Local from 'pages/local'
-import Scroller from 'components/scroller'
 
 export default [
   {
@@ -13,11 +12,6 @@ export default [
   {
     path: '/global',
     component: Global,
-    exact: true
-  },
-  {
-    path: '/scroll',
-    component: Scroller,
     exact: true
   },
   {
