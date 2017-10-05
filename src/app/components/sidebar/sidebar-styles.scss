@@ -1,63 +1,57 @@
 @import '~styles/variables.scss';
+@import './variables.scss';
+
+$pad: 6rem;
 
 .sidebar {
-  position: absolute;
-  right: $site-padding / 2;
-  top: 20vh;
-  flex-direction: column;
-  text-align: right;
-  padding-right: 20px;
+  background-color: $color-mid-blue;
+  position: relative;
+  display: block;
+  width: calc(70vw + 30px);
+  max-width: 600px;
+  transition: width 0.25s ease-in-out;
 
-  &.items {}
-
-  .item {
-    height: 33vh;
-    position: relative;
-    $radius: 15px;
-
-    padding-right: 20px;
-    margin-top: 12px;
-    border-right: 1px solid transparent;
-
-    &.itemActive::after {
-      content: '';
-      display: block;
-      width: 4px;
-      height: 4px;
-      background-color: white;
-      position: absolute;
-      right: -3px;
-      top: -0.9em;
-      border-radius: 100%;
-    }
-  }
-
-  .item:not(:last-child) {
-    border-color: white;
-  }
-
-  .link {
-    position: relative;
+  .content {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    color: white;
+    padding: $pad $site-padding;
+    overflow-y: auto;
+    font-size: 1.6rem;
+    line-height: 2em;
 
     &::after {
+      pointer-events: none;
       content: '';
-      display: block;
-      width: 10px;
-      height: 10px;
-      border: 2px solid $color-turquoise;
-      position: absolute;
-      right: -28px;
-      top: -14px;
-      border-radius: 100%;
+      height: 10rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: $column-width;
+      max-width: $max-width;
+      z-index: 1000;
+      background-image:
+        linear-gradient(
+          rgba($color-mid-blue, 0),
+          rgba($color-mid-blue, 0.5),
+          rgba($color-mid-blue, 0.7),
+          $color-mid-blue
+        );
     }
   }
 
-  .label {
-    position: absolute;
-    right: 0;
-    top: -1em;
-    color: white;
-    font-size: 1.1rem;
-    text-transform: uppercase;
+  &Hidden {
+    width: 0;
+    opacity: 0;
+
+    .content::after {
+      width: 0;
+    }
+  }
+
+  &Closed {
+    width: calc(#{$arrow-padding * 2} + #{$arrow-width});
   }
 }
+

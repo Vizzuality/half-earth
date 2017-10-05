@@ -1,7 +1,27 @@
 @import '~styles/variables.scss';
 
-.content {
-  font-family: PierSans;
+.container {
+  position: fixed;
+  width: 100vw;
+  height: 100vw;
+
+  .header {
+    // height: 5rem;
+    height: $header-height;
+  }
+
+  .body {
+    display: flex;
+    position: relative;
+  }
+
+  .col {
+    height: calc(100vh - #{$header-height});
+  }
+
+  .map {
+    width: 100%;
+  }
 }
 
 // .grid {

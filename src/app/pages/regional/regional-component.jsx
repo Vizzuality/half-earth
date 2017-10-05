@@ -1,14 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import cx from 'classnames'
 
 import Button from 'components/button'
 import SpiderChart from 'components/spider-chart'
 import Placeholder from 'components/placeholder'
 import Earthometer from 'components/earthometer'
 
-import pageStyles from 'styles/pages.scss'
 const Regional = ({
+  classname,
   renderDropdown,
   renderToggle,
   selectLayer,
@@ -18,11 +17,7 @@ const Regional = ({
   const t = renderToggle(toggleLayer)
   const d = renderDropdown(selectLayer)
   return (
-    <div
-      className={cx(pageStyles.container, {
-        [pageStyles.containerClosed]: !sidebar.open
-      })}
-    >
+    <div className={classname}>
       <Earthometer />
       <p>
         Soaring high up upon the air thermals, white storks glide alongside

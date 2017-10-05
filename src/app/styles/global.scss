@@ -1,7 +1,14 @@
 @import '~styles/variables.scss';
 
-* {
+html {
   box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body * {
@@ -11,8 +18,8 @@ body * {
 body {
   margin: 0;
   padding: 0;
-  font-size: 62.5%;
-  overflow: hidden;
+  font-size: 1.6rem;
+  font-family: PierSans;
 }
 
 #root :global {

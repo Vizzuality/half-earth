@@ -9,10 +9,6 @@ import random from 'lodash/random'
 import zoomLevels from 'data/zoom-levels'
 const { Cesium } = window
 
-const styles = {}
-const lockNavigation = true
-
-const scope = path => path.replace('/', '') || 'home'
 const [lat, long] = zoomLevels(Cesium).local[0]
 const birdPosition = [lat - 0.07, long - 0.07, 150000]
 const displace = (x, y, z) => [
@@ -22,11 +18,11 @@ const displace = (x, y, z) => [
 ]
 const birds = new Array(1000).fill(0)
 
-const Map = ({ map, location }) => (
+const Map = ({ map, zoomLevel, lockNavigation, className }) => (
   <CesiumMap
-    className={styles.map}
+    className={className}
     lockNavigation={lockNavigation}
-    zoomLevel={scope(location.pathname)}
+    zoomLevel={zoomLevel}
   >
     {birds.map((bird, i) => (
       <ModelProvider

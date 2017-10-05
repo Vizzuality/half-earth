@@ -1,46 +1,28 @@
 @import '~styles/variables.scss';
+@import '~styles/ui.scss';
 
 .container {
   color: $color-wite;
   background-color: $color-dark-blue;
-  position: relative;
-  z-index: $zforeground + 1;
+  height: 100%;
   display: flex;
   justify-content: space-between;
-  height: $header-height;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   align-items: center;
   padding: 0.5rem $site-padding;
 }
 
-.col,
-.colMiddle {
-  padding: 10px;
-  text-align: center;
-}
-
-.col {
-  width: 45vw;
-}
-
-.colMiddle {
-  width: 10%;
-}
-
-.logo,
-.menu {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 .logo {
+  @extend %bg-image;
+
   background-image: url(/img/logo.png);
   width: 117px;
   height: 68px;
 }
 
 .menu {
+  @extend %bg-image;
+
   background-image: url(/img/menu.png);
   width: 507px;
   height: 36px;
