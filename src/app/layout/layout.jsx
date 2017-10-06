@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { cloneElement, Children } from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import cx from 'classnames'
@@ -18,9 +18,18 @@ const Layout = ({ children, location, sidebar, ...props }) => {
     <div className={styles.container}>
       <Header className={styles.header} />
       <div className={styles.body}>
-        <Sidebar hidden={isHome} className={cx(styles.col, styles.sidebar)}>
-          {children}
-        </Sidebar>
+        {Children.map(
+          children,
+          child =>
+            child.key === location.pathname && (
+              <Sidebar
+                hidden={isHome}
+                className={cx(styles.col, styles.sidebar)}
+              >
+                {cloneElement(child)}
+              </Sidebar>
+            )
+        )}
         {isHome && <Home />}
         <Map className={cx(styles.col, styles.map)} zoomLevel={route} />
       </div>
