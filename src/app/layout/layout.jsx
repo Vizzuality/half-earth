@@ -18,11 +18,7 @@ const Layout = ({ children, location, sidebar, ...props }) => {
     <div className={styles.container}>
       <Header className={styles.header} />
       <div className={styles.body}>
-        <Sidebar
-          open={sidebar.open}
-          hidden={isHome}
-          className={cx(styles.col, styles.sidebar)}
-        >
+        <Sidebar hidden={isHome} className={cx(styles.col, styles.sidebar)}>
           {children}
         </Sidebar>
         {isHome && <Home />}

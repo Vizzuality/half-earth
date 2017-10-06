@@ -3,10 +3,10 @@ import cx from 'classnames'
 
 import styles from './button-styles'
 
-const Button = ({ toggleSidebar, sidebar }) => (
+const Button = ({ toggleSidebar, open }) => (
   <div
     className={cx(styles.container, {
-      [styles.containerClosed]: !sidebar.open
+      [styles.containerClosed]: open
     })}
   >
     <div className={styles.arrow} onClick={toggleSidebar} />
