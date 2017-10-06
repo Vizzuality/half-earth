@@ -6,6 +6,7 @@ import difference from 'lodash/difference'
 import { assign } from 'app/utils'
 import * as actions from './map-actions'
 import { actions as cartoActions } from 'providers/carto'
+import { actions as sectionActions } from 'providers/section'
 
 const updateLayer = (state, { payload, ...rest }) => {
   const { name, reset } = rest
@@ -48,5 +49,10 @@ export default {
       l.visible = false
       return l
     })
-  })
+  }),
+
+  [sectionActions.setSection]: (state, { payload }) => {
+    console.log(payload)
+    return state
+  }
 }

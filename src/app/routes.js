@@ -6,22 +6,22 @@ import Local from 'pages/local'
 export default [
   {
     path: '/',
-    component: Home,
-    exact: true
+    exact: true,
+    component: Home
   },
   {
     path: '/global',
-    component: Global,
-    exact: true
+    exact: true,
+    component: Global
   },
   {
     path: '/regional',
-    component: Regional,
-    exact: true
+    exact: true,
+    component: Regional
   },
   {
     path: '/local',
-    component: Local,
-    exact: true
+    exact: true,
+    component: Local
   }
 ]

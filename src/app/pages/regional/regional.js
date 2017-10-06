@@ -16,6 +16,7 @@ class RegionalConTainer extends Component {
 }
 
 const mapStateToProps = ({ map, global, sidebar }) => {
+  console.log('regional')
   return {
     map,
     sidebar,

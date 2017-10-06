@@ -9,3 +9,23 @@
   // background-color: red;
   // top: 25vh;
 }
+
+.button {
+  background-color: transparent;
+  border: 1px solid $color-turquoise;
+  border-radius: 20px;
+  padding: 0.5em 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: 100%;
+  z-index: 100000;
+  position: relative;
+  font-size: 0.9rem;
+
+  &:focus {
+    outline: 0;
+  }
+
+  color: $color-turquoise;
+  text-decoration: none;
+}

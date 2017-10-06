@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Button from 'components/button'
 import SpiderChart from 'components/spider-chart'
 import Placeholder from 'components/placeholder'
 import Earthometer from 'components/earthometer'
+
+import uiStyles from 'app/styles/ui'
 
 const Regional = ({
   classname,
@@ -68,9 +69,9 @@ const Regional = ({
         have, we can confidently identify which areas should be protected and
         how.
       </p>
-      <Button>
-        <Link to="global">Global</Link>
-      </Button>
+      <Link className={uiStyles.button} to="/global">
+        Global
+      </Link>
     </div>
   )
 }
