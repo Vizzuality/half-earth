@@ -23,7 +23,10 @@ const Local = ({
     <div className={cx(className)}>
       <Scroller className={styles.playhead}>
         <Earthometer />
-        <P className={styles.p} onScrollFocus={() => setSection('local:1')}>
+        <P
+          className={uiStyles.slides}
+          onScrollFocus={() => setSection('local:1')}
+        >
           Swooping over Botswana’s Okavango Delta, the white stork (Ciconia
           ciconia) observes the oasis beneath its wings. The Okavango Delta is
           an important place for {t('migrating birds', false, true)} that stop
@@ -33,7 +36,10 @@ const Local = ({
           the area is a warning call to all.
         </P>
         <Floodmap />
-        <P className={styles.p} onScrollFocus={() => setSection('local:2')}>
+        <P
+          className={uiStyles.slides}
+          onScrollFocus={() => setSection('local:2')}
+        >
           The variety of life in the Okavango Delta is rich and diverse, earning
           itself a place on the UNESCO World Heritage List. A mosaic of{' '}
           {t('protected areas')} that include a game reserve and a number of
@@ -43,7 +49,10 @@ const Local = ({
           along with the water, food and resources they, and the people living
           here, need to survive.
         </P>
-        <P className={styles.p} onScrollFocus={() => setSection('local:3')}>
+        <P
+          className={uiStyles.slides}
+          onScrollFocus={() => setSection('local:3')}
+        >
           For every species observed there is a story to tell. This stork, named{' '}
           {t('91397A', false, true)}, was tagged by a group of German
           researchers as they set out to track and map the migration patterns of

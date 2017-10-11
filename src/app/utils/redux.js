@@ -20,8 +20,8 @@ export const bindActionsToReducers = (actions, reducerList) =>
 // this should be unwrapped and simplified:
 // can take a list of all reducers and use the key to select
 // can take initialstate from module instead of importing initialstate into data
-export const handleActions = (key, actions, reducers, state) =>
-  handle(bindActionsToReducers(actions, [reducers]), state[key] || {})
+export const handleActions = (actions, reducers, state) =>
+  handle(bindActionsToReducers(actions, [reducers]), state || {})
 
 // our own actioncreattor that can handle thunks
 // fires the action as init

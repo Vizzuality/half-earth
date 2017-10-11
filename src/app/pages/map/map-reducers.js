@@ -1,27 +1,12 @@
-import sortBy from 'lodash/sortBy'
-import identity from 'lodash/identity'
-import find from 'lodash/find'
-import difference from 'lodash/difference'
-
-import { assign } from 'app/utils'
+import { updateLayer } from './map-utils'
 import * as actions from './map-actions'
 import { actions as cartoActions } from 'providers/carto'
-import { actions as sectionActions } from 'providers/section'
-
-const updateLayer = (state, { payload, ...rest }) => {
-  const { name, reset } = rest
-  const { layers } = state
-  const layer = find(layers, { name })
-  if (!layer) return state
-  const filtered = difference(layers, [layer]).map(
-    reset ? l => assign(l, { visible: false }) : identity
-  )
-
-  return {
-    ...state,
-    layers: sortBy(filtered.concat([assign(layer, payload(layer))]), 'name')
-  }
-}
+// import { actions as sectionActions } from 'providers/section'
+export const selectLayer = (state, { payload }) =>
+  updateLayer(state, {
+    ...payload,
+    payload: layer => ({ visible: true })
+  })
 
 export default {
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
@@ -36,12 +21,7 @@ export default {
       payload: layer => ({ visible: !layer.visible })
     }),
 
-  [actions.selectLayer]: (state, { payload }) =>
-    updateLayer(state, {
-      ...payload,
-      reset: true,
-      payload: layer => ({ visible: true })
-    }),
+  [actions.selectLayer]: selectLayer,
 
   [actions.resetLayers]: (state, { payload }) => ({
     ...state,
@@ -49,10 +29,5 @@ export default {
       l.visible = false
       return l
     })
-  }),
-
-  [sectionActions.setSection]: (state, { payload }) => {
-    console.log(payload)
-    return state
-  }
+  })
 }

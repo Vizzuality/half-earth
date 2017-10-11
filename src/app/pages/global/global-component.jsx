@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import Placeholder from 'components/placeholder'
 import Earthometer from 'components/earthometer'
-import Button from 'components/button'
+import uiStyles from 'app/styles/ui'
 
 class Global extends Component {
   render () {
@@ -71,9 +71,9 @@ class Global extends Component {
           level that encompasses half of the Earth.
         </p>
 
-        <Button>
-          <Link to="/">Home</Link>
-        </Button>
+        <Link className={uiStyles.button} to="/">
+          Home
+        </Link>
       </div>
     )
   }

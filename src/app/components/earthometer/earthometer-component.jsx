@@ -3,14 +3,14 @@ import last from 'lodash/last'
 import cx from 'classnames'
 
 import Slider from 'components/slider'
-import styles from './slider-styles.scss'
+import styles from './earthometer-styles.scss'
 import theme from './slider-theme.scss'
 const values = [0, 50, 100]
 
 const hasPercent = v => v === 50
 const showPercent = v => (hasPercent(v) ? '%' : '')
 
-const SliderComponent = ({ className, earthSaved, setEarthSaved }) => (
+const Earthometer = ({ className, earthSaved, setEarthSaved }) => (
   <div className={cx(className, styles.container)}>
     <div className={styles.wrap}>
       <div className={styles.labels}>
@@ -38,4 +38,4 @@ const SliderComponent = ({ className, earthSaved, setEarthSaved }) => (
   </div>
 )
 
-export default SliderComponent
+export default Earthometer

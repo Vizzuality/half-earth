@@ -1,9 +1,46 @@
-.container {
-  width: 100%;
-  height: 116px;
-  background-image: url(/img/earthometer.png);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center;
-  margin-bottom: 4rem;
+@import '~styles/variables.scss';
+$offset: 0.1em;
+
+.wrap {
+  width: calc(100% - #{$site-padding});
+}
+
+.values,
+.labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.labels,
+.values {
+  width: calc(100% + 10px);
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  font-weight: 500; // ?
+}
+
+.labelx {
+  font-size: 0.7rem;
+}
+
+.values {
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: 0.6em;
+  // margin-left: - $offset;
+  margin-left: -4px;
+}
+
+.percent {
+  margin-left: 1.7em;
+}
+
+.percentSaved {
+  color: $color-turquoise;
 }

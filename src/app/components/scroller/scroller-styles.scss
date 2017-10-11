@@ -5,6 +5,7 @@
   z-index: 1000;
   top: 50vh;
   left: 0;
+  pointer-events: none;
 
   &Visible {
     background-color: white;

@@ -44,6 +44,7 @@ class CesiumComponent extends Component {
       timeline: false,
       creditsDisplay: false,
       fullscreenButton: false,
+      terrainExaggeration: 10,
       // skyAtmosphere: false,
       imageryProvider: new Cesium.UrlTemplateImageryProvider({
         url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNoYWxmZWFydGgiLCJhIjoiY2o4Mnh4aDN6MGNqazMzc2FkeTlnajBoeiJ9.5Su3_JeAsjM0slTkaGFihw`

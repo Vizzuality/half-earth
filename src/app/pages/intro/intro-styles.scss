@@ -1,0 +1,14 @@
+@import '~styles/variables';
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  padding-top: 25vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: $zforeground;
+  text-align: center;
+}

@@ -6,6 +6,7 @@ import cx from 'classnames'
 import Header from 'components/header'
 import Map from 'pages/map'
 import Home from 'pages/home'
+import Intro from 'pages/intro'
 import Sidebar from 'components/sidebar'
 
 import styles from './layout-styles.scss'
@@ -14,6 +15,8 @@ const scope = path => path.replace('/', '') || 'home'
 const Layout = ({ children, location, sidebar, ...props }) => {
   const route = scope(location.pathname)
   const isHome = route === 'home'
+  const isIntro = route === 'intro'
+
   return (
     <div className={styles.container}>
       <Header className={styles.header} />
@@ -23,7 +26,7 @@ const Layout = ({ children, location, sidebar, ...props }) => {
           child =>
             child.key === location.pathname && (
               <Sidebar
-                hidden={isHome}
+                hidden={isHome || isIntro}
                 className={cx(styles.col, styles.sidebar)}
               >
                 {cloneElement(child)}
@@ -31,6 +34,7 @@ const Layout = ({ children, location, sidebar, ...props }) => {
             )
         )}
         {isHome && <Home />}
+        {isIntro && <Intro />}
         <Map className={cx(styles.col, styles.map)} zoomLevel={route} />
       </div>
     </div>

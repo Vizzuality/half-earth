@@ -19,12 +19,12 @@
     width: $arrow-width;
     height: $arrow-width;
     background-image: url('/img/arrow.png');
-    transform: rotate(90deg);
+    transform: rotate(270deg);
   }
 
   &Closed {
     .arrow {
-      transform: rotate(270deg);
+      transform: rotate(90deg);
     }
   }
 }

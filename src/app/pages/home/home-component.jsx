@@ -13,7 +13,7 @@ const Home = props => (
       telling the stories of the species that live there.
     </p>
     <button className={styles.cto}>
-      <Link to="local">Go</Link>
+      <Link to="intro">Go</Link>
     </button>
   </div>
 )

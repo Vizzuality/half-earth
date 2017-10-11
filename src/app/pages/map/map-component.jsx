@@ -16,9 +16,9 @@ const displace = (x, y, z) => [
   y - 0.5 + random(-0.8, 0.8, true),
   z
 ]
-const birds = new Array(1000).fill(0)
+const birds = new Array(10).fill(0)
 
-const Map = ({ map, zoomLevel, lockNavigation, className }) => (
+const Map = ({ map, regional, zoomLevel, lockNavigation, className }) => (
   <CesiumMap
     className={className}
     lockNavigation={lockNavigation}
@@ -38,6 +38,12 @@ const Map = ({ map, zoomLevel, lockNavigation, className }) => (
       layer =>
         layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
     )}
+    {regional.layers
+      .filter(l => l.visible)
+      .map(
+        layer =>
+          layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
+      )}
   </CesiumMap>
 )
 

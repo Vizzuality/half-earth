@@ -2,24 +2,58 @@ import { combineReducers } from 'redux'
 import { handleActions } from 'app/utils/redux'
 import { routerReducer } from 'react-router-redux'
 
-import initialState from './data/initial-state'
-import allActions from './actions'
-import { reducers as zoomReducers } from 'components/zoom'
-// import { reducers as earthometerReducers } from 'components/earthometer'
-import { reducers as mapReducers } from 'pages/map'
-import { reducers as sidebarReducers } from 'components/sidebar'
-import { reducers as sectionReducers } from 'providers/section'
+import { actions as cartoActions } from 'providers/carto'
+
+import {
+  actions as zoomActions,
+  reducers as zoomReducers,
+  initialState as zoomState
+} from 'components/zoom'
+
+import {
+  actions as earthometerActions,
+  reducers as earthometerReducers,
+  initialState as earthometerState
+} from 'components/earthometer'
+
+import {
+  actions as mapActions,
+  reducers as mapReducers,
+  initialState as mapState
+} from 'pages/map'
+
+import {
+  actions as sidebarActions,
+  reducers as sidebarReducers,
+  initialState as sidebarState
+} from 'components/sidebar'
+
+import {
+  actions as sectionActions,
+  reducers as sectionReducers,
+  initialState as sectionState
+} from 'providers/section'
+
+import {
+  reducers as regionalReducers,
+  initialState as regionalState
+} from 'pages/regional'
+
+const allActions = {
+  ...cartoActions,
+  ...zoomActions,
+  ...earthometerActions,
+  ...mapActions,
+  ...sidebarActions,
+  ...sectionActions
+}
 
 export default combineReducers({
   routing: routerReducer,
-  zoom: handleActions('zoom', allActions, zoomReducers, initialState),
-  // earthSaved: handleActions(
-  //   'zoom',
-  //   allActions,
-  //   earthometerReducers,
-  //   initialState
-  // ),
-  sidebar: handleActions('sidebar', allActions, sidebarReducers, initialState),
-  map: handleActions('map', allActions, mapReducers, initialState),
-  section: handleActions('section', allActions, sectionReducers, initialState)
+  zoom: handleActions(allActions, zoomReducers, zoomState),
+  earthSaved: handleActions(allActions, earthometerReducers, earthometerState),
+  sidebar: handleActions(allActions, sidebarReducers, sidebarState),
+  map: handleActions(allActions, mapReducers, mapState),
+  section: handleActions(allActions, sectionReducers, sectionState),
+  regional: handleActions(allActions, regionalReducers, regionalState)
 })
