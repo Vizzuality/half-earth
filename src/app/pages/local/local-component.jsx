@@ -22,7 +22,7 @@ const Local = ({
   return (
     <div className={cx(className)}>
       <Scroller className={styles.playhead}>
-        <Earthometer />
+        <Earthometer displayOnly />
         <P
           className={uiStyles.slides}
           onScrollFocus={() => setSection('local:1')}

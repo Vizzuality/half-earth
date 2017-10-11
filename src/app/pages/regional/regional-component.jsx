@@ -37,7 +37,7 @@ const Regional = ({
   return (
     <div className={classname}>
       <Scroller>
-        <Earthometer />
+        <Earthometer displayOnly />
         <P
           className={uiStyles.slides}
           onScrollFocus={() => setSection('regional:1')}
