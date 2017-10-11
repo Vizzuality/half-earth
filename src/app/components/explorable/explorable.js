@@ -37,6 +37,7 @@ export const renderToggle = (layers, namespace = '') => toggle => (
 }
 
 export const renderDropdown = sections => selectOption => (section, name) => {
+  if (!sections[section]) return <span>{name}</span>
   const { options, selected } = sections[section].selectors[name]
   return (
     <Dropdown
