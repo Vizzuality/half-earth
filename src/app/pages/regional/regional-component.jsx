@@ -6,8 +6,6 @@ import SpiderChart from 'components/spider-chart'
 import Placeholder from 'components/placeholder'
 import Earthometer from 'components/earthometer'
 
-// import Dropdown from 'components/dropdown'
-// import dropdownTheme from 'styles/themes/dropdown.scss'
 import uiStyles from 'app/styles/ui'
 
 const Regional = ({
@@ -19,20 +17,11 @@ const Regional = ({
   toggleLayer,
   sidebar,
   setSection,
+  section,
   ...props
 }) => {
   const t = renderToggle(toggleLayer)
   const d = renderDropdown(name => selectLayer({ name }))
-  /**
-   Dropdown, {
-    className: dropdownTheme.dropdown,
-    theme: dropdownTheme,
-    onSelect: name => selectOption({ name }),
-    options,
-    selected:
-      (foundSelected && foundSelected.name) || `${defaultLayer}${namespace}`
-  }
-   */
 
   return (
     <div className={classname}>
@@ -91,16 +80,13 @@ const Regional = ({
           {t('community-based reserves', null, false)},{' '}
           {t('private reserves', null, false)} and Indigenous and Community
           Conserved Areas (ICCAs).
-        </P>
-        <P
-          className={uiStyles.slides}
-          onScrollFocus={() => setSection('regional:5')}
-        >
-          We currently have detailed information for just a fraction of our
-          planet, yet it’s within our ability and reach to apply this mapping
-          approach to every part of the world. By combining all the knowledge we
-          have, we can confidently identify which areas should be protected and
-          how.
+          <p className={uiStyles.slides}>
+            We currently have detailed information for just a fraction of our
+            planet, yet it’s within our ability and reach to apply this mapping
+            approach to every part of the world. By combining all the knowledge
+            we have, we can confidently identify which areas should be protected
+            and how.
+          </p>
         </P>
         <Link className={uiStyles.button} to="/global">
           Global

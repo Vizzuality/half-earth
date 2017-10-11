@@ -70,10 +70,22 @@ export default {
     },
     {
       name: 'protected-areas',
-      url:
-        'https://simbiotica.carto.com/tables/wdpa_protected_areas/public/map',
+      url: null,
       type: 'UrlTemplate',
       maximumLevel,
+      carto: cartoConfig(
+        'simbiotica',
+        `#layer {
+          polygon-fill: #00f7ff;
+          polygon-opacity: 0;
+        }
+        #layer::outline {
+          line-width: 1;
+          line-color: #000000;
+          line-opacity: 0.5;
+        }`,
+        'wdpa_protected_areas'
+      ),
       visible: false
     },
     {
