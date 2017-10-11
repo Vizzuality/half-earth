@@ -38,12 +38,10 @@ const Map = ({ map, regional, zoomLevel, lockNavigation, className }) => (
       layer =>
         layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
     )}
-    {regional.layers
-      .filter(l => l.visible)
-      .map(
-        layer =>
-          layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
-      )}
+    {regional.layers.map(
+      layer =>
+        layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
+    )}
   </CesiumMap>
 )
 
