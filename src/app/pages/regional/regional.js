@@ -12,21 +12,22 @@ import RegionalComponent from './regional-component'
 class RegionalConTainer extends Component {
   constructor (props) {
     super(props)
-    const { getCartoTiles, selectLayer } = props
+    const { getCartoTiles, setSection } = props
     const { layers } = props.regional
     requestCartos({ layers, getCartoTiles })
-    selectLayer({ name: 'stork-flyways' })
+    setSection('regional:1')
   }
   render () {
     return createElement(RegionalComponent, this.props)
   }
 }
 
-const mapStateToProps = ({ map, regional, sidebar }) => {
+const mapStateToProps = ({ map, regional, sidebar, section }) => {
   return {
     map,
     sidebar,
     regional,
+    section,
     renderToggle: renderToggle(map.layers, ':regional'),
     renderDropdown: renderDropdown(regional.sections)
   }
