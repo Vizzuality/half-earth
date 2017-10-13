@@ -1,0 +1,72 @@
+@import '~styles/variables.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  z-index: $zforeground;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 180px;
+}
+
+.back {
+  color: $color-white;
+  font-family: 'PierSans';
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.4rem;
+  text-align: left;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &:active {
+    outline: 0;
+  }
+
+  &::after {
+    content: '';
+    width: 1px;
+    height: 9px;
+    background-color: $color-white;
+  }
+}
+
+.forth {
+  position: relative;
+  border: 2px solid $color-white;
+  height: 36px;
+  width: 36px;
+  border-radius: 50px;
+  background-color: transparent;
+
+  &:active {
+    outline: 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: lighten($color-mid-blue, 4%);
+  }
+
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid $color-white;
+    border-bottom: 2px solid $color-white;
+    transform: translate(-50%, -50%) rotate(45deg);
+    left: 50%;
+  }
+}

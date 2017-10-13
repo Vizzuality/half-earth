@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import Scroller, { Element as P } from 'components/scroller'
 import SpiderChart from 'components/spider-chart'
 import Placeholder from 'components/placeholder'
 import Earthometer from 'components/earthometer'
+import NavFooter from 'components/nav-footer'
 
 import uiStyles from 'app/styles/ui'
 
@@ -88,9 +88,7 @@ const Regional = ({
             and how.
           </p>
         </P>
-        <Link className={uiStyles.button} to="/global">
-          Global
-        </Link>
+        <NavFooter to="/global" />
       </Scroller>
     </div>
   )
