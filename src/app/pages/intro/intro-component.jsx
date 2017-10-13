@@ -1,16 +1,16 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
 
-import uiStyles from 'app/styles/ui'
 import styles from './intro-styles'
 
-const Intro = props => (
-  <div className={styles.container}>
-    <h1>Intro</h1>
-    <Link className={uiStyles.button} to="/local">
-      Next
-    </Link>
-  </div>
-)
+class Intro extends Component {
+  render () {
+    const { getRef, videoSrc } = this.props
 
+    return (
+      <div className={styles.container}>
+        <video ref={getRef} autoPlay src={videoSrc} />
+      </div>
+    )
+  }
+}
 export default Intro
