@@ -23,6 +23,7 @@ const Map = ({ map, regional, zoomLevel, lockNavigation, className }) => (
     className={className}
     lockNavigation={lockNavigation}
     zoomLevel={zoomLevel}
+    rotate={zoomLevel === 'global'}
   >
     {birds.map((bird, i) => (
       <ModelProvider

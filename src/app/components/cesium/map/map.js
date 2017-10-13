@@ -10,9 +10,10 @@ const zoomLevels = bindZoomLevels(Cesium)
 const mapId = `map-${new Date().getTime()}`
 
 const bindFlyTo = v => (lat, long, z = 15000.0, rest = {}) =>
-  v.camera.flyTo(
-    assign({ destination: Cesium.Cartesian3.fromDegrees(lat, long, z) }, rest)
-  )
+  // v.camera.flyTo(
+  //   assign({ destination: Cesium.Cartesian3.fromDegrees(lat, long, z) }, rest)
+  // )
+  v.camera.flyTo(assign({ destination: { x: long, y: lat, z } }, rest))
 
 const disablePanning = v => {
   const { scene } = v
@@ -27,6 +28,7 @@ const disablePanning = v => {
 class CesiumComponent extends Component {
   constructor (props) {
     super(props)
+
     this.state = {
       layers: {},
       viewer: null
@@ -56,6 +58,8 @@ class CesiumComponent extends Component {
 
     if (zoomLevel) this.handleZoom(zoomLevel)
     if (lockNavigation) return disablePanning(viewer)
+
+    this.state.viewer = viewer
     return viewer
   }
 
@@ -79,8 +83,18 @@ class CesiumComponent extends Component {
 
   handleZoom (zoom) {
     if (!zoomLevels[zoom]) return
-    const [zLevel, opts] = zoomLevels[zoom]
-    this.flyTo(...zLevel, opts)
+    const { state: { viewer } } = this
+    const [zLevel, opts, cameraProps] = zoomLevels[zoom]
+    if (zLevel) {
+      this.flyTo(...zLevel, opts)
+    }
+
+    if (viewer && cameraProps) {
+      Object.keys(cameraProps).map(p => {
+        console.log(viewer.camera[p])
+        viewer.camera[p] = cameraProps[p]
+      })
+    }
   }
 
   componentWillReceiveProps (props) {
@@ -89,9 +103,25 @@ class CesiumComponent extends Component {
     }
   }
 
+  rotate () {
+    const { viewer } = this.state
+
+    var lastNow = Date.now()
+    viewer.clock.onTick.addEventListener(clock => {
+      const now = Date.now()
+      const spinRate = 0.08
+      const delta = (now - lastNow) / 1000
+      viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate * delta)
+      lastNow = now
+    })
+  }
+
   render () {
     const { props, state } = this
+    const { rotate } = props
     const { layers, viewer } = state
+
+    if (viewer && rotate) this.rotate()
 
     const getPos = (window.getPos = () => {
       const c = viewer.camera.positionCartographic
