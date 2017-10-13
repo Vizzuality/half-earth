@@ -8,9 +8,7 @@ class Intro extends Component {
 
     return (
       <div className={styles.container}>
-        <div className={styles.videoContainer}>
-          <video ref={getRef} autoPlay src={videoSrc} />
-        </div>
+        <video ref={getRef} autoPlay src={videoSrc} />
       </div>
     )
   }

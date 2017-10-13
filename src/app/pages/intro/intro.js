@@ -21,7 +21,7 @@ class IntroContainer extends Component {
     return createElement(IntroComponent, {
       ...this.props,
       getRef,
-      videoSrc: 'http://media.w3.org/2010/05/bunny/trailer.mp4'
+      videoSrc: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'
     })
   }
 }
