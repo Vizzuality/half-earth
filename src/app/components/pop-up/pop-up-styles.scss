@@ -1,0 +1,50 @@
+@import '~styles/variables.scss';
+
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+}
+
+.close {
+  position: absolute;
+  top: 35px;
+  right: 60px;
+  background-color: $color-turquoise;
+  height: 44px;
+  width: 44px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: darken($color-turquoise, 7%);
+  }
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    height: 14px;
+    width: 2px;
+    background-color: $color-white;
+    top: 50%;
+    left: 50%;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+

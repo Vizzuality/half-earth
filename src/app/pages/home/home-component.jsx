@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './home-styles.scss'
+import PopUp from 'components/pop-up'
 
 const Home = props => (
   <div className={styles.container}>
@@ -17,6 +18,7 @@ const Home = props => (
     <div className={styles.cto}>
       <Link to="intro">Play</Link>
     </div>
+    <PopUp />
   </div>
 )
 
