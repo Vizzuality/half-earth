@@ -2,7 +2,7 @@ const merge = require('webpack-merge')
 const { config, sassConfig, paths: { publicPath } } = require('./base')
 
 module.exports = merge(config, {
-  devtool: 'cheap-eval-source-map',
+  devtool: '#eval-source-map',
 
   module: {
     rules: [
