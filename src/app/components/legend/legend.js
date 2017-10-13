@@ -3,6 +3,10 @@ import { createElement, Component } from 'react'
 import LegendComponent from './legend-component'
 
 class LegendContainer extends Component {
+  static defaultProps = {
+    title: 'Legend'
+  }
+
   state = {
     closed: false
   }

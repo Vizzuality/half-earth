@@ -8,6 +8,7 @@ import Map from 'pages/map'
 import Home from 'pages/home'
 import Intro from 'pages/intro'
 import Sidebar from 'components/sidebar'
+import Legend from 'components/legend'
 
 import styles from './layout-styles.scss'
 const scope = path => path.replace('/', '') || 'home'
@@ -36,6 +37,18 @@ const Layout = ({ children, location, sidebar, ...props }) => {
         {isHome && <Home />}
         {isIntro && <Intro />}
         <Map className={cx(styles.col, styles.map)} zoomLevel={route} />
+        {!isHome &&
+        !isIntro && (
+          <Legend>
+            <h3>Title</h3>
+            <p>Paragraph</p>
+            <ul>
+              <li>List item</li>
+              <li>List item</li>
+              <li>List item</li>
+            </ul>
+          </Legend>
+        )}
       </div>
     </div>
   )
