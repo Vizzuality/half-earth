@@ -4,7 +4,9 @@ import styles from './home-styles.scss'
 
 const Home = props => (
   <div className={styles.container}>
-    <h1 className={styles.title}>Half-Earth Project Map</h1>
+    <div className={styles.titleContainer}>
+      <h1 className={styles.title}>Getting To Half</h1>
+    </div>
     <p className={styles.intro}>
       Half-Earth is a call-to-action to protect half the Earth’s land and sea.
       If we conserve half, we can protect 85% or more of species, including
@@ -12,9 +14,9 @@ const Home = props => (
       identifying the places that contain the greatest diversity of life and
       telling the stories of the species that live there.
     </p>
-    <button className={styles.cto}>
-      <Link to="intro">Go</Link>
-    </button>
+    <div className={styles.cto}>
+      <Link to="intro">Play</Link>
+    </div>
   </div>
 )
 
