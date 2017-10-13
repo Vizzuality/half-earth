@@ -88,7 +88,6 @@ class CesiumComponent extends Component {
 
     if (viewer && cameraProps) {
       Object.keys(cameraProps).map(p => {
-        console.log(viewer.camera[p])
         viewer.camera[p] = cameraProps[p]
       })
     }
