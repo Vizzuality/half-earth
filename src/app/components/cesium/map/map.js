@@ -25,7 +25,7 @@ const disablePanning = v => {
 class CesiumComponent extends Component {
   constructor (props) {
     super(props)
-
+    this.rotatingEvent = false
     this.state = {
       layers: {},
       viewer: null
@@ -99,17 +99,28 @@ class CesiumComponent extends Component {
     }
   }
 
-  rotate () {
+  rotate = clock => {
+    const { startTime, currentTime } = clock
     const { viewer } = this.state
+    const lastNow = startTime.secondsOfDay
+    const now = currentTime.secondsOfDay
+    const spinRate = 0.8
+    const delta = (now - lastNow) / 1000
+    viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate * delta)
+    clock.startTime.secondsOfDay = now - 1
+  }
 
-    var lastNow = Date.now()
-    viewer.clock.onTick.addEventListener(clock => {
-      const now = Date.now()
-      const spinRate = 0.08
-      const delta = (now - lastNow) / 1000
-      viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate * delta)
-      lastNow = now
-    })
+  addRotation () {
+    const { viewer } = this.state
+    if (this.rotatingEvent) return
+    viewer.clock.onTick.addEventListener(this.rotate)
+    this.rotatingEvent = true
+  }
+
+  removeRotation () {
+    const { viewer } = this.state
+    viewer.clock.onTick.removeEventListener(this.rotate)
+    this.rotatingEvent = false
   }
 
   render () {
@@ -117,7 +128,7 @@ class CesiumComponent extends Component {
     const { rotate } = props
     const { layers, viewer } = state
 
-    if (viewer && rotate) this.rotate()
+    if (viewer) this[rotate ? 'addRotation' : 'removeRotation']()
 
     const getPos = (window.getPos = () => {
       const c = viewer.camera.positionCartographic
