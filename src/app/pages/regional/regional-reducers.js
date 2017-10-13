@@ -16,7 +16,13 @@ export default {
       payload: layer => ({ url: payload.url, carto: null })
     }),
   [actions.setSection]: (state, { payload }) => {
-    const visibleLayers = state.sections[payload].layers
+    const block = state.sections[payload]
+    const { layers, selectors } = block
+
+    const visibleLayers = layers.concat(
+      Object.keys(selectors).map(s => selectors[s].selected)
+    )
+
     const matchingLayers = state.layers.filter(l =>
       includes(visibleLayers, l.name)
     )
@@ -29,6 +35,7 @@ export default {
   },
   [mapActions.selectLayer]: (state, action) => {
     const { name: payload } = action.payload
+    console.log(payload)
     const { section, selector, name } = payload
     if (!section) return mapReducers.selectLayer(state, action)
     const { sections } = state

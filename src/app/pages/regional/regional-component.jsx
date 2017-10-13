@@ -41,7 +41,7 @@ const Regional = ({
           {t('evergreen shrublands and low fynbos', null, true)},
           {t('thicket', null, true)}, and{' '}
           {t('forest and woodlands', null, true)} areas. x% of all{' '}
-          {d('regional:2', 'birds')} species are found here.
+          {d('regional:1', 'birds')} species are found here.
           <Placeholder
             backgroundImage="url(/img/stackedbarchart.png)"
             width="100%"
@@ -64,9 +64,9 @@ const Regional = ({
           onScrollFocus={() => setSection('regional:3')}
         >
           {t('human activities', null, true)} such as{' '}
-          {d('regional:3', 'road-building')} have overtaken some of the places
-          white storks and other birds stop to feed and rest at as they fly
-          south, putting them in danger of injury, starvation, and death.
+          {/* d('regional:3', 'road-building') */} have overtaken some of the
+          places white storks and other birds stop to feed and rest at as they
+          fly south, putting them in danger of injury, starvation, and death.
           Protecting the places that birds depend on can save both them and the
           other species that share their habitats.
         </P>

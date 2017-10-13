@@ -4,22 +4,35 @@ const MAPBOX_TOKEN =
   'pk.eyJ1IjoiamNoYWxmZWFydGgiLCJhIjoiY2o4Mnh4aDN6MGNqazMzc2FkeTlnajBoeiJ9.5Su3_JeAsjM0slTkaGFihw'
 const maximumLevel = undefined
 
+const MOLLayer = (name, species, type) => ({
+  name,
+  url: `https://cdn.mol.org/half-earth/tiles/${type}/${species}/{z}/{x}/{y}`,
+  type: 'UrlTemplate',
+  visible: false
+})
+
 export default {
   layers: [
     {
-      name: 'basemap:1',
+      name: 'basemap',
       type: 'UrlTemplate',
       url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
       maximumLevel,
       visible: false
     },
     {
-      name: 'basemap:2',
+      name: 'dark:basemap',
       type: 'UrlTemplate',
       url: `https://api.mapbox.com/styles/v1/jchalfearth/cj82yobfla1uq2ss6vlwaidgy/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
       maximumLevel,
       visible: false
     },
+    MOLLayer('birds:richness', 'birds', 'richness_1km'),
+    MOLLayer('mammals:richness', 'mammals_1km', 'richness'),
+    MOLLayer('amphibians:richness', 'amphibians_1km', 'richness'),
+    MOLLayer('protea:richness', 'protea', 'richness_1km'),
+    MOLLayer('restio:richness', 'restio', 'richness_1km'),
+    MOLLayer('birds:pressures', 'birds', 'richness_pressures_1km'),
     {
       name: 'stork-flyways',
       url: null,
@@ -38,14 +51,6 @@ export default {
         }`,
         'southern_africa_white_stork_flyway'
       ),
-      visible: false
-    },
-    {
-      name: 'birds',
-      type: 'UrlTemplate',
-      url:
-        'https://cdn.mol.org/half-earth/tiles/richness_1km/birds/{z}/{x}/{y}',
-      maximumLevel,
       visible: false
     },
     {
@@ -89,38 +94,6 @@ export default {
       visible: false
     },
     {
-      name: 'mammals',
-      type: 'UrlTemplate',
-      url:
-        'https://cdn.mol.org/half-earth/tiles/richness_1km/mammals/{z}/{x}/{y}',
-      maximumLevel,
-      visible: false
-    },
-    {
-      name: 'amphibians',
-      url:
-        'https://cdn.mol.org/half-earth/tiles/richness/amphibians_1km/{z}/{x}/{y}',
-      type: 'UrlTemplate',
-      maximumLevel,
-      visible: false
-    },
-    {
-      name: 'protea',
-      url:
-        'https://cdn.mol.org/half-earth/tiles/richness_1km/protea/{z}/{x}/{y}',
-      type: 'UrlTemplate',
-      maximumLevel,
-      visible: false
-    },
-    {
-      name: 'restio',
-      url:
-        'https://cdn.mol.org/half-earth/tiles/richness_1km/restio/{z}/{x}/{y}"',
-      type: 'UrlTemplate',
-      maximumLevel,
-      visible: false
-    },
-    {
       name: 'urban-density',
       type: 'WebMapService',
       format: 'image/png',
@@ -133,26 +106,38 @@ export default {
     }
   ],
   sections: {
-    // should this be an array and use numeric access by section?
     'regional:1': {
-      layers: ['basemap:1', 'stork-flyways'] // use layer index instead?
-    },
-    'regional:2': {
-      layers: ['basemap:2', 'birds'],
+      layers: ['basemap'],
       selectors: {
         birds: {
           options: {
+            'birds:richness': 'Birds',
+            'mammals:richness': 'Mammals',
+            'amphibians:richness': 'Amphibians',
+            'protea:richness': 'Protea',
+            'restio:richness': 'Restio'
+          },
+          selected: 'birds:richness'
+        }
+      }
+    },
+    'regional:2': {
+      layers: ['basemap'],
+      selectors: {
+        anthropogenic: {
+          options: {
+            birds: 'Birds:richness',
             mammals: 'Mammals',
             amphibians: 'Amphibians',
             protea: 'Protea',
             restio: 'Restio'
           },
-          selected: 'mammals'
+          selected: 'birds:richness'
         }
       }
     },
     'regional:3': {
-      layers: ['basemap:1', 'road-building'],
+      layers: ['basemap', 'road-building'],
       selectors: {
         'road-building': {
           options: {
@@ -164,7 +149,7 @@ export default {
       }
     },
     'regional:4': {
-      layers: ['basemap:1', 'protected-areas']
+      layers: ['basemap', 'protected-areas']
     }
   }
 }
