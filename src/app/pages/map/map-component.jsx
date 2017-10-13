@@ -4,7 +4,6 @@ import CesiumMap from 'components/cesium/map'
 import ImageProvider from 'components/cesium/image-provider'
 import ModelProvider from 'components/cesium/model-provider'
 
-// import styles from './home-styles.scss'
 import random from 'lodash/random'
 import zoomLevels from 'data/zoom-levels'
 const { Cesium } = window

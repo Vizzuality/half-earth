@@ -10,10 +10,7 @@ const zoomLevels = bindZoomLevels(Cesium)
 const mapId = `map-${new Date().getTime()}`
 
 const bindFlyTo = v => (lat, long, z = 15000.0, rest = {}) =>
-  // v.camera.flyTo(
-  //   assign({ destination: Cesium.Cartesian3.fromDegrees(lat, long, z) }, rest)
-  // )
-  v.camera.flyTo(assign({ destination: { x: long, y: lat, z } }, rest))
+  v.camera.flyTo(assign({ destination: { x: lat, y: long, z } }, rest))
 
 const disablePanning = v => {
   const { scene } = v
@@ -130,7 +127,7 @@ class CesiumComponent extends Component {
           a[k] = Cesium.Math.toDegrees(c[k])
           return a
         }, {})
-      ) //
+      )
     })
     return createElement(CesiumMapComponent, {
       mapId,
