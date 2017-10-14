@@ -10,9 +10,7 @@ const zoomLevels = bindZoomLevels(Cesium)
 const mapId = `map-${new Date().getTime()}`
 
 const bindFlyTo = v => (lat, long, z = 15000.0, rest = {}) =>
-  v.camera.flyTo(
-    assign({ destination: Cesium.Cartesian3.fromDegrees(lat, long, z) }, rest)
-  )
+  v.camera.flyTo(assign({ destination: { x: lat, y: long, z } }, rest))
 
 const disablePanning = v => {
   const { scene } = v
@@ -27,6 +25,7 @@ const disablePanning = v => {
 class CesiumComponent extends Component {
   constructor (props) {
     super(props)
+    this.rotatingEvent = false
     this.state = {
       layers: {},
       viewer: null
@@ -56,6 +55,8 @@ class CesiumComponent extends Component {
 
     if (zoomLevel) this.handleZoom(zoomLevel)
     if (lockNavigation) return disablePanning(viewer)
+
+    this.state.viewer = viewer
     return viewer
   }
 
@@ -79,8 +80,17 @@ class CesiumComponent extends Component {
 
   handleZoom (zoom) {
     if (!zoomLevels[zoom]) return
-    const [zLevel, opts] = zoomLevels[zoom]
-    this.flyTo(...zLevel, opts)
+    const { state: { viewer } } = this
+    const [zLevel, opts, cameraProps] = zoomLevels[zoom]
+    if (zLevel) {
+      this.flyTo(...zLevel, opts)
+    }
+
+    if (viewer && cameraProps) {
+      Object.keys(cameraProps).map(p => {
+        viewer.camera[p] = cameraProps[p]
+      })
+    }
   }
 
   componentWillReceiveProps (props) {
@@ -89,9 +99,36 @@ class CesiumComponent extends Component {
     }
   }
 
+  rotate = clock => {
+    const { startTime, currentTime } = clock
+    const { viewer } = this.state
+    const lastNow = startTime.secondsOfDay
+    const now = currentTime.secondsOfDay
+    const spinRate = 0.8
+    const delta = (now - lastNow) / 1000
+    viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate * delta)
+    clock.startTime.secondsOfDay = now - 1
+  }
+
+  addRotation () {
+    const { viewer } = this.state
+    if (this.rotatingEvent) return
+    viewer.clock.onTick.addEventListener(this.rotate)
+    this.rotatingEvent = true
+  }
+
+  removeRotation () {
+    const { viewer } = this.state
+    viewer.clock.onTick.removeEventListener(this.rotate)
+    this.rotatingEvent = false
+  }
+
   render () {
     const { props, state } = this
+    const { rotate } = props
     const { layers, viewer } = state
+
+    if (viewer) this[rotate ? 'addRotation' : 'removeRotation']()
 
     const getPos = (window.getPos = () => {
       const c = viewer.camera.positionCartographic
@@ -100,7 +137,7 @@ class CesiumComponent extends Component {
           a[k] = Cesium.Math.toDegrees(c[k])
           return a
         }, {})
-      ) //
+      )
     })
     return createElement(CesiumMapComponent, {
       mapId,
