@@ -1,1 +1,26 @@
-export { default } from './pop-up-component'
+import { createElement, Component } from 'react'
+import { clickOutside } from 'utils/react'
+
+import PopUp from './pop-up-component'
+
+class PopUpContainer extends Component {
+  state = {
+    closed: false
+  }
+
+  componentWillReceiveProps ({ clickedOutside, ...props }) {
+    if (clickedOutside) this.setState({ closed: clickedOutside })
+  }
+
+  close = () => {
+    this.setState({ closed: true })
+  }
+
+  render () {
+    const { closed } = this.state
+    const { close } = this
+    return createElement(PopUp, { ...this.props, closed, close })
+  }
+}
+
+export default clickOutside(PopUpContainer)
