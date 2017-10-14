@@ -2,7 +2,6 @@ import { cartoConfig } from 'app/utils'
 
 const MAPBOX_TOKEN =
   'pk.eyJ1IjoiamNoYWxmZWFydGgiLCJhIjoiY2o4Mnh4aDN6MGNqazMzc2FkeTlnajBoeiJ9.5Su3_JeAsjM0slTkaGFihw'
-const maximumLevel = undefined
 
 const MOLLayer = (name, species, type) => ({
   name,
@@ -11,20 +10,37 @@ const MOLLayer = (name, species, type) => ({
   visible: false
 })
 
+const speciesSelector = selected => ({
+  options: {
+    birds: 'Birds',
+    mammals: 'Mammals',
+    amphibians: 'Amphibians',
+    protea: 'Protea',
+    restio: 'Restio'
+  },
+  selected
+})
+
+const speciesSelections = type => ({
+  birds: [`birds:${type}`],
+  mammals: [`mammals:${type}`],
+  amphibians: [`amphibians:${type}`],
+  protea: [`protea:${type}`],
+  restio: [`restio:${type}`]
+})
+
 export default {
   layers: [
     {
       name: 'basemap',
       type: 'UrlTemplate',
       url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
-      maximumLevel,
       visible: false
     },
     {
       name: 'dark:basemap',
       type: 'UrlTemplate',
       url: `https://api.mapbox.com/styles/v1/jchalfearth/cj82yobfla1uq2ss6vlwaidgy/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
-      maximumLevel,
       visible: false
     },
     MOLLayer('birds:richness', 'birds', 'richness_1km'),
@@ -37,7 +53,6 @@ export default {
       name: 'stork-flyways',
       url: null,
       type: 'UrlTemplate',
-      maximumLevel,
       carto: cartoConfig(
         'simbiotica',
         `#layer {
@@ -57,7 +72,6 @@ export default {
       name: 'road-building',
       url: null,
       type: 'UrlTemplate',
-      maximumLevel,
       carto: cartoConfig(
         'simbiotica',
         `#layer {
@@ -77,7 +91,6 @@ export default {
       name: 'protected-areas',
       url: null,
       type: 'UrlTemplate',
-      maximumLevel,
       carto: cartoConfig(
         'simbiotica',
         `#layer {
@@ -101,39 +114,22 @@ export default {
       srs: 'EPSG:4326',
       transparent: true,
       url: 'https://geoservice.dlr.de/eoc/land/wms?service:WMS&request:GetMap',
-      maximumLevel,
       visible: false
     }
   ],
   sections: {
     'regional:1': {
-      layers: ['basemap'],
+      layers: ['basemap', 'birds:richness'],
+      selections: speciesSelections('richness'),
       selectors: {
-        birds: {
-          options: {
-            'birds:richness': 'Birds',
-            'mammals:richness': 'Mammals',
-            'amphibians:richness': 'Amphibians',
-            'protea:richness': 'Protea',
-            'restio:richness': 'Restio'
-          },
-          selected: 'birds:richness'
-        }
+        birds: speciesSelector('birds')
       }
     },
     'regional:2': {
       layers: ['basemap'],
+      selections: speciesSelections('pressures'),
       selectors: {
-        anthropogenic: {
-          options: {
-            birds: 'Birds:richness',
-            mammals: 'Mammals',
-            amphibians: 'Amphibians',
-            protea: 'Protea',
-            restio: 'Restio'
-          },
-          selected: 'birds:richness'
-        }
+        anthropogenic: speciesSelector('birds')
       }
     },
     'regional:3': {

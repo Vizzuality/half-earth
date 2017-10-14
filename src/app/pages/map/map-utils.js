@@ -27,3 +27,9 @@ export const requestCartos = ({ layers, getCartoTiles }) => {
     }
   })
 }
+
+export const selectLayer = (state, { payload }) =>
+  updateLayer(state, {
+    ...payload,
+    payload: layer => ({ visible: true })
+  })

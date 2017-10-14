@@ -13,7 +13,7 @@ const Regional = ({
   regional: { sections },
   renderDropdown,
   renderToggle,
-  selectLayer,
+  selectLayers,
   toggleLayer,
   sidebar,
   setSection,
@@ -21,7 +21,7 @@ const Regional = ({
   ...props
 }) => {
   const t = renderToggle(toggleLayer)
-  const d = renderDropdown(name => selectLayer({ name }))
+  const d = renderDropdown(selectLayers)
 
   return (
     <div className={classname}>

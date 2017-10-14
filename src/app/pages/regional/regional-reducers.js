@@ -1,10 +1,12 @@
 import includes from 'lodash/includes'
 import difference from 'lodash/difference'
+import find from 'lodash/find'
 import { assign } from 'utils'
-import { updateLayer } from 'pages/map/map-utils'
+import { updateLayer, selectLayer } from 'pages/map/map-utils'
+
 import { actions } from 'providers/section'
 import { actions as cartoActions } from 'providers/carto'
-import { actions as mapActions, reducers as mapReducers } from 'pages/map'
+import { actions as mapActions } from 'pages/map'
 
 const makeVisible = l => assign(l, { visible: true })
 const makeHidden = l => assign(l, { visible: false })
@@ -33,30 +35,16 @@ export default {
 
     return { ...state, layers: updatedLayers }
   },
-  [mapActions.selectLayer]: (state, action) => {
-    const { name: payload } = action.payload
-    console.log(payload)
-    const { section, selector, name } = payload
-    if (!section) return mapReducers.selectLayer(state, action)
-    const { sections } = state
-    const currentSection = sections[section]
-    const selectors = currentSection.selectors
+  [mapActions.selectLayers]: (state, { payload: visibleLayers }) => {
+    const reset = true
+    const selectedLayers = visibleLayers.map(name =>
+      find(selectLayer(state, { payload: { name, reset } }).layers, { name })
+    )
+    const layers = state.layers.map(
+      stateLayer =>
+        find(selectedLayers, { name: stateLayer.name }) || stateLayer
+    )
 
-    return {
-      ...mapReducers.selectLayer(state, action),
-      sections: {
-        ...sections,
-        [section]: {
-          ...currentSection,
-          selectors: {
-            ...selectors,
-            [selector]: {
-              ...selectors[selector],
-              selected: name
-            }
-          }
-        }
-      }
-    }
+    return { ...state, layers }
   }
 }
