@@ -7,6 +7,7 @@
   left: 0;
   bottom: 0;
   background-color: white;
+  padding: 165px 165px 0;
 
   &Closed {
     display: none;
@@ -26,6 +27,7 @@
 
   &:hover {
     cursor: pointer;
+    background-color: darken($color-turquoise, 7%);
   }
 
   &:active {
@@ -50,5 +52,9 @@
   &::after {
     transform: translate(-50%, -50%) rotate(-45deg);
   }
+}
+
+.content {
+  height: 100%;
 }
 

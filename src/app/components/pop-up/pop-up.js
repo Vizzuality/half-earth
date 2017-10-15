@@ -23,4 +23,5 @@ class PopUpContainer extends Component {
   }
 }
 
+export { default as TextContent } from './text-content/text-content'
 export default clickOutside(PopUpContainer)

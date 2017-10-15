@@ -8,7 +8,7 @@ const PopUp = ({ className, closed, close, children, render = () => {} }) => (
     className={cx([className, styles.popUp, { [styles.popUpClosed]: closed }])}
   >
     <button className={styles.close} onClick={close} />
-    <div>{render()}</div>
+    <div className={styles.content}>{render()}</div>
   </article>
 )
 export default PopUp

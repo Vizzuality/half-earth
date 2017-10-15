@@ -1,7 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './home-styles.scss'
-import PopUp from 'components/pop-up'
+import { default as PopUp, TextContent } from 'components/pop-up'
+
+const dummyContent = {
+  type: 'text',
+  image: 'img/bird.png',
+  details: [
+    { label: 'Area', value: '52ha' },
+    { label: 'Established', value: '1985' }
+  ],
+  description:
+    'Kenilworth Racecourse Conservation Area (KRCA) is a special protected area and a powerful example of urban conservation success. Bounded by a racecourse, the endangered Cape Flat Sands Fynbos vegetation type found in KRCA supports populations of birds, small mammals, and reptiles. The critically endangered Micro Frog can be found in this urban refugium. Friends of the Kenilworth Racecourse Conservation Area manages this reserve and conducts educational nature walks, weed and invasive species removal, and also collects seeds for the Millennium Seed Bank to ensure the survival of the rare vegetation found here.'
+}
 
 const Home = props => (
   <div className={styles.container}>
@@ -18,7 +29,12 @@ const Home = props => (
     <div className={styles.cto}>
       <Link to="intro">Play</Link>
     </div>
-    <PopUp />
+    <PopUp
+      render={() =>
+        dummyContent.type === 'text' ? (
+          <TextContent content={dummyContent} />
+        ) : null}
+    />
   </div>
 )
 
