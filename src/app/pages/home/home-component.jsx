@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './home-styles.scss'
-import { default as PopUp, TextContent } from 'components/pop-up'
+import { default as PopUp, TextContent, VideoContent } from 'components/pop-up'
 
-const dummyContent = {
+const dummyText = {
   type: 'text',
+  background:
+    'https://i.pinimg.com/originals/94/e5/61/94e561fa304e3f477981cc494d84c647.jpg',
   image: 'img/bird.png',
   details: [
     { label: 'Area', value: '52ha' },
@@ -12,6 +14,25 @@ const dummyContent = {
   ],
   description:
     'Kenilworth Racecourse Conservation Area (KRCA) is a special protected area and a powerful example of urban conservation success. Bounded by a racecourse, the endangered Cape Flat Sands Fynbos vegetation type found in KRCA supports populations of birds, small mammals, and reptiles. The critically endangered Micro Frog can be found in this urban refugium. Friends of the Kenilworth Racecourse Conservation Area manages this reserve and conducts educational nature walks, weed and invasive species removal, and also collects seeds for the Millennium Seed Bank to ensure the survival of the rare vegetation found here.'
+}
+
+const dummyVideo = {
+  type: 'video',
+  background:
+    'https://i.pinimg.com/originals/94/e5/61/94e561fa304e3f477981cc494d84c647.jpg',
+  description:
+    'Swooping over Botswana’s Okavango Delta, the white stork (Ciconia ciconia) observes the oasis beneath its wings.',
+  video: 'http://media.w3.org/2010/05/bunny/movie.mp4'
+}
+
+const displayContent = () => {
+  const content =
+    parseInt(Math.random() * 10, 10) % 2 === 0 ? dummyText : dummyVideo
+  return content.type === 'text' ? (
+    <TextContent content={content} />
+  ) : (
+    <VideoContent content={content} />
+  )
 }
 
 const Home = props => (
@@ -29,12 +50,7 @@ const Home = props => (
     <div className={styles.cto}>
       <Link to="intro">Play</Link>
     </div>
-    <PopUp
-      render={() =>
-        dummyContent.type === 'text' ? (
-          <TextContent content={dummyContent} />
-        ) : null}
-    />
+    <PopUp render={displayContent} />
   </div>
 )
 
