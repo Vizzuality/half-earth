@@ -9,6 +9,10 @@ class Intro extends Component {
     return (
       <div className={styles.container}>
         <video ref={getRef} autoPlay src={videoSrc} />
+        <p>
+          Swooping over Botswana’s Okavango Delta, the white stork (Ciconia
+          ciconia) observes the oasis beneath its wings.
+        </p>
       </div>
     )
   }

@@ -1,19 +1,19 @@
 import React from 'react'
 
 import Scroller, { Element as P } from 'components/scroller'
-import SpiderChart from 'components/spider-chart'
-import Placeholder from 'components/placeholder'
 import Earthometer from 'components/earthometer'
 import NavFooter from 'components/nav-footer'
 
 import uiStyles from 'app/styles/ui'
+
+const earthProtected = 100
 
 const Regional = ({
   classname,
   regional: { sections },
   renderDropdown,
   renderToggle,
-  selectLayer,
+  selectLayers,
   toggleLayer,
   sidebar,
   setSection,
@@ -21,7 +21,9 @@ const Regional = ({
   ...props
 }) => {
   const t = renderToggle(toggleLayer)
-  const d = renderDropdown(name => selectLayer({ name }))
+  // const d = renderDropdown(selectLayers)
+  const d = selector => console.log('missing selector', selector)
+  const KBAs = 80
 
   return (
     <div className={classname}>
@@ -36,57 +38,47 @@ const Regional = ({
           and back each year. Many of these species have been observed, tagged
           and mapped. Passing over Zimbabwe, the birds fan out towards Botswana,
           Mozambique, Namibia, Swaziland, Lesotho and South Africa, down to the
-          Cape Region. The Cape Regionis is one of the most biologically diverse
-          regions on Earth and is characterised by its{' '}
-          {t('evergreen shrublands and low fynbos', null, true)},
-          {t('thicket', null, true)}, and{' '}
-          {t('forest and woodlands', null, true)} areas. x% of all{' '}
-          {d('regional:2', 'birds')} species are found here.
-          <Placeholder
-            backgroundImage="url(/img/stackedbarchart.png)"
-            width="100%"
-            height="190px"
-          />
+          Cape Region. The Cape Region is one of the most biologically diverse
+          regions on Earth and is characterised by its evergreen shrublands and
+          low fynbos, thicket, and forest and woodlands, and is home to a large
+          number of {d('regional:1', 'birds')} species.
+          {/* spider, data in store: graphs.spider1[regional/global] */}
         </P>
         <P
           className={uiStyles.slides}
           onScrollFocus={() => setSection('regional:2')}
         >
-          Half-Earth integrates historical and current distribution data with
-          the analysis of protected area governance and management to inform
-          decision-making and provide scientific leadership on which areas must
-          be protected. Our map of the Cape Region area highlights where the
-          greatest concentration of life can be found and the threats they face.
-          <SpiderChart />
+          <p>
+            Human activities such as {t('road building')} and{' '}
+            {t('urban development')}
+            have overtaken some of the places white storks and other birds stop
+            to feed and rest at as they fly south, putting them in danger of
+            injury, starvation, and death.
+          </p>
+          <p>
+            The combined effect of these threats is shrinking the habitats where
+            {d('regional:2', 'Anthropogenic impacts', '! default: birds')}{' '}
+            species live. Improving our understanding of how these anthropogenic
+            impacts put biodiversity at risk can help us identify which species
+            to protect and where.
+          </p>
         </P>
         <P
           className={uiStyles.slides}
           onScrollFocus={() => setSection('regional:3')}
         >
-          {t('human activities', null, true)} such as{' '}
-          {d('regional:3', 'road-building')} have overtaken some of the places
-          white storks and other birds stop to feed and rest at as they fly
-          south, putting them in danger of injury, starvation, and death.
-          Protecting the places that birds depend on can save both them and the
-          other species that share their habitats.
-        </P>
-        <P
-          className={uiStyles.slides}
-          onScrollFocus={() => setSection('regional:4')}
-        >
-          In this region, 10.24% percent of the area is covered by designated{' '}
-          {t('protected areas')}, encompassing an area of 132,885 km2. Other
-          conservation approaches are also present in this area, including
-          {t('community-based reserves', null, false)},{' '}
-          {t('private reserves', null, false)} and Indigenous and Community
-          Conserved Areas (ICCAs).
-          <p className={uiStyles.slides}>
-            We currently have detailed information for just a fraction of our
-            planet, yet it’s within our ability and reach to apply this mapping
-            approach to every part of the world. By combining all the knowledge
-            we have, we can confidently identify which areas should be protected
-            and how.
-          </p>
+          In this region, {earthProtected} percent of the area is covered by
+          designated {t('Protected Areas')}, encompassing an area of 132,885
+          km2. A few of these {t('existing reserves', 'missing')} are
+          characterised by the exceptional endemism and the megafauna that they
+          support. Other conservation approaches are also present in this area,
+          including {t('Community-based reserves')} , {t('Private reserves')}{' '}
+          and Indigenous and Community Conserved Areas (ICCAs). Similarly,
+          several sites have been proposed as biodiversity{' '}
+          {t('corridors', 'missing')} to support habitat connectivity, and{' '}
+          {KBAs} {t('Key Biodiversity Areas')}
+          sites have been identified due to their importance for conserving
+          threatened and geographically restricted biodiversity.
         </P>
         <NavFooter to="/global" />
       </Scroller>
