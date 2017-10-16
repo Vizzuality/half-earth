@@ -4,22 +4,12 @@ import { clickOutside } from 'utils/react'
 import PopUp from './pop-up-component'
 
 class PopUpContainer extends Component {
-  state = {
-    closed: false
-  }
-
-  componentWillReceiveProps ({ clickedOutside, ...props }) {
-    if (clickedOutside) this.setState({ closed: clickedOutside })
-  }
-
-  close = () => {
-    this.setState({ closed: true })
+  componentWillReceiveProps ({ clickedOutside, close, ...props }) {
+    if (clickedOutside && this.props.open) close()
   }
 
   render () {
-    const { closed } = this.state
-    const { close } = this
-    return createElement(PopUp, { ...this.props, closed, close })
+    return createElement(PopUp, { ...this.props })
   }
 }
 

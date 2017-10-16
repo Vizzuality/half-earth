@@ -6,7 +6,7 @@ import Scroller, { Element as P } from 'components/scroller'
 import Earthometer from 'components/earthometer'
 import Floodmap from 'components/floodmap'
 import Placeholder from 'components/placeholder'
-
+import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
 import styles from './local-styles'
 import uiStyles from 'app/styles/ui'
 
@@ -16,13 +16,29 @@ const Local = ({
   renderToggle,
   sidebar,
   setSection,
+  local,
+  closePopUp,
+  openPopUp,
   ...props
 }) => {
   const t = renderToggle(toggleLayer)
+  const randomPopUp = parseInt(Math.random() * 10, 10) % 4
   return (
     <div className={cx(className)}>
+      <PopUp open={local.popUp.open} close={closePopUp}>
+        <ImageContent content={local.popUp.selected} />
+      </PopUp>
       <Scroller className={styles.playhead}>
         <Earthometer displayOnly />
+        <button
+          onClick={e => {
+            e.preventDefault()
+            e.stopPropagation()
+            openPopUp(randomPopUp)
+          }}
+        >
+          Open pop-up
+        </button>
         <P
           className={uiStyles.slides}
           onScrollFocus={() => setSection('local:1')}
