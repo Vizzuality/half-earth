@@ -22,11 +22,11 @@ const speciesSelector = selected => ({
 })
 
 const speciesSelections = type => ({
-  birds: [`birds:${type}`],
-  mammals: [`mammals:${type}`],
-  amphibians: [`amphibians:${type}`],
-  protea: [`protea:${type}`],
-  restio: [`restio:${type}`]
+  birds: `birds:${type}`,
+  mammals: `mammals:${type}`,
+  amphibians: `amphibians:${type}`,
+  protea: `protea:${type}`,
+  restio: `restio:${type}`
 })
 
 export default {
@@ -64,11 +64,16 @@ export default {
       visible: false
     },
     MOLLayer('birds:richness', 'birds', 'richness_1km'),
-    MOLLayer('mammals:richness', 'mammals_1km', 'richness'),
-    MOLLayer('amphibians:richness', 'amphibians_1km', 'richness'),
+    MOLLayer('amphibians:richness', 'amphibians', 'richness_1km'),
+    MOLLayer('mammals:richness', 'mammals', 'richness_1km'),
     MOLLayer('protea:richness', 'protea', 'richness_1km'),
     MOLLayer('restio:richness', 'restio', 'richness_1km'),
+
     MOLLayer('birds:pressures', 'birds', 'richness_pressures_1km'),
+    MOLLayer('amphibians:pressures', 'amphibians', 'richness_pressures_1km'),
+    MOLLayer('mammals:pressures', 'mammals', 'richness_pressures_1km'),
+    MOLLayer('protea:pressures', 'protea', 'richness_pressures_1km'),
+    MOLLayer('restio:pressures', 'restio', 'richness_pressures_1km'),
     {
       name: 'stork-flyways',
       url: null,
@@ -139,7 +144,7 @@ export default {
   ],
   sections: {
     'regional:1': {
-      layers: ['basemap', 'birds:richness'],
+      layers: ['basemap'],
       selections: speciesSelections('richness'),
       selectors: {
         birds: speciesSelector('birds')

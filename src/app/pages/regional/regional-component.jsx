@@ -10,10 +10,10 @@ const earthProtected = 100
 
 const Regional = ({
   classname,
-  regional: { sections },
+  regional,
   renderDropdown,
   renderToggle,
-  selectLayers,
+  selectSelector,
   toggleLayer,
   sidebar,
   setSection,
@@ -21,10 +21,9 @@ const Regional = ({
   ...props
 }) => {
   const t = renderToggle(toggleLayer)
-  // const d = renderDropdown(selectLayers)
-  const d = selector => console.log('missing selector', selector)
-  const KBAs = 80
+  const d = renderDropdown(selectSelector)
 
+  const KBAs = 80
   return (
     <div className={classname}>
       <Scroller>
@@ -56,11 +55,10 @@ const Regional = ({
             injury, starvation, and death.
           </p>
           <p>
-            The combined effect of these threats is shrinking the habitats where
-            {d('regional:2', 'Anthropogenic impacts', '! default: birds')}{' '}
-            species live. Improving our understanding of how these anthropogenic
-            impacts put biodiversity at risk can help us identify which species
-            to protect and where.
+            The combined effect of these threats is shrinking the habitats where{' '}
+            {d('regional:2', 'anthropogenic')} species live. Improving our
+            understanding of how these anthropogenic impacts put biodiversity at
+            risk can help us identify which species to protect and where.
           </p>
         </P>
         <P
