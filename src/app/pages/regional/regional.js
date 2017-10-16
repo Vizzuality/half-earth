@@ -29,7 +29,7 @@ const mapStateToProps = ({ map, regional, sidebar, section }) => {
     sidebar,
     regional,
     section,
-    renderToggle: renderToggle(map.layers, ':regional'),
+    renderToggle: renderToggle(regional.layers),
     renderDropdown: renderDropdown(regional.sections)
   }
 }

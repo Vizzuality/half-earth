@@ -94,6 +94,25 @@ export default {
       visible: false
     },
     {
+      name: 'key-biodiversity-areas',
+      url: null,
+      type: 'UrlTemplate',
+      carto: cartoConfig(
+        'simbiotica',
+        `#layer {
+          polygon-fill: #00f7ff;
+          polygon-opacity: 0.9;
+        }
+        #layer::outline {
+          line-width: 1;
+          line-color: #FFFFFF;
+          line-opacity: 0.5;
+        }`,
+        'kba_poly_2016_id'
+      ),
+      visible: false
+    },
+    {
       name: 'road-building',
       url: null,
       type: 'UrlTemplate',
@@ -109,6 +128,82 @@ export default {
           line-opacity: 0.5;
         }`,
         'openstreetmaps_southern_africa_roads'
+      ),
+      visible: false
+    },
+    {
+      name: 'existing-reserves',
+      url: null,
+      type: 'UrlTemplate',
+      carto: cartoConfig(
+        'half-earth',
+        `#layer {
+          polygon-fill: #00f7ff;
+          polygon-opacity: 0;
+        }
+        #layer::outline {
+          line-width: 1;
+          line-color: #000000;
+          line-opacity: 0.5;
+        }`,
+        'wdpa_example_reserves'
+      ),
+      visible: false
+    },
+    {
+      name: 'corridors',
+      url: null,
+      type: 'UrlTemplate',
+      carto: cartoConfig(
+        'half-earth',
+        `#layer {
+          polygon-fill: #00f7ff;
+          polygon-opacity: 0;
+        }
+        #layer::outline {
+          line-width: 1;
+          line-color: #000000;
+          line-opacity: 0.5;
+        }`,
+        'proposed_cederberg_corridor'
+      ),
+      visible: false
+    },
+    {
+      name: 'community-based-reserves',
+      url: null,
+      type: 'UrlTemplate',
+      carto: cartoConfig(
+        'half-earth',
+        `#layer {
+          polygon-fill: #00f7ff;
+          polygon-opacity: 0;
+        }
+        #layer::outline {
+          line-width: 1;
+          line-color: #000000;
+          line-opacity: 0.5;
+        }`,
+        'community_based_kenilworth'
+      ),
+      visible: false
+    },
+    {
+      name: 'private-reserves',
+      url: null,
+      type: 'UrlTemplate',
+      carto: cartoConfig(
+        'half-earth',
+        `#layer {
+          polygon-fill: #00f7ff;
+          polygon-opacity: 0;
+        }
+        #layer::outline {
+          line-width: 1;
+          line-color: #000000;
+          line-opacity: 0.5;
+        }`,
+        'private_nature_reserve'
       ),
       visible: false
     },
@@ -132,7 +227,7 @@ export default {
       visible: false
     },
     {
-      name: 'urban-density',
+      name: 'urban-development',
       type: 'WebMapService',
       format: 'image/png',
       layers: 'GUF28_DLR_v1_Mosaic',
@@ -158,19 +253,7 @@ export default {
       }
     },
     'regional:3': {
-      layers: ['basemap', 'road-building'],
-      selectors: {
-        'road-building': {
-          options: {
-            'road-building': 'Road Building',
-            'urban-density': 'Urban Density'
-          },
-          selected: 'road-building'
-        }
-      }
-    },
-    'regional:4': {
-      layers: ['basemap', 'protected-areas']
+      layers: ['basemap']
     }
   }
 }

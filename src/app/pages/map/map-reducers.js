@@ -1,9 +1,29 @@
 import { actions as cartoActions } from 'providers/carto'
 import includes from 'lodash/includes'
-import { updateLayer, selectLayer } from './map-utils'
+import sortBy from 'lodash/sortBy'
+import identity from 'lodash/identity'
+import find from 'lodash/find'
+import difference from 'lodash/difference'
+import { assign } from 'app/utils'
 import * as actions from './map-actions'
 
+const updateLayer = (state, { payload, ...rest }) => {
+  const { name, reset } = rest
+  const { layers } = state
+  const layer = find(layers, { name })
+  if (!layer) return state
+  const filtered = difference(layers, [layer]).map(
+    reset ? l => assign(l, { visible: false }) : identity
+  )
+
+  return {
+    ...state,
+    layers: sortBy(filtered.concat([assign(layer, payload(layer))]), 'name')
+  }
+}
+
 export default {
+  updateLayer,
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
     updateLayer(state, {
       ...payload,
@@ -28,9 +48,13 @@ export default {
       payload: layer => ({ visible: !layer.visible })
     }),
 
-  [actions.selectLayer]: selectLayer,
+  [actions.selectLayer]: (state, { payload }) =>
+    updateLayer(state, {
+      ...payload,
+      payload: layer => ({ visible: true })
+    }),
 
-  [actions.resetLayers]: (state, { payload }) => ({
+  [actions.resetLayers]: state => ({
     ...state,
     layers: state.layers.map(l => {
       l.visible = false

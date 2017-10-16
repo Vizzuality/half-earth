@@ -2,12 +2,10 @@ import includes from 'lodash/includes'
 import difference from 'lodash/difference'
 import merge from 'lodash/fp/merge'
 import { assign } from 'utils'
-import { updateLayer } from 'pages/map/map-utils'
-
 import { actions } from 'providers/section'
 import { actions as cartoActions } from 'providers/carto'
 import { actions as selectorActions } from 'providers/selectors'
-import { reducers as mapReducers } from 'pages/map'
+import { actions as mapActions, reducers as mapReducers } from 'pages/map'
 
 const makeVisible = l => assign(l, { visible: true })
 const makeHidden = l => assign(l, { visible: false })
@@ -36,24 +34,29 @@ const filterSelector = (state, { payload: { section, selection } }) => {
 
 export default {
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
-    updateLayer(state, {
+    mapReducers.updateLayer(state, {
       ...payload,
       payload: layer => ({ url: payload.url, carto: null })
     }),
+
   [selectorActions.selectSelector]: (state, { payload }) => {
     const { section, selector, selection } = payload
-
-    return selectSelector(
-      filterSelector(state, toPayload(payload)),
-      toPayload({ section, selector, selection })
-    )
+    const filtered = filterSelector(state, toPayload(payload))
+    return selectSelector(filtered, toPayload({ section, selector, selection }))
   },
+
+  [mapActions.toggleLayer]: mapReducers.toggleLayer,
+
   [actions.setSection]: (state, { payload, __app: { section } }) => {
     if (payload === section.section) return state
-    const block = state.sections[payload]
+    const reset = mapReducers.resetLayers(state)
+    const block = reset.sections[payload]
     const { layers, selectors, selections } = block
+
     const visibleLayers = layers.concat(
-      Object.keys(selectors).map(s => selections[selectors[s].selected])
+      (selectors &&
+        Object.keys(selectors).map(s => selections[selectors[s].selected])) ||
+        []
     )
 
     const matchingLayers = state.layers.filter(l =>
