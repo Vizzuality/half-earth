@@ -35,16 +35,54 @@ export default {
 
     return { ...state, layers: updatedLayers }
   },
-  [mapActions.selectLayers]: (state, { payload: visibleLayers }) => {
+  [mapActions.selectLayers]: (
+    state,
+    { payload: { section, selector, layers: visibleLayers, selection } }
+  ) => {
     const reset = true
     const selectedLayers = visibleLayers.map(name =>
       find(selectLayer(state, { payload: { name, reset } }).layers, { name })
     )
+
     const layers = state.layers.map(
       stateLayer =>
         find(selectedLayers, { name: stateLayer.name }) || stateLayer
     )
 
-    return { ...state, layers }
+    console.log(state, {
+      ...state,
+      sections: {
+        ...state.sections,
+        [section]: {
+          ...state.sections[section],
+          selectors: {
+            ...state.sections[section].selectors,
+            [selector]: {
+              ...state.sections[section].selectors[selector],
+              selected: selection
+            }
+          }
+        }
+      },
+      layers
+    })
+
+    return {
+      ...state,
+      sections: {
+        ...state.sections,
+        [section]: {
+          ...state.sections[section],
+          selectors: {
+            ...state.sections[section].selectors,
+            [selector]: {
+              ...state.sections[section].selectors[selector],
+              selected: selection
+            }
+          }
+        }
+      },
+      layers
+    }
   }
 }

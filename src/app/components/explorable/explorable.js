@@ -36,13 +36,18 @@ export const renderDropdown = sections => selectOption => (section, name) => {
   if (!sections[section]) return <span>{name}</span>
   const { selections: sel } = sections[section]
   const { options, selected } = sections[section].selectors[name]
-  console.log(name, sections[section].selectors)
   return (
     <Dropdown
       options={options}
       className={dropdownTheme.dropdown}
       theme={dropdownTheme}
-      onSelect={layerName => selectOption(sel[layerName])}
+      onSelect={layerName =>
+        selectOption({
+          selection: layerName,
+          layers: sel[layerName],
+          section,
+          selector: name
+        })}
       selected={selected}
     />
   )
