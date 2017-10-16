@@ -3,6 +3,7 @@ import { handleActions } from 'app/utils/redux'
 import { routerReducer } from 'react-router-redux'
 
 import { actions as cartoActions } from 'providers/carto'
+import { actions as selectorActions } from 'providers/selectors'
 
 import {
   actions as zoomActions,
@@ -45,7 +46,8 @@ const allActions = {
   ...earthometerActions,
   ...mapActions,
   ...sidebarActions,
-  ...sectionActions
+  ...sectionActions,
+  ...selectorActions
 }
 
 export default combineReducers({
