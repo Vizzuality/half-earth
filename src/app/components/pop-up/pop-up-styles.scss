@@ -7,10 +7,6 @@
   left: 0;
   bottom: 0;
   background-color: transparent;
-
-  &Closed {
-    display: none;
-  }
 }
 
 .close {
@@ -56,4 +52,3 @@
 .content {
   height: 100%;
 }
-
