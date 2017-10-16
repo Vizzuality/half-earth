@@ -1,0 +1,24 @@
+@import "~styles/variables.scss";
+
+.close {
+  position: absolute;
+  top: 35px;
+  right: 60px;
+  background-color: $color-turquoise;
+  border: none;
+  outline: none;
+  z-index: $zforeground;
+
+  &:hover {
+    background-color: darken($color-turquoise, 7%);
+  }
+
+  &:active {
+    background-color: darken($color-turquoise, 7%);
+  }
+
+  &::before,
+  &::after {
+    background-color: $color-white;
+  }
+}

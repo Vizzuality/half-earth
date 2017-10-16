@@ -4,23 +4,22 @@ import cx from 'classnames'
 import Scroller, { Element as P } from 'components/scroller'
 import Earthometer from 'components/earthometer'
 import Floodmap from 'components/floodmap'
+import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
 import NavFooter from 'components/nav-footer'
 
 import styles from './local-styles'
 import uiStyles from 'app/styles/ui'
 
-const Local = ({
-  className,
-  toggleLayer,
-  renderToggle,
-  sidebar,
-  setSection,
-  ...props
-}) => {
+const Local = ({ className, local, closePopUp, openPopUp }) => {
+  const randomPopUp = parseInt(Math.random() * 10, 10) % 4
   return (
     <div className={cx(className)}>
+      <PopUp open={local.popUp.open} close={closePopUp}>
+        <ImageContent content={local.popUp.selected} />
+      </PopUp>
       <Scroller className={styles.playhead}>
         <Earthometer displayOnly />
+        <button onClick={e => openPopUp(randomPopUp)}>Open pop-up</button>
         <P className={uiStyles.slides}>
           The Okavango Delta is an important place for migrating birds that stop
           to feed and rest as they travel thousands of miles across Africa and
