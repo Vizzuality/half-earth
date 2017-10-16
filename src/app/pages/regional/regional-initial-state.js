@@ -30,6 +30,26 @@ const speciesSelections = type => ({
 })
 
 export default {
+  graphs: {
+    spider1: {
+      regional: {
+        birds: 400,
+        mammals: 120,
+        amphibians: 60,
+        cacti: 0,
+        turtles: 7,
+        conifers: 5
+      },
+      global: {
+        birds: 627,
+        mammals: 180,
+        amphibians: 92,
+        cacti: 1,
+        turtles: 11,
+        conifers: 7
+      }
+    }
+  },
   layers: [
     {
       name: 'basemap',
