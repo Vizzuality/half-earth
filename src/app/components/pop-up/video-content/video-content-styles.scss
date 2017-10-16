@@ -1,0 +1,58 @@
+@import "~styles/variables.scss";
+
+.videoContent {
+  background-color: $color-mid-blue;
+  height: 100%;
+  padding: 165px 165px 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.play {
+  $background: rgba(6, 20, 32, 0.2);
+
+  position: relative;
+  min-height: 90px;
+  min-width: 90px;
+  background-color: $background;
+  border: 2px solid $color-white;
+  border-radius: 50px;
+  margin-bottom: 95px;
+  outline: 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(6, 20, 32, 0.5);
+  }
+
+  &:active {
+    background-color: $background;
+  }
+
+  .triangle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-50% + 3px), -50%);
+    fill: $color-white;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.description {
+  color: $color-white;
+  height: 100%;
+  margin: 0;
+  font-size: 1.8rem;
+  letter-spacing: 0.9px;
+  line-height: 2.33;
+  font-weight: 500;
+}
