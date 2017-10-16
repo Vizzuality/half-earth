@@ -52,9 +52,6 @@ export default {
     if (payload === section.section) return state
     const block = state.sections[payload]
     const { layers, selectors, selections } = block
-    console.log(
-      Object.keys(selectors).map(s => selections[selectors[s].selected])
-    )
     const visibleLayers = layers.concat(
       Object.keys(selectors).map(s => selections[selectors[s].selected])
     )

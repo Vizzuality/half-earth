@@ -1,7 +1,7 @@
 import { actions as cartoActions } from 'providers/carto'
+import includes from 'lodash/includes'
 import { updateLayer, selectLayer } from './map-utils'
 import * as actions from './map-actions'
-// import { actions as sectionActions } from 'providers/section'
 
 export default {
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
@@ -9,6 +9,18 @@ export default {
       ...payload,
       payload: layer => ({ url: payload.url, carto: null })
     }),
+
+  [actions.hideLayers]: (state, { payload }) => {
+    const layers = state.layers.map(l => {
+      if (includes(payload, l.name)) l.visible = false
+      return l
+    }, [])
+
+    return {
+      ...state,
+      layers
+    }
+  },
 
   [actions.toggleLayer]: (state, { payload }) =>
     updateLayer(state, {
