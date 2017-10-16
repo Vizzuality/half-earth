@@ -32,7 +32,7 @@ const dummyVideo = {
 
 const dummyImage = {
   type: 'image',
-  image:
+  background:
     'https://i.pinimg.com/originals/94/e5/61/94e561fa304e3f477981cc494d84c647.jpg',
   title: 'Madagascar',
   description:

@@ -7,6 +7,7 @@
   background-color: $color-turquoise;
   border: none;
   outline: none;
+  z-index: $zforeground;
 
   &:hover {
     background-color: darken($color-turquoise, 7%);

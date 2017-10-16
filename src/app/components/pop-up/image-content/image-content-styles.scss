@@ -4,31 +4,30 @@
   display: flex;
   background-color: $color-mid-blue;
   height: 100%;
-}
-
-.image {
-  flex: 0.65;
-  background-position: center;
+  padding: 165px 165px 0;
   background-size: cover;
+  background-repeat: no-repeat;
+  align-items: flex-end;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: rgba($color-mid-blue, 0.2);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 }
 
-.sidebar {
-  flex: 0.35;
-  padding: 132px 23px;
-
-  .title {
-    font-size: 3.2rem;
-    font-weight: 700;
-    line-height: 1.88;
-    letter-spacing: 1px;
-    color: rgba($color-white, 0.9);
-  }
-
-  .description {
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: 0.4px;
-    color: $color-white;
-    text-align: justify;
-  }
+.description {
+  color: $color-white;
+  min-height: 50%;
+  margin: 0;
+  font-size: 1.8rem;
+  letter-spacing: 0.9px;
+  line-height: 2.33;
+  font-weight: 500;
+  text-align: center;
+  z-index: $zforeground;
 }

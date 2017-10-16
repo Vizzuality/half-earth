@@ -9,6 +9,16 @@
   padding: 165px 165px 0;
   background-size: cover;
   background-repeat: no-repeat;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: rgba($color-mid-blue, 0.2);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 }
 
 .image {
@@ -17,6 +27,7 @@
   flex-shrink: 0;
   background-size: cover;
   margin-right: 42px;
+  z-index: $zforeground;
 }
 
 .details {
@@ -31,6 +42,7 @@
   margin: 0;
   color: $color-white;
   margin-right: 42px;
+  z-index: $zforeground;
 }
 
 .description {
@@ -43,4 +55,5 @@
   line-height: 2.33;
   font-weight: 500;
   overflow: auto;
+  z-index: $zforeground;
 }
