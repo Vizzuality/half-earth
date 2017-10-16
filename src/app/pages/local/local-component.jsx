@@ -1,27 +1,16 @@
 import React from 'react'
 import cx from 'classnames'
-import { Link } from 'react-router-dom'
 
 import Scroller, { Element as P } from 'components/scroller'
 import Earthometer from 'components/earthometer'
 import Floodmap from 'components/floodmap'
-import Placeholder from 'components/placeholder'
 import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
+import NavFooter from 'components/nav-footer'
+
 import styles from './local-styles'
 import uiStyles from 'app/styles/ui'
 
-const Local = ({
-  className,
-  toggleLayer,
-  renderToggle,
-  sidebar,
-  setSection,
-  local,
-  closePopUp,
-  openPopUp,
-  ...props
-}) => {
-  const t = renderToggle(toggleLayer)
+const Local = ({ className, local, closePopUp, openPopUp }) => {
   const randomPopUp = parseInt(Math.random() * 10, 10) % 4
   return (
     <div className={cx(className)}>
@@ -30,59 +19,33 @@ const Local = ({
       </PopUp>
       <Scroller className={styles.playhead}>
         <Earthometer displayOnly />
-        <button
-          onClick={e => {
-            e.preventDefault()
-            e.stopPropagation()
-            openPopUp(randomPopUp)
-          }}
-        >
-          Open pop-up
-        </button>
-        <P
-          className={uiStyles.slides}
-          onScrollFocus={() => setSection('local:1')}
-        >
-          Swooping over Botswana’s Okavango Delta, the white stork (Ciconia
-          ciconia) observes the oasis beneath its wings. The Okavango Delta is
-          an important place for {t('migrating birds', false, true)} that stop
+        <button onClick={e => openPopUp(randomPopUp)}>Open pop-up</button>
+        <P className={uiStyles.slides}>
+          The Okavango Delta is an important place for migrating birds that stop
           to feed and rest as they travel thousands of miles across Africa and
           beyond. In this place, humans and nature live in synchrony with the
           seasonal rains and flooding. Any change to the natural heartbeat of
           the area is a warning call to all.
+          <Floodmap />
         </P>
-        <Floodmap />
-        <P
-          className={uiStyles.slides}
-          onScrollFocus={() => setSection('local:2')}
-        >
+        <P className={uiStyles.slides}>
           The variety of life in the Okavango Delta is rich and diverse, earning
-          itself a place on the UNESCO World Heritage List. A mosaic of{' '}
-          {t('protected areas')} that include a game reserve and a number of
-          wildlife management areas are managed by private and community groups,
-          and receive legal protection from the national government. Together
-          these conservation measures ensure thousands of species are protected,
-          along with the water, food and resources they, and the people living
-          here, need to survive.
+          itself aplace on the UNESCO World Heritage List. A mosaic of protected
+          lands that include a game reserve and a number of wildlife management
+          areas are managed by private and community groups, and receive legal
+          protection from the national government. Together these conservation
+          measures ensure thousands of species are protected, along with the
+          water, food and resources they, and the people living here, need to
+          survive.
         </P>
-        <P
-          className={uiStyles.slides}
-          onScrollFocus={() => setSection('local:3')}
-        >
-          For every species observed there is a story to tell. This stork, named{' '}
-          {t('91397A', false, true)}, was tagged by a group of German
-          researchers as they set out to track and map the migration patterns of
-          White Storks between Africa and Europe. 91397A belongs to a small
-          White Storks population breeding in South Africa.
+        <P className={uiStyles.slides}>
+          For every species observed there is a story to tell. This stork, named
+          Prinzesschen (40534B), was tagged by a group of German researchers as
+          they set out to track and map the migration patterns of White Storks
+          between Africa and Europe. Prinzesschen belongs to a small population
+          of white storks breeding in South Africa.
         </P>
-        <Placeholder
-          backgroundImage="url(/img/paharo.png"
-          width="30%"
-          height="200px"
-        />
-        <Link className={uiStyles.button} to="/regional">
-          Regional
-        </Link>
+        <NavFooter to="/regional" />
       </Scroller>
     </div>
   )

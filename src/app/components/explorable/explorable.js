@@ -2,10 +2,6 @@ import React from 'react'
 
 import first from 'lodash/first'
 import find from 'lodash/find'
-// import isArray from 'lodash/isArray'
-// import startCase from 'lodash/startCase'
-// import filter from 'lodash/filter'
-// import difference from 'lodash/difference'
 import lowerCase from 'lodash/lowerCase'
 import kebabCase from 'lodash/kebabCase'
 
@@ -38,6 +34,7 @@ export const renderToggle = (layers, namespace = '') => toggle => (
 
 export const renderDropdown = sections => selectOption => (section, name) => {
   if (!sections[section]) return <span>{name}</span>
+  const { selections: sel } = sections[section]
   const { options, selected } = sections[section].selectors[name]
   return (
     <Dropdown
@@ -45,7 +42,12 @@ export const renderDropdown = sections => selectOption => (section, name) => {
       className={dropdownTheme.dropdown}
       theme={dropdownTheme}
       onSelect={layerName =>
-        selectOption({ section, selector: name, name: layerName })}
+        selectOption({
+          selection: layerName,
+          layers: sel[layerName],
+          section,
+          selector: name
+        })}
       selected={selected}
     />
   )
