@@ -1,11 +1,11 @@
 import React from 'react'
 import cx from 'classnames'
-import { Link } from 'react-router-dom'
 
 import Scroller, { Element as P } from 'components/scroller'
 import Earthometer from 'components/earthometer'
 import Floodmap from 'components/floodmap'
 import Placeholder from 'components/placeholder'
+import NavFooter from 'components/nav-footer'
 
 import styles from './local-styles'
 import uiStyles from 'app/styles/ui'
@@ -64,9 +64,7 @@ const Local = ({
           width="30%"
           height="200px"
         />
-        <Link className={uiStyles.button} to="/regional">
-          Regional
-        </Link>
+        <NavFooter to="/regional" />
       </Scroller>
     </div>
   )
