@@ -1,0 +1,34 @@
+@import "~styles/variables.scss";
+
+.imageContent {
+  display: flex;
+  background-color: $color-mid-blue;
+  height: 100%;
+}
+
+.image {
+  flex: 0.65;
+  background-position: center;
+  background-size: cover;
+}
+
+.sidebar {
+  flex: 0.35;
+  padding: 132px 23px;
+
+  .title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.88;
+    letter-spacing: 1px;
+    color: rgba($color-white, 0.9);
+  }
+
+  .description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    letter-spacing: 0.4px;
+    color: $color-white;
+    text-align: justify;
+  }
+}

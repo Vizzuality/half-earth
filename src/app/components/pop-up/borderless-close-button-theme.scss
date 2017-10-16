@@ -1,0 +1,14 @@
+@import '~styles/variables.scss';
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  outline: none;
+
+  &::before,
+  &::after {
+    background-color: $color-white;
+  }
+}

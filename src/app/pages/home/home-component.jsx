@@ -1,7 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './home-styles.scss'
-import { default as PopUp, TextContent, VideoContent } from 'components/pop-up'
+import {
+  default as PopUp,
+  TextContent,
+  VideoContent,
+  ImageContent
+} from 'components/pop-up'
 
 const dummyText = {
   type: 'text',
@@ -25,14 +30,23 @@ const dummyVideo = {
   video: 'http://media.w3.org/2010/05/bunny/movie.mp4'
 }
 
+const dummyImage = {
+  type: 'image',
+  image:
+    'https://i.pinimg.com/originals/94/e5/61/94e561fa304e3f477981cc494d84c647.jpg',
+  title: 'Madagascar',
+  description:
+    "Being very big, ancient, and tropical, Madagascar harbors a very large and unique fauna and flora, with 70 percent or more of its species found nowhere else... Examples of evolutionary radiation in Madagascar's animals are the may, yet closely related, species of lemurs (primitive primates), chameleons, vangid shrikes, ranid frogs, and among the twelve thousand species of plants, complex palms, orchids, baobabs, and cactus-like Didiereaceae."
+}
+
 const displayContent = () => {
-  const content =
-    parseInt(Math.random() * 10, 10) % 2 === 0 ? dummyText : dummyVideo
-  return content.type === 'text' ? (
-    <TextContent content={content} />
-  ) : (
-    <VideoContent content={content} />
-  )
+  const types = [dummyText, dummyVideo, dummyImage]
+  const i = parseInt(Math.random() * 10, 10) % 3
+  const content = types[i]
+
+  if (content.type === 'text') return <TextContent content={content} />
+  if (content.type === 'video') return <VideoContent content={content} />
+  if (content.type === 'image') return <ImageContent content={content} />
 }
 
 const Home = props => (
@@ -50,7 +64,7 @@ const Home = props => (
     <div className={styles.cto}>
       <Link to="intro">Play</Link>
     </div>
-    <PopUp render={displayContent} />
+    <PopUp>{displayContent()}</PopUp>
   </div>
 )
 
