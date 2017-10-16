@@ -21,7 +21,8 @@ const Regional = ({
   ...props
 }) => {
   const t = renderToggle(toggleLayer)
-  const d = renderDropdown(selectLayers)
+  // const d = renderDropdown(selectLayers)
+  const d = selector => console.log('missing selector', selector)
   const KBAs = 80
 
   return (
