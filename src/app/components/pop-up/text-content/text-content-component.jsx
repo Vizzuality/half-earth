@@ -13,8 +13,8 @@ const TextContent = ({ className, content }) => {
         style={{ backgroundImage: `url(${image})` }}
       />
       <ul className={styles.details}>
-        {details.map(({ label, value }) => (
-          <li>
+        {details.map(({ label, value }, key) => (
+          <li key={`details-item-${key}`}>
             {capitalize(label)}: {value}
           </li>
         ))}
