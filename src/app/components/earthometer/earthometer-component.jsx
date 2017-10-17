@@ -12,11 +12,13 @@ const showPercent = v => (hasPercent(v) ? '%' : '')
 
 const Earthometer = ({ className, earthSaved, setEarthSaved, displayOnly }) => (
   <div className={cx(className, styles.container)}>
-    <div className={styles.wrap}>
+    <div className={styles.containerPercentage}>
       <div className={styles.labels}>
         <h1 className={styles.title}>Earth Conserved</h1>
         <h2 className={styles.percentSaved}>{Math.round(earthSaved)}%</h2>
       </div>
+    </div>
+    <div className={styles.wrap}>
       {!displayOnly && (
         <div>
           <Slider

@@ -1,5 +1,6 @@
 @import '~styles/variables.scss';
 $offset: 0.1em;
+$lineColor: #2b4d68;
 
 .wrap {
   width: calc(100% - #{$site-padding});
@@ -11,16 +12,37 @@ $offset: 0.1em;
   justify-content: space-between;
 }
 
-.labels,
 .values {
   width: calc(100% + 10px);
 }
 
+.labels {
+  width: 100%;
+  align-items: center;
+  padding: 0 70px 0 50px;
+}
+
+.containerPercentage {
+  position: fixed;
+  top: 100px;
+  z-index: 20;
+  display: flex;
+  width: calc(42vw - 5px);
+  align-items: center;
+  left: 0;
+  background-color: $color-mid-blue;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  border-bottom: 1px solid $lineColor;
+}
+
 .title {
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  letter-spacing: 4px;
+  text-transform: capitalize;
+  font-size: 18px;
   font-weight: 500; // ?
+  line-height: 2.33;
+  letter-spacing: 0.9px;
+  margin-bottom: 0;
 }
 
 .labelx {
@@ -43,4 +65,5 @@ $offset: 0.1em;
 
 .percentSaved {
   color: $color-turquoise;
+  margin-bottom: 0;
 }
