@@ -24,6 +24,60 @@
   }
 }
 
+.legendContent {
+  color: $color-white;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+
+  .simpleLegend {
+    position: relative;
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    padding-right: 26px;
+    flex-shrink: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 23px;
+      height: 18px;
+      display: block;
+      margin-left: 10px;
+    }
+
+    &Red::after {
+      background-color: #e95353;
+    }
+
+    &Brown::after {
+      background-color: #f4a175;
+    }
+
+    &Pink::after {
+      background-color: rgba(243, 40, 116, 0.7);
+    }
+
+    &Orange::after {
+      background-color: rgba(243, 136, 40, 0.7);
+    }
+
+    &Green::after {
+      background-color: rgba(56, 192, 180, 0.7);
+    }
+
+    &Yellow::after {
+      background-color: rgba(243, 193, 40, 0.7);
+    }
+  }
+}
+
 // .grid {
 //   position: absolute;
 //   top: 0;
