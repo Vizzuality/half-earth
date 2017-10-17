@@ -3,6 +3,7 @@ import React from 'react'
 import CesiumMap from 'components/cesium/map'
 import ImageProvider from 'components/cesium/image-provider'
 import ModelProvider from 'components/cesium/model-provider'
+import Billboard from 'components/cesium/billboard'
 
 import random from 'lodash/random'
 import zoomLevels from 'data/zoom-levels'
@@ -42,6 +43,22 @@ const Map = ({ map, regional, zoomLevel, lockNavigation, className }) => (
       layer =>
         layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
     )}
+    <Billboard
+      id={'paharo'}
+      url="/img/bird.png"
+      width="100"
+      height="100"
+      onClick={id => console.log('clicked', id)}
+      position={[22.727253, -19.3193416]}
+    />
+    <Billboard
+      id={'paharo2'}
+      url="/img/bird.png"
+      width="100"
+      height="100"
+      onClick={id => console.log('clicked', id)}
+      position={[22.827253, -19.3193416]}
+    />
   </CesiumMap>
 )
 
