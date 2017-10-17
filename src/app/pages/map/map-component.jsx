@@ -18,7 +18,14 @@ const displace = (x, y, z) => [
 ]
 const birds = new Array(10).fill(0)
 
-const Map = ({ map, regional, zoomLevel, lockNavigation, className }) => (
+const Map = ({
+  map,
+  regional,
+  global,
+  zoomLevel,
+  lockNavigation,
+  className
+}) => (
   <CesiumMap
     className={className}
     lockNavigation={lockNavigation}
@@ -36,6 +43,10 @@ const Map = ({ map, regional, zoomLevel, lockNavigation, className }) => (
       />
     ))}
     {regional.layers.map(
+      layer =>
+        layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
+    )}
+    {global.layers.map(
       layer =>
         layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
     )}

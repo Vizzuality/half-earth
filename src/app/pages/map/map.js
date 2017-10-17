@@ -21,7 +21,11 @@ class MapContainer extends Component {
 }
 
 export { actions, reducers, initialState, utils }
-const mapStateToProps = ({ map, regional }) => ({ map, regional })
+const mapStateToProps = ({ map, regional, global }) => ({
+  map,
+  regional,
+  global
+})
 
 export default connect(mapStateToProps, { ...actions, ...cartoActions })(
   MapContainer

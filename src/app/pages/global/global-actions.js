@@ -1,5 +1,6 @@
 import { createAction } from 'redux-actions'
 
-export const selectSelector = createAction('global:selectSelector')
-export const toggleLayer = createAction('global:toggleLayer')
-export const setSection = createAction('global:setSection')
+export const selectGlobalSelector = createAction('selectGlobalSelector')
+export const toggleGlobalLayer = createAction('toggleGlobalLayer')
+export const setGlobalSection = createAction('setGlobalSection')
+export const resetGlobalLayers = createAction('setGlobalSection')

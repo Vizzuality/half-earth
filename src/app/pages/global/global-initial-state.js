@@ -22,10 +22,10 @@ export default {
     sliderLayers([20, 25, 40, 45, 40, 45, 50]),
     MOLLayer('all-taxa', 'all-taxa', 'richness'),
     MOLLayer('birds', 'birds', 'richness'),
-    MOLLayer('amphibians', 'amphibians', 'richness'),
     MOLLayer('mammals', 'mammals', 'richness'),
-    MOLLayer('protea', 'protea', 'richness'),
-    MOLLayer('restio', 'restio', 'richness'),
+    MOLLayer('amphibians', 'amphibians', 'richness'),
+    MOLLayer('conifers', 'conifers', 'richness'),
+    MOLLayer('cacti', 'cacti', 'richness'),
     {
       name: 'protected-areas',
       url: null,
@@ -74,11 +74,7 @@ export default {
       }
     },
     'global:2': {
-      layers: [],
-      selections: speciesSelections('pressures'),
-      selectors: {
-        anthropogenic: speciesSelector('birds')
-      }
+      layers: []
     },
     'global:3': {
       layers: []
