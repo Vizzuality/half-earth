@@ -11,7 +11,7 @@
   align-items: flex-end;
   flex-direction: column;
   padding: $arrow-padding;
-  z-index: $zforeground;
+  z-index: $zforeground * 3;
 
   .arrow {
     @extend %bg-image;
