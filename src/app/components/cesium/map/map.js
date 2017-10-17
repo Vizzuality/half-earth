@@ -58,12 +58,8 @@ class CesiumComponent extends Component {
     if (lockNavigation) return disablePanning(viewer)
     this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
     this.handler.setInputAction(
-      this.onMouseDown,
-      Cesium.ScreenSpaceEventType.LEFT_DOWN
-    )
-    this.handler.setInputAction(
-      this.onMouseUp,
-      Cesium.ScreenSpaceEventType.LEFT_UP
+      this.onMouseClick,
+      Cesium.ScreenSpaceEventType.LEFT_CLICK
     )
     this.state.viewer = viewer
     return viewer
@@ -126,12 +122,8 @@ class CesiumComponent extends Component {
     this.rotatingEvent = true
   }
 
-  onMouseDown = click => {
+  onMouseClick = click => {
     this.setState({ clickedPosition: click.position })
-  }
-
-  onMouseUp = click => {
-    this.setState({ clickedPosition: { x: 0, y: 0 } })
   }
 
   removeRotation () {

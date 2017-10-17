@@ -14,6 +14,7 @@ class Billboard extends Component {
     clickedPosition,
     ...props
   }) {
+    if (!viewer) return false
     const existing = viewer.entities.values.map(e => e.id)
 
     if (!includes(existing, id)) {
