@@ -10,8 +10,7 @@ import NavFooter from 'components/nav-footer'
 import styles from './local-styles'
 import uiStyles from 'app/styles/ui'
 
-const Local = ({ className, local, closePopUp, openPopUp }) => {
-  const randomPopUp = parseInt(Math.random() * 10, 10) % 4
+const Local = ({ className, local, closePopUp }) => {
   return (
     <div className={cx(className)}>
       <PopUp open={local.popUp.open} close={closePopUp}>
@@ -19,7 +18,6 @@ const Local = ({ className, local, closePopUp, openPopUp }) => {
       </PopUp>
       <Scroller className={styles.playhead}>
         <Earthometer displayOnly />
-        <button onClick={e => openPopUp(randomPopUp)}>Open pop-up</button>
         <P className={uiStyles.slides}>
           The Okavango Delta is an important place for migrating birds that stop
           to feed and rest as they travel thousands of miles across Africa and
