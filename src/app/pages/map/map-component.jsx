@@ -46,6 +46,7 @@ const Map = ({ map, regional, zoomLevel, lockNavigation, className }) => (
     <Billboard
       id={'paharo'}
       url="/img/bird.png"
+      urlHover="/img/bird-hover.png"
       width="100"
       height="100"
       onClick={id => console.log('clicked', id)}
@@ -54,6 +55,7 @@ const Map = ({ map, regional, zoomLevel, lockNavigation, className }) => (
     <Billboard
       id={'paharo2'}
       url="/img/bird.png"
+      urlHover="/img/bird-hover.png"
       width="100"
       height="100"
       onClick={id => console.log('clicked', id)}
