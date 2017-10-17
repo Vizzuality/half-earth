@@ -35,3 +35,57 @@
   display: block;
   margin-bottom: 50rem;
 }
+
+.paragraphAfterChart {
+  margin-top: 100px;
+}
+
+.radarChart {
+  circle {
+    stroke-dasharray: 5;
+
+    &:last-of-type {
+      display: none;
+    }
+  }
+
+  text {
+    fill: $color-white;
+
+    tspan {
+      font-size: 12px;
+      letter-spacing: 4px;
+      line-height: 2.17;
+    }
+  }
+}
+
+:global .recharts-default-legend {
+  top: 60px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+
+  .recharts-legend-item {
+    display: flex !important;
+    flex-direction: row;
+    align-items: baseline;
+    margin-right: 20px;
+
+    .recharts-surface {
+      min-width: 16px;
+      min-height: 16px;
+      margin-right: 10px !important;
+    }
+
+    .recharts-legend-item-text {
+      max-width: 140px;
+      display: block;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.71;
+      letter-spacing: 0.7px;
+    }
+  }
+}
