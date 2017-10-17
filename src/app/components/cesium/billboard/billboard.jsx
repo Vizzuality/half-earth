@@ -4,20 +4,20 @@ const { Cesium } = window
 
 class Billboard extends Component {
   handleHover = hoverPosition => {
-    const { viewer, url, urlHover } = this.props
+    const { viewer } = this.props
     if (!viewer) return false
     const { scene } = viewer
     const pickedObject = scene.pick(hoverPosition)
 
-    viewer.entities.values.forEach(bill => {
+    viewer.entities.values.map(bill => {
       if (pickedObject) {
         if (pickedObject.id.id === bill.id) {
-          bill.billboard.image = urlHover
+          bill.billboard.image = bill.imageHover
         } else {
-          bill.billboard.image = url
+          bill.billboard.image = bill.image
         }
       } else {
-        bill.billboard.image = url
+        bill.billboard.image = bill.image
       }
     })
   }
@@ -32,21 +32,25 @@ class Billboard extends Component {
     }
   }
 
-  mountBillboard = () => {
+  mountBillboard = viewer => {
     const {
-      viewer,
       id,
       url: image,
+      urlHover: imageHover,
       width,
       height,
       position: [lat, long]
     } = this.props
     if (!viewer) return false
+
     viewer.entities.add({
       position: Cesium.Cartesian3.fromDegrees(lat, long),
       id,
+      image,
+      imageHover,
       billboard: {
         image,
+        imageHover,
         width,
         height
       }
@@ -68,10 +72,9 @@ class Billboard extends Component {
   }) {
     if (!viewer) return false
     const existing = viewer.entities.values.map(e => e.id)
-
-    if (!includes(existing, id)) this.mountBillboard()
-    if (hoverPosition) this.handleHover(hoverPosition)
+    if (!includes(existing, id)) this.mountBillboard(viewer)
     if (clickedPosition) this.handleClick(clickedPosition)
+    if (hoverPosition) this.handleHover(hoverPosition)
   }
 
   render () {

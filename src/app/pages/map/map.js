@@ -5,6 +5,7 @@ import initialState from './initial-state'
 import * as actions from './map-actions'
 import { requestCartos } from './map-utils'
 import { actions as cartoActions } from 'providers/carto'
+import { actions as popUpActions } from 'providers/pop-up'
 import reducers from './map-reducers'
 
 class MapContainer extends Component {
@@ -21,8 +22,14 @@ class MapContainer extends Component {
 }
 
 export { actions, reducers, initialState }
-const mapStateToProps = ({ map, regional }) => ({ map, regional })
+const mapStateToProps = ({ map, regional, local, popUp }) => ({
+  map,
+  regional,
+  local
+})
 
-export default connect(mapStateToProps, { ...actions, ...cartoActions })(
-  MapContainer
-)
+export default connect(mapStateToProps, {
+  ...actions,
+  ...cartoActions,
+  ...popUpActions
+})(MapContainer)
