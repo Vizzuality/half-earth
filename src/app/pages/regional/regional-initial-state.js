@@ -244,5 +244,48 @@ export default {
     'regional:3': {
       layers: ['basemap']
     }
+  },
+  legend: {
+    'key-biodiversity-areas': {
+      type: 'simple',
+      label: 'Key Biodiversity Areas',
+      color: 'green'
+    },
+    'road-building': {
+      type: 'simple',
+      label: 'Roads',
+      color: 'red'
+    },
+    'private-reserves': {
+      type: 'simple',
+      label: 'Private Reserves',
+      color: 'orange'
+    },
+    'urban-development': {
+      type: 'simple',
+      label: 'Urban Development',
+      color: 'brown'
+    },
+    'protected-areas': {
+      type: 'simple',
+      label: 'Protected Areas',
+      color: 'pink'
+    },
+    mammals: {
+      type: 'gradient',
+      label: 'Mammals'
+    },
+    birds: {
+      type: 'gradient',
+      label: 'Birds'
+    },
+    amphibians: {
+      type: 'gradient',
+      label: 'Amphibians'
+    },
+    restio: {
+      type: 'gradient',
+      label: 'Restio'
+    }
   }
 }
