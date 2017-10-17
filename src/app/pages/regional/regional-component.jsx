@@ -1,16 +1,24 @@
 import React from 'react'
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  Legend,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer
+} from 'recharts'
 
 import Scroller, { Element as P } from 'components/scroller'
 import Earthometer from 'components/earthometer'
 import NavFooter from 'components/nav-footer'
 
 import uiStyles from 'app/styles/ui'
-
 const earthProtected = 100
 
 const Regional = ({
   classname,
-  regional,
+  regional: { sections, graphs },
   renderDropdown,
   renderToggle,
   selectSelector,
@@ -41,7 +49,39 @@ const Regional = ({
           regions on Earth and is characterised by its evergreen shrublands and
           low fynbos, thicket, and forest and woodlands, and is home to a large
           number of {d('regional:1', 'birds')} species.
-          {/* spider, data in store: graphs.spider1[regional/global] */}
+          <ResponsiveContainer width="100%" height={400}>
+            <RadarChart data={graphs} className={uiStyles.radarChart}>
+              <Radar
+                name="Total Species in the Region"
+                dataKey="Regional"
+                stroke="#0664f6"
+                fill="#0664f6"
+                fillOpacity={0.2}
+              />
+              <Radar
+                name="Total Species Globally"
+                dataKey="Global"
+                stroke="#8366e4"
+                fill="#8366e4"
+                fillOpacity={0.2}
+              />
+              <PolarGrid
+                gridType="circle"
+                stroke="#2b4d68"
+                stroke-dasharray="15"
+              />
+              <Legend />
+              <PolarRadiusAxis
+                angle={0}
+                domain={['auto', 'auto']}
+                tick={false}
+                tickCount={5}
+                stroke="#2b4d68"
+                strokeDasharray="15"
+              />
+              <PolarAngleAxis dataKey="subject" fill="#fff" />
+            </RadarChart>
+          </ResponsiveContainer>
         </P>
         <P
           className={uiStyles.slides}
