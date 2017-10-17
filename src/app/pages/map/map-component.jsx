@@ -24,7 +24,10 @@ const Map = ({
   global,
   zoomLevel,
   lockNavigation,
-  className
+  local,
+  openPopUp,
+  className,
+  section
 }) => (
   <CesiumMap
     className={className}
@@ -42,32 +45,29 @@ const Map = ({
         speed={1}
       />
     ))}
-    {regional.layers.map(
-      layer =>
-        layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
-    )}
-    {global.layers.map(
-      layer =>
-        layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
-    )}
-    <Billboard
-      id={'paharo'}
-      url="/img/bird.png"
-      urlHover="/img/bird-hover.png"
-      width="100"
-      height="100"
-      onClick={id => console.log('clicked', id)}
-      position={[22.727253, -19.3193416]}
-    />
-    <Billboard
-      id={'paharo2'}
-      url="/img/bird.png"
-      urlHover="/img/bird-hover.png"
-      width="100"
-      height="100"
-      onClick={id => console.log('clicked', id)}
-      position={[22.827253, -19.3193416]}
-    />
+    {zoomLevel === 'regional' &&
+      regional.layers.map(
+        layer =>
+          layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
+      )}
+    {zoomLevel === 'global' &&
+      global.layers.map(
+        layer =>
+          layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
+      )}
+    {zoomLevel === 'local' &&
+      local.billboards.map(billboard => (
+        <Billboard
+          key={billboard.id}
+          id={billboard.id}
+          url={billboard.url}
+          urlHover={billboard.urlHover}
+          width={82}
+          height={123}
+          onClick={id => openPopUp(id)}
+          position={billboard.coordinates}
+        />
+      ))}
   </CesiumMap>
 )
 

@@ -80,7 +80,7 @@ export default {
       layers: []
     },
     'global:4': {
-      layers: ['all-taxa']
+      layers: []
     },
     'global:5': {
       layers: []
