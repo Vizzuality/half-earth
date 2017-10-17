@@ -1,4 +1,4 @@
-import { actions as popUpActions } from 'providers/pop-up'
+import { actions as popUpActions } from 'components/pop-up'
 
 export default {
   [popUpActions.openPopUp]: (state, { payload }) => ({

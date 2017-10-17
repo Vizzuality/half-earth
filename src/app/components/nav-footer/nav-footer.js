@@ -1,5 +1,10 @@
 import { createElement, Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import { actions as popUpActions } from 'components/pop-up'
+import { connect } from 'react-redux'
+
+import reducers from './nav-footer-reducers'
+import initialState from './initial-state'
 
 import NavFooter from './nav-footer-component'
 
@@ -20,4 +25,11 @@ class NavFooterContainer extends Component {
   }
 }
 
-export default withRouter(NavFooterContainer)
+const mapStateToProps = ({ navFooter }) => ({
+  popUp: navFooter.popUp
+})
+
+export { reducers, initialState }
+export default connect(mapStateToProps, {
+  ...popUpActions
+})(withRouter(NavFooterContainer))
