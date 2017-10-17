@@ -2,7 +2,7 @@ import includes from 'lodash/includes'
 import difference from 'lodash/difference'
 import merge from 'lodash/fp/merge'
 import { assign } from 'utils'
-import { actions } from 'providers/section'
+import { actions as sectionActions } from 'providers/section'
 import { actions as cartoActions } from 'providers/carto'
 import { actions as selectorActions } from 'providers/selectors'
 import { actions as mapActions, reducers as mapReducers } from 'pages/map'
@@ -47,7 +47,7 @@ export default {
 
   [mapActions.toggleLayer]: mapReducers.toggleLayer,
 
-  [actions.setSection]: (state, { payload, __app: { section } }) => {
+  [sectionActions.setSection]: (state, { payload, __app: { section } }) => {
     if (payload === section.section) return state
     const reset = mapReducers.resetLayers(state)
     const block = reset.sections[payload]
