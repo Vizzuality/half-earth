@@ -14,5 +14,5 @@ export default {
     ...state,
     popUp: { ...state.popUp, open: false, selected: null }
   }),
-  [mapActions.resetLayers]: mapReducers.resetLayers
+  [mapActions.resetLayers]: (state, payload) => mapReducers.resetLayers
 }

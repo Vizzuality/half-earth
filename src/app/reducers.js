@@ -37,6 +37,7 @@ import {
 } from 'providers/section'
 
 import {
+  actions as regionalActions,
   reducers as regionalReducers,
   initialState as regionalState
 } from 'pages/regional'
@@ -54,6 +55,7 @@ const allActions = {
   ...sidebarActions,
   ...sectionActions,
   ...selectorActions,
+  ...regionalActions,
   ...popUpActions
 }
 

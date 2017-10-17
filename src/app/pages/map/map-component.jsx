@@ -35,10 +35,6 @@ const Map = ({ map, regional, zoomLevel, lockNavigation, className }) => (
         speed={1}
       />
     ))}
-    {map.layers.map(
-      layer =>
-        layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
-    )}
     {regional.layers.map(
       layer =>
         layer.url ? <ImageProvider key={layer.name} {...layer} /> : null

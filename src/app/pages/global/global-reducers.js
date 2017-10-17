@@ -2,9 +2,8 @@ import includes from 'lodash/includes'
 import difference from 'lodash/difference'
 import merge from 'lodash/fp/merge'
 import { assign } from 'utils'
-import { actions as cartoActions } from 'providers/carto'
 import { reducers as mapReducers } from 'pages/map'
-import * as actions from './regional-actions'
+import * as actions from './global-actions'
 
 const makeVisible = l => assign(l, { visible: true })
 const makeHidden = l => assign(l, { visible: false })
@@ -32,22 +31,15 @@ const filterSelector = (state, { payload: { section, selection } }) => {
 }
 
 export default {
-  [cartoActions.gotCartoTiles]: (state, { payload }) =>
-    mapReducers.updateLayer(state, {
-      ...payload,
-      payload: layer => ({ url: payload.url, carto: null })
-    }),
-
-  [actions.selectRegionalSelector]: (state, { payload }) => {
+  [actions.selectSelector]: (state, { payload }) => {
     const { section, selector, selection } = payload
     const filtered = filterSelector(state, toPayload(payload))
     return selectSelector(filtered, toPayload({ section, selector, selection }))
   },
 
-  [actions.toggleRegionalLayer]: mapReducers.toggleLayer,
+  [actions.toggleLayer]: mapReducers.toggleLayer,
 
-  [actions.setRegionalSection]: (state, { payload, __app: { section } }) => {
-    console.log(payload, section.section)
+  [actions.setSection]: (state, { payload, __app: { section } }) => {
     if (payload === section.section) return state
     const reset = mapReducers.resetLayers(state)
     const block = reset.sections[payload]
@@ -66,6 +58,7 @@ export default {
     const otherLayers = difference(state.layers, matchingLayers)
     const otherLayersHidden = otherLayers.map(makeHidden)
     const updatedLayers = matchingVisibleLayers.concat(otherLayersHidden)
+
     return { ...state, layers: updatedLayers }
   }
 }

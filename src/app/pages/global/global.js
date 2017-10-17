@@ -7,6 +7,8 @@ import { renderDropdown, renderToggle } from 'components/explorable'
 import GlobalComponent from './global-component'
 import graph from './global-initial-state'
 import { actions as mapActions } from 'pages/map'
+import { actions as sectionActions } from 'providers/section'
+import { actions as selectorActions } from 'providers/selectors'
 
 const mapStateToProps = ({ map, global, sidebar }) => {
   return {
@@ -21,11 +23,16 @@ const mapStateToProps = ({ map, global, sidebar }) => {
 class GlobalContainer extends Component {
   constructor (props) {
     super(props)
-    props.selectLayer({ name: 'birds:global' })
+    console.log('')
+    // props.resetLayers()
   }
   render () {
     return createElement(GlobalComponent, assign(this.props))
   }
 }
 
-export default connect(mapStateToProps, mapActions)(GlobalContainer)
+export default connect(mapStateToProps, {
+  ...mapActions,
+  ...sectionActions,
+  ...selectorActions
+})(GlobalContainer)
