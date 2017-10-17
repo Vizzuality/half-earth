@@ -1,0 +1,109 @@
+@import '~styles/variables.scss';
+
+.legendLayers {
+  color: $color-white;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+
+  .simpleLegend {
+    position: relative;
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    padding-right: 26px;
+    flex-shrink: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 23px;
+      height: 18px;
+      display: block;
+      margin-left: 10px;
+    }
+
+    &Red::after {
+      background-color: #e95353;
+    }
+
+    &Brown::after {
+      background-color: #f4a175;
+    }
+
+    &Pink::after {
+      background-color: rgba(243, 40, 116, 0.7);
+    }
+
+    &Orange::after {
+      background-color: rgba(243, 136, 40, 0.7);
+    }
+
+    &Green::after {
+      background-color: rgba(56, 192, 180, 0.7);
+    }
+
+    &Yellow::after {
+      background-color: rgba(243, 193, 40, 0.7);
+    }
+  }
+
+  .gradientLegend {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-shrink: 0;
+
+    .gradient {
+      display: flex;
+      flex-direction: column;
+      text-transform: uppercase;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 3.3px;
+      text-align: right;
+
+      &Boxes {
+        display: flex;
+        padding-top: 10px;
+
+        span {
+          width: 23px;
+          height: 18px;
+          position: relative;
+
+          &:first-child {
+            color: $color-white;
+          }
+
+          &:last-child {
+            color: $color-mid-blue;
+          }
+
+          &:first-child,
+          &:last-child {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+          }
+
+          $colors: #281170, #4051d9, #4085d9, #38b3e3, #54def2, #6df1db, #3fdec3;
+
+          @for $i from 1 through length($colors) {
+            &:nth-child(#{$i}) {
+              background-color: nth($colors, $i);
+            }
+          }
+        }
+      }
+    }
+  }
+}

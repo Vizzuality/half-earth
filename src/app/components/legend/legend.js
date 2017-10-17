@@ -22,4 +22,6 @@ class LegendContainer extends Component {
   }
 }
 
+export { default as LegendLayers } from './legend-layers/legend-layers'
+
 export default LegendContainer
