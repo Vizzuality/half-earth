@@ -32,11 +32,11 @@ const speciesSelections = type => ({
 export default {
   graphs: [
     { subject: 'BIRDS', Regional: 400, Global: 627, fullMark: 150 },
-    { subject: 'MAMMALS', Regional: 320, Global: 480, fullMark: 150 },
-    { subject: 'AMPHIBIANS', Regional: 360, Global: 492, fullMark: 150 },
-    { subject: 'CACTI', Regional: 430, Global: 345, fullMark: 150 },
-    { subject: 'TURTLES', Regional: 300, Global: 400, fullMark: 150 },
-    { subject: 'CONIFERS', Regional: 345, Global: 723, fullMark: 150 }
+    { subject: 'MAMMALS', Regional: 120, Global: 180, fullMark: 150 },
+    { subject: 'AMPHIBIANS', Regional: 60, Global: 92, fullMark: 150 },
+    { subject: 'CACTI', Regional: 0, Global: 1, fullMark: 150 },
+    { subject: 'TURTLES', Regional: 7, Global: 11, fullMark: 150 },
+    { subject: 'CONIFERS', Regional: 5, Global: 7, fullMark: 150 }
   ],
 
   layers: [
