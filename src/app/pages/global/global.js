@@ -5,11 +5,13 @@ import { assign } from 'utils'
 
 import { renderDropdown, renderToggle } from 'components/explorable'
 import GlobalComponent from './global-component'
+import graph from './global-initial-state'
 import { actions as mapActions } from 'pages/map'
 
 const mapStateToProps = ({ map, global, sidebar }) => {
   return {
     map,
+    graph,
     sidebar,
     renderToggle: renderToggle(map.layers, ':global'),
     renderDropdown: renderDropdown(map.layers, ':global')
