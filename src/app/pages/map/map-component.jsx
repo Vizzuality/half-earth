@@ -54,11 +54,13 @@ const Map = ({
     {zoomLevel === 'local' &&
       local.billboards.map(billboard => (
         <Billboard
+          key={billboard.id}
           id={billboard.id}
           url={billboard.url}
-          width={150}
-          height={100}
-          onClick={() => openPopUp(billboard.id)}
+          urlHover={billboard.urlHover}
+          width={82}
+          height={123}
+          onClick={id => openPopUp(id)}
           position={billboard.coordinates}
         />
       ))}

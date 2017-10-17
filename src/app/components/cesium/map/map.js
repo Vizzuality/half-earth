@@ -29,7 +29,8 @@ class CesiumComponent extends Component {
     this.state = {
       layers: {},
       viewer: null,
-      clickedPosition: { x: 0, y: 0 }
+      clickedPosition: null,
+      hoverPosition: { x: 0, y: 0 }
     }
   }
 
@@ -60,6 +61,10 @@ class CesiumComponent extends Component {
     this.handler.setInputAction(
       this.onMouseClick,
       Cesium.ScreenSpaceEventType.LEFT_CLICK
+    )
+    this.handler.setInputAction(
+      this.onMouseMove,
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE
     )
     this.state.viewer = viewer
     return viewer
@@ -104,6 +109,10 @@ class CesiumComponent extends Component {
     }
   }
 
+  componentDidUpdate () {
+    this.state.clickedPosition = null
+  }
+
   rotate = clock => {
     const { startTime, currentTime } = clock
     const { viewer } = this.state
@@ -126,6 +135,10 @@ class CesiumComponent extends Component {
     this.setState({ clickedPosition: click.position })
   }
 
+  onMouseMove = mouse => {
+    this.setState({ hoverPosition: mouse.startPosition })
+  }
+
   removeRotation () {
     const { viewer } = this.state
     viewer.clock.onTick.removeEventListener(this.rotate)
@@ -135,8 +148,7 @@ class CesiumComponent extends Component {
   render () {
     const { props, state } = this
     const { rotate } = props
-    const { layers, viewer, clickedPosition } = state
-
+    const { layers, viewer, clickedPosition, hoverPosition } = state
     if (viewer) this[rotate ? 'addRotation' : 'removeRotation']()
 
     const getPos = (window.getPos = () => {
@@ -148,13 +160,13 @@ class CesiumComponent extends Component {
         }, {})
       )
     })
-
     return createElement(CesiumMapComponent, {
       mapId,
       layers,
       getPos,
       viewer,
       clickedPosition,
+      hoverPosition,
       ...props
     })
   }

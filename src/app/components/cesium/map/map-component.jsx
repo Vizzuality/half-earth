@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 import styles from './map-styles.scss'
 
-const layerId = layer => `layer-${layer.key || layer.type.name + '-' + uuid()}`
+const layerId = layer => `${layer.type.name}-${uuid()}`
 
 class CesiumMap extends Component {
   render () {
@@ -14,7 +14,8 @@ class CesiumMap extends Component {
       mapId,
       children,
       viewer,
-      clickedPosition
+      clickedPosition,
+      hoverPosition
     } = this.props
     return (
       <div className={cx(className, styles.map)} id={mapId}>
@@ -29,6 +30,7 @@ class CesiumMap extends Component {
               cLayers,
               viewer,
               clickedPosition,
+              hoverPosition,
               ref: el => {
                 this[id] = Boolean(ch.props.url)
               }

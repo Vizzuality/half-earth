@@ -22,7 +22,11 @@ class MapContainer extends Component {
 }
 
 export { actions, reducers, initialState }
-const mapStateToProps = ({ map, regional, local }) => ({ map, regional, local })
+const mapStateToProps = ({ map, regional, local, popUp }) => ({
+  map,
+  regional,
+  local
+})
 
 export default connect(mapStateToProps, {
   ...actions,

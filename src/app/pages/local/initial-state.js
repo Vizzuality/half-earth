@@ -4,34 +4,38 @@ export default {
     {
       id: 0,
       coordinates: [22.54351616, -19.07886918],
-      url:
-        'img/billboard/01_NG_Okavango_Wilderness_Project_credit_James_Kydd_thumb.jpg'
+      url: 'img/billboard/01_01.png',
+      urlHover: 'img/billboard/01_01-hover.png'
     },
     {
       id: 1,
       coordinates: [22.68887043, -19.33414618],
-      url:
-        'img/billboard/02_NG_Okavango_Wilderness_Project_credit_Chris_Boyes_thumb.jpg'
+      url: 'img/billboard/02_01.png',
+      urlHover: 'img/billboard/02_01-hover.png'
     },
     {
       id: 2,
       coordinates: [22.91130066, -19.45817589],
-      url: 'img/billboard/03_NationalGeographic_2435343_thumb.jpg'
+      url: 'img/billboard/03_01.png',
+      urlHover: 'img/billboard/03_01-hover.png'
     },
     {
       id: 3,
       coordinates: [22.76802778, -19.5840516],
-      url: 'img/billboard/04_Okavango_steve_w_elephant_mombo_2_JKydd_thumb.jpg'
+      url: 'img/billboard/04_01.png',
+      urlHover: 'img/billboard/04_01-hover.png'
     },
     {
       id: 4,
       coordinates: [22.88422108, -19.13450538],
-      url: 'img/billboard/05_NationalGeographic_2435021_thumb.jpg'
+      url: 'img/billboard/05_01.png',
+      urlHover: 'img/billboard/05_01-hover.png'
     },
     {
       id: 5,
       coordinates: [23.07403564, -19.27485063],
-      url: 'img/billboard/06_NationalGeographic_2444856_thumb.jpg'
+      url: 'img/billboard/06_01.png',
+      urlHover: 'img/billboard/06_01-hover.png'
     }
   ],
   popUp: {

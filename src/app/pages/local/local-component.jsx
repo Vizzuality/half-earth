@@ -13,7 +13,7 @@ import uiStyles from 'app/styles/ui'
 const Local = ({ className, local, closePopUp }) => {
   return (
     <div className={cx(className)}>
-      <PopUp open={local.popUp.open} close={closePopUp}>
+      <PopUp open={local.popUp.open} close={() => closePopUp()}>
         <ImageContent content={local.popUp.selected} />
       </PopUp>
       <Scroller className={styles.playhead}>
