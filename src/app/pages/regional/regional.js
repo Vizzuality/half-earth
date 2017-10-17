@@ -24,10 +24,9 @@ class RegionalConTainer extends Component {
   }
 }
 
-const mapStateToProps = ({ map, regional, sidebar, section }) => {
+const mapStateToProps = ({ map, regional, section }) => {
   return {
     map,
-    sidebar,
     regional,
     section,
     renderToggle: renderToggle(regional.layers),
