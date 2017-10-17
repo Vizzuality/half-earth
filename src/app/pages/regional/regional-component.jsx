@@ -10,10 +10,10 @@ const earthProtected = 100
 
 const Regional = ({
   classname,
-  regional: { sections },
+  regional,
   renderDropdown,
   renderToggle,
-  selectLayers,
+  selectSelector,
   toggleLayer,
   sidebar,
   setSection,
@@ -21,10 +21,9 @@ const Regional = ({
   ...props
 }) => {
   const t = renderToggle(toggleLayer)
-  // const d = renderDropdown(selectLayers)
-  const d = selector => console.log('missing selector', selector)
-  const KBAs = 80
+  const d = renderDropdown(selectSelector)
 
+  const KBAs = 80
   return (
     <div className={classname}>
       <Scroller>
@@ -56,11 +55,10 @@ const Regional = ({
             injury, starvation, and death.
           </p>
           <p>
-            The combined effect of these threats is shrinking the habitats where
-            {d('regional:2', 'Anthropogenic impacts', '! default: birds')}{' '}
-            species live. Improving our understanding of how these anthropogenic
-            impacts put biodiversity at risk can help us identify which species
-            to protect and where.
+            The combined effect of these threats is shrinking the habitats where{' '}
+            {d('regional:2', 'anthropogenic')} species live. Improving our
+            understanding of how these anthropogenic impacts put biodiversity at
+            risk can help us identify which species to protect and where.
           </p>
         </P>
         <P
@@ -69,14 +67,13 @@ const Regional = ({
         >
           In this region, {earthProtected} percent of the area is covered by
           designated {t('Protected Areas')}, encompassing an area of 132,885
-          km2. A few of these {t('existing reserves', 'missing')} are
-          characterised by the exceptional endemism and the megafauna that they
-          support. Other conservation approaches are also present in this area,
-          including {t('Community-based reserves')} , {t('Private reserves')}{' '}
-          and Indigenous and Community Conserved Areas (ICCAs). Similarly,
-          several sites have been proposed as biodiversity{' '}
-          {t('corridors', 'missing')} to support habitat connectivity, and{' '}
-          {KBAs} {t('Key Biodiversity Areas')}
+          km2. A few of these {t('existing reserves')} are characterised by the
+          exceptional endemism and the megafauna that they support. Other
+          conservation approaches are also present in this area, including{' '}
+          {t('Community-based reserves')}, {t('Private reserves')} and
+          Indigenous and Community Conserved Areas (ICCAs). Similarly, several
+          sites have been proposed as biodiversity {t('corridors')} to support
+          habitat connectivity, and {KBAs} {t('Key Biodiversity Areas')}
           sites have been identified due to their importance for conserving
           threatened and geographically restricted biodiversity.
         </P>
