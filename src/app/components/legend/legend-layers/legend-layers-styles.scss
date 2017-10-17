@@ -60,6 +60,11 @@
     justify-content: space-between;
     align-items: flex-end;
     flex-shrink: 0;
+    padding-bottom: 15px;
+
+    &:only-of-type {
+      padding-bottom: 0;
+    }
 
     .gradient {
       display: flex;

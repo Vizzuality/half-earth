@@ -1,33 +1,7 @@
 import { cartoConfig } from 'app/utils'
+import { utils } from 'pages/map'
 
-const MAPBOX_TOKEN =
-  'pk.eyJ1IjoiamNoYWxmZWFydGgiLCJhIjoiY2o4Mnh4aDN6MGNqazMzc2FkeTlnajBoeiJ9.5Su3_JeAsjM0slTkaGFihw'
-
-const MOLLayer = (name, species, type) => ({
-  name,
-  url: `https://cdn.mol.org/half-earth/tiles/${type}/${species}/{z}/{x}/{y}`,
-  type: 'UrlTemplate',
-  visible: false
-})
-
-const speciesSelector = selected => ({
-  options: {
-    birds: 'Birds',
-    mammals: 'Mammals',
-    amphibians: 'Amphibians',
-    protea: 'Protea',
-    restio: 'Restio'
-  },
-  selected
-})
-
-const speciesSelections = type => ({
-  birds: `birds:${type}`,
-  mammals: `mammals:${type}`,
-  amphibians: `amphibians:${type}`,
-  protea: `protea:${type}`,
-  restio: `restio:${type}`
-})
+const { MAPBOX_TOKEN, MOLLayer, speciesSelector, speciesSelections } = utils
 
 export default {
   graphs: [
@@ -228,21 +202,21 @@ export default {
   ],
   sections: {
     'regional:1': {
-      layers: ['basemap'],
+      layers: [],
       selections: speciesSelections('richness'),
       selectors: {
         birds: speciesSelector('birds')
       }
     },
     'regional:2': {
-      layers: ['basemap'],
+      layers: [],
       selections: speciesSelections('pressures'),
       selectors: {
         anthropogenic: speciesSelector('birds')
       }
     },
     'regional:3': {
-      layers: ['basemap']
+      layers: []
     }
   },
   legend: {
