@@ -88,6 +88,22 @@ class Global extends Component {
         </p>
         <Shapes />
         <NavFooter to="/" />
+        <p>
+          The rapid growth in available data on terrestrial species and
+          ecosystems has made it possible to identify where to expand the
+          protected areas network globally.
+          <Spider />
+        </p>
+        <p>
+          Half-Earth aims to continue building upon the data we already have,
+          prioritizing and supporting research to understand the identity and
+          biology of our planet’s species and utilizing advances in data
+          collection and analyses to map the information needed to get to
+          Half-Earth and best care for our planet. The Half-Earth Project maps
+          will also monitor our progress in getting to Half, inspiring people
+          everywhere to participate in actions that will help us achieve the
+          Half-Earth goal.
+        </p>
       </div>
     )
   }

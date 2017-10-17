@@ -28,7 +28,9 @@ class CesiumComponent extends Component {
     this.rotatingEvent = false
     this.state = {
       layers: {},
-      viewer: null
+      viewer: null,
+      clickedPosition: { x: 0, y: 0 },
+      hoverPosition: { x: 0, y: 0 }
     }
   }
 
@@ -55,7 +57,19 @@ class CesiumComponent extends Component {
 
     if (zoomLevel) this.handleZoom(zoomLevel)
     if (lockNavigation) return disablePanning(viewer)
-
+    this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    this.handler.setInputAction(
+      this.onMouseDown,
+      Cesium.ScreenSpaceEventType.LEFT_DOWN
+    )
+    this.handler.setInputAction(
+      this.onMouseUp,
+      Cesium.ScreenSpaceEventType.LEFT_UP
+    )
+    this.handler.setInputAction(
+      this.onMouseMove,
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE
+    )
     this.state.viewer = viewer
     return viewer
   }
@@ -74,7 +88,7 @@ class CesiumComponent extends Component {
 
   componentDidMount () {
     const { props } = this
-    this.bindMap(Object.assign({}, props))
+    this.bindMap(Object.assign(props))
     if (props.zoomLevel) this.handleZoom(props.zoomLevel)
   }
 
@@ -117,6 +131,18 @@ class CesiumComponent extends Component {
     this.rotatingEvent = true
   }
 
+  onMouseDown = click => {
+    this.setState({ clickedPosition: click.position })
+  }
+
+  onMouseUp = click => {
+    this.setState({ clickedPosition: { x: 0, y: 0 } })
+  }
+
+  onMouseMove = mouse => {
+    this.setState({ hoverPosition: mouse.startPosition })
+  }
+
   removeRotation () {
     const { viewer } = this.state
     viewer.clock.onTick.removeEventListener(this.rotate)
@@ -126,7 +152,7 @@ class CesiumComponent extends Component {
   render () {
     const { props, state } = this
     const { rotate } = props
-    const { layers, viewer } = state
+    const { layers, viewer, clickedPosition, hoverPosition } = state
 
     if (viewer) this[rotate ? 'addRotation' : 'removeRotation']()
 
@@ -139,11 +165,14 @@ class CesiumComponent extends Component {
         }, {})
       )
     })
+
     return createElement(CesiumMapComponent, {
       mapId,
       layers,
       getPos,
       viewer,
+      clickedPosition,
+      hoverPosition,
       ...props
     })
   }
