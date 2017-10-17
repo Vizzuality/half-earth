@@ -19,7 +19,7 @@ export default {
     { subject: 'CONIFERS', Meeting: 226, Global: 606, fullMark: 150 }
   ],
   layers: [
-    sliderLayers([20, 25, 40, 45, 40, 45, 50]),
+    ...sliderLayers([20, 25, 30, 35, 40, 45, 50]),
     MOLLayer('all-taxa', 'all-taxa', 'richness'),
     MOLLayer('birds', 'birds', 'richness'),
     MOLLayer('mammals', 'mammals', 'richness'),
@@ -80,7 +80,7 @@ export default {
       layers: []
     },
     'global:4': {
-      layers: []
+      layers: ['all-taxa']
     },
     'global:5': {
       layers: []

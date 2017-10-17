@@ -37,7 +37,7 @@ const mapStateToProps = ({ map, global, section }) => {
 
 export { actions, reducers, initialState }
 export default connect(mapStateToProps, {
+  ...actions,
   ...cartoActions,
-  ...sectionActions,
-  ...actions
+  ...sectionActions
 })(GlobalContainer)
