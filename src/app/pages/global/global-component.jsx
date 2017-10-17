@@ -46,8 +46,8 @@ class Global extends Component {
           <ResponsiveContainer width="100%" height={400}>
             <RadarChart data={graph.graphs} className={uiStyles.radarChart}>
               <Radar
-                name="Total Species in the Region"
-                dataKey="Regional"
+                name="Total Species meeting protected area"
+                dataKey="Meeting"
                 stroke="#0664f6"
                 fill="#0664f6"
                 fillOpacity={0.2}
