@@ -29,7 +29,7 @@ class CesiumComponent extends Component {
     this.state = {
       layers: {},
       viewer: null,
-      clickedPosition: { x: 0, y: 0 },
+      clickedPosition: null,
       hoverPosition: { x: 0, y: 0 }
     }
   }
@@ -59,12 +59,8 @@ class CesiumComponent extends Component {
     if (lockNavigation) return disablePanning(viewer)
     this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
     this.handler.setInputAction(
-      this.onMouseDown,
-      Cesium.ScreenSpaceEventType.LEFT_DOWN
-    )
-    this.handler.setInputAction(
-      this.onMouseUp,
-      Cesium.ScreenSpaceEventType.LEFT_UP
+      this.onMouseClick,
+      Cesium.ScreenSpaceEventType.LEFT_CLICK
     )
     this.handler.setInputAction(
       this.onMouseMove,
@@ -113,6 +109,10 @@ class CesiumComponent extends Component {
     }
   }
 
+  componentDidUpdate () {
+    this.state.clickedPosition = null
+  }
+
   rotate = clock => {
     const { startTime, currentTime } = clock
     const { viewer } = this.state
@@ -131,12 +131,8 @@ class CesiumComponent extends Component {
     this.rotatingEvent = true
   }
 
-  onMouseDown = click => {
+  onMouseClick = click => {
     this.setState({ clickedPosition: click.position })
-  }
-
-  onMouseUp = click => {
-    this.setState({ clickedPosition: { x: 0, y: 0 } })
   }
 
   onMouseMove = mouse => {
@@ -153,7 +149,6 @@ class CesiumComponent extends Component {
     const { props, state } = this
     const { rotate } = props
     const { layers, viewer, clickedPosition, hoverPosition } = state
-
     if (viewer) this[rotate ? 'addRotation' : 'removeRotation']()
 
     const getPos = (window.getPos = () => {
@@ -165,7 +160,6 @@ class CesiumComponent extends Component {
         }, {})
       )
     })
-
     return createElement(CesiumMapComponent, {
       mapId,
       layers,

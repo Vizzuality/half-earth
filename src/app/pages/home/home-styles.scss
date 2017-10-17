@@ -2,30 +2,82 @@
 
 .container {
   position: absolute;
-  top: 0;
   left: 0;
+  top: 25px;
   width: 100vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   z-index: $zforeground;
-  height: calc(100vh - #{$header-height});
+  height: calc(100vh - #{$header-height} - 150px);
 }
 
-.titleContainer {
-  display: flex;
-  align-items: center;
+.containerScroll {
+  height: 100%;
+  overflow-y: scroll;
+  position: relative;
+  max-width: 955px;
+
+  // &:after {
+  //   pointer-events: none;
+  //   content: '';
+  //   position: fixed;
+  //   top: #{$header-height};
+  //   height: calc(100vh - #{$header-height} - 130px);
+  //   left: 0;
+  //   z-index: 0;
+  //   background-image: linear-gradient(#091e31, rgba(9, 30, 49, 0) 5%);
+  //   left: 50%;
+  //   transform: translate(-50%, 0%);
+  //   width: 955px;
+  // }
 }
 
 .title {
   color: $color-white;
   font-size: 5rem;
   text-transform: uppercase;
-  letter-spacing: 2.5rem;
-  line-height: 2.1;
   text-align: center;
-  width: 50vw;
+  max-width: 410px;
+  line-height: 1.8;
+  letter-spacing: 25px;
+  text-shadow: 0 0 34px rgba($color-black, 0.3);
+  margin: 90px auto 30px;
+  padding-left: 12px;
+}
+
+.separator {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 2.33;
+  letter-spacing: 20px;
+  text-align: center;
+  color: $color-white;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translate(-50%, 0%);
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 1px;
+    width: 150px;
+    top: 50%;
+    background-color: $color-turquoise;
+  }
+
+  &::before {
+    left: -200px;
+  }
+
+  &::after {
+    right: -180px;
+  }
 }
 
 .em {
@@ -37,7 +89,18 @@
   color: white;
   font-size: 1.8rem;
   line-height: 2.33;
-  width: 50vw;
+  min-width: 955px;
+  max-width: 955px;
+  text-align: center;
+  margin: 45px auto;
+}
+
+.body {
+  max-width: 950px;
+  margin: 18px auto;
+  line-height: 2.33;
+  letter-spacing: 0.9px;
+  color: white;
   text-align: center;
 }
 
@@ -54,6 +117,8 @@
   background-size: contain;
   text-transform: uppercase;
   text-align: center;
+  position: fixed;
+  bottom: 20px;
 
   a {
     color: white;

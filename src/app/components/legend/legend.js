@@ -1,6 +1,11 @@
 import { createElement, Component } from 'react'
+import { connect } from 'react-redux'
 
 import LegendComponent from './legend-component'
+
+function mapStateToProps (props, { page }) {
+  return { layers: props[page].layers }
+}
 
 class LegendContainer extends Component {
   static defaultProps = {
@@ -24,4 +29,4 @@ class LegendContainer extends Component {
 
 export { default as LegendLayers } from './legend-layers/legend-layers'
 
-export default LegendContainer
+export default connect(mapStateToProps)(LegendContainer)

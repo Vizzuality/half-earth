@@ -38,7 +38,7 @@ const Layout = ({ children, location, sidebar, ...props }) => {
         {isIntro && <Intro />}
         <Map className={cx(styles.col, styles.map)} zoomLevel={route} />
         {route === 'regional' && (
-          <Legend>
+          <Legend page={route}>
             <LegendLayers />
           </Legend>
         )}

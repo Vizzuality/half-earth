@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 import styles from './map-styles.scss'
 
-const layerId = layer => `layer-${layer.key || layer.type.name + '-' + uuid()}`
+const layerId = layer => `${layer.type.name}-${uuid()}`
 
 class CesiumMap extends Component {
   render () {
