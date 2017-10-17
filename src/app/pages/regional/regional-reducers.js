@@ -1,22 +1,64 @@
 import includes from 'lodash/includes'
 import difference from 'lodash/difference'
+import merge from 'lodash/fp/merge'
 import { assign } from 'utils'
-import { updateLayer } from 'pages/map/map-utils'
 import { actions } from 'providers/section'
 import { actions as cartoActions } from 'providers/carto'
+import { actions as selectorActions } from 'providers/selectors'
 import { actions as mapActions, reducers as mapReducers } from 'pages/map'
 
 const makeVisible = l => assign(l, { visible: true })
 const makeHidden = l => assign(l, { visible: false })
+const toPayload = payload => ({ payload })
+
+const selectSelector = (state, { payload: { section, selector, selection } }) =>
+  merge(state, {
+    sections: {
+      [section]: {
+        selectors: {
+          [selector]: { selected: selection }
+        }
+      }
+    }
+  })
+
+const filterSelector = (state, { payload: { section, selection } }) => {
+  const { selections } = state.sections[section]
+  const toHide = Object.keys(selections).map(v => selections[v])
+
+  return merge(
+    merge(state, mapReducers.hideLayers(state, toPayload(toHide))),
+    mapReducers.selectLayer(state, toPayload({ name: selections[selection] }))
+  )
+}
 
 export default {
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
-    updateLayer(state, {
+    mapReducers.updateLayer(state, {
       ...payload,
       payload: layer => ({ url: payload.url, carto: null })
     }),
-  [actions.setSection]: (state, { payload }) => {
-    const visibleLayers = state.sections[payload].layers
+
+  [selectorActions.selectSelector]: (state, { payload }) => {
+    const { section, selector, selection } = payload
+    const filtered = filterSelector(state, toPayload(payload))
+    return selectSelector(filtered, toPayload({ section, selector, selection }))
+  },
+
+  [mapActions.toggleLayer]: mapReducers.toggleLayer,
+
+  [actions.setSection]: (state, { payload, __app: { section } }) => {
+    if (payload === section.section) return state
+    const reset = mapReducers.resetLayers(state)
+    const block = reset.sections[payload]
+    const { layers, selectors, selections } = block
+
+    const visibleLayers = layers.concat(
+      (selectors &&
+        Object.keys(selectors).map(s => selections[selectors[s].selected])) ||
+        []
+    )
+
     const matchingLayers = state.layers.filter(l =>
       includes(visibleLayers, l.name)
     )
@@ -26,30 +68,5 @@ export default {
     const updatedLayers = matchingVisibleLayers.concat(otherLayersHidden)
 
     return { ...state, layers: updatedLayers }
-  },
-  [mapActions.selectLayer]: (state, action) => {
-    const { name: payload } = action.payload
-    const { section, selector, name } = payload
-    if (!section) return mapReducers.selectLayer(state, action)
-    const { sections } = state
-    const currentSection = sections[section]
-    const selectors = currentSection.selectors
-
-    return {
-      ...mapReducers.selectLayer(state, action),
-      sections: {
-        ...sections,
-        [section]: {
-          ...currentSection,
-          selectors: {
-            ...selectors,
-            [selector]: {
-              ...selectors[selector],
-              selected: name
-            }
-          }
-        }
-      }
-    }
   }
 }

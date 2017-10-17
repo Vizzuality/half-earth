@@ -5,6 +5,7 @@ import { requestCartos } from 'pages/map/map-utils'
 import { actions as mapActions } from 'pages/map'
 import { actions as sectionActions } from 'providers/section'
 import { actions as cartoActions } from 'providers/carto'
+import { actions as selectorActions } from 'providers/selectors'
 import reducers from './regional-reducers'
 import initialState from './regional-initial-state'
 import RegionalComponent from './regional-component'
@@ -28,7 +29,7 @@ const mapStateToProps = ({ map, regional, sidebar, section }) => {
     sidebar,
     regional,
     section,
-    renderToggle: renderToggle(map.layers, ':regional'),
+    renderToggle: renderToggle(regional.layers),
     renderDropdown: renderDropdown(regional.sections)
   }
 }
@@ -37,5 +38,6 @@ export { reducers, initialState }
 export default connect(mapStateToProps, {
   ...mapActions,
   ...sectionActions,
-  ...cartoActions
+  ...cartoActions,
+  ...selectorActions
 })(RegionalConTainer)

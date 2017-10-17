@@ -1,0 +1,16 @@
+@import '~styles/variables.scss';
+
+.popUp {
+  position: fixed;
+  top: $header-height;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: calc(100% - #{$header-height});
+  background-color: transparent;
+  z-index: $zforeground;
+}
+
+.content {
+  height: 100%;
+}
