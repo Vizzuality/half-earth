@@ -14,7 +14,8 @@ class CesiumMap extends Component {
       mapId,
       children,
       viewer,
-      clickedPosition
+      clickedPosition,
+      hoverPosition
     } = this.props
     return (
       <div className={cx(className, styles.map)} id={mapId}>
@@ -29,6 +30,7 @@ class CesiumMap extends Component {
               cLayers,
               viewer,
               clickedPosition,
+              hoverPosition,
               ref: el => {
                 this[id] = Boolean(ch.props.url)
               }
