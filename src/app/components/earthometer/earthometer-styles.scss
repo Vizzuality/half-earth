@@ -70,7 +70,7 @@ $lineColor: #2b4d68;
 }
 
 .half {
-  margin-left: 1.7em;
+  margin-left: 0.7em;
   color: $color-white;
 }
 
@@ -78,6 +78,7 @@ $lineColor: #2b4d68;
   color: $color-turquoise;
   font-size: 2rem;
   margin: 0 25px;
+  min-width: 41px;
 }
 
 .slider {
