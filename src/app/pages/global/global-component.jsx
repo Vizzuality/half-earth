@@ -16,7 +16,8 @@ class Global extends Component {
       className,
       global,
       setSection,
-      setGlobalSection
+      setGlobalSection,
+      section
     } = this.props
     const updateSections = s => {
       setGlobalSection(s)
@@ -26,7 +27,7 @@ class Global extends Component {
     return (
       <div className={className}>
         <Scroller>
-          <Earthometer displayOnly />
+          <Earthometer displayOnly={section !== 'global:3'} />
           <P
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:1')}
@@ -72,7 +73,6 @@ class Global extends Component {
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:4')}
           >
-            <Earthometer />
             The rapid growth in available data on terrestrial species and
             ecosystems has made it possible to identify where to expand the
             protected areas network globally.

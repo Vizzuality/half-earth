@@ -7,39 +7,56 @@ import styles from './earthometer-styles.scss'
 import theme from './slider-theme.scss'
 const values = [0, 50, 100]
 
-const hasPercent = v => v === 50
-const showPercent = v => (hasPercent(v) ? '%' : '')
+const isHalfWayThrough = v => v === 50
+const formatValue = v => (isHalfWayThrough(v) ? 'Half' : v)
 
-const Earthometer = ({ className, earthSaved, setEarthSaved, displayOnly }) => (
-  <div className={cx(className, styles.container)}>
-    <div className={styles.containerPercentage}>
-      <div className={styles.labels}>
-        <h1 className={styles.title}>Earth Conserved</h1>
-        <h2 className={styles.percentSaved}>{Math.round(earthSaved)}%</h2>
+const Earthometer = ({ className, earthSaved, setEarthSaved, displayOnly }) => {
+  console.info(displayOnly)
+  const title = displayOnly
+    ? 'Earth conserved accounts for around'
+    : 'Earth Conserved'
+  return (
+    <div className={cx(className, styles.earthometer)}>
+      <div className={styles.container}>
+        <div className={styles.labels}>
+          <h3
+            className={cx([
+              styles.title,
+              { [styles.titleSmall]: !displayOnly }
+            ])}
+          >
+            {title}
+          </h3>
+          <div
+            className={cx([styles.wrap, { [styles.wrapHidden]: displayOnly }])}
+          >
+            {!displayOnly && (
+              <div>
+                <Slider
+                  className={styles.slider}
+                  theme={theme}
+                  value={earthSaved}
+                  max={last(values)}
+                  onChange={setEarthSaved}
+                />
+                <ul className={styles.values}>
+                  {values.map(v => (
+                    <li
+                      className={cx({ [styles.half]: isHalfWayThrough(v) })}
+                      key={v}
+                    >
+                      {formatValue(v)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+          <h2 className={styles.percentSaved}>{Math.round(earthSaved)}%</h2>
+        </div>
       </div>
     </div>
-    <div className={styles.wrap}>
-      {!displayOnly && (
-        <div>
-          <Slider
-            className={styles.slider}
-            theme={theme}
-            value={earthSaved}
-            max={last(values)}
-            onChange={setEarthSaved}
-          />
-          <ul className={styles.values}>
-            {values.map(v => (
-              <li className={cx({ [styles.percent]: hasPercent(v) })} key={v}>
-                {v}
-                {showPercent(v)}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  </div>
-)
+  )
+}
 
 export default Earthometer
