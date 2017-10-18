@@ -60,6 +60,43 @@
   }
 }
 
+.lineChartGlobal {
+  margin: 80px 0;
+}
+
+.visualisationsContainer {
+  display: flex;
+  justify-content: space-around;
+
+  .svgTextContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin: 90px 0;
+
+    img {
+      width: 60px;
+    }
+
+    .percentage {
+      margin: 30px 0 5px;
+      font-size: 14px;
+      font-weight: 500;
+      color: $color-white;
+    }
+
+    .category {
+      font-weight: 500;
+      font-size: 14px;
+      color: $color-white;
+      line-height: 2.17;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+  }
+}
+
 :global .recharts-default-legend {
   top: 60px;
   position: relative;
