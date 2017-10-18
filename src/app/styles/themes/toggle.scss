@@ -11,3 +11,9 @@
   background-color: $color-turquoise;
   color: $color-dark-blue;
 }
+
+.disabled {
+  cursor: none;
+  border-color: rgba($color-turquoise, 0.8);
+  pointer-events: none;
+}
