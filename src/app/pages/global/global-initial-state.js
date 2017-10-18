@@ -85,5 +85,68 @@ export default {
     'global:5': {
       layers: []
     }
+  },
+  legend: {
+    'key-biodiversity-areas': {
+      type: 'simple',
+      label: 'Key Biodiversity Areas',
+      color: 'green'
+    },
+    'road-building': {
+      type: 'simple',
+      label: 'Roads',
+      color: 'red'
+    },
+    'private-reserves': {
+      type: 'simple',
+      label: 'Private Reserves',
+      color: 'orange'
+    },
+    'urban-development': {
+      type: 'simple',
+      label: 'Urban Development',
+      color: 'brown'
+    },
+    'protected-areas': {
+      type: 'simple',
+      label: 'Protected Areas',
+      color: 'pink'
+    },
+    'pa-scenario': {
+      type: 'simple',
+      label: 'Where to Protect',
+      color: 'yellow'
+    },
+    mammals: {
+      type: 'gradient',
+      label: 'Mammals',
+      color: 'purple'
+    },
+    birds: {
+      type: 'gradient',
+      label: 'Birds',
+      color: 'aqua'
+    },
+    amphibians: {
+      type: 'gradient',
+      label: 'Amphibians',
+      color: 'green'
+    },
+    cacti: {
+      type: 'gradient',
+      label: 'Cacti',
+      color: 'orange'
+    },
+    // TODO: review conifers color
+    conifers: {
+      type: 'gradient',
+      label: 'Conifers',
+      color: 'red'
+    },
+    'all-taxa': {
+      type: 'gradient',
+      label: 'All Taxa',
+      color: 'blue'
+    }
   }
 }
