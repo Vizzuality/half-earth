@@ -1,4 +1,4 @@
-import { actions as popUpActions } from 'providers/pop-up'
+import { actions as popUpActions } from 'components/pop-up'
 import { actions as mapActions, reducers as mapReducers } from 'pages/map'
 
 export default {
