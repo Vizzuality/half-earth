@@ -28,7 +28,7 @@ class GlobalContainer extends Component {
 const mapStateToProps = ({ map, global, section }) => {
   return {
     map,
-    section,
+    section: section.section,
     global,
     renderToggle: renderToggle(global.layers),
     renderDropdown: renderDropdown(global.sections)

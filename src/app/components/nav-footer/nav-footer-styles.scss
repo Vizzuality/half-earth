@@ -82,7 +82,7 @@ $pad: 6rem;
     height: 8px;
     border-right: 2px solid $color-white;
     border-bottom: 2px solid $color-white;
-    transform: translate(-50%, -50%) rotate(45deg);
+    transform: translate(-50%, calc(-50% - 1px)) rotate(45deg);
     left: 50%;
   }
 }

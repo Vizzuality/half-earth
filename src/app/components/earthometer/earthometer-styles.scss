@@ -1,8 +1,15 @@
 @import '~styles/variables.scss';
 $offset: 0.1em;
+$lineColor: #2b4d68;
 
 .wrap {
-  width: calc(100% - #{$site-padding});
+  width: 240px;
+  padding-top: 25px;
+  padding-bottom: 5px;
+
+  &Hidden {
+    display: none;
+  }
 }
 
 .values,
@@ -11,16 +18,38 @@ $offset: 0.1em;
   justify-content: space-between;
 }
 
-.labels,
 .values {
   width: calc(100% + 10px);
 }
 
+.labels {
+  width: 100%;
+  align-items: center;
+  padding: 0 50px;
+  height: 100%;
+}
+
+.container {
+  position: fixed;
+  top: 100px;
+  z-index: 20;
+  display: flex;
+  width: calc(42vw - 5px);
+  max-width: $max-width;
+  min-height: 72px;
+  align-items: center;
+  left: 0;
+  background-color: $color-mid-blue;
+  border-bottom: 1px solid $lineColor;
+}
+
 .title {
+  font-weight: 500;
+  margin-bottom: 0;
   text-transform: uppercase;
-  font-size: 0.7rem;
+  font-size: 1.2rem;
+  line-height: 2;
   letter-spacing: 4px;
-  font-weight: 500; // ?
 }
 
 .labelx {
@@ -28,19 +57,30 @@ $offset: 0.1em;
 }
 
 .values {
-  font-size: 0.9rem;
+  $size: 1.4rem;
+
+  font-size: $size;
+  line-height: $size;
   margin: 0;
   padding: 0;
   list-style: none;
-  margin-top: 0.6em;
-  // margin-left: - $offset;
+  margin-top: 8px;
   margin-left: -4px;
+  color: rgba($color-white, 0.5);
 }
 
-.percent {
-  margin-left: 1.7em;
+.half {
+  margin-left: 0.7em;
+  color: $color-white;
 }
 
 .percentSaved {
   color: $color-turquoise;
+  font-size: 2rem;
+  margin: 0 25px;
+  min-width: 41px;
+}
+
+.slider {
+  width: 240px;
 }

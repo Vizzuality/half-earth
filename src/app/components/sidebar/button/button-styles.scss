@@ -6,12 +6,13 @@
   cursor: pointer;
   position: absolute;
   top: 0;
-  width: 100%;
+  right: 0;
+  width: 50px;
+  height: 72px;
   display: flex;
-  align-items: flex-end;
-  flex-direction: column;
-  padding: $arrow-padding;
-  z-index: $zforeground;
+  align-items: center;
+  justify-content: center;
+  z-index: $zforeground * 3;
 
   .arrow {
     @extend %bg-image;
