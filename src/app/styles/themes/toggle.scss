@@ -14,5 +14,6 @@
 
 .disabled {
   cursor: none;
+  border-color: rgba($color-turquoise, 0.8);
   pointer-events: none;
 }
