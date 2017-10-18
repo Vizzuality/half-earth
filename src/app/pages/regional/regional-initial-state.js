@@ -17,12 +17,14 @@ export default {
     {
       name: 'basemap',
       type: 'UrlTemplate',
+      keep: true,
       url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
       visible: false
     },
     {
       name: 'dark:basemap',
       type: 'UrlTemplate',
+      keep: true,
       url: `https://api.mapbox.com/styles/v1/jchalfearth/cj82yobfla1uq2ss6vlwaidgy/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
       visible: false
     },

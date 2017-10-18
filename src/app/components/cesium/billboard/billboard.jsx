@@ -3,6 +3,10 @@ import includes from 'lodash/includes'
 const { Cesium } = window
 
 class Billboard extends Component {
+  componentWillUnmount () {
+    const { viewer } = this.props
+    viewer.entities.remove(this.entity)
+  }
   handleHover = hoverPosition => {
     const { viewer } = this.props
     if (!viewer) return false
@@ -42,8 +46,7 @@ class Billboard extends Component {
       position: [lat, long]
     } = this.props
     if (!viewer) return false
-
-    viewer.entities.add({
+    this.entity = viewer.entities.add({
       position: Cesium.Cartesian3.fromDegrees(lat, long),
       id,
       image,

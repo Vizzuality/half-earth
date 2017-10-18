@@ -47,7 +47,6 @@ export default {
   [actions.toggleRegionalLayer]: mapReducers.toggleLayer,
 
   [actions.setRegionalSection]: (state, { payload, __app: { section } }) => {
-    console.log(payload, section.section)
     if (payload === section.section) return state
     const reset = mapReducers.resetLayers(state)
     const block = reset.sections[payload]
