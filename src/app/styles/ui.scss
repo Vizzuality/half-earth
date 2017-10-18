@@ -33,11 +33,12 @@
 
 .slides {
   display: block;
-  margin-bottom: 50rem;
+  // margin-bottom: 22rem;
+  margin-bottom: calc((100vh / 2) - #{$header-height});
 }
 
 .paragraphAfterChart {
-  margin-top: 100px;
+  padding-top: 50px;
 }
 
 .radarChart {
