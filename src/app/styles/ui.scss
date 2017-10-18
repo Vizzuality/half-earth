@@ -34,7 +34,7 @@
 .slides {
   display: block;
   // margin-bottom: 22rem;
-  margin-bottom: calc((100vh / 2) - #{$header-height});
+  margin-bottom: calc((100vh / 2) - (#{$header-height} * 2));
 }
 
 .paragraphAfterChart {
