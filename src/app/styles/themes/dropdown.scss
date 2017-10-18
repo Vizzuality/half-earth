@@ -9,17 +9,16 @@
   left: -0.5em;
   background-color: $color-dark-blue;
   border: none;
-  display: block;
   font-weight: normal;
   list-style: none;
   margin: 0;
-  padding: 10px;
-  padding-top: 2em;
+  padding: 2em 20px 10px 10px;
   position: absolute;
-  z-index: $zforeground + 1000;
-  // width: auto;
-  width: 180px;
+  z-index: 1;
+  display: inline-block;
   line-height: 2em;
+  width: auto;
+  border-bottom: 1px solid $color-turquoise;
 
   &Closed {
     display: none;
@@ -29,21 +28,24 @@
 .option {
   font-size: 0.9em;
   margin: 0.7em 0;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba($color-white, 0.5);
+  white-space: nowrap;
 
   &:hover {
     color: $color-white;
   }
 
   &Selected {
-    display: none;
     text-decoration: none;
+    cursor: none;
+    pointer-events: none;
+    color: rgba($color-white, 0.2);
   }
 }
 
 .label {
   position: relative;
-  z-index: $zforeground + 1010;
+  z-index: 2;
   border-bottom: 1px solid $color-turquoise;
   display: inline;
   margin: 0;

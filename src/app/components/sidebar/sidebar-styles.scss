@@ -29,7 +29,7 @@ $pad: 6rem;
       height: calc(100% - #{$header-height});
       left: 0;
       width: $column-width;
-      z-index: $zground;
+      z-index: 2;
       background-image:
         linear-gradient(
           $color-mid-blue,
@@ -53,4 +53,3 @@ $pad: 6rem;
     width: calc(#{$arrow-padding * 2} + #{$arrow-width});
   }
 }
-
