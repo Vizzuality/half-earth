@@ -27,6 +27,7 @@ $pad: 6rem;
       position: fixed;
       top: $header-height;
       height: calc(100% - #{$header-height});
+      max-width: $max-width;
       left: 0;
       width: $column-width;
       z-index: 2;
