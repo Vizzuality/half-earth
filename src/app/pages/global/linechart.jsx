@@ -122,9 +122,9 @@ const LineChart = props => (
         <text
           fill="#FFFFFF"
           fontFamily="PierSans"
-          fontSize="10"
+          fontSize="12"
           fontWeight="400"
-          letterSpacing="4"
+          letterSpacing="3.5"
         >
           <tspan x="370.856" y="168">
             OTHER V.
@@ -133,9 +133,9 @@ const LineChart = props => (
         <text
           fill="#FFFFFF"
           fontFamily="PierSans"
-          fontSize="10"
+          fontSize="12"
           fontWeight="400"
-          letterSpacing="4"
+          letterSpacing="3.5"
         >
           <tspan x="333.02" y="103">
             VERTEBRATES
@@ -144,9 +144,9 @@ const LineChart = props => (
         <text
           fill="#FFFFFF"
           fontFamily="PierSans"
-          fontSize="10"
+          fontSize="12"
           fontWeight="400"
-          letterSpacing="4"
+          letterSpacing="3.5"
         >
           <tspan x="406.448" y="45">
             BIRDS
@@ -155,9 +155,9 @@ const LineChart = props => (
         <text
           fill="#FFFFFF"
           fontFamily="PierSans"
-          fontSize="10"
+          fontSize="12"
           fontWeight="400"
-          letterSpacing="4"
+          letterSpacing="3.5"
         >
           <tspan x="365.856" y="15">
             MAMMALS
