@@ -33,13 +33,13 @@ export default {
       carto: cartoConfig(
         'simbiotica',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0.9;
+          polygon-fill: #f32874;
+          polygon-opacity: 0.7;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #FFFFFF;
-          line-opacity: 0.5;
+          line-color: #f32874;
+          line-opacity: 1;
         }`,
         'wdpa_protected_areas'
       ),
@@ -52,12 +52,12 @@ export default {
       carto: cartoConfig(
         'simbiotica',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0.9;
+          polygon-fill: #38c0b4;
+          polygon-opacity: 0.7;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #FFFFFF;
+          line-color: #38c0b4;
           line-opacity: 0.5;
         }`,
         'kba_poly_2016_id'

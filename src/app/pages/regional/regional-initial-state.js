@@ -63,12 +63,12 @@ export default {
       carto: cartoConfig(
         'simbiotica',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0.9;
+          polygon-fill: #38c0b4;
+          polygon-opacity: 0.7;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #FFFFFF;
+          line-color: #38c0b4;
           line-opacity: 0.5;
         }`,
         'kba_poly_2016_id'
@@ -82,8 +82,9 @@ export default {
       carto: cartoConfig(
         'simbiotica',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0;
+          line-width: 1.5;
+          line-color: #e85353;
+          line-opacity: 1;
         }
         #layer::outline {
           line-width: 1;
@@ -158,13 +159,13 @@ export default {
       carto: cartoConfig(
         'half-earth',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0;
+          polygon-fill: #f38828;
+          polygon-opacity: 0.7;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #000000;
-          line-opacity: 0.5;
+          line-color: #f38828;
+          line-opacity: 1;
         }`,
         'private_nature_reserve'
       ),
@@ -177,13 +178,13 @@ export default {
       carto: cartoConfig(
         'simbiotica',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0;
+          polygon-fill: #f32874;
+          polygon-opacity: 0.7;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #000000;
-          line-opacity: 0.5;
+          line-color: #f32874;
+          line-opacity: 1;
         }`,
         'wdpa_protected_areas'
       ),
