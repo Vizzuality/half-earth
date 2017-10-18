@@ -16,7 +16,7 @@ const LineChart = props => (
         </linearGradient>
       </defs>
       <g fill="none" fillRule="evenodd" transform="translate(0 -6)">
-        <rect width="301" height="46" x="1" y="301" fill="#0E3250" />
+        <rect width="301" height="46" x="1" y="301" fill="#0f2432" />
         <text
           fill="#FFFFFF"
           fontFamily="PierSans"
@@ -104,11 +104,11 @@ const LineChart = props => (
           d="M302.5 346.891221L302.5 67M.5 346.891221L.5 67M75.5 346.891221L75.5 67M151.5 346.891221L151.5 67M226.5 346.891221L226.5 67"
         />
         <text
-          fill="#79A3C6"
+          fill="#FFFFFF"
           fontFamily="PierSans"
-          fontSize="10"
+          fontSize="14"
           fontWeight="400"
-          letterSpacing="4"
+          letterSpacing="2.6"
         >
           <tspan x="356.904" y="251">
             Background
@@ -192,6 +192,7 @@ const LineChart = props => (
           stroke="#2B4D68"
           d="M305,267.5 L457.321754,267.5"
           opacity=".6"
+          strokeDasharray="4"
           transform="matrix(-1 0 0 1 762.322 0)"
         />
         <polyline
