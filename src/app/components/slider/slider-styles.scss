@@ -1,3 +1,4 @@
+@import '~styles/variables.scss';
 
 .range,
 .progress {
@@ -16,7 +17,7 @@
 }
 
 .progress {
-  z-index: 1;
+  z-index: $zforeground;
   height: 100%;
   top: 0;
   letter-spacing: 0;
@@ -24,7 +25,7 @@
 }
 
 .handle {
-  z-index: 2;
+  z-index: $zforeground + 1;
   cursor: pointer;
   display: inline-block;
   position: absolute;

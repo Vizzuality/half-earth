@@ -19,7 +19,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   width: 100%;
-  z-index: 100000;
+  z-index: $zforeground * 10000;
   position: relative;
   font-size: 0.9rem;
 
