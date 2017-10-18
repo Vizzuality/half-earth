@@ -1,15 +1,18 @@
 import includes from 'lodash/includes'
 import difference from 'lodash/difference'
 import merge from 'lodash/fp/merge'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
 import { assign } from 'utils'
+import { actions as earthometerActions } from 'components/earthometer'
 import { actions as cartoActions } from 'providers/carto'
 import { reducers as mapReducers } from 'pages/map'
-import * as actions from './regional-actions'
+import * as actions from './global-actions'
 
 const makeVisible = l => assign(l, { visible: true })
 const makeHidden = l => assign(l, { visible: false })
 const toPayload = payload => ({ payload })
-
+const layerToNum = l => Number(l.name.replace('pa-scenario-', ''))
 const selectSelector = (state, { payload: { section, selector, selection } }) =>
   merge(state, {
     sections: {
@@ -38,16 +41,34 @@ export default {
       payload: layer => ({ url: payload.url, carto: null })
     }),
 
-  [actions.selectRegionalSelector]: (state, { payload }) => {
+  [actions.selectGlobalSelector]: (state, { payload }) => {
     const { section, selector, selection } = payload
     const filtered = filterSelector(state, toPayload(payload))
     return selectSelector(filtered, toPayload({ section, selector, selection }))
   },
 
-  [actions.toggleRegionalLayer]: mapReducers.toggleLayer,
+  [earthometerActions.setEarthSaved]: (state, { payload: value }) => {
+    const { layers } = state
+    const scenarioLayers = filter(layers, l => includes(l.name, 'pa-scenario'))
+    const restLayers = difference(layers, scenarioLayers)
+    const visibleScenarioLayers = map(scenarioLayers, l => {
+      if (value >= layerToNum(l)) {
+        l.visible = true
+      } else {
+        l.visible = false
+      }
+      return l
+    })
 
-  [actions.setRegionalSection]: (state, { payload, __app: { section } }) => {
-    console.log(payload, section.section)
+    return {
+      ...state,
+      layers: [...restLayers, ...visibleScenarioLayers]
+    }
+  },
+
+  [actions.toggleGlobalLayer]: mapReducers.toggleLayer,
+
+  [actions.setGlobalSection]: (state, { payload, __app: { section } }) => {
     if (payload === section.section) return state
     const reset = mapReducers.resetLayers(state)
     const block = reset.sections[payload]
