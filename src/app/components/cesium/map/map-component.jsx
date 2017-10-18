@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 import styles from './map-styles.scss'
 
-const layerId = layer => `layer-${layer.key || layer.type.name + '-' + uuid()}`
+const layerId = layer => `${layer.type.name}-${uuid()}`
 
 class CesiumMap extends Component {
   render () {
@@ -22,9 +22,6 @@ class CesiumMap extends Component {
         {React.Children.map(children, ch => {
           if (!ch) return null
           const id = layerId(ch)
-          // prevent remounting
-          if (this[id]) return null
-
           return ch.props.url
             ? cloneElement(ch, {
               cLayers,

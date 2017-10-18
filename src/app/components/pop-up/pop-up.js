@@ -1,19 +1,8 @@
-import { createElement, Component } from 'react'
-import { clickOutside } from 'utils/react'
-
 import PopUp from './pop-up-component'
-
-class PopUpContainer extends Component {
-  componentWillReceiveProps ({ clickedOutside, close, ...props }) {
-    if (clickedOutside && this.props.open) close()
-  }
-
-  render () {
-    return createElement(PopUp, { ...this.props })
-  }
-}
+import * as actions from './pop-up-actions'
 
 export { default as ImageContent } from './image-content/image-content'
 export { default as TextContent } from './text-content/text-content'
 export { default as VideoContent } from './video-content/video-content'
-export default clickOutside(PopUpContainer)
+export { actions }
+export default PopUp

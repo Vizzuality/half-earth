@@ -1,18 +1,26 @@
 @import '~styles/variables.scss';
+$site-gutter: 20px;
+$site-padding: 50px;
+$pad: 6rem;
 
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 20px;
+  position: absolute;
   width: 100%;
+  left: 0;
+  flex-direction: column;
 }
 
 .controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 180px;
+  width: 154px;
+  margin-bottom: 50px;
+  margin-right: 77px;
 }
 
 .back {
@@ -76,5 +84,83 @@
     border-bottom: 2px solid $color-white;
     transform: translate(-50%, -50%) rotate(45deg);
     left: 50%;
+  }
+}
+
+.partnerFooter {
+  height: 70px;
+  background-color: $color-dark-blue;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $site-padding;
+
+  .containImages {
+    display: flex;
+    align-items: center;
+
+    img {
+      max-width: 90px;
+      max-height: 34px;
+      display: inline-block;
+
+      &:first-of-type {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .linkPartner {
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: $color-white;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+}
+
+.footerModal {
+  width: 100vw;
+  height: 100vh;
+  background-color: $color-dark-blue;
+  overflow-y: scroll;
+  padding-bottom: 80px;
+
+  .contain {
+    padding: $pad $site-padding;
+  }
+
+  h1 {
+    margin: 0 auto 80px;
+    line-height: 4.09;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 11px;
+    text-align: center;
+    color: $color-white;
+    text-shadow: 0 0 34px rgba(0, 0, 0, 0.3);
+    padding-top: 100px;
+  }
+
+  .containImages {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .imageContainer {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 60px;
+
+    img {
+      max-width: 150px;
+      display: inline-block;
+    }
   }
 }
