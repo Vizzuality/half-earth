@@ -13,7 +13,6 @@ import Earthometer from 'components/earthometer'
 import NavFooter from 'components/nav-footer'
 import uiStyles from 'app/styles/ui'
 import LineChart from './linechart'
-import Shapes from './shapes'
 
 class Global extends Component {
   render () {
@@ -86,8 +85,23 @@ class Global extends Component {
           contribution to the global persistence of biodiversity. Each one meets
           strict criteria and their selection is informed by data.
         </p>
-        <Shapes />
-        <NavFooter to="/" />
+        <div className={uiStyles.visualisationsContainer}>
+          <div className={uiStyles.svgTextContainer}>
+            <img src="img/graph/montain.svg" />
+            <span className={uiStyles.percentage}>14.7%</span>
+            <span className={uiStyles.category}>Land</span>
+          </div>
+          <div className={uiStyles.svgTextContainer}>
+            <img src="img/graph/coral.svg" />
+            <span className={uiStyles.percentage}>4.12%</span>
+            <span className={uiStyles.category}>Marine</span>
+          </div>
+          <div className={uiStyles.svgTextContainer}>
+            <img src="img/graph/sea.svg" />
+            <span className={uiStyles.percentage}>10.2%</span>
+            <span className={uiStyles.category}>Ocean</span>
+          </div>
+        </div>
         <p>
           The rapid growth in available data on terrestrial species and
           ecosystems has made it possible to identify where to expand the
@@ -103,6 +117,7 @@ class Global extends Component {
           everywhere to participate in actions that will help us achieve the
           Half-Earth goal.
         </p>
+        <NavFooter to="/" />
       </div>
     )
   }
