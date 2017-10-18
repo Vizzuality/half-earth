@@ -36,7 +36,7 @@ $lineColor: #2b4d68;
   display: flex;
   width: calc(42vw - 5px);
   max-width: $max-width;
-  min-height: 72px;
+  min-height: 84px;
   align-items: center;
   left: 0;
   background-color: $color-mid-blue;
@@ -57,21 +57,25 @@ $lineColor: #2b4d68;
 }
 
 .values {
-  $size: 1.4rem;
+  $size: 1.2rem;
 
   font-size: $size;
   line-height: $size;
   margin: 0;
   padding: 0;
   list-style: none;
-  margin-top: 8px;
-  margin-left: -4px;
-  color: rgba($color-white, 0.5);
+  color: $lineColor;
+
+  li:last-child {
+    transform: translate(-80%);
+  }
 }
 
 .half {
-  margin-left: 0.7em;
+  margin-left: -8px;
   color: $color-white;
+  margin-top: 8px;
+  font-size: 1.4rem;
 }
 
 .percentSaved {
