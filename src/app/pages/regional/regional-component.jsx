@@ -1,5 +1,5 @@
 import React from 'react'
-
+import cx from 'classnames'
 import Scroller, { Element as P } from 'components/scroller'
 import Earthometer from 'components/earthometer'
 import NavFooter from 'components/nav-footer'
@@ -49,7 +49,7 @@ const Regional = ({
           <SpiderChart data={graphs} />
         </P>
         <P
-          className={uiStyles.slides}
+          className={cx(uiStyles.slides, uiStyles.paragraphAfterChart)}
           onScrollFocus={() => updateSections('regional:2')}
         >
           <p>
