@@ -33,6 +33,9 @@ const Dropdown = ({
           </li>
         )
       })}
+      {!closed && (
+        <button className={styles.closeButton} onClick={() => toggleOpen()} />
+      )}
     </ul>
   </div>
 )
