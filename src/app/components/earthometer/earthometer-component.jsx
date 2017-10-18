@@ -11,7 +11,6 @@ const isHalfWayThrough = v => v === 50
 const formatValue = v => (isHalfWayThrough(v) ? 'Half' : v)
 
 const Earthometer = ({ className, earthSaved, setEarthSaved, displayOnly }) => {
-  console.info(displayOnly)
   const title = displayOnly
     ? 'Earth conserved accounts for around'
     : 'Earth Conserved'

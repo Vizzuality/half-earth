@@ -11,7 +11,7 @@ const Sidebar = ({ children, className, hidden, toggleSidebar, open }) => (
       [styles.sidebarHidden]: hidden
     })}
   >
-    <Button open={open} toggleSidebar={toggleSidebar} />
+    <Button open={open} toggleSidebar={() => toggleSidebar()} />
     {open && <div className={cx(styles.content)}>{children}</div>}
   </div>
 )
