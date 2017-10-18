@@ -37,9 +37,16 @@ import {
 } from 'providers/section'
 
 import {
+  actions as regionalActions,
   reducers as regionalReducers,
   initialState as regionalState
 } from 'pages/regional'
+
+import {
+  actions as globalActions,
+  reducers as globalReducers,
+  initialState as globalState
+} from 'pages/global'
 
 import {
   reducers as localReducers,
@@ -59,6 +66,8 @@ const allActions = {
   ...sidebarActions,
   ...sectionActions,
   ...selectorActions,
+  ...regionalActions,
+  ...globalActions,
   ...popUpActions
 }
 
@@ -71,5 +80,6 @@ export default combineReducers({
   section: handleActions(allActions, sectionReducers, sectionState),
   regional: handleActions(allActions, regionalReducers, regionalState),
   local: handleActions(allActions, localReducers, localState),
-  navFooter: handleActions(allActions, navFooterReducers, navFooterState)
+  navFooter: handleActions(allActions, navFooterReducers, navFooterState),
+  global: handleActions(allActions, globalReducers, globalState)
 })
