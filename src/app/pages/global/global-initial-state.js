@@ -11,12 +11,12 @@ const sliderLayers = steps => {
 
 export default {
   graphs: [
-    { subject: 'BIRDS', Meeting: 4871, Global: 9990, fullMark: 150 },
-    { subject: 'MAMMALS', Meeting: 1661, Global: 4214, fullMark: 150 },
-    { subject: 'AMPHIBIANS', Meeting: 1356, Global: 6183, fullMark: 150 },
-    { subject: 'CACTI', Meeting: 213, Global: 1413, fullMark: 150 },
-    { subject: 'TURTLES', Meeting: 89, Global: 289, fullMark: 150 },
-    { subject: 'CONIFERS', Meeting: 226, Global: 606, fullMark: 150 }
+    { subject: 'BIRDS', Total: 80, fullMark: 150 },
+    { subject: 'MAMMALS', Total: 69, fullMark: 150 },
+    { subject: 'AMPHIBIANS', Total: 36, fullMark: 150 },
+    { subject: 'CACTI', Total: 34, fullMark: 150 },
+    { subject: 'TURTLES', Total: 67, fullMark: 150 },
+    { subject: 'CONIFERS', Total: 63, fullMark: 150 }
   ],
   layers: [
     ...sliderLayers([20, 25, 30, 35, 40, 45, 50]),

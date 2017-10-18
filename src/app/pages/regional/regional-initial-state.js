@@ -5,12 +5,12 @@ const { MAPBOX_TOKEN, MOLLayer, speciesSelector, speciesSelections } = utils
 
 export default {
   graphs: [
-    { subject: 'BIRDS', Regional: 400, Global: 627, fullMark: 150 },
-    { subject: 'MAMMALS', Regional: 120, Global: 180, fullMark: 150 },
-    { subject: 'AMPHIBIANS', Regional: 60, Global: 92, fullMark: 150 },
-    { subject: 'CACTI', Regional: 0, Global: 1, fullMark: 150 },
-    { subject: 'TURTLES', Regional: 7, Global: 11, fullMark: 150 },
-    { subject: 'CONIFERS', Regional: 5, Global: 7, fullMark: 150 }
+    { subject: 'BIRDS', Total: 96, fullMark: 150 },
+    { subject: 'MAMMALS', Total: 88, fullMark: 150 },
+    { subject: 'AMPHIBIANS', Total: 56, fullMark: 150 },
+    { subject: 'CACTI', Total: 100, fullMark: 150 },
+    { subject: 'TURTLES', Total: 81, fullMark: 150 },
+    { subject: 'CONIFERS', Total: 71, fullMark: 150 }
   ],
 
   layers: [
