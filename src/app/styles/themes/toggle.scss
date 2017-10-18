@@ -11,3 +11,8 @@
   background-color: $color-turquoise;
   color: $color-dark-blue;
 }
+
+.disabled {
+  cursor: none;
+  pointer-events: none;
+}

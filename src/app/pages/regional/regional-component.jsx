@@ -72,13 +72,14 @@ const Regional = ({
         >
           In this region, {earthProtected} percent of the area is covered by
           designated {t('Protected Areas')}, encompassing an area of 132,885
-          km2. A few of these {t('existing reserves')} are characterised by the
-          exceptional endemism and the megafauna that they support. Other
+          km2. A few of these {t('existing reserves', true)} are characterised
+          by the exceptional endemism and the megafauna that they support. Other
           conservation approaches are also present in this area, including{' '}
-          {t('Community-based reserves')}, {t('Private reserves')} and
-          Indigenous and Community Conserved Areas (ICCAs). Similarly, several
-          sites have been proposed as biodiversity {t('corridors')} to support
-          habitat connectivity, and {KBAs} {t('Key Biodiversity Areas')}
+          {t('Community-based reserves', true)}, {t('Private reserves', true)}{' '}
+          and Indigenous and Community Conserved Areas (ICCAs). Similarly,
+          several sites have been proposed as biodiversity{' '}
+          {t('corridors', true)} to support habitat connectivity, and {KBAs}{' '}
+          {t('Key Biodiversity Areas')}
           sites have been identified due to their importance for conserving
           threatened and geographically restricted biodiversity.
         </P>

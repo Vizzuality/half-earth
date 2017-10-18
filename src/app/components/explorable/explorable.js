@@ -10,13 +10,19 @@ import dropdownTheme from 'styles/themes/dropdown.scss'
 import XToggle from './toggle'
 import toggleTheme from 'styles/themes/toggle.scss'
 
-export const renderToggle = layers => toggle => (label, n, enabled = true) => {
+export const renderToggle = layers => toggle => (
+  label,
+  disabled,
+  n,
+  enabled = true
+) => {
   const name = n || kebabCase(lowerCase(label))
   return (
     <XToggle
       theme={toggleTheme}
       key={name}
       active={find(layers, { name }) && find(layers, { name }).visible}
+      disabled={disabled}
       onClick={() => (enabled ? toggle({ name }) : null)}
       className={toggleTheme.toggle}
     >
