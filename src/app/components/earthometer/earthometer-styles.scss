@@ -28,6 +28,7 @@ $lineColor: #2b4d68;
   z-index: 20;
   display: flex;
   width: calc(42vw - 5px);
+  max-width: $max-width;
   align-items: center;
   left: 0;
   background-color: $color-mid-blue;
