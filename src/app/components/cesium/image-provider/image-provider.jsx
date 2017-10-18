@@ -22,7 +22,6 @@ class ImageProvider extends Component {
   }
   componentWillUnmount () {
     const { viewer } = this.props
-    if (!this.keep) console.log(this.layer)
     if (!this.keep) viewer.imageryLayers.remove(this.layer)
   }
   componentWillReceiveProps ({

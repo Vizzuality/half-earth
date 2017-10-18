@@ -4,7 +4,7 @@ import { routerReducer } from 'react-router-redux'
 
 import { actions as cartoActions } from 'providers/carto'
 import { actions as selectorActions } from 'providers/selectors'
-import { actions as popUpActions } from 'providers/pop-up'
+import { actions as popUpActions } from 'components/pop-up'
 
 import {
   actions as zoomActions,
@@ -37,14 +37,26 @@ import {
 } from 'providers/section'
 
 import {
+  actions as regionalActions,
   reducers as regionalReducers,
   initialState as regionalState
 } from 'pages/regional'
 
 import {
+  actions as globalActions,
+  reducers as globalReducers,
+  initialState as globalState
+} from 'pages/global'
+
+import {
   reducers as localReducers,
   initialState as localState
 } from 'pages/local'
+
+import {
+  reducers as navFooterReducers,
+  initialState as navFooterState
+} from 'components/nav-footer'
 
 const allActions = {
   ...cartoActions,
@@ -54,6 +66,8 @@ const allActions = {
   ...sidebarActions,
   ...sectionActions,
   ...selectorActions,
+  ...regionalActions,
+  ...globalActions,
   ...popUpActions
 }
 
@@ -65,5 +79,7 @@ export default combineReducers({
   map: handleActions(allActions, mapReducers, mapState),
   section: handleActions(allActions, sectionReducers, sectionState),
   regional: handleActions(allActions, regionalReducers, regionalState),
-  local: handleActions(allActions, localReducers, localState)
+  local: handleActions(allActions, localReducers, localState),
+  navFooter: handleActions(allActions, navFooterReducers, navFooterState),
+  global: handleActions(allActions, globalReducers, globalState)
 })

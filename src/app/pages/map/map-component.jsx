@@ -21,11 +21,13 @@ const birds = new Array(10).fill(0)
 const Map = ({
   map,
   regional,
-  local,
+  global,
   zoomLevel,
   lockNavigation,
+  local,
   openPopUp,
-  className
+  className,
+  section
 }) => (
   <CesiumMap
     className={className}
@@ -39,6 +41,11 @@ const Map = ({
           layer.url ? (
             <ImageProvider keep={layer.keep} key={layer.name} {...layer} />
           ) : null
+      )}
+    {zoomLevel === 'global' &&
+      global.layers.map(
+        layer =>
+          layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
       )}
     {zoomLevel === 'local' &&
       local.billboards.map(billboard => (

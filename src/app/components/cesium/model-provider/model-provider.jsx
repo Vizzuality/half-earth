@@ -4,7 +4,7 @@ const { Cesium } = window
 class ModelProvider extends Component {
   componentWillUnmount () {
     const { viewer } = this.props
-    viewer.mrimitives.removeAll()
+    viewer.scene.primitives.remove(this.model)
   }
   componentWillReceiveProps ({
     viewer,
