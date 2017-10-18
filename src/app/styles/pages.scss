@@ -41,7 +41,7 @@ $pad: 6rem;
     left: 0;
     width: $column-width;
     max-width: $max-width;
-    z-index: 1000;
+    z-index: $zforeground * 100;
     background-image:
       linear-gradient(
         rgba($color-mid-blue, 0),
