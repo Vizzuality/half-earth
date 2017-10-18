@@ -91,7 +91,7 @@ $pad: 6rem;
   height: 70px;
   background-color: $color-dark-blue;
   width: 100%;
-  z-index: $zforeground;
+  z-index: $zforeground + 1;
   display: flex;
   align-items: center;
   justify-content: space-between;

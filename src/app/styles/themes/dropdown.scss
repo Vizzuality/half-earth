@@ -14,7 +14,7 @@
   margin: 0;
   padding: 2em 20px 10px 10px;
   position: absolute;
-  z-index: $zforeground;
+  z-index: $zforeground - 1;
   display: inline-block;
   line-height: 2em;
   width: auto;
@@ -45,7 +45,7 @@
 
 .label {
   position: relative;
-  z-index: $zforeground + 1;
+  z-index: $zforeground;
   border-bottom: 1px solid $color-turquoise;
   display: inline;
   margin: 0;
