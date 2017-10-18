@@ -92,7 +92,6 @@ class Global extends Component {
           The rapid growth in available data on terrestrial species and
           ecosystems has made it possible to identify where to expand the
           protected areas network globally.
-          <Spider />
         </p>
         <p>
           Half-Earth aims to continue building upon the data we already have,

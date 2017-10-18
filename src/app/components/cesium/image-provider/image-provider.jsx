@@ -18,9 +18,21 @@ class ImageProvider extends Component {
   constructor (props) {
     super(props)
     this.layer = null
+    this.keep = false
   }
-
-  componentWillReceiveProps ({ cLayers, visible, type, viewer, ...props }) {
+  componentWillUnmount () {
+    const { viewer } = this.props
+    if (!this.keep) console.log(this.layer)
+    if (!this.keep) viewer.imageryLayers.remove(this.layer)
+  }
+  componentWillReceiveProps ({
+    cLayers,
+    keep,
+    visible,
+    type,
+    viewer,
+    ...props
+  }) {
     if (notEmpty(cLayers)) {
       if (!this.layer) {
         const provider = new Cesium[`${type}ImageryProvider`](
@@ -28,7 +40,7 @@ class ImageProvider extends Component {
         )
         this.layer = cLayers.addImageryProvider(provider)
       }
-
+      this.keep = keep
       this.layer.show = Boolean(visible)
     }
   }

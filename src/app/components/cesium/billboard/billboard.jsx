@@ -3,6 +3,10 @@ import includes from 'lodash/includes'
 const { Cesium } = window
 
 class Billboard extends Component {
+  componentWillUnmount () {
+    const { viewer } = this.props
+    viewer.entities.removeAll()
+  }
   handleHover = hoverPosition => {
     const { viewer } = this.props
     if (!viewer) return false
