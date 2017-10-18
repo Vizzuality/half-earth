@@ -14,8 +14,19 @@
   width: 100%;
   z-index: $zforeground;
 
-  &Closed {
-    display: none;
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid $color-white;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 5px;
+    cursor: pointer;
   }
 }
 
@@ -24,6 +35,27 @@
   cursor: pointer;
 }
 
+.label {
+
+}
+
 .optionSelected {
+  display: block;
   text-decoration: underline;
+}
+
+.label {
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid $color-white;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 1px;
+  }
 }
