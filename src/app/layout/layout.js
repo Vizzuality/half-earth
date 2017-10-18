@@ -19,7 +19,7 @@ function mapStateToProps (state, { location }) {
         .map(layer => page.legend && page.legend[layer])
         .filter(layer => !!layer)
     : []
-  const layers = activeLayers.length && activeLayers
+  const layers = activeLayers.length > 0 && activeLayers
 
   return { location, route, layers }
 }
