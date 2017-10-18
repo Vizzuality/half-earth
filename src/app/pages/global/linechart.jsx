@@ -21,16 +21,16 @@ const LineChart = props => (
           fill="#FFFFFF"
           fontFamily="PierSans"
           fontSize="14"
-          fontWeight="300"
+          fontWeight="800"
           letterSpacing=".2"
         >
           <tspan x="248.844" y="320">
             1900
           </tspan>{' '}
-          <tspan x="248.503" y="338" fontFamily="PierSans" fontWeight="500">
+          <tspan x="248.503" y="338" fontFamily="PierSans" fontWeight="300">
             201
           </tspan>{' '}
-          <tspan x="271.377" y="338" fontFamily="PierSans" fontWeight="500">
+          <tspan x="271.377" y="338" fontFamily="PierSans" fontWeight="300">
             4
           </tspan>
         </text>
@@ -38,16 +38,16 @@ const LineChart = props => (
           fill="#FFFFFF"
           fontFamily="PierSans"
           fontSize="14"
-          fontWeight="300"
+          fontWeight="800"
           letterSpacing=".2"
         >
           <tspan x="174.085" y="320">
             1700
           </tspan>{' '}
-          <tspan x="172.876" y="338" fontFamily="PierSans" fontWeight="500">
+          <tspan x="172.876" y="338" fontFamily="PierSans" fontWeight="300">
             190
           </tspan>{' '}
-          <tspan x="195.834" y="338" fontFamily="PierSans" fontWeight="500">
+          <tspan x="195.834" y="338" fontFamily="PierSans" fontWeight="300">
             0
           </tspan>
         </text>
@@ -55,16 +55,16 @@ const LineChart = props => (
           fill="#FFFFFF"
           fontFamily="PierSans"
           fontSize="14"
-          fontWeight="300"
+          fontWeight="800"
           letterSpacing=".2"
         >
           <tspan x="98.177" y="320">
             1600
           </tspan>{' '}
-          <tspan x="98.025" y="338" fontFamily="PierSans" fontWeight="500">
+          <tspan x="98.025" y="338" fontFamily="PierSans" fontWeight="300">
             170
           </tspan>{' '}
-          <tspan x="120.017" y="338" fontFamily="PierSans" fontWeight="500">
+          <tspan x="120.017" y="338" fontFamily="PierSans" fontWeight="300">
             0
           </tspan>
         </text>
@@ -72,16 +72,16 @@ const LineChart = props => (
           fill="#FFFFFF"
           fontFamily="PierSans"
           fontSize="14"
-          fontWeight="300"
+          fontWeight="800"
           letterSpacing=".2"
         >
           <tspan x="22.858" y="320">
             1500
           </tspan>{' '}
-          <tspan x="22.209" y="338" fontFamily="PierSans" fontWeight="500">
+          <tspan x="22.209" y="338" fontFamily="PierSans" fontWeight="300">
             160
           </tspan>{' '}
-          <tspan x="45.167" y="338" fontFamily="PierSans" fontWeight="500">
+          <tspan x="45.167" y="338" fontFamily="PierSans" fontWeight="300">
             0
           </tspan>
         </text>
