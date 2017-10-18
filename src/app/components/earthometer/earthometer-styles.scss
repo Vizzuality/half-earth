@@ -32,7 +32,7 @@ $lineColor: #2b4d68;
 .container {
   position: fixed;
   top: 100px;
-  z-index: 20;
+  z-index: $zforeground;
   display: flex;
   width: calc(42vw - 5px);
   max-width: $max-width;
