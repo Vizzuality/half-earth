@@ -22,8 +22,6 @@ class CesiumMap extends Component {
         {React.Children.map(children, ch => {
           if (!ch) return null
           const id = layerId(ch)
-          // prevent remounting
-          if (this[id]) return null
 
           return ch.props.url
             ? cloneElement(ch, {

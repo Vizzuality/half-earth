@@ -21,11 +21,13 @@ const birds = new Array(10).fill(0)
 const Map = ({
   map,
   regional,
-  local,
+  global,
   zoomLevel,
   lockNavigation,
+  local,
   openPopUp,
-  className
+  className,
+  section
 }) => (
   <CesiumMap
     className={className}
@@ -33,24 +35,18 @@ const Map = ({
     zoomLevel={zoomLevel}
     rotate={zoomLevel === 'global'}
   >
-    {birds.map((bird, i) => (
-      <ModelProvider
-        key={`bird-${i}`}
-        url="/img/bird.gltf"
-        scale="150.0"
-        coordinates={displace(...birdPosition)}
-        animate
-        speed={1}
-      />
-    ))}
-    {map.layers.map(
-      layer =>
-        layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
-    )}
-    {regional.layers.map(
-      layer =>
-        layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
-    )}
+    {zoomLevel === 'regional' &&
+      regional.layers.map(
+        layer =>
+          layer.url ? (
+            <ImageProvider keep={layer.keep} key={layer.name} {...layer} />
+          ) : null
+      )}
+    {zoomLevel === 'global' &&
+      global.layers.map(
+        layer =>
+          layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
+      )}
     {zoomLevel === 'local' &&
       local.billboards.map(billboard => (
         <Billboard
@@ -62,6 +58,17 @@ const Map = ({
           height={123}
           onClick={id => openPopUp(id)}
           position={billboard.coordinates}
+        />
+      ))}
+    {zoomLevel === 'local' &&
+      birds.map((bird, i) => (
+        <ModelProvider
+          key={`bird-${i}`}
+          url="/img/bird.gltf"
+          scale="150.0"
+          coordinates={displace(...birdPosition)}
+          animate
+          speed={1}
         />
       ))}
   </CesiumMap>

@@ -2,10 +2,10 @@ import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
 import { renderDropdown, renderToggle } from 'components/explorable'
 import { requestCartos } from 'pages/map/map-utils'
-import { actions as mapActions } from 'pages/map'
-import { actions as sectionActions } from 'providers/section'
+import * as actions from './regional-actions'
 import { actions as cartoActions } from 'providers/carto'
-import { actions as selectorActions } from 'providers/selectors'
+import { actions as sectionActions } from 'providers/section'
+
 import reducers from './regional-reducers'
 import initialState from './regional-initial-state'
 import RegionalComponent from './regional-component'
@@ -13,9 +13,10 @@ import RegionalComponent from './regional-component'
 class RegionalConTainer extends Component {
   constructor (props) {
     super(props)
-    const { getCartoTiles, setSection } = props
+    const { getCartoTiles, setRegionalSection, setSection } = props
     const { layers } = props.regional
     requestCartos({ layers, getCartoTiles })
+    setRegionalSection('regional:1')
     setSection('regional:1')
   }
   render () {
@@ -23,10 +24,9 @@ class RegionalConTainer extends Component {
   }
 }
 
-const mapStateToProps = ({ map, regional, sidebar, section }) => {
+const mapStateToProps = ({ map, regional, section }) => {
   return {
     map,
-    sidebar,
     regional,
     section,
     renderToggle: renderToggle(regional.layers),
@@ -34,10 +34,9 @@ const mapStateToProps = ({ map, regional, sidebar, section }) => {
   }
 }
 
-export { reducers, initialState }
+export { reducers, initialState, actions }
 export default connect(mapStateToProps, {
-  ...mapActions,
-  ...sectionActions,
   ...cartoActions,
-  ...selectorActions
+  ...actions,
+  ...sectionActions
 })(RegionalConTainer)

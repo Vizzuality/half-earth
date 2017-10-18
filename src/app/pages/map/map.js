@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import MapComponent from './map-component'
 import initialState from './initial-state'
 import * as actions from './map-actions'
-import { requestCartos } from './map-utils'
+import * as utils from './map-utils'
 import { actions as cartoActions } from 'providers/carto'
-import { actions as popUpActions } from 'providers/pop-up'
+import { actions as popUpActions } from 'components/pop-up'
 import reducers from './map-reducers'
 
 class MapContainer extends Component {
@@ -13,7 +13,7 @@ class MapContainer extends Component {
     super(props)
     const { getCartoTiles } = props
     const { layers } = props.map
-    requestCartos({ layers, getCartoTiles })
+    utils.requestCartos({ layers, getCartoTiles })
   }
 
   render () {
@@ -21,11 +21,14 @@ class MapContainer extends Component {
   }
 }
 
-export { actions, reducers, initialState }
-const mapStateToProps = ({ map, regional, local, popUp }) => ({
+export { actions, reducers, initialState, utils }
+const mapStateToProps = ({ map, regional, local, popUp, global, section }) => ({
   map,
   regional,
-  local
+  local,
+  global,
+  popUp,
+  section
 })
 
 export default connect(mapStateToProps, {

@@ -1,17 +1,9 @@
 import React from 'react'
-import {
-  Radar,
-  RadarChart,
-  PolarGrid,
-  Legend,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  ResponsiveContainer
-} from 'recharts'
 
 import Scroller, { Element as P } from 'components/scroller'
 import Earthometer from 'components/earthometer'
 import NavFooter from 'components/nav-footer'
+import SpiderChart from 'components/spider-chart'
 
 import uiStyles from 'app/styles/ui'
 const earthProtected = 100
@@ -21,24 +13,29 @@ const Regional = ({
   regional: { sections, graphs },
   renderDropdown,
   renderToggle,
-  selectSelector,
-  toggleLayer,
-  sidebar,
   setSection,
+  setRegionalSection,
+  toggleRegionalLayer,
+  sidebar,
+  selectRegionalSelector,
   section,
   ...props
 }) => {
-  const t = renderToggle(toggleLayer)
-  const d = renderDropdown(selectSelector)
-
+  const t = renderToggle(toggleRegionalLayer)
+  const d = renderDropdown(selectRegionalSelector)
   const KBAs = 80
+  const updateSections = s => {
+    setRegionalSection(s)
+    setSection(s)
+  }
+
   return (
     <div className={classname}>
       <Scroller>
         <Earthometer displayOnly />
         <P
           className={uiStyles.slides}
-          onScrollFocus={() => setSection('regional:1')}
+          onScrollFocus={() => updateSections('regional:1')}
         >
           Soaring high up upon the air thermals, white storks glide alongside
           millions of other birds that make the journey between Europe, Africa
@@ -49,43 +46,11 @@ const Regional = ({
           regions on Earth and is characterised by its evergreen shrublands and
           low fynbos, thicket, and forest and woodlands, and is home to a large
           number of {d('regional:1', 'birds')} species.
-          <ResponsiveContainer width="100%" height={400}>
-            <RadarChart data={graphs} className={uiStyles.radarChart}>
-              <Radar
-                name="Total Species in the Region"
-                dataKey="Regional"
-                stroke="#0664f6"
-                fill="#0664f6"
-                fillOpacity={0.2}
-              />
-              <Radar
-                name="Total Species Globally"
-                dataKey="Global"
-                stroke="#8366e4"
-                fill="#8366e4"
-                fillOpacity={0.2}
-              />
-              <PolarGrid
-                gridType="circle"
-                stroke="#2b4d68"
-                stroke-dasharray="15"
-              />
-              <Legend />
-              <PolarRadiusAxis
-                angle={0}
-                domain={['auto', 'auto']}
-                tick={false}
-                tickCount={5}
-                stroke="#2b4d68"
-                strokeDasharray="15"
-              />
-              <PolarAngleAxis dataKey="subject" fill="#fff" />
-            </RadarChart>
-          </ResponsiveContainer>
+          <SpiderChart data={graphs} />
         </P>
         <P
           className={uiStyles.slides}
-          onScrollFocus={() => setSection('regional:2')}
+          onScrollFocus={() => updateSections('regional:2')}
         >
           <p>
             Human activities such as {t('road building')} and{' '}
@@ -103,17 +68,18 @@ const Regional = ({
         </P>
         <P
           className={uiStyles.slides}
-          onScrollFocus={() => setSection('regional:3')}
+          onScrollFocus={() => updateSections('regional:3')}
         >
           In this region, {earthProtected} percent of the area is covered by
           designated {t('Protected Areas')}, encompassing an area of 132,885
-          km2. A few of these {t('existing reserves')} are characterised by the
-          exceptional endemism and the megafauna that they support. Other
+          km2. A few of these {t('existing reserves', true)} are characterised
+          by the exceptional endemism and the megafauna that they support. Other
           conservation approaches are also present in this area, including{' '}
-          {t('Community-based reserves')}, {t('Private reserves')} and
-          Indigenous and Community Conserved Areas (ICCAs). Similarly, several
-          sites have been proposed as biodiversity {t('corridors')} to support
-          habitat connectivity, and {KBAs} {t('Key Biodiversity Areas')}
+          {t('Community-based reserves', true)}, {t('Private reserves', true)}{' '}
+          and Indigenous and Community Conserved Areas (ICCAs). Similarly,
+          several sites have been proposed as biodiversity{' '}
+          {t('corridors', true)} to support habitat connectivity, and {KBAs}{' '}
+          {t('Key Biodiversity Areas')}
           sites have been identified due to their importance for conserving
           threatened and geographically restricted biodiversity.
         </P>

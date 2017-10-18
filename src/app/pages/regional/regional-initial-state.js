@@ -1,33 +1,7 @@
 import { cartoConfig } from 'app/utils'
+import { utils } from 'pages/map'
 
-const MAPBOX_TOKEN =
-  'pk.eyJ1IjoiamNoYWxmZWFydGgiLCJhIjoiY2o4Mnh4aDN6MGNqazMzc2FkeTlnajBoeiJ9.5Su3_JeAsjM0slTkaGFihw'
-
-const MOLLayer = (name, species, type) => ({
-  name,
-  url: `https://cdn.mol.org/half-earth/tiles/${type}/${species}/{z}/{x}/{y}`,
-  type: 'UrlTemplate',
-  visible: false
-})
-
-const speciesSelector = selected => ({
-  options: {
-    birds: 'Birds',
-    mammals: 'Mammals',
-    amphibians: 'Amphibians',
-    protea: 'Protea',
-    restio: 'Restio'
-  },
-  selected
-})
-
-const speciesSelections = type => ({
-  birds: `birds:${type}`,
-  mammals: `mammals:${type}`,
-  amphibians: `amphibians:${type}`,
-  protea: `protea:${type}`,
-  restio: `restio:${type}`
-})
+const { MAPBOX_TOKEN, MOLLayer, speciesSelector, speciesSelections } = utils
 
 export default {
   graphs: [
@@ -43,12 +17,14 @@ export default {
     {
       name: 'basemap',
       type: 'UrlTemplate',
+      keep: true,
       url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
       visible: false
     },
     {
       name: 'dark:basemap',
       type: 'UrlTemplate',
+      keep: true,
       url: `https://api.mapbox.com/styles/v1/jchalfearth/cj82yobfla1uq2ss6vlwaidgy/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
       visible: false
     },
@@ -89,12 +65,12 @@ export default {
       carto: cartoConfig(
         'simbiotica',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0.9;
+          polygon-fill: #38c0b4;
+          polygon-opacity: 0.7;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #FFFFFF;
+          line-color: #38c0b4;
           line-opacity: 0.5;
         }`,
         'kba_poly_2016_id'
@@ -108,8 +84,9 @@ export default {
       carto: cartoConfig(
         'simbiotica',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0;
+          line-width: 1.5;
+          line-color: #e85353;
+          line-opacity: 1;
         }
         #layer::outline {
           line-width: 1;
@@ -184,13 +161,13 @@ export default {
       carto: cartoConfig(
         'half-earth',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0;
+          polygon-fill: #f38828;
+          polygon-opacity: 0.7;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #000000;
-          line-opacity: 0.5;
+          line-color: #f38828;
+          line-opacity: 1;
         }`,
         'private_nature_reserve'
       ),
@@ -203,13 +180,13 @@ export default {
       carto: cartoConfig(
         'simbiotica',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0;
+          polygon-fill: #f32874;
+          polygon-opacity: 0.7;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #000000;
-          line-opacity: 0.5;
+          line-color: #f32874;
+          line-opacity: 1;
         }`,
         'wdpa_protected_areas'
       ),
@@ -228,21 +205,73 @@ export default {
   ],
   sections: {
     'regional:1': {
-      layers: ['basemap'],
+      layers: [],
       selections: speciesSelections('richness'),
       selectors: {
         birds: speciesSelector('birds')
       }
     },
     'regional:2': {
-      layers: ['basemap'],
+      layers: [],
       selections: speciesSelections('pressures'),
       selectors: {
         anthropogenic: speciesSelector('birds')
       }
     },
     'regional:3': {
-      layers: ['basemap']
+      layers: []
+    }
+  },
+  legend: {
+    'key-biodiversity-areas': {
+      type: 'simple',
+      label: 'Key Biodiversity Areas',
+      color: 'green'
+    },
+    'road-building': {
+      type: 'simple',
+      label: 'Roads',
+      color: 'red'
+    },
+    'private-reserves': {
+      type: 'simple',
+      label: 'Private Reserves',
+      color: 'orange'
+    },
+    'urban-development': {
+      type: 'simple',
+      label: 'Urban Development',
+      color: 'brown'
+    },
+    'protected-areas': {
+      type: 'simple',
+      label: 'Protected Areas',
+      color: 'pink'
+    },
+    mammals: {
+      type: 'gradient',
+      label: 'Mammals',
+      color: 'purple'
+    },
+    birds: {
+      type: 'gradient',
+      label: 'Birds',
+      color: 'aqua'
+    },
+    amphibians: {
+      type: 'gradient',
+      label: 'Amphibians',
+      color: 'green'
+    },
+    restio: {
+      type: 'gradient',
+      label: 'Restio',
+      color: 'orange'
+    },
+    protea: {
+      type: 'gradient',
+      label: 'Protea',
+      color: 'red'
     }
   }
 }

@@ -2,6 +2,10 @@ import { Component } from 'react'
 const { Cesium } = window
 
 class ModelProvider extends Component {
+  componentWillUnmount () {
+    const { viewer } = this.props
+    viewer.scene.primitives.remove(this.model)
+  }
   componentWillReceiveProps ({
     viewer,
     url,

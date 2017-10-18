@@ -1,6 +1,4 @@
 import React, { cloneElement, Children } from 'react'
-import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
 import cx from 'classnames'
 
 import Header from 'components/header'
@@ -8,12 +6,11 @@ import Map from 'pages/map'
 import Home from 'pages/home'
 import Intro from 'pages/intro'
 import Sidebar from 'components/sidebar'
+import Legend, { LegendLayers } from 'components/legend'
 
 import styles from './layout-styles.scss'
-const scope = path => path.replace('/', '') || 'home'
 
-const Layout = ({ children, location, sidebar, ...props }) => {
-  const route = scope(location.pathname)
+const Layout = ({ children, location, route, layers }) => {
   const isHome = route === 'home'
   const isIntro = route === 'intro'
 
@@ -36,11 +33,14 @@ const Layout = ({ children, location, sidebar, ...props }) => {
         {isHome && <Home />}
         {isIntro && <Intro />}
         <Map className={cx(styles.col, styles.map)} zoomLevel={route} />
+        {layers && (
+          <Legend>
+            <LegendLayers layers={layers} />
+          </Legend>
+        )}
       </div>
     </div>
   )
 }
 
-const mapStateToProps = state => state
-
-export default withRouter(connect(mapStateToProps)(Layout))
+export default Layout
