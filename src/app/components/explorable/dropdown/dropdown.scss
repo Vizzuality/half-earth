@@ -14,20 +14,6 @@
   width: 100%;
   z-index: $zforeground;
 
-  &::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 6px solid $color-turquoise;
-    position: relative;
-    left: 50%;
-    transform: translate(0, -50%);
-    top: 5px;
-  }
-
   .closeButton {
     position: absolute;
     bottom: 0;
@@ -42,6 +28,19 @@
 
     &:hover {
       background: linear-gradient(to bottom, $color-navy-blue, $color-mid-blue);
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid $color-turquoise;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 }
