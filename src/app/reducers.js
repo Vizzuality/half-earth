@@ -49,6 +49,7 @@ import {
 } from 'pages/global'
 
 import {
+  actions as localActions,
   reducers as localReducers,
   initialState as localState
 } from 'pages/local'
@@ -68,7 +69,8 @@ const allActions = {
   ...selectorActions,
   ...regionalActions,
   ...globalActions,
-  ...popUpActions
+  ...popUpActions,
+  ...localActions
 }
 
 export default combineReducers({
