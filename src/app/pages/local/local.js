@@ -1,9 +1,6 @@
 import { connect } from 'react-redux'
 
 import LocalComponent from './local-component'
-import * as actions from './local-actions'
-import { actions as mapActions } from 'pages/map'
-import { actions as sectionActions } from 'providers/section'
 import { actions as popUpActions } from 'components/pop-up'
 import reducers from './local-reducers'
 import initialState from './initial-state'
@@ -15,9 +12,7 @@ const mapStateToProps = ({ map, local, sidebar }) => ({
   renderToggle: renderToggle(map.layers)
 })
 
-export { actions, reducers, initialState }
+export { reducers, initialState }
 export default connect(mapStateToProps, {
-  ...mapActions,
-  ...sectionActions,
   ...popUpActions
 })(LocalComponent)
