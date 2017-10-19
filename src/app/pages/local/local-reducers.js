@@ -1,5 +1,4 @@
 import { actions as popUpActions } from 'components/pop-up'
-import { actions as mapActions, reducers as mapReducers } from 'pages/map'
 
 export default {
   [popUpActions.openPopUp]: (state, { payload }) => ({
@@ -13,6 +12,5 @@ export default {
   [popUpActions.closePopUp]: (state, { payload }) => ({
     ...state,
     popUp: { ...state.popUp, open: false, selected: null }
-  }),
-  [mapActions.resetLayers]: (state, payload) => mapReducers.resetLayers
+  })
 }
