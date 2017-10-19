@@ -27,6 +27,11 @@ $lineColor: #2b4d68;
   align-items: center;
   padding: 0 50px;
   height: 100%;
+  flex-direction: row;
+
+  @media screen and (min-width: 1325px) {
+    flex-direction: row;
+  }
 }
 
 .container {
@@ -87,4 +92,24 @@ $lineColor: #2b4d68;
 
 .slider {
   width: 240px;
+}
+
+.labelToColumn {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  @media screen and (min-width: 1200px) {
+    flex-direction: row;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.linePercentage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

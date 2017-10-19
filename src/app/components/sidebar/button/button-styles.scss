@@ -5,7 +5,7 @@
 .container {
   cursor: pointer;
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 0;
   width: 50px;
   height: 84px;
@@ -13,6 +13,10 @@
   align-items: center;
   justify-content: center;
   z-index: $zforeground * 3;
+
+  @media screen and (min-width: 1200px) {
+    top: 0;
+  }
 
   .arrow {
     @extend %bg-image;

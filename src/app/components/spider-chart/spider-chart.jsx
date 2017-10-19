@@ -13,7 +13,11 @@ import uiStyles from 'app/styles/ui'
 
 const SpiderChart = ({ data }) => (
   <ResponsiveContainer width="100%" height={400}>
-    <RadarChart data={data} className={uiStyles.radarChart}>
+    <RadarChart
+      data={data}
+      className={uiStyles.radarChart}
+      margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+    >
       <Radar
         name="Total Species in the Region"
         dataKey="Total"
