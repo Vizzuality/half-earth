@@ -94,12 +94,26 @@ $pad: 6rem;
   z-index: $zforeground + 1;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 0 $site-padding;
 
+  @media screen and (min-width: 1180px) {
+    justify-content: space-between;
+  }
+
   .containImages {
-    display: flex;
+    display: none;
     align-items: center;
+
+    @media screen and (min-width: 1180px) {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+    }
 
     img {
       max-width: 90px;
@@ -119,6 +133,7 @@ $pad: 6rem;
     color: $color-white;
     text-transform: uppercase;
     cursor: pointer;
+    line-height: 0;
   }
 }
 
@@ -142,12 +157,24 @@ $pad: 6rem;
     text-align: center;
     color: $color-white;
     text-shadow: 0 0 34px rgba(0, 0, 0, 0.3);
-    padding-top: 100px;
   }
 
   .containImages {
     display: flex;
     flex-flow: row wrap;
+    margin-bottom: 100px;
+
+    &:first-of-type {
+      padding-top: 100px;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+      border-bottom: 1px solid rgba($color-white, 0.5);
+
+      @media screen and (min-width: 1180px) {
+        display: none;
+      }
+    }
   }
 
   .imageContainer {
