@@ -96,7 +96,7 @@ const LineChart = props => (
             Cumulative{' '}
           </tspan>{' '}
           <tspan x=".5" y="58">
-            extintions % of IUCN
+            extinctions % of IUCN
           </tspan>
         </text>
         <path
