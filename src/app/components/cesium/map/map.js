@@ -66,6 +66,17 @@ class CesiumComponent extends Component {
       this.onMouseMove,
       Cesium.ScreenSpaceEventType.MOUSE_MOVE
     )
+
+    // var scene = viewer.scene
+    // var sglobe = scene.globe
+    // sglobe.depthTestAgainstTerrain = true
+    // var vrTheWorldProvider = new Cesium.VRTheWorldTerrainProvider({
+    //   url: '//www.vr-theworld.com/vr-theworld/tiles1.0.0/73/',
+    //   credit: 'Terrain data courtesy VT MÄK'
+    // })
+
+    // viewer.terrainProvider = vrTheWorldProvider
+
     this.state.viewer = viewer
     return viewer
   }
