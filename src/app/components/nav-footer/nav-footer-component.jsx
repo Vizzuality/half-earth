@@ -32,6 +32,13 @@ const NavFooter = ({
             alt="national geographic"
           />
         </a>
+        <a href="http://www.vizzuality.com/" target="_blank">
+          <img
+            width="100%"
+            src="/img/partners/logo_vizz.png"
+            alt="vizzuality"
+          />
+        </a>
       </div>
       <span className={styles.linkPartner} onClick={() => openPopUpNavFooter()}>
         Partners
