@@ -14,9 +14,10 @@ class Global extends Component {
       toggleGlobalLayer,
       renderToggle,
       className,
-      global,
+      protectedAnimalsSpider,
       setSection,
       setGlobalSection,
+      whereToProtectSpider,
       section
     } = this.props
     const updateSections = s => {
@@ -54,7 +55,7 @@ class Global extends Component {
             haven’t been discovered or formally identified, but they are an
             integral part of the network of life and are vulnerable to the same
             threats as the species we have records for.
-            <SpiderChart data={global.graphs} />
+            <SpiderChart {...protectedAnimalsSpider} />
           </P>
           <P
             className={cx(uiStyles.slides, uiStyles.paragraphAfterChart)}
@@ -76,7 +77,7 @@ class Global extends Component {
             The rapid growth in available data on terrestrial species and
             ecosystems has made it possible to identify where to expand the
             protected areas network globally.
-            <SpiderChart data={global.graphs} />
+            <SpiderChart {...whereToProtectSpider} />
           </P>
           <P
             className={uiStyles.slides}

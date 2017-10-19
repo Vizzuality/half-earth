@@ -19,9 +19,10 @@ class GlobalContainer extends Component {
       getCartoTiles,
       setGlobalSection,
       setSection,
+      layers,
       getWhereToProtectSpiderData
     } = props
-    requestCartos({ layers: props.global.layers, getCartoTiles })
+    requestCartos({ layers, getCartoTiles })
     setGlobalSection('global:1')
     setSection('global:1')
     getWhereToProtectSpiderData()
@@ -35,13 +36,35 @@ const mapStateToProps = ({
   map,
   global,
   section,
+  earthSaved,
   getWhereToProtectSpiderData
 }) => {
+  const index = Math.round(earthSaved.value)
+  const whereToProtectScenario = global.whereToProtect.data[index] || []
+  const whereToProtectSpider = {
+    dimensions: [
+      {
+        key: 'percentSpeciesMeetingTargetProtectedAreaViaAny'
+      },
+      {
+        key: 'percentProtectedCurrently',
+        style: {
+          fill: '8366e4',
+          stroke: '#8366e4',
+          fillOpacity: 0.18
+        }
+      }
+    ],
+    data: whereToProtectScenario
+  }
+
   return {
     map,
-    global,
+    whereToProtectSpider,
     getWhereToProtectSpiderData,
+    layers: global.layers,
     section: section.section,
+    protectedAnimalsSpider: global.protectedAnimals,
     renderToggle: renderToggle(global.layers),
     renderDropdown: renderDropdown(global.sections)
   }
