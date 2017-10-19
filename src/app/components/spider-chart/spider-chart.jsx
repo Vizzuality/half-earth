@@ -6,7 +6,8 @@ import {
   PolarGrid,
   PolarAngleAxis,
   PolarRadiusAxis,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Tooltip
 } from 'recharts'
 
 import uiStyles from 'app/styles/ui'
@@ -15,7 +16,7 @@ const SpiderChart = ({ data }) => (
   <ResponsiveContainer width="100%" height={400}>
     <RadarChart data={data} className={uiStyles.radarChart}>
       <Radar
-        name="Total Species in the Region"
+        name="Total Percentages"
         dataKey="Total"
         stroke="#0664f6"
         fill="#0664f6"
@@ -31,6 +32,14 @@ const SpiderChart = ({ data }) => (
         strokeDasharray="15"
       />
       <PolarAngleAxis dataKey="subject" fill="#fff" />
+      <Tooltip
+        wrapperStyle={{ backgroundColor: '#1b364c', border: 0 }}
+        labelStyle={{ padding: '0', fontSize: 12 }}
+        itemStyle={{ color: '#fff', padding: '0', fontSize: 12 }}
+        formatter={val => `${val}%`}
+        cursor={false}
+        isAnimationActive={false}
+      />
     </RadarChart>
   </ResponsiveContainer>
 )

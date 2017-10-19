@@ -55,6 +55,11 @@ class Global extends Component {
             integral part of the network of life and are vulnerable to the same
             threats as the species we have records for.
             <SpiderChart data={global.graphs} />
+            <div className={uiStyles.spiderLegendContainer}>
+              <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
+                Percent of species adequately protected
+              </span>
+            </div>
           </P>
           <P
             className={cx(uiStyles.slides, uiStyles.paragraphAfterChart)}
