@@ -3,7 +3,38 @@ import styles from './nav-footer-styles.scss'
 
 const ModalContent = props => (
   <div className={styles.footerModal}>
-    <div className={styles.containt}>
+    <div className={styles.contain}>
+      <div className={styles.containImages}>
+        <a
+          className={styles.imageContainer}
+          href="https://mol.org/"
+          target="_blank"
+        >
+          <img width="100%" src="/img/partners/mol_logo.png" alt="mol" />
+        </a>
+        <a
+          className={styles.imageContainer}
+          href="https://www.nationalgeographic.com/"
+          target="_blank"
+        >
+          <img
+            width="100%"
+            src="/img/partners/nat_geo_logo.png"
+            alt="national geographic"
+          />
+        </a>
+        <a
+          className={styles.imageContainer}
+          href="http://www.vizzuality.com/"
+          target="_blank"
+        >
+          <img
+            width="100%"
+            src="/img/partners/logo_vizz.png"
+            alt="vizzuality"
+          />
+        </a>
+      </div>
       <h1>Data Partners</h1>
       <div className={styles.containImages}>
         <a
