@@ -88,5 +88,10 @@ export default {
     const otherLayersHidden = otherLayers.map(makeHidden)
     const updatedLayers = matchingVisibleLayers.concat(otherLayersHidden)
     return { ...state, layers: updatedLayers }
-  }
+  },
+
+  [actions.setWhereToProtectData]: (state, { payload }) => ({
+    ...state,
+    whereToProtect: { ...state.whereToProtect, data: payload }
+  })
 }
