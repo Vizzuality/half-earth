@@ -77,6 +77,14 @@ class Global extends Component {
             ecosystems has made it possible to identify where to expand the
             protected areas network globally.
             <SpiderChart data={global.graphs} />
+            <div className={uiStyles.spiderLegendContainer}>
+              <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
+                Percent of species protected (currently)
+              </span>
+              <span className={cx(uiStyles.legend, uiStyles.legendPurple)}>
+                Percent of species protected by extending the PA network
+              </span>
+            </div>
           </P>
           <P
             className={uiStyles.slides}
