@@ -10,14 +10,35 @@ const sliderLayers = steps => {
 }
 
 export default {
-  graphs: [
-    { subject: 'BIRDS', Total: 80, fullMark: 150 },
-    { subject: 'MAMMALS', Total: 69, fullMark: 150 },
-    { subject: 'AMPHIBIANS', Total: 36, fullMark: 150 },
-    { subject: 'CACTI', Total: 34, fullMark: 150 },
-    { subject: 'TURTLES', Total: 67, fullMark: 150 },
-    { subject: 'CONIFERS', Total: 63, fullMark: 150 }
-  ],
+  whereToProtect: {
+    url:
+      'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa.json',
+    dimensions: [
+      {
+        key: 'percentSpeciesMeetingTargetProtectedAreaViaAny',
+        style: {
+          fill: '#8366e4',
+          stroke: '#8366e4',
+          fillOpacity: 0.18
+        }
+      },
+      {
+        key: 'percentProtectedCurrently'
+      }
+    ],
+    data: []
+  },
+  protectedAnimals: {
+    dimensions: [{ key: 'total' }],
+    data: [
+      { subject: 'BIRDS', total: 80, fullMark: 150 },
+      { subject: 'MAMMALS', total: 69, fullMark: 150 },
+      { subject: 'AMPHIBIANS', total: 36, fullMark: 150 },
+      { subject: 'CACTI', total: 34, fullMark: 150 },
+      { subject: 'TURTLES', total: 67, fullMark: 150 },
+      { subject: 'CONIFERS', total: 63, fullMark: 150 }
+    ]
+  },
   layers: [
     ...sliderLayers([20, 25, 30, 35, 40, 45, 50]),
     MOLLayer('all-taxa', 'all-taxa', 'richness'),

@@ -46,7 +46,7 @@ const Regional = ({
           regions on Earth and is characterised by its evergreen shrublands and
           low fynbos, thicket, and forest and woodlands, and is home to a large
           number of {d('regional:1', 'birds')} species.
-          <SpiderChart data={graphs} />
+          <SpiderChart {...graphs} />
         </P>
         <P
           className={cx(uiStyles.slides, uiStyles.paragraphAfterChart)}
