@@ -10,6 +10,11 @@ const sliderLayers = steps => {
 }
 
 export default {
+  whereToProtect: {
+    url:
+      'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa.json',
+    data: null
+  },
   graphs: [
     { subject: 'BIRDS', Total: 80, fullMark: 150 },
     { subject: 'MAMMALS', Total: 69, fullMark: 150 },
