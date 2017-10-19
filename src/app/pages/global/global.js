@@ -44,15 +44,15 @@ const mapStateToProps = ({
   const whereToProtectSpider = {
     dimensions: [
       {
-        key: 'percentSpeciesMeetingTargetProtectedAreaViaAny'
-      },
-      {
-        key: 'percentProtectedCurrently',
+        key: 'percentSpeciesMeetingTargetProtectedAreaViaAny',
         style: {
-          fill: '8366e4',
+          fill: '#8366e4',
           stroke: '#8366e4',
           fillOpacity: 0.18
         }
+      },
+      {
+        key: 'percentProtectedCurrently'
       }
     ],
     data: whereToProtectScenario

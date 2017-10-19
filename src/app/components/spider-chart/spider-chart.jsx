@@ -12,7 +12,7 @@ import {
 import uiStyles from 'app/styles/ui'
 
 const SpiderChart = ({ data, dimensions }) => {
-  const defaultStyle = { stroke: '#0664f6', fill: '#0664f6', fillOpacity: 0.2 }
+  const defaultStyle = { stroke: '#0664f6', fill: '#0664f6', fillOpacity: 0.18 }
   const styles = d => ({ ...defaultStyle, ...d.style })
   return (
     <ResponsiveContainer width="100%" height={400}>
