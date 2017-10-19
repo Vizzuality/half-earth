@@ -8,7 +8,8 @@ $pad: 6rem;
   position: relative;
   display: block;
   width: calc(70vw + 30px);
-  max-width: 600px;
+  max-width: $max-width;
+  min-width: $min-width;
   transition: width 0.25s ease-in-out;
 
   .content {
