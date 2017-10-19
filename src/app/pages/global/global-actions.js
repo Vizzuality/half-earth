@@ -11,17 +11,20 @@ export const setWhereToProtectData = createAction('setWhereToProtectData')
 export const getWhereToProtectSpiderData = createThunkAction(
   'getWhereToProtectSpiderData',
   () => (dispatch, state) => {
+    const classifyScenarios = data =>
+      data.reduce((acc, next) => {
+        const scenarios = acc[next.taxa] || []
+        const index = next.scenario
+        if (!scenarios[index - 1]) scenarios[index - 1] = {}
+        scenarios[index] = next
+
+        return { ...acc, [next.taxa]: scenarios }
+      }, {})
+
     const { whereToProtect: { url } } = state().global
     return fetch(url)
       .then(res => res.json())
-      .then(data =>
-        data.reduce((acc, next) => {
-          const scenarios = acc[next.taxa] || []
-          return { ...acc, [next.taxa]: [...scenarios, next] }
-        }, {})
-      )
-      .then(data => {
-        dispatch(setWhereToProtectData(data))
-      })
+      .then(classifyScenarios)
+      .then(data => dispatch(setWhereToProtectData(data)))
   }
 )
