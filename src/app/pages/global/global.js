@@ -40,22 +40,9 @@ const mapStateToProps = ({
   getWhereToProtectSpiderData
 }) => {
   const index = Math.round(earthSaved.value)
-  const whereToProtectScenario = global.whereToProtect.data[index] || []
   const whereToProtectSpider = {
-    dimensions: [
-      {
-        key: 'percentSpeciesMeetingTargetProtectedAreaViaAny',
-        style: {
-          fill: '#8366e4',
-          stroke: '#8366e4',
-          fillOpacity: 0.18
-        }
-      },
-      {
-        key: 'percentProtectedCurrently'
-      }
-    ],
-    data: whereToProtectScenario
+    dimensions: global.whereToProtect.dimensions,
+    data: global.whereToProtect.data[index] || []
   }
 
   return {

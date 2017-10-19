@@ -13,6 +13,19 @@ export default {
   whereToProtect: {
     url:
       'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa.json',
+    dimensions: [
+      {
+        key: 'percentSpeciesMeetingTargetProtectedAreaViaAny',
+        style: {
+          fill: '#8366e4',
+          stroke: '#8366e4',
+          fillOpacity: 0.18
+        }
+      },
+      {
+        key: 'percentProtectedCurrently'
+      }
+    ],
     data: []
   },
   protectedAnimals: {
