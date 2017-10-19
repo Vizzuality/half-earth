@@ -13,7 +13,10 @@ const Home = props => (
         If we conserve half, we can protect 85% or more of species, including
         ourselves.
       </p>
-      <p className={styles.separator}>Which half?</p>
+      <div className={styles.titleSection}>
+        <img src="/img/home/iconPlanet.png" />
+        <p className={styles.separator}>Which half?</p>
+      </div>
       <p className={styles.body}>
         By mapping data at the local, regional, and global scale, we’re
         identifying the places that contain the greatest diversity of life and

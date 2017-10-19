@@ -5,7 +5,6 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: calc(100vh - #{$header-height});
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: $zforeground;
@@ -13,6 +12,5 @@
 
   > video {
     width: 100vw;
-    height: calc(100vh - #{$header-height});
   }
 }

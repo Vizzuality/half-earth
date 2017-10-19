@@ -4,14 +4,17 @@ import { utils } from 'pages/map'
 const { MAPBOX_TOKEN, MOLLayer, speciesSelector, speciesSelections } = utils
 
 export default {
-  graphs: [
-    { subject: 'BIRDS', Total: 96, fullMark: 150 },
-    { subject: 'MAMMALS', Total: 88, fullMark: 150 },
-    { subject: 'AMPHIBIANS', Total: 56, fullMark: 150 },
-    { subject: 'CACTI', Total: 100, fullMark: 150 },
-    { subject: 'TURTLES', Total: 81, fullMark: 150 },
-    { subject: 'CONIFERS', Total: 71, fullMark: 150 }
-  ],
+  graphs: {
+    data: [
+      { subject: 'BIRDS', total: 96, fullMark: 150 },
+      { subject: 'MAMMALS', total: 88, fullMark: 150 },
+      { subject: 'AMPHIBIANS', total: 56, fullMark: 150 },
+      { subject: 'CACTI', total: 100, fullMark: 150 },
+      { subject: 'TURTLES', total: 81, fullMark: 150 },
+      { subject: 'CONIFERS', total: 71, fullMark: 150 }
+    ],
+    dimensions: [{ key: 'total' }]
+  },
 
   layers: [
     {
