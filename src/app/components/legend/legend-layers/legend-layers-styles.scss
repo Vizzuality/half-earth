@@ -1,4 +1,5 @@
 @import '~styles/variables.scss';
+$backCircle: #18bab4;
 
 .legendLayers {
   color: $color-white;
@@ -61,7 +62,6 @@
     align-items: flex-end;
     flex-shrink: 0;
     padding-bottom: 15px;
-    color: transparent;
 
     &:only-of-type {
       padding-bottom: 0;
@@ -73,17 +73,20 @@
 
     .gradient {
       display: flex;
-      flex-direction: column;
       text-transform: uppercase;
       color: $color-white;
       font-size: 1rem;
       font-weight: 500;
       letter-spacing: 3.3px;
       text-align: right;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
 
       &Boxes {
         display: flex;
         padding-top: 10px;
+        margin-bottom: 10px;
 
         @mixin gradient($colors) {
           @for $i from 1 through length($colors) {
@@ -94,8 +97,10 @@
         }
 
         span {
-          width: 23px;
-          height: 18px;
+          min-width: 15px;
+          min-height: 10px;
+          max-height: 10px;
+          max-width: 15px;
           position: relative;
 
           &:first-child {
@@ -154,4 +159,100 @@
       }
     }
   }
+}
+
+.legendModal {
+  cursor: pointer;
+  position: absolute;
+  text-align: right;
+  margin-bottom: 10px;
+  color: $color-black;
+  z-index: $zforeground;
+  width: 16px;
+  height: 16px;
+  background-color: $backCircle;
+  border-radius: 16px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  span {
+    font-size: 12px;
+    font-weight: 800px;
+  }
+}
+
+.legendPopUp {
+  background-color: $color-mid-blue;
+  width: 100%;
+  height: 100%;
+  padding: 120px 0;
+  overflow-y: scroll;
+  margin-bottom: 50px;
+  position: relative;
+
+  .containInfo {
+    margin-bottom: 60px;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      height: 1px;
+      position: absolute;
+      width: 60%;
+      background-color: rgba($color-white, 0.2);
+      margin: 0 auto;
+      bottom: -30px;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    h2,
+    h3 {
+      margin: 0 auto;
+      color: $color-white;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 2.73;
+      letter-spacing: 11px;
+      text-align: center;
+      text-shadow: 0 0 34px rgba($color-black, 0.3);
+      text-transform: uppercase;
+    }
+
+    h3 {
+      max-width: 955px;
+      text-transform: none;
+      margin: 50px auto;
+    }
+
+    p {
+      max-width: 955px;
+      margin: 0 auto;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 2.63;
+      letter-spacing: 0.8px;
+      color: $color-white;
+      text-align: center;
+    }
+  }
+}
+
+.simpleLegendTopBig {
+  margin-top: 30px;
+}
+
+.labelContain {
+  align-items: baseline;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-right: 20px;
+}
+
+.bioText {
+  margin-bottom: 10px;
 }
