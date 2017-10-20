@@ -1,5 +1,6 @@
 import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
+import isEqual from 'lodash/isEqual'
 
 import { assign } from 'utils'
 import CesiumMapComponent from './map-component'
@@ -100,8 +101,9 @@ class CesiumComponent extends Component {
   handleZoom (zoom) {
     const { state: { viewer } } = this
     const [zLevel, opts, cameraProps] = zoom
-    if (zLevel) {
+    if (zLevel && !isEqual(zoom, this.zLevel)) {
       this.flyTo(...zLevel, opts)
+      this.zLevel = zoom
     }
 
     if (viewer && cameraProps) {
