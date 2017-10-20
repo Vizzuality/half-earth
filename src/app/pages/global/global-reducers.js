@@ -51,8 +51,10 @@ export default {
     const { layers } = state
     const scenarioLayers = filter(layers, l => includes(l.name, 'pa-scenario'))
     const restLayers = difference(layers, scenarioLayers)
-    const visibleScenarioLayers = map(scenarioLayers, l => {
-      if (value >= layerToNum(l)) {
+    const visibleScenarioLayers = map(scenarioLayers, (l, i) => {
+      const nextLayer = scenarioLayers[i + 1]
+      const notInNextLayer = nextLayer ? value < layerToNum(nextLayer) : true
+      if (value >= layerToNum(l) && notInNextLayer) {
         l.visible = true
       } else {
         l.visible = false
