@@ -55,6 +55,7 @@ $pad: 6rem;
   }
 
   &Closed {
+    min-width: 0;
     width: calc(#{$arrow-padding * 2} + #{$arrow-width});
   }
 }
