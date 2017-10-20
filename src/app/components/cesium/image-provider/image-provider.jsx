@@ -37,6 +37,7 @@ class ImageProvider extends Component {
         const provider = new Cesium[`${type}ImageryProvider`](
           formatParams(type, props)
         )
+        provider.errorEvent.addEventListener(e => false)
         this.layer = cLayers.addImageryProvider(provider)
       }
       this.keep = keep
