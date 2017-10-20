@@ -10,10 +10,10 @@ import Legend, { LegendLayers } from 'components/legend'
 
 import styles from './layout-styles.scss'
 
-const Layout = ({ children, location, route, layers }) => {
+const Layout = ({ children, location, route, layers, section }) => {
   const isHome = route === 'home'
   const isIntro = route === 'intro'
-
+  const zoomLevel = `${route}|${section.section}`
   return (
     <div className={styles.container}>
       <Header className={styles.header} />
@@ -32,7 +32,7 @@ const Layout = ({ children, location, route, layers }) => {
         )}
         {isHome && <Home />}
         {isIntro && <Intro />}
-        <Map className={cx(styles.col, styles.map)} zoomLevel={route} />
+        <Map className={cx(styles.col, styles.map)} zoomLevel={zoomLevel} />
         {layers && (
           <Legend>
             <LegendLayers layers={layers} />
