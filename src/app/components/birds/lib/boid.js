@@ -2,17 +2,17 @@
 import Vector from './vector'
 
 class Boid {
-  constructor (x, y, r, maxspeed, maxforce, target, targetRate, opts) {
+  constructor (x, y, r, opts) {
     this.acceleration = new Vector(0, 0)
     // const angle = Math.random(TWO_PI)
     // this.velocity = new Vector(Math.cos(angle), Math.sin(angle))
     this.velocity = Vector.random2D()
     this.position = new Vector(x, y)
     this.r = r
-    this.maxspeed = maxspeed // Maximum speed
-    this.maxforce = maxforce // Maximum steering force
-    this.target = new Vector(...target)
-    this.targetRate = targetRate
+    this.maxspeed = opts.maxspeed // Maximum speed
+    this.maxforce = opts.maxforce // Maximum steering force
+    this.target = new Vector(...opts.target)
+    this.targetRate = opts.targetRate
     this.opts = opts
   }
 

@@ -1,5 +1,5 @@
 export const assign = (o, ...rest) => Object.assign({}, o, ...rest)
-
+export const ns = (s, sep = '|') => s.split(sep)
 // quick helper, can be further improved
 export const cartoConfig = (account, cartocss, table, options = {}) => ({
   account,

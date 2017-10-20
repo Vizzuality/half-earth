@@ -10,7 +10,7 @@ import NavFooter from 'components/nav-footer'
 import styles from './local-styles'
 import uiStyles from 'app/styles/ui'
 
-const Local = ({ className, local, closePopUp }) => {
+const Local = ({ className, local, closePopUp, setSection }) => {
   return (
     <div className={cx(className)}>
       <PopUp open={local.popUp.open} close={() => closePopUp()}>
@@ -36,7 +36,10 @@ const Local = ({ className, local, closePopUp }) => {
           water, food and resources they, and the people living here, need to
           survive.
         </P>
-        <P className={uiStyles.slides}>
+        <P
+          className={uiStyles.slides}
+          onScrollFocus={() => setSection('local:3')}
+        >
           For every species observed there is a story to tell. This stork, named
           Prinzesschen (40534B), was tagged by a group of German researchers as
           they set out to track and map the migration patterns of White Storks
