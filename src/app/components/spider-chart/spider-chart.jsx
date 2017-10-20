@@ -61,8 +61,8 @@ const SpiderTooltip = ({ payload: [info] }) => {
   const tooltip = info && info.payload && info.payload.tooltip
   return tooltip ? (
     <div className={uiStyles.radarChartTooltip}>
-      <div>{tooltip.label}</div>
-      <div>{tooltip.value}</div>
+      <div className={uiStyles.radarChartTooltipLabel}>{tooltip.label}</div>
+      <div className={uiStyles.radarChartTooltipValue}>{tooltip.value}</div>
     </div>
   ) : null
 }

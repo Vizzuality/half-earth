@@ -95,7 +95,31 @@
   }
 
   .radarChartTooltip {
-    padding: 5px 10px;
+    display: flex;
+
+    .radarChartTooltipLabel {
+      height: 100%;
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: 0.2px;
+      text-align: left;
+      color: $color-white;
+      padding: 12px;
+    }
+
+    .radarChartTooltipValue {
+      display: flex;
+      min-height: 100%;
+      align-items: center;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      text-align: left;
+      color: $color-white;
+      background-color: #3850d6;
+      padding: 0 11px;
+    }
   }
 }
 
