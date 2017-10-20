@@ -24,7 +24,6 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
               <span
                 key={`legend-item-${layer.name}`}
                 className={cx(
-                  { [styles.simpleLegendTopBig]: i === 1 },
                   styles.simpleLegend,
                   styles['simpleLegend' + capitalize(layer.color)]
                 )}
@@ -40,32 +39,30 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
                 )}
               >
                 <div className={styles.gradient}>
-                  {layer.label}
+                  <div className={styles.labelContain}>
+                    {layer.label}
+                    {i === 0 && (
+                      <span className={styles.bioText}>Biodiversity</span>
+                    )}
+                    {i > 0 &&
+                    layer.size === 'big' && (
+                      <span className={styles.bioText}>Biodiversity</span>
+                    )}
+                  </div>
                   <div
                     className={cx([
                       styles.gradientBoxes,
                       styles['gradientBoxes' + capitalize(layer.color)]
                     ])}
                   >
-                    <span>
-                      {i === 0 && <span className={styles.symbolBox}>-</span>}
-                    </span>
+                    <span>-</span>
                     <span />
                     <span />
                     <span />
                     <span />
                     <span />
-                    <span>
-                      {i === 0 && <span className={styles.symbolBox}>+</span>}
-                    </span>
+                    <span>+</span>
                   </div>
-                  {i === 0 && (
-                    <span className={styles.bioText}>Biodiversity</span>
-                  )}
-                  {i > 0 &&
-                  layer.size === 'big' && (
-                    <span className={styles.bioText}>Biodiversity</span>
-                  )}
                 </div>
               </div>
             ) : null
