@@ -14,6 +14,7 @@ class Billboard extends Component {
     const pickedObject = scene.pick(hoverPosition)
 
     viewer.entities.values.map(bill => {
+      if (!bill.billboard) return bill
       if (pickedObject) {
         if (pickedObject.id.id === bill.id) {
           bill.billboard.image = bill.imageHover

@@ -43,9 +43,8 @@ const Map = ({
             position={billboard.coordinates}
           />
         ))}
-      {route === 'loscal' && (
+      {route === 'local' && (
         <Birds
-          log={console.log(section)}
           pixelSize={15}
           maxspeed={0.5}
           target={[21.814053, -33.583702]}
@@ -57,8 +56,7 @@ const Map = ({
           url="hum"
         />
       )}
-      {((route === 'local' && section.section === 'local:3') ||
-        route === 'regional') && (
+      {route === 'regional' && (
         <Birds
           pixelSize={15}
           target={[23.269086, -19.925504]}
