@@ -119,7 +119,7 @@ export default {
     'protected-areas': {
       type: 'simple',
       label: 'Protected Areas',
-      color: 'pink'
+      color: 'violet'
     },
     'pa-scenario': {
       type: 'simple',
