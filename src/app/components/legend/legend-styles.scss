@@ -2,7 +2,7 @@
 
 .legend {
   position: absolute;
-  z-index: $zforeground;
+  z-index: $zforeground + 20;
   bottom: 67px;
   right: 40px;
   overflow: hidden;
