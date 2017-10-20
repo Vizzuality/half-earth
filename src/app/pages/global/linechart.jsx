@@ -5,7 +5,7 @@ const LineChart = props => (
   <div className={uiStyles.lineChartGlobal}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="458"
+      width="100%"
       height="341"
       viewBox="0 0 458 341"
     >
@@ -96,7 +96,7 @@ const LineChart = props => (
             Cumulative{' '}
           </tspan>{' '}
           <tspan x=".5" y="58">
-            extintions % of IUCN
+            extinctions % of IUCN
           </tspan>
         </text>
         <path

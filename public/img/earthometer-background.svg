@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="12" viewBox="0 0 1020 12">
+  <g fill="none" fill-rule="evenodd" transform="translate(-4 1)">
+    <g transform="translate(0 4)" stroke-dasharray="4">
+      <path stroke="#335876" d="M512,1 L0,1" transform="translate(512)"/>
+      <path stroke="#18BAB4" d="M512,1 L0,1"/>
+    </g>
+    <circle cx="512" cy="5" r="5" fill="#091F31" fill-rule="nonzero" stroke="#1BCEC7"/>
+  </g>
+</svg>

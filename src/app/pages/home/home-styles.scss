@@ -18,33 +18,18 @@
   overflow-y: scroll;
   position: relative;
   max-width: 955px;
-
-  // &:after {
-  //   pointer-events: none;
-  //   content: '';
-  //   position: fixed;
-  //   top: #{$header-height};
-  //   height: calc(100vh - #{$header-height} - 130px);
-  //   left: 0;
-  //   z-index: 0;
-  //   background-image: linear-gradient(#091e31, rgba(9, 30, 49, 0) 5%);
-  //   left: 50%;
-  //   transform: translate(-50%, 0%);
-  //   width: 955px;
-  // }
 }
 
 .title {
   color: $color-white;
-  font-size: 5rem;
+  font-size: 60px;
   text-transform: uppercase;
-  text-align: center;
-  max-width: 410px;
-  line-height: 1.8;
-  letter-spacing: 25px;
+  max-width: 500px;
+  line-height: 1.57;
+  letter-spacing: 30px;
   text-shadow: 0 0 34px rgba($color-black, 0.3);
-  margin: 90px auto 30px;
-  padding-left: 12px;
+  margin: 100px auto 40px;
+  text-align: center;
 }
 
 .separator {
@@ -59,6 +44,7 @@
   display: inline-block;
   left: 50%;
   transform: translate(-50%, 0%);
+  margin-top: 0;
 
   &::before,
   &::after {
@@ -68,15 +54,16 @@
     height: 1px;
     width: 150px;
     top: 50%;
-    background-color: $color-turquoise;
   }
 
   &::before {
-    left: -200px;
+    left: -190px;
+    background: linear-gradient(to right, rgba($color-turquoise, 0), rgba($color-white, 0.5));
   }
 
   &::after {
     right: -180px;
+    background: linear-gradient(to left, rgba($color-turquoise, 0), rgba($color-white, 0.5));
   }
 }
 
@@ -87,19 +74,22 @@
 
 .intro {
   color: white;
-  font-size: 1.8rem;
-  line-height: 2.33;
-  min-width: 955px;
-  max-width: 955px;
+  font-size: 16px;
+  line-height: 2.63;
+  letter-spacing: 0.8px;
+  font-weight: 300;
+  max-width: 755px;
   text-align: center;
-  margin: 45px auto;
+  margin: 0 auto 30px;
 }
 
 .body {
-  max-width: 950px;
+  max-width: 755px;
   margin: 18px auto;
-  line-height: 2.33;
-  letter-spacing: 0.9px;
+  line-height: 2.63;
+  letter-spacing: 0.8px;
+  font-weight: 300;
+  font-size: 16px;
   color: white;
   text-align: center;
 }
@@ -107,8 +97,6 @@
 .cto {
   $size: 86px;
 
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
   background-color: transparent;
   background-image: url(/img/go-bg.png);
   width: $size;
@@ -126,6 +114,19 @@
     display: block;
     width: 100%;
     height: 50%;
-    margin-top: 50%;
+    margin-top: 34px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 2;
+    letter-spacing: 4px;
+  }
+}
+
+.titleSection {
+  img {
+    max-width: 36px;
+    display: block;
+    margin: 0 auto 10px;
+    position: relative;
   }
 }

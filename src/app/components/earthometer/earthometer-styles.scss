@@ -27,6 +27,11 @@ $lineColor: #2b4d68;
   align-items: center;
   padding: 0 50px;
   height: 100%;
+  flex-direction: row;
+
+  @media screen and (min-width: 1325px) {
+    flex-direction: row;
+  }
 }
 
 .container {
@@ -36,7 +41,8 @@ $lineColor: #2b4d68;
   display: flex;
   width: calc(42vw - 5px);
   max-width: $max-width;
-  min-height: 72px;
+  min-height: $sidebar-header-height;
+  min-width: $min-width;
   align-items: center;
   left: 0;
   background-color: $color-mid-blue;
@@ -57,21 +63,25 @@ $lineColor: #2b4d68;
 }
 
 .values {
-  $size: 1.4rem;
+  $size: 1.2rem;
 
   font-size: $size;
   line-height: $size;
   margin: 0;
   padding: 0;
   list-style: none;
-  margin-top: 8px;
-  margin-left: -4px;
-  color: rgba($color-white, 0.5);
+  color: $lineColor;
+
+  li:last-child {
+    transform: translate(-80%);
+  }
 }
 
 .half {
-  margin-left: 0.7em;
+  margin-left: -8px;
   color: $color-white;
+  margin-top: 8px;
+  font-size: 1.4rem;
 }
 
 .percentSaved {
@@ -83,4 +93,24 @@ $lineColor: #2b4d68;
 
 .slider {
   width: 240px;
+}
+
+.labelToColumn {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  @media screen and (min-width: 1200px) {
+    flex-direction: row;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.linePercentage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

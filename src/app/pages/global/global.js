@@ -15,21 +15,43 @@ import initialState from './global-initial-state'
 class GlobalContainer extends Component {
   constructor (props) {
     super(props)
-    const { getCartoTiles, setGlobalSection, setSection } = props
-    requestCartos({ layers: props.global.layers, getCartoTiles })
+    const {
+      getCartoTiles,
+      setGlobalSection,
+      setSection,
+      layers,
+      getWhereToProtectSpiderData
+    } = props
+    requestCartos({ layers, getCartoTiles })
     setGlobalSection('global:1')
     setSection('global:1')
+    getWhereToProtectSpiderData()
   }
   render () {
     return createElement(GlobalComponent, assign(this.props))
   }
 }
 
-const mapStateToProps = ({ map, global, section }) => {
+const mapStateToProps = ({
+  map,
+  global,
+  section,
+  earthSaved,
+  getWhereToProtectSpiderData
+}) => {
+  const index = Math.round(earthSaved.value)
+  const whereToProtectSpider = {
+    dimensions: global.whereToProtect.dimensions,
+    data: global.whereToProtect.data[index] || []
+  }
+
   return {
     map,
+    whereToProtectSpider,
+    getWhereToProtectSpiderData,
+    layers: global.layers,
     section: section.section,
-    global,
+    protectedAnimalsSpider: global.protectedAnimals,
     renderToggle: renderToggle(global.layers),
     renderDropdown: renderDropdown(global.sections)
   }
