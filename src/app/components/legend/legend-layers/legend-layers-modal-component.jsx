@@ -68,7 +68,7 @@ const data = [
 const ModalContent = props => (
   <div className={styles.legendPopUp}>
     {data.map((item, i) => (
-      <div className={styles.containInfo}>
+      <div className={styles.containInfo} key={i}>
         <h2>{item.title}</h2>
         <h3>{item.subTitle}</h3>
         <p>{item.description}</p>

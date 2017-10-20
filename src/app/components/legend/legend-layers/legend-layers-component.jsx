@@ -15,27 +15,30 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
   return (
     <div>
       <div className={styles.legendLayers}>
-        <span className={styles.legendModal} onClick={() => openPopUpLegend()}>
-          ?
-        </span>
+        <div className={styles.legendModal} onClick={() => openPopUpLegend()}>
+          <span>?</span>
+        </div>
         {layers.sort(sortLayers).map(
-          layer =>
+          (layer, i) =>
             layer.type === 'simple' ? (
               <span
                 key={`legend-item-${layer.name}`}
-                className={cx([
+                className={cx(
+                  { [styles.simpleLegendTopBig]: i === 1 },
                   styles.simpleLegend,
                   styles['simpleLegend' + capitalize(layer.color)]
-                ])}
+                )}
               >
                 {layer.label}
               </span>
             ) : layer.type === 'gradient' ? (
               <div
                 key={`legend-item-${layer.name}`}
-                className={styles.gradientLegend}
+                className={cx(
+                  { [styles.gradientBig]: layer.size === 'big' },
+                  styles.gradientLegend
+                )}
               >
-                Biodiversity
                 <div className={styles.gradient}>
                   {layer.label}
                   <div
@@ -44,14 +47,25 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
                       styles['gradientBoxes' + capitalize(layer.color)]
                     ])}
                   >
-                    <span>-</span>
+                    <span>
+                      {i === 0 && <span className={styles.symbolBox}>-</span>}
+                    </span>
                     <span />
                     <span />
                     <span />
                     <span />
                     <span />
-                    <span>+</span>
+                    <span>
+                      {i === 0 && <span className={styles.symbolBox}>+</span>}
+                    </span>
                   </div>
+                  {i === 0 && (
+                    <span className={styles.bioText}>Biodiversity</span>
+                  )}
+                  {i > 0 &&
+                  layer.size === 'big' && (
+                    <span className={styles.bioText}>Biodiversity</span>
+                  )}
                 </div>
               </div>
             ) : null
