@@ -178,21 +178,9 @@ export default {
     },
     {
       name: 'protected-areas',
-      url: null,
+      url:
+        'https://cdn.mol.org/half-earth/tiles/reserve-coverage/existing-network/{z}/{x}/{y}',
       type: 'UrlTemplate',
-      carto: cartoConfig(
-        'simbiotica',
-        `#layer {
-          polygon-fill: #f32874;
-          polygon-opacity: 0.7;
-        }
-        #layer::outline {
-          line-width: 1;
-          line-color: #f32874;
-          line-opacity: 1;
-        }`,
-        'wdpa_protected_areas'
-      ),
       visible: false
     },
     {
