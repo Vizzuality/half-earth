@@ -196,11 +196,10 @@ export default {
       min: 1,
       max: 93
     },
-    // TODO: review conifers color
     conifers: {
       type: 'gradient',
       label: 'Conifers',
-      color: 'red',
+      color: 'orange2',
       min: 1,
       max: 49
     },

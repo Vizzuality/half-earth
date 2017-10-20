@@ -163,8 +163,8 @@ $backCircle: #18bab4;
           @include gradient($colors);
         }
 
-        &Red span {
-          $colors: #6f0b0b, #971212, #b61c1c, #cd3838, #e85353, #f87070, #f89595;
+        &Orange2 span {
+          $colors: #bc3809, #c24b21, #c95f3a, #d07352, #d6876b, #dd9b84, #e4af9c;
 
           @include gradient($colors);
         }
