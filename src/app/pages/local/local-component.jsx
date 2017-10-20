@@ -43,7 +43,7 @@ const Local = ({ className, local, closePopUp }) => {
           between Africa and Europe. Prinzesschen belongs to a small population
           of white storks breeding in South Africa.
         </P>
-        <NavFooter to="/regional" />
+        <NavFooter from="/" to="/regional" />
       </Scroller>
     </div>
   )

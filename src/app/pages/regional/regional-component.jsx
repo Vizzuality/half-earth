@@ -88,7 +88,7 @@ const Regional = ({
           sites have been identified due to their importance for conserving
           threatened and geographically restricted biodiversity.
         </P>
-        <NavFooter to="/global" />
+        <NavFooter from="/local" to="/global" />
       </Scroller>
     </div>
   )

@@ -58,6 +58,11 @@ import {
   initialState as navFooterState
 } from 'components/nav-footer'
 
+import {
+  reducers as legendLayersReducers,
+  initialState as legendLayersState
+} from 'components/legend/legend-layers/legend-layers'
+
 const allActions = {
   ...cartoActions,
   ...zoomActions,
@@ -81,5 +86,10 @@ export default combineReducers({
   regional: handleActions(allActions, regionalReducers, regionalState),
   local: handleActions(allActions, localReducers, localState),
   navFooter: handleActions(allActions, navFooterReducers, navFooterState),
+  legendLayers: handleActions(
+    allActions,
+    legendLayersReducers,
+    legendLayersState
+  ),
   global: handleActions(allActions, globalReducers, globalState)
 })

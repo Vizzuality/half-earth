@@ -8,7 +8,7 @@
   bottom: 0;
   height: calc(100% - #{$header-height});
   background-color: transparent;
-  z-index: $zforeground * 100;
+  z-index: $zforeground * 1000;
 }
 
 .content {

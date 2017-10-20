@@ -245,12 +245,9 @@ export default {
     },
     {
       name: 'urban-development',
-      type: 'WebMapService',
-      format: 'image/png',
-      layers: 'GUF28_DLR_v1_Mosaic',
-      srs: 'EPSG:4326',
-      transparent: true,
-      url: 'https://geoservice.dlr.de/eoc/land/wms?service:WMS&request:GetMap',
+      type: 'UrlTemplate',
+      url:
+        'https://storage.googleapis.com/half-earth/v1/urban-earthenv-consensus-landcover/{z}/{x}/{y}.png',
       visible: false
     }
   ],
@@ -302,27 +299,32 @@ export default {
     mammals: {
       type: 'gradient',
       label: 'Mammals',
-      color: 'purple'
+      color: 'purple',
+      size: 'big'
     },
     birds: {
       type: 'gradient',
       label: 'Birds',
-      color: 'aqua'
+      color: 'aqua',
+      size: 'big'
     },
     amphibians: {
       type: 'gradient',
       label: 'Amphibians',
-      color: 'green'
+      color: 'green',
+      size: 'big'
     },
     restio: {
       type: 'gradient',
       label: 'Restio',
-      color: 'orange'
+      color: 'orange',
+      size: 'big'
     },
     protea: {
       type: 'gradient',
       label: 'Protea',
-      color: 'red'
+      color: 'red',
+      size: 'big'
     }
   }
 }
