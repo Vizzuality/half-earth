@@ -199,7 +199,7 @@ export default {
       name: 'urban-development',
       type: 'UrlTemplate',
       url:
-        'https://storage.googleapis.com/half-earth/v1/urban-earthenv-consensus-landcover/{z}/{x}/{y}',
+        'https://storage.googleapis.com/half-earth/v1/urban-earthenv-consensus-landcover/{z}/{x}/{y}.png',
       visible: false
     }
   ],
