@@ -17,6 +17,7 @@ $backCircle: #18bab4;
     padding-bottom: 15px;
     padding-right: 26px;
     flex-shrink: 0;
+    font-size: 1.2rem;
 
     &::after {
       content: '';
@@ -262,6 +263,10 @@ $backCircle: #18bab4;
   display: flex;
   flex-direction: column-reverse;
   margin-right: 20px;
+  text-transform: none;
+  font-size: 1.2rem;
+  letter-spacing: 0.2px;
+  font-weight: 500;
 }
 
 .bioText {
