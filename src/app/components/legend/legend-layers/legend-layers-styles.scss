@@ -83,6 +83,17 @@ $backCircle: #18bab4;
       justify-content: space-between;
       align-items: center;
 
+      .boxContainer {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .numbers {
+        min-width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+
       &Boxes {
         display: flex;
         padding-top: 10px;

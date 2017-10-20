@@ -282,31 +282,41 @@ export default {
       type: 'gradient',
       label: 'Mammals',
       color: 'purple',
-      size: 'big'
+      size: 'big',
+      min: 8,
+      max: 49
     },
     birds: {
       type: 'gradient',
       label: 'Birds',
       color: 'aqua',
-      size: 'big'
+      size: 'big',
+      min: 1,
+      max: 38
     },
     amphibians: {
       type: 'gradient',
       label: 'Amphibians',
       color: 'green',
-      size: 'big'
+      size: 'big',
+      min: 3,
+      max: 25
     },
     restio: {
       type: 'gradient',
       label: 'Restio',
       color: 'orange',
-      size: 'big'
+      size: 'big',
+      min: 1,
+      max: 166
     },
     protea: {
       type: 'gradient',
       label: 'Protea',
       color: 'red',
-      size: 'big'
+      size: 'big',
+      min: 1,
+      max: 69
     }
   }
 }

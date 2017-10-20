@@ -171,33 +171,44 @@ export default {
     mammals: {
       type: 'gradient',
       label: 'Mammals',
-      color: 'purple'
+      color: 'purple',
+      min: 1,
+      max: 244
     },
     birds: {
       type: 'gradient',
       label: 'Birds',
-      color: 'aqua'
+      color: 'aqua',
+      min: 1,
+      max: 1020
     },
     amphibians: {
       type: 'gradient',
       label: 'Amphibians',
-      color: 'green'
+      color: 'green',
+      min: 1,
+      max: 180
     },
     cacti: {
       type: 'gradient',
       label: 'Cacti',
-      color: 'orange'
+      color: 'orange',
+      min: 1,
+      max: 93
     },
     // TODO: review conifers color
     conifers: {
       type: 'gradient',
       label: 'Conifers',
-      color: 'red'
+      color: 'red',
+      min: 1,
+      max: 49
     },
     'all-taxa': {
       type: 'gradient',
       label: 'All Taxa',
-      color: 'blue'
+      color: 'blue',
+      min: 1
     }
   }
 }
