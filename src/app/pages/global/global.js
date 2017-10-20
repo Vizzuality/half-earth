@@ -43,7 +43,22 @@ const mapStateToProps = ({
   const whereToProtectSpider = {
     dimensions: global.whereToProtect.dimensions,
     data: (global.whereToProtect.data[index] || [])
-      .map(({ taxa, ...rest }) => ({ ...rest, subject: taxa.toUpperCase() }))
+      .map(({ taxa, ...rest }) => ({
+        ...rest,
+        subject: taxa.toUpperCase(),
+        tooltip: [
+          {
+            label: 'Percentage',
+            value: rest.percentSpeciesMeetingTargetProtectedAreaViaAny,
+            color: '#8366e4'
+          },
+          {
+            label: 'Percentage',
+            value: rest.percentProtectedCurrently,
+            color: '#3850d6'
+          }
+        ]
+      }))
   }
 
   return {
