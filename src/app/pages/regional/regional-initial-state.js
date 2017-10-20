@@ -6,14 +6,56 @@ const { MAPBOX_TOKEN, MOLLayer, speciesSelector, speciesSelections } = utils
 export default {
   graphs: {
     data: [
-      { subject: 'BIRDS', total: 96, fullMark: 150 },
-      { subject: 'MAMMALS', total: 88, fullMark: 150 },
-      { subject: 'AMPHIBIANS', total: 56, fullMark: 150 },
-      { subject: 'CACTI', total: 100, fullMark: 150 },
-      { subject: 'TURTLES', total: 81, fullMark: 150 },
-      { subject: 'CONIFERS', total: 71, fullMark: 150 }
+      {
+        subject: 'BIRDS',
+        percent: 96,
+        tooltip: {
+          value: 607,
+          label: 'Number of species in the region'
+        }
+      },
+      {
+        subject: 'MAMMALS',
+        percent: 88,
+        tooltip: {
+          value: 160,
+          label: 'Number of species in the region'
+        }
+      },
+      {
+        subject: 'AMPHIBIANS',
+        percent: 56,
+        tooltip: {
+          value: 52,
+          label: 'Number of species in the region'
+        }
+      },
+      {
+        subject: 'CACTI',
+        percent: 100,
+        tooltip: {
+          value: 1,
+          label: 'Number of species in the region'
+        }
+      },
+      {
+        subject: 'TURTLES',
+        percent: 81,
+        tooltip: {
+          value: 9,
+          label: 'Number of species in the region'
+        }
+      },
+      {
+        subject: 'CONIFERS',
+        percent: 71,
+        tooltip: {
+          value: 5,
+          label: 'Number of species in the region'
+        }
+      }
     ],
-    dimensions: [{ key: 'total' }]
+    dimensions: [{ key: 'percent' }]
   },
 
   layers: [
