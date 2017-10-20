@@ -85,7 +85,7 @@ class Birds extends Component {
           id: bird.id,
           model: {
             uri: '/img/triangulos.glb',
-            minimumPixelSize: 10
+            minimumPixelSize: 15
           }
         })
       })
