@@ -41,6 +41,40 @@
   padding-top: 50px;
 }
 
+.spiderLegendContainer {
+  display: flex;
+
+  .legend {
+    display: flex;
+    align-items: baseline;
+    position: relative;
+    flex-direction: row-reverse;
+    flex: 0.5;
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 1.71;
+    letter-spacing: 0.7px;
+    color: $color-white;
+
+    &::after {
+      content: '';
+      height: 16px;
+      width: 16px;
+      background-color: $color-white;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    &Blue::after {
+      background-color: #0664f6;
+    }
+
+    &Purple::after {
+      background-color: #8366e4;
+    }
+  }
+}
+
 .radarChart {
   circle {
     stroke-dasharray: 5;
@@ -57,6 +91,34 @@
       font-size: 8px;
       letter-spacing: 4px;
       line-height: 2.17;
+    }
+  }
+
+  .radarChartTooltip {
+    display: flex;
+
+    .radarChartTooltipLabel {
+      height: 100%;
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: 0.2px;
+      text-align: left;
+      color: $color-white;
+      padding: 12px;
+    }
+
+    .radarChartTooltipValue {
+      display: flex;
+      min-height: 100%;
+      align-items: center;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      text-align: left;
+      color: $color-white;
+      background-color: #3850d6;
+      padding: 0 11px;
     }
   }
 }

@@ -42,7 +42,8 @@ const mapStateToProps = ({
   const index = Math.round(earthSaved.value)
   const whereToProtectSpider = {
     dimensions: global.whereToProtect.dimensions,
-    data: global.whereToProtect.data[index] || []
+    data: (global.whereToProtect.data[index] || [])
+      .map(({ taxa, ...rest }) => ({ ...rest, subject: taxa.toUpperCase() }))
   }
 
   return {

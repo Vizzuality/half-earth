@@ -47,6 +47,11 @@ const Regional = ({
           low fynbos, thicket, and forest and woodlands, and is home to a large
           number of {d('regional:1', 'birds')} species.
           <SpiderChart {...graphs} />
+          <div className={uiStyles.spiderLegendContainer}>
+            <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
+              Percent of local species adequately protected
+            </span>
+          </div>
         </P>
         <P
           className={cx(uiStyles.slides, uiStyles.paragraphAfterChart)}
