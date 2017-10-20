@@ -104,8 +104,43 @@ export default {
     ]
   },
   layers: [
-    // ...sliderLayers([16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]),
-    ...sliderLayers([16, 21, 30, 36, 41, 46, 50]),
+    ...sliderLayers([
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
+    ]),
     MOLLayer('all-taxa', 'all-taxa', 'richness'),
     MOLLayer('birds', 'birds', 'richness'),
     MOLLayer('mammals', 'mammals', 'richness'),
@@ -187,40 +222,58 @@ export default {
       color: 'violet'
     },
     'pa-scenario': {
-      type: 'simple',
-      label: 'Where to Protect',
-      color: 'yellow'
+      type: 'multiple',
+      elements: [
+        {
+          label: 'Grids optimised for meeting conservation targets',
+          color: 'yellow'
+        },
+        {
+          label: 'Grids with > 75% protected area coverage',
+          color: 'violet'
+        }
+      ]
     },
     mammals: {
       type: 'gradient',
       label: 'Mammals',
-      color: 'purple'
+      color: 'purple',
+      min: 1,
+      max: 244
     },
     birds: {
       type: 'gradient',
       label: 'Birds',
-      color: 'aqua'
+      color: 'aqua',
+      min: 1,
+      max: 1020
     },
     amphibians: {
       type: 'gradient',
       label: 'Amphibians',
-      color: 'green'
+      color: 'green',
+      min: 1,
+      max: 180
     },
     cacti: {
       type: 'gradient',
       label: 'Cacti',
-      color: 'orange'
+      color: 'orange',
+      min: 1,
+      max: 93
     },
-    // TODO: review conifers color
     conifers: {
       type: 'gradient',
       label: 'Conifers',
-      color: 'red'
+      color: 'orange2',
+      min: 1,
+      max: 49
     },
     'all-taxa': {
       type: 'gradient',
       label: 'All Taxa',
-      color: 'blue'
+      color: 'blue',
+      min: 1
     }
   }
 }

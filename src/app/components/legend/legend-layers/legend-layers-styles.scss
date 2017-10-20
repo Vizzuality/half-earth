@@ -17,6 +17,7 @@ $backCircle: #18bab4;
     padding-bottom: 15px;
     padding-right: 26px;
     flex-shrink: 0;
+    font-size: 1.2rem;
 
     &::after {
       content: '';
@@ -82,6 +83,17 @@ $backCircle: #18bab4;
       width: 100%;
       justify-content: space-between;
       align-items: center;
+
+      .boxContainer {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .numbers {
+        min-width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
 
       &Boxes {
         display: flex;
@@ -151,8 +163,8 @@ $backCircle: #18bab4;
           @include gradient($colors);
         }
 
-        &Red span {
-          $colors: #6f0b0b, #971212, #b61c1c, #cd3838, #e85353, #f87070, #f89595;
+        &Orange2 span {
+          $colors: #bc3809, #c24b21, #c95f3a, #d07352, #d6876b, #dd9b84, #e4af9c;
 
           @include gradient($colors);
         }
@@ -251,6 +263,10 @@ $backCircle: #18bab4;
   display: flex;
   flex-direction: column-reverse;
   margin-right: 20px;
+  text-transform: none;
+  font-size: 1.2rem;
+  letter-spacing: 0.2px;
+  font-weight: 500;
 }
 
 .bioText {
