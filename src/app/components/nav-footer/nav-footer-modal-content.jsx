@@ -14,13 +14,14 @@ const ModalContent = props => (
         </a>
         <a
           className={styles.imageContainer}
-          href="https://www.nationalgeographic.com/"
+          href="https://eowilsonfoundation.org/"
           target="_blank"
         >
           <img
             width="100%"
-            src="/img/partners/nat_geo_logo.png"
-            alt="national geographic"
+            src="/img/partners/wilson.png"
+            alt="Wilson Biodiversity Foundation"
+            className={styles.eoImageModal}
           />
         </a>
         <a

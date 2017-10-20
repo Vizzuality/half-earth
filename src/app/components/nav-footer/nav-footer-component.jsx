@@ -25,11 +25,12 @@ const NavFooter = ({
         <a href="https://mol.org/" target="_blank">
           <img width="100%" src="/img/partners/mol_logo.png" alt="mol" />
         </a>
-        <a href="https://www.nationalgeographic.com/" target="_blank">
+        <a href="https://eowilsonfoundation.org/" target="_blank">
           <img
             width="100%"
-            src="/img/partners/nat_geo_logo.png"
-            alt="national geographic"
+            src="/img/partners/wilson.png"
+            alt="Wilson Biodiversity Foundation"
+            className={styles.eoImage}
           />
         </a>
         <a href="http://www.vizzuality.com/" target="_blank">
