@@ -197,12 +197,9 @@ export default {
     },
     {
       name: 'urban-development',
-      type: 'WebMapService',
-      format: 'image/png',
-      layers: 'GUF28_DLR_v1_Mosaic',
-      srs: 'EPSG:4326',
-      transparent: true,
-      url: 'https://geoservice.dlr.de/eoc/land/wms?service:WMS&request:GetMap',
+      type: 'UrlTemplate',
+      url:
+        'https://storage.googleapis.com/half-earth/v1/urban-earthenv-consensus-landcover/{z}/{x}/{y}',
       visible: false
     }
   ],
