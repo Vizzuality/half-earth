@@ -56,6 +56,11 @@ class Global extends Component {
             integral part of the network of life and are vulnerable to the same
             threats as the species we have records for.
             <SpiderChart {...protectedAnimalsSpider} />
+            <div className={uiStyles.spiderLegendContainer}>
+              <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
+                Percent of species adequately protected
+              </span>
+            </div>
           </P>
           <P
             className={cx(uiStyles.slides, uiStyles.paragraphAfterChart)}
@@ -78,6 +83,14 @@ class Global extends Component {
             ecosystems has made it possible to identify where to expand the
             protected areas network globally.
             <SpiderChart {...whereToProtectSpider} />
+            <div className={uiStyles.spiderLegendContainer}>
+              <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
+                Percent of species protected (currently)
+              </span>
+              <span className={cx(uiStyles.legend, uiStyles.legendPurple)}>
+                Percent of species protected by extending the PA network
+              </span>
+            </div>
           </P>
           <P
             className={uiStyles.slides}
@@ -92,7 +105,7 @@ class Global extends Component {
             everywhere to participate in actions that will help us achieve the
             Half-Earth goal.
           </P>
-          <NavFooter to="/" />
+          <NavFooter from="/regional" to="/" />
         </Scroller>
       </div>
     )

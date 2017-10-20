@@ -22,7 +22,7 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
           (layer, i) =>
             layer.type === 'simple' ? (
               <span
-                key={`legend-item-${layer.name}`}
+                key={`legend-item-${layer.label}`}
                 className={cx(
                   styles.simpleLegend,
                   styles['simpleLegend' + capitalize(layer.color)]
@@ -32,7 +32,7 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
               </span>
             ) : layer.type === 'gradient' ? (
               <div
-                key={`legend-item-${layer.name}`}
+                key={`legend-item-${layer.label}`}
                 className={cx(
                   { [styles.gradientBig]: layer.size === 'big' },
                   styles.gradientLegend

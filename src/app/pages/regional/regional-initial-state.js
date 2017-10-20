@@ -6,14 +6,56 @@ const { MAPBOX_TOKEN, MOLLayer, speciesSelector, speciesSelections } = utils
 export default {
   graphs: {
     data: [
-      { subject: 'BIRDS', total: 96, fullMark: 150 },
-      { subject: 'MAMMALS', total: 88, fullMark: 150 },
-      { subject: 'AMPHIBIANS', total: 56, fullMark: 150 },
-      { subject: 'CACTI', total: 100, fullMark: 150 },
-      { subject: 'TURTLES', total: 81, fullMark: 150 },
-      { subject: 'CONIFERS', total: 71, fullMark: 150 }
+      {
+        subject: 'BIRDS',
+        percent: 96,
+        tooltip: {
+          value: 607,
+          label: 'Number of species in the region'
+        }
+      },
+      {
+        subject: 'MAMMALS',
+        percent: 88,
+        tooltip: {
+          value: 160,
+          label: 'Number of species in the region'
+        }
+      },
+      {
+        subject: 'AMPHIBIANS',
+        percent: 56,
+        tooltip: {
+          value: 52,
+          label: 'Number of species in the region'
+        }
+      },
+      {
+        subject: 'CACTI',
+        percent: 100,
+        tooltip: {
+          value: 1,
+          label: 'Number of species in the region'
+        }
+      },
+      {
+        subject: 'TURTLES',
+        percent: 81,
+        tooltip: {
+          value: 9,
+          label: 'Number of species in the region'
+        }
+      },
+      {
+        subject: 'CONIFERS',
+        percent: 71,
+        tooltip: {
+          value: 5,
+          label: 'Number of species in the region'
+        }
+      }
     ],
-    dimensions: [{ key: 'total' }]
+    dimensions: [{ key: 'percent' }]
   },
 
   layers: [
@@ -178,31 +220,16 @@ export default {
     },
     {
       name: 'protected-areas',
-      url: null,
+      url:
+        'https://cdn.mol.org/half-earth/tiles/reserve-coverage/existing-network/{z}/{x}/{y}',
       type: 'UrlTemplate',
-      carto: cartoConfig(
-        'simbiotica',
-        `#layer {
-          polygon-fill: #f32874;
-          polygon-opacity: 0.7;
-        }
-        #layer::outline {
-          line-width: 1;
-          line-color: #f32874;
-          line-opacity: 1;
-        }`,
-        'wdpa_protected_areas'
-      ),
       visible: false
     },
     {
       name: 'urban-development',
-      type: 'WebMapService',
-      format: 'image/png',
-      layers: 'GUF28_DLR_v1_Mosaic',
-      srs: 'EPSG:4326',
-      transparent: true,
-      url: 'https://geoservice.dlr.de/eoc/land/wms?service:WMS&request:GetMap',
+      type: 'UrlTemplate',
+      url:
+        'https://storage.googleapis.com/half-earth/v1/urban-earthenv-consensus-landcover/{z}/{x}/{y}.png',
       visible: false
     }
   ],
@@ -249,7 +276,7 @@ export default {
     'protected-areas': {
       type: 'simple',
       label: 'Protected Areas',
-      color: 'pink'
+      color: 'violet'
     },
     mammals: {
       type: 'gradient',

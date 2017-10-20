@@ -14,13 +14,14 @@ const ModalContent = props => (
         </a>
         <a
           className={styles.imageContainer}
-          href="https://www.nationalgeographic.com/"
+          href="https://eowilsonfoundation.org/"
           target="_blank"
         >
           <img
             width="100%"
-            src="/img/partners/nat_geo_logo.png"
-            alt="national geographic"
+            src="/img/partners/wilson.png"
+            alt="Wilson Biodiversity Foundation"
+            className={styles.eoImageModal}
           />
         </a>
         <a
@@ -38,11 +39,11 @@ const ModalContent = props => (
       <h1>Data Partners</h1>
       <div className={styles.containImages}>
         <a
-          href="http://www.amstat.org/"
+          href="http://www.amphibians.org/"
           target="_blank"
           className={styles.imageContainer}
         >
-          <img src="/img/partners/partner_image/1.png" alt="ASA" />
+          <img src="/img/partners/partner_image/1.png" alt="amphibians" />
         </a>
         <a
           href="http://www.birdlife.org/"
@@ -62,7 +63,7 @@ const ModalContent = props => (
           <img src="/img/partners/partner_image/3.png" alt="rspb" />
         </a>
         <a
-          href="https://www.conservation.cam.ac.uk/"
+          href="http://www.cambridgeconservation.org/"
           target="_blank"
           className={styles.imageContainer}
         >
@@ -198,7 +199,7 @@ const ModalContent = props => (
           <img src="/img/partners/partner_image/19.png" alt="unep-wcmc" />
         </a>
         <a
-          href="https://www.google.es/search?q=wcs&oq=wcs&aqs=chrome..69i57j0l5.789j0j4&sourceid=chrome&ie=UTF-8"
+          href="https://www.wcs.org"
           target="_blank"
           className={styles.imageContainer}
         >
@@ -236,7 +237,7 @@ const ModalContent = props => (
           />
         </a>
         <a
-          href="http://www.missouribotanicalgarden.org/"
+          href="http://www.mcz.harvard.edu"
           target="_blank"
           className={styles.imageContainer}
         >
@@ -246,7 +247,7 @@ const ModalContent = props => (
           />
         </a>
         <a
-          href="http://www.mcz.harvard.edu/"
+          href="http://www.mncn.csic.es"
           target="_blank"
           className={styles.imageContainer}
         >
@@ -256,14 +257,14 @@ const ModalContent = props => (
           />
         </a>
         <a
-          href="http://www.mncn.csic.es/"
+          href="https://www.nybg.org"
           target="_blank"
           className={styles.imageContainer}
         >
           <img src="/img/partners/partner_image/28.png" alt="mncn" />
         </a>
         <a
-          href="https://www.nybg.org/"
+          href="http://www.missouribotanicalgarden.org/"
           target="_blank"
           className={styles.imageContainer}
         >

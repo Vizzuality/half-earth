@@ -29,14 +29,56 @@ export default {
     data: []
   },
   protectedAnimals: {
-    dimensions: [{ key: 'total' }],
+    dimensions: [{ key: 'percent' }],
     data: [
-      { subject: 'BIRDS', total: 80, fullMark: 150 },
-      { subject: 'MAMMALS', total: 69, fullMark: 150 },
-      { subject: 'AMPHIBIANS', total: 36, fullMark: 150 },
-      { subject: 'CACTI', total: 34, fullMark: 150 },
-      { subject: 'TURTLES', total: 67, fullMark: 150 },
-      { subject: 'CONIFERS', total: 63, fullMark: 150 }
+      {
+        subject: 'BIRDS',
+        percent: 80,
+        tooltip: {
+          value: 9987,
+          label: 'Number of Species'
+        }
+      },
+      {
+        subject: 'MAMMALS',
+        percent: 69,
+        tooltip: {
+          value: 4420,
+          label: 'Number of Species'
+        }
+      },
+      {
+        subject: 'AMPHIBIANS',
+        percent: 36,
+        tooltip: {
+          value: 6417,
+          label: 'Number of Species'
+        }
+      },
+      {
+        subject: 'CACTI',
+        percent: 34,
+        tooltip: {
+          value: 1413,
+          label: 'Number of Species'
+        }
+      },
+      {
+        subject: 'TURTLES',
+        percent: 67,
+        tooltip: {
+          value: 289,
+          label: 'Number of Species'
+        }
+      },
+      {
+        subject: 'CONIFERS',
+        percent: 63,
+        tooltip: {
+          value: 606,
+          label: 'Number of Species'
+        }
+      }
     ]
   },
   layers: [
@@ -49,21 +91,9 @@ export default {
     MOLLayer('cacti', 'cacti', 'richness'),
     {
       name: 'protected-areas',
-      url: null,
+      url:
+        'https://cdn.mol.org/half-earth/tiles/reserve-coverage/existing-network/{z}/{x}/{y}',
       type: 'UrlTemplate',
-      carto: cartoConfig(
-        'simbiotica',
-        `#layer {
-          polygon-fill: #f32874;
-          polygon-opacity: 0.7;
-        }
-        #layer::outline {
-          line-width: 1;
-          line-color: #f32874;
-          line-opacity: 1;
-        }`,
-        'wdpa_protected_areas'
-      ),
       visible: false
     },
     {
@@ -131,7 +161,7 @@ export default {
     'protected-areas': {
       type: 'simple',
       label: 'Protected Areas',
-      color: 'pink'
+      color: 'violet'
     },
     'pa-scenario': {
       type: 'simple',

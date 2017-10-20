@@ -47,24 +47,29 @@ const Regional = ({
           low fynbos, thicket, and forest and woodlands, and is home to a large
           number of {d('regional:1', 'birds')} species.
           <SpiderChart {...graphs} />
+          <div className={uiStyles.spiderLegendContainer}>
+            <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
+              Percent of local species adequately protected
+            </span>
+          </div>
         </P>
         <P
           className={cx(uiStyles.slides, uiStyles.paragraphAfterChart)}
           onScrollFocus={() => updateSections('regional:2')}
         >
-          <p>
+          <span className={uiStyles.slides}>
             Human activities such as {t('road building')} and{' '}
             {t('urban development')}
             have overtaken some of the places white storks and other birds stop
             to feed and rest at as they fly south, putting them in danger of
             injury, starvation, and death.
-          </p>
-          <p>
+          </span>
+          <span className={uiStyles.slides}>
             The combined effect of these threats is shrinking the habitats where{' '}
             {d('regional:2', 'anthropogenic')} species live. Improving our
             understanding of how these anthropogenic impacts put biodiversity at
             risk can help us identify which species to protect and where.
-          </p>
+          </span>
         </P>
         <P
           className={uiStyles.slides}
@@ -83,7 +88,7 @@ const Regional = ({
           sites have been identified due to their importance for conserving
           threatened and geographically restricted biodiversity.
         </P>
-        <NavFooter to="/global" />
+        <NavFooter from="/local" to="/global" />
       </Scroller>
     </div>
   )
