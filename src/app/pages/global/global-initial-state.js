@@ -5,7 +5,11 @@ const { MOLLayer, speciesSelector, speciesSelections } = utils
 
 const sliderLayers = steps => {
   return steps.map(v =>
-    MOLLayer(`pa-scenario-${v}`, `pa-scenario/${v}/all-taxa`, 'richness')
+    MOLLayer(
+      `pa-scenario-${v}`,
+      `pa-scenarios/rarity-driven/all-taxa/${v}`,
+      'reserve-coverage'
+    )
   )
 }
 
@@ -34,55 +38,74 @@ export default {
       {
         subject: 'BIRDS',
         percent: 80,
-        tooltip: {
-          value: 9987,
-          label: 'Number of Species'
-        }
+        tooltip: [
+          {
+            value: 9987,
+            label: 'Number of Species',
+            color: '#3850d6'
+          }
+        ]
       },
       {
         subject: 'MAMMALS',
         percent: 69,
-        tooltip: {
-          value: 4420,
-          label: 'Number of Species'
-        }
+        tooltip: [
+          {
+            value: 4420,
+            label: 'Number of Species',
+            color: '#3850d6'
+          }
+        ]
       },
       {
         subject: 'AMPHIBIANS',
         percent: 36,
-        tooltip: {
-          value: 6417,
-          label: 'Number of Species'
-        }
+        tooltip: [
+          {
+            value: 6417,
+            label: 'Number of Species',
+            color: '#3850d6'
+          }
+        ]
       },
       {
         subject: 'CACTI',
         percent: 34,
-        tooltip: {
-          value: 1413,
-          label: 'Number of Species'
-        }
+        tooltip: [
+          {
+            value: 1413,
+            label: 'Number of Species',
+            color: '#3850d6'
+          }
+        ]
       },
       {
         subject: 'TURTLES',
         percent: 67,
-        tooltip: {
-          value: 289,
-          label: 'Number of Species'
-        }
+        tooltip: [
+          {
+            value: 289,
+            label: 'Number of Species',
+            color: '#3850d6'
+          }
+        ]
       },
       {
         subject: 'CONIFERS',
         percent: 63,
-        tooltip: {
-          value: 606,
-          label: 'Number of Species'
-        }
+        tooltip: [
+          {
+            value: 606,
+            label: 'Number of Species',
+            color: '#3850d6'
+          }
+        ]
       }
     ]
   },
   layers: [
-    ...sliderLayers([20, 25, 30, 35, 40, 45, 50]),
+    // ...sliderLayers([16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]),
+    ...sliderLayers([16, 21, 30, 36, 41, 46, 50]),
     MOLLayer('all-taxa', 'all-taxa', 'richness'),
     MOLLayer('birds', 'birds', 'richness'),
     MOLLayer('mammals', 'mammals', 'richness'),

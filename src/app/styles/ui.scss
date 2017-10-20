@@ -96,29 +96,43 @@
 
   .radarChartTooltip {
     display: flex;
+    flex-direction: column;
+    background-color: $color-navy-blue;
 
-    .radarChartTooltipLabel {
-      height: 100%;
-      font-size: 1.2rem;
-      font-weight: 600;
-      line-height: 1.5;
-      letter-spacing: 0.2px;
-      text-align: left;
-      color: $color-white;
-      padding: 12px;
-    }
-
-    .radarChartTooltipValue {
+    .radarChartTooltipContainer {
       display: flex;
-      min-height: 100%;
-      align-items: center;
-      font-size: 1.6rem;
-      font-weight: 600;
-      letter-spacing: 1.1px;
-      text-align: left;
-      color: $color-white;
-      background-color: #3850d6;
-      padding: 0 11px;
+
+      &:first-of-type {
+        border-bottom: 1px solid #2b4d68;
+      }
+
+      &:only-of-type {
+        border: 0;
+      }
+
+      .radarChartTooltipLabel {
+        height: 100%;
+        font-size: 1.2rem;
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: 0.2px;
+        text-align: left;
+        color: $color-white;
+        padding: 12px;
+      }
+
+      .radarChartTooltipValue {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100%;
+        min-width: 50px;
+        font-size: 1.6rem;
+        font-weight: 600;
+        letter-spacing: 1.1px;
+        color: $color-white;
+        padding: 0 11px;
+      }
     }
   }
 }

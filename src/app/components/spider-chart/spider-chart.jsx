@@ -45,9 +45,6 @@ const SpiderChart = ({ data, dimensions }) => {
         />
         <PolarAngleAxis dataKey="subject" fill="#fff" />
         <Tooltip
-          wrapperStyle={{ backgroundColor: '#1b364c', border: 0 }}
-          labelStyle={{ padding: '0', fontSize: 12 }}
-          itemStyle={{ color: '#fff', padding: '0', fontSize: 12 }}
           content={({ payload }) => <SpiderTooltip payload={payload} />}
           cursor={false}
           isAnimationActive={false}
@@ -57,12 +54,27 @@ const SpiderChart = ({ data, dimensions }) => {
   )
 }
 
-const SpiderTooltip = ({ payload: [info] }) => {
-  const tooltip = info && info.payload && info.payload.tooltip
-  return tooltip ? (
+const SpiderTooltip = ({ payload }) => {
+  const formatter = n =>
+    n.toLocaleString(undefined, { maximumFractionDigits: 0 })
+  return payload.length > 0 ? (
     <div className={uiStyles.radarChartTooltip}>
-      <div className={uiStyles.radarChartTooltipLabel}>{tooltip.label}</div>
-      <div className={uiStyles.radarChartTooltipValue}>{tooltip.value}</div>
+      {payload.map(({ payload }, k) => (
+        <div
+          key={`tooltip-value-${k}`}
+          className={uiStyles.radarChartTooltipContainer}
+        >
+          <div className={uiStyles.radarChartTooltipLabel}>
+            {payload.tooltip[k].label}
+          </div>
+          <div
+            style={{ backgroundColor: payload.tooltip[k].color }}
+            className={uiStyles.radarChartTooltipValue}
+          >
+            {formatter(payload.tooltip[k].value)}
+          </div>
+        </div>
+      ))}
     </div>
   ) : null
 }
