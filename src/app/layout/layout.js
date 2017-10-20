@@ -8,6 +8,7 @@ const scope = path => path.replace('/', '') || 'home'
 function mapStateToProps (state, { location }) {
   const route = scope(location.pathname)
   const page = state[route]
+  const { section } = state
 
   // TODO: improve this
   const getLayerName = layer => layer.split('pa-scenario')[0].split(':')[0]
@@ -22,7 +23,7 @@ function mapStateToProps (state, { location }) {
       : []
   const layers = activeLayers.length > 0 && activeLayers
 
-  return { location, route, layers }
+  return { location, route, layers, section }
 }
 
 export default withRouter(connect(mapStateToProps)(Layout))
