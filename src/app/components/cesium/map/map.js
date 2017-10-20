@@ -3,10 +3,8 @@ import { connect } from 'react-redux'
 
 import { assign } from 'utils'
 import CesiumMapComponent from './map-component'
-import bindZoomLevels from 'data/zoom-levels'
 const { Cesium } = window
 
-const zoomLevels = bindZoomLevels(Cesium)
 const mapId = `map-${new Date().getTime()}`
 
 const bindFlyTo = v => (lat, long, z = 15000.0, rest = {}) =>
@@ -100,9 +98,8 @@ class CesiumComponent extends Component {
   }
 
   handleZoom (zoom) {
-    if (!zoomLevels[zoom]) return
     const { state: { viewer } } = this
-    const [zLevel, opts, cameraProps] = zoomLevels[zoom]
+    const [zLevel, opts, cameraProps] = zoom
     if (zLevel) {
       this.flyTo(...zLevel, opts)
     }
