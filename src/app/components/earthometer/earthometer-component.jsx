@@ -17,7 +17,12 @@ const Earthometer = ({ className, earthSaved, setEarthSaved, displayOnly }) => {
   return (
     <div className={cx(className, styles.earthometer)}>
       <div className={styles.container}>
-        <div className={styles.labels}>
+        <div
+          className={cx([
+            styles.labels,
+            { [styles.labelToColumn]: !displayOnly }
+          ])}
+        >
           <h3
             className={cx([
               styles.title,
@@ -26,32 +31,37 @@ const Earthometer = ({ className, earthSaved, setEarthSaved, displayOnly }) => {
           >
             {title}
           </h3>
-          <div
-            className={cx([styles.wrap, { [styles.wrapHidden]: displayOnly }])}
-          >
-            {!displayOnly && (
-              <div>
-                <Slider
-                  className={styles.slider}
-                  theme={theme}
-                  value={earthSaved}
-                  max={last(values)}
-                  onChange={setEarthSaved}
-                />
-                <ul className={styles.values}>
-                  {values.map(v => (
-                    <li
-                      className={cx({ [styles.half]: isHalfWayThrough(v) })}
-                      key={v}
-                    >
-                      {formatValue(v)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+          <div className={styles.linePercentage}>
+            <div
+              className={cx([
+                styles.wrap,
+                { [styles.wrapHidden]: displayOnly }
+              ])}
+            >
+              {!displayOnly && (
+                <div>
+                  <Slider
+                    className={styles.slider}
+                    theme={theme}
+                    value={earthSaved}
+                    max={last(values)}
+                    onChange={setEarthSaved}
+                  />
+                  <ul className={styles.values}>
+                    {values.map(v => (
+                      <li
+                        className={cx({ [styles.half]: isHalfWayThrough(v) })}
+                        key={v}
+                      >
+                        {formatValue(v)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+            <h2 className={styles.percentSaved}>{Math.round(earthSaved)}%</h2>
           </div>
-          <h2 className={styles.percentSaved}>{Math.round(earthSaved)}%</h2>
         </div>
       </div>
     </div>

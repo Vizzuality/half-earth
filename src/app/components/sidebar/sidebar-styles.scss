@@ -8,7 +8,8 @@ $pad: 6rem;
   position: relative;
   display: block;
   width: calc(70vw + 30px);
-  max-width: 600px;
+  max-width: $max-width;
+  min-width: $min-width;
   transition: width 0.25s ease-in-out;
 
   .content {
@@ -20,6 +21,8 @@ $pad: 6rem;
     overflow-y: auto;
     font-size: 1.6rem;
     line-height: 2em;
+    width: 100%;
+    min-width: 430px;
 
     &::after {
       pointer-events: none;
@@ -34,7 +37,7 @@ $pad: 6rem;
       background-image:
         linear-gradient(
           $color-mid-blue,
-          rgba($color-mid-blue, 0) 20%,
+          rgba($color-mid-blue, 0) 30%,
           rgba($color-mid-blue, 0) 80%,
           $color-mid-blue
         );
@@ -43,6 +46,7 @@ $pad: 6rem;
 
   &Hidden {
     width: 0;
+    min-width: 0;
     opacity: 0;
 
     .content::after {
