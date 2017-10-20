@@ -46,6 +46,7 @@ $pad: 6rem;
 
   &Hidden {
     width: 0;
+    min-width: 0;
     opacity: 0;
 
     .content::after {
