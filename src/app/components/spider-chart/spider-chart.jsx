@@ -45,9 +45,6 @@ const SpiderChart = ({ data, dimensions }) => {
         />
         <PolarAngleAxis dataKey="subject" fill="#fff" />
         <Tooltip
-          wrapperStyle={{ backgroundColor: '#1b364c', border: 0 }}
-          labelStyle={{ padding: '0', fontSize: 12 }}
-          itemStyle={{ color: '#fff', padding: '0', fontSize: 12 }}
           content={({ payload }) => <SpiderTooltip payload={payload} />}
           cursor={false}
           isAnimationActive={false}

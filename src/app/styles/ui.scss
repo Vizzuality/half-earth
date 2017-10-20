@@ -97,6 +97,7 @@
   .radarChartTooltip {
     display: flex;
     flex-direction: column;
+    background-color: $color-navy-blue;
 
     .radarChartTooltipContainer {
       display: flex;
