@@ -24,6 +24,9 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
     </span>
   )
 
+  const multipleLegend = layer =>
+    layer.elements.map(element => console.log(element) || simpleLegend(element))
+
   const gradientLegend = (layer, i) => (
     <div
       key={`legend-item-${layer.label}`}
@@ -67,6 +70,7 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
 
   const renderLegend = (layer, i) => {
     if (layer.type === 'simple') return simpleLegend(layer)
+    if (layer.type === 'multiple') return multipleLegend(layer)
     if (layer.type === 'gradient') return gradientLegend(layer, i)
     return null
   }

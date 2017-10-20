@@ -222,9 +222,17 @@ export default {
       color: 'violet'
     },
     'pa-scenario': {
-      type: 'simple',
-      label: 'Where to Protect',
-      color: 'yellow'
+      type: 'multiple',
+      elements: [
+        {
+          label: 'Grids optimised for meeting conservation targets',
+          color: 'yellow'
+        },
+        {
+          label: 'Grids with > 75% protected area coverage',
+          color: 'violet'
+        }
+      ]
     },
     mammals: {
       type: 'gradient',
