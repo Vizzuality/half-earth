@@ -16,7 +16,7 @@ const LegendLayers = ({ layers }) => {
         layer =>
           layer.type === 'simple' ? (
             <span
-              key={`legend-item-${layer.name}`}
+              key={`legend-item-${layer.label}`}
               className={cx([
                 styles.simpleLegend,
                 styles['simpleLegend' + capitalize(layer.color)]
