@@ -92,7 +92,7 @@ class Global extends Component {
             everywhere to participate in actions that will help us achieve the
             Half-Earth goal.
           </P>
-          <NavFooter to="/" />
+          <NavFooter from="/regional" to="/" />
         </Scroller>
       </div>
     )
