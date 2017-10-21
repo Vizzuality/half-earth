@@ -11,7 +11,10 @@ function mapStateToProps (state, { location }) {
   const { section } = state
 
   // TODO: improve this
-  const getLayerName = layer => layer.split('pa-scenario')[0].split(':')[0]
+  const getLayerName = layer => {
+    if (layer.startsWith('pa-scenario')) return 'pa-scenario'
+    return layer.split(':')[0]
+  }
   const activeLayers =
     page && Array.isArray(page.layers)
       ? page.layers

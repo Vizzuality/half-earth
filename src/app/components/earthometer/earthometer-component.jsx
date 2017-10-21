@@ -12,7 +12,7 @@ const formatValue = v => (isHalfWayThrough(v) ? 'Half' : v)
 
 const Earthometer = ({ className, earthSaved, setEarthSaved, displayOnly }) => {
   const title = displayOnly
-    ? 'Earth conserved accounts for around'
+    ? 'Percentage of land covered by protected areas'
     : 'Earth Conserved'
   return (
     <div className={cx(className, styles.earthometer)}>
