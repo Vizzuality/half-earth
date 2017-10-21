@@ -148,13 +148,8 @@ export default {
         'simbiotica',
         `#layer {
           line-width: 1.5;
-          line-color: #e85353;
+          line-color: #291270;
           line-opacity: 1;
-        }
-        #layer::outline {
-          line-width: 1;
-          line-color: #000000;
-          line-opacity: 0.5;
         }`,
         'openstreetmaps_southern_africa_roads'
       ),
@@ -167,13 +162,13 @@ export default {
       carto: cartoConfig(
         'half-earth',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0;
+          polygon-fill: #d96fad;
+          polygon-opacity: 0.9;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #000000;
-          line-opacity: 0.5;
+          line-color: #d96fad;
+          line-opacity: 1;
         }`,
         'wdpa_example_reserves'
       ),
@@ -186,13 +181,13 @@ export default {
       carto: cartoConfig(
         'half-earth',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0;
+          polygon-fill: #a509e4;
+          polygon-opacity: 0.8;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #000000;
-          line-opacity: 0.5;
+          line-color: #a509e4;
+          line-opacity: 1;
         }`,
         'proposed_cederberg_corridor'
       ),
@@ -205,13 +200,13 @@ export default {
       carto: cartoConfig(
         'half-earth',
         `#layer {
-          polygon-fill: #00f7ff;
-          polygon-opacity: 0;
+          polygon-fill: #e95353;
+          polygon-opacity: 1;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #000000;
-          line-opacity: 0.5;
+          line-color: #e95353;
+          line-opacity: 1;
         }`,
         'community_based_kenilworth'
       ),
@@ -224,12 +219,12 @@ export default {
       carto: cartoConfig(
         'half-earth',
         `#layer {
-          polygon-fill: #f38828;
+          polygon-fill: #972a6a;
           polygon-opacity: 0.7;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #f38828;
+          line-color: #972a6a;
           line-opacity: 1;
         }`,
         'private_nature_reserve'
@@ -279,12 +274,17 @@ export default {
     'road-building': {
       type: 'simple',
       label: 'Roads',
-      color: 'red'
+      color: 'purple'
     },
     'private-reserves': {
       type: 'simple',
       label: 'Private Reserves',
-      color: 'orange'
+      color: 'pink'
+    },
+    'community-based-reserves': {
+      type: 'simple',
+      label: 'Community Based Reserves',
+      color: 'red'
     },
     'urban-development': {
       type: 'simple',
@@ -300,31 +300,41 @@ export default {
       type: 'gradient',
       label: 'Mammals',
       color: 'purple',
-      size: 'big'
+      size: 'big',
+      min: 8,
+      max: 49
     },
     birds: {
       type: 'gradient',
       label: 'Birds',
       color: 'aqua',
-      size: 'big'
+      size: 'big',
+      min: 1,
+      max: 38
     },
     amphibians: {
       type: 'gradient',
       label: 'Amphibians',
       color: 'green',
-      size: 'big'
+      size: 'big',
+      min: 3,
+      max: 25
     },
     restio: {
       type: 'gradient',
       label: 'Restio',
       color: 'orange',
-      size: 'big'
+      size: 'big',
+      min: 1,
+      max: 166
     },
     protea: {
       type: 'gradient',
       label: 'Protea',
-      color: 'red',
-      size: 'big'
+      color: 'orange2',
+      size: 'big',
+      min: 1,
+      max: 69
     }
   }
 }

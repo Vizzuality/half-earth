@@ -2,7 +2,7 @@
   "plugins": {
     "postcss-font-smoothing": {},
     "postcss-cssnext": {
-      "browsers": ["last 2 versions", "IE > 10"]
+      "browsers": ["> 1%", "last 2 versions", "Firefox ESR", "Safari >= 8"]
     }
   }
 }
