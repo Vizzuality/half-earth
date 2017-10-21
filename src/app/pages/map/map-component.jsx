@@ -43,7 +43,7 @@ const Map = ({
             position={billboard.coordinates}
           />
         ))}
-      {(route === 'intro' || route === 'local') && (
+      {(route === 'home' || route === 'intro' || route === 'local') && (
         <Birds
           pixelSize={15}
           colorBlendMode={1}
