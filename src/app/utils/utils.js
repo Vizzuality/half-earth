@@ -1,5 +1,8 @@
+import once from 'lodash/once'
 export const assign = (o, ...rest) => Object.assign({}, o, ...rest)
 export const ns = (s, sep = '|') => s.split(sep)
+export const logOnce = once((...args) => console.log(...args))
+
 // quick helper, can be further improved
 export const cartoConfig = (account, cartocss, table, options = {}) => ({
   account,
