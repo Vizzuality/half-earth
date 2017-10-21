@@ -6,7 +6,7 @@ import NavFooter from 'components/nav-footer'
 import SpiderChart from 'components/spider-chart'
 
 import uiStyles from 'app/styles/ui'
-const earthProtected = 100
+const earthProtected = 15
 
 const Regional = ({
   classname,
