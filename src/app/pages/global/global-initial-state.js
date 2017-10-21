@@ -1,7 +1,7 @@
 import { cartoConfig } from 'app/utils'
 import { utils } from 'pages/map'
 
-const { MOLLayer, speciesSelector, speciesSelections } = utils
+const { MOLLayer } = utils
 
 const sliderLayers = steps => {
   return steps.map(v =>
@@ -12,6 +12,25 @@ const sliderLayers = steps => {
     )
   )
 }
+
+export const speciesSelector = selected => ({
+  options: {
+    birds: 'Birds',
+    mammals: 'Mammals',
+    amphibians: 'Amphibians',
+    cacti: 'Cacti',
+    conifers: 'Conifers'
+  },
+  selected
+})
+
+export const speciesSelections = type => ({
+  birds: `birds:${type}`,
+  mammals: `mammals:${type}`,
+  amphibians: `amphibians:${type}`,
+  cacti: `cacti:${type}`,
+  conifers: `conifers:${type}`
+})
 
 export default {
   whereToProtect: {
@@ -142,11 +161,11 @@ export default {
       50
     ]),
     MOLLayer('all-taxa', 'all-taxa', 'richness'),
-    MOLLayer('birds', 'birds', 'richness'),
-    MOLLayer('mammals', 'mammals', 'richness'),
-    MOLLayer('amphibians', 'amphibians', 'richness'),
-    MOLLayer('conifers', 'conifers', 'richness'),
-    MOLLayer('cacti', 'cacti', 'richness'),
+    MOLLayer('birds:richness', 'birds', 'richness'),
+    MOLLayer('mammals:richness', 'mammals', 'richness'),
+    MOLLayer('amphibians:richness', 'amphibians', 'richness'),
+    MOLLayer('conifers:richness', 'conifers', 'richness'),
+    MOLLayer('cacti:richness', 'cacti', 'richness'),
     {
       name: 'protected-areas',
       url:
@@ -176,14 +195,14 @@ export default {
   ],
   sections: {
     'global:1': {
+      layers: []
+    },
+    'global:2': {
       layers: [],
       selections: speciesSelections('richness'),
       selectors: {
         birds: speciesSelector('birds')
       }
-    },
-    'global:2': {
-      layers: []
     },
     'global:3': {
       layers: []

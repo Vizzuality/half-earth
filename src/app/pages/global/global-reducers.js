@@ -3,14 +3,12 @@ import difference from 'lodash/difference'
 import merge from 'lodash/fp/merge'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
-import { assign } from 'utils'
 import { actions as earthometerActions } from 'components/earthometer'
 import { actions as cartoActions } from 'providers/carto'
 import { reducers as mapReducers } from 'pages/map'
+import { reducers as regionalReducers } from 'pages/regional'
 import * as actions from './global-actions'
 
-const makeVisible = l => assign(l, { visible: true })
-const makeHidden = l => assign(l, { visible: false })
 const toPayload = payload => ({ payload })
 const layerToNum = l => Number(l.name.replace('pa-scenario-', ''))
 const selectSelector = (state, { payload: { section, selector, selection } }) =>
@@ -70,27 +68,7 @@ export default {
 
   [actions.toggleGlobalLayer]: mapReducers.toggleLayer,
 
-  [actions.setGlobalSection]: (state, { payload, __app: { section } }) => {
-    if (payload === section.section) return state
-    const reset = mapReducers.resetLayers(state)
-    const block = reset.sections[payload]
-    const { layers, selectors, selections } = block
-
-    const visibleLayers = layers.concat(
-      (selectors &&
-        Object.keys(selectors).map(s => selections[selectors[s].selected])) ||
-        []
-    )
-
-    const matchingLayers = state.layers.filter(l =>
-      includes(visibleLayers, l.name)
-    )
-    const matchingVisibleLayers = matchingLayers.map(makeVisible)
-    const otherLayers = difference(state.layers, matchingLayers)
-    const otherLayersHidden = otherLayers.map(makeHidden)
-    const updatedLayers = matchingVisibleLayers.concat(otherLayersHidden)
-    return { ...state, layers: updatedLayers }
-  },
+  [actions.setGlobalSection]: regionalReducers.setRegionalSection,
 
   [actions.setWhereToProtectData]: (state, { payload }) => ({
     ...state,
