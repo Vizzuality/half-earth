@@ -30,7 +30,9 @@ class Global extends Component {
     return (
       <div className={className}>
         <Scroller>
-          <Earthometer displayOnly={section !== 'global:4'} />
+          <Earthometer
+            displayOnly={section !== 'global:4' && section !== 'global:5'}
+          />
           <P
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:1')}
