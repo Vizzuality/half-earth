@@ -10,22 +10,20 @@ const Home = props => (
       </div>
       <p className={styles.intro}>
         Half-Earth is a call-to-action to protect half the Earth’s land and sea.
-        If we conserve half, we can protect 85% or more of species, including
-        ourselves.
+        If we conserve half, we can safeguard the bulk of the planet’s species,
+        including ourselves.
       </p>
       <div className={styles.titleSection}>
         <img src="/img/home/iconPlanet.png" />
         <p className={styles.separator}>Which half?</p>
       </div>
       <p className={styles.body}>
-        By mapping data at the local, regional, and global scale, we’re
-        identifying the places that contain the greatest diversity of life and
-        showcasing how the species protected in these habitats can best be
-        managed to sustain biodiversity. We’re analyzing protected places, along
-        with their governance and management, and integrating data about the
-        historical distribution and current status of biodiversity to help drive
-        decision-making and provide scientific leadership regarding what areas
-        must be protected to reach the goal of Half-Earth.
+        By mapping data at the local, regional, and global scale, we are
+        identifying the places with the greatest and rarest diversity of life.
+        We are showcasing the species inhabiting these sites and their unique
+        roles. And we are providing scientific leadership and decision support
+        for how we can best manage these special places to sustain this
+        diversity for future generations and reach the goal of Half-Earth.
       </p>
     </div>
     <div className={styles.cto}>
