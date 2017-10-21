@@ -1,0 +1,16 @@
+@import '~styles/variables.scss';
+
+.link {
+  color: $color-turquoise;
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+    color: rgba($color-white, 0.2);
+  }
+
+  &:active {
+    outline: 0;
+  }
+}

@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import Scroller, { Element as P } from 'components/scroller'
 import Earthometer from 'components/earthometer'
 import NavFooter from 'components/nav-footer'
+
+import styles from './global-styles.scss'
 import uiStyles from 'app/styles/ui'
 import Shapes from './shapes'
 
@@ -107,7 +109,10 @@ class Global extends Component {
             also highlights the importance of including more biodiversity in
             such planning and illustrates the obvious need for such planning to
             ultimately happen at a kilometer resolution or finer — as
-            illustrated for <Link to="/regional">Southern Africa.</Link>{' '}
+            illustrated for{' '}
+            <Link className={styles.link} to="/regional">
+              Southern Africa.
+            </Link>{' '}
             Half-Earth sets out to help provide the science, tools, and
             leadership to achieve this vision of a world that consciously
             safeguards its biodiversity heritage.
