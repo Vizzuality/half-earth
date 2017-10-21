@@ -52,12 +52,12 @@ class Global extends Component {
             onScrollFocus={() => updateSections('global:2')}
           >
             Globally, we are able to map species diversity, at least in broad
-            brushes, for an increasing number of
-            {d('global:2', 'birds')}. This allows us to pinpoint important
-            candidate regions for conservation. There are countless more species
-            that haven’t been discovered or formally identified, but they are an
-            integral part of the network of life and are vulnerable to the same
-            threats as the species we have records for.
+            brushes, for an increasing number of {d('global:2', 'birds')}. This
+            allows us to pinpoint important candidate regions for conservation.
+            There are countless more species that haven’t been discovered or
+            formally identified, but they are an integral part of the network of
+            life and are vulnerable to the same threats as the species we have
+            records for.
             <SpiderChart {...protectedAnimalsSpider} />
             <div className={uiStyles.spiderLegendContainer}>
               <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
