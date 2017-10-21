@@ -2,18 +2,28 @@
 import Vector from './vector'
 
 class Boid {
-  constructor (x, y, r, maxspeed, maxforce, target, targetRate, opts) {
+  constructor (options) {
+    const {
+      position,
+      r,
+      maxspeed = 1,
+      maxforce = 0.03,
+      separationFactor = 1.5,
+      alignmentFactor = 1.0,
+      cohesionFactor = 1.0,
+      velocityFactor = 1.0
+    } = options
+
     this.acceleration = new Vector(0, 0)
-    // const angle = Math.random(TWO_PI)
-    // this.velocity = new Vector(Math.cos(angle), Math.sin(angle))
     this.velocity = Vector.random2D()
-    this.position = new Vector(x, y)
+    this.position = new Vector(position[0], position[1])
     this.r = r
     this.maxspeed = maxspeed // Maximum speed
     this.maxforce = maxforce // Maximum steering force
-    this.target = new Vector(...target)
-    this.targetRate = targetRate
-    this.opts = opts
+    this.separationFactor = separationFactor
+    this.alignmentFactor = alignmentFactor
+    this.cohesionFactor = cohesionFactor
+    this.velocityFactor = velocityFactor
   }
 
   applyForce (force) {
@@ -24,13 +34,11 @@ class Boid {
 
   // We accumulate a new acceleration each time based on three rules
   flock (boids) {
-    const sep = this.separate(boids) // Separation
-    const ali = this.align(boids) // Alignment
-    const coh = this.cohesion(boids) // Cohesion
-    // Arbitrarily weight these forces
-    sep.mult(this.opts.sep)
-    ali.mult(this.opts.ali)
-    coh.mult(this.opts.coh)
+    const { separationFactor, alignmentFactor, cohesionFactor } = this
+    const sep = this.separate(boids).mult(separationFactor) // Separation
+    const ali = this.align(boids).mult(alignmentFactor) // Alignment
+    const coh = this.cohesion(boids).mult(cohesionFactor) // Cohesion
+
     // Add the force vectors to acceleration
     this.applyForce(sep)
     this.applyForce(ali)
@@ -41,7 +49,7 @@ class Boid {
 
   // Method to update position
   update (boids) {
-    const { velocity, position, acceleration, maxspeed } = this
+    const { velocity, position, acceleration, maxspeed, velocityFactor } = this
 
     // compute flocking first
     this.flock(boids)
@@ -50,26 +58,19 @@ class Boid {
     velocity.add(acceleration)
     // Limit speed
     velocity.limit(maxspeed)
-    position.add(velocity)
+    position.add(velocity.mult(velocityFactor))
     // Reset accelertion to 0 each cycle
     acceleration.mult(0)
-
-    // { position, velocity } are already up to date at this point
-    return { position, velocity }
   }
 
   // A method that calculates and applies a steering force towards a target
   // STEER = DESIRED MINUS VELOCITY
-  seek (target) {
+  seek (to) {
     const { velocity, maxspeed, maxforce } = this
-    let desired = Vector.sub(target, this.position) // A vector pointing from the position to the target
+    // A vector pointing from the position to the target
+    let desired = Vector.sub(to, this.position)
     // Scale to maximum speed
-    desired.normalize()
-    desired.mult(maxspeed)
-
-    // Above two lines of code below could be condensed with new Vector setMag() method
-    // Not using this method until Processing.js catches up
-    // desired.setMag(maxspeed)
+    desired.setMag(maxspeed)
 
     // Steering = Desired minus Velocity
     const steer = Vector.sub(desired, velocity)
@@ -165,7 +166,6 @@ class Boid {
       const d = Vector.dist(position, other.position)
       if (d > 0 && d < neighbordist) {
         sum.add(other.position) // Add position
-        sum.add(this.target.mult(this.targetRate))
         count++
       }
     })

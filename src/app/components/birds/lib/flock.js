@@ -5,13 +5,15 @@ class Flock {
     this.boids = [] // Initialize the ArrayList
   }
 
-  run (renderBoid) {
+  run () {
     const { boids } = this
-    boids.map((boid, i) => renderBoid(boid.update(boids), boid.i))
+    boids.map(boid => {
+      boid.update(boids)
+      boid.render()
+    })
   }
 
-  addBoid (b, i) {
-    b.i = i
+  addBoid (b) {
     this.boids.push(b)
   }
 }

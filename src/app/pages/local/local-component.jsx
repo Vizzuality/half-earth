@@ -10,7 +10,7 @@ import NavFooter from 'components/nav-footer'
 import styles from './local-styles'
 import uiStyles from 'app/styles/ui'
 
-const Local = ({ className, local, closePopUp }) => {
+const Local = ({ className, local, closePopUp, setSection }) => {
   return (
     <div className={cx(className)}>
       <PopUp open={local.popUp.open} close={() => closePopUp()}>
