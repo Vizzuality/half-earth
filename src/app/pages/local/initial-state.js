@@ -87,5 +87,28 @@ export default {
         description: 'Where water flows, life grows.'
       }
     }
-  }
+  },
+  birds: [
+    {
+      pixelSize: 18,
+      colorBlendMode: 1,
+      colorBlendAmount: 1,
+      separationFactor: 3,
+      crop: false,
+      // position: [18.4196, -17.3312],
+      position: [20.317629, -17.806846],
+      targets: [
+        [23.201735, -18.302562],
+        [23.223064, -18.818436],
+        [22.867807, -19.054048],
+        [22.249646, -19.275385],
+        [22.522715, -19.798506]
+      ],
+      north: -17.3312,
+      south: -20.273157,
+      east: 24.031766,
+      west: 21.395792,
+      numBirds: 50
+    }
+  ]
 }
