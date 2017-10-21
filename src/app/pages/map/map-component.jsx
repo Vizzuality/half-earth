@@ -38,7 +38,7 @@ const Map = ({
             url={billboard.url}
             urlHover={billboard.urlHover}
             width={82}
-            height={123}
+            height={108}
             onClick={id => openPopUp(id)}
             position={billboard.coordinates}
           />
