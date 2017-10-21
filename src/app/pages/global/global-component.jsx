@@ -15,11 +15,13 @@ class Global extends Component {
     const {
       toggleGlobalLayer,
       renderToggle,
+      renderDropdown,
       className,
       protectedAnimalsSpider,
       setSection,
       setGlobalSection,
       whereToProtectSpider,
+      selectGlobalSelector,
       section
     } = this.props
     const updateSections = s => {
@@ -27,6 +29,7 @@ class Global extends Component {
       setSection(s)
     }
     const t = renderToggle(toggleGlobalLayer)
+    const d = renderDropdown(selectGlobalSelector)
     return (
       <div className={className}>
         <Scroller>
@@ -50,12 +53,11 @@ class Global extends Component {
           >
             Globally, we are able to map species diversity, at least in broad
             brushes, for an increasing number of
-            {t('amphibians')}, {t('birds')} {t('mammals')} {t('conifers')}{' '}
-            {t('cacti')}. This allows us to pinpoint important candidate regions
-            for conservation. There are countless more species that haven’t been
-            discovered or formally identified, but they are an integral part of
-            the network of life and are vulnerable to the same threats as the
-            species we have records for.
+            {d('global:2', 'birds')}. This allows us to pinpoint important
+            candidate regions for conservation. There are countless more species
+            that haven’t been discovered or formally identified, but they are an
+            integral part of the network of life and are vulnerable to the same
+            threats as the species we have records for.
             <SpiderChart {...protectedAnimalsSpider} />
             <div className={uiStyles.spiderLegendContainer}>
               <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
