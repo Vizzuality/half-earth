@@ -331,7 +331,7 @@ export default {
     protea: {
       type: 'gradient',
       label: 'Protea',
-      color: 'red',
+      color: 'orange2',
       size: 'big',
       min: 1,
       max: 69
