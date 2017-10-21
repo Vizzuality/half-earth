@@ -49,15 +49,14 @@ export default {
         type: 'image',
         background: 'img/popup/03_NationalGeographic_2435343.jpg',
         description:
-          'People living in the Okavango Delta use narrow boats called mokovo to navigate the waterways of this oasis. Great care must be taken when travelling in a mokovo as hippos could be hidden beneath the surface.'
+          'People living in the Okavango Delta use narrow boats called mokovo to navigate the waterways of this oasis.'
       },
       1: {
         id: 1,
         type: 'image',
         background:
           'img/popup/02_NG_Okavango_Wilderness_Project_credit_Chris_Boyes.jpg',
-        description:
-          'A whole world exists beneath the surface / With water comes life'
+        description: 'A whole world exists beneath the surface'
       },
       2: {
         id: 2,
@@ -71,7 +70,7 @@ export default {
         type: 'image',
         background: 'img/popup/05_NationalGeographic_2435021.jpg',
         description:
-          'Humans traveling by mokovo have to watch out for and avoid hippos wallowing in the mud.'
+          'Great care must be taken by people navigating the Okavango Delta as hippos could be hidden beneath the surface.'
       },
       4: {
         id: 4,
