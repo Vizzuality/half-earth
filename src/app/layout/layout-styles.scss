@@ -8,6 +8,10 @@
   .header {
     // height: 5rem;
     height: $header-height;
+
+    &Hidden {
+      display: none;
+    }
   }
 
   .body {

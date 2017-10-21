@@ -16,7 +16,7 @@ const Layout = ({ children, location, route, layers, section }) => {
   const zoomLevel = `${route}|${section.section}`
   return (
     <div className={styles.container}>
-      <Header className={styles.header} />
+      <Header className={cx(styles.header, styles.headerHidden)} />
       <div className={styles.body}>
         {Children.map(
           children,
