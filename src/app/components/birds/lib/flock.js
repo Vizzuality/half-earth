@@ -15,6 +15,7 @@ class Flock {
 
   addBoid (b) {
     this.boids.push(b)
+    return b
   }
 }
 
