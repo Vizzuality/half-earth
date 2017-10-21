@@ -43,30 +43,15 @@ const Map = ({
             position={billboard.coordinates}
           />
         ))}
-      {(route === 'home' ||
-        route === 'intro' ||
-        route === 'local' ||
-        route === 'regional') && (
-        <Birds
-          pixelSize={(route === 'local') | (route === 'intro') ? 18 : 10}
-          colorBlendMode={1}
-          colorBlendAmount={route === local ? 1 : 0}
-          position={[18.4196, -13.461407]}
-          targets={[
-            [23.201735, -18.302562],
-            [23.223064, -18.818436],
-            [22.867807, -19.054048],
-            [22.249646, -19.275385],
-            [22.522715, -19.798506]
-          ]}
-          north={-17.3312}
-          south={-20.273157}
-          east={24.031766}
-          west={21.395792}
-          numBirds="200"
-          url="hum"
-        />
-      )}
+      {route === 'local' &&
+        local.birds.map(localBird => (
+          <Birds {...{ ...localBird }} key={localBird} url="hum" />
+        ))}
+      {(route === 'local' ||
+        (route === 'regional' && section.section === 'regional:1')) &&
+        regional.birds.map((regionalBird, i) => (
+          <Birds {...{ ...regionalBird }} key={`regionalBird${i}`} url="hum" />
+        ))}
       {route === 'regional' &&
         regional.layers.map(
           layer =>

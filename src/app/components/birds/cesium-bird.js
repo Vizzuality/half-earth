@@ -1,16 +1,19 @@
 import Bird from './lib/bird'
-
 const { Cesium } = window
 
 class CesiumBird extends Bird {
   constructor (options) {
     super(options)
     this.viewer = options.viewer
-
     if (!this.entity) {
       this.coords = options.coords
       this.latScale = options.latScale
       this.longScale = options.longScale
+      this.west = options.west
+      this.east = options.east
+      this.north = options.north
+      this.south = options.south
+      this.crop = options.crop
 
       this.entity = this.viewer.entities.add({
         position: Cesium.Cartesian3.fromDegrees(...options.position),
@@ -52,9 +55,14 @@ class CesiumBird extends Bird {
     var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll)
     var orientation = Cesium.Transforms.headingPitchRollQuaternion(pos, hpr)
     entity.orientation = orientation
-
-    if (!entity.show) viewer.entities.remove(entity)
-    if (y < south || x < west || x > east || y > north) {
+    if (!this.crop) return
+    if (
+      this.longScale(y) < south ||
+      this.longScale(y) > north ||
+      this.latScale(x) > east ||
+      this.latScale(x) < west
+    ) {
+      if (!entity.show) viewer.entities.remove(entity)
       entity.show = false
     }
   }
