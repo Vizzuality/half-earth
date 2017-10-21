@@ -4,10 +4,6 @@ import Flock from './lib/flock'
 import Boid from './lib/boid'
 const { Cesium } = window
 
-const start = [22.8888689, -19.1014986, 1000]
-// const start = [32.980262, -2.898339, 1000]
-const fence = -30.945565
-
 const w = 100
 const h = 100
 const r = 2.0
@@ -23,7 +19,7 @@ var linScale = function ([istart, istop], [ostart, ostop]) {
 class Birds extends Component {
   constructor (props) {
     super(props)
-    const { numBirds, target, north, south, east, west } = props
+    const { numBirds, target, north, south, east, west, start } = props
     // const inc = 2
     this.latScale = linScale([0, w], [west, east])
     this.longScale = linScale([0, h], [north, south])
@@ -61,7 +57,7 @@ class Birds extends Component {
   }
 
   componentWillReceiveProps (props) {
-    const { viewer } = props
+    const { viewer, colorBlendMode, colorBlendAmount } = props
     if (!viewer) return
     if (!this.viewer) this.viewer = viewer
 
@@ -73,11 +69,19 @@ class Birds extends Component {
     if (!this.entities) {
       this.entities = this.birds.map(bird => {
         return viewer.entities.add({
-          position: Cesium.Cartesian3.fromDegrees(...start),
+          position: Cesium.Cartesian3.fromDegrees(0, 0, 0),
           id: bird.id,
           model: {
             uri: '/img/triangulos.glb',
-            minimumPixelSize: props.pixelSize
+            minimumPixelSize: props.pixelSize,
+            allowPicking: false,
+            shadows: Cesium.ShadowMode.DISABLED,
+            // // material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.PURPLE),
+            // appearance: new Cesium.MaterialAppearance({
+            //   flat: true
+            // })
+            colorBlendMode: colorBlendMode || 1,
+            colorBlendAmount: colorBlendAmount || 0.4
           }
         })
       })
@@ -88,17 +92,27 @@ class Birds extends Component {
     // this.entities.map(entity => {
     // })
     flock.run(({ position, velocity }, i) => {
-      const { west, east, north, viewer } = this.props
+      const { west, east, north, south, viewer, start } = this.props
       const entity = this.entities[i]
       if (!entity || !entity.position) return
       const { x, y } = position
-      entity.position = Cesium.Cartesian3.fromDegrees(
+      const pos = Cesium.Cartesian3.fromDegrees(
         this.latScale(x),
-        this.longScale(y)
-      ) // { x: x + 1000, y: y + 1000, z }
+        this.longScale(y),
+        start[2] || 0
+      )
+      const heading = velocity.heading() + Cesium.Math.toRadians(90)
+      var pitch = 0
+      var roll = 0
+      var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll)
+      var orientation = Cesium.Transforms.headingPitchRollQuaternion(pos, hpr)
+
+      entity.position = pos
+      entity.orientation = orientation
+
       if (!entity.show) viewer.entities.remove(entity)
       if (
-        this.longScale(y) < fence ||
+        this.longScale(y) < south ||
         this.latScale(x) < west ||
         this.latScale(x) > east ||
         this.longScale(y) > north

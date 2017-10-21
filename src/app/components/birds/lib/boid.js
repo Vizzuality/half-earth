@@ -11,7 +11,7 @@ class Boid {
     this.r = r
     this.maxspeed = opts.maxspeed // Maximum speed
     this.maxforce = opts.maxforce // Maximum steering force
-    this.target = new Vector(...opts.target)
+    this.target = (opts.target && new Vector(...opts.target)) || false
     this.targetRate = opts.targetRate
     this.opts = opts
   }
@@ -165,7 +165,7 @@ class Boid {
       const d = Vector.dist(position, other.position)
       if (d > 0 && d < neighbordist) {
         sum.add(other.position) // Add position
-        sum.add(this.target.mult(this.targetRate))
+        if (this.target) sum.add(this.target.mult(this.targetRate))
         count++
       }
     })
