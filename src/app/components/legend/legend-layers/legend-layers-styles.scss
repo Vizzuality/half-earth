@@ -34,8 +34,8 @@ $backCircle: #18bab4;
       background-color: #291270;
     }
 
-    &Brown::after {
-      background-color: #f4a175;
+    &Red::after {
+      background-color: #e95353;
     }
 
     &Violet::after {
@@ -52,6 +52,10 @@ $backCircle: #18bab4;
 
     &Yellow::after {
       background-color: rgba(243, 193, 40, 0.7);
+    }
+
+    &Pink::after {
+      background-color: rgba(#972a6a, 0.7);
     }
   }
 

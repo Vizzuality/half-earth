@@ -200,12 +200,12 @@ export default {
       carto: cartoConfig(
         'half-earth',
         `#layer {
-          polygon-fill: #611181;
-          polygon-opacity: 0.7;
+          polygon-fill: #e95353;
+          polygon-opacity: 1;
         }
         #layer::outline {
           line-width: 1;
-          line-color: #611181;
+          line-color: #e95353;
           line-opacity: 1;
         }`,
         'community_based_kenilworth'
@@ -279,7 +279,12 @@ export default {
     'private-reserves': {
       type: 'simple',
       label: 'Private Reserves',
-      color: 'orange'
+      color: 'pink'
+    },
+    'community-based-reserves': {
+      type: 'simple',
+      label: 'Community Based Reserves',
+      color: 'red'
     },
     'urban-development': {
       type: 'simple',

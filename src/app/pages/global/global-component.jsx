@@ -107,8 +107,7 @@ class Global extends Component {
             also highlights the importance of including more biodiversity in
             such planning and illustrates the obvious need for such planning to
             ultimately happen at a kilometer resolution or finer — as
-            illustrated for
-            <Link to="/regional">Southern Africa.</Link>
+            illustrated for <Link to="/regional">Southern Africa.</Link>{' '}
             Half-Earth sets out to help provide the science, tools, and
             leadership to achieve this vision of a world that consciously
             safeguards its biodiversity heritage.

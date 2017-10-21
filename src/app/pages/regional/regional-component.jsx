@@ -88,9 +88,9 @@ const Regional = ({
           In this region, {earthProtected} percent of the area is covered by
           designated {t('Protected Areas')}, encompassing an area of 60,100 km2.
           Other conservation approaches are also present in this area, including{' '}
-          {t('Community-based reserves', true)}, {t('Private reserves', true)}{' '}
-          and Indigenous and Community Conserved Areas (ICCAs). Similarly, a
-          number of {t('Key Biodiversity Areas')}
+          {t('Community-based reserves')}, {t('Private reserves')} and
+          Indigenous and Community Conserved Areas (ICCAs). Similarly, a number
+          of {t('Key Biodiversity Areas')}
           have been identified due to their importance for select threatened and
           geographically restricted species.
         </P>
