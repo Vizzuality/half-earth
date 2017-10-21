@@ -18,7 +18,9 @@ class Birds extends Component {
 
   componentWillUnmount () {
     const { viewer } = this.props
-    viewer.entities.removeAll()
+    this.birds.map(bird => {
+      viewer.entities.remove(bird.entity)
+    })
   }
 
   componentWillReceiveProps (props) {
@@ -29,7 +31,7 @@ class Birds extends Component {
       viewer.clock.onTick.addEventListener(this.flock.run)
       this.ontick = true
     }
-    if (!this.entities) {
+    if (!this.birds) {
       const {
         numBirds,
         targets,
@@ -43,13 +45,20 @@ class Birds extends Component {
         pixelSize
       } = this.props
 
-      let maxspeed = 1
+      let maxspeed = 2.5
       let maxforce = 0.03
-      let separationFactor = 1.5
+      let separationFactor = 3
       let alignmentFactor = 1.0
       let cohesionFactor = 0.8
       let velocityFactor = 1.0
       let targetFactor = 0.35 // .35
+
+      // maxspeed = undefined
+      // maxforce = undefined
+      // separationFactor = undefined
+      // alignmentFactor = undefined
+      // cohesionFactor = undefined
+      // velocityFactor = undefined
 
       const w = 1000
       const latScale = map([0, w], [west, east])
@@ -60,8 +69,8 @@ class Birds extends Component {
 
       const nTargets = targets.map(t => [tLatScale(t[0]), tLongScale(t[1])])
 
-      this.entities = new Array(Number(numBirds)).fill(0).map((v, i) => {
-        this.flock.addBoid(
+      this.birds = new Array(Number(numBirds)).fill(0).map((v, i) => {
+        return this.flock.addBoid(
           new Bird({
             maxspeed,
             r: pixelSize,

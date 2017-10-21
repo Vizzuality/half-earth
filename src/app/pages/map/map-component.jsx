@@ -43,12 +43,15 @@ const Map = ({
             position={billboard.coordinates}
           />
         ))}
-      {(route === 'home' || route === 'intro' || route === 'local') && (
+      {(route === 'home' ||
+        route === 'intro' ||
+        route === 'local' ||
+        route === 'regional') && (
         <Birds
-          pixelSize={15}
+          pixelSize={(route === 'local') | (route === 'intro') ? 18 : 10}
           colorBlendMode={1}
-          colorBlendAmount={1}
-          position={[22.541396, -16.692624]}
+          colorBlendAmount={route === local ? 1 : 0}
+          position={[18.4196, -13.461407]}
           targets={[
             [23.201735, -18.302562],
             [23.223064, -18.818436],
