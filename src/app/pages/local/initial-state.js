@@ -96,7 +96,7 @@ export default {
       separationFactor: 3,
       crop: false,
       // position: [18.4196, -17.3312],
-      position: [20.317629, -17.806846],
+      position: [20.065122, -17.794145],
       targets: [
         [23.201735, -18.302562],
         [23.223064, -18.818436],
