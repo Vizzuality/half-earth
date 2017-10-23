@@ -32,8 +32,9 @@ const Logos = ({ openPopUpNavFooter, closePopUp, popUp }) => [
       Partners
     </span>
     <div className={styles.containImages}>
-      {logos.map(({ url, className, img, alt }) => (
+      {logos.map(({ url, className, img, alt }, k) => (
         <a
+          key={k}
           href={url}
           style={{ backgroundImage: `url(/img/partners/${img})` }}
           className={cx(className, styles.logo)}

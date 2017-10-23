@@ -94,12 +94,6 @@ class Global extends Component {
             sequence that is optimized for meeting conservation targets, and
             assuming that up to three quarters of a cell could see
             conservation-focused management.
-            <SpiderChart {...whereToProtectSpider} />
-            <div className={uiStyles.spiderLegendContainer}>
-              <span className={cx(uiStyles.legend, uiStyles.legendPurple)}>
-                % species meeting conservation target
-              </span>
-            </div>
           </P>
           <P
             className={uiStyles.slides}
