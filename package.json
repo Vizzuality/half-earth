@@ -2,15 +2,18 @@
   "name": "half-earth",
   "private": true,
   "scripts": {
+    "start": "node ./stagging.js",
     "reinstall": "rm -rf ./node_modules && yarn install",
     "clean:dist": "rm -rf public/scripts && rm -rf public/styles/main.css && rm -rf public/styles/main.css.gz && rm -rf public/index.html",
     "dev": "yarn run clean:dist && webpack-dev-server --config ./config/development.js",
     "build": "yarn run clean:dist && NODE_ENV=production && webpack --config ./config/production.js",
+    "postinstall": "npm run build",
     "precommit": "lint-staged"
   },
   "dependencies": {
     "babel-plugin-transform-postcss": "^0.3.0",
     "classnames": "^2.2.5",
+    "connect": "^3.6.5",
     "history": "^4.6.3",
     "postcss-font-smoothing": "^0.1.0",
     "react": "^16.0.0",
@@ -28,6 +31,7 @@
     "redux-actions": "^2.2.1",
     "redux-thunk": "^2.2.0",
     "rxjs": "^5.4.3",
+    "serve-static": "^1.13.1",
     "shortid": "^2.2.8",
     "supercluster": "^3.0.0",
     "uuid": "^3.1.0"
