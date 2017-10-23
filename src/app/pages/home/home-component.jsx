@@ -27,7 +27,7 @@ const Home = props => (
       </p>
     </div>
     <div className={styles.cto}>
-      <Link to="intro">Play</Link>
+      <Link to="/local">Play</Link>
       <img className={styles.pulseOne} src="img/button_01.svg" />
       <img className={styles.pulseTwo} src="img/button_02.svg" />
     </div>
