@@ -24,73 +24,31 @@ const defaultRegional = {
 }
 
 export default {
-  graphs: {
+  localProtectedSpecies: {
     data: [
       {
         subject: 'BIRDS',
-        percent: 96,
-        tooltip: [
-          {
-            value: 607,
-            label: 'Number of species in the region',
-            color: '#3850d6'
-          }
-        ]
+        percent: 96
       },
       {
         subject: 'MAMMALS',
-        percent: 88,
-        tooltip: [
-          {
-            value: 160,
-            label: 'Number of species in the region',
-            color: '#3850d6'
-          }
-        ]
+        percent: 88
       },
       {
         subject: 'AMPHIBIANS',
-        percent: 56,
-        tooltip: [
-          {
-            value: 52,
-            label: 'Number of species in the region',
-            color: '#3850d6'
-          }
-        ]
+        percent: 56
       },
       {
         subject: 'CACTI',
-        percent: 100,
-        tooltip: [
-          {
-            value: 1,
-            label: 'Number of species in the region',
-            color: '#3850d6'
-          }
-        ]
+        percent: 100
       },
       {
         subject: 'TURTLES',
-        percent: 81,
-        tooltip: [
-          {
-            value: 9,
-            label: 'Number of species in the region',
-            color: '#3850d6'
-          }
-        ]
+        percent: 81
       },
       {
         subject: 'CONIFERS',
-        percent: 71,
-        tooltip: [
-          {
-            value: 5,
-            label: 'Number of species in the region',
-            color: '#3850d6'
-          }
-        ]
+        percent: 71
       }
     ],
     dimensions: [{ key: 'percent' }]
