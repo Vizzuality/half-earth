@@ -4,7 +4,7 @@ import cx from 'classnames'
 import Header from 'components/header'
 import Map from 'pages/map'
 import Home from 'pages/home'
-import Intro from 'pages/intro'
+// import Intro from 'pages/intro'
 import Sidebar from 'components/sidebar'
 import Legend, { LegendLayers } from 'components/legend'
 
@@ -12,7 +12,7 @@ import styles from './layout-styles.scss'
 
 const Layout = ({ children, location, route, layers, section }) => {
   const isHome = route === 'home'
-  const isIntro = route === 'intro'
+  // const isIntro = route === 'intro'
   const zoomLevel = `${route}|${section.section}`
   return (
     <div className={styles.container}>
@@ -23,7 +23,7 @@ const Layout = ({ children, location, route, layers, section }) => {
           child =>
             child.key === location.pathname && (
               <Sidebar
-                hidden={isHome || isIntro}
+                hidden={isHome /* || isIntro */}
                 className={cx(styles.col, styles.sidebar)}
               >
                 {cloneElement(child)}
@@ -31,7 +31,7 @@ const Layout = ({ children, location, route, layers, section }) => {
             )
         )}
         {isHome && <Home />}
-        {isIntro && <Intro />}
+        {/* {isIntro && <Intro />} */}
         <Map className={cx(styles.col, styles.map)} zoomLevel={zoomLevel} />
         {layers && (
           <Legend>
