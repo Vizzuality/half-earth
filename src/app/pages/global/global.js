@@ -57,13 +57,27 @@ const mapStateToProps = ({
       }))
   }
 
+  const protectedAnimalsSpider = {
+    ...global.protectedAnimals,
+    data: global.protectedAnimals.data.map(d => ({
+      ...d,
+      tooltip: [
+        {
+          value: d.percent,
+          label: '%',
+          color: '#3850d6'
+        }
+      ]
+    }))
+  }
+
   return {
     map,
     whereToProtectSpider,
+    protectedAnimalsSpider,
     getWhereToProtectSpiderData,
     layers: global.layers,
     section: section.section,
-    protectedAnimalsSpider: global.protectedAnimals,
     renderToggle: renderToggle(global.layers),
     renderDropdown: renderDropdown(global.sections)
   }

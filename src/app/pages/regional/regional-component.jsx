@@ -10,12 +10,12 @@ const earthProtected = 15
 
 const Regional = ({
   classname,
-  regional: { sections, graphs },
   renderDropdown,
   renderToggle,
   setSection,
   setRegionalSection,
   toggleRegionalLayer,
+  localProtectedSpeciesSpider,
   sidebar,
   selectRegionalSelector,
   section,
@@ -55,7 +55,7 @@ const Regional = ({
           landscapes fully aware of implications for biodiversity. And we can
           chart out a carefully developed planetary network of potential areas
           primed to safeguard the world’s heritage of life.
-          <SpiderChart {...graphs} />
+          <SpiderChart {...localProtectedSpeciesSpider} />
           <div className={uiStyles.spiderLegendContainer}>
             <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
               Percent of local species adequately protected
