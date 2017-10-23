@@ -2,7 +2,7 @@
   "name": "half-earth",
   "private": true,
   "scripts": {
-    "start": "node ./stagging.js",
+    "start": "node ./stagging-server.js",
     "reinstall": "rm -rf ./node_modules && yarn install",
     "clean:dist": "rm -rf public/scripts && rm -rf public/styles/main.css && rm -rf public/styles/main.css.gz && rm -rf public/index.html",
     "dev": "yarn run clean:dist && webpack-dev-server --config ./config/development.js",
