@@ -7,12 +7,13 @@ import styles from './pop-up-styles.scss'
 
 const PopUp = ({ className, open, close, children }) => {
   return (
-    open && (
+    (open && (
       <article className={cx([className, styles.popUp])}>
         <CloseButton theme={theme} close={close} />
         <div className={styles.content}>{children}</div>
       </article>
-    )
+    )) ||
+    null
   )
 }
 export default PopUp

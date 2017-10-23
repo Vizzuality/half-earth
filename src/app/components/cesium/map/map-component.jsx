@@ -23,17 +23,15 @@ class CesiumMap extends Component {
           if (!ch) return null
           const id = layerId(ch)
 
-          return ch.props.url
-            ? cloneElement(ch, {
-              cLayers,
-              viewer,
-              clickedPosition,
-              hoverPosition,
-              ref: el => {
-                this[id] = Boolean(ch.props.url)
-              }
-            })
-            : null
+          return cloneElement(ch, {
+            cLayers,
+            viewer,
+            clickedPosition,
+            hoverPosition,
+            ref: el => {
+              this[id] = Boolean(ch.props.url)
+            }
+          })
         })}
       </div>
     )

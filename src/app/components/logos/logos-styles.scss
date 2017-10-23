@@ -1,0 +1,115 @@
+@import '~styles/variables.scss';
+
+.partnerFooter {
+  position: fixed;
+  bottom: 0;
+  height: 87px;
+  background-color: rgba($color-dark-blue, 0.2);
+  border-top: 1px solid $color-white;
+  width: 100%;
+  z-index: $zforeground + 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-left: $site-padding;
+
+  .logo {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 90%;
+    width: 25%;
+    margin-top: 5px;
+    text-indent: -1000vw;
+  }
+
+  .logoWilson {
+    width: 222px;
+  }
+
+  .logoMoll {
+    width: 115px;
+    margin-right: 10px;
+  }
+
+  .logoVizz {
+    width: 130px;
+  }
+
+  .linkPartner {
+    width: calc(25% - #{$site-padding});
+  }
+
+  .containImages {
+    height: 100%;
+    width: 100%;
+    display: flex;
+  }
+
+  .linkPartner {
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: $color-white;
+    text-transform: uppercase;
+    cursor: pointer;
+    line-height: 0;
+  }
+}
+
+/////////////////////////
+
+.footerModal {
+  width: 100vw;
+  height: 100vh;
+  background-color: $color-dark-blue;
+  overflow-y: scroll;
+  padding-bottom: 80px;
+
+  .contain {
+    padding: $pad $site-padding;
+  }
+
+  h1 {
+    margin: 0 auto 80px;
+    line-height: 4.09;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 11px;
+    text-align: center;
+    color: $color-white;
+    text-shadow: 0 0 34px rgba(0, 0, 0, 0.3);
+  }
+
+  .containImages {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 100px;
+
+    &:first-of-type {
+      padding-top: 100px;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+      border-bottom: 1px solid rgba($color-white, 0.5);
+
+      @media screen and (min-width: 1180px) {
+        display: none;
+      }
+    }
+  }
+
+  .imageContainer {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 60px;
+
+    img {
+      max-width: 150px;
+      display: inline-block;
+    }
+  }
+}

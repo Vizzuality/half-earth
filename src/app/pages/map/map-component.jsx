@@ -5,6 +5,7 @@ import ImageProvider from 'components/cesium/image-provider'
 import bindZoomLevels from 'data/zoom-levels'
 import Billboard from 'components/cesium/billboard'
 import Birds from 'components/birds'
+import Logos from 'components/logos'
 
 const { Cesium } = window
 
@@ -25,6 +26,7 @@ const Map = ({
 
   return (
     <CesiumMap
+      key="CesiumMap"
       className={className}
       lockNavigation={lockNavigation}
       zoomLevel={zoom}
@@ -64,6 +66,7 @@ const Map = ({
           layer =>
             layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
         )}
+      {route !== 'home' && <Logos key="Logos" />}
     </CesiumMap>
   )
 }

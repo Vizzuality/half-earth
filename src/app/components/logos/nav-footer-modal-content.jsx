@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './nav-footer-styles.scss'
+import styles from './logos-styles.scss'
 
 const ModalContent = props => (
   <div className={styles.footerModal}>
