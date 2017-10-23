@@ -3,6 +3,7 @@ import cx from 'classnames'
 
 import Header from 'components/header'
 import Map from 'pages/map'
+import Locator from 'components/locator'
 import Home from 'pages/home'
 // import Intro from 'pages/intro'
 import Sidebar from 'components/sidebar'
@@ -30,6 +31,7 @@ const Layout = ({ children, location, route, layers, section }) => {
               </Sidebar>
             )
         )}
+        {!isHome && !isIntro && <Locator route={route} />}
         {isHome && <Home />}
         {/* {isIntro && <Intro />} */}
         <Map className={cx(styles.col, styles.map)} zoomLevel={zoomLevel} />

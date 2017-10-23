@@ -4,12 +4,16 @@ $height: 45px;
 
 .container {
   position: fixed;
-  top: $header-height + 2rem;
+  top: calc(#{$header-height} + 2rem);
   right: $site-padding;
   background-position: center right;
   background-size: contain;
   background-repeat: no-repeat;
   height: $height;
+  z-index: $zforeground;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .title {
@@ -17,6 +21,6 @@ $height: 45px;
   margin-right: 60px;
   color: white;
   text-transform: uppercase;
-  font-size: 1.6em;
+  font-size: 1em;
   letter-spacing: 0.2em;
 }

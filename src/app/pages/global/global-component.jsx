@@ -96,11 +96,8 @@ class Global extends Component {
             conservation-focused management.
             <SpiderChart {...whereToProtectSpider} />
             <div className={uiStyles.spiderLegendContainer}>
-              <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
-                Percent of species protected (currently)
-              </span>
               <span className={cx(uiStyles.legend, uiStyles.legendPurple)}>
-                Percent of species protected by extending the PA network
+                % species meeting conservation target
               </span>
             </div>
           </P>
