@@ -25,8 +25,23 @@ class RegionalConTainer extends Component {
 }
 
 const mapStateToProps = ({ map, regional, section }) => {
+  const localProtectedSpeciesSpider = {
+    ...regional.localProtectedSpecies,
+    data: regional.localProtectedSpecies.data.map(d => ({
+      ...d,
+      tooltip: [
+        {
+          value: d.percent,
+          label: '%',
+          color: '#3850d6'
+        }
+      ]
+    }))
+  }
+
   return {
     map,
+    localProtectedSpeciesSpider,
     regional,
     section,
     renderToggle: renderToggle(regional.layers),

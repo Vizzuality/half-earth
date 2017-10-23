@@ -53,69 +53,27 @@ export default {
     data: [
       {
         subject: 'BIRDS',
-        percent: 80,
-        tooltip: [
-          {
-            value: 9987,
-            label: 'Number of Species',
-            color: '#3850d6'
-          }
-        ]
+        percent: 80
       },
       {
         subject: 'MAMMALS',
-        percent: 69,
-        tooltip: [
-          {
-            value: 4420,
-            label: 'Number of Species',
-            color: '#3850d6'
-          }
-        ]
+        percent: 69
       },
       {
         subject: 'AMPHIBIANS',
-        percent: 36,
-        tooltip: [
-          {
-            value: 6417,
-            label: 'Number of Species',
-            color: '#3850d6'
-          }
-        ]
+        percent: 36
       },
       {
         subject: 'CACTI',
-        percent: 34,
-        tooltip: [
-          {
-            value: 1413,
-            label: 'Number of Species',
-            color: '#3850d6'
-          }
-        ]
+        percent: 34
       },
       {
         subject: 'TURTLES',
-        percent: 67,
-        tooltip: [
-          {
-            value: 289,
-            label: 'Number of Species',
-            color: '#3850d6'
-          }
-        ]
+        percent: 67
       },
       {
         subject: 'CONIFERS',
-        percent: 63,
-        tooltip: [
-          {
-            value: 606,
-            label: 'Number of Species',
-            color: '#3850d6'
-          }
-        ]
+        percent: 63
       }
     ]
   },
