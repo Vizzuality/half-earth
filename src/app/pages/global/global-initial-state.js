@@ -44,9 +44,6 @@ export default {
           stroke: '#8366e4',
           fillOpacity: 0.18
         }
-      },
-      {
-        key: 'percentProtectedCurrently'
       }
     ],
     data: []

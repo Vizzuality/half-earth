@@ -25,7 +25,7 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
   )
 
   const multipleLegend = layer =>
-    layer.elements.map(element => console.log(element) || simpleLegend(element))
+    layer.elements.map(element => simpleLegend(element))
 
   const gradientLegend = (layer, i) => (
     <div

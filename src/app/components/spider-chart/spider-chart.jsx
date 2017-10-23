@@ -56,7 +56,10 @@ const SpiderChart = ({ data, dimensions }) => {
 
 const SpiderTooltip = ({ payload }) => {
   const formatter = n =>
-    n.toLocaleString(undefined, { maximumFractionDigits: 0 })
+    n.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })
   return payload.length > 0 ? (
     <div className={uiStyles.radarChartTooltip}>
       {payload.map(({ payload }, k) => (

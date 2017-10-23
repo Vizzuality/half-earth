@@ -101,6 +101,7 @@
 
     .radarChartTooltipContainer {
       display: flex;
+      flex-direction: row-reverse;
 
       &:first-of-type {
         border-bottom: 1px solid #2b4d68;
