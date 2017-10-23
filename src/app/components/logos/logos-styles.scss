@@ -1,14 +1,5 @@
 @import '~styles/variables.scss';
 
-// @media screen and (min-width: 1180px) {
-//   justify-content: space-between;
-// }
-
-//   @media screen and (min-width: 1180px) {
-//   display: flex;
-//   justify-content: flex-end;
-// }
-
 .partnerFooter {
   position: fixed;
   bottom: 0;
@@ -53,33 +44,6 @@
     height: 100%;
     width: 100%;
     display: flex;
-    //     display: none;
-    //     align-items: center;
-
-    //     a {
-    //       display: flex;
-    //       align-items: center;
-    //     }
-
-    //     img {
-    //       max-width: 90px;
-    //       max-height: 34px;
-    //       display: inline-block;
-
-    //       &:first-of-type {
-    //         margin-right: 20px;
-    //       }
-    //     }
-    //   }
-
-    //   .linkPartner {
-    //     text-decoration: none;
-    //     font-size: 14px;
-    //     letter-spacing: 2px;
-    //     color: $color-white;
-    //     text-transform: uppercase;
-    //     cursor: pointer;
-    //     line-height: 0;
   }
 
   .linkPartner {
@@ -92,14 +56,6 @@
     line-height: 0;
   }
 }
-
-// .eoImage {
-//   max-width: 35px !important;
-// }
-
-// .eoImageModal {
-//   max-width: 100px !important;
-// }
 
 /////////////////////////
 
