@@ -31,7 +31,7 @@ const Layout = ({ children, location, route, layers, section }) => {
               </Sidebar>
             )
         )}
-        {!isHome && /* !isIntro && */ <Locator route={route} />}
+        {!isHome /* && !isIntro */ && <Locator route={route} />}
         {isHome && <Home />}
         {/* {isIntro && <Intro />} */}
         <Map className={cx(styles.col, styles.map)} zoomLevel={zoomLevel} />
