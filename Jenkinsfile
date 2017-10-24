@@ -55,16 +55,16 @@ node {
 
         // Roll out to staging
         case "develop":
-          sh("echo Deploying to STAGING cluster")
-          sh("kubectl config use-context ${VIZZ_CONTEXT}")
-          def service = sh([returnStdout: true, script: "kubectl get deploy ${appName} || echo NotFound"]).trim()
-          if ((service && service.indexOf("NotFound") > -1) || (forceCompleteDeploy)){
-            sh("sed -i -e 's/{name}/${appName}/g' k8s/services/*.yaml")
-            sh("sed -i -e 's/{name}/${appName}/g' k8s/staging/*.yaml")
-            sh("kubectl apply -f k8s/services/")
-            sh("kubectl apply -f k8s/staging/")
-          }
-          sh("kubectl set image deployment ${appName} ${appName}=${imageTag} --record")
+          // sh("echo Deploying to STAGING cluster")
+          // sh("kubectl config use-context ${VIZZ_CONTEXT}")
+          // def service = sh([returnStdout: true, script: "kubectl get deploy ${appName} || echo NotFound"]).trim()
+          // if ((service && service.indexOf("NotFound") > -1) || (forceCompleteDeploy)){
+          //   sh("sed -i -e 's/{name}/${appName}/g' k8s/services/*.yaml")
+          //   sh("sed -i -e 's/{name}/${appName}/g' k8s/staging/*.yaml")
+          //   sh("kubectl apply -f k8s/services/")
+          //   sh("kubectl apply -f k8s/staging/")
+          // }
+          // sh("kubectl set image deployment ${appName} ${appName}=${imageTag} --record")
           break
 
         // Roll out to production
@@ -88,16 +88,17 @@ node {
               }
           }
           if (userInput == true && !didTimeout){
-            sh("echo Deploying to PROD cluster")
+            sh("echo Deploying to STAGING cluster")
             sh("kubectl config use-context ${VIZZ_CONTEXT}")
             def service = sh([returnStdout: true, script: "kubectl get deploy ${appName} || echo NotFound"]).trim()
             if ((service && service.indexOf("NotFound") > -1) || (forceCompleteDeploy)){
               sh("sed -i -e 's/{name}/${appName}/g' k8s/services/*.yaml")
-              sh("sed -i -e 's/{name}/${appName}/g' k8s/production/*.yaml")
+              sh("sed -i -e 's/{name}/${appName}/g' k8s/staging/*.yaml")
               sh("kubectl apply -f k8s/services/")
-              sh("kubectl apply -f k8s/production/")
+              sh("kubectl apply -f k8s/staging/")
             }
             sh("kubectl set image deployment ${appName} ${appName}=${imageTag} --record")
+            break
           } else {
             sh("echo NOT DEPLOYED")
             currentBuild.result = 'SUCCESS'
