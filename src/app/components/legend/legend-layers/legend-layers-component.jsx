@@ -24,14 +24,11 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
     </span>
   )
 
-  const multipleLegend = layer =>
-    layer.elements.map(element => simpleLegend(element))
-
   const gradientLegend = (layer, i) => (
     <div
       key={`legend-item-${layer.label}`}
       className={cx(
-        { [styles.gradientBig]: layer.size === 'big' },
+        { [styles.gradientLegendSmall]: layer.size === 'small' },
         styles.gradientLegend
       )}
     >
@@ -39,10 +36,6 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
         <div className={styles.labelContain}>
           {layer.label}
           {i === 0 && <span className={styles.bioText}>Biodiversity</span>}
-          {i > 0 &&
-          layer.size === 'big' && (
-            <span className={styles.bioText}>Biodiversity</span>
-          )}
         </div>
         <div className={styles.boxContainer}>
           <div
@@ -68,10 +61,24 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
     </div>
   )
 
+  const multipleLegend = (layer, i) => {
+    if (!layer.type) throw new Error('Layer type is required')
+    const renderer = {
+      simple: simpleLegend,
+      gradient: gradientLegend
+    }
+
+    return layer.elements.map(element => renderer[element.type](element, i))
+  }
+
   const renderLegend = (layer, i) => {
-    if (layer.type === 'simple') return simpleLegend(layer)
-    if (layer.type === 'multiple') return multipleLegend(layer)
-    if (layer.type === 'gradient') return gradientLegend(layer, i)
+    const renderer = {
+      simple: simpleLegend,
+      gradient: gradientLegend,
+      multiple: multipleLegend
+    }[layer.type]
+
+    if (renderer) return renderer(layer, i)
     return null
   }
 

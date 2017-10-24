@@ -200,11 +200,13 @@ export default {
       elements: [
         {
           label: 'Grids optimised for meeting conservation targets',
-          color: 'yellow'
+          color: 'yellow',
+          type: 'simple'
         },
         {
           label: 'Grids with > 75% protected area coverage',
-          color: 'violet'
+          color: 'violet',
+          type: 'simple'
         }
       ]
     },
