@@ -113,20 +113,6 @@ const dataPartners = [
     }
   },
   {
-    href: 'http://www.gorongosa.org/',
-    image: {
-      src: '/img/partners/partner_image/13.png',
-      alt: 'gorongosa'
-    }
-  },
-  {
-    href: 'http://tesf.org/',
-    image: {
-      src: '/img/partners/partner_image/14.png',
-      alt: 'tesf'
-    }
-  },
-  {
     href: 'http://www.nhm.ac.uk/',
     image: {
       src: '/img/partners/partner_image/15.png',
@@ -145,13 +131,6 @@ const dataPartners = [
     image: {
       src: '/img/partners/partner_image/17.png',
       alt: 'the nature conservancy'
-    }
-  },
-  {
-    href: 'http://www.tompkinsconservation.org/home.htm',
-    image: {
-      src: '/img/partners/partner_image/18.png',
-      alt: 'tompkings conservation'
     }
   },
   {
@@ -233,10 +212,31 @@ const researchPartners = [
       src: '/img/partners/partner_image/30.png',
       alt: 'DLiA'
     }
+  },
+  {
+    href: 'https://www.yale.edu/',
+    image: {
+      src: '/img/partners/partner_image/33.png',
+      alt: 'Yale University'
+    }
+  },
+  {
+    href: 'https://cloud.google.com',
+    image: {
+      src: '/img/partners/partner_image/34.png',
+      alt: 'Google Cloud Platform'
+    }
+  },
+  {
+    href: 'https://earthengine.google.com/',
+    image: {
+      src: '/img/partners/partner_image/35.png',
+      alt: 'Google Earth Engine'
+    }
   }
 ]
 
-const engagement = [
+const engagementPartners = [
   {
     href: 'http://www.msichicago.org/',
     image: {
@@ -249,6 +249,30 @@ const engagement = [
     image: {
       src: '/img/partners/partner_image/32.png',
       alt: 'OPS'
+    }
+  }
+]
+
+const modelConservationEffortsPartners = [
+  {
+    href: 'http://tesf.org/',
+    image: {
+      src: '/img/partners/partner_image/14.png',
+      alt: 'tesf'
+    }
+  },
+  {
+    href: 'http://www.gorongosa.org/',
+    image: {
+      src: '/img/partners/partner_image/13.png',
+      alt: 'gorongosa'
+    }
+  },
+  {
+    href: 'http://www.tompkinsconservation.org/home.htm',
+    image: {
+      src: '/img/partners/partner_image/18.png',
+      alt: 'tompkings conservation'
     }
   }
 ]
@@ -267,8 +291,12 @@ const sections = [
     content: researchPartners
   },
   {
-    title: 'Engagement',
-    content: engagement
+    title: 'Engagement Partners',
+    content: engagementPartners
+  },
+  {
+    title: 'Model Conservation Efforts Partners',
+    content: modelConservationEffortsPartners
   }
 ]
 
