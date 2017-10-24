@@ -288,7 +288,7 @@ export default {
       color: 'aqua',
       size: 'big',
       min: 1,
-      max: 38
+      max: 380
     },
     amphibians: {
       type: 'gradient',

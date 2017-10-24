@@ -199,12 +199,12 @@ export default {
       type: 'multiple',
       elements: [
         {
-          label: 'Grids optimised for meeting conservation targets',
+          label: 'Priority regions for conservation',
           color: 'yellow',
           type: 'simple'
         },
         {
-          label: 'Grids with > 75% protected area coverage',
+          label: 'Regions with >75% current reserve coverage',
           color: 'violet',
           type: 'simple'
         }

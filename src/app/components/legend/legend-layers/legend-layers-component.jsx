@@ -35,7 +35,7 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
       <div className={styles.gradient}>
         <div className={styles.labelContain}>
           {layer.label}
-          {i === 0 && <span className={styles.bioText}>Biodiversity</span>}
+          {i === 0 && <span className={styles.bioText}>Species Richness</span>}
         </div>
         <div className={styles.boxContainer}>
           <div
