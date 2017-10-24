@@ -33,12 +33,30 @@
 
 .slides {
   display: block;
-  // margin-bottom: 22rem;
-  margin-bottom: calc((100vh / 2) - (#{$header-height} * 2));
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  // margin-bottom: calc((100vh / 2) - (#{$header-height} * 2));
+
+  &:first-of-type {
+    padding-top: 5em;
+  }
+
+  &:last-of-type {
+    padding-bottom: 20vh;
+  }
+}
+
+.innerP {
+  display: block;
+  margin-bottom: 1em;
 }
 
 .paragraphAfterChart {
-  padding-top: 50px;
+  // padding-top: 50px;
+}
+
+.chartContainer {
+  margin: 3rem 0;
 }
 
 .spiderLegendContainer {
@@ -151,7 +169,7 @@
     flex-direction: column;
     align-items: center;
     align-content: center;
-    margin: 90px 0;
+    margin: 7rem 0 5rem;
 
     img {
       width: 60px;

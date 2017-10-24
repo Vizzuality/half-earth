@@ -9,6 +9,7 @@
   width: 100%;
   left: 0;
   flex-direction: column;
+  z-index: $zforeground + 10;
 }
 
 .controls {
