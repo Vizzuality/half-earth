@@ -4,8 +4,8 @@
   display: flex;
   background-color: $color-mid-blue;
   height: 100%;
-  padding: 165px 165px 0;
   background-size: cover;
+  padding: 0 165px;
   background-repeat: no-repeat;
   align-items: flex-end;
   justify-content: center;
@@ -34,14 +34,17 @@
 }
 
 .description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   color: $color-white;
-  min-height: 50%;
+  min-height: 100%;
   margin: 0;
   font-size: 1.8rem;
   letter-spacing: 0.9px;
   line-height: 2.33;
   font-weight: 500;
-  text-align: center;
   z-index: $zforeground * 100;
 }
 
