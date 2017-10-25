@@ -10,7 +10,7 @@ class PopUp extends Component {
   constructor (props) {
     super(props)
     this.root = document.getElementById('pop-up-root')
-    this.el = document.createElement('article')
+    this.el = document.createElement('aside')
   }
   componentDidMount () {
     this.root.appendChild(this.el)
