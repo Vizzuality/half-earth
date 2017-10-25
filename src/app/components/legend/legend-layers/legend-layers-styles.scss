@@ -238,6 +238,10 @@ $backCircle: #18bab4;
       transform: translate(-50%, 0);
     }
 
+    h2 {
+      letter-spacing: 1.5px;
+    }
+
     h2,
     h3 {
       color: $color-white;
@@ -258,7 +262,7 @@ $backCircle: #18bab4;
       margin: 0 auto;
       font-size: 12px;
       font-weight: 300;
-      line-height: 1.73;
+      line-height: 1.9;
       letter-spacing: 0.8px;
       color: $color-white;
       text-align: left;
@@ -266,8 +270,10 @@ $backCircle: #18bab4;
 
     .source {
       margin-top: 10px;
-      line-height: 1.25;
-      font-weight: 700;
+      // line-height: 1.25;
+      font-size: 10px;
+      color: rgba($color-white, 0.7);
+      // font-weight: 700;
     }
   }
 }
