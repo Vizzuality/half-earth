@@ -4,7 +4,7 @@ import find from 'lodash/find'
 import lowerCase from 'lodash/lowerCase'
 import kebabCase from 'lodash/kebabCase'
 
-import Dropdown from './dropdown'
+import Dropdown from 'components/dropdown'
 import dropdownTheme from 'styles/themes/dropdown.scss'
 
 import XToggle from './toggle'

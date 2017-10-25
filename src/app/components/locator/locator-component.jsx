@@ -1,16 +1,24 @@
 import React from 'react'
 import cx from 'classnames'
 import styles from './locator-styles'
-import startCase from 'lodash/startCase'
+import Dropdown from 'components/dropdown'
+import dropdownTheme from 'styles/themes/dropdown.scss'
 
-const Locator = ({ className, route }) => {
-  const lable = startCase(route)
+const Locator = ({ className, route, history }) => {
+  const options = { local: 'local', regional: 'regional', global: 'global' }
   return (
-    <div
-      style={{ backgroundImage: `url(/img/${route}.png` }}
-      className={cx(className, styles.container)}
-    >
-      <h1 className={styles.title}>{lable}</h1>
+    <div className={cx(className, styles.container)}>
+      <Dropdown
+        options={options}
+        className={dropdownTheme.dropdown}
+        theme={dropdownTheme}
+        onSelect={r => history.push(r)}
+        selected={route}
+      />
+      <div
+        className={styles.earth}
+        style={{ backgroundImage: `url(/img/${route}.png` }}
+      />
     </div>
   )
 }

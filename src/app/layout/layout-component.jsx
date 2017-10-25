@@ -11,7 +11,7 @@ import Legend, { LegendLayers } from 'components/legend'
 
 import styles from './layout-styles.scss'
 
-const Layout = ({ children, location, route, layers, section }) => {
+const Layout = ({ children, location, route, layers, section, history }) => {
   const isHome = route === 'home'
   // const isIntro = route === 'intro'
   const zoomLevel = `${route}|${section.section}`
@@ -31,7 +31,9 @@ const Layout = ({ children, location, route, layers, section }) => {
               </Sidebar>
             )
         )}
-        {!isHome /* && !isIntro */ && <Locator route={route} />}
+        {!isHome /* && !isIntro */ && (
+          <Locator route={route} history={history} />
+        )}
         {isHome && <Home />}
         {/* {isIntro && <Intro />} */}
         <Map className={cx(styles.col, styles.map)} zoomLevel={zoomLevel} />
