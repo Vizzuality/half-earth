@@ -48,7 +48,7 @@
 .attribution {
   position: absolute;
   right: $pop-up-button-right;
-  bottom: 0;
+  bottom: $pop-up-button-top;
   z-index: $zforeground * 100;
   color: rgba($color-white, 0.8);
   font-style: normal;
