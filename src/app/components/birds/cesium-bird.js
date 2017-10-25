@@ -1,4 +1,5 @@
 import Bird from './lib/bird'
+import { mapCubed } from './lib/utils'
 const { Cesium } = window
 
 class CesiumBird extends Bird {
@@ -14,7 +15,9 @@ class CesiumBird extends Bird {
       this.north = options.north
       this.south = options.south
       this.crop = options.crop
-
+      this.color = Cesium.Color.WHITE
+      this.burstTime = 10
+      this.alphaScale = mapCubed([0, this.burstTime], [0, 1])
       this.entity = this.viewer.entities.add({
         position: Cesium.Cartesian3.fromDegrees(...options.position),
         model: {
@@ -33,11 +36,10 @@ class CesiumBird extends Bird {
     }
   }
 
-  render () {
+  render (clock) {
     // const { context, position, velocity, r } = this
     // const pos = position // wrap(position)
     // const theta = velocity.heading() + degreesToRadians(90)
-
     const { west, east, north, south, viewer } = this
     const { entity } = this
     if (!entity || !entity.position) return
@@ -48,6 +50,15 @@ class CesiumBird extends Bird {
       this.longScale(y)
     )
     entity.position = pos
+
+    const lifeTime =
+      clock.currentTime.secondsOfDay - clock.startTime.secondsOfDay
+    if (lifeTime <= this.burstTime) {
+      entity.model.color = Cesium.Color.fromAlpha(
+        this.color,
+        this.alphaScale(lifeTime)
+      )
+    }
 
     const heading = this.velocity.heading() + Cesium.Math.toRadians(90)
     var pitch = 0
