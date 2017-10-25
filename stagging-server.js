@@ -1,9 +1,14 @@
-const connect = require('connect')
+const express = require('express')
 const path = require('path')
 const serveStatic = require('serve-static')
 const port = process.env.PORT || 8080
-connect()
-  .use(serveStatic(path.join(__dirname, 'public')))
+
+const baseDir = path.join(__dirname, 'public')
+const indexPath = path.join(baseDir, 'index.html')
+
+express()
+  .use(serveStatic(baseDir))
+  .get('*', (req, res) => res.sendFile(indexPath))
   .listen(port)
 
 console.log(`serving from ${port}`)
