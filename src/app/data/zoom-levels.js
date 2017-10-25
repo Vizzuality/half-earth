@@ -44,7 +44,7 @@ export default Cesium => ({
     }
   ],
   local: [
-    [5626398.973060097, 2385343.5266934135, -2267032.581361837],
+    [5760629.535260948, 2406368.791758723, -2400118.3266120856],
     {
       orientation: {
         heading: (Cesium && Cesium.Math.toRadians(-15.0)) || null,

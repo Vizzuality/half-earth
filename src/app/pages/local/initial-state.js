@@ -4,37 +4,37 @@ export default {
     // These ids are co-dependent with the popUp.content ids change accordingly
     {
       id: 0,
-      coordinates: [22.54351616, -19.07886918],
+      coordinates: [19.097183, -16.648018],
       url: 'img/billboard/01_01.png',
       urlHover: 'img/billboard/01_01-hover.png'
     },
     {
       id: 1,
-      coordinates: [22.68887043, -19.33414618],
+      coordinates: [18.895381, -13.08937],
       url: 'img/billboard/02_01.png',
       urlHover: 'img/billboard/02_01-hover.png'
     },
     {
       id: 2,
-      coordinates: [22.91130066, -19.45817589],
+      coordinates: [22.51708, -19.14287],
       url: 'img/billboard/03_01.png',
       urlHover: 'img/billboard/03_01-hover.png'
     },
     {
       id: 3,
-      coordinates: [22.76802778, -19.5840516],
+      coordinates: [22.747902, -19.208395],
       url: 'img/billboard/04_01.png',
       urlHover: 'img/billboard/04_01-hover.png'
     },
     {
       id: 4,
-      coordinates: [22.88422108, -19.13450538],
+      coordinates: [22.712362, -19.201898],
       url: 'img/billboard/05_01.png',
       urlHover: 'img/billboard/05_01-hover.png'
     },
     {
       id: 5,
-      coordinates: [23.07403564, -19.27485063],
+      coordinates: [22.830506, -19.268221],
       url: 'img/billboard/06_01.png',
       urlHover: 'img/billboard/06_01-hover.png'
     }
