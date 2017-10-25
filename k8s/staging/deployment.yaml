@@ -2,18 +2,18 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    name: {name}
-  name: {name}
+    name: {name}-staging
+  name: {name}-staging
 spec:
   revisionHistoryLimit: 2
   template:
     metadata:
       labels:
-        name: {name}
+        name: {name}-staging
     spec:
       restartPolicy: Always
       containers:
-      - name: {name}
+      - name: {name}-staging
         image: vizzuality/{name}
         imagePullPolicy: Always
         resources:
