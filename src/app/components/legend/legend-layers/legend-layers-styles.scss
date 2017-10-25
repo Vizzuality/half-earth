@@ -30,6 +30,10 @@ $backCircle: #18bab4;
       margin-left: 10px;
     }
 
+    &Brown::after {
+      background-color: #f4a175;
+    }
+
     &Purple::after {
       background-color: #291270;
     }
@@ -174,6 +178,10 @@ $backCircle: #18bab4;
         }
       }
     }
+
+    &Small {
+      width: 50%;
+    }
   }
 }
 
@@ -196,7 +204,7 @@ $backCircle: #18bab4;
 
   span {
     font-size: 12px;
-    font-weight: 800px;
+    font-weight: 800;
   }
 }
 
