@@ -2,8 +2,8 @@
 
 .close {
   position: absolute;
-  top: 35px;
-  right: 60px;
+  top: $pop-up-button-top;
+  right: $pop-up-button-right;
   background-color: $color-turquoise;
   border: none;
   outline: none;
