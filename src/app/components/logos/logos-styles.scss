@@ -1,25 +1,22 @@
 @import '~styles/variables.scss';
 
 .partnerFooter {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   height: 87px;
   background-color: rgba($color-dark-blue, 0.2);
-  border-top: 1px solid $color-white;
   width: 100%;
   z-index: $zforeground + 1;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-left: $site-padding;
+  justify-content: space-between;
+  padding: 0 $site-padding;
 
   .logo {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    height: 90%;
+    height: 100%;
     width: 25%;
-    margin-top: 5px;
     text-indent: -1000vw;
   }
 
@@ -29,21 +26,25 @@
 
   .logoMoll {
     width: 115px;
-    margin-right: 10px;
   }
 
   .logoVizz {
     width: 130px;
-    display: none;
   }
 
   .linkPartner {
-    width: calc(25% - #{$site-padding});
+    width: 120px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background: url(/img/punticos.svg);
+    background-repeat: no-repeat;
+    background-position: 100px center;
   }
 
   .containImages {
     height: 100%;
-    width: 100%;
+    width: 465px;
     display: flex;
   }
 
