@@ -20,7 +20,6 @@ class Global extends Component {
       protectedAnimalsSpider,
       setSection,
       setGlobalSection,
-      whereToProtectSpider,
       selectGlobalSelector,
       section
     } = this.props
@@ -58,11 +57,13 @@ class Global extends Component {
             formally identified, but they are an integral part of the network of
             life and are vulnerable to the same threats as the species we have
             records for.
-            <SpiderChart {...protectedAnimalsSpider} />
-            <div className={uiStyles.spiderLegendContainer}>
-              <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
-                Percent of species adequately protected
-              </span>
+            <div className={uiStyles.chartContainer}>
+              <SpiderChart {...protectedAnimalsSpider} />
+              <div className={uiStyles.spiderLegendContainer}>
+                <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
+                  Percent of species adequately protected
+                </span>
+              </div>
             </div>
           </P>
           <P

@@ -13,6 +13,7 @@
   position: absolute;
   width: 100%;
   z-index: $zforeground;
+  text-transform: lowercase;
 
   .closeButton {
     position: absolute;
@@ -60,6 +61,8 @@
 }
 
 .label {
+  text-transform: lowercase;
+
   &::after {
     content: '';
     display: block;

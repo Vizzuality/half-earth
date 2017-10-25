@@ -55,11 +55,13 @@ const Regional = ({
           landscapes fully aware of implications for biodiversity. And we can
           chart out a carefully developed planetary network of potential areas
           primed to safeguard the world’s heritage of life.
-          <SpiderChart {...localProtectedSpeciesSpider} />
-          <div className={uiStyles.spiderLegendContainer}>
-            <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
-              Percent of local species adequately protected
-            </span>
+          <div className={uiStyles.chartContainer}>
+            <SpiderChart {...localProtectedSpeciesSpider} />
+            <div className={uiStyles.spiderLegendContainer}>
+              <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
+                Percent of local species adequately protected
+              </span>
+            </div>
           </div>
         </P>
 
@@ -67,14 +69,14 @@ const Regional = ({
           className={cx(uiStyles.slides, uiStyles.paragraphAfterChart)}
           onScrollFocus={() => updateSections('regional:2')}
         >
-          <span className={uiStyles.slides}>
+          <span className={uiStyles.innerP}>
             Human activities such as {t('road building')} and{' '}
             {t('urban development')}
             have overtaken some of the places white storks and other birds stop
             to feed and rest as they fly south, putting them in danger of
             injury, starvation, and death.
           </span>
-          <span className={uiStyles.slides}>
+          <span className={uiStyles.innerP}>
             The combined effect of these threats is shrinking the habitats where{' '}
             {d('regional:2', 'anthropogenic')} species live. Protecting the
             places that species like these depend on can save them and others
