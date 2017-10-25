@@ -47,44 +47,56 @@ export default {
       0: {
         id: 0,
         type: 'image',
-        background: 'img/popup/03_NationalGeographic_2435343.jpg',
+        background: 'img/popup/03_NationalGeographic_2435343.png',
         description:
-          'People living in the Okavango Delta use narrow boats called mokovo to navigate the waterways of this oasis.'
+          'People living in the Okavango Delta use narrow boats called mokovo to navigate the waterways of this oasis.',
+        attribution: 'National Geographic',
+        watermark: 'img/natgeo.png'
       },
       1: {
         id: 1,
         type: 'image',
         background:
-          'img/popup/02_NG_Okavango_Wilderness_Project_credit_Chris_Boyes.jpg',
-        description: 'A whole world exists beneath the surface'
+          'img/popup/02_NG_Okavango_Wilderness_Project_credit_Chris_Boyes.png',
+        description: 'A whole world exists beneath the surface',
+        attribution: 'Chris Boyes',
+        watermark: 'img/natgeo.png'
       },
       2: {
         id: 2,
         type: 'image',
-        background: 'img/popup/06_NationalGeographic_2444856.jpg',
+        background: 'img/popup/06_NationalGeographic_2444856.png',
         description:
-          'Lit by starlight alone, the Okavango Delta is paradise for both stargazers and nocturnal creatures.'
+          'Lit by starlight alone, the Okavango Delta is paradise for both stargazers and nocturnal creatures.',
+        attribution: 'National Geographic',
+        watermark: 'img/natgeo.png'
       },
       3: {
         id: 3,
         type: 'image',
-        background: 'img/popup/05_NationalGeographic_2435021.jpg',
+        background: 'img/popup/05_NationalGeographic_2435021.png',
         description:
-          'Great care must be taken by people navigating the Okavango Delta as hippos could be hidden beneath the surface.'
+          'Great care must be taken by people navigating the Okavango Delta as hippos could be hidden beneath the surface.',
+        attribution: 'National Geographic',
+        watermark: 'img/natgeo.png'
       },
       4: {
         id: 4,
         type: 'image',
-        background: 'img/popup/04_Okavango_steve_w_elephant_mombo_2_JKydd.jpg',
+        background: 'img/popup/04_Okavango_steve_w_elephant_mombo_2_JKydd.png',
         description:
-          "The Okavango Delta is a safe stronghold for Botswana's large elephant population."
+          "The Okavango Delta is a safe stronghold for Botswana's large elephant population.",
+        attribution: 'James Kydd',
+        watermark: 'img/natgeo.png'
       },
       5: {
         id: 5,
         type: 'image',
         background:
-          'img/popup/01_NG_Okavango_Wilderness_Project_credit_James_Kydd.jpg',
-        description: 'Where water flows, life grows.'
+          'img/popup/01_NG_Okavango_Wilderness_Project_credit_James_Kydd.png',
+        description: 'Where water flows, life grows.',
+        attribution: 'James Kydd',
+        watermark: 'img/natgeo.png'
       }
     }
   },
