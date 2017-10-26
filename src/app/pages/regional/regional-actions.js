@@ -7,5 +7,11 @@ export const selectRegionalSelector = createAction(
     analytics: [section, 'Change species on map', `Change to ${selection}`]
   })
 )
-export const toggleRegionalLayer = createAction('toggleRegionalLayer')
+export const toggleRegionalLayer = createAction(
+  'toggleRegionalLayer',
+  null,
+  ({ name }) => ({
+    analytics: ['regional', 'Change protection type', name]
+  })
+)
 export const setRegionalSection = createAction('setRegionalSection')

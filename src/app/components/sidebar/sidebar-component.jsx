@@ -28,7 +28,7 @@ const Sidebar = ({
       <Button
         open={open}
         toggleSidebar={() =>
-          toggleSidebar({ meta: [route, ...sidebarAnalytics] })}
+          toggleSidebar({ meta: { analytics: [route, ...sidebarAnalytics] } })}
       />
       {open && <div className={cx(styles.content)}>{children}</div>}
     </div>
