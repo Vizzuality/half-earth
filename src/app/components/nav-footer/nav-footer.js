@@ -17,7 +17,7 @@ const backwards = {
   '/regional': 'local'
 }
 const forwards = {
-  '/global': 'regional',
+  '/global': 'start',
   '/regional': 'local'
 }
 
