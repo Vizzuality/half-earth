@@ -2,7 +2,7 @@ import React from 'react'
 import cx from 'classnames'
 import styles from './locator-styles'
 import Dropdown from 'components/dropdown'
-import dropdownTheme from 'styles/themes/dropdown.scss'
+import dropdownTheme from './locator-dropdown-theme.scss'
 
 const Locator = ({ className, route, history }) => {
   const options = { local: 'local', regional: 'regional', global: 'global' }
