@@ -16,7 +16,10 @@ const Dropdown = ({
   ...props
 }) => (
   <div className={cx(className, theme.dropdown)} ref={getContainer}>
-    <div onClick={toggleOpen} className={theme.label}>
+    <div
+      onClick={toggleOpen}
+      className={cx(theme.label, { [theme.labelClosed]: closed })}
+    >
       {options[selected]}
     </div>
     <ul className={cx(theme.options, { [theme.optionsClosed]: closed })}>
@@ -34,7 +37,7 @@ const Dropdown = ({
         )
       })}
       {!closed && (
-        <button className={styles.closeButton} onClick={() => toggleOpen()} />
+        <button className={theme.closeButton} onClick={() => toggleOpen()} />
       )}
     </ul>
   </div>
