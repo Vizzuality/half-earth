@@ -23,6 +23,55 @@ const defaultRegional = {
   west: 13.532018
 }
 
+const richnessLegend = {
+  mammals: {
+    type: 'gradient',
+    label: 'Mammals',
+    color: 'purple',
+    size: 'big',
+    min: 8,
+    max: 49
+  },
+  birds: {
+    type: 'gradient',
+    label: 'Birds',
+    color: 'aqua',
+    size: 'big',
+    min: 1,
+    max: 380
+  },
+  amphibians: {
+    type: 'gradient',
+    label: 'Amphibians',
+    color: 'green',
+    size: 'big',
+    min: 3,
+    max: 25
+  },
+  restio: {
+    type: 'gradient',
+    label: 'Restio',
+    color: 'orange',
+    size: 'big',
+    min: 1,
+    max: 166
+  },
+  protea: {
+    type: 'gradient',
+    label: 'Protea',
+    color: 'orange2',
+    size: 'big',
+    min: 1,
+    max: 69
+  }
+}
+
+const pressureLegend = {
+  label: 'Human Pressures',
+  color: 'burgundy',
+  type: 'simple'
+}
+
 export default {
   localProtectedSpecies: {
     data: [
@@ -274,45 +323,32 @@ export default {
       label: 'Protected Areas',
       color: 'violet'
     },
-    mammals: {
-      type: 'gradient',
-      label: 'Mammals',
-      color: 'purple',
-      size: 'big',
-      min: 8,
-      max: 49
+    // richness
+    mammalsRichness: richnessLegend.mammals,
+    proteaRichness: richnessLegend.protea,
+    amphibiansRichness: richnessLegend.amphibians,
+    birdsRichness: richnessLegend.birds,
+    restioRichness: richnessLegend.restio,
+    // pressure
+    mammalsPressures: {
+      type: 'multiple',
+      elements: [richnessLegend.mammals, pressureLegend]
     },
-    birds: {
-      type: 'gradient',
-      label: 'Birds',
-      color: 'aqua',
-      size: 'big',
-      min: 1,
-      max: 380
+    proteaPressures: {
+      type: 'multiple',
+      elements: [richnessLegend.protea, pressureLegend]
     },
-    amphibians: {
-      type: 'gradient',
-      label: 'Amphibians',
-      color: 'green',
-      size: 'big',
-      min: 3,
-      max: 25
+    amphibiansPressures: {
+      type: 'multiple',
+      elements: [richnessLegend.amphibians, pressureLegend]
     },
-    restio: {
-      type: 'gradient',
-      label: 'Restio',
-      color: 'orange',
-      size: 'big',
-      min: 1,
-      max: 166
+    birdsPressures: {
+      type: 'multiple',
+      elements: [richnessLegend.birds, pressureLegend]
     },
-    protea: {
-      type: 'gradient',
-      label: 'Protea',
-      color: 'orange2',
-      size: 'big',
-      min: 1,
-      max: 69
+    restioPressures: {
+      type: 'multiple',
+      elements: [richnessLegend.restio, pressureLegend]
     }
   },
   birds: [
