@@ -5,10 +5,16 @@ import thunk from 'redux-thunk'
 import reducers from 'app/reducers'
 import createHistory from 'history/createBrowserHistory'
 import { mergeAppState } from 'utils/redux'
+import { middleware as analyticsMiddleware } from 'providers/analytics'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 export const history = createHistory()
-const middlewares = [thunk, routerMiddleware(history), mergeAppState]
+const middlewares = [
+  thunk,
+  routerMiddleware(history),
+  analyticsMiddleware.trackEvents,
+  mergeAppState
+]
 
 export default createStore(
   reducers,

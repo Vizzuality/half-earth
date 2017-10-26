@@ -24,6 +24,7 @@ const Layout = ({ children, location, route, layers, section, history }) => {
           child =>
             child.key === location.pathname && (
               <Sidebar
+                route={route}
                 hidden={isHome /* || isIntro */}
                 className={cx(styles.col, styles.sidebar)}
               >
