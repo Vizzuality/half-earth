@@ -10,8 +10,13 @@ export const selectRegionalSelector = createAction(
 export const toggleRegionalLayer = createAction(
   'toggleRegionalLayer',
   null,
-  ({ name }) => ({
-    analytics: ['regional', 'Change protection type', name]
-  })
+  ({ name }) => {
+    const text = ['road-building', 'urban-development'].includes(name)
+      ? 'Change Human activities on the map'
+      : 'Change protection type'
+    return {
+      analytics: ['regional', text, name]
+    }
+  }
 )
 export const setRegionalSection = createAction('setRegionalSection')

@@ -13,12 +13,14 @@ const analytics = {
 }
 
 const backwards = {
+  '/home': 'local',
   '/local': 'regional',
-  '/regional': 'local'
+  '/regional': 'global'
 }
 const forwards = {
-  '/global': 'start',
-  '/regional': 'local'
+  '/home': 'start',
+  '/regional': 'local',
+  '/global': 'regional'
 }
 
 class NavFooterContainer extends Component {

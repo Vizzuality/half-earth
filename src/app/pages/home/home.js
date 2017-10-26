@@ -17,7 +17,7 @@ class HomeContainer extends Component {
   }
   onClick = () => {
     const { history, trackEvent } = this.props
-    trackEvent(...analytics.onClick)
+    trackEvent(analytics.onClick)
 
     history.push('/local')
   }
