@@ -4,8 +4,7 @@ import styles from './locator-styles'
 import Dropdown from 'components/dropdown'
 import dropdownTheme from './locator-dropdown-theme.scss'
 
-const Locator = ({ className, route, history }) => {
-  const options = { local: 'local', regional: 'regional', global: 'global' }
+const Locator = ({ className, route, history, options }) => {
   return (
     <div className={cx(className, styles.container)}>
       <Dropdown
