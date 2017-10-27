@@ -2,6 +2,17 @@
 $offset: 0.1em;
 $lineColor: #2b4d68;
 
+@keyframes flash {
+  0% {
+    background-color: $color-turquoise;
+    opacity: 1;
+  }
+
+  100% {
+    background-color: $color-mid-blue;
+  }
+}
+
 .wrap {
   width: 240px;
   padding-top: 25px;
@@ -39,7 +50,7 @@ $lineColor: #2b4d68;
   top: $header-height;
   z-index: $zforeground * 2;
   display: flex;
-  width: calc(42vw - 5px);
+  width: calc(42vw - 2px);
   max-width: $max-width;
   min-height: $sidebar-header-height;
   min-width: $min-width;
@@ -47,6 +58,13 @@ $lineColor: #2b4d68;
   left: 0;
   background-color: $color-mid-blue;
   border-bottom: 1px solid $lineColor;
+
+  &Slider {
+    animation-name: flash;
+    animation-duration: 900ms;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+  }
 }
 
 .title {
