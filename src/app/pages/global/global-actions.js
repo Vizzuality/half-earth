@@ -2,11 +2,24 @@ import { createAction } from 'redux-actions'
 import { createThunkAction } from 'app/utils/redux'
 const { fetch } = window
 
-export const selectGlobalSelector = createAction('selectGlobalSelector')
-export const toggleGlobalLayer = createAction('toggleGlobalLayer')
 export const setGlobalSection = createAction('setGlobalSection')
 export const resetGlobalLayers = createAction('resetGlobalLayers')
 export const setWhereToProtectData = createAction('setWhereToProtectData')
+
+export const selectGlobalSelector = createAction(
+  'selectGlobalSelector',
+  null,
+  ({ selection }) => ({
+    analytics: ['global', 'Change species on map', `Change to ${selection}`]
+  })
+)
+export const toggleGlobalLayer = createAction(
+  'toggleGlobalLayer',
+  null,
+  ({ name }) => ({
+    analytics: ['global', 'Change Map Layer', name]
+  })
+)
 
 export const getWhereToProtectSpiderData = createThunkAction(
   'getWhereToProtectSpiderData',

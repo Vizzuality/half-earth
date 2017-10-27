@@ -78,7 +78,8 @@ module.exports = {
       new HtmlWebpackPlugin({
         filename: 'index.html',
         template: resolve(sourcePath, 'tpl.ejs'),
-        inject: 'body'
+        inject: 'body',
+        GOOGLE_ANALYTICS: JSON.stringify(process.env.GOOGLE_ANALYTICS)
       })
     ],
 

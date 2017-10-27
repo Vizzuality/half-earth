@@ -8,6 +8,9 @@ import Birds from 'components/birds'
 import Logos from 'components/logos'
 
 const { Cesium } = window
+const analytics = {
+  openPopUp: ['Map hotspots']
+}
 
 const Map = ({
   map,
@@ -41,7 +44,11 @@ const Map = ({
             urlHover={billboard.urlHover}
             width={80}
             height={106}
-            onClick={id => openPopUp(id)}
+            onClick={id =>
+              openPopUp({
+                payload: id,
+                meta: ['local', ...analytics.openPopUp, id]
+              })}
             position={billboard.coordinates}
           />
         ))}
