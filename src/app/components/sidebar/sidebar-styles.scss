@@ -23,6 +23,11 @@ $pad: 6rem;
     line-height: 2em;
     width: 100%;
     min-width: 430px;
+    opacity: 0;
+
+    &Open {
+      opacity: 1;
+    }
 
     &::after {
       pointer-events: none;
