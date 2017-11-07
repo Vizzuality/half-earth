@@ -1,26 +1,22 @@
 @import '~styles/variables.scss';
 
-$height: 45px;
+$size: 45px;
 
 .container {
   position: fixed;
   top: calc(#{$header-height} + 2rem);
   right: $site-padding;
+  z-index: $zforeground;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.earth {
   background-position: center right;
   background-size: contain;
   background-repeat: no-repeat;
-  height: $height;
-  z-index: $zforeground;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.title {
-  margin-top: calc(#{$height / 2} - 0.2em);
-  margin-right: 60px;
-  color: white;
-  text-transform: uppercase;
-  font-size: 1em;
-  letter-spacing: 0.2em;
+  height: $size;
+  width: $size;
+  margin-left: 27px;
 }

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import capitalize from 'lodash/capitalize'
 
 import Layout from './layout-component'
 
@@ -10,10 +11,12 @@ function mapStateToProps (state, { location }) {
   const page = state[route]
   const { section } = state
 
-  // TODO: improve this
   const getLayerName = layer => {
     if (layer.startsWith('pa-scenario')) return 'pa-scenario'
-    return layer.split(':')[0]
+    const parts = layer.split(':')
+    if (parts.length === 1) return parts[0]
+
+    return parts[0] + capitalize(parts[1])
   }
   const activeLayers =
     page && Array.isArray(page.layers)

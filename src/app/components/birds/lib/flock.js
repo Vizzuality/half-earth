@@ -5,11 +5,11 @@ class Flock {
     this.boids = [] // Initialize the ArrayList
   }
 
-  run () {
+  run (clock) {
     const { boids } = this
     boids.map(boid => {
       boid.update(boids)
-      boid.render()
+      boid.render(clock)
     })
   }
 

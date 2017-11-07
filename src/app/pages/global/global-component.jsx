@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Scroller, { Element as P } from 'components/scroller'
 import Earthometer from 'components/earthometer'
 import NavFooter from 'components/nav-footer'
+import Barchart from './barchart'
 
 import styles from './global-styles.scss'
 import uiStyles from 'app/styles/ui'
@@ -20,14 +21,18 @@ class Global extends Component {
       protectedAnimalsSpider,
       setSection,
       setGlobalSection,
-      whereToProtectSpider,
       selectGlobalSelector,
+      whereToProtectSpider,
       section
     } = this.props
+
     const updateSections = s => {
       setGlobalSection(s)
       setSection(s)
     }
+    const { data, dimensions } = whereToProtectSpider
+    const dimension = dimensions[0]
+
     const t = renderToggle(toggleGlobalLayer)
     const d = renderDropdown(selectGlobalSelector)
     return (
@@ -58,11 +63,13 @@ class Global extends Component {
             formally identified, but they are an integral part of the network of
             life and are vulnerable to the same threats as the species we have
             records for.
-            <SpiderChart {...protectedAnimalsSpider} />
-            <div className={uiStyles.spiderLegendContainer}>
-              <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
-                Percent of species adequately protected
-              </span>
+            <div className={uiStyles.chartContainer}>
+              <SpiderChart {...protectedAnimalsSpider} />
+              <div className={uiStyles.spiderLegendContainer}>
+                <span className={cx(uiStyles.legend, uiStyles.legendBlue)}>
+                  Percent of species adequately protected
+                </span>
+              </div>
             </div>
           </P>
           <P
@@ -94,6 +101,12 @@ class Global extends Component {
             sequence that is optimized for meeting conservation targets, and
             assuming that up to three quarters of a cell could see
             conservation-focused management.
+            <Barchart data={data} dimension={dimension} />
+            <div className={uiStyles.spiderLegendContainer}>
+              <span className={cx(uiStyles.legend, uiStyles.legendPurple)}>
+                Percent of species meeting conservation target
+              </span>
+            </div>
           </P>
           <P
             className={uiStyles.slides}

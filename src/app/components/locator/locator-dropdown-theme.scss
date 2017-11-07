@@ -1,0 +1,72 @@
+@import '~styles/variables.scss';
+
+.dropdown {
+  display: inline-block;
+}
+
+.options {
+  top: -1em;
+  background-color: rgba($color-dark-blue, 0.2);
+  border: none;
+  font-size: 1.2rem;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 2.5em 15px 10px;
+  position: absolute;
+  z-index: $zforeground - 1;
+  display: inline-block;
+  line-height: 2em;
+  width: auto;
+  border-bottom: 1px solid $color-turquoise;
+  min-width: 122px;
+
+  &Closed {
+    display: none;
+  }
+}
+
+.closeButton {
+  &:hover {
+    background: none;
+  }
+}
+
+.option {
+  font-size: 0.9em;
+  margin: 0.7em 0;
+  color: $color-white;
+  white-space: nowrap;
+
+  &:hover {
+    color: rgba($color-white, 0.5);
+  }
+
+  &Selected {
+    text-decoration: none;
+    cursor: none;
+    pointer-events: none;
+    color: rgba($color-white, 0.2);
+  }
+}
+
+.label {
+  font-size: 1.2rem;
+  color: $color-white;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 4px;
+  position: relative;
+  z-index: $zforeground;
+  border-bottom: 1px solid $color-turquoise;
+  margin: 0;
+  min-width: 122px;
+
+  &::after {
+    top: 15px;
+  }
+}

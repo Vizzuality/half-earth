@@ -16,7 +16,11 @@ const Earthometer = ({ className, earthSaved, setEarthSaved, displayOnly }) => {
     : 'Earth Conserved'
   return (
     <div className={cx(className, styles.earthometer)}>
-      <div className={styles.container}>
+      <div
+        className={cx(styles.container, {
+          [styles.containerSlider]: !displayOnly
+        })}
+      >
         <div
           className={cx([
             styles.labels,

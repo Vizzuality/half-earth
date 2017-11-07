@@ -199,55 +199,56 @@ export default {
       type: 'multiple',
       elements: [
         {
-          label: 'Grids optimised for meeting conservation targets',
-          color: 'yellow'
+          label: 'Priority regions for conservation',
+          color: 'yellow',
+          type: 'simple'
         },
         {
-          label: 'Grids with > 75% protected area coverage',
-          color: 'violet'
+          label: 'Regions with >75% current reserve coverage',
+          color: 'violet',
+          type: 'simple'
         }
       ]
     },
-    mammals: {
+    mammalsRichness: {
       type: 'gradient',
       label: 'Mammals',
       color: 'purple',
       min: 1,
       max: 244
     },
-    birds: {
+    birdsRichness: {
       type: 'gradient',
       label: 'Birds',
       color: 'aqua',
       min: 1,
       max: 1020
     },
-    amphibians: {
+    amphibiansRichness: {
       type: 'gradient',
       label: 'Amphibians',
       color: 'green',
       min: 1,
       max: 180
     },
-    cacti: {
+    cactiRichness: {
       type: 'gradient',
       label: 'Cacti',
       color: 'orange',
       min: 1,
       max: 93
     },
-    conifers: {
+    conifersRichness: {
       type: 'gradient',
       label: 'Conifers',
       color: 'orange2',
       min: 1,
       max: 49
     },
-    'all-taxa': {
+    'all-taxaRichness': {
       type: 'gradient',
       label: 'All Taxa',
-      color: 'blue',
-      min: 1
+      color: 'blue'
     }
   }
 }

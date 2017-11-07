@@ -25,6 +25,12 @@
   }
 }
 
+.closeButton {
+  &:hover {
+    background: linear-gradient(to bottom, $color-navy-blue, $color-mid-blue);
+  }
+}
+
 .option {
   font-size: 0.9em;
   margin: 0.7em 0;

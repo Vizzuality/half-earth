@@ -1,0 +1,82 @@
+@import '~styles/variables.scss';
+
+.dropdown {
+  display: block;
+  position: relative;
+}
+
+.options {
+  border: 1px solid grey;
+  display: block;
+  font-weight: normal;
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  z-index: $zforeground;
+  text-transform: lowercase;
+}
+
+.closeButton {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 18px;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  cursor: pointer;
+  outline: 0;
+
+  &:hover {
+    background: none;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid $color-turquoise;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.option,
+.label {
+  cursor: pointer;
+}
+
+.optionSelected {
+  display: block;
+  text-decoration: underline;
+}
+
+.label {
+  text-transform: lowercase;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid $color-turquoise;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 1px;
+    visibility: hidden;
+  }
+
+  &Closed {
+    &::after {
+      visibility: visible;
+    }
+  }
+}

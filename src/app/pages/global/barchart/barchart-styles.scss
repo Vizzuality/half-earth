@@ -1,0 +1,58 @@
+@import '~styles/variables.scss';
+$fs: 1.2rem;
+
+:global .recharts-wrapper {
+  shape-rendering: crispEdges;
+  font-size: 1.2rem;
+
+  .recharts-cartesian-grid-horizontal {
+    display: none;
+  }
+
+  .recharts-xAxis .recharts-cartesian-axis-tick-value {
+    fill: $color-light-blue;
+    text-anchor: start;
+    transform: translateX(5px);
+  }
+
+  .recharts-yAxis .recharts-cartesian-axis-tick-value {
+    fill: $color-white;
+  }
+
+  .recharts-cartesian-grid-vertical {
+    line {
+      stroke-opacity: 0.2;
+    }
+
+    line:nth-child(6),
+    line:nth-child(7) {
+      display: none;
+    }
+  }
+
+  .recharts-xAxis {
+    .recharts-cartesian-axis-tick {
+      transform: translateY(-($fs + 0.25rem));
+    }
+  }
+
+  .recharts-legend-wrapper {
+    bottom: 45px !important;
+  }
+}
+
+.container {
+  margin-top: 6rem;
+}
+
+.tickLabel {
+  fill: $color-white;
+}
+
+.tickTitle {
+  letter-spacing: 4px;
+}
+
+.bar {
+  fill: $color-purple;
+}

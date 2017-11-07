@@ -1,8 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styles from './home-styles.scss'
 
-const Home = props => (
+const Home = ({ onClick }) => (
   <div className={styles.container}>
     <div className={styles.containerScroll}>
       <div className={styles.titleContainer}>
@@ -27,7 +26,7 @@ const Home = props => (
       </p>
     </div>
     <div className={styles.cto}>
-      <Link to="/local">Play</Link>
+      <a onClick={onClick}>Play</a>
       <img className={styles.pulseOne} src="img/button_01.svg" />
       <img className={styles.pulseTwo} src="img/button_02.svg" />
     </div>
