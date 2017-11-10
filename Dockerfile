@@ -21,6 +21,7 @@ COPY public ./public
 
 ## Build the angular app in production mode and store the artifacts in dist folder
 
+ENV GOOGLE_ANALYTICS=UA-28439074-2
 RUN npm run build
 
 
