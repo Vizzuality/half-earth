@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Scroller, { Element as P } from 'components/scroller'
 import Earthometer from 'components/earthometer'
 import NavFooter from 'components/nav-footer'
+import EarthoMeterKnob from 'components/earthometer-knob'
 import Barchart from './barchart'
 
 import styles from './global-styles.scss'
@@ -91,6 +92,7 @@ class Global extends Component {
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:4')}
           >
+            <EarthoMeterKnob />
             With basic species maps in hand that can populate a simplified
             global grid, we can begin to identify conservation gaps and pinpoint
             the most critical regions to close them. The current reserve system
