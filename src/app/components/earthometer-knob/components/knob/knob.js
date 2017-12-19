@@ -1,5 +1,6 @@
 import { createElement, Component } from 'react'
 import KnobComponent from './knob-component'
+import { assign } from 'utils'
 import { lerp, clamp, getAngle } from './knob-utils'
 
 export const π = Math.PI
@@ -12,8 +13,27 @@ class Knob extends Component {
     this.onMouseUp = this.onMouseUp.bind(this)
     this.getContainer = this.getContainer.bind(this)
 
-    this.R = this.props.radius || 90
-    this.C = 2 * π * this.R
+    const { halfTickWidth, handleWidth, trackWidth, radius } = props
+    const C = 2 * π * radius
+    const trackDashOffset = 2 * π * (radius / 6)
+    const halfOffset = C - trackDashOffset - halfTickWidth
+
+    const halfDashOffset =
+      halfOffset * (1 - 0.5) + trackDashOffset + 2 * halfTickWidth
+    const halfDashArray = `${halfTickWidth} ${C}`
+    const handleDashArray = `${handleWidth} ${C}`
+    const handleOffset = C - trackDashOffset - handleWidth
+
+    this.C = C
+    this.R = radius
+    this.handleWidth = handleWidth
+    this.halfOffset = halfOffset
+    this.trackDashOffset = trackDashOffset
+    this.halfDashOffset = halfDashOffset
+    this.halfDashArray = halfDashArray
+    this.handleDashArray = handleDashArray
+    this.handleOffset = handleOffset
+    this.trackWidth = trackWidth
 
     this.state = {
       percent: 0,
@@ -23,6 +43,7 @@ class Knob extends Component {
 
   componentDidMount () {
     this.containerEl.addEventListener('mousedown', this.onMouseDown)
+    document.addEventListener('mousedown', this.onMouseMove)
   }
 
   onMouseDown (e) {
@@ -53,15 +74,23 @@ class Knob extends Component {
     if (angle > 330) angle = 0 // reset going going over center
 
     const percent = clamp(lerp(angle, 0, 300, 0, 1), 0, 0.5)
-    this.setState({
+
+    const state = {
       angle,
       percent
-    })
+    }
+
+    this.props.onChange && this.props.onChange(state)
+    this.setState(state)
   }
 
   onMouseUp () {
     document.removeEventListener('mousemove', this.onMouseMove)
     document.removeEventListener('mouseup', this.onMouseUp)
+  }
+
+  componentWillUnmount () {
+    document.removeEventListener('mousedown', this.onMouseMove)
   }
 
   getContainer (el) {
@@ -70,36 +99,33 @@ class Knob extends Component {
 
   render () {
     const { percent } = this.state
-    const { R, C } = this
+    const {
+      R,
+      C,
+      halfDashOffset,
+      handleDashArray,
+      halfDashArray,
+      trackDashOffset,
+      handleWidth,
+      handleOffset,
+      trackWidth
+    } = this
 
-    // props
-    const width = 12
-    const handle = 10
-    const half = 1
-
-    const dashArray = C
-    const trackDashOffset = 2 * π * (R / 6)
     const progressDashOffset =
-      (C - (trackDashOffset + handle)) * (1 - percent) +
+      (C - (trackDashOffset + handleWidth)) * (1 - percent) +
       trackDashOffset +
-      handle
+      handleWidth
 
-    const halfOffset = C - trackDashOffset - half
-    const halfDashOffset = halfOffset * (1 - 0.5) + trackDashOffset + 2 * half
-    const halfDashArray = `${half} ${C}`
-
-    const handleOffset = C - trackDashOffset - handle
     const handleDashOffset =
-      handleOffset * (1 - percent) + trackDashOffset + 2 * handle
-    const handleDashArray = `${handle} ${C}`
+      handleOffset * (1 - percent) + trackDashOffset + 2 * handleWidth
 
     return createElement(
       KnobComponent,
-      Object.assign({}, this.props, {
+      assign({}, this.props, {
         radius: R,
         percent,
-        width,
-        dashArray,
+        trackWidth,
+        dashArray: C,
         trackDashOffset,
         progressDashOffset,
         halfDashOffset,

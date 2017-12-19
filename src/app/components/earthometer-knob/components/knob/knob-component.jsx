@@ -4,7 +4,7 @@ import styles from './knob-styles.scss'
 const Knob = ({
   radius,
   percent,
-  width,
+  trackWidth,
   dashArray,
   trackDashOffset,
   progressDashOffset,
@@ -14,11 +14,10 @@ const Knob = ({
   handleDashArray,
   getContainer
 }) => {
-  const dim = 2 * radius + 2 * width
+  const dim = 2 * radius + 2 * trackWidth
 
   return (
     <svg
-      ref={getContainer}
       width={dim}
       height={dim}
       className={styles.knob}
@@ -33,7 +32,7 @@ const Knob = ({
         r={radius}
         fill="none"
         strokeLinecap="round"
-        strokeWidth={width}
+        strokeWidth={trackWidth}
       />
       <circle
         className={styles.progress}
@@ -44,7 +43,7 @@ const Knob = ({
         r={radius}
         fill="none"
         strokeLinecap="round"
-        strokeWidth={width}
+        strokeWidth={trackWidth}
       />
       <circle
         className={styles.half}
@@ -54,7 +53,7 @@ const Knob = ({
         cy={dim / 2}
         r={radius}
         fill="none"
-        strokeWidth={width + 4}
+        strokeWidth={trackWidth + 4}
       />
       <circle
         className={styles.handle}
@@ -64,7 +63,19 @@ const Knob = ({
         cy={dim / 2}
         r={radius}
         fill="none"
-        strokeWidth={width + 10}
+        strokeWidth={trackWidth + 10}
+      />
+      <circle
+        ref={getContainer}
+        className={styles.surface}
+        strokeDashoffset={trackDashOffset}
+        strokeDasharray={dashArray}
+        cx={dim / 2}
+        cy={dim / 2}
+        r={radius}
+        fill="none"
+        strokeLinecap="round"
+        strokeWidth={trackWidth + 10}
       />
     </svg>
   )

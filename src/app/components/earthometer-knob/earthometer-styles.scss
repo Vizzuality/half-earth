@@ -1,0 +1,24 @@
+@import '~styles/variables.scss';
+
+.earthometer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  margin-bottom: 5rem;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  max-width: 40%;
+  display: inline-block;
+}
+
+.protected {
+  color: $color-turquoise;
+  text-align: end;
+}

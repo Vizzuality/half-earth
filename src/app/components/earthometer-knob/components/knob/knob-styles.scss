@@ -4,10 +4,15 @@
   transform: rotateZ(120deg);
 }
 
+.surface,
 .progress,
 .track,
 .half {
   cursor: pointer;
+}
+
+.surface {
+  stroke: rgba($color-navy-blue, 0);
 }
 
 .progress {
