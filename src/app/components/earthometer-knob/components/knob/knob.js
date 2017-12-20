@@ -1,7 +1,8 @@
 import { createElement, Component } from 'react'
 import KnobComponent from './knob-component'
 import { assign } from 'utils'
-import { lerp, clamp, getAngle } from './knob-utils'
+import { getAngle } from './knob-utils'
+import { lerp, clamp } from 'app/utils'
 
 export const π = Math.PI
 
