@@ -116,14 +116,14 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-40%, -50%);
+      transform: translate(-35%, -50%);
       background: transparent;
       box-sizing: border-box;
       width: 0;
       height: 0;
       border-color: transparent transparent transparent $color-white;
       border-style: solid;
-      border-width: 6px 0 6px 12px;
+      border-width: 8px 0 8px 12px;
     }
 
     &:hover {

@@ -18,7 +18,10 @@ const Home = ({ onClick }) => (
       </div>
       <div className={styles.videoContainer}>
         <span className={styles.playButton} />
-        <video className={styles.video} />
+        <video
+          poster="/img/home-video-placeholder.png"
+          className={styles.video}
+        />
       </div>
     </div>
     <div className={styles.body}>
