@@ -25,3 +25,8 @@ export const cartoConfig = (account, cartocss, table, options = {}) => ({
     ]
   }
 })
+
+export const lerp = (value, istart, istop, ostart, ostop) =>
+  ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
+
+export const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
