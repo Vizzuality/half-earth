@@ -43,7 +43,7 @@ class Knob extends Component {
 
   componentDidMount () {
     this.containerEl.addEventListener('mousedown', this.onMouseDown)
-    document.addEventListener('mousedown', this.onMouseMove)
+    this.containerEl.addEventListener('mousedown', this.onMouseMove)
   }
 
   onMouseDown (e) {
@@ -90,7 +90,7 @@ class Knob extends Component {
   }
 
   componentWillUnmount () {
-    document.removeEventListener('mousedown', this.onMouseMove)
+    this.containerEl.removeEventListener('mousedown', this.onMouseMove)
   }
 
   getContainer (el) {
