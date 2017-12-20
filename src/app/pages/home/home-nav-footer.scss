@@ -1,0 +1,14 @@
+.container {
+  position: static;
+  left: auto;
+  padding-bottom: 0;
+
+  .controls {
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+
+  .back {
+    display: none;
+  }
+}
