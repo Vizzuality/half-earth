@@ -52,12 +52,11 @@ const Map = ({
             position={billboard.coordinates}
           />
         ))}
-      {route === 'local' &&
+      {false &&
         local.birds.map(localBird => (
           <Birds {...{ ...localBird }} key={localBird} url="hum" />
         ))}
-      {(route === 'local' ||
-        (route === 'regional' && section.section === 'regional:1')) &&
+      {false &&
         regional.birds.map((regionalBird, i) => (
           <Birds {...{ ...regionalBird }} key={`regionalBird${i}`} url="hum" />
         ))}
