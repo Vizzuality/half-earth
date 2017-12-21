@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { renderDropdown, renderToggle } from 'components/explorable'
 import { requestCartos } from 'pages/map/map-utils'
 import * as actions from './regional-actions'
+import { getSection, getType } from './regional-selectors'
 import { actions as cartoActions } from 'providers/carto'
 import { actions as sectionActions } from 'providers/section'
 
@@ -24,24 +25,12 @@ class RegionalConTainer extends Component {
   }
 }
 
-const mapStateToProps = ({ map, regional, section }) => {
-  const localProtectedSpeciesSpider = {
-    ...regional.localProtectedSpecies,
-    data: regional.localProtectedSpecies.data.map(d => ({
-      ...d,
-      tooltip: [
-        {
-          value: d.percent,
-          label: '%',
-          color: '#3850d6'
-        }
-      ]
-    }))
-  }
+const mapStateToProps = state => {
+  const { map, regional, section } = state
 
   return {
     map,
-    localProtectedSpeciesSpider,
+    selectedType: getType(getSection(state)),
     regional,
     section,
     renderToggle: renderToggle(regional.layers),

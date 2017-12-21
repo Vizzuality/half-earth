@@ -20,3 +20,4 @@ export const toggleRegionalLayer = createAction(
   }
 )
 export const setRegionalSection = createAction('setRegionalSection')
+export const setType = createAction('setType')
