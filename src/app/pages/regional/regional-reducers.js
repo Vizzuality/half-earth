@@ -49,31 +49,38 @@ export default {
     const currentSectionName = __app.section.section
     const currentSection = state.sections[currentSectionName]
     const { selections } = currentSection
+    const selection = currentSection.selectors.birds.selected
+
+    if (currentSection.selectionType === payload) return state
+
+    // hide all current dropdown values
+    const toHide = Object.keys(selections).map(v => selections[v])
+    const matchingLayers = state.layers.filter(l => includes(toHide, l.name))
+    const hiddenLayers = matchingLayers.map(makeHidden)
+    const otherLayers = difference(state.layers, matchingLayers).map(l => {
+      if (l.name === `${selection}:${payload}`) l.visible = true
+      return l
+    })
+    // merge hidden and visible
+    const layers = hiddenLayers.concat(otherLayers)
+
+    // update dropdown data based on submited type
     const updatedSelections = reduce(
-      state.sections[currentSectionName].selections,
+      currentSection.selections,
       (sections, value, key) => {
         sections[key] = `${key}:${payload}`
         return sections
       },
       {}
     )
-    const selection = currentSection.selectors.birds.selected
-
-    const toHide = Object.keys(selections).map(v => selections[v])
-    const matchingLayers = state.layers.filter(l => includes(toHide, l.name))
-    const otherLayers = difference(state.layers, matchingLayers).map(l => {
-      if (l.name === `${selection}:${payload}`) l.visible = true
-      return l
-    })
-    const hiddenLayers = matchingLayers.map(makeHidden)
 
     return {
       ...state,
-      layers: hiddenLayers.concat(otherLayers),
+      layers,
       sections: {
         ...state.sections,
         [currentSectionName]: {
-          ...state.sections[currentSectionName],
+          ...currentSection,
           selectionType: payload,
           selections: updatedSelections
         }
