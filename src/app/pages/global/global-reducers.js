@@ -70,8 +70,13 @@ export default {
 
   [actions.setGlobalSection]: regionalReducers.setRegionalSection,
 
-  [actions.setWhereToProtectData]: (state, { payload }) => ({
+  [actions.setCanonicalData]: (state, { payload }) => ({
     ...state,
-    whereToProtect: { ...state.whereToProtect, data: payload }
+    canonical: { ...state.canonical, ...payload }
+  }),
+
+  [actions.setChartData]: (state, { payload }) => ({
+    ...state,
+    charts: { ...state.charts, ...payload }
   })
 }
