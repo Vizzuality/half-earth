@@ -3,10 +3,9 @@ import SpiderChart from 'components/spider-chart'
 import cx from 'classnames'
 import { Link } from 'react-router-dom'
 import Scroller, { Element as P } from 'components/scroller'
-import Earthometer from 'components/earthometer'
 import NavFooter from 'components/nav-footer'
 import EarthoMeterKnob from 'components/earthometer-knob'
-import Barchart from './barchart'
+import Barchart from 'components/barchart'
 
 import styles from './global-styles.scss'
 import uiStyles from 'app/styles/ui'
@@ -22,26 +21,20 @@ class Global extends Component {
       protectedAnimalsSpider,
       setSection,
       setGlobalSection,
-      selectGlobalSelector,
-      whereToProtectSpider,
-      section
+      selectGlobalSelector
     } = this.props
 
     const updateSections = s => {
       setGlobalSection(s)
       setSection(s)
     }
-    const { data, dimensions } = whereToProtectSpider
-    const dimension = dimensions[0]
 
     const t = renderToggle(toggleGlobalLayer)
     const d = renderDropdown(selectGlobalSelector)
     return (
       <div className={className}>
         <Scroller>
-          <Earthometer
-            displayOnly={section !== 'global:4' && section !== 'global:5'}
-          />
+          <Barchart data={[]} dimension={{ key: 0 }} />
           <P
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:1')}
@@ -103,7 +96,6 @@ class Global extends Component {
             sequence that is optimized for meeting conservation targets, and
             assuming that up to three quarters of a cell could see
             conservation-focused management.
-            <Barchart data={data} dimension={dimension} />
             <div className={uiStyles.spiderLegendContainer}>
               <span className={cx(uiStyles.legend, uiStyles.legendPurple)}>
                 Percent of species meeting conservation target
