@@ -51,6 +51,12 @@
   margin-bottom: 1em;
 }
 
+.innerTitle {
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: 1em;
+}
+
 .paragraphAfterChart {
   // padding-top: 50px;
 }
@@ -222,3 +228,21 @@
     }
   }
 }
+
+.toggle {
+  @extend %button;
+
+  outline: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $color-turquoise;
+  display: inline-block;
+  background-color: transparent;
+  color: $color-white;
+}
+
+.toggleActive {
+  background-color: $color-turquoise;
+  color: $color-dark-blue;
+}
+
