@@ -1,5 +1,8 @@
 import includes from 'lodash/includes'
 import reduce from 'lodash/reduce'
+import lowerCase from 'lodash/lowerCase'
+import find from 'lodash/find'
+import kebabCase from 'lodash/kebabCase'
 import difference from 'lodash/difference'
 import merge from 'lodash/fp/merge'
 import { assign } from 'utils'
@@ -108,5 +111,47 @@ export default {
     const otherLayersHidden = otherLayers.map(makeHidden)
     const updatedLayers = matchingVisibleLayers.concat(otherLayersHidden)
     return { ...state, layers: updatedLayers }
+  },
+  [actions.gotBillboards]: (state, { payload }) => {
+    return {
+      ...state,
+      billboards: payload.map(b => ({
+        id: kebabCase(b.name),
+        coordinates: [b.x, b.y],
+        url: 'img/billboard/dot.png',
+        urlHover: 'img/billboard/dot-hover.png'
+      }))
+    }
+  },
+  [actions.openSidePopup]: (state, { payload }) => {
+    return {
+      ...state,
+      sidePopup: {
+        ...state.sidePopup,
+        open: true,
+        selected: payload
+      }
+    }
+  },
+  [actions.filterSpeciesBy]: (state, { payload }) => {
+    const current = find(state.sidePopup.content, {
+      key: state.sidePopup.selected
+    })
+    current.filters.push(payload)
+    const filtered = current.species.filter(s =>
+      includes(current.filters, lowerCase(s.taxoGroup))
+    )
+    console.log(current.filters, filtered)
+    return state
+  },
+  [actions.closeSidePopup]: (state, { payload }) => {
+    return {
+      ...state,
+      sidePopup: {
+        ...state.sidePopup,
+        open: false,
+        selected: null
+      }
+    }
   }
 }

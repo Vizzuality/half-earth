@@ -3,7 +3,7 @@ const { speciesSelector, speciesSelections } = utils
 
 export default {
   'regional:1': {
-    layers: [],
+    layers: ['dark:basemap'],
     selectionType: 'richness',
     selections: speciesSelections('richness'),
     selectors: {
@@ -11,13 +11,13 @@ export default {
     }
   },
   'regional:2': {
-    layers: [],
+    layers: ['dark:basemap', 'protected-areas'],
     selections: speciesSelections('pressures'),
     selectors: {
       anthropogenic: speciesSelector('birds')
     }
   },
   'regional:3': {
-    layers: []
+    layers: ['dark:basemap']
   }
 }

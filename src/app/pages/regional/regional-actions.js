@@ -1,4 +1,7 @@
 import { createAction } from 'redux-actions'
+import { createThunkAction } from 'app/utils/redux'
+
+const { fetch } = window
 
 export const selectRegionalSelector = createAction(
   'selectRegionalSelector',
@@ -21,3 +24,19 @@ export const toggleRegionalLayer = createAction(
 )
 export const setRegionalSection = createAction('setRegionalSection')
 export const setType = createAction('setType')
+
+export const openSidePopup = createAction('openSidePopup')
+export const closeSidePopup = createAction('closeSidePopup')
+
+export const filterSpeciesBy = createAction('filterSpeciesBy')
+export const gotBillboards = createAction('gotBillboards')
+export const getBillboards = createThunkAction(
+  'getBillboards',
+  payload => dispatch => {
+    return fetch(
+      'https://half-earth.carto.com/api/v2/sql?q=select%20*%20from%20public.reserves_centroids'
+    )
+      .then(d => d.json())
+      .then(d => dispatch(gotBillboards(d.rows)))
+  }
+)

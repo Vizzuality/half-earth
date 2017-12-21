@@ -14,11 +14,17 @@ import RegionalComponent from './regional-component'
 class RegionalConTainer extends Component {
   constructor (props) {
     super(props)
-    const { getCartoTiles, setRegionalSection, setSection } = props
+    const {
+      getCartoTiles,
+      setRegionalSection,
+      setSection,
+      getBillboards
+    } = props
     const { layers } = props.regional
     requestCartos({ layers, getCartoTiles })
     setRegionalSection('regional:1')
     setSection('regional:1')
+    getBillboards()
   }
   render () {
     return createElement(RegionalComponent, this.props)

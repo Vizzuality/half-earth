@@ -1,6 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 import Scroller, { Element as P } from 'components/scroller'
+import SidePopup from 'components/side-popup'
 import NavFooter from 'components/nav-footer'
 
 import uiStyles from 'app/styles/ui'
@@ -20,7 +21,7 @@ const Regional = ({
   setType,
   ...props
 }) => {
-  // const t = renderToggle(toggleRegionalLayer)
+  const t = renderToggle(toggleRegionalLayer)
   const d = renderDropdown(selectRegionalSelector)
   const updateSections = s => {
     setRegionalSection(s)
@@ -29,6 +30,7 @@ const Regional = ({
 
   return (
     <div className={classname}>
+      <SidePopup />
       <Scroller>
         <P
           className={uiStyles.slides}
@@ -75,11 +77,31 @@ const Regional = ({
           className={uiStyles.slides}
           onScrollFocus={() => updateSections('regional:2')}
         >
-          In publishing and graphic design, lorem ipsum is a filler text or
-          greeking commonly used to demonstrate the textual elements of a
-          graphic document or visual presentation. Replacing meaningful content
-          with placeholder text allows designers to design the form of the
-          content before the content itself has been produced.
+          {t('Protected Areas')}, including {t('example protected areas')},
+          cover ca. 15% of this region and have been instrumental for the
+          conservation of its unique flora and fauna. While the regional
+          governments and institutions are dedicated to safeguarding this
+          heritage, many key areas remain unprotected.
+        </P>
+        <P
+          className={uiStyles.slides}
+          onScrollFocus={() => updateSections('regional:3')}
+        >
+          <span className={uiStyles.innerP}>
+            Beyond traditional reserves,{' '}
+            {t('Community-based conservation areas')} and
+            {t('private reserves')} take on a particular role in this region,
+            especially pressures {t('human pressures')} on land are ongoing and
+            growing.
+          </span>
+          <span className={uiStyles.innerP}>
+            Highlighting the global significance of sites for biodiversity can
+            empower local conservation efforts and encourage regional or global
+            support.
+          </span>
+          <span className={uiStyles.innerP}>
+            You can explore the different areas by clicking on the map.
+          </span>
         </P>
         <NavFooter from="/local" to="/global" />
       </Scroller>

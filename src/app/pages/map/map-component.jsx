@@ -20,6 +20,7 @@ const Map = ({
   lockNavigation,
   local,
   openPopUp,
+  openSidePopup,
   className,
   section
 }) => {
@@ -35,17 +36,17 @@ const Map = ({
       zoomLevel={zoom}
       rotate={route === 'global'}
     >
-      {route === 'local' &&
-        local.billboards.map(billboard => (
+      {route === 'regional' &&
+        regional.billboards.map(billboard => (
           <Billboard
             key={billboard.id}
             id={billboard.id}
             url={billboard.url}
             urlHover={billboard.urlHover}
-            width={80}
-            height={106}
+            width={58}
+            height={58}
             onClick={id =>
-              openPopUp({
+              openSidePopup({
                 payload: id,
                 meta: ['local', ...analytics.openPopUp, id]
               })}
