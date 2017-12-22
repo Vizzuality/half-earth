@@ -15,7 +15,8 @@ const Sidebar = ({
   hidden,
   toggleSidebar,
   open,
-  route
+  route,
+  sidePopupOpen
 }) => {
   const sidebarAnalytics = open ? analytics.open : analytics.close
   return (
@@ -30,7 +31,12 @@ const Sidebar = ({
         toggleSidebar={() =>
           toggleSidebar({ meta: { analytics: [route, ...sidebarAnalytics] } })}
       />
-      <div className={cx(styles.content, { [styles.contentOpen]: open })}>
+      <div
+        className={cx(styles.content, {
+          [styles.contentOpen]: open,
+          [styles.contentLocked]: sidePopupOpen
+        })}
+      >
         {children}
       </div>
     </div>
