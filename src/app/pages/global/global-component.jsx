@@ -4,6 +4,7 @@ import Scroller, { Element as P } from 'components/scroller'
 import NavFooter from 'components/nav-footer'
 import EarthoMeterKnob from 'components/earthometer-knob'
 import Barchart from 'components/barchart'
+import OldBarchart from './barchart/barchart'
 import uiStyles from 'app/styles/ui'
 
 class Global extends Component {
@@ -66,9 +67,9 @@ class Global extends Component {
             overlaying global species {t('richness')} and
             {t('rarity')} with the protected areas network, we can see that many
             species remain insufficiently protected.
-            <Barchart
+            <OldBarchart
               data={globalScaleProtectedAreas.data}
-              dimension={globalScaleProtectedAreas.key}
+              dataKey={globalScaleProtectedAreas.key}
               labelKey="taxa"
             />
           </P>
