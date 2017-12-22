@@ -6,6 +6,7 @@
 
 .container {
   margin-top: 6rem;
+  margin-bottom: 2rem;
 
   :global .recharts-layer .recharts-cartesian-axis-ticks {
     text.recharts-text.recharts-cartesian-axis-tick-value {
@@ -66,6 +67,7 @@
 
 .legendContainer {
   display: flex;
+  margin-bottom: 3rem;
 
   .legend {
     display: flex;
