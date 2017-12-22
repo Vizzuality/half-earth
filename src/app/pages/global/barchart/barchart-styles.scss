@@ -1,58 +1,104 @@
 @import '~styles/variables.scss';
-$fs: 1.2rem;
 
-:global .recharts-wrapper {
-  shape-rendering: crispEdges;
-  font-size: 1.2rem;
-
-  .recharts-cartesian-grid-horizontal {
-    display: none;
-  }
-
-  .recharts-xAxis .recharts-cartesian-axis-tick-value {
-    fill: $color-light-blue;
-    text-anchor: start;
-    transform: translateX(5px);
-  }
-
-  .recharts-yAxis .recharts-cartesian-axis-tick-value {
-    fill: $color-white;
-  }
-
-  .recharts-cartesian-grid-vertical {
-    line {
-      stroke-opacity: 0.2;
-    }
-
-    line:nth-child(6),
-    line:nth-child(7) {
-      display: none;
-    }
-  }
-
-  .recharts-xAxis {
-    .recharts-cartesian-axis-tick {
-      transform: translateY(-($fs + 0.25rem));
-    }
-  }
-
-  .recharts-legend-wrapper {
-    bottom: 45px !important;
-  }
+:global .recharts-rectangle.recharts-tooltip-cursor {
+  fill: transparent;
 }
 
 .container {
   margin-top: 6rem;
+  margin-bottom: 2rem;
+
+  :global .recharts-layer .recharts-cartesian-axis-ticks {
+    text.recharts-text.recharts-cartesian-axis-tick-value {
+      fill: $color-white;
+    }
+  }
+
+  :global .recharts-xAxis {
+    text.recharts-text.recharts-cartesian-axis-tick-value {
+      font-size: 12px;
+      text-transform: capitalize;
+    }
+  }
 }
 
-.tickLabel {
-  fill: $color-white;
+.customTooltip {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-navy-blue;
+  transform: translate(-50%, 0);
+
+  &LastBar {
+    transform: translate(50%, 0);
+  }
+
+  .customTooltipContainer {
+    position: relative;
+    display: flex;
+    border: 0;
+
+    .customTooltipValue {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      min-width: 50px;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      color: $color-white;
+      padding: 0 11px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid $color-navy-blue;
+      transform: translate(-50%, 0);
+    }
+  }
 }
 
-.tickTitle {
-  letter-spacing: 4px;
-}
+.legendContainer {
+  display: flex;
+  margin-bottom: 3rem;
 
-.bar {
-  fill: $color-purple;
+  .legend {
+    display: flex;
+    align-items: baseline;
+    position: relative;
+    flex-direction: row-reverse;
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 1.71;
+    letter-spacing: 0.7px;
+    color: $color-white;
+
+    &::after {
+      content: '';
+      height: 16px;
+      width: 16px;
+      background-color: $color-white;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    &Blue::after {
+      background-color: #0664f6;
+    }
+
+    &Purple::after {
+      background-color: $color-purple;
+    }
+
+    &Violet::after {
+      background-color: #9632b2;
+    }
+  }
 }

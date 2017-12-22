@@ -1,0 +1,21 @@
+.container {
+  position: static;
+  left: auto;
+  padding-bottom: 0;
+
+  .controls {
+    margin-bottom: 0;
+  }
+
+  .back {
+    display: none;
+  }
+
+  .label {
+    display: none;
+  }
+
+  .arrowButton {
+    margin: 0;
+  }
+}
