@@ -1,7 +1,7 @@
-import layers from './global-layers-initial-state'
-import sections from './global-sections-initial-state'
-import legend from './global-legends-initial-state'
-import charts from './global-charts-initial-state'
+import layers from './global-layers'
+import sections from './global-sections'
+import legend from './global-legends'
+import charts from './global-charts'
 
 export default {
   layers,

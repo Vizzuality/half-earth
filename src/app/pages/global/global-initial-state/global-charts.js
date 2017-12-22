@@ -14,6 +14,7 @@ const defaultParser = (d, key) =>
     .map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
 
 const classifyScenarios = data =>
+  Array.isArray(data) &&
   data.reduce((acc, next) => {
     const scenario = acc[next.scenario] || []
     const scenarios = [...scenario, next]
@@ -53,13 +54,14 @@ export default {
     key: 'percentSpeciesMeetingTargetProtectedAreaViaAny',
     parser: data =>
       classifyScenarios(
-        data.filter(d => d.taxa !== 'all').map(d => ({
-          ...d,
-          percentSpeciesMeetingTargetProtectedAreaViaAny: parseInt(
-            d.percentSpeciesMeetingTargetProtectedAreaViaAny,
-            10
-          )
-        }))
+        Array.isArray(data) &&
+          data.filter(d => d.taxa !== 'all').map(d => ({
+            ...d,
+            percentSpeciesMeetingTargetProtectedAreaViaAny: parseInt(
+              d.percentSpeciesMeetingTargetProtectedAreaViaAny,
+              10
+            )
+          }))
       )
   }
 }
