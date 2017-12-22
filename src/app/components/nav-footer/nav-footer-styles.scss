@@ -59,6 +59,7 @@
 .back {
   position: relative;
   display: flex;
+  align-items: center;
   padding-right: 15px;
   margin-right: 15px;
 
@@ -80,6 +81,7 @@
 
 .forth {
   display: flex;
+  align-items: center;
 
   .arrowButton {
     margin-right: 15px;
