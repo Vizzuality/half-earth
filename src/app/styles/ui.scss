@@ -33,8 +33,8 @@
 
 .slides {
   display: block;
-  padding-bottom: 1em;
-  margin-bottom: 1em;
+  padding-bottom: 50vh;
+  margin-bottom: 50vh;
   // margin-bottom: calc((100vh / 2) - (#{$header-height} * 2));
 
   &:first-of-type {
@@ -42,7 +42,8 @@
   }
 
   &:last-of-type {
-    padding-bottom: 20vh;
+    padding-bottom: 20rem;
+    margin-bottom: 20rem;
   }
 }
 
