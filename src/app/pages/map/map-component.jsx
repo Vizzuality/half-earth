@@ -37,6 +37,7 @@ const Map = ({
       rotate={route === 'global'}
     >
       {route === 'regional' &&
+        section.section === 'regional:3' &&
         regional.billboards.map(billboard => (
           <Billboard
             key={billboard.id}
