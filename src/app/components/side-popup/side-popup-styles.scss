@@ -13,4 +13,15 @@
   &Open {
     display: block;
   }
+
+  .tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    display: inline;
+    margin-right: 1px;
+  }
 }

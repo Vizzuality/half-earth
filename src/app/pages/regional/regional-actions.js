@@ -28,7 +28,7 @@ export const setType = createAction('setType')
 export const openSidePopup = createAction('openSidePopup')
 export const closeSidePopup = createAction('closeSidePopup')
 
-export const filterSpeciesBy = createAction('filterSpeciesBy')
+export const toggleFilters = createAction('toggleFilters')
 export const gotBillboards = createAction('gotBillboards')
 export const getBillboards = createThunkAction(
   'getBillboards',

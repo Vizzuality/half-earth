@@ -1,6 +1,6 @@
 import includes from 'lodash/includes'
 import reduce from 'lodash/reduce'
-import lowerCase from 'lodash/lowerCase'
+import concat from 'lodash/concat'
 import find from 'lodash/find'
 import kebabCase from 'lodash/kebabCase'
 import difference from 'lodash/difference'
@@ -133,16 +133,24 @@ export default {
       }
     }
   },
-  [actions.filterSpeciesBy]: (state, { payload }) => {
+  [actions.toggleFilters]: (state, { payload }) => {
     const current = find(state.sidePopup.content, {
       key: state.sidePopup.selected
     })
-    current.filters.push(payload)
-    const filtered = current.species.filter(s =>
-      includes(current.filters, lowerCase(s.taxoGroup))
-    )
-    console.log(current.filters, filtered)
-    return state
+    const others = difference(state.sidePopup.content, [current])
+    const withFilters = assign(current, {
+      filters: includes(current.filters, payload)
+        ? difference(current.filters, [payload])
+        : concat(current.filters, [payload])
+    })
+    const content = others.concat(withFilters)
+    return {
+      ...state,
+      sidePopup: {
+        ...state.sidePopup,
+        content
+      }
+    }
   },
   [actions.closeSidePopup]: (state, { payload }) => {
     return {

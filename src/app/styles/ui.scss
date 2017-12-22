@@ -229,19 +229,19 @@
   }
 }
 
-.toggle {
+.toggle,
+.tag {
   @extend %button;
 
-  outline: none;
   border-width: 1px;
   border-style: solid;
   border-color: $color-turquoise;
   display: inline-block;
-  background-color: transparent;
   color: $color-white;
 }
 
-.toggleActive {
+.toggleActive,
+.tagActive {
   background-color: $color-turquoise;
   color: $color-dark-blue;
 }

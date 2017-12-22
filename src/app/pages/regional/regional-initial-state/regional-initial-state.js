@@ -12,8 +12,8 @@ export default {
   legend,
   billboards,
   sidePopup: {
-    open: false,
-    selected: null,
+    open: true,
+    selected: 'samara-private-game-reserve',
     content: popups
   }
 }

@@ -27,3 +27,13 @@ body {
   height: 100vh;
   z-index: $zforeground;
 }
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: 0;
+}
