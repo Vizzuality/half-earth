@@ -1,5 +1,6 @@
 import { createAction } from 'redux-actions'
 import { createThunkAction } from 'app/utils/redux'
+import isEmpty from 'lodash/isEmpty'
 
 const { fetch } = window
 
@@ -34,7 +35,7 @@ export const getChartData = createThunkAction(
       const { data, provider, parser = x => x } = charts[chartName]
       const { [provider]: canonicalData } = canonical
       let req = null
-      if (data.length > 0) return
+      if (!isEmpty(data)) return
       if (canonicalData) {
         req = Promise.resolve(parser(canonical)).then(chart =>
           dispatch(setChartData({ chartName, chart }))

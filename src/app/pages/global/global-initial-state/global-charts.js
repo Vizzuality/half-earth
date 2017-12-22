@@ -44,7 +44,7 @@ export default {
     parser: data => defaultParser(data, 'percentProtectedCurrently')
   },
   globalConservationPrioritization: {
-    data: [],
+    data: {},
     domain: [0, 100],
     color: 'violet',
     legend:
@@ -54,14 +54,13 @@ export default {
     key: 'percentSpeciesMeetingTargetProtectedAreaViaAny',
     parser: data =>
       classifyScenarios(
-        Array.isArray(data) &&
-          data.filter(d => d.taxa !== 'all').map(d => ({
-            ...d,
-            percentSpeciesMeetingTargetProtectedAreaViaAny: parseInt(
-              d.percentSpeciesMeetingTargetProtectedAreaViaAny,
-              10
-            )
-          }))
+        data.filter(d => d.taxa !== 'all').map(d => ({
+          ...d,
+          percentSpeciesMeetingTargetProtectedAreaViaAny: parseInt(
+            d.percentSpeciesMeetingTargetProtectedAreaViaAny,
+            10
+          )
+        }))
       )
   }
 }
