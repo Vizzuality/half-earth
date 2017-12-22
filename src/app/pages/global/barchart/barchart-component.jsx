@@ -1,58 +1,72 @@
 import React from 'react'
+import cx from 'classnames'
 import {
   BarChart,
-  CartesianGrid,
   ResponsiveContainer,
   XAxis,
   YAxis,
-  Bar
+  Bar,
+  Tooltip
 } from 'recharts'
 
 import styles from './barchart-styles.scss'
+import { colorMap } from 'utils/utils'
+import capitalize from 'lodash/capitalize'
 
-const leftPad = 80
-const rightPad = 20
-const bottomPad = 30
-const positionX = props => props.width + (leftPad - 15)
+const CustomBarchart = ({ data, dataKey, labelKey, color, domain, legend }) => (
+  <div className={styles.outerContainer}>
+    <ResponsiveContainer className={styles.container} width="100%" height={400}>
+      <BarChart data={data}>
+        <YAxis tickLine={false} axisLine={false} domain={domain} />
+        <XAxis
+          tickLine={false}
+          axisLine={false}
+          dataKey={labelKey}
+          interval={0}
+        />
+        <Bar
+          background={{ fill: 'rgba(43, 77, 104, 0.3)' }}
+          className={styles.bar}
+          dataKey={dataKey}
+          maxBarSize={11}
+          fill={colorMap[color]}
+        />
+        <Tooltip
+          offset={0}
+          content={({ payload }) => <CustomTooltip content={payload} />}
+          cursor={false}
+          isAnimationActive={false}
+        />
+      </BarChart>
+    </ResponsiveContainer>
+    <div className={styles.legendContainer}>
+      <span className={cx(styles.legend, styles[`legend${capitalize(color)}`])}>
+        {legend}
+      </span>
+    </div>
+  </div>
+)
 
-const CustomTick = ({ data, dimension, ...props }) => (
-  <text y={props.y - 10} className={styles.tickLabel}>
-    <tspan className={styles.tickPercent} x={positionX(props)} textAnchor="end">
-      {data[props.index][dimension.key]}%
-    </tspan>
-    <tspan
-      className={styles.tickTitle}
-      textAnchor="end"
-      x={positionX(props)}
-      y={props.y + 16}
+const CustomTooltip = ({ content }) => {
+  const [bar] = content
+  const formatter = n =>
+    n.toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    })
+  return bar ? (
+    <div
+      className={cx(styles.customTooltip, {
+        [styles.customTooltipLastBar]: bar.payload.isLast
+      })}
     >
-      {props.payload.value}
-    </tspan>
-  </text>
-)
-
-const CustomBarchart = ({ data, dimension }) => (
-  <ResponsiveContainer className={styles.container} width="100%" height={400}>
-    <BarChart layout="vertical" data={data}>
-      <CartesianGrid />
-      <XAxis
-        padding={{ left: leftPad, right: rightPad }}
-        tickLine={false}
-        axisLine={false}
-        domain={[0, 100]}
-        type="number"
-      />
-      <YAxis
-        padding={{ bottom: bottomPad }}
-        tickLine={false}
-        tick={<CustomTick data={data} dimension={dimension} />}
-        axisLine={false}
-        type="category"
-        dataKey="subject"
-      />
-      <Bar className={styles.bar} dataKey={dimension.key} />
-    </BarChart>
-  </ResponsiveContainer>
-)
+      <div className={styles.customTooltipContainer}>
+        <div className={styles.customTooltipValue}>
+          {formatter(bar.value || '')}
+        </div>
+      </div>
+    </div>
+  ) : null
+}
 
 export default CustomBarchart

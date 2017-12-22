@@ -30,3 +30,9 @@ export const lerp = (value, istart, istop, ostart, ostop) =>
   ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
 
 export const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+export const colorMap = {
+  blue: '#0664f6',
+  purple: '#8366e4',
+  violet: '#9632b2'
+}

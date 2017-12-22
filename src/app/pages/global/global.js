@@ -10,7 +10,7 @@ import { actions as cartoActions } from 'providers/carto'
 import { actions as sectionActions } from 'providers/section'
 import * as actions from './global-actions'
 import reducers from './global-reducers'
-import initialState from './global-initial-state'
+import initialState from './global-initial-state/global-initial-state'
 
 class GlobalContainer extends Component {
   constructor (props) {
@@ -20,66 +20,33 @@ class GlobalContainer extends Component {
       setGlobalSection,
       setSection,
       layers,
-      getWhereToProtectSpiderData
+      getChartData
     } = props
     requestCartos({ layers, getCartoTiles })
     setGlobalSection('global:1')
     setSection('global:1')
-    getWhereToProtectSpiderData()
+    getChartData()
   }
   render () {
     return createElement(GlobalComponent, assign(this.props))
   }
 }
 
-const mapStateToProps = ({
-  map,
-  global,
-  section,
-  earthSaved,
-  getWhereToProtectSpiderData
-}) => {
+const mapStateToProps = ({ map, global, section, earthSaved }) => {
   const index = Math.round(earthSaved.value)
-  const whereToProtectSpider = {
-    dimensions: global.whereToProtect.dimensions,
-    data: (global.whereToProtect.data[index] || [])
-      .filter(d => d.taxa !== 'all')
-      .map(({ taxa, ...rest }) => ({
-        ...rest,
-        subject: taxa.toUpperCase(),
-        tooltip: [
-          {
-            label: '%',
-            value: rest.percentSpeciesMeetingTargetProtectedAreaViaAny,
-            color: '#8366e4'
-          }
-        ]
-      }))
+  const globalConservationPrioritization = {
+    ...global.charts.globalConservationPrioritization,
+    data: (global.charts.globalConservationPrioritization.data[index] || [])
+      .map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
   }
-
-  const protectedAnimalsSpider = {
-    ...global.protectedAnimals,
-    data: global.protectedAnimals.data.map(d => ({
-      ...d,
-      tooltip: [
-        {
-          value: d.percent,
-          label: '%',
-          color: '#3850d6'
-        }
-      ]
-    }))
-  }
-
   return {
     map,
-    whereToProtectSpider,
-    protectedAnimalsSpider,
-    getWhereToProtectSpiderData,
     layers: global.layers,
     section: section.section,
     renderToggle: renderToggle(global.layers),
-    renderDropdown: renderDropdown(global.sections)
+    renderDropdown: renderDropdown(global.sections),
+    ...global.charts,
+    globalConservationPrioritization
   }
 }
 
