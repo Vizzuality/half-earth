@@ -42,13 +42,7 @@ $pad: 6rem;
     width: $column-width;
     max-width: $max-width;
     z-index: $zforeground * 100;
-    background-image:
-      linear-gradient(
-        rgba($color-mid-blue, 0),
-        rgba($color-mid-blue, 0.5),
-        rgba($color-mid-blue, 0.7),
-        $color-mid-blue
-      );
+    background: background-gradient($color-mid-blue);
   }
 
   &Closed {

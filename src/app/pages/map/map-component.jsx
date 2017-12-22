@@ -20,6 +20,7 @@ const Map = ({
   lockNavigation,
   local,
   openPopUp,
+  openSidePopup,
   className,
   section
 }) => {
@@ -35,29 +36,29 @@ const Map = ({
       zoomLevel={zoom}
       rotate={route === 'global'}
     >
-      {route === 'local' &&
-        local.billboards.map(billboard => (
+      {route === 'regional' &&
+        section.section === 'regional:3' &&
+        regional.billboards.map(billboard => (
           <Billboard
             key={billboard.id}
             id={billboard.id}
             url={billboard.url}
             urlHover={billboard.urlHover}
-            width={80}
-            height={106}
+            width={58}
+            height={58}
             onClick={id =>
-              openPopUp({
+              openSidePopup({
                 payload: id,
                 meta: ['local', ...analytics.openPopUp, id]
               })}
             position={billboard.coordinates}
           />
         ))}
-      {route === 'local' &&
+      {false &&
         local.birds.map(localBird => (
           <Birds {...{ ...localBird }} key={localBird} url="hum" />
         ))}
-      {(route === 'local' ||
-        (route === 'regional' && section.section === 'regional:1')) &&
+      {false &&
         regional.birds.map((regionalBird, i) => (
           <Birds {...{ ...regionalBird }} key={`regionalBird${i}`} url="hum" />
         ))}

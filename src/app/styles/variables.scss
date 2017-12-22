@@ -30,3 +30,12 @@ $color-green: #a6ecc0;
 $site-gutter: 20px;
 $site-padding: 50px;
 $closed-container: calc(-#{$max-width - $site-padding});
+
+@function background-gradient($c, $mult: 1) {
+  @return linear-gradient(
+    rgba($c, 0 * $mult),
+    rgba($c, 0.5 * $mult),
+    rgba($c, 0.7 * $mult),
+    rgba($c, 1 * $mult)
+  );
+}
