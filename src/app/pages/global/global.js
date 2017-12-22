@@ -36,7 +36,8 @@ const mapStateToProps = ({ map, global, section, earthSaved }) => {
   const index = Math.round(earthSaved.value)
   const globalConservationPrioritization = {
     ...global.charts.globalConservationPrioritization,
-    data: global.charts.globalConservationPrioritization.data[index] || []
+    data: (global.charts.globalConservationPrioritization.data[index] || [])
+      .map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
   }
   return {
     map,

@@ -3,8 +3,7 @@ import cx from 'classnames'
 import Scroller, { Element as P } from 'components/scroller'
 import NavFooter from 'components/nav-footer'
 import EarthoMeterKnob from 'components/earthometer-knob'
-import Barchart from 'components/barchart'
-import OldBarchart from './barchart/barchart'
+import Barchart from './barchart/barchart'
 import uiStyles from 'app/styles/ui'
 
 class Global extends Component {
@@ -32,7 +31,7 @@ class Global extends Component {
     return (
       <div className={className}>
         <Scroller>
-          <h2>Biodiversity at the planetary scale.</h2>
+          <h2 className={uiStyles}>Biodiversity at the planetary scale.</h2>
           <P
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:1')}
@@ -52,9 +51,10 @@ class Global extends Component {
               select different species groups.
             </span>
             <Barchart
+              labelKey="taxa"
+              color={globalScaleBiodiversity.color}
               data={globalScaleBiodiversity.data}
               dataKey={globalScaleBiodiversity.key}
-              labelKey="taxa"
             />
           </P>
 
@@ -67,11 +67,14 @@ class Global extends Component {
             overlaying global species {t('richness')} and
             {t('rarity')} with the protected areas network, we can see that many
             species remain insufficiently protected.
-            <OldBarchart
-              data={globalScaleProtectedAreas.data}
-              dataKey={globalScaleProtectedAreas.key}
-              labelKey="taxa"
-            />
+            {globalScaleProtectedAreas.data.length > 0 && (
+              <Barchart
+                labelKey="taxa"
+                color={globalScaleProtectedAreas.color}
+                data={globalScaleProtectedAreas.data}
+                dataKey={globalScaleProtectedAreas.key}
+              />
+            )}
           </P>
 
           <P
@@ -95,9 +98,10 @@ class Global extends Component {
               prioritization of places for conservation.
             </span>
             <Barchart
+              labelKey="taxa"
+              color={globalConservationPrioritization.color}
               data={globalConservationPrioritization.data}
               dataKey={globalConservationPrioritization.key}
-              labelKey="taxa"
             />
             <span className={uiStyles.innerP}>
               By prioritizing conservation efforts in regions that are rich in

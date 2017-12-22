@@ -1,58 +1,52 @@
 @import '~styles/variables.scss';
-$fs: 1.2rem;
 
-:global .recharts-wrapper {
-  shape-rendering: crispEdges;
-  font-size: 1.2rem;
-
-  .recharts-cartesian-grid-horizontal {
-    display: none;
-  }
-
-  .recharts-xAxis .recharts-cartesian-axis-tick-value {
-    fill: $color-light-blue;
-    text-anchor: start;
-    transform: translateX(5px);
-  }
-
-  .recharts-yAxis .recharts-cartesian-axis-tick-value {
-    fill: $color-white;
-  }
-
-  .recharts-cartesian-grid-vertical {
-    line {
-      stroke-opacity: 0.2;
-    }
-
-    line:nth-child(6),
-    line:nth-child(7) {
-      display: none;
-    }
-  }
-
-  .recharts-xAxis {
-    .recharts-cartesian-axis-tick {
-      transform: translateY(-($fs + 0.25rem));
-    }
-  }
-
-  .recharts-legend-wrapper {
-    bottom: 45px !important;
-  }
+:global .recharts-rectangle.recharts-tooltip-cursor {
+  fill: transparent;
 }
 
 .container {
   margin-top: 6rem;
 }
 
-.tickLabel {
-  fill: $color-white;
-}
+.customTooltip {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-navy-blue;
+  transform: translate(-50%, 0);
 
-.tickTitle {
-  letter-spacing: 4px;
-}
+  &LastBar {
+    transform: translate(50%, 0);
+  }
 
-.bar {
-  fill: $color-purple;
+  .customTooltipContainer {
+    position: relative;
+    display: flex;
+    border: 0;
+
+    .customTooltipValue {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      min-width: 50px;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      color: $color-white;
+      padding: 0 11px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid $color-navy-blue;
+      transform: translate(-50%, 0);
+    }
+  }
 }

@@ -8,9 +8,10 @@ const defaultChartSorter = key => (a, b) => {
 }
 const defaultParser = (d, key) =>
   d
-    .map(d => ({ ...d, [key]: parseInt(d[key]) }))
     .filter(defaultFilter)
+    .map(d => ({ ...d, [key]: parseInt(d[key]) }))
     .sort(defaultChartSorter(key))
+    .map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
 
 const classifyScenarios = data =>
   data.reduce((acc, next) => {
@@ -23,6 +24,7 @@ const classifyScenarios = data =>
 export default {
   globalScaleBiodiversity: {
     data: [],
+    color: '#0664f6',
     provider:
       'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa-old.json',
     key: 'totalSpecies',
@@ -30,6 +32,7 @@ export default {
   },
   globalScaleProtectedAreas: {
     data: [],
+    color: '#8366e4',
     provider:
       'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa.json',
     key: 'percentProtectedCurrently',
@@ -37,6 +40,7 @@ export default {
   },
   globalConservationPrioritization: {
     data: [],
+    color: '#9632b2',
     provider:
       'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa.json',
     key: 'percentSpeciesMeetingTargetProtectedAreaViaAny',
