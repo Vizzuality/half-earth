@@ -17,13 +17,18 @@ $pad: 6rem;
     top: 0;
     height: 100%;
     color: white;
-    padding: calc(8rem + 80px) $site-padding $pad;
+    // padding: calc(8rem + 80px) $site-padding $pad;
+    padding: 5rem $site-padding $pad;
     overflow-y: auto;
     font-size: 1.6rem;
     line-height: 2em;
     width: 100%;
     min-width: 430px;
     opacity: 0;
+
+    &Locked {
+      overflow: hidden;
+    }
 
     &Open {
       opacity: 1;
@@ -39,13 +44,13 @@ $pad: 6rem;
       left: 0;
       width: $column-width;
       z-index: $zforeground;
-      background-image:
-        linear-gradient(
-          $color-mid-blue,
-          rgba($color-mid-blue, 0) 30%,
-          rgba($color-mid-blue, 0) 80%,
-          $color-mid-blue
-        );
+      // background-image:
+      //   linear-gradient(
+      //     $color-mid-blue,
+      //     rgba($color-mid-blue, 0) 30%,
+      //     rgba($color-mid-blue, 0) 80%,
+      //     $color-mid-blue
+      //   );
     }
   }
 
