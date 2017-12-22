@@ -24,7 +24,8 @@ const classifyScenarios = data =>
 export default {
   globalScaleBiodiversity: {
     data: [],
-    color: '#0664f6',
+    color: 'blue',
+    legend: 'Number of described species for each organismal group',
     provider:
       'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa-old.json',
     key: 'totalSpecies',
@@ -33,7 +34,9 @@ export default {
   globalScaleProtectedAreas: {
     data: [],
     domain: [0, 100],
-    color: '#8366e4',
+    color: 'purple',
+    legend:
+      'Percentage of species for which the global protected area network provides sufficient coverage.',
     provider:
       'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa.json',
     key: 'percentProtectedCurrently',
@@ -42,7 +45,9 @@ export default {
   globalConservationPrioritization: {
     data: [],
     domain: [0, 100],
-    color: '#9632b2',
+    color: 'violet',
+    legend:
+      'Percentage of species for which the global protected area network provides sufficient coverage.',
     provider:
       'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa.json',
     key: 'percentSpeciesMeetingTargetProtectedAreaViaAny',

@@ -59,40 +59,6 @@
   margin: 3rem 0;
 }
 
-.spiderLegendContainer {
-  display: flex;
-
-  .legend {
-    display: flex;
-    align-items: baseline;
-    position: relative;
-    flex-direction: row-reverse;
-    flex: 0.5;
-    font-size: 1.4rem;
-    font-weight: 300;
-    line-height: 1.71;
-    letter-spacing: 0.7px;
-    color: $color-white;
-
-    &::after {
-      content: '';
-      height: 16px;
-      width: 16px;
-      background-color: $color-white;
-      margin-right: 12px;
-      flex-shrink: 0;
-    }
-
-    &Blue::after {
-      background-color: #0664f6;
-    }
-
-    &Purple::after {
-      background-color: $color-purple;
-    }
-  }
-}
-
 .lineChartGlobal {
   margin: 80px 0;
 }

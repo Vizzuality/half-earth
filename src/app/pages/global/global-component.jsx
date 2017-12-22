@@ -55,6 +55,7 @@ class Global extends Component {
               color={globalScaleBiodiversity.color}
               data={globalScaleBiodiversity.data}
               dataKey={globalScaleBiodiversity.key}
+              legend={globalScaleBiodiversity.legend}
             />
           </P>
 
@@ -74,6 +75,7 @@ class Global extends Component {
                 color={globalScaleProtectedAreas.color}
                 data={globalScaleProtectedAreas.data}
                 dataKey={globalScaleProtectedAreas.key}
+                legend={globalScaleProtectedAreas.legend}
               />
             )}
           </P>
@@ -104,6 +106,7 @@ class Global extends Component {
               color={globalConservationPrioritization.color}
               data={globalConservationPrioritization.data}
               dataKey={globalConservationPrioritization.key}
+              legend={globalConservationPrioritization.legend}
             />
             <span className={uiStyles.innerP}>
               By prioritizing conservation efforts in regions that are rich in
