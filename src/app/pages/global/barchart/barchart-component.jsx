@@ -11,10 +11,10 @@ import {
 
 import styles from './barchart-styles.scss'
 
-const CustomBarchart = ({ data, dataKey, labelKey, color }) => (
+const CustomBarchart = ({ data, dataKey, labelKey, color, domain }) => (
   <ResponsiveContainer className={styles.container} width="100%" height={400}>
     <BarChart data={data}>
-      <YAxis tickLine={false} axisLine={false} />
+      <YAxis tickLine={false} axisLine={false} domain={domain} />
       <XAxis
         tickLine={false}
         axisLine={false}

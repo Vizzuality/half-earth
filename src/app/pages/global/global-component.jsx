@@ -70,6 +70,7 @@ class Global extends Component {
             {globalScaleProtectedAreas.data.length > 0 && (
               <Barchart
                 labelKey="taxa"
+                domain={globalScaleProtectedAreas.domain}
                 color={globalScaleProtectedAreas.color}
                 data={globalScaleProtectedAreas.data}
                 dataKey={globalScaleProtectedAreas.key}
@@ -99,6 +100,7 @@ class Global extends Component {
             </span>
             <Barchart
               labelKey="taxa"
+              domain={globalConservationPrioritization.domain}
               color={globalConservationPrioritization.color}
               data={globalConservationPrioritization.data}
               dataKey={globalConservationPrioritization.key}

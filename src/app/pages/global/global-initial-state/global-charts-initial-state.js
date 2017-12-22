@@ -32,6 +32,7 @@ export default {
   },
   globalScaleProtectedAreas: {
     data: [],
+    domain: [0, 100],
     color: '#8366e4',
     provider:
       'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa.json',
@@ -40,6 +41,7 @@ export default {
   },
   globalConservationPrioritization: {
     data: [],
+    domain: [0, 100],
     color: '#9632b2',
     provider:
       'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa.json',

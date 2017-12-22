@@ -6,6 +6,19 @@
 
 .container {
   margin-top: 6rem;
+
+  :global .recharts-layer .recharts-cartesian-axis-ticks {
+    text.recharts-text.recharts-cartesian-axis-tick-value {
+      fill: $color-white;
+    }
+  }
+
+  :global .recharts-xAxis {
+    text.recharts-text.recharts-cartesian-axis-tick-value {
+      font-size: 12px;
+      text-transform: capitalize;
+    }
+  }
 }
 
 .customTooltip {
