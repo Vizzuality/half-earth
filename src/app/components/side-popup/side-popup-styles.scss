@@ -1,17 +1,63 @@
 @import '~styles/variables.scss';
 
+$vertical-pad: 5rem;
+
 .container {
   display: none;
-  position: absolute;
+  position: fixed;
   z-index: 100;
-  width: 100%;
+  width: calc(70vw + 30px);
+  max-width: 600px;
+  min-width: 430px;
   height: 100vh;
   top: 0;
   left: 0;
   background-color: $color-mid-blue;
+  overflow: auto;
+  padding-bottom: $vertical-pad;
 
   &Open {
     display: block;
+  }
+
+  .col {
+    padding: $vertical-pad $site-padding;
+  }
+
+  .top {
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+  .bottom {
+    padding: ($vertical-pad / 2) $site-padding;
+  }
+
+  .fade {
+    width: 100%;
+    height: 100%;
+    background: background-gradient($color-black, 0.7);
+  }
+
+  .title {
+    font-size: 2.4rem;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    font-weight: 500;
+  }
+
+  .description {
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 2;
+    letter-spacing: 0.8px;
+  }
+
+  .tags,
+  .species {
+    margin: 0;
+    padding: 0;
   }
 
   .tags {
@@ -24,4 +70,47 @@
     display: inline;
     margin-right: 1px;
   }
+
+  .species {
+    list-style: none;
+  }
+
+  .specie {
+    border-bottom: 1px solid rgba($color-white, 0.2);
+    padding: 17px 0;
+    display: flex;
+    justify-content: space-between;
+
+    .thumb {
+      border: 1px solid rgba($color-white, 0.2);
+      border-radius: 200%;
+      width: 62px;
+      min-width: 62px;
+      height: 62px;
+    }
+
+    .more {
+      color: $color-turquoise;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:last-child {
+      border: none;
+    }
+  }
 }
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: calc(#{$vertical-pad} + 8px);
+  border: none;
+  width: 32px;
+  height: 32px;
+  background-color: $color-turquoise;
+}
+

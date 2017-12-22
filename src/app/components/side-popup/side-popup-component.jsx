@@ -3,6 +3,8 @@ import cx from 'classnames'
 import kebabCase from 'lodash/kebabCase'
 import startCase from 'lodash/startCase'
 import includes from 'lodash/includes'
+
+import Close from 'components/close-button'
 import uiStyles from 'styles/ui'
 import styles from './side-popup-styles'
 
@@ -17,17 +19,23 @@ const SidePopupComponent = ({
   toggleFilters,
   ...props
 }) =>
-  console.log(data) ||
   (data && (
     <div className={cx(styles.container, { [styles.containerOpen]: open })}>
-      <div className={styles.top}>
-        <button onClick={() => closeSidePopup()}>X</button>
-        <h1>{data.name}</h1>
-        <p>{data.description}</p>
+      <div
+        className={styles.top}
+        style={{ backgroundImage: `url(/img/reserves/${data.key}.jpg)` }}
+      >
+        <div className={styles.fade}>
+          <div className={styles.col}>
+            <Close close={() => closeSidePopup()} theme={styles} />
+            <h1 className={styles.title}>{data.name}</h1>
+            <p className={styles.description}>{data.description}</p>
+          </div>
+        </div>
       </div>
       <div className={styles.bottom}>
         <ul className={styles.tags}>
-          {groups.map(group => (
+          {groups.sort().map(group => (
             <li className={styles.tag} key={group}>
               <button
                 className={cx(uiStyles.tag, {
@@ -46,7 +54,27 @@ const SidePopupComponent = ({
               key={kebabCase(`${data.name}-${specie.scientificName}`)}
               className={styles.specie}
             >
-              {specie.commonName}
+              <span>
+                {specie.scientificName} - {specie.commonName}
+                <br />
+                {specie.molLink && (
+                  <a
+                    target="_blank"
+                    className={styles.more}
+                    href={specie.molLink}
+                  >
+                    Learn more
+                  </a>
+                )}
+              </span>
+              <img
+                src={`/img/reserves/species/${data.key}/${kebabCase(
+                  specie.taxoGroup
+                )}-${kebabCase(specie.scientificName)}-${kebabCase(
+                  specie.commonName
+                )}.jpg`}
+                className={styles.thumb}
+              />
             </li>
           ))}
         </ul>
