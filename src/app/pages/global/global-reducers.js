@@ -77,6 +77,12 @@ export default {
 
   [actions.setChartData]: (state, { payload }) => ({
     ...state,
-    charts: { ...state.charts, ...payload }
+    charts: {
+      ...state.charts,
+      [payload.chartName]: {
+        ...state.charts[payload.chartName],
+        data: payload.chart
+      }
+    }
   })
 }

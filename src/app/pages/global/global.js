@@ -32,19 +32,20 @@ class GlobalContainer extends Component {
   }
 }
 
-const mapStateToProps = ({
-  map,
-  global,
-  section,
-  getWhereToProtectSpiderData
-}) => {
+const mapStateToProps = ({ map, global, section, earthSaved }) => {
+  const index = Math.round(earthSaved.value)
+  const globalConservationPrioritization = {
+    ...global.charts.globalConservationPrioritization,
+    data: global.charts.globalConservationPrioritization.data[index] || []
+  }
   return {
     map,
-    getWhereToProtectSpiderData,
     layers: global.layers,
     section: section.section,
     renderToggle: renderToggle(global.layers),
-    renderDropdown: renderDropdown(global.sections)
+    renderDropdown: renderDropdown(global.sections),
+    ...global.charts,
+    globalConservationPrioritization
   }
 }
 

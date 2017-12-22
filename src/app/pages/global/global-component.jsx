@@ -15,7 +15,10 @@ class Global extends Component {
       className,
       setSection,
       setGlobalSection,
-      selectGlobalSelector
+      selectGlobalSelector,
+      globalScaleBiodiversity,
+      globalScaleProtectedAreas,
+      globalConservationPrioritization
     } = this.props
 
     const updateSections = s => {
@@ -47,7 +50,11 @@ class Global extends Component {
               protect the bulk of biodiversity. Watch how the map changes as you
               select different species groups.
             </span>
-            <Barchart data={[]} dimension={{ key: 0 }} />
+            <Barchart
+              data={globalScaleBiodiversity.data}
+              dataKey={globalScaleBiodiversity.key}
+              labelKey="taxa"
+            />
           </P>
 
           <P
@@ -57,9 +64,13 @@ class Global extends Component {
             This global {t('Protected Areas')} network plays a key role in the
             conservation of nature and safeguarding of species. However, by
             overlaying global species {t('richness')} and
-            {t('rarity')} with the {t('Protected Areas')} network, we can see
-            that many species remain insufficiently protected.
-            <Barchart data={[]} dimension={{ key: 0 }} />
+            {t('rarity')} with the protected areas network, we can see that many
+            species remain insufficiently protected.
+            <Barchart
+              data={globalScaleProtectedAreas.data}
+              dimension={globalScaleProtectedAreas.key}
+              labelKey="taxa"
+            />
           </P>
 
           <P
@@ -82,7 +93,11 @@ class Global extends Component {
               insufficiently protected and using this information to guide
               prioritization of places for conservation.
             </span>
-            <Barchart data={[]} dimension={{ key: 0 }} />
+            <Barchart
+              data={globalConservationPrioritization.data}
+              dataKey={globalConservationPrioritization.key}
+              labelKey="taxa"
+            />
             <span className={uiStyles.innerP}>
               By prioritizing conservation efforts in regions that are rich in
               species, or regions that have rare species, we can rapidly

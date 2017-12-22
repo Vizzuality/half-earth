@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 import { createThunkAction } from 'app/utils/redux'
 
-const { fetch, btoa } = window
+const { fetch } = window
 
 export const setGlobalSection = createAction('setGlobalSection')
 export const setWhereToProtectData = createAction('setWhereToProtectData')
@@ -32,12 +32,12 @@ export const getChartData = createThunkAction(
     const { charts, canonical } = getState().global
     Object.keys(charts).forEach(chartName => {
       const { data, provider, parser = x => x } = charts[chartName]
-      const { [btoa(provider)]: canonicalData } = canonical
+      const { [provider]: canonicalData } = canonical
       let req = null
       if (data.length > 0) return
       if (canonicalData) {
         req = Promise.resolve(parser(canonical)).then(chart =>
-          dispatch(setChartData({ [chartName]: chart }))
+          dispatch(setChartData({ chartName, chart }))
         )
       } else {
         req = fetch(provider)
@@ -45,11 +45,11 @@ export const getChartData = createThunkAction(
           .then(d => (d.ok ? d.json() : Promise.reject(d.statusText)))
           .then(
             canonical =>
-              dispatch(setCanonicalData({ [btoa(provider)]: canonical })) ||
+              dispatch(setCanonicalData({ [provider]: canonical })) ||
               Promise.resolve(canonical)
           )
           .then(res => Promise.resolve(parser(res)))
-          .then(chart => dispatch(setChartData({ [chartName]: chart })))
+          .then(chart => dispatch(setChartData({ chartName, chart })))
           .catch(err => console.warn(err))
       }
       requests.push(req)

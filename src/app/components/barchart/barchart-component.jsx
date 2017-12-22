@@ -8,7 +8,7 @@ const axis = {
   className: styles.tickLabel
 }
 
-const Barchart = ({ data, dimension }) => (
+const Barchart = ({ data, labelKey, dataKey }) => (
   <div className={styles.barchart}>
     <ResponsiveORFrame
       responsiveWidth
@@ -17,7 +17,7 @@ const Barchart = ({ data, dimension }) => (
       type="bar"
       axis={axis}
       oPadding={5}
-      oAccessor={d => d.subject}
+      oAccessor={d => d[labelKey]}
       oLabel={d => (
         <text
           className={styles.tickLabel}
@@ -27,8 +27,8 @@ const Barchart = ({ data, dimension }) => (
           {d}
         </text>
       )}
-      rAccessor={dimension.key}
-      pieceClass={d => console.log(d) || styles.mark}
+      rAccessor={dataKey}
+      pieceClass={styles.mark}
     />
   </div>
 )
