@@ -6,10 +6,14 @@ import styles from './nav-footer-styles.scss'
 const NavFooter = ({ className, from, to, onClickTo, onClickFrom, theme }) => (
   <div className={cx(theme.container, className)}>
     <div className={theme.controls}>
-      <a className={theme.back} onClick={() => onClickFrom()}>
-        Go Back
-      </a>
-      <a className={theme.forth} onClick={() => onClickTo()} />
+      <div className={theme.back}>
+        <span className={theme.label}>Back</span>
+        <a className={theme.arrowButton} onClick={() => onClickFrom()} />
+      </div>
+      <div className={theme.forth}>
+        <a className={theme.arrowButton} onClick={() => onClickTo()} />
+        <span className={theme.label}>Next</span>
+      </div>
     </div>
   </div>
 )
