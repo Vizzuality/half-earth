@@ -24,14 +24,16 @@ const forwards = {
 }
 
 class NavFooterContainer extends Component {
-  onClickTo = () => {
+  onClickTo = e => {
+    e.preventDefault()
     const { history, trackEvent, to } = this.props
     trackEvent([...analytics.onClickTo(to)])
 
     history.push(to)
   }
 
-  onClickFrom = () => {
+  onClickFrom = e => {
+    e.preventDefault()
     const { history, trackEvent, from } = this.props
     trackEvent([...analytics.onClickFrom(from)])
 
