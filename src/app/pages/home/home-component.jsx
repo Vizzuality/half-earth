@@ -54,7 +54,7 @@ const Home = ({ onClick }) => (
       conservation..
     </h2>
     <div className={styles.navFooterContainer}>
-      <NavFooter to={'/local'} theme={HomeNavFooter} />
+      <NavFooter to={'/global'} theme={HomeNavFooter} />
       <p className={styles.navFooterCaption}>continue</p>
     </div>
   </div>
