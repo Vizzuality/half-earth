@@ -103,7 +103,7 @@ const Regional = ({
             You can explore the different areas by clicking on the map.
           </span>
         </P>
-        <NavFooter from="/local" to="/global" />
+        <NavFooter from="/global" to="/" />
       </Scroller>
     </div>
   )

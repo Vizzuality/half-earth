@@ -34,7 +34,6 @@ const Map = ({
       className={className}
       lockNavigation={lockNavigation}
       zoomLevel={zoom}
-      rotate={route === 'global'}
     >
       {route === 'regional' &&
         section.section === 'regional:3' &&
