@@ -11,12 +11,18 @@ import styles from './side-popup-styles'
 const notInFilters = filters => d =>
   filters.length ? includes(filters, d.taxoGroup) : true
 
+const thumbName = (data, specie) =>
+  `/img/reserves/species/${data.key}/${kebabCase(specie.taxoGroup)}-${kebabCase(
+    specie.scientificName
+  )}-${kebabCase(specie.commonName)}.jpg`
+
 const SidePopupComponent = ({
   open,
   closeSidePopup,
   data,
   groups,
   toggleFilters,
+  onThumbClick,
   ...props
 }) =>
   (data && (
@@ -67,14 +73,9 @@ const SidePopupComponent = ({
                   </a>
                 )}
               </span>
-              <img
-                src={`/img/reserves/species/${data.key}/${kebabCase(
-                  specie.taxoGroup
-                )}-${kebabCase(specie.scientificName)}-${kebabCase(
-                  specie.commonName
-                )}.jpg`}
-                className={styles.thumb}
-              />
+              <button onClick={() => onThumbClick(thumbName(data, specie))}>
+                <img src={thumbName(data, specie)} className={styles.thumb} />
+              </button>
             </li>
           ))}
         </ul>

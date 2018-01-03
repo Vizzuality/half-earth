@@ -113,7 +113,6 @@ export default {
     return { ...state, layers: updatedLayers }
   },
   [actions.gotBillboards]: (state, { payload }) => {
-    console.log(state)
     return {
       ...state,
       billboards: payload.map(b => ({
@@ -132,6 +131,26 @@ export default {
         ...state.sidePopup,
         open: true,
         selected: payload
+      }
+    }
+  },
+  [actions.openPopup]: (state, { payload }) => {
+    return {
+      ...state,
+      popup: {
+        ...state.popup,
+        open: true,
+        selected: payload
+      }
+    }
+  },
+  [actions.closePopup]: (state, { payload }) => {
+    return {
+      ...state,
+      popup: {
+        ...state.popup,
+        open: false,
+        selected: null
       }
     }
   },

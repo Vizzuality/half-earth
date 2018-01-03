@@ -1,5 +1,6 @@
 import React from 'react'
 import cx from 'classnames'
+import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
 import Scroller, { Element as P } from 'components/scroller'
 import SidePopup from 'components/side-popup'
 import NavFooter from 'components/nav-footer'
@@ -19,6 +20,9 @@ const Regional = ({
   section,
   selectedType,
   setType,
+  regional,
+  closePopup,
+  openPopup,
   ...props
 }) => {
   const t = renderToggle(toggleRegionalLayer)
@@ -30,7 +34,10 @@ const Regional = ({
 
   return (
     <div className={classname}>
-      <SidePopup />
+      <SidePopup onThumbClick={e => openPopup({ background: e })} />
+      <PopUp open={regional.popup.open} close={() => closePopup()}>
+        <ImageContent content={regional.popup.selected} />
+      </PopUp>
       <Scroller>
         <P
           className={uiStyles.slides}
