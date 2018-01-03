@@ -24,7 +24,10 @@ const disablePanning = v => {
 class CesiumComponent extends Component {
   constructor (props) {
     super(props)
-    this.rotatingEvent = false
+    this.rotating = false
+    this.distance = 0
+    this.ticking = false
+
     this.state = {
       layers: {},
       viewer: null,
@@ -96,6 +99,12 @@ class CesiumComponent extends Component {
     const { props } = this
     this.bindMap(Object.assign(props))
     if (props.zoomLevel) this.handleZoom(props.zoomLevel)
+    if (props.onTick) this.addTick()
+  }
+
+  componentWillUnmount () {
+    this.removeTicking()
+    this.removeRotating()
   }
 
   handleZoom (zoom) {
@@ -134,11 +143,28 @@ class CesiumComponent extends Component {
     clock.startTime.secondsOfDay = now - 1
   }
 
-  addRotation () {
+  onTick = clock => {
     const { viewer } = this.state
-    if (this.rotatingEvent) return
-    viewer.clock.onTick.addEventListener(this.rotate)
-    this.rotatingEvent = true
+
+    if (this.rotating) this.rotate(clock)
+    const cameraPosition = viewer.scene.camera.positionWC
+    const ellipsoidPosition = viewer.scene.globe.ellipsoid.scaleToGeodeticSurface(
+      cameraPosition
+    )
+    const distance = Cesium.Cartesian3.magnitude(
+      Cesium.Cartesian3.subtract(
+        cameraPosition,
+        ellipsoidPosition,
+        new Cesium.Cartesian3()
+      )
+    )
+
+    if (distance !== this.distance) {
+      this.props.onTick({
+        distance
+      })
+      this.distance = distance
+    }
   }
 
   onMouseClick = click => {
@@ -149,10 +175,30 @@ class CesiumComponent extends Component {
     this.setState({ hoverPosition: mouse.startPosition })
   }
 
+  addRotation () {
+    const { viewer } = this.state
+    if (this.rotating) return
+    viewer.clock.onTick.addEventListener(this.onTick)
+    this.rotating = true
+  }
+
+  addTick () {
+    const { viewer } = this.state
+    if (this.ticking) return
+    viewer.clock.onTick.addEventListener(c => this.onTick(c))
+    this.ticking = true
+  }
+
   removeRotation () {
     const { viewer } = this.state
-    viewer.clock.onTick.removeEventListener(this.rotate)
-    this.rotatingEvent = false
+    viewer.clock.onTick.removeEventListener(this.onTick)
+    this.rotating = false
+  }
+
+  removeTicking () {
+    const { viewer } = this.state
+    viewer.clock.onTick.removeEventListener(this.onTick)
+    this.ticking = false
   }
 
   render () {

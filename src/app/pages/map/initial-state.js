@@ -1,3 +1,4 @@
 export default {
-  layers: []
+  layers: [],
+  distance: 0
 }

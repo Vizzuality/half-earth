@@ -113,13 +113,15 @@ export default {
     return { ...state, layers: updatedLayers }
   },
   [actions.gotBillboards]: (state, { payload }) => {
+    console.log(state)
     return {
       ...state,
       billboards: payload.map(b => ({
         id: kebabCase(b.name),
         coordinates: [b.x, b.y],
         url: 'img/billboard/dot.png',
-        urlHover: 'img/billboard/dot-hover.png'
+        urlHover: 'img/billboard/dot-hover.png',
+        distanceDisplayCondition: [state.billboardsDistance + 10000]
       }))
     }
   },
