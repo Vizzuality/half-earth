@@ -3,13 +3,16 @@
 
 $pad: 6rem;
 
+.container {
+  width: calc(70vw + 30px);
+  max-width: $max-width;
+  min-width: $min-width;
+}
+
 .sidebar {
   background-color: $color-mid-blue;
   position: relative;
   display: block;
-  width: calc(70vw + 30px);
-  max-width: $max-width;
-  min-width: $min-width;
   transition: width 0.25s ease-in-out;
 
   .content {

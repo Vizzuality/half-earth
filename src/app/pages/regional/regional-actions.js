@@ -10,6 +10,7 @@ export const selectRegionalSelector = createAction(
     analytics: ['regional', 'Change species on map', `Change to ${selection}`]
   })
 )
+
 export const toggleRegionalLayer = createAction(
   'toggleRegionalLayer',
   null,
@@ -22,8 +23,12 @@ export const toggleRegionalLayer = createAction(
     }
   }
 )
+
 export const setRegionalSection = createAction('setRegionalSection')
 export const setType = createAction('setType')
+
+export const openPopup = createAction('openPopup')
+export const closePopup = createAction('closePopup')
 
 export const openSidePopup = createAction('openSidePopup')
 export const closeSidePopup = createAction('closeSidePopup')

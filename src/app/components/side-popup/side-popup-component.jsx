@@ -6,10 +6,16 @@ import includes from 'lodash/includes'
 
 import Close from 'components/close-button'
 import uiStyles from 'styles/ui'
+import { styles as sidebarStyles } from 'components/sidebar'
 import styles from './side-popup-styles'
 
 const notInFilters = filters => d =>
   filters.length ? includes(filters, d.taxoGroup) : true
+
+const thumbName = (data, specie, hover = false) =>
+  `/img/reserves/species/${data.key}/${kebabCase(specie.taxoGroup)}-${kebabCase(
+    specie.scientificName
+  )}-${kebabCase(specie.commonName)}-thumb${hover ? '-hover' : ''}.jpg`
 
 const SidePopupComponent = ({
   open,
@@ -17,10 +23,15 @@ const SidePopupComponent = ({
   data,
   groups,
   toggleFilters,
+  onThumbClick,
   ...props
 }) =>
   (data && (
-    <div className={cx(styles.container, { [styles.containerOpen]: open })}>
+    <div
+      className={cx(styles.container, sidebarStyles.container, {
+        [styles.containerOpen]: open
+      })}
+    >
       <div
         className={styles.top}
         style={{ backgroundImage: `url(/img/reserves/${data.key}.jpg)` }}
@@ -67,14 +78,18 @@ const SidePopupComponent = ({
                   </a>
                 )}
               </span>
-              <img
-                src={`/img/reserves/species/${data.key}/${kebabCase(
-                  specie.taxoGroup
-                )}-${kebabCase(specie.scientificName)}-${kebabCase(
-                  specie.commonName
-                )}.jpg`}
-                className={styles.thumb}
-              />
+              <button onClick={() => onThumbClick(thumbName(data, specie))}>
+                <img
+                  src={thumbName(data, specie)}
+                  onMouseOver={e => {
+                    e.target.src = thumbName(data, specie, true)
+                  }}
+                  onMouseOut={e => {
+                    e.target.src = thumbName(data, specie, false)
+                  }}
+                  className={styles.thumb}
+                />
+              </button>
             </li>
           ))}
         </ul>

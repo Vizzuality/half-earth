@@ -8,10 +8,14 @@ import cards from './regional-cards'
 export default {
   ...charts,
   layers,
-  billboardsDistance: 70000.0,
   sections,
   legend,
   billboards,
+  billboardsDistance: 70000.0,
+  popup: {
+    open: false,
+    selected: null
+  },
   sidePopup: {
     open: false,
     selected: null,
