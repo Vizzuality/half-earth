@@ -1,6 +1,10 @@
+const { PI } = Math
+const toRadians = deg => deg * (PI / 180)
+const PI_OVER_FOUR = PI / 4
+
 export const home = [1553050.2420231537, -7982538.989058298, 208217.95614838324]
 
-export default Cesium => ({
+export default {
   home: [
     null,
     null,
@@ -47,8 +51,8 @@ export default Cesium => ({
     [5760629.535260948, 2406368.791758723, -2400118.3266120856],
     {
       orientation: {
-        heading: (Cesium && Cesium.Math.toRadians(-15.0)) || null,
-        pitch: (Cesium && -Cesium.Math.PI_OVER_FOUR) || null,
+        heading: toRadians(-15.0),
+        pitch: PI_OVER_FOUR,
         roll: 0.0
       }
     }
@@ -56,4 +60,4 @@ export default Cesium => ({
 
   regional: [[6117078.691789706, 2713298.848612979, -4028512.8895655624], null],
   global: [[18164909.39474914, -5635861.180443844, -985462.2374030603], null]
-})
+}

@@ -54,6 +54,11 @@ export default {
       payload: layer => ({ visible: true })
     }),
 
+  [actions.setDistance]: (state, { payload }) => ({
+    ...state,
+    distance: payload
+  }),
+
   [actions.resetLayers]: state => ({
     ...state,
     layers: state.layers.map(l => {

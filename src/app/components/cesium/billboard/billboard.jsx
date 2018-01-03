@@ -44,7 +44,8 @@ class Billboard extends Component {
       urlHover: imageHover,
       width,
       height,
-      position: [lat, long]
+      position: [lat, long],
+      distanceDisplayCondition
     } = this.props
     if (!viewer) return false
     this.entity = viewer.entities.add({
@@ -54,6 +55,7 @@ class Billboard extends Component {
       imageHover,
       billboard: {
         image,
+        distanceDisplayCondition,
         imageHover,
         width,
         height

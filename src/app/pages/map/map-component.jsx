@@ -1,13 +1,15 @@
 import React from 'react'
+import _find from 'lodash/find'
 import { ns } from 'utils'
 import CesiumMap from 'components/cesium/map'
 import ImageProvider from 'components/cesium/image-provider'
-import bindZoomLevels from 'data/zoom-levels'
+import zoomLevels from 'data/zoom-levels'
 import Billboard from 'components/cesium/billboard'
 import Birds from 'components/birds'
 import Logos from 'components/logos'
 
 const { Cesium } = window
+
 const analytics = {
   openPopUp: ['Map hotspots']
 }
@@ -20,20 +22,33 @@ const Map = ({
   lockNavigation,
   local,
   openPopUp,
+  setDistance,
   openSidePopup,
   className,
   section
 }) => {
+  // @NOTE zoom handling should be refactored and handled independently in the furure
+  const foundRegionalPopup = _find(regional.sidePopup.content, {
+    key: regional.sidePopup.selected
+  })
   const [route, zoomLevel] = ns(routeLevel, '|')
-  const zoomLevels = bindZoomLevels(Cesium)
-  const zoom = zoomLevels[zoomLevel] || zoomLevels[route]
 
+  let zoom = zoomLevels[zoomLevel] || zoomLevels[route]
+
+  if (regional.sidePopup.open && foundRegionalPopup) {
+    const { x, y, z } = Cesium.Cartesian3.fromDegrees(
+      ...foundRegionalPopup.location,
+      regional.billboardsDistance
+    )
+    if (x && y) zoom = [[x, y, z], null]
+  }
   return (
     <CesiumMap
       key="CesiumMap"
       className={className}
       lockNavigation={lockNavigation}
       zoomLevel={zoom}
+      // onTick={({ distance }) => setDistance(distance)}
     >
       {route === 'regional' &&
         section.section === 'regional:3' &&
@@ -50,6 +65,12 @@ const Map = ({
                 payload: id,
                 meta: ['local', ...analytics.openPopUp, id]
               })}
+            // log={console.log(new Cesium.DistanceDisplayCondition(...billboard.distanceDisplayCondition))}
+            distanceDisplayCondition={
+              new Cesium.DistanceDisplayCondition(
+                ...billboard.distanceDisplayCondition
+              )
+            }
             position={billboard.coordinates}
           />
         ))}
