@@ -11,10 +11,12 @@ import styles from './side-popup-styles'
 const notInFilters = filters => d =>
   filters.length ? includes(filters, d.taxoGroup) : true
 
-const thumbName = (data, specie, hover = false) =>
+const thumbName = (data, specie, thumb = false, hover = false) =>
   `/img/reserves/species/${data.key}/${kebabCase(specie.taxoGroup)}-${kebabCase(
     specie.scientificName
-  )}-${kebabCase(specie.commonName)}-thumb${hover ? '-hover' : ''}.jpg`
+  )}-${kebabCase(specie.commonName)}${thumb ? '-thumb' : ''}${hover
+    ? '-hover'
+    : ''}.jpg`
 
 const SidePopupComponent = ({
   open,
@@ -79,12 +81,12 @@ const SidePopupComponent = ({
               </span>
               <button onClick={() => onThumbClick(thumbName(data, specie))}>
                 <img
-                  src={thumbName(data, specie)}
+                  src={thumbName(data, specie, true)}
                   onMouseOver={e => {
-                    e.target.src = thumbName(data, specie, true)
+                    e.target.src = thumbName(data, specie, true, true)
                   }}
                   onMouseOut={e => {
-                    e.target.src = thumbName(data, specie, false)
+                    e.target.src = thumbName(data, specie, true, false)
                   }}
                   className={styles.thumb}
                 />
