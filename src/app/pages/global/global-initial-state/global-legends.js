@@ -122,6 +122,13 @@ export default {
     label: 'Protected Areas',
     color: 'violet'
   },
+  'human-pressures': {
+    type: 'gradient',
+    label: 'Protected Areas',
+    color: 'black',
+    min: 0,
+    max: 100
+  },
   'pa-scenario': {
     type: 'multiple',
     elements: [
