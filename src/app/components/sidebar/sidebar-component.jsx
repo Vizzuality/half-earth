@@ -21,7 +21,7 @@ const Sidebar = ({
   const sidebarAnalytics = open ? analytics.open : analytics.close
   return (
     <div
-      className={cx(className, styles.sidebar, styles.container, {
+      className={cx(className, styles.sidebar, {
         [styles.sidebarClosed]: !open,
         [styles.sidebarHidden]: hidden
       })}

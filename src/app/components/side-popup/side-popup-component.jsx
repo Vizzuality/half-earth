@@ -6,7 +6,6 @@ import includes from 'lodash/includes'
 
 import Close from 'components/close-button'
 import uiStyles from 'styles/ui'
-import { styles as sidebarStyles } from 'components/sidebar'
 import styles from './side-popup-styles'
 
 const notInFilters = filters => d =>
@@ -28,7 +27,7 @@ const SidePopupComponent = ({
 }) =>
   (data && (
     <div
-      className={cx(styles.container, sidebarStyles.container, {
+      className={cx(styles.container, {
         [styles.containerOpen]: open
       })}
     >

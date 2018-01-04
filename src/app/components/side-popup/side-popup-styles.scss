@@ -6,13 +6,15 @@ $vertical-pad: 5rem;
   display: none;
   position: fixed;
   z-index: 100;
-  width: calc(42vw - 1px);
   height: 100vh;
   top: 0;
   left: 0;
   background-color: $color-mid-blue;
   overflow: auto;
   padding-bottom: $vertical-pad;
+  width: calc(42vw - 1px);
+  max-width: $max-width;
+  min-width: $min-width;
 
   &Open {
     display: block;
