@@ -47,12 +47,9 @@ export default {
     }
   },
   'global:3': {
-    layers: []
+    layers: ['human-pressures']
   },
   'global:4': {
-    layers: []
-  },
-  'global:5': {
-    layers: []
+    layers: ['human-pressures']
   }
 }

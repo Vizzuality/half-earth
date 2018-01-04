@@ -73,6 +73,13 @@ export default [
   MOLLayer('all-taxa:rarity', 'all-taxa', 'rarity'),
 
   {
+    name: 'human-pressures',
+    url:
+      'https://cdn.mol.org/half-earth/tiles/human-pressures/esa/1km/80p/{z}/{x}/{y}',
+    type: 'UrlTemplate',
+    visible: false
+  },
+  {
     name: 'protected-areas',
     url:
       'https://cdn.mol.org/half-earth/tiles/reserve-coverage/existing-network/{z}/{x}/{y}',

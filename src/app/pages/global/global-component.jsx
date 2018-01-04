@@ -130,7 +130,7 @@ class Global extends Component {
           >
             How can we reduce these conservation gaps and include more species
             in an expanded network of conservation areas while accounting for
-            the growing constraints from [human press ures], such as road
+            the growing constraints from {t('human pressures')}, such as road
             building and urban development?
           </P>
 
