@@ -18,14 +18,16 @@ class Global extends Component {
       selectGlobalSelector,
       globalScaleBiodiversity,
       globalScaleProtectedAreas,
-      globalConservationPrioritization
+      globalConservationPrioritization,
+      setType,
+      selectedType
     } = this.props
 
     const updateSections = s => {
       setGlobalSection(s)
       setSection(s)
     }
-
+    console.log(selectedType)
     const t = renderToggle(toggleGlobalLayer)
     const d = renderDropdown(selectGlobalSelector)
     return (
@@ -44,11 +46,32 @@ class Global extends Component {
             </span>
             <span>
               Globally, we have amassed a general, coarse-resolution
-              understanding of species {t('richness')} and
-              {t('rarity')} for {d('global:1', 'birds')}. This information
-              allows us to begin to see the areas most important to manage to
-              protect the bulk of biodiversity. Watch how the map changes as you
-              select different species groups.
+              understanding of species{' '}
+              {
+                <button
+                  onClick={() => setType('richness')}
+                  className={cx(uiStyles.toggle, {
+                    [uiStyles.toggleActive]: selectedType === 'richness'
+                  })}
+                >
+                  richness
+                </button>
+              }{' '}
+              and{' '}
+              {
+                <button
+                  onClick={() => setType('rarity')}
+                  className={cx(uiStyles.toggle, {
+                    [uiStyles.toggleActive]: selectedType === 'rarity'
+                  })}
+                >
+                  rarity
+                </button>
+              }{' '}
+              for {d('global:1', 'birds')}. This information allows us to begin
+              to see the areas most important to manage to protect the bulk of
+              biodiversity. Watch how the map changes as you select different
+              species groups.
             </span>
             <Barchart
               labelKey="taxa"

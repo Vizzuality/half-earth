@@ -57,3 +57,5 @@ export const getChartData = createThunkAction(
     return Promise.all(requests)
   }
 )
+
+export const setType = createAction('setType:global')

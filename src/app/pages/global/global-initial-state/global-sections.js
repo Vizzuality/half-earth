@@ -19,7 +19,8 @@ export const speciesSelections = type => ({
 
 export default {
   'global:1': {
-    layers: [],
+    layers: ['birds:richness'],
+    selectionType: 'richness',
     selections: speciesSelections('richness'),
     selectors: {
       birds: speciesSelector('birds')

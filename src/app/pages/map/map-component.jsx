@@ -5,7 +5,6 @@ import CesiumMap from 'components/cesium/map'
 import ImageProvider from 'components/cesium/image-provider'
 import zoomLevels from 'data/zoom-levels'
 import Billboard from 'components/cesium/billboard'
-import Birds from 'components/birds'
 import Logos from 'components/logos'
 
 const { Cesium } = window
@@ -65,7 +64,6 @@ const Map = ({
                 payload: id,
                 meta: ['local', ...analytics.openPopUp, id]
               })}
-            // log={console.log(new Cesium.DistanceDisplayCondition(...billboard.distanceDisplayCondition))}
             distanceDisplayCondition={
               new Cesium.DistanceDisplayCondition(
                 ...billboard.distanceDisplayCondition
@@ -73,14 +71,6 @@ const Map = ({
             }
             position={billboard.coordinates}
           />
-        ))}
-      {false &&
-        local.birds.map(localBird => (
-          <Birds {...{ ...localBird }} key={localBird} url="hum" />
-        ))}
-      {false &&
-        regional.birds.map((regionalBird, i) => (
-          <Birds {...{ ...regionalBird }} key={`regionalBird${i}`} url="hum" />
         ))}
       {route === 'regional' &&
         regional.layers.map(

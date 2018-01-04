@@ -8,6 +8,7 @@ import GlobalComponent from './global-component'
 import { requestCartos } from 'pages/map/map-utils'
 import { actions as cartoActions } from 'providers/carto'
 import { actions as sectionActions } from 'providers/section'
+import { getSection, getType } from './global-selectors'
 import * as actions from './global-actions'
 import reducers from './global-reducers'
 import initialState from './global-initial-state/global-initial-state'
@@ -32,7 +33,9 @@ class GlobalContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ map, global, section, earthSaved }) => {
+const mapStateToProps = state => {
+  const { map, global, section, earthSaved } = state
+
   const index = Math.round(earthSaved.value)
   const globalConservationPrioritization = {
     ...global.charts.globalConservationPrioritization,
@@ -41,6 +44,7 @@ const mapStateToProps = ({ map, global, section, earthSaved }) => {
   }
   return {
     map,
+    selectedType: getType(getSection(state)),
     layers: global.layers,
     section: section.section,
     renderToggle: renderToggle(global.layers),
