@@ -20,7 +20,9 @@ class Global extends Component {
       globalScaleProtectedAreas,
       globalConservationPrioritization,
       setType,
-      selectedType
+      selectedType,
+      landSaved,
+      oceanSaved
     } = this.props
 
     const updateSections = s => {
@@ -86,6 +88,10 @@ class Global extends Component {
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:2')}
           >
+            <span className={uiStyles.innerTitle}>
+              Currently, {landSaved}% of the land and {oceanSaved}% of the sea
+              are protected.
+            </span>
             This global {t('Protected Areas')} network plays a key role in the
             conservation of nature and safeguarding of species. However, by
             overlaying global species{' '}

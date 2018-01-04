@@ -50,6 +50,8 @@ const mapStateToProps = state => {
     renderToggle: renderToggle(global.layers),
     renderDropdown: renderDropdown(global.sections),
     ...global.charts,
+    landSaved: Math.round(earthometer.landSaved.value),
+    oceanSaved: Math.round(earthometer.oceanSaved.value),
     globalConservationPrioritization
   }
 }
