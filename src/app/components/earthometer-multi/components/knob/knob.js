@@ -36,10 +36,7 @@ class Knob extends Component {
     this.handleOffset = handleOffset
     this.trackWidth = trackWidth
 
-    this.state = {
-      percent: 0,
-      angle: 0
-    }
+    this.state = this.parseValue(props)
   }
 
   componentDidMount () {
@@ -90,8 +87,18 @@ class Knob extends Component {
     document.removeEventListener('mouseup', this.onMouseUp)
   }
 
+  componentWillReceiveProps (props) {
+    this.setState(this.parseValue(props))
+  }
+
   componentWillUnmount () {
     this.containerEl.removeEventListener('mousedown', this.onMouseMove)
+  }
+
+  parseValue ({ value }) {
+    const percent = value / 100
+    const angle = lerp(percent, 0, 1, 0, 300)
+    return { percent, angle }
   }
 
   getContainer (el) {

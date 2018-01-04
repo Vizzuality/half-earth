@@ -34,9 +34,9 @@ class GlobalContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { map, global, section, earthSaved } = state
+  const { map, global, section, earthometer } = state
 
-  const index = Math.round(earthSaved.value)
+  const index = Math.round(earthometer.landSaved.value)
   const globalConservationPrioritization = {
     ...global.charts.globalConservationPrioritization,
     data: (global.charts.globalConservationPrioritization.data[index] || [])

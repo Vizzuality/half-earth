@@ -10,7 +10,7 @@ import {
 import {
   reducers as earthometerReducers,
   initialState as earthometerState
-} from 'components/earthometer'
+} from 'components/earthometer-multi'
 
 import { reducers as mapReducers, initialState as mapState } from 'pages/map'
 
@@ -35,11 +35,6 @@ import {
 } from 'pages/global'
 
 import {
-  reducers as localReducers,
-  initialState as localState
-} from 'pages/local'
-
-import {
   reducers as navFooterReducers,
   initialState as navFooterState
 } from 'components/nav-footer'
@@ -52,12 +47,11 @@ import {
 export default combineReducers({
   routing: routerReducer,
   zoom: handleActions(zoomReducers, zoomState),
-  earthSaved: handleActions(earthometerReducers, earthometerState),
+  earthometer: handleActions(earthometerReducers, earthometerState),
   sidebar: handleActions(sidebarReducers, sidebarState),
   map: handleActions(mapReducers, mapState),
   section: handleActions(sectionReducers, sectionState),
   regional: handleActions(regionalReducers, regionalState),
-  local: handleActions(localReducers, localState),
   navFooter: handleActions(navFooterReducers, navFooterState),
   legendLayers: handleActions(legendLayersReducers, legendLayersState),
   global: handleActions(globalReducers, globalState)

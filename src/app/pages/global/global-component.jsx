@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import cx from 'classnames'
 import Scroller, { Element as P } from 'components/scroller'
 import NavFooter from 'components/nav-footer'
-import EarthoMeterKnob from 'components/earthometer-knob'
+import EarthoMeter from 'components/earthometer-multi'
 import Barchart from './barchart'
 import uiStyles from 'app/styles/ui'
 
@@ -158,7 +158,7 @@ class Global extends Component {
               increase the number of species that have at least minimum
               conservation protection.
             </span>
-            <EarthoMeterKnob />
+            <EarthoMeter />
             <span className={uiStyles.innerP}>
               Conservation activities that balance the needs of both humans and
               nature will require more information, in much finer detail, than

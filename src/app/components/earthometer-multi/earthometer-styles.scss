@@ -22,3 +22,19 @@
   color: $color-turquoise;
   text-align: end;
 }
+
+.tabs {
+  list-style: none;
+}
+
+.tab {
+  button {
+    color: $color-white;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  &Selected button {
+    opacity: 1;
+  }
+}
