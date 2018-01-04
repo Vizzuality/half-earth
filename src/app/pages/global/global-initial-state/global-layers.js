@@ -50,14 +50,28 @@ export default [
     49,
     50
   ]),
-  MOLLayer('all-taxa', 'all-taxa', 'richness'),
-  MOLLayer('birds:richness', 'birds', 'richness'),
-  MOLLayer('birds:rarity', 'birds', 'rarity'),
+
   MOLLayer('mammals:richness', 'mammals', 'richness'),
   MOLLayer('mammals:rarity', 'mammals', 'rarity'),
+
   MOLLayer('amphibians:richness', 'amphibians', 'richness'),
-  MOLLayer('conifers:richness', 'conifers', 'richness'),
+  MOLLayer('amphibians:rarity', 'amphibians', 'rarity'),
+
   MOLLayer('cacti:richness', 'cacti', 'richness'),
+  MOLLayer('cacti:rarity', 'cacti', 'rarity'),
+
+  MOLLayer('birds:richness', 'birds', 'richness'),
+  MOLLayer('birds:rarity', 'birds', 'rarity'),
+
+  MOLLayer('conifers:richness', 'conifers', 'richness'),
+  MOLLayer('conifers:rarity', 'conifers', 'rarity'),
+
+  MOLLayer('turtles:richness', 'turtles', 'richness'),
+  MOLLayer('turtles:rarity', 'turtles', 'rarity'),
+
+  MOLLayer('all-taxa:richness', 'all-taxa', 'richness'),
+  MOLLayer('all-taxa:rarity', 'all-taxa', 'rarity'),
+
   {
     name: 'protected-areas',
     url:

@@ -27,7 +27,7 @@ class Global extends Component {
       setGlobalSection(s)
       setSection(s)
     }
-    console.log(selectedType)
+
     const t = renderToggle(toggleGlobalLayer)
     const d = renderDropdown(selectGlobalSelector)
     return (
@@ -88,9 +88,30 @@ class Global extends Component {
           >
             This global {t('Protected Areas')} network plays a key role in the
             conservation of nature and safeguarding of species. However, by
-            overlaying global species {t('richness')} and
-            {t('rarity')} with the protected areas network, we can see that many
-            species remain insufficiently protected.
+            overlaying global species{' '}
+            {
+              <button
+                onClick={() => setType('richness')}
+                className={cx(uiStyles.toggle, {
+                  [uiStyles.toggleActive]: selectedType === 'richness'
+                })}
+              >
+                richness
+              </button>
+            }{' '}
+            and{' '}
+            {
+              <button
+                onClick={() => setType('rarity')}
+                className={cx(uiStyles.toggle, {
+                  [uiStyles.toggleActive]: selectedType === 'rarity'
+                })}
+              >
+                rarity
+              </button>
+            }{' '}
+            with the protected areas network, we can see that many species
+            remain insufficiently protected.
             {globalScaleProtectedAreas.data.length > 0 && (
               <Barchart
                 labelKey="taxa"

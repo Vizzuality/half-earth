@@ -1,20 +1,32 @@
 export const speciesSelector = selected => ({
   options: {
-    birds: 'Birds',
     mammals: 'Mammals',
     amphibians: 'Amphibians',
     cacti: 'Cacti',
-    conifers: 'Conifers'
+    birds: 'Birds',
+    conifers: 'Conifers',
+    turtles: 'Turtles'
+  },
+  selected
+})
+export const speciesSelections = type => ({
+  mammals: `mammals:${type}`,
+  amphibians: `amphibians:${type}`,
+  cacti: `cacti:${type}`,
+  birds: `birds:${type}`,
+  conifers: `conifers:${type}`,
+  turtles: `turtles:${type}`
+})
+
+export const allTaxaSelector = selected => ({
+  options: {
+    'all-taxa': 'All taxa'
   },
   selected
 })
 
-export const speciesSelections = type => ({
-  birds: `birds:${type}`,
-  mammals: `mammals:${type}`,
-  amphibians: `amphibians:${type}`,
-  cacti: `cacti:${type}`,
-  conifers: `conifers:${type}`
+export const allTaxaSelections = type => ({
+  'all-taxa': `all-taxa:${type}`
 })
 
 export default {
@@ -27,7 +39,12 @@ export default {
     }
   },
   'global:2': {
-    layers: []
+    selectionType: 'richness',
+    layers: ['all-taxa:richness'],
+    selections: allTaxaSelections('richness'),
+    selectors: {
+      birds: allTaxaSelector('all-taxa')
+    }
   },
   'global:3': {
     layers: []
