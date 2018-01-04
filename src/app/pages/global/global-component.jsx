@@ -3,7 +3,7 @@ import cx from 'classnames'
 import Scroller, { Element as P } from 'components/scroller'
 import NavFooter from 'components/nav-footer'
 import EarthoMeterKnob from 'components/earthometer-knob'
-import Barchart from './barchart/barchart'
+import Barchart from './barchart'
 import uiStyles from 'app/styles/ui'
 
 class Global extends Component {

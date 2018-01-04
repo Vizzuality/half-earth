@@ -3,7 +3,7 @@ import difference from 'lodash/difference'
 import merge from 'lodash/fp/merge'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
-import { actions as earthometerActions } from 'components/earthometer'
+import { actions as earthometerActions } from 'components/earthometer-knob'
 import { actions as cartoActions } from 'providers/carto'
 import { reducers as mapReducers } from 'pages/map'
 import { reducers as regionalReducers } from 'pages/regional'
@@ -47,6 +47,7 @@ export default {
 
   [earthometerActions.setEarthSaved]: (state, { payload: value }) => {
     const { layers } = state
+    console.log(value)
     const scenarioLayers = filter(layers, l => includes(l.name, 'pa-scenario'))
     const restLayers = difference(layers, scenarioLayers)
     const visibleScenarioLayers = map(scenarioLayers, (l, i) => {

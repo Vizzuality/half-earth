@@ -1,5 +1,4 @@
-import { createAction } from 'redux-actions'
-import { createThunkAction } from 'app/utils/redux'
+import { createAction, createThunkAction } from 'redux-tools'
 import isEmpty from 'lodash/isEmpty'
 
 const { fetch } = window

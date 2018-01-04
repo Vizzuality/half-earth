@@ -7,7 +7,7 @@ import difference from 'lodash/difference'
 import merge from 'lodash/fp/merge'
 import { assign } from 'utils'
 import { actions as cartoActions } from 'providers/carto'
-import { reducers as mapReducers } from 'pages/map'
+import * as mapReducers from 'pages/map/map-reducers'
 import * as actions from './regional-actions'
 
 const makeVisible = l => assign(l, { visible: true })
