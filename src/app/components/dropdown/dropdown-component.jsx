@@ -23,19 +23,21 @@ const Dropdown = ({
       {options[selected]}
     </div>
     <ul className={cx(theme.options, { [theme.optionsClosed]: closed })}>
-      {Object.keys(options).map(g => {
-        return (
-          <li
-            key={g}
-            className={cx(theme.option, {
-              [theme.optionSelected]: g === selected
-            })}
-            onClick={() => selectItem(g)}
-          >
-            {options[g]}
-          </li>
-        )
-      })}
+      {Object.keys(options)
+        .sort()
+        .map(g => {
+          return (
+            <li
+              key={g}
+              className={cx(theme.option, {
+                [theme.optionSelected]: g === selected
+              })}
+              onClick={() => selectItem(g)}
+            >
+              {options[g]}
+            </li>
+          )
+        })}
       {!closed && (
         <button className={theme.closeButton} onClick={() => toggleOpen()} />
       )}

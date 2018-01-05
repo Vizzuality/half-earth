@@ -1,5 +1,4 @@
-import { createAction } from 'redux-actions'
-import { createThunkAction } from 'app/utils/redux'
+import { createAction, createThunkAction } from 'redux-tools'
 
 const { fetch } = window
 

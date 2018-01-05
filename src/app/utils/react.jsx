@@ -24,7 +24,11 @@ export const clickOutside = Comp =>
 
     handle (e) {
       const el = this.container
-      if (!el.contains(e.target)) this.setState({ clickedOutside: true })
+      if (!el.contains(e.target)) {
+        const { onClickOutside } = this.props
+        if (onClickOutside) onClickOutside()
+        this.setState({ clickedOutside: true })
+      }
     }
 
     render () {

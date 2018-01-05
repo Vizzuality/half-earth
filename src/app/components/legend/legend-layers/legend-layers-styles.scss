@@ -65,6 +65,14 @@ $backCircle: #18bab4;
     &Pink::after {
       background-color: rgba(#972a6a, 0.7);
     }
+
+    &Black::after {
+      background-color: $color-black;
+    }
+
+    &Red::after {
+      background-color: #e75457;
+    }
   }
 
   .gradientLegend {
@@ -179,6 +187,24 @@ $backCircle: #18bab4;
           $colors: #bc3809, #c24b21, #c95f3a, #d07352, #d6876b, #dd9b84, #e4af9c;
 
           @include gradient($colors);
+        }
+
+        &Black span {
+          $base: 0.1428571429;
+          $colors:
+            rgba($color-black, $base),
+            rgba($color-black, $base * 2),
+            rgba($color-black, $base * 3),
+            rgba($color-black, $base * 4),
+            rgba($color-black, $base * 5),
+            rgba($color-black, $base * 6),
+            rgba($color-black, $base * 7);
+
+          @include gradient($colors);
+
+          &:last-child {
+            color: $color-white;
+          }
         }
       }
     }

@@ -1,4 +1,4 @@
-import { createThunkAction } from 'app/utils/redux'
+import { createThunkAction } from 'redux-tools'
 const { ga } = window
 
 export const trackEvent = createThunkAction('trackEvent', params => dispatch =>

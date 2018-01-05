@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import cx from 'classnames'
 import Scroller, { Element as P } from 'components/scroller'
 import NavFooter from 'components/nav-footer'
-import EarthoMeterKnob from 'components/earthometer-knob'
-import Barchart from './barchart/barchart'
+import EarthoMeter from 'components/earthometer-multi'
+import Barchart from './barchart'
 import uiStyles from 'app/styles/ui'
 
 class Global extends Component {
@@ -18,7 +18,11 @@ class Global extends Component {
       selectGlobalSelector,
       globalScaleBiodiversity,
       globalScaleProtectedAreas,
-      globalConservationPrioritization
+      globalConservationPrioritization,
+      setType,
+      selectedType,
+      landSaved,
+      oceanSaved
     } = this.props
 
     const updateSections = s => {
@@ -44,11 +48,32 @@ class Global extends Component {
             </span>
             <span>
               Globally, we have amassed a general, coarse-resolution
-              understanding of species {t('richness')} and
-              {t('rarity')} for {d('global:1', 'birds')}. This information
-              allows us to begin to see the areas most important to manage to
-              protect the bulk of biodiversity. Watch how the map changes as you
-              select different species groups.
+              understanding of species{' '}
+              {
+                <button
+                  onClick={() => setType('richness')}
+                  className={cx(uiStyles.toggle, {
+                    [uiStyles.toggleActive]: selectedType === 'richness'
+                  })}
+                >
+                  richness
+                </button>
+              }{' '}
+              and{' '}
+              {
+                <button
+                  onClick={() => setType('rarity')}
+                  className={cx(uiStyles.toggle, {
+                    [uiStyles.toggleActive]: selectedType === 'rarity'
+                  })}
+                >
+                  rarity
+                </button>
+              }{' '}
+              for {d('global:1', 'birds')}. This information allows us to begin
+              to see the areas most important to manage to protect the bulk of
+              biodiversity. Watch how the map changes as you select different
+              species groups.
             </span>
             <Barchart
               labelKey="taxa"
@@ -63,11 +88,36 @@ class Global extends Component {
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:2')}
           >
+            <span className={uiStyles.innerTitle}>
+              Currently, {landSaved}% of the land and {oceanSaved}% of the sea
+              are protected.
+            </span>
             This global {t('Protected Areas')} network plays a key role in the
             conservation of nature and safeguarding of species. However, by
-            overlaying global species {t('richness')} and
-            {t('rarity')} with the protected areas network, we can see that many
-            species remain insufficiently protected.
+            overlaying global species{' '}
+            {
+              <button
+                onClick={() => setType('richness')}
+                className={cx(uiStyles.toggle, {
+                  [uiStyles.toggleActive]: selectedType === 'richness'
+                })}
+              >
+                richness
+              </button>
+            }{' '}
+            and{' '}
+            {
+              <button
+                onClick={() => setType('rarity')}
+                className={cx(uiStyles.toggle, {
+                  [uiStyles.toggleActive]: selectedType === 'rarity'
+                })}
+              >
+                rarity
+              </button>
+            }{' '}
+            with the protected areas network, we can see that many species
+            remain insufficiently protected.
             {globalScaleProtectedAreas.data.length > 0 && (
               <Barchart
                 labelKey="taxa"
@@ -86,7 +136,7 @@ class Global extends Component {
           >
             How can we reduce these conservation gaps and include more species
             in an expanded network of conservation areas while accounting for
-            the growing constraints from [human press ures], such as road
+            the growing constraints from {t('human pressures')}, such as road
             building and urban development?
           </P>
 
@@ -114,7 +164,7 @@ class Global extends Component {
               increase the number of species that have at least minimum
               conservation protection.
             </span>
-            <EarthoMeterKnob />
+            <EarthoMeter />
             <span className={uiStyles.innerP}>
               Conservation activities that balance the needs of both humans and
               nature will require more information, in much finer detail, than

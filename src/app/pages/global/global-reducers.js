@@ -3,10 +3,10 @@ import difference from 'lodash/difference'
 import merge from 'lodash/fp/merge'
 import filter from 'lodash/filter'
 import map from 'lodash/map'
-import { actions as earthometerActions } from 'components/earthometer'
+import { actions as earthometerActions } from 'components/earthometer-multi'
 import { actions as cartoActions } from 'providers/carto'
-import { reducers as mapReducers } from 'pages/map'
-import { reducers as regionalReducers } from 'pages/regional'
+import * as mapReducers from 'pages/map/map-reducers'
+import * as regionalReducers from 'pages/regional/regional-reducers'
 import * as actions from './global-actions'
 
 const toPayload = payload => ({ payload })
@@ -32,6 +32,27 @@ const filterSelector = (state, { payload: { section, selection } }) => {
   )
 }
 
+const slideLayers = nameId => (state, { payload: value }) => {
+  const { layers } = state
+  const desiredLayers = filter(layers, l => includes(l.name, nameId))
+  const restLayers = difference(layers, desiredLayers)
+  const visibleLayers = map(desiredLayers, (l, i) => {
+    const nextLayer = desiredLayers[i + 1]
+    const notInNextLayer = nextLayer ? value < layerToNum(nextLayer) : true
+    if (value >= layerToNum(l) && notInNextLayer) {
+      l.visible = true
+    } else {
+      l.visible = false
+    }
+    return l
+  })
+
+  return {
+    ...state,
+    layers: [...restLayers, ...visibleLayers]
+  }
+}
+
 export default {
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
     mapReducers.updateLayer(state, {
@@ -45,30 +66,11 @@ export default {
     return selectSelector(filtered, toPayload({ section, selector, selection }))
   },
 
-  [earthometerActions.setEarthSaved]: (state, { payload: value }) => {
-    const { layers } = state
-    const scenarioLayers = filter(layers, l => includes(l.name, 'pa-scenario'))
-    const restLayers = difference(layers, scenarioLayers)
-    const visibleScenarioLayers = map(scenarioLayers, (l, i) => {
-      const nextLayer = scenarioLayers[i + 1]
-      const notInNextLayer = nextLayer ? value < layerToNum(nextLayer) : true
-      if (value >= layerToNum(l) && notInNextLayer) {
-        l.visible = true
-      } else {
-        l.visible = false
-      }
-      return l
-    })
-
-    return {
-      ...state,
-      layers: [...restLayers, ...visibleScenarioLayers]
-    }
-  },
+  [earthometerActions.setLandSaved]: slideLayers('pa-scenario'),
 
   [actions.toggleGlobalLayer]: mapReducers.toggleLayer,
-
   [actions.setGlobalSection]: regionalReducers.setRegionalSection,
+  [actions.setType]: regionalReducers.setType,
 
   [actions.setCanonicalData]: (state, { payload }) => ({
     ...state,

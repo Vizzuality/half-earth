@@ -1,5 +1,4 @@
-import { createAction } from 'redux-actions'
-import { createThunkAction } from 'app/utils/redux'
+import { createAction, createThunkAction } from 'redux-tools'
 import isEmpty from 'lodash/isEmpty'
 
 const { fetch } = window
@@ -58,3 +57,5 @@ export const getChartData = createThunkAction(
     return Promise.all(requests)
   }
 )
+
+export const setType = createAction('setType:global')

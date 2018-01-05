@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect'
 import { speciesSelections } from 'pages/map/map-utils'
 
-const getRegional = state => state.regional
+const getCurrentSection = state => state.regional
 export const currentSection = state => state.section.section
 export const getType = state => (state && state.selectionType) || 'richness'
-const getSections = state => getRegional(state).sections
+const getSections = state => getCurrentSection(state).sections
 
 export const getSection = createSelector(
   getSections,

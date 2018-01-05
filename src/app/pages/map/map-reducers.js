@@ -7,7 +7,7 @@ import difference from 'lodash/difference'
 import { assign } from 'app/utils'
 import * as actions from './map-actions'
 
-const updateLayer = (state, { payload, ...rest }) => {
+export const updateLayer = (state, { payload, ...rest }) => {
   const { name, reset } = rest
   const { layers } = state
   const layer = find(layers, { name })
@@ -22,6 +22,38 @@ const updateLayer = (state, { payload, ...rest }) => {
   }
 }
 
+export const resetLayers = state => ({
+  ...state,
+  layers: state.layers.map(l => {
+    l.visible = false
+    return l
+  })
+})
+
+export const toggleLayer = (state, { payload }) =>
+  updateLayer(state, {
+    ...payload,
+    payload: layer => ({ visible: !layer.visible })
+  })
+
+export const hideLayers = (state, { payload }) => {
+  const layers = state.layers.map(l => {
+    if (includes(payload, l.name)) l.visible = false
+    return l
+  }, [])
+
+  return {
+    ...state,
+    layers
+  }
+}
+
+export const selectLayer = (state, { payload }) =>
+  updateLayer(state, {
+    ...payload,
+    payload: layer => ({ visible: true })
+  })
+
 export default {
   updateLayer,
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
@@ -30,40 +62,13 @@ export default {
       payload: layer => ({ url: payload.url, carto: null })
     }),
 
-  [actions.hideLayers]: (state, { payload }) => {
-    const layers = state.layers.map(l => {
-      if (includes(payload, l.name)) l.visible = false
-      return l
-    }, [])
-
-    return {
-      ...state,
-      layers
-    }
-  },
-
-  [actions.toggleLayer]: (state, { payload }) =>
-    updateLayer(state, {
-      ...payload,
-      payload: layer => ({ visible: !layer.visible })
-    }),
-
-  [actions.selectLayer]: (state, { payload }) =>
-    updateLayer(state, {
-      ...payload,
-      payload: layer => ({ visible: true })
-    }),
-
   [actions.setDistance]: (state, { payload }) => ({
     ...state,
     distance: payload
   }),
 
-  [actions.resetLayers]: state => ({
-    ...state,
-    layers: state.layers.map(l => {
-      l.visible = false
-      return l
-    })
-  })
+  [actions.hideLayers]: hideLayers,
+  [actions.toggleLayer]: toggleLayer,
+  [actions.selectLayer]: selectLayer,
+  [actions.resetLayers]: resetLayers
 }

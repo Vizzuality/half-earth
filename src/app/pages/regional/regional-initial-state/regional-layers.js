@@ -46,6 +46,11 @@ export default [
     visible: false
   },
   {
+    name: 'conservation-areas',
+    url: '',
+    visible: false
+  },
+  {
     name: 'example-protected-areas',
     url: null,
     type: 'UrlTemplate',
@@ -108,18 +113,16 @@ export default [
     type: 'UrlTemplate',
     carto: cartoConfig(
       'half-earth',
-      `##layer {
-        marker-width: 7;
-        marker-fill: #EE4D5A;
-        marker-fill-opacity: 0.9;
-        marker-line-color: #FFFFFF;
-        marker-line-width: 1;
-        marker-line-opacity: 1;
-        marker-placement: point;
-        marker-type: ellipse;
+      `#layer {
+        marker-width: 12.5;
+        marker-fill: ramp([cell_prior], (#ff2955, #e2254c, #c02847, #911c34, #93345d, #350a13), quantiles);
+        marker-fill-opacity: 1;
         marker-allow-overlap: true;
+        marker-line-width: 1;
+        marker-line-color: #FFFFFF;
+        marker-line-opacity: 1;
       }`,
-      'caz_scenarios_centroids'
+      'half_earth_priority_centroids'
     ),
     visible: false
   }
