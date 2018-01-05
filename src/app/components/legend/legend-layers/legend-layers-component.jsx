@@ -37,7 +37,8 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
           {layer.label}
           {i === 0 && (
             <span className={styles.bioText}>
-              Species {capitalize(layer.group) || 'Richness'}
+              {layer.group &&
+                `Species ${capitalize(layer.group) || 'Richness'}`}
             </span>
           )}
         </div>

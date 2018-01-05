@@ -131,6 +131,30 @@ export default {
     label: 'Protected Areas',
     color: 'violet'
   },
+  'example-protected-areas': {
+    type: 'simple',
+    label: 'Example Protected Areas',
+    color: 'pink'
+  },
+  'community-based-conservation-areas': {
+    type: 'simple',
+    label: 'Community Based Conservation Areas',
+    color: 'violet'
+  },
+  'human-pressures': {
+    type: 'gradient',
+    label: 'Human Pressures',
+    color: 'black',
+    min: 0,
+    max: 100
+  },
+  'conservation-areas': {
+    type: 'simple',
+    label: 'Conservation Areas',
+    color: 'red',
+    min: 0,
+    max: 100
+  },
   // richness
   mammalsRichness: richnessLegend.mammals,
   proteaRichness: richnessLegend.protea,

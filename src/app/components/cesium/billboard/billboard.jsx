@@ -45,6 +45,7 @@ class Billboard extends Component {
       width,
       height,
       position: [lat, long],
+      color,
       distanceDisplayCondition
     } = this.props
     if (!viewer) return false
@@ -55,6 +56,7 @@ class Billboard extends Component {
       imageHover,
       billboard: {
         image,
+        color,
         distanceDisplayCondition,
         imageHover,
         width,
@@ -74,6 +76,7 @@ class Billboard extends Component {
     onClick,
     clickedPosition,
     hoverPosition,
+    color,
     ...props
   }) {
     if (!viewer) return false
@@ -81,6 +84,7 @@ class Billboard extends Component {
     if (!includes(existing, id)) this.mountBillboard(viewer)
     if (clickedPosition) this.handleClick(clickedPosition)
     if (hoverPosition) this.handleHover(hoverPosition)
+    if (color && this.entity.billboard.color !== color) { this.entity.billboard.color = color }
   }
 
   render () {

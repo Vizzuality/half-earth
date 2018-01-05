@@ -41,13 +41,14 @@ const Map = ({
     )
     if (x && y) zoom = [[x, y, z], null]
   }
+
   return (
     <CesiumMap
       key="CesiumMap"
       className={className}
       lockNavigation={lockNavigation}
       zoomLevel={zoom}
-      // onTick={({ distance }) => setDistance(distance)}
+      onTick={({ distance }) => setDistance(distance)}
     >
       {route === 'regional' &&
         section.section === 'regional:3' &&
@@ -59,16 +60,27 @@ const Map = ({
             urlHover={billboard.urlHover}
             width={58}
             height={58}
+            {...(billboard.color
+              ? { color: new Cesium.Color(...billboard.color) }
+              : {
+                color: new Cesium.Color(
+                    ...(map.distance < regional.billboardsDistance + 1000
+                      ? [1.0, 1.0, 1.0, 0.25]
+                      : [1, 1, 1])
+                  )
+              })}
+            {...(billboard.distanceDisplayCondition
+              ? {
+                distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+                    ...billboard.distanceDisplayCondition
+                  )
+              }
+              : {})}
             onClick={id =>
               openSidePopup({
                 payload: id,
                 meta: ['local', ...analytics.openPopUp, id]
               })}
-            distanceDisplayCondition={
-              new Cesium.DistanceDisplayCondition(
-                ...billboard.distanceDisplayCondition
-              )
-            }
             position={billboard.coordinates}
           />
         ))}

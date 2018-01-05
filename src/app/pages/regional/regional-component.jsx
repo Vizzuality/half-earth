@@ -96,7 +96,7 @@ const Regional = ({
         >
           <span className={uiStyles.innerP}>
             Beyond traditional reserves,{' '}
-            {t('Community-based conservation areas')} and
+            {t('Community-based conservation areas')} and{' '}
             {t('private reserves')} take on a particular role in this region,
             especially pressures {t('human pressures')} on land are ongoing and
             growing.

@@ -3,6 +3,7 @@ const { speciesSelector, speciesSelections } = utils
 
 export default {
   'regional:1': {
+    // layers: ['centroid-tests'],
     layers: [],
     selectionType: 'richness',
     selections: speciesSelections('richness'),
@@ -14,6 +15,6 @@ export default {
     layers: ['protected-areas']
   },
   'regional:3': {
-    layers: []
+    layers: ['conservation-areas']
   }
 }

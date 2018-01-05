@@ -69,6 +69,10 @@ $backCircle: #18bab4;
     &Black::after {
       background-color: $color-black;
     }
+
+    &Red::after {
+      background-color: #e75457;
+    }
   }
 
   .gradientLegend {

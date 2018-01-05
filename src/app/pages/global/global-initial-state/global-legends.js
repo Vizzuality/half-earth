@@ -124,7 +124,7 @@ export default {
   },
   'human-pressures': {
     type: 'gradient',
-    label: 'Protected Areas',
+    label: 'Human Pressures',
     color: 'black',
     min: 0,
     max: 100

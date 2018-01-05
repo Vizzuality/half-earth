@@ -125,8 +125,7 @@ export default {
         id: kebabCase(b.name),
         coordinates: [b.x, b.y],
         url: 'img/billboard/dot.png',
-        urlHover: 'img/billboard/dot-hover.png',
-        distanceDisplayCondition: [state.billboardsDistance + 10000]
+        urlHover: 'img/billboard/dot-hover.png'
       }))
     }
   },
