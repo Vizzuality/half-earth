@@ -5,6 +5,21 @@ import Knob from './components/knob'
 
 import styles from './earthometer-styles.scss'
 
+const Tabs = ({ tabs, selected, setTab }) => (
+  <ul className={styles.tabs}>
+    {tabs.map(tab => (
+      <li
+        key={tab.key}
+        className={cx(styles.tab, {
+          [styles.tabSelected]: selected === tab.key
+        })}
+      >
+        <button onClick={() => setTab(tab.key)}>{tab.label}</button>
+      </li>
+    ))}
+  </ul>
+)
+
 const Earthometer = ({ className, tabs, setTab, selected, ...props }) => {
   return (
     <div className={cx(className, styles.earthometer)}>
@@ -20,18 +35,7 @@ const Earthometer = ({ className, tabs, setTab, selected, ...props }) => {
       <span className={styles.percent}>
         {Math.round(props[`${selected}Saved`])}%
       </span>
-      <ul className={styles.tabs}>
-        {tabs.map(tab => (
-          <li
-            key={tab.key}
-            className={cx(styles.tab, {
-              [styles.tabSelected]: selected === tab.key
-            })}
-          >
-            <button onClick={() => setTab(tab.key)}>{tab.label}</button>
-          </li>
-        ))}
-      </ul>
+      {false && Tabs}
       <div className={styles.labels}>
         <span className={cx(styles.label, styles.protected)}>
           Current protected area
