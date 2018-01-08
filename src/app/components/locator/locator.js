@@ -4,7 +4,7 @@ import LocatorComponent from './locator-component'
 
 class LocatorContainer extends Component {
   static defaultProps = {
-    options: { local: 'local', regional: 'regional', global: 'global' }
+    options: { global: 'global', regional: 'regional' }
   }
 
   render () {
