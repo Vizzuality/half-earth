@@ -42,6 +42,8 @@ const Map = ({
     if (x && y) zoom = [[x, y, z], null]
   }
 
+  console.log(routeLevel, zoom)
+
   return (
     <CesiumMap
       key="CesiumMap"
