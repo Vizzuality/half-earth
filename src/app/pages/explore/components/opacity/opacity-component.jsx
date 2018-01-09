@@ -8,8 +8,18 @@ const next = (options, value) => {
   return nextIndex === options.length ? options[0] : options[nextIndex]
 }
 
-const Opacity = ({ value, options, update, path, label, ...props }) => (
-  <div className={styles.container}>
+const Opacity = ({
+  value,
+  options,
+  update,
+  path,
+  label,
+  enabled,
+  ...props
+}) => (
+  <div
+    className={cx(styles.container, { [styles.containerDisabled]: !enabled })}
+  >
     <span className={styles.tooltip}>
       {label} {value}%
     </span>

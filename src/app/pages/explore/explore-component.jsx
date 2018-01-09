@@ -1,7 +1,6 @@
 import React from 'react'
 import Expand from './components/expand'
-import Toggle from './components/toggle'
-import Opacity from './components/opacity'
+import Row from './components/row'
 
 const Explore = ({
   landCoverFold,
@@ -22,16 +21,10 @@ const Explore = ({
           label: 'Land Cover'
         }}
       >
-        <Toggle
-          label="Human Pressures"
-          isOn={someValue}
-          toggle={() => toggleValue('someValue')}
-        />
-        <Opacity
-          label="opacity"
-          value={opacity.value}
-          options={opacity.options}
-          update={value => updateOpacity({ path: ['opacity', 'value'], value })}
+        <Row
+          {...{ someValue, toggleValue, opacity }}
+          updateOpacity={value =>
+            updateOpacity({ path: ['opacity', 'value'], value })}
         />
       </Expand>
     </div>
