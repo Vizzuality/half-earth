@@ -1,0 +1,73 @@
+@import "~styles/variables";
+
+.container {
+  position: relative;
+  width: 120px;
+
+  .tooltip {
+    display: none;
+    width: 100%;
+    position: absolute;
+    border: 1px solid $color-turquoise;
+    top: -3em;
+    padding: 0 10px;
+
+    &::after {
+      $height: 6px;
+
+      position: absolute;
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: $height solid transparent;
+      border-right: $height solid transparent;
+      left: calc(50% - #{$height});
+      bottom: -$height;
+      border-top: $height solid $color-turquoise;
+    }
+  }
+
+  &:hover .tooltip {
+    display: block;
+  }
+
+  .opacities {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .opacity {
+      display: inline;
+      background-image: url(/img/opacity.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+
+      &25 {
+        opacity: 0.25;
+      }
+
+      &50 {
+        opacity: 0.5;
+      }
+
+      &75 {
+        opacity: 0.75;
+      }
+
+      &100 {
+        opacity: 1;
+      }
+    }
+
+    .icon {
+      color: white;
+      text-indent: -200vw;
+
+      &Hidden {
+        display: none;
+      }
+    }
+  }
+}

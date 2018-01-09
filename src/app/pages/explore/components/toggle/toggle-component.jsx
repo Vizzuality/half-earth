@@ -4,17 +4,24 @@ import styles from './toggle-styles'
 
 const onOff = isOn => (isOn ? 'On' : 'Off')
 
-const Toggle = ({ isOn, toggle, ...props }) => (
-  <div className={cx(styles.container, { [styles.containerOn]: isOn })}>
-    <button
-      className={cx(styles.toggle, {
-        [styles.toggleOn]: isOn,
-        [styles.toggleOff]: !isOn
+const Toggle = ({ isOn, toggle, label, ...props }) => (
+  <div className={styles.container}>
+    {label && <span className={cx(styles.label, styles.child)}>{label}</span>}
+    <div
+      className={cx(styles.toggleContainer, {
+        [styles.toggleContainerOn]: isOn
       })}
-      onClick={() => toggle()}
     >
-      {onOff(isOn)}
-    </button>
+      <button
+        className={cx(styles.toggle, {
+          [styles.toggleOn]: isOn,
+          [styles.toggleOff]: !isOn
+        })}
+        onClick={() => toggle()}
+      >
+        {onOff(isOn)}
+      </button>
+    </div>
   </div>
 )
 

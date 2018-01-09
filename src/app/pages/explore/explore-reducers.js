@@ -11,5 +11,9 @@ export default {
     const $value = ofPath(payload)
     const newState = !get($value, state)
     return set($value, newState, state)
+  },
+  [actions.updateOpacity]: (state, { payload: { path, value } }) => {
+    const $path = ofPath(...path)
+    return set($path, value, state)
   }
 }

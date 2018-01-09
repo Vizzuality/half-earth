@@ -6,6 +6,10 @@ $left-pad: 20px;
   padding-left: $left-pad + 9px;
 }
 
+.collapseClosed {
+  display: none;
+}
+
 .expand {
   .label {
     color: $color-white;
