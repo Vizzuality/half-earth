@@ -7,3 +7,4 @@ export const toggleSidebar = createAction(
   ({ meta, ...payload }) => payload,
   ({ meta }) => meta
 )
+export const switchMode = createAction('switchMode')

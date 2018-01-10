@@ -1,7 +1,9 @@
 import React from 'react'
 import cx from 'classnames'
 
-import Button from './button'
+import Pane from 'components/pane'
+import Button from './components/button'
+import PaneToggle from './components/pane-toggle'
 import styles from './sidebar-styles'
 
 const analytics = {
@@ -16,7 +18,10 @@ const Sidebar = ({
   toggleSidebar,
   open,
   route,
-  sidePopupOpen
+  sidePopupOpen,
+  mode,
+  switchMode,
+  ...props
 }) => {
   const sidebarAnalytics = open ? analytics.open : analytics.close
   return (
@@ -37,7 +42,12 @@ const Sidebar = ({
           [styles.contentLocked]: sidePopupOpen
         })}
       >
-        {children}
+        <PaneToggle
+          options={mode.options}
+          selected={mode.selected}
+          onSwitch={() => switchMode()}
+        />
+        {mode.selected === 'st' ? children : <Pane page={route} />}
       </div>
     </div>
   )

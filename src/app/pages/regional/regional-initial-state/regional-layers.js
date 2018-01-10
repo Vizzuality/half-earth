@@ -11,13 +11,6 @@ export default [
     url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
     visible: false
   },
-  {
-    name: 'dark:basemap',
-    type: 'UrlTemplate',
-    keep: true,
-    url: `https://api.mapbox.com/styles/v1/jchalfearth/cj82yobfla1uq2ss6vlwaidgy/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
-    visible: false
-  },
 
   MOLLayer('mammals:richness', 'mammals', 'richness_1km'),
   MOLLayer('amphibians:richness', 'amphibians', 'richness_1km'),
@@ -39,18 +32,6 @@ export default [
     visible: false
   },
   {
-    name: 'human-pressures',
-    url:
-      'https://cdn.mol.org/half-earth/tiles/human-pressures/esa/1km/80p/{z}/{x}/{y}',
-    type: 'UrlTemplate',
-    visible: false
-  },
-  {
-    name: 'conservation-areas',
-    url: '',
-    visible: false
-  },
-  {
     name: 'example-protected-areas',
     url: null,
     type: 'UrlTemplate',
@@ -69,6 +50,7 @@ export default [
     ),
     visible: false
   },
+
   {
     name: 'community-based-conservation-areas',
     url: null,
@@ -88,6 +70,7 @@ export default [
     ),
     visible: false
   },
+
   {
     name: 'private-reserves',
     url: null,
@@ -107,23 +90,17 @@ export default [
     ),
     visible: false
   },
+
   {
-    name: 'centroid-tests',
-    url: null,
+    name: 'human-pressures',
+    url:
+      'https://cdn.mol.org/half-earth/tiles/human-pressures/esa/1km/80p/{z}/{x}/{y}',
     type: 'UrlTemplate',
-    carto: cartoConfig(
-      'half-earth',
-      `#layer {
-        marker-width: 12.5;
-        marker-fill: ramp([cell_prior], (#ff2955, #e2254c, #c02847, #911c34, #93345d, #350a13), quantiles);
-        marker-fill-opacity: 1;
-        marker-allow-overlap: true;
-        marker-line-width: 1;
-        marker-line-color: #FFFFFF;
-        marker-line-opacity: 1;
-      }`,
-      'half_earth_priority_centroids'
-    ),
+    visible: false
+  },
+  {
+    name: 'conservation-areas',
+    url: '',
     visible: false
   }
 ]

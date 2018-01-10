@@ -1,3 +1,7 @@
 export default {
-  open: true
+  open: true,
+  mode: {
+    options: [{ key: 'st', label: 'Story' }, { key: 'xp', label: 'Explore' }],
+    selected: 'xp'
+  }
 }
