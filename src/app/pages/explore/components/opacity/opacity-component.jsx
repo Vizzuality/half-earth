@@ -14,11 +14,11 @@ const Opacity = ({
   update,
   path,
   label,
-  enabled,
+  disabled,
   ...props
 }) => (
   <div
-    className={cx(styles.container, { [styles.containerDisabled]: !enabled })}
+    className={cx(styles.container, { [styles.containerDisabled]: disabled })}
   >
     <span className={styles.tooltip}>
       {label} {value}%

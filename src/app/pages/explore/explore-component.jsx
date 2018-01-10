@@ -1,6 +1,13 @@
 import React from 'react'
+
+import Toggle from './components/toggle'
+import Opacity from './components/opacity'
+import Info from './components/info'
 import Expand from './components/expand'
 import Row from './components/row'
+import rowStyles from './components/row/row-styles'
+
+const openInfo = console.log.bind(console)
 
 const Explore = ({
   landCoverFold,
@@ -21,11 +28,26 @@ const Explore = ({
           label: 'Land Cover'
         }}
       >
-        <Row
-          {...{ someValue, toggleValue, opacity }}
-          updateOpacity={value =>
-            updateOpacity({ path: ['opacity', 'value'], value })}
-        />
+        <Row>
+          <Toggle
+            label="Human Pressures"
+            key="Human Pressures"
+            isOn={someValue}
+            toggle={() => toggleValue('someValue')}
+          />
+          <div className={rowStyles.buttons}>
+            <Opacity
+              disabled={!someValue}
+              label="opacity"
+              key="opacity"
+              value={opacity.value}
+              options={opacity.options}
+              update={value =>
+                updateOpacity({ path: ['opacity', 'value'], value })}
+            />
+            <Info onClick={() => openInfo('Human Pressures')} />
+          </div>
+        </Row>
       </Expand>
     </div>
   </div>

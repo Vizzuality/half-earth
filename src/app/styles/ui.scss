@@ -11,6 +11,11 @@
   background-position: center;
 }
 
+%disabled {
+  opacity: 0.1;
+  pointer-events: none;
+}
+
 .button {
   background-color: transparent;
   border: 1px solid $color-turquoise;

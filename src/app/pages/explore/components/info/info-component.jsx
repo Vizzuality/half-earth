@@ -1,6 +1,12 @@
 import React from 'react'
 import styles from './info-styles'
 
-const Info = peops => <div className={styles.info}>i</div>
+const Info = ({ onClick }) => (
+  <div className={styles.container}>
+    <button onClick={onClick} className={styles.info}>
+      ⓘ
+    </button>
+  </div>
+)
 
 export default Info

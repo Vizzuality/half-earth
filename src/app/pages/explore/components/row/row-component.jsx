@@ -1,28 +1,13 @@
-import React from 'react'
-
-import Toggle from '../toggle'
-import Opacity from '../opacity'
-import Info from '../info'
+import React, { Children } from 'react'
 import styles from './row-styles.scss'
 
-const Row = ({ someValue, toggleValue, opacity, updateOpacity }) => (
-  <div className={styles.row}>
-    <Toggle
-      label="Human Pressures"
-      key="Human Pressures"
-      isOn={someValue}
-      toggle={() => toggleValue('someValue')}
-    />
-    <Opacity
-      enabled={someValue}
-      label="opacity"
-      key="opacity"
-      value={opacity.value}
-      options={opacity.options}
-      update={updateOpacity}
-    />
-    <Info />
-  </div>
-)
+const Row = ({
+  children,
+  someValue,
+  toggleValue,
+  opacity,
+  updateOpacity,
+  openInfo
+}) => <div className={styles.row}>{Children.map(children, Child => Child)}</div>
 
 export default Row

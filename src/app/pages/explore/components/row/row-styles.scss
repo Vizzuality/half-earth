@@ -1,4 +1,16 @@
+@import "~styles/ui";
+
 .row {
   display: flex;
   justify-content: space-between;
+}
+
+.buttons {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &Disabled {
+    @extend %disabled;
+  }
 }

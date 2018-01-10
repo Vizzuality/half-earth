@@ -1,13 +1,17 @@
 @import "~styles/variables";
+@import "~styles/ui";
+
+$icon-size: 15px;
 
 .container {
   &Disabled {
-    opacity: 0.1;
-    pointer-events: none;
+    @extend %disabled;
   }
 
-  position: relative;
+  position: absolute;
   width: 120px;
+  right: -70px;
+  top: 7.7px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,21 +21,25 @@
     width: 100%;
     position: absolute;
     border: 1px solid $color-turquoise;
-    top: -2.2em;
+    top: -3em;
+    left: calc(-50% + #{$icon-size / 2});
     padding: 0 10px;
 
     &::after {
-      $height: 6px;
+      $size: 8px;
 
-      position: absolute;
       content: '';
-      width: 0;
-      height: 0;
-      border-left: $height solid transparent;
-      border-right: $height solid transparent;
-      left: calc(50% - #{$height});
-      bottom: -$height;
-      border-top: $height solid $color-turquoise;
+      display: block;
+      position: absolute;
+      background-color: $color-mid-blue;
+      width: $size;
+      height: $size;
+      bottom: - (($size / 2) + 1);
+      left: calc(50% - #{$size / 2});
+      z-index: 10;
+      border-left: 1px solid $color-turquoise;
+      border-bottom: 1px solid $color-turquoise;
+      transform: rotate(-45deg);
     }
   }
 
@@ -40,7 +48,8 @@
   }
 
   .opacities {
-    height: 15px;
+    height: $icon-size;
+    width: $icon-size;
     list-style: none;
     padding: 0;
     margin: 0;
