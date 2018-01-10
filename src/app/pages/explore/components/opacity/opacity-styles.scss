@@ -4,6 +4,8 @@
 $icon-size: 15px;
 
 .container {
+  z-index: 0;
+
   &Disabled {
     @extend %disabled;
   }

@@ -31,7 +31,6 @@ const Explore = ({
         <Row>
           <Toggle
             label="Human Pressures"
-            key="Human Pressures"
             isOn={someValue}
             toggle={() => toggleValue('someValue')}
           />
@@ -39,7 +38,6 @@ const Explore = ({
             <Opacity
               disabled={!someValue}
               label="opacity"
-              key="opacity"
               value={opacity.value}
               options={opacity.options}
               update={value =>
