@@ -1,5 +1,6 @@
 import React from 'react'
 
+import PaneToggle from './components/pane-toggle'
 import Toggle from './components/toggle'
 import Opacity from './components/opacity'
 import Info from './components/info'
@@ -16,38 +17,68 @@ const Explore = ({
   toggleFold,
   toggleValue,
   updateOpacity,
+  screenMode,
+  switchScreenMode,
   ...props
 }) => (
   <div>
-    Explore
-    <div>
-      <Expand
-        {...{
-          isOpen: landCoverFold.isOpen,
-          expand: () => toggleFold('landCoverFold'),
-          label: 'Land Cover'
-        }}
-      >
-        <Row>
-          <Toggle
-            label="Human Pressures"
-            isOn={someValue}
-            toggle={() => toggleValue('someValue')}
+    <PaneToggle
+      options={screenMode.options}
+      selected={screenMode.selected}
+      onSwitch={switchScreenMode}
+    />
+    <Expand
+      {...{
+        isOpen: landCoverFold.isOpen,
+        expand: () => toggleFold('landCoverFold'),
+        label: 'Land Cover'
+      }}
+    >
+      <Row>
+        <Toggle
+          label="Human Pressures"
+          isOn={someValue}
+          toggle={() => toggleValue('someValue')}
+        />
+        <div className={rowStyles.buttons}>
+          <Opacity
+            disabled={!someValue}
+            label="opacity"
+            value={opacity.value}
+            options={opacity.options}
+            update={value =>
+              updateOpacity({ path: ['opacity', 'value'], value })}
           />
-          <div className={rowStyles.buttons}>
-            <Opacity
-              disabled={!someValue}
-              label="opacity"
-              value={opacity.value}
-              options={opacity.options}
-              update={value =>
-                updateOpacity({ path: ['opacity', 'value'], value })}
-            />
-            <Info onClick={() => openInfo('Human Pressures')} />
-          </div>
-        </Row>
-      </Expand>
-    </div>
+          <Info onClick={() => openInfo('Human Pressures')} />
+        </div>
+      </Row>
+    </Expand>
+    <Expand
+      {...{
+        isOpen: landCoverFold.isOpen,
+        expand: () => toggleFold('landCoverFold'),
+        label: 'Land Cover'
+      }}
+    >
+      <Row>
+        <Toggle
+          label="Human Pressures"
+          isOn={someValue}
+          toggle={() => toggleValue('someValue')}
+        />
+        <div className={rowStyles.buttons}>
+          <Opacity
+            disabled={!someValue}
+            label="opacity"
+            value={opacity.value}
+            options={opacity.options}
+            update={value =>
+              updateOpacity({ path: ['opacity', 'value'], value })}
+          />
+          <Info onClick={() => openInfo('Human Pressures')} />
+        </div>
+      </Row>
+    </Expand>
   </div>
 )
 
