@@ -3831,6 +3831,10 @@ js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
 
+js-lenses@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/js-lenses/-/js-lenses-2.0.1.tgz#9a3d7f3d470ed26e22924863682b404d40a3b3f8"
+
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"

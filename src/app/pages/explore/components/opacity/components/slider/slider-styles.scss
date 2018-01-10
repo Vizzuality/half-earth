@@ -1,0 +1,56 @@
+@import '~styles/variables.scss';
+
+.container {
+  display: flex;
+
+  .child {
+    margin-right: 15px;
+
+    &:nth-child(2) {
+      margin-right: 25px;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+// Slider theme
+$handle-size: 18px;
+$handle-border-width: 1px;
+$handle-border: $handle-border-width solid;
+$handle-color: $color-turquoise;
+$handle-border-color: $color-turquoise;
+
+$track-height: 3px;
+$track-color: $color-turquoise;
+$track-border: 1px solid;
+$track-border-color: $color-turquoise;
+
+$progress-color: $color-turquoise;
+
+.range {
+  margin-top: 13px;
+  background-color: $color-navy-blue;
+  border: none;
+  height: $track-height;
+}
+
+.progress {
+  height: $track-height;
+  background-color: $progress-color;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.handle {
+  width: $handle-size;
+  height: $handle-size;
+  background-image: url('/img/earthometer-handle.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform-origin: 50% 50%;
+  top: -7px;
+}
