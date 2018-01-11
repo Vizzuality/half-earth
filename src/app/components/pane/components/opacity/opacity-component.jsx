@@ -34,7 +34,7 @@ const Opacity = ({
           <button
             onClick={() => update(next(options, opacity))}
             className={cx(styles.icon, {
-              [styles.iconHidden]: opacity !== value
+              [styles.iconHidden]: Number(opacity) !== Number(value)
             })}
           >
             O

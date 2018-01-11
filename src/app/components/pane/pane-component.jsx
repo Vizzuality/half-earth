@@ -1,6 +1,7 @@
 import React from 'react'
 import find from 'lodash/find'
 
+import { default as PopUp } from 'components/pop-up/pop-up'
 import Expand from './components/expand'
 import Row from './components/row'
 import Toggle from './components/toggle'
@@ -10,17 +11,24 @@ import Opacity from './components/opacity'
 import rowStyles from './components/row/row-styles'
 import styles from './pane-styles'
 
-const opacity = {
-  options: [],
-  selected: '100'
-}
-
-const toggleValue = console.log.bind(console)
-const updateOpacity = console.log.bind(console)
 const openInfo = console.log.bind(console)
 
-const Pane = ({ page, panes, layers, togglePane, ...props }) => (
-  <ul className={styles.panes}>
+const Pane = ({
+  page,
+  panes,
+  layers,
+  togglePane,
+  toggleLayer,
+  setLayerOpacity,
+  opacities,
+  ...props
+}) => [
+  <PopUp
+    key="pane-info-popup"
+    open={false}
+    close={() => console.log('closePopup')}
+  />,
+  <ul key="pane-info-rows" className={styles.panes}>
     {panes.map(pane => (
       <li key={pane.layers}>
         <Expand
@@ -30,22 +38,21 @@ const Pane = ({ page, panes, layers, togglePane, ...props }) => (
         >
           {pane.layers.map(l => {
             const layer = find(layers, { name: l.key })
-            // console.log(layer)
             return (
               <Row key={layer.name}>
                 <Toggle
                   label={l.label}
                   isOn={layer.visible}
-                  toggle={() => toggleValue('someValue')}
+                  toggle={() => toggleLayer({ page, name: layer.name })}
                 />
                 <div className={rowStyles.buttons}>
                   <Opacity
                     disabled={!layer.visible}
                     label="opacity"
-                    value={opacity.value}
-                    options={opacity.options}
+                    value={layer.opacity}
+                    options={opacities}
                     update={value =>
-                      updateOpacity({ path: ['opacity', 'value'], value })}
+                      setLayerOpacity({ page, name: layer.name, value })}
                   />
                   <Info onClick={() => openInfo(l.key)} />
                 </div>
@@ -56,6 +63,6 @@ const Pane = ({ page, panes, layers, togglePane, ...props }) => (
       </li>
     ))}
   </ul>
-)
+]
 
 export default Pane

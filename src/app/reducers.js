@@ -49,16 +49,20 @@ import {
   initialState as paneState
 } from 'components/pane'
 
-export default combineReducers({
-  routing: routerReducer,
-  zoom: handleActions(zoomReducers, zoomState),
-  earthometer: handleActions(earthometerReducers, earthometerState),
-  sidebar: handleActions(sidebarReducers, sidebarState),
-  map: handleActions(mapReducers, mapState),
-  section: handleActions(sectionReducers, sectionState),
-  regional: handleActions(regionalReducers, regionalState),
-  navFooter: handleActions(navFooterReducers, navFooterState),
-  legendLayers: handleActions(legendLayersReducers, legendLayersState),
-  global: handleActions(globalReducers, globalState),
-  pane: handleActions(paneReducers, paneState)
-})
+export default (state, action) => {
+  const appState = combineReducers({
+    routing: routerReducer,
+    zoom: handleActions(zoomReducers, zoomState),
+    earthometer: handleActions(earthometerReducers, earthometerState),
+    sidebar: handleActions(sidebarReducers, sidebarState),
+    map: handleActions(mapReducers, mapState),
+    section: handleActions(sectionReducers, sectionState),
+    regional: handleActions(regionalReducers, regionalState),
+    navFooter: handleActions(navFooterReducers, navFooterState),
+    legendLayers: handleActions(legendLayersReducers, legendLayersState),
+    global: handleActions(globalReducers, globalState)
+  })(state, action)
+
+  // give the pane access to the whole state
+  return handleActions(paneReducers, paneState)(appState, action)
+}

@@ -6,6 +6,7 @@ const { MAPBOX_TOKEN, MOLLayer } = utils
 export default [
   {
     name: 'basemap',
+    opacity: 100,
     type: 'UrlTemplate',
     keep: true,
     url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
@@ -26,6 +27,7 @@ export default [
 
   {
     name: 'protected-areas',
+    opacity: 100,
     url:
       'https://cdn.mol.org/half-earth/tiles/reserve-coverage/existing-network/{z}/{x}/{y}',
     type: 'UrlTemplate',
@@ -33,6 +35,7 @@ export default [
   },
   {
     name: 'example-protected-areas',
+    opacity: 100,
     url: null,
     type: 'UrlTemplate',
     carto: cartoConfig(
@@ -44,7 +47,7 @@ export default [
       #layer::outline {
         line-width: 1;
         line-color: #d96fad;
-        line-opacity: 1;
+        line-opacity: 100;
       }`,
       'wdpa_example_reserves'
     ),
@@ -53,6 +56,7 @@ export default [
 
   {
     name: 'community-based-conservation-areas',
+    opacity: 100,
     url: null,
     type: 'UrlTemplate',
     carto: cartoConfig(
@@ -64,7 +68,7 @@ export default [
       #layer::outline {
         line-width: 1;
         line-color: #611181;
-        line-opacity: 1;
+        line-opacity: 100;
       }`,
       'community_based_kenilworth'
     ),
@@ -73,6 +77,7 @@ export default [
 
   {
     name: 'private-reserves',
+    opacity: 100,
     url: null,
     type: 'UrlTemplate',
     carto: cartoConfig(
@@ -84,7 +89,7 @@ export default [
       #layer::outline {
         line-width: 1;
         line-color: #972a6a;
-        line-opacity: 1;
+        line-opacity: 100;
       }`,
       'private_nature_reserve'
     ),
@@ -93,6 +98,7 @@ export default [
 
   {
     name: 'human-pressures',
+    opacity: 100,
     url:
       'https://cdn.mol.org/half-earth/tiles/human-pressures/esa/1km/80p/{z}/{x}/{y}',
     type: 'UrlTemplate',
@@ -100,6 +106,7 @@ export default [
   },
   {
     name: 'conservation-areas',
+    opacity: 100,
     url: '',
     visible: false
   }

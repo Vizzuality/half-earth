@@ -6,12 +6,14 @@ import * as actions from './pane-actions'
 import initialState from './pane-initial-state'
 
 const mapStateToProps = (state, { page }) => {
-  const { layers } = state[page]
-  const { panes } = state.pane[page]
+  const { popUp, opacities } = initialState
+  const { layers, panes } = state[page]
 
   return {
     layers,
+    popUp,
     panes,
+    opacities,
     page
   }
 }
