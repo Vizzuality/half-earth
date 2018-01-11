@@ -26,7 +26,7 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
 
   const gradientLegend = (layer, i) => (
     <div
-      key={`legend-item-${layer.label}`}
+      key={`legend-item-${layer.label}-${layer.group}`}
       className={cx(
         { [styles.gradientLegendSmall]: layer.size === 'small' },
         styles.gradientLegend
@@ -35,7 +35,7 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
       <div className={styles.gradient}>
         <div className={styles.labelContain}>
           {layer.label}
-          {i === 0 && (
+          {layer.showGroup && (
             <span className={styles.bioText}>
               {layer.group &&
                 `Species ${capitalize(layer.group) || 'Richness'}`}

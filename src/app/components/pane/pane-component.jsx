@@ -13,56 +13,81 @@ import styles from './pane-styles'
 
 const openInfo = console.log.bind(console)
 
-const Pane = ({
-  page,
-  panes,
-  layers,
-  togglePane,
-  toggleLayer,
-  setLayerOpacity,
-  opacities,
-  ...props
-}) => [
-  <PopUp
-    key="pane-info-popup"
-    open={false}
-    close={() => console.log('closePopup')}
-  />,
-  <ul key="pane-info-rows" className={styles.panes}>
-    {panes.map(pane => (
-      <li key={pane.layers}>
-        <Expand
-          isOpen={pane.isOpen}
-          expand={() => togglePane({ name: pane.name, page })}
-          label={pane.name}
-        >
-          {pane.layers.map(l => {
-            const layer = find(layers, { name: l.key })
-            return (
-              <Row key={layer.name}>
-                <Toggle
-                  label={l.label}
-                  isOn={layer.visible}
-                  toggle={() => toggleLayer({ page, name: layer.name })}
-                />
-                <div className={rowStyles.buttons}>
-                  <Opacity
-                    disabled={!layer.visible}
-                    label="opacity"
-                    value={layer.opacity}
-                    options={opacities}
-                    update={value =>
-                      setLayerOpacity({ page, name: layer.name, value })}
-                  />
-                  <Info onClick={() => openInfo(l.key)} />
-                </div>
-              </Row>
-            )
-          })}
-        </Expand>
-      </li>
-    ))}
-  </ul>
-]
+const Layer = ({ l, layer, opacities, page, setLayerOpacity, toggleLayer }) => (
+  <Row key={layer.name}>
+    <Toggle
+      label={l.label}
+      isOn={layer.visible}
+      toggle={() => toggleLayer({ page, name: layer.name })}
+    />
+    <div className={rowStyles.buttons}>
+      <Opacity
+        disabled={!layer.visible}
+        label="opacity"
+        value={layer.opacity}
+        options={opacities}
+        update={value => setLayerOpacity({ page, name: layer.name, value })}
+      />
+      <Info onClick={() => openInfo(l.key)} />
+    </div>
+  </Row>
+)
+
+const PaneList = props => {
+  const {
+    page,
+    panes,
+    layers,
+    togglePane,
+    toggleLayer,
+    setLayerOpacity,
+    opacities
+  } = props
+  return (
+    <ul key="pane-info-rows" className={styles.panes}>
+      {panes.map(pane => (
+        <li key={pane.name}>
+          <Expand
+            isOpen={pane.isOpen}
+            expand={() => togglePane({ name: pane.name, page })}
+            label={pane.name}
+          >
+            {pane.layers &&
+              pane.layers.map(l => {
+                const layer = find(layers, { name: l.key })
+                return (
+                  layer && (
+                    <Layer
+                      key={l.key}
+                      {...{
+                        l,
+                        layer,
+                        opacities,
+                        page,
+                        setLayerOpacity,
+                        toggleLayer
+                      }}
+                    />
+                  )
+                )
+              })}
+            {pane.panes && <PaneList {...{ ...props, panes: pane.panes }} />}
+          </Expand>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+const Pane = props => {
+  return [
+    <PopUp
+      key="pane-info-popup"
+      open={false}
+      close={() => console.log('closePopup')}
+    />,
+    <PaneList key="pane-list" {...props} />
+  ]
+}
 
 export default Pane

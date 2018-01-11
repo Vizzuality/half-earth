@@ -12,6 +12,7 @@ export const MAPBOX_TOKEN =
 
 export const MOLLayer = (name, species, type) => ({
   name,
+  opacity: 100,
   url: `https://cdn.mol.org/half-earth/tiles/${type}/${species}/{z}/{x}/{y}`,
   type: 'UrlTemplate',
   visible: false
