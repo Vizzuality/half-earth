@@ -108,11 +108,30 @@ const Pane = props => {
           {selectedPopup &&
           selectedPopup.title && <h1>{selectedPopup.title}</h1>}
           {selectedPopup &&
-          selectedPopup.content && <p>{selectedPopup.content}</p>}
+            selectedPopup.content &&
+            selectedPopup.content.map(p => <p key={p}>{p}</p>)}
+          {selectedPopup &&
+            selectedPopup.formulas &&
+            selectedPopup.formulas.map(f => (
+              <pre key={f} className={styles.formula}>
+                {f}
+              </pre>
+            ))}
+          {selectedPopup &&
+          selectedPopup.keywords && (
+            <p className={styles.keyWords}>
+              <h2 className={styles.keywordLabel}>Keywords</h2>
+              <div className={styles.keywordList}>
+                {selectedPopup.keywords.join(', ')}
+              </div>
+            </p>
+          )}
         </div>
       </div>
     </PopUp>,
-    <PaneList key="pane-list" {...props} />
+    <div key="pane-list" className={styles.paneContainer}>
+      <PaneList {...props} />
+    </div>
   ]
 }
 

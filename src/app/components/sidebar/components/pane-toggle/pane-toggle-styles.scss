@@ -3,6 +3,10 @@
 .container {
   width: 100%;
   height: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: -50px;
 
   .items {
     width: 213px;

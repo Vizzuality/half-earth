@@ -1,5 +1,9 @@
 @import "~styles/variables";
 
+.paneContainer {
+  margin-top: 9rem;
+}
+
 .panes,
 .panesChild {
   list-style: none;
@@ -23,9 +27,34 @@
     background-color: $color-dark-blue;
     position: relative;
     top: $pad;
-    height: calc(100% - (2 * #{$pad}));
+    max-height: calc(100% - (2 * #{$pad}));
     bottom: $pad;
     left: $pad;
-    width: calc(100% - (2 * #{$pad}));
+    max-width: calc(100% - (2 * #{$pad}));
+    padding: ($pad / 2) ($pad * 2);
+    line-height: 2;
+    letter-spacing: 0.8px;
+
+    p {
+      margin-bottom: 2em;
+    }
+
+    .formula {
+      font-family: monospace;
+      font-style: italic;
+      font-size: 0.7vw;
+      padding: 3em;
+      background-color: rgba(white, 0.02);
+      border-radius: 3px;
+    }
+
+    .keywordLabel {
+      margin: 0;
+    }
+
+    .keywordList {
+      padding: 0;
+      margin: 0;
+    }
   }
 }
