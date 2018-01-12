@@ -25,14 +25,7 @@ export default [
   MOLLayer('protea:rarity', 'protea', 'rarity_1km'),
   MOLLayer('restio:rarity', 'restio', 'rarity_1km'),
 
-  {
-    name: 'protected-areas',
-    opacity: 100,
-    url:
-      'https://cdn.mol.org/half-earth/tiles/reserve-coverage/existing-network/{z}/{x}/{y}',
-    type: 'UrlTemplate',
-    visible: false
-  },
+  MOLLayer('protected-areas', 'existing-network', 'reserve-coverage'),
   {
     name: 'example-protected-areas',
     opacity: 100,
@@ -96,14 +89,8 @@ export default [
     visible: false
   },
 
-  {
-    name: 'human-pressures',
-    opacity: 100,
-    url:
-      'https://cdn.mol.org/half-earth/tiles/human-pressures/esa/1km/80p/{z}/{x}/{y}',
-    type: 'UrlTemplate',
-    visible: false
-  },
+  MOLLayer('human-pressures', 'esa/1km/80p', 'human-pressures'),
+
   {
     name: 'conservation-areas',
     opacity: 100,

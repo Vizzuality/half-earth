@@ -1,8 +1,9 @@
 import React from 'react'
+import cx from 'classnames'
 import styles from './info-styles'
 
-const Info = ({ onClick }) => (
-  <div className={styles.container}>
+const Info = ({ className, onClick }) => (
+  <div className={cx(styles.container, className)}>
     <button onClick={onClick} className={styles.info}>
       ⓘ
     </button>

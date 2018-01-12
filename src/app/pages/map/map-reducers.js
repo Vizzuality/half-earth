@@ -3,7 +3,9 @@ import includes from 'lodash/includes'
 import sortBy from 'lodash/sortBy'
 import identity from 'lodash/identity'
 import find from 'lodash/find'
+import findIndex from 'lodash/findIndex'
 import difference from 'lodash/difference'
+import { get, ofPath, of, set, compose } from 'js-lenses'
 import { assign } from 'app/utils'
 import * as actions from './map-actions'
 
@@ -30,11 +32,16 @@ export const resetLayers = state => ({
   })
 })
 
-export const toggleLayer = (state, { payload }) =>
-  updateLayer(state, {
-    ...payload,
-    payload: layer => ({ visible: !layer.visible })
-  })
+export const toggleLayer = (state, { payload: { name } }) => {
+  const layers = get(of('layers'), state)
+  const currentIndex = findIndex(layers, { name })
+  const $currentIsVisible = compose(
+    ofPath('layers', currentIndex),
+    of('visible')
+  )
+
+  return set($currentIsVisible, !get($currentIsVisible, state), state)
+}
 
 export const hideLayers = (state, { payload }) => {
   const layers = state.layers.map(l => {

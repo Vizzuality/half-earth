@@ -21,6 +21,8 @@ const species = type => ({
 })
 
 export default [
+  species('richness'),
+  species('rarity'),
   {
     name: 'Conservation Management Types',
     isOpen: true,
@@ -30,9 +32,8 @@ export default [
         label: 'Community based conservation areas'
       },
       { key: 'private-reserves', label: 'Private reserves' },
-      { key: 'protected-areas', label: 'Protected areas' }
+      { key: 'protected-areas', label: 'Protected areas' },
+      { key: 'human-pressures', label: 'Human pressures' }
     ]
-  },
-  species('richness'),
-  species('rarity')
+  }
 ]

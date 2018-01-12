@@ -4,6 +4,7 @@ import findIndex from 'lodash/findIndex'
 
 export default {
   [actions.togglePane]: (state, { payload: { name, page } }) => {
+    console.log(state)
     const $panes = ofPath(page, 'panes')
 
     const panes = get($panes, state)
@@ -15,26 +16,8 @@ export default {
 
     return set($currentIsOpen, !get($currentIsOpen, state), state)
   },
-  [actions.toggleLayer]: (state, { payload: { page, name } }) => {
-    const $layers = compose(ofPath(page), of('layers'))
-    const layers = get($layers, state)
-    const currentIndex = findIndex(layers, { name })
-    const $currentIsVisible = compose(
-      ofPath(page, 'layers', currentIndex),
-      of('visible')
-    )
-
-    return set($currentIsVisible, !get($currentIsVisible, state), state)
-  },
-  [actions.setLayerOpacity]: (state, { payload: { page, name, value } }) => {
-    const $layers = compose(ofPath(page), of('layers'))
-    const layers = get($layers, state)
-    const currentIndex = findIndex(layers, { name })
-    const $currentOpacity = compose(
-      ofPath(page, 'layers', currentIndex),
-      of('opacity')
-    )
-
-    return set($currentOpacity, value, state)
-  }
+  [actions.openPopup]: (state, { payload }) =>
+    set(of('popup'), { open: true, selected: payload }, state),
+  [actions.closePopup]: state =>
+    set(of('popup'), { open: false, selected: null }, state)
 }

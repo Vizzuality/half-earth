@@ -37,4 +37,4 @@ export const colorMap = {
   violet: '#9632b2'
 }
 
-export const pick = (o, k) => o[k] || o
+export const pick = (o, k) => (o && o[k]) || o

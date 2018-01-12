@@ -12,7 +12,8 @@ $icon-size: 15px;
 
   position: absolute;
   width: 120px;
-  right: -70px;
+  // right: -70px;
+  right: -98px;
   top: 7.7px;
   display: flex;
   flex-direction: column;
@@ -52,9 +53,11 @@ $icon-size: 15px;
   }
 
   .opacities {
+    position: relative;
+    list-style: none;
     height: $icon-size;
     width: $icon-size;
-    list-style: none;
+    right: 0;
     padding: 0;
     margin: 0;
     display: flex;
