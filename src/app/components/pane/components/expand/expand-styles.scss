@@ -1,0 +1,65 @@
+@import '~styles/variables.scss';
+
+$left-pad: 20px;
+
+.child {
+  padding-left: $left-pad + 9px;
+  position: relative;
+}
+
+.collapseClosed {
+  display: none;
+}
+
+.paneInfo {
+  position: absolute;
+  right: 30px;
+  top: 0;
+}
+
+.expand {
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  display: inline-block;
+
+  .label {
+    color: $color-white;
+  }
+
+  .icon {
+    position: relative;
+    text-indent: -200vw;
+    width: $left-pad;
+    display: inline-block;
+
+    .arrow {
+      position: relative;
+      display: block;
+
+      &::after {
+        position: absolute;
+        content: '';
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        left: 0;
+        top: 30%;
+      }
+
+      $border: 6px solid $color-turquoise;
+
+      &Open::after {
+        border-bottom: $border;
+        transform: translateX(-50%);
+      }
+
+      &Close::after {
+        border-top: $border;
+        transform: translate(-50%, -50%);
+        top: 50%;
+      }
+    }
+  }
+}

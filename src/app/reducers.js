@@ -44,6 +44,11 @@ import {
   initialState as legendLayersState
 } from 'components/legend/legend-layers/legend-layers'
 
+import {
+  reducers as paneReducers,
+  initialState as paneState
+} from 'components/pane'
+
 export default combineReducers({
   routing: routerReducer,
   zoom: handleActions(zoomReducers, zoomState),
@@ -54,5 +59,6 @@ export default combineReducers({
   regional: handleActions(regionalReducers, regionalState),
   navFooter: handleActions(navFooterReducers, navFooterState),
   legendLayers: handleActions(legendLayersReducers, legendLayersState),
-  global: handleActions(globalReducers, globalState)
+  global: handleActions(globalReducers, globalState),
+  pane: handleActions(paneReducers, paneState)
 })

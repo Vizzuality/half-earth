@@ -1,0 +1,60 @@
+@import "~styles/variables";
+
+.paneContainer {
+  margin-top: 9rem;
+}
+
+.panes,
+.panesChild {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.panes:not(.panesChild) > li {
+  margin-top: 3rem;
+}
+
+.popup {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(black, 0.9);
+  color: $color-white;
+
+  .popupContent {
+    $pad: 10%;
+
+    background-color: $color-dark-blue;
+    position: relative;
+    top: $pad;
+    max-height: calc(100% - (2 * #{$pad}));
+    bottom: $pad;
+    left: $pad;
+    max-width: calc(100% - (2 * #{$pad}));
+    padding: ($pad / 2) ($pad * 2);
+    line-height: 2;
+    letter-spacing: 0.8px;
+
+    p {
+      margin-bottom: 2em;
+    }
+
+    .formula {
+      font-family: monospace;
+      font-style: italic;
+      font-size: 0.7vw;
+      padding: 3em;
+      background-color: rgba(white, 0.02);
+      border-radius: 3px;
+    }
+
+    .keywordLabel {
+      margin: 0;
+    }
+
+    .keywordList {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

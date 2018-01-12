@@ -44,3 +44,6 @@ export const getBillboards = createThunkAction(
       .then(d => dispatch(gotBillboards(d.rows)))
   }
 )
+
+export const setLayerOpacity = createAction('setLayerOpacity')
+export const togglePane = createAction('togglePane')

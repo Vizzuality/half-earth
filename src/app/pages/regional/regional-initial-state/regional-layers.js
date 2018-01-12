@@ -6,16 +6,10 @@ const { MAPBOX_TOKEN, MOLLayer } = utils
 export default [
   {
     name: 'basemap',
+    opacity: 100,
     type: 'UrlTemplate',
     keep: true,
     url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
-    visible: false
-  },
-  {
-    name: 'dark:basemap',
-    type: 'UrlTemplate',
-    keep: true,
-    url: `https://api.mapbox.com/styles/v1/jchalfearth/cj82yobfla1uq2ss6vlwaidgy/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
     visible: false
   },
 
@@ -31,27 +25,10 @@ export default [
   MOLLayer('protea:rarity', 'protea', 'rarity_1km'),
   MOLLayer('restio:rarity', 'restio', 'rarity_1km'),
 
-  {
-    name: 'protected-areas',
-    url:
-      'https://cdn.mol.org/half-earth/tiles/reserve-coverage/existing-network/{z}/{x}/{y}',
-    type: 'UrlTemplate',
-    visible: false
-  },
-  {
-    name: 'human-pressures',
-    url:
-      'https://cdn.mol.org/half-earth/tiles/human-pressures/esa/1km/80p/{z}/{x}/{y}',
-    type: 'UrlTemplate',
-    visible: false
-  },
-  {
-    name: 'conservation-areas',
-    url: '',
-    visible: false
-  },
+  MOLLayer('protected-areas', 'existing-network', 'reserve-coverage'),
   {
     name: 'example-protected-areas',
+    opacity: 100,
     url: null,
     type: 'UrlTemplate',
     carto: cartoConfig(
@@ -63,14 +40,16 @@ export default [
       #layer::outline {
         line-width: 1;
         line-color: #d96fad;
-        line-opacity: 1;
+        line-opacity: 100;
       }`,
       'wdpa_example_reserves'
     ),
     visible: false
   },
+
   {
     name: 'community-based-conservation-areas',
+    opacity: 100,
     url: null,
     type: 'UrlTemplate',
     carto: cartoConfig(
@@ -82,14 +61,16 @@ export default [
       #layer::outline {
         line-width: 1;
         line-color: #611181;
-        line-opacity: 1;
+        line-opacity: 100;
       }`,
       'community_based_kenilworth'
     ),
     visible: false
   },
+
   {
     name: 'private-reserves',
+    opacity: 100,
     url: null,
     type: 'UrlTemplate',
     carto: cartoConfig(
@@ -101,29 +82,19 @@ export default [
       #layer::outline {
         line-width: 1;
         line-color: #972a6a;
-        line-opacity: 1;
+        line-opacity: 100;
       }`,
       'private_nature_reserve'
     ),
     visible: false
   },
+
+  MOLLayer('human-pressures', 'esa/1km/80p', 'human-pressures'),
+
   {
-    name: 'centroid-tests',
-    url: null,
-    type: 'UrlTemplate',
-    carto: cartoConfig(
-      'half-earth',
-      `#layer {
-        marker-width: 12.5;
-        marker-fill: ramp([cell_prior], (#ff2955, #e2254c, #c02847, #911c34, #93345d, #350a13), quantiles);
-        marker-fill-opacity: 1;
-        marker-allow-overlap: true;
-        marker-line-width: 1;
-        marker-line-color: #FFFFFF;
-        marker-line-opacity: 1;
-      }`,
-      'half_earth_priority_centroids'
-    ),
+    name: 'conservation-areas',
+    opacity: 100,
+    url: '',
     visible: false
   }
 ]
