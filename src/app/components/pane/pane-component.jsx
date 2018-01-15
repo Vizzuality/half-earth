@@ -52,13 +52,13 @@ const PaneList = props => {
     openPopup,
     className
   } = props
-  return (
+  return panes ? (
     <ul key="pane-info-rows" className={cx(className, styles.panes)}>
       {panes.map(pane => (
         <li key={pane.name}>
           <Expand
             isOpen={pane.isOpen}
-            expand={() => togglePane({ name: pane.name, page })}
+            expand={() => togglePane(pane.key)}
             label={pane.name}
             info={pane.info}
             openPopup={openPopup}
@@ -96,7 +96,7 @@ const PaneList = props => {
         </li>
       ))}
     </ul>
-  )
+  ) : null
 }
 
 const Pane = props => {

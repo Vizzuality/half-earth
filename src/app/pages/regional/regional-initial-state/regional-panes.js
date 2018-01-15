@@ -2,6 +2,7 @@ import upperFirst from 'lodash/upperFirst'
 
 const species = type => ({
   name: `Species ${upperFirst(type)}`,
+  key: `species-${type}`,
   isOpen: true,
   layers: [
     { key: `birds:${type}`, label: 'Birds' },
@@ -11,6 +12,7 @@ const species = type => ({
   panes: [
     {
       name: 'Plants',
+      key: `species-${type}-plants`,
       isOpen: true,
       layers: [
         { key: `protea:${type}`, label: 'Protea' },
@@ -25,6 +27,7 @@ export default [
   species('rarity'),
   {
     name: 'Conservation Management Types',
+    key: 'conservation-management-types',
     isOpen: true,
     layers: [
       {

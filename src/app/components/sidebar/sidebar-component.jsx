@@ -42,18 +42,12 @@ const Sidebar = ({
           [styles.contentLocked]: sidePopupOpen
         })}
       >
-        {route === 'regional' && (
-          <PaneToggle
-            options={mode.options}
-            selected={mode.selected}
-            onSwitch={() => switchMode()}
-          />
-        )}
-        {mode.selected === 'st' ? (
-          children
-        ) : (
-          route === 'regional' && <Pane page={route} />
-        )}
+        <PaneToggle
+          options={mode.options}
+          selected={mode.selected}
+          onSwitch={() => switchMode()}
+        />
+        {mode.selected === 'st' ? children : <Pane page={route} />}
       </div>
     </div>
   )

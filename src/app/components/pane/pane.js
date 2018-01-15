@@ -14,13 +14,15 @@ import * as actions from './pane-actions'
 import initialState from './pane-initial-state'
 
 const addInfo = (data, infos) =>
-  data.map(datum =>
-    assign(datum, {
-      info: pick(
-        find(infos, { key: kebabCase(last(datum.name.split(':'))) }),
-        'key'
-      )
-    })
+  data &&
+  data.map(
+    datum =>
+      assign(datum, {
+        info: pick(
+          find(infos, { key: kebabCase(last(datum.name.split(':'))) }),
+          'key'
+        )
+      }) || []
   )
 
 const mapStateToProps = (state, { page, ...props }) => {

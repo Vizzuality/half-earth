@@ -8,6 +8,9 @@ import { actions as cartoActions } from 'providers/carto'
 import * as mapReducers from 'pages/map/map-reducers'
 import * as regionalReducers from 'pages/regional/regional-reducers'
 import * as actions from './global-actions'
+import * as paneReducers from 'components/pane/pane-reducers'
+
+const { togglePane, setLayerOpacity } = paneReducers
 
 const toPayload = payload => ({ payload })
 const layerToNum = l => Number(l.name.replace('pa-scenario-', ''))
@@ -86,5 +89,7 @@ export default {
         data: payload.chart
       }
     }
-  })
+  }),
+  [actions.togglePane]: togglePane,
+  [actions.setLayerOpacity]: setLayerOpacity
 }
