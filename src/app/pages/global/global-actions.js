@@ -59,3 +59,5 @@ export const getChartData = createThunkAction(
 )
 
 export const setType = createAction('setType:global')
+export const togglePane = createAction('global:togglePane')
+export const setLayerOpacity = createAction('setLayerOpacity')

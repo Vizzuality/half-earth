@@ -4,13 +4,14 @@ import concat from 'lodash/concat'
 import find from 'lodash/find'
 import kebabCase from 'lodash/kebabCase'
 import difference from 'lodash/difference'
-import findIndex from 'lodash/findIndex'
 import merge from 'lodash/fp/merge'
-import { get, ofPath, of, set, compose } from 'js-lenses'
 import { assign } from 'utils'
 import { actions as cartoActions } from 'providers/carto'
 import * as mapReducers from 'pages/map/map-reducers'
 import * as actions from './regional-actions'
+import * as paneReducers from 'components/pane/pane-reducers'
+
+const { togglePane, setLayerOpacity } = paneReducers
 
 const makeVisible = l => assign(l, { visible: true })
 const makeHidden = l => assign(l, { visible: false })
@@ -190,21 +191,6 @@ export default {
       }
     }
   },
-  [actions.setLayerOpacity]: (state, { payload: { name, value } }) => {
-    const layers = get(of('layers'), state)
-    const currentIndex = findIndex(layers, { name })
-    const $currentOpacity = compose(
-      ofPath('layers', currentIndex),
-      of('opacity')
-    )
-
-    return set($currentOpacity, value, state)
-  },
-  [actions.togglePane]: (state, { payload: { name, page } }) => {
-    const panes = get(of('panes'), state)
-    const currentIndex = findIndex(panes, { name })
-    const $currentIsOpen = compose(ofPath('panes', currentIndex), of('isOpen'))
-
-    return set($currentIsOpen, !get($currentIsOpen, state), state)
-  }
+  [actions.setLayerOpacity]: setLayerOpacity,
+  [actions.togglePane]: togglePane
 }

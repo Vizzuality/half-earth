@@ -1,4 +1,3 @@
-import { cartoConfig } from 'app/utils'
 import { utils } from 'pages/map'
 
 const { MOLLayer } = utils
@@ -51,6 +50,9 @@ export default [
     50
   ]),
 
+  MOLLayer('birds:richness', 'birds', 'richness'),
+  MOLLayer('birds:rarity', 'birds', 'rarity'),
+
   MOLLayer('mammals:richness', 'mammals', 'richness'),
   MOLLayer('mammals:rarity', 'mammals', 'rarity'),
 
@@ -59,9 +61,6 @@ export default [
 
   MOLLayer('cacti:richness', 'cacti', 'richness'),
   MOLLayer('cacti:rarity', 'cacti', 'rarity'),
-
-  MOLLayer('birds:richness', 'birds', 'richness'),
-  MOLLayer('birds:rarity', 'birds', 'rarity'),
 
   MOLLayer('conifers:richness', 'conifers', 'richness'),
   MOLLayer('conifers:rarity', 'conifers', 'rarity'),
@@ -72,37 +71,6 @@ export default [
   MOLLayer('all-taxa:richness', 'all-taxa', 'richness'),
   MOLLayer('all-taxa:rarity', 'all-taxa', 'rarity'),
 
-  {
-    name: 'human-pressures',
-    url:
-      'https://cdn.mol.org/half-earth/tiles/human-pressures/esa/1km/80p/{z}/{x}/{y}',
-    type: 'UrlTemplate',
-    visible: false
-  },
-  {
-    name: 'protected-areas',
-    url:
-      'https://cdn.mol.org/half-earth/tiles/reserve-coverage/existing-network/{z}/{x}/{y}',
-    type: 'UrlTemplate',
-    visible: false
-  },
-  {
-    name: 'key-biodiversity-areas',
-    url: null,
-    type: 'UrlTemplate',
-    carto: cartoConfig(
-      'simbiotica',
-      `#layer {
-          polygon-fill: #38c0b4;
-          polygon-opacity: 0.7;
-        }
-        #layer::outline {
-          line-width: 1;
-          line-color: #38c0b4;
-          line-opacity: 0.5;
-        }`,
-      'kba_poly_2016_id'
-    ),
-    visible: false
-  }
+  MOLLayer('human-pressures', 'esa/1km/80p', 'human-pressures'),
+  MOLLayer('protected-areas', 'existing-network', 'reserve-coverage')
 ]
