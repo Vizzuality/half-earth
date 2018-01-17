@@ -15,7 +15,7 @@ import capitalize from 'lodash/capitalize'
 
 const CustomBarchart = ({ data, dataKey, labelKey, color, domain, legend }) => (
   <div className={styles.outerContainer}>
-    <ResponsiveContainer className={styles.container} width="100%" height={400}>
+    <ResponsiveContainer className={styles.container} width="100%" height={300}>
       <BarChart data={data}>
         <YAxis tickLine={false} axisLine={false} domain={domain} />
         <XAxis

@@ -20,9 +20,9 @@ class Global extends Component {
       globalScaleProtectedAreas,
       globalConservationPrioritization,
       setType,
-      selectedType,
-      landSaved,
-      oceanSaved
+      selectedType
+      // landSaved,
+      // oceanSaved
     } = this.props
 
     const updateSections = s => {
@@ -35,7 +35,9 @@ class Global extends Component {
     return (
       <div className={className}>
         <Scroller>
-          <h2 className={uiStyles}>Biodiversity at the planetary scale.</h2>
+          <span className={uiStyles.innerTitle}>
+            Biodiversity at the planetary scale.
+          </span>
           <P
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:1')}
@@ -88,10 +90,6 @@ class Global extends Component {
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:2')}
           >
-            <span className={uiStyles.innerTitle}>
-              Currently, {landSaved}% of the land and {oceanSaved}% of the sea
-              are protected.
-            </span>
             This global {t('Protected Areas')} network plays a key role in the
             conservation of nature and safeguarding of species. However, by
             overlaying global species{' '}
@@ -158,13 +156,13 @@ class Global extends Component {
               dataKey={globalConservationPrioritization.key}
               legend={globalConservationPrioritization.legend}
             />
+            <EarthoMeter />
             <span className={uiStyles.innerP}>
               By prioritizing conservation efforts in regions that are rich in
               species, or regions that have rare species, we can rapidly
               increase the number of species that have at least minimum
               conservation protection.
             </span>
-            <EarthoMeter />
             <span className={uiStyles.innerP}>
               Conservation activities that balance the needs of both humans and
               nature will require more information, in much finer detail, than
