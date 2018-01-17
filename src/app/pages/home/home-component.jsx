@@ -26,13 +26,6 @@ const Home = ({ onClick }) => (
     </div>
     <div className={styles.body}>
       <p className={styles.paragraph}>
-        Half-Earth is a call to conserve half our planet’s lands and seas in
-        order to reverse the species extinction crisis. As E.O. Wilson says in
-        the book, Half-Earth, “Unless humanity learns a great deal more about
-        global biodiversity and moves quickly to protect it, we will soon lose
-        most of the species composing life on Earth.”
-      </p>
-      <p className={styles.paragraph}>
         How can we reach the goal of Half-Earth? One important part is by
         mapping the biodiversity of our planet to help discover where we should
         conserve. This will safeguard the maximum number of species.
