@@ -31,7 +31,7 @@ const richnessLegend = {
     label: 'Restio',
     color: 'orange',
     size: 'big',
-    min: 1,
+    min: 1.35,
     max: 166,
     group: 'richness'
   },
@@ -40,8 +40,8 @@ const richnessLegend = {
     label: 'Protea',
     color: 'orange2',
     size: 'big',
-    min: 1,
-    max: 69,
+    min: 0.005,
+    max: 68,
     group: 'richness'
   }
 }

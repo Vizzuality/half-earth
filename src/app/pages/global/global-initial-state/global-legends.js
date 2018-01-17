@@ -4,7 +4,15 @@ const richnessLegend = {
     label: 'Mammals',
     color: 'rainbow',
     min: 1,
-    max: 244,
+    max: 221,
+    group: 'richness'
+  },
+  turtles: {
+    type: 'gradient',
+    label: 'Turtles',
+    color: 'rainbow',
+    min: 1,
+    max: 22,
     group: 'richness'
   },
   birds: {
@@ -12,7 +20,7 @@ const richnessLegend = {
     label: 'Birds',
     color: 'rainbow',
     min: 1,
-    max: 1020,
+    max: 1010,
     group: 'richness'
   },
   amphibians: {
@@ -20,7 +28,7 @@ const richnessLegend = {
     label: 'Amphibians',
     color: 'rainbow',
     min: 1,
-    max: 180,
+    max: 179,
     group: 'richness'
   },
   cacti: {
@@ -42,6 +50,8 @@ const richnessLegend = {
   'all-taxa': {
     type: 'gradient',
     label: 'All Taxa',
+    min: 1,
+    max: 1416,
     color: 'rainbow',
     group: 'richness'
   }
@@ -52,46 +62,56 @@ const rarityLegend = {
     type: 'gradient',
     label: 'Mammals',
     color: 'rainbow',
-    min: 1,
-    max: 244,
+    min: '2.0e-8,',
+    max: '1.8e-1',
     group: 'rarity'
   },
   birds: {
     type: 'gradient',
     label: 'Birds',
     color: 'rainbow',
-    min: 1,
-    max: 1020,
+    min: '1.2e-8,',
+    max: '1.2e-6',
+    group: 'rarity'
+  },
+  turtles: {
+    type: 'gradient',
+    label: 'Turtles',
+    color: 'rainbow',
+    min: '2.5e-8,',
+    max: '2.7e-3',
     group: 'rarity'
   },
   amphibians: {
     type: 'gradient',
     label: 'Amphibians',
     color: 'rainbow',
-    min: 1,
-    max: 180,
+    min: '7.2e-8,',
+    max: '8.3e-2',
     group: 'rarity'
   },
   cacti: {
     type: 'gradient',
     label: 'Cacti',
     color: 'rainbow',
-    min: 1,
-    max: 93,
+    min: '5.3e-8,',
+    max: '5.2e-2',
     group: 'rarity'
   },
   conifers: {
     type: 'gradient',
     label: 'Conifers',
     color: 'rainbow',
-    min: 1,
-    max: 49,
+    min: '2.9e-8,',
+    max: '2.8e-2',
     group: 'rarity'
   },
   'all-taxa': {
     type: 'gradient',
     label: 'All Taxa',
     color: 'rainbow',
+    min: '1.3e-8,',
+    max: '5.9e-2',
     group: 'rarity'
   }
 }
@@ -149,11 +169,13 @@ export default {
   amphibiansRichness: richnessLegend.amphibians,
   cactiRichness: richnessLegend.cacti,
   conifersRichness: richnessLegend.conifers,
+  turtlesRichness: richnessLegend.conifers,
   'all-taxaRichness': richnessLegend['all-taxa'],
   mammalsRarity: rarityLegend.mammals,
   birdsRarity: rarityLegend.birds,
   amphibiansRarity: rarityLegend.amphibians,
   cactiRarity: rarityLegend.cacti,
   conifersRarity: rarityLegend.conifers,
+  turtlesRarity: rarityLegend.turtles,
   'all-taxaRarity': rarityLegend['all-taxa']
 }
