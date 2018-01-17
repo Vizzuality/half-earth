@@ -149,6 +149,13 @@ export default {
     min: 0,
     max: 100
   },
+  'prioritization-of-places': {
+    type: 'gradient',
+    label: 'Priority PLaces',
+    color: 'priority',
+    min: 0,
+    max: 7793
+  },
   'pa-scenario': {
     type: 'multiple',
     elements: [

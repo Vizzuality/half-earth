@@ -25,6 +25,8 @@ const Earthometer = ({ className, tabs, setTab, selected, ...props }) => {
     <div className={cx(className, styles.earthometer)}>
       <div>Half-Earth</div>
       <Knob
+        min={0.15}
+        max={0.5}
         radius={80}
         halfTickWidth={1}
         handleWidth={10}
