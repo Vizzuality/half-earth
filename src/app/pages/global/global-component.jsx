@@ -35,13 +35,13 @@ class Global extends Component {
     return (
       <div className={className}>
         <Scroller>
-          <span className={uiStyles.innerTitle}>
-            Biodiversity at the planetary scale.
-          </span>
           <P
             className={uiStyles.slides}
             onScrollFocus={() => updateSections('global:1')}
           >
+            <span className={uiStyles.innerTitle}>
+              Biodiversity at the planetary scale.
+            </span>
             <span className={uiStyles.innerP}>
               Species are the fundamental level of study that must drive our
               understanding of conservation priorities. Regions that are
