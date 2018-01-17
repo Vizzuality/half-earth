@@ -154,7 +154,7 @@ export default {
     label: 'Priority Places',
     color: 'priority',
     min: 0,
-    max: 7793
+    max: 100
   },
   'pa-scenario': {
     type: 'multiple',
