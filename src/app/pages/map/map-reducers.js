@@ -2,6 +2,7 @@ import { actions as cartoActions } from 'providers/carto'
 import includes from 'lodash/includes'
 import sortBy from 'lodash/sortBy'
 import identity from 'lodash/identity'
+import isUndefined from 'lodash/isUndefined'
 import find from 'lodash/find'
 import findIndex from 'lodash/findIndex'
 import difference from 'lodash/difference'
@@ -35,12 +36,12 @@ export const resetLayers = state => ({
 export const toggleLayer = (state, { payload: { name } }) => {
   const layers = get(of('layers'), state)
   const currentIndex = findIndex(layers, { name })
-  const $currentIsVisible = compose(
-    ofPath('layers', currentIndex),
-    of('visible')
-  )
+  const $exists = compose(ofPath('layers', currentIndex))
+  const $currentIsVisible = compose($exists, of('visible'))
 
-  return set($currentIsVisible, !get($currentIsVisible, state), state)
+  return isUndefined(get($exists, state))
+    ? state
+    : set($currentIsVisible, !get($currentIsVisible, state), state)
 }
 
 export const hideLayers = (state, { payload }) => {

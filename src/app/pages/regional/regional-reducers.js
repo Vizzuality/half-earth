@@ -192,5 +192,6 @@ export default {
     }
   },
   [actions.setLayerOpacity]: setLayerOpacity,
-  [actions.togglePane]: togglePane
+  [actions.togglePane]: togglePane,
+  [actions.resetLayers]: mapReducers.resetLayers
 }
