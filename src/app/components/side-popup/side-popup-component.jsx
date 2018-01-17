@@ -2,6 +2,7 @@ import React from 'react'
 import cx from 'classnames'
 import kebabCase from 'lodash/kebabCase'
 import startCase from 'lodash/startCase'
+import lowerCase from 'lodash/lowerCase'
 import includes from 'lodash/includes'
 
 import Close from 'components/close-button'
@@ -25,6 +26,8 @@ const SidePopupComponent = ({
   groups,
   toggleFilters,
   onThumbClick,
+  onFilter,
+  onCloseSidePopup,
   ...props
 }) =>
   (data && (
@@ -39,7 +42,13 @@ const SidePopupComponent = ({
       >
         <div className={styles.fade}>
           <div className={styles.col}>
-            <Close close={() => closeSidePopup()} theme={styles} />
+            <Close
+              close={() => {
+                closeSidePopup()
+                onCloseSidePopup()
+              }}
+              theme={styles}
+            />
             <h1 className={styles.title}>{data.name}</h1>
             <p className={styles.description}>{data.description}</p>
           </div>
@@ -53,7 +62,10 @@ const SidePopupComponent = ({
                 className={cx(uiStyles.tag, {
                   [uiStyles.tagActive]: includes(data.filters, group)
                 })}
-                onClick={() => toggleFilters(group)}
+                onClick={() => {
+                  toggleFilters(lowerCase(group))
+                  onFilter(lowerCase(group))
+                }}
               >
                 {startCase(group)}
               </button>

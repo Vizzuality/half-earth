@@ -1,11 +1,17 @@
 import React from 'react'
 import cx from 'classnames'
+import lowerCase from 'lodash/lowerCase'
 import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
 import Scroller, { Element as P } from 'components/scroller'
 import SidePopup from 'components/side-popup'
 import NavFooter from 'components/nav-footer'
 
 import uiStyles from 'app/styles/ui'
+
+const filterToLayer = name =>
+  ({
+    protea: 'protea'
+  }[lowerCase(name)] || `${lowerCase(name)}s`)
 
 const Regional = ({
   classname,
@@ -23,6 +29,7 @@ const Regional = ({
   regional,
   closePopup,
   openPopup,
+  resetLayers,
   ...props
 }) => {
   const t = renderToggle(toggleRegionalLayer)
@@ -34,7 +41,14 @@ const Regional = ({
 
   return (
     <div className={classname}>
-      <SidePopup onThumbClick={e => openPopup({ background: e })} />
+      <SidePopup
+        onThumbClick={e => {
+          openPopup({ background: e })
+        }}
+        onCloseSidePopup={() => resetLayers()}
+        onFilter={name =>
+          toggleRegionalLayer({ name: `${filterToLayer(name)}:richness` })}
+      />
       <PopUp open={regional.popup.open} close={() => closePopup()}>
         <ImageContent content={regional.popup.selected} />
       </PopUp>

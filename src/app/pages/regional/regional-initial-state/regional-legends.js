@@ -148,13 +148,13 @@ export default {
     min: 0,
     max: 100
   },
-  'conservation-areas': {
-    type: 'simple',
-    label: 'Conservation Areas',
-    color: 'red',
-    min: 0,
-    max: 100
-  },
+  // 'conservation-areas': {
+  //   type: 'simple',
+  //   label: 'Conservation Areas',
+  //   color: 'red',
+  //   min: 0,
+  //   max: 100
+  // },
   // richness
   mammalsRichness: richnessLegend.mammals,
   proteaRichness: richnessLegend.protea,
