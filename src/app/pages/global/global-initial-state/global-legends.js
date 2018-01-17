@@ -2,7 +2,7 @@ const richnessLegend = {
   mammals: {
     type: 'gradient',
     label: 'Mammals',
-    color: 'purple',
+    color: 'rainbow',
     min: 1,
     max: 244,
     group: 'richness'
@@ -10,7 +10,7 @@ const richnessLegend = {
   birds: {
     type: 'gradient',
     label: 'Birds',
-    color: 'aqua',
+    color: 'rainbow',
     min: 1,
     max: 1020,
     group: 'richness'
@@ -18,7 +18,7 @@ const richnessLegend = {
   amphibians: {
     type: 'gradient',
     label: 'Amphibians',
-    color: 'green',
+    color: 'rainbow',
     min: 1,
     max: 180,
     group: 'richness'
@@ -26,7 +26,7 @@ const richnessLegend = {
   cacti: {
     type: 'gradient',
     label: 'Cacti',
-    color: 'orange',
+    color: 'rainbow',
     min: 1,
     max: 93,
     group: 'richness'
@@ -34,7 +34,7 @@ const richnessLegend = {
   conifers: {
     type: 'gradient',
     label: 'Conifers',
-    color: 'orange2',
+    color: 'rainbow',
     min: 1,
     max: 49,
     group: 'richness'
@@ -42,7 +42,7 @@ const richnessLegend = {
   'all-taxa': {
     type: 'gradient',
     label: 'All Taxa',
-    color: 'blue',
+    color: 'rainbow',
     group: 'richness'
   }
 }
@@ -51,7 +51,7 @@ const rarityLegend = {
   mammals: {
     type: 'gradient',
     label: 'Mammals',
-    color: 'purple',
+    color: 'rainbow',
     min: 1,
     max: 244,
     group: 'rarity'
@@ -59,7 +59,7 @@ const rarityLegend = {
   birds: {
     type: 'gradient',
     label: 'Birds',
-    color: 'aqua',
+    color: 'rainbow',
     min: 1,
     max: 1020,
     group: 'rarity'
@@ -67,7 +67,7 @@ const rarityLegend = {
   amphibians: {
     type: 'gradient',
     label: 'Amphibians',
-    color: 'green',
+    color: 'rainbow',
     min: 1,
     max: 180,
     group: 'rarity'
@@ -75,7 +75,7 @@ const rarityLegend = {
   cacti: {
     type: 'gradient',
     label: 'Cacti',
-    color: 'orange',
+    color: 'rainbow',
     min: 1,
     max: 93,
     group: 'rarity'
@@ -83,7 +83,7 @@ const rarityLegend = {
   conifers: {
     type: 'gradient',
     label: 'Conifers',
-    color: 'orange2',
+    color: 'rainbow',
     min: 1,
     max: 49,
     group: 'rarity'
@@ -91,7 +91,7 @@ const rarityLegend = {
   'all-taxa': {
     type: 'gradient',
     label: 'All Taxa',
-    color: 'blue',
+    color: 'rainbow',
     group: 'rarity'
   }
 }

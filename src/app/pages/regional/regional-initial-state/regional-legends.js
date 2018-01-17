@@ -2,7 +2,7 @@ const richnessLegend = {
   mammals: {
     type: 'gradient',
     label: 'Mammals',
-    color: 'purple',
+    color: 'rainbow',
     size: 'big',
     min: 8,
     max: 49,
@@ -11,7 +11,7 @@ const richnessLegend = {
   birds: {
     type: 'gradient',
     label: 'Birds',
-    color: 'aqua',
+    color: 'rainbow',
     size: 'big',
     min: 1,
     max: 380,
@@ -20,7 +20,7 @@ const richnessLegend = {
   amphibians: {
     type: 'gradient',
     label: 'Amphibians',
-    color: 'green',
+    color: 'rainbow',
     size: 'big',
     min: 3,
     max: 25,
@@ -50,7 +50,7 @@ const rarityLegend = {
   mammals: {
     type: 'gradient',
     label: 'Mammals',
-    color: 'purple',
+    color: 'rainbow',
     size: 'big',
     min: 8,
     max: 49,
@@ -59,7 +59,7 @@ const rarityLegend = {
   birds: {
     type: 'gradient',
     label: 'Birds',
-    color: 'aqua',
+    color: 'rainbow',
     size: 'big',
     min: 1,
     max: 380,
@@ -68,7 +68,7 @@ const rarityLegend = {
   amphibians: {
     type: 'gradient',
     label: 'Amphibians',
-    color: 'green',
+    color: 'rainbow',
     size: 'big',
     min: 3,
     max: 25,
@@ -77,7 +77,7 @@ const rarityLegend = {
   restio: {
     type: 'gradient',
     label: 'Restio',
-    color: 'orange',
+    color: 'rainbow',
     size: 'big',
     min: 1,
     max: 166,
@@ -86,7 +86,7 @@ const rarityLegend = {
   protea: {
     type: 'gradient',
     label: 'Protea',
-    color: 'orange2',
+    color: 'rainbow',
     size: 'big',
     min: 1,
     max: 69,

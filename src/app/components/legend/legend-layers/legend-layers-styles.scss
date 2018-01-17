@@ -189,6 +189,13 @@ $backCircle: #18bab4;
           @include gradient($colors);
         }
 
+        &Rainbow span {
+          // $colors: #fa6262, #ef9b61, #eec86d, #aaf6a1, #39e8d2, #00b2e2, #7743e4;
+          $colors: #7743e4, #00b2e2, #39e8d2, #aaf6a1, #eec86d, #ef9b61, #fa6262;
+
+          @include gradient($colors);
+        }
+
         &Black span {
           $base: 0.1428571429;
           $colors:
