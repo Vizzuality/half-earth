@@ -151,7 +151,7 @@ export default {
   },
   'prioritization-of-places': {
     type: 'gradient',
-    label: 'Priority PLaces',
+    label: 'Priority Places',
     color: 'priority',
     min: 0,
     max: 7793
