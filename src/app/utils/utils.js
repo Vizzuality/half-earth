@@ -17,7 +17,7 @@ export const cartoConfig = (account, cartocss, table, options = {}) => ({
           {
             cartocss_version: '2.3.0',
             cartocss,
-            sql: `select * from ${table}`
+            sql: options.sql || `select * from ${table}`
           },
           options
         )

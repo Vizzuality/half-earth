@@ -148,7 +148,7 @@ class Global extends Component {
               The Half-Earth Project is integrating multiple layers of high
               resolution data to identify places where species are
               insufficiently protected and using this information to guide
-              prioritization of places for conservation.
+              {t('prioritization of places')} for conservation.
             </span>
             <Barchart
               labelKey="taxa"

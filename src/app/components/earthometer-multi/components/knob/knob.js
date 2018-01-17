@@ -71,7 +71,11 @@ class Knob extends Component {
     if (angle < 0) angle += 360
     if (angle > 330) angle = 0 // reset going going over center
 
-    const percent = clamp(lerp(angle, 0, 300, 0, 1), 0, 0.5)
+    const percent = clamp(
+      lerp(angle, 0, 300, 0, 1),
+      this.props.min || 0,
+      this.props.max || 1
+    )
 
     const state = {
       angle,

@@ -196,6 +196,25 @@ $backCircle: #18bab4;
           @include gradient($colors);
         }
 
+        &Priority span {
+          $base: 0.1428571429;
+          $colors:
+            rgba(#350a13, $base),
+            rgba(#93345d, $base * 2),
+            rgba(#911c34, $base * 3),
+            rgba(#c02847, $base * 4),
+            rgba(#e2254c, $base * 5),
+            rgba(#ff2955, $base * 6),
+            rgba(#ff2955, $base * 7);
+          // rgba($color-priority, $base * 7);
+
+          @include gradient($colors);
+
+          &:last-child {
+            color: $color-white;
+          }
+        }
+
         &Black span {
           $base: 0.1428571429;
           $colors:
