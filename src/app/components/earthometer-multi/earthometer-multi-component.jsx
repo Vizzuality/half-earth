@@ -29,7 +29,7 @@ const Earthometer = ({ className, tabs, setTab, selected, ...props }) => {
         max={0.5}
         radius={80}
         halfTickWidth={1}
-        handleWidth={10}
+        handleWidth={0}
         trackWidth={12}
         value={props[`${selected}Saved`]}
         onChange={d => props[`set${startCase(selected)}Saved`](d.percent * 100)}
