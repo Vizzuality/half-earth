@@ -38,9 +38,8 @@
 
 .slides {
   display: block;
-  padding-bottom: 25vh;
-  margin-bottom: 25vh;
-  // margin-bottom: calc((100vh / 2) - (#{$header-height} * 2));
+  padding-bottom: 20vh;
+  margin-bottom: 20vh;
 
   &:first-of-type {
     padding-top: 0;
