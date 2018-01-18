@@ -4,7 +4,7 @@ import lowerCase from 'lodash/lowerCase'
 import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
 import Scroller, { Element as P } from 'components/scroller'
 import SidePopup from 'components/side-popup'
-import NavFooter from 'components/nav-footer'
+import Restart from 'components/nav-footer/restart-component'
 
 import uiStyles from 'app/styles/ui'
 
@@ -124,7 +124,21 @@ const Regional = ({
             You can explore the different areas by clicking on the map.
           </span>
         </P>
-        <NavFooter from="/global" to="/" />
+        <P
+          className={uiStyles.slides}
+          onScrollFocus={() => updateSections('regional:4')}
+        >
+          In the next 5 years, the EO Wilson foundation, Map of Life and
+          Vizzuality along with many partners will create fine scale maps of
+          every known species on the planet. Unlocking a new era in data driven
+          conservation, the Half Earth Mapping Core will lead the way. Contact
+          us to find out more and join the initiative
+          <em>
+            [Paula/Walter, can you help shape this final aspirational paragraph
+            please - Craig]
+          </em>
+        </P>
+        <Restart />
       </Scroller>
     </div>
   )

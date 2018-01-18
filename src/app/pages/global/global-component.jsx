@@ -148,6 +148,7 @@ class Global extends Component {
               insufficiently protected and using this information to guide
               {t('prioritization of places')} for conservation.
             </span>
+            <EarthoMeter />
             <Barchart
               labelKey="taxa"
               domain={globalConservationPrioritization.domain}
@@ -156,7 +157,6 @@ class Global extends Component {
               dataKey={globalConservationPrioritization.key}
               legend={globalConservationPrioritization.legend}
             />
-            <EarthoMeter />
             <span className={uiStyles.innerP}>
               By prioritizing conservation efforts in regions that are rich in
               species, or regions that have rare species, we can rapidly

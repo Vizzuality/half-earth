@@ -16,5 +16,8 @@ export default {
   },
   'regional:3': {
     layers: ['conservation-areas']
+  },
+  'regional:4': {
+    layers: []
   }
 }
