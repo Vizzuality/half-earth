@@ -133,9 +133,10 @@ class Global extends Component {
             onScrollFocus={() => updateSections('global:3')}
           >
             How can we reduce these conservation gaps and include more species
-            in an expanded network of conservation areas while accounting for
-            the growing constraints from {t('human pressures')}, such as road
-            building and urban development?
+            in an expanded network of{' '}
+            {t('conservation areas', false, 'protected-areas')} while accounting
+            for the growing constraints from {t('human pressures')}, such as
+            road building and urban development?
           </P>
 
           <P
