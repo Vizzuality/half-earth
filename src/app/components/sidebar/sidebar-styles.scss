@@ -17,7 +17,7 @@
     height: 100%;
     color: white;
     // padding: calc(8rem + 80px) $site-padding $pad;
-    padding: 2rem $site-padding $pad;
+    padding: $pad $site-padding;
     overflow-y: auto;
     font-size: 1.6rem;
     line-height: 2em;
