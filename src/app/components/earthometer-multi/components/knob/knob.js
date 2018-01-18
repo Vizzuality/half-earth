@@ -15,7 +15,6 @@ class Knob extends Component {
     this.getContainer = this.getContainer.bind(this)
 
     const { halfTickWidth, handleWidth, trackWidth, radius } = props
-    console.log(handleWidth)
     const C = 2 * π * radius
     const trackDashOffset = 2 * π * (radius / 6)
     const halfOffset = C - trackDashOffset - halfTickWidth
