@@ -17,19 +17,20 @@ const Dropdown = ({
   toggleOpen,
   selectItem,
   theme,
+  sort,
   ...props
-}) => (
-  <div className={cx(className, theme.dropdown)} ref={getContainer}>
-    <div
-      onClick={toggleOpen}
-      className={cx(theme.label, { [theme.labelClosed]: closed })}
-    >
-      {get(selected, options)}
-    </div>
-    <ul className={cx(theme.options, { [theme.optionsClosed]: closed })}>
-      {keys(options)
-        .sort()
-        .map((g, ...rest) => {
+}) => {
+  const optionKeys = sort ? keys(options).sort() : keys(options)
+  return (
+    <div className={cx(className, theme.dropdown)} ref={getContainer}>
+      <div
+        onClick={toggleOpen}
+        className={cx(theme.label, { [theme.labelClosed]: closed })}
+      >
+        {get(selected, options)}
+      </div>
+      <ul className={cx(theme.options, { [theme.optionsClosed]: closed })}>
+        {optionKeys.map((g, ...rest) => {
           return (
             <li
               key={g}
@@ -42,11 +43,12 @@ const Dropdown = ({
             </li>
           )
         })}
-      {!closed && (
-        <button className={theme.closeButton} onClick={() => toggleOpen()} />
-      )}
-    </ul>
-  </div>
-)
+        {!closed && (
+          <button className={theme.closeButton} onClick={() => toggleOpen()} />
+        )}
+      </ul>
+    </div>
+  )
+}
 
 export default themr('Dropdown', styles)(Dropdown)
