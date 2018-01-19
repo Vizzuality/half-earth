@@ -13,6 +13,7 @@ const Locator = ({ className, route, history, options }) => {
         theme={dropdownTheme}
         onSelect={r => history.push(r)}
         selected={route}
+        sort={false}
       />
       <div
         className={styles.earth}
