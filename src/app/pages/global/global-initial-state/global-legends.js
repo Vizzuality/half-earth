@@ -156,21 +156,6 @@ export default {
     min: 0,
     max: 100
   },
-  'pa-scenario': {
-    type: 'multiple',
-    elements: [
-      {
-        label: 'Priority regions for conservation',
-        color: 'yellow',
-        type: 'simple'
-      },
-      {
-        label: 'Regions with >75% current reserve coverage',
-        color: 'violet',
-        type: 'simple'
-      }
-    ]
-  },
   mammalsRichness: richnessLegend.mammals,
   birdsRichness: richnessLegend.birds,
   amphibiansRichness: richnessLegend.amphibians,

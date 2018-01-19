@@ -132,11 +132,7 @@ const Regional = ({
           Vizzuality along with many partners will create fine scale maps of
           every known species on the planet. Unlocking a new era in data driven
           conservation, the Half Earth Mapping Core will lead the way. Contact
-          us to find out more and join the initiative
-          <em>
-            [Paula/Walter, can you help shape this final aspirational paragraph
-            please - Craig]
-          </em>
+          us to find out more and join the initiative.
         </P>
         <Restart />
       </Scroller>

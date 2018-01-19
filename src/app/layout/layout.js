@@ -21,7 +21,7 @@ function mapStateToProps (state, { location }) {
   const { section } = state
 
   const getLayerName = layer => {
-    if (layer.startsWith('pa-scenario')) return 'pa-scenario'
+    if (layer.startsWith('prioritization-of-places')) { return 'prioritization-of-places' }
     const parts = layer.split(':')
     if (parts.length === 1) return parts[0]
 

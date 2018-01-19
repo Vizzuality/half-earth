@@ -144,8 +144,8 @@ class Global extends Component {
             onScrollFocus={() => updateSections('global:4')}
           >
             <span className={uiStyles.innerP}>
-              The Half-Earth Project is integrating multiple layers of high
-              resolution data to identify places where species are
+              The Half-Earth Project is integrating multiple layers of
+              high-resolution data to identify places where species are
               insufficiently protected and using this information to guide for
               conservation.
             </span>

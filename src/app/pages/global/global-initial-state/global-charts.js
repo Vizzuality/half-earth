@@ -26,7 +26,7 @@ export default {
   globalScaleBiodiversity: {
     data: [],
     color: 'blue',
-    legend: 'Number of described species for each organismal group',
+    legend: 'Number of described species for each group',
     provider:
       'https://storage.googleapis.com/cdn.mol.org/half-earth/data/reserve-coverage/all-taxa-old.json',
     key: 'totalSpecies',

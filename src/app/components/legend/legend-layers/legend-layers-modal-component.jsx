@@ -26,14 +26,6 @@ const data = [
       'IUCN, UNEP-WCMC (2017). The World Database on Protected Areas (WDPA). Cambridge (UK): UNEP World Conservation Monitoring Centre. Available at: www.protectedplanet.net'
   },
   {
-    title: 'Key Biodiversity Areas (KBAs)',
-    subtitle: '',
-    description:
-      'Key Biodiversity Areas (KBAs) are areas that have been identified as having high conservation value. KBAs account for threatened and geographically restricted biodiversity, ecological integrity, biological processes, and irreplaceability. This global standard has been implemented to help inform decision-makers on which areas should be prioritized for conservation.',
-    source:
-      'BirdLife International (2017). Key Biodiversity Area digital boundaries. Derived from the World Database of Key Biodiversity Areas. Developed by the KBA Partnership (BirdLife International, International Union for the Conservation of Nature, Amphibian Survival Alliance, Conservation International, Critical Ecosystem Partnership Fund, Global Environment Facility, Global Wildlife Conservation, NatureServe, Royal Society for the Conservation of Birds, Wildlife Conservation Society and World Wildlife Fund). Available at www.keybiodiversityareas.org'
-  },
-  {
     title: 'Alternative Conservation Areas',
     subtitle: 'Community-based reserves, Private reserves, Corridors',
     description:
