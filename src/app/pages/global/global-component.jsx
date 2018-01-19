@@ -146,8 +146,8 @@ class Global extends Component {
             <span className={uiStyles.innerP}>
               The Half-Earth Project is integrating multiple layers of high
               resolution data to identify places where species are
-              insufficiently protected and using this information to guide
-              {t('prioritization of places')} for conservation.
+              insufficiently protected and using this information to guide for
+              conservation.
             </span>
             <EarthoMeter />
             <Barchart

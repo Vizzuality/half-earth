@@ -50,6 +50,6 @@ export default {
     layers: ['human-pressures']
   },
   'global:4': {
-    layers: ['human-pressures', 'prioritization-of-places']
+    layers: ['human-pressures', 'prioritization-of-places-15']
   }
 }

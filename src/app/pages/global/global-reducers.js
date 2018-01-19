@@ -1,9 +1,9 @@
-// import includes from 'lodash/includes'
-// import difference from 'lodash/difference'
+import includes from 'lodash/includes'
+import difference from 'lodash/difference'
 import merge from 'lodash/fp/merge'
-// import filter from 'lodash/filter'
-// import map from 'lodash/map'
-// import { actions as earthometerActions } from 'components/earthometer-multi'
+import filter from 'lodash/filter'
+import map from 'lodash/map'
+import { actions as earthometerActions } from 'components/earthometer-multi'
 import { actions as cartoActions } from 'providers/carto'
 import * as mapReducers from 'pages/map/map-reducers'
 import * as regionalReducers from 'pages/regional/regional-reducers'
@@ -13,7 +13,7 @@ import * as paneReducers from 'components/pane/pane-reducers'
 const { togglePane, setLayerOpacity } = paneReducers
 
 const toPayload = payload => ({ payload })
-// const layerToNum = l => Number(l.name.replace('pa-scenario-', ''))
+const layerToNum = l => Number(l.name.replace('prioritization-of-places-', ''))
 const selectSelector = (state, { payload: { section, selector, selection } }) =>
   merge(state, {
     sections: {
@@ -35,26 +35,26 @@ const filterSelector = (state, { payload: { section, selection } }) => {
   )
 }
 
-// const slideLayers = nameId => (state, { payload: value }) => {
-//   const { layers } = state
-//   const desiredLayers = filter(layers, l => includes(l.name, nameId))
-//   const restLayers = difference(layers, desiredLayers)
-//   const visibleLayers = map(desiredLayers, (l, i) => {
-//     const nextLayer = desiredLayers[i + 1]
-//     const notInNextLayer = nextLayer ? value < layerToNum(nextLayer) : true
-//     if (value >= layerToNum(l) && notInNextLayer) {
-//       l.visible = true
-//     } else {
-//       l.visible = false
-//     }
-//     return l
-//   })
+const slideLayers = nameId => (state, { payload: value }) => {
+  const { layers } = state
+  const desiredLayers = filter(layers, l => includes(l.name, nameId))
+  const restLayers = difference(layers, desiredLayers)
+  const visibleLayers = map(desiredLayers, (l, i) => {
+    const nextLayer = desiredLayers[i + 1]
+    const notInNextLayer = nextLayer ? value < layerToNum(nextLayer) : true
+    if (value >= layerToNum(l) && notInNextLayer) {
+      l.visible = true
+    } else {
+      l.visible = false
+    }
+    return l
+  })
 
-//   return {
-//     ...state,
-//     layers: [...restLayers, ...visibleLayers]
-//   }
-// }
+  return {
+    ...state,
+    layers: [...restLayers, ...visibleLayers]
+  }
+}
 
 export default {
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
@@ -69,7 +69,7 @@ export default {
     return selectSelector(filtered, toPayload({ section, selector, selection }))
   },
 
-  // [earthometerActions.setLandSaved]: slideLayers('pa-scenario'),
+  [earthometerActions.setLandSaved]: slideLayers('prioritization-of-places'),
 
   [actions.toggleGlobalLayer]: mapReducers.toggleLayer,
   [actions.setGlobalSection]: regionalReducers.setRegionalSection,
