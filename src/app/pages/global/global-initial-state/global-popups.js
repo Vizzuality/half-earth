@@ -29,7 +29,7 @@ export default [
     ]
   },
   {
-    key: 'priority-areas-for-conservation-management',
+    key: 'prioritization-of-places',
     title: 'Priority Areas for Conservation Management',
     content: [
       'These layers show the current state protected areas globally, and how well they are protecting species. Working at a 110 km grid size, priority was assigned based on cells with the highest rarity and protecting up to 75% of those cells, until sufficient protection was reached on a per species basis. Sufficient protection was determined based on species range size.'

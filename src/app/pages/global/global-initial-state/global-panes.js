@@ -39,12 +39,11 @@ export default [
     name: 'Conservation Management',
     key: 'conservation-management',
     isOpen: true,
-    layers: [{ key: 'protected-areas', label: 'Protected areas' }]
+    layers: [
+      { key: 'protected-areas', label: 'Protected areas' },
+      { key: 'prioritization-of-places', label: 'Prioritization areas' }
+    ]
   },
-  {
-    name: 'Species information',
-    key: 'species-information',
-    isOpen: true,
-    panes: [species('richness'), species('rarity')]
-  }
+  species('richness'),
+  species('rarity')
 ]
