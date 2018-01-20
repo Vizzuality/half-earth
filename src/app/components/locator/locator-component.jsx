@@ -15,10 +15,6 @@ const Locator = ({ className, route, history, options }) => {
         selected={route}
         sort={false}
       />
-      <div
-        className={styles.earth}
-        style={{ backgroundImage: `url(/img/${route}.png` }}
-      />
     </div>
   )
 }

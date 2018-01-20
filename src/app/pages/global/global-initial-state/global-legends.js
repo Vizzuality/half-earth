@@ -142,6 +142,11 @@ export default {
     label: 'Protected Areas',
     color: 'violet'
   },
+  'conservation-areas': {
+    type: 'simple',
+    label: 'Conservation Areas',
+    color: 'violet'
+  },
   'human-pressures': {
     type: 'gradient',
     label: 'Human Pressures',
@@ -161,7 +166,7 @@ export default {
   amphibiansRichness: richnessLegend.amphibians,
   cactiRichness: richnessLegend.cacti,
   conifersRichness: richnessLegend.conifers,
-  turtlesRichness: richnessLegend.conifers,
+  turtlesRichness: richnessLegend.turtles,
   'all-taxaRichness': richnessLegend['all-taxa'],
   mammalsRarity: rarityLegend.mammals,
   birdsRarity: rarityLegend.birds,

@@ -29,7 +29,7 @@ const richnessLegend = {
   restio: {
     type: 'gradient',
     label: 'Restio',
-    color: 'orange',
+    color: 'rainbow',
     size: 'big',
     min: 1.35,
     max: 166,
@@ -38,7 +38,7 @@ const richnessLegend = {
   protea: {
     type: 'gradient',
     label: 'Protea',
-    color: 'orange2',
+    color: 'rainbow',
     size: 'big',
     min: 0.005,
     max: 68,

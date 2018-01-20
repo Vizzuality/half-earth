@@ -39,13 +39,6 @@ const data = [
       'Shows areas where there is high anthropogenic pressure, which are represented as areas that have been highly modified or transformed from their natural state. The land use practices that typically characterize these human impacts are urban areas, roads, intensive farming, and clear-cutting. Human impacts must be considered when establishing protected areas as some species are less tolerant of human disturbance.',
     source:
       'Tuanmu, M.-N. & Jetz, W., 2014. A global 1-km consensus land-cover product for biodiversity and ecosystem modelling. Global ecology and biogeography: a journal of macroecology, 23(9), pp.1031–1045.'
-  },
-  {
-    title: 'Road building',
-    subtitle: '',
-    description:
-      'This layer shows the current road network across Southern Africa, it´s shown as a proxy of human induced pressures. This is important for conservation planning because roads affect the connectivity of the landscape and impede the ability of species movement and distribution. Roads and human impacts are both important considerations when developing protected area networks to establish corridors to maintain connectivity between suitable habitats.',
-    source: 'Open Street Maps (2017)'
   }
 ]
 

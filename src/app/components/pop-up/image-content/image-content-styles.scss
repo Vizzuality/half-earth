@@ -4,12 +4,14 @@
   display: flex;
   background-color: $color-mid-blue;
   height: 100%;
-  background-size: cover;
+  // background-size: cover;
   padding: 0 165px;
   background-repeat: no-repeat;
   align-items: flex-end;
   justify-content: center;
   margin: 0;
+  background-size: contain;
+  background-position: center;
 
   &::after {
     content: '';

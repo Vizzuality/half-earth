@@ -47,7 +47,7 @@ const Regional = ({
         }}
         onCloseSidePopup={() => resetLayers()}
         onFilter={name =>
-          toggleRegionalLayer({ name: `${filterToLayer(name)}:richness` })}
+          toggleRegionalLayer({ name: `${filterToLayer(name)}:rarity` })}
       />
       <PopUp open={regional.popup.open} close={() => closePopup()}>
         <ImageContent content={regional.popup.selected} />
@@ -98,11 +98,10 @@ const Regional = ({
           className={uiStyles.slides}
           onScrollFocus={() => updateSections('regional:2')}
         >
-          {t('Protected Areas')}, including {t('example protected areas')},
-          cover ca. 15% of this region and have been instrumental for the
-          conservation of its unique flora and fauna. While the regional
-          governments and institutions are dedicated to safeguarding this
-          heritage, many key areas remain unprotected.
+          {t('Protected Areas')}, cover ca. 15% of this region and have been
+          instrumental for the conservation of its unique flora and fauna. While
+          the regional governments and institutions are dedicated to
+          safeguarding this heritage, many key areas remain unprotected.
         </P>
         <P
           className={uiStyles.slides}
