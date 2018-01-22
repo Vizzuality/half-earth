@@ -10,6 +10,7 @@ import { actions as cartoActions } from 'providers/carto'
 import * as mapReducers from 'pages/map/map-reducers'
 import * as actions from './regional-actions'
 import * as paneReducers from 'components/pane/pane-reducers'
+import * as keyActions from 'providers/keyboard/keyboard-actions'
 
 const { togglePane, setLayerOpacity } = paneReducers
 
@@ -104,12 +105,33 @@ export const setRegionalSection = (state, { payload, __app: { section } }) => {
   return { ...state, layers: updatedLayers }
 }
 
+const popCloser = (state, key) => {
+  return {
+    ...state,
+    [key]: {
+      ...state[key],
+      open: false,
+      selected: null
+    }
+  }
+}
+
+const closeSidePopup = state => popCloser(state, 'sidePopup')
+const closePopup = state => popCloser(state, 'popup')
+
 export default {
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
     mapReducers.updateLayer(state, {
       ...payload,
       payload: layer => ({ url: payload.url, carto: null })
     }),
+
+  [keyActions.keyUp]: (state, { payload }) => {
+    const escaped = payload.key === 'Escape'
+    return state.popup.open && escaped
+      ? closePopup(state)
+      : state.sidePopup.open && escaped ? closeSidePopup(state) : state
+  },
 
   [actions.selectRegionalSelector]: (state, { payload }) => {
     const { section, selector, selection } = payload
@@ -152,16 +174,7 @@ export default {
       }
     }
   },
-  [actions.closePopup]: (state, { payload }) => {
-    return {
-      ...state,
-      popup: {
-        ...state.popup,
-        open: false,
-        selected: null
-      }
-    }
-  },
+  [actions.closePopup]: closePopup,
   [actions.toggleFilters]: (state, { payload }) => {
     const current = find(state.sidePopup.content, {
       key: state.sidePopup.selected
@@ -181,16 +194,7 @@ export default {
       }
     }
   },
-  [actions.closeSidePopup]: (state, { payload }) => {
-    return {
-      ...state,
-      sidePopup: {
-        ...state.sidePopup,
-        open: false,
-        selected: null
-      }
-    }
-  },
+  [actions.closeSidePopup]: closeSidePopup,
   [actions.setLayerOpacity]: setLayerOpacity,
   [actions.togglePane]: togglePane,
   [actions.resetLayers]: mapReducers.resetLayers
