@@ -1,4 +1,6 @@
-import { createAction } from 'redux-actions'
+import { createAction, createThunkAction } from 'redux-tools'
+
+const { fetch } = window
 
 export const selectRegionalSelector = createAction(
   'selectRegionalSelector',
@@ -7,6 +9,7 @@ export const selectRegionalSelector = createAction(
     analytics: ['regional', 'Change species on map', `Change to ${selection}`]
   })
 )
+
 export const toggleRegionalLayer = createAction(
   'toggleRegionalLayer',
   null,
@@ -19,4 +22,29 @@ export const toggleRegionalLayer = createAction(
     }
   }
 )
+
 export const setRegionalSection = createAction('setRegionalSection')
+export const setType = createAction('setType')
+
+export const openPopup = createAction('openPopup')
+export const closePopup = createAction('closePopup')
+
+export const openSidePopup = createAction('openSidePopup')
+export const closeSidePopup = createAction('closeSidePopup')
+
+export const toggleFilters = createAction('toggleFilters')
+export const gotBillboards = createAction('gotBillboards')
+export const getBillboards = createThunkAction(
+  'getBillboards',
+  payload => dispatch => {
+    return fetch(
+      'https://half-earth.carto.com/api/v2/sql?q=select%20*%20from%20public.reserves_centroids'
+    )
+      .then(d => d.json())
+      .then(d => dispatch(gotBillboards(d.rows)))
+  }
+)
+
+export const setLayerOpacity = createAction('setLayerOpacity')
+export const togglePane = createAction('togglePane')
+export const resetLayers = createAction('resetLayers')

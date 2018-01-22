@@ -1,9 +1,9 @@
-import { createAction } from 'redux-actions'
-import { createThunkAction } from 'app/utils/redux'
+import { createAction, createThunkAction } from 'redux-tools'
+import isEmpty from 'lodash/isEmpty'
+
 const { fetch } = window
 
 export const setGlobalSection = createAction('setGlobalSection')
-export const resetGlobalLayers = createAction('resetGlobalLayers')
 export const setWhereToProtectData = createAction('setWhereToProtectData')
 
 export const selectGlobalSelector = createAction(
@@ -21,21 +21,43 @@ export const toggleGlobalLayer = createAction(
   })
 )
 
-export const getWhereToProtectSpiderData = createThunkAction(
-  'getWhereToProtectSpiderData',
-  () => (dispatch, state) => {
-    const classifyScenarios = data =>
-      data.reduce((acc, next) => {
-        const scenario = acc[next.scenario] || []
-        const scenarios = [...scenario, next]
+export const setCanonicalData = createAction('setCanonicalData')
 
-        return { ...acc, [next.scenario]: scenarios }
-      }, {})
+export const setChartData = createAction('setChartData')
 
-    const { whereToProtect: { url } } = state().global
-    return fetch(url)
-      .then(res => res.json())
-      .then(classifyScenarios)
-      .then(data => dispatch(setWhereToProtectData(data)))
+export const getChartData = createThunkAction(
+  'getChartData',
+  () => (dispatch, getState) => {
+    const requests = []
+    const { charts, canonical } = getState().global
+    Object.keys(charts).forEach(chartName => {
+      const { data, provider, parser = x => x } = charts[chartName]
+      const { [provider]: canonicalData } = canonical
+      let req = null
+      if (!isEmpty(data)) return
+      if (canonicalData) {
+        req = Promise.resolve(parser(canonical)).then(chart =>
+          dispatch(setChartData({ chartName, chart }))
+        )
+      } else {
+        req = fetch(provider)
+        req
+          .then(d => (d.ok ? d.json() : Promise.reject(d.statusText)))
+          .then(
+            canonical =>
+              dispatch(setCanonicalData({ [provider]: canonical })) ||
+              Promise.resolve(canonical)
+          )
+          .then(res => Promise.resolve(parser(res)))
+          .then(chart => dispatch(setChartData({ chartName, chart })))
+          .catch(err => console.warn(err))
+      }
+      requests.push(req)
+    })
+    return Promise.all(requests)
   }
 )
+
+export const setType = createAction('setType:global')
+export const togglePane = createAction('global:togglePane')
+export const setLayerOpacity = createAction('setLayerOpacity')

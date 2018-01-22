@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import cx from 'classnames'
-import CloseButton from './close-button/close-button-component'
+import CloseButton from 'components/close-button'
 
 import theme from './turquoise-close-button-theme.scss'
 import styles from './pop-up-styles.scss'

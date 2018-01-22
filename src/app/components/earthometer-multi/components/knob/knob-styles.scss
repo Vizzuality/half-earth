@@ -1,0 +1,33 @@
+@import '~styles/variables.scss';
+
+.knob {
+  transform: rotateZ(120deg);
+}
+
+.surface,
+.progress,
+.track,
+.half {
+  cursor: pointer;
+}
+
+.surface {
+  stroke: rgba($color-navy-blue, 0);
+}
+
+.progress {
+  stroke: $color-turquoise;
+}
+
+.track {
+  stroke: $color-navy-blue;
+}
+
+.half {
+  stroke: $color-turquoise;
+}
+
+.handle {
+  stroke: $color-white;
+  stroke-linecap: round;
+}

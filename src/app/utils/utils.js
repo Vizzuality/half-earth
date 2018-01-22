@@ -17,7 +17,7 @@ export const cartoConfig = (account, cartocss, table, options = {}) => ({
           {
             cartocss_version: '2.3.0',
             cartocss,
-            sql: `select * from ${table}`
+            sql: options.sql || `select * from ${table}`
           },
           options
         )
@@ -25,3 +25,16 @@ export const cartoConfig = (account, cartocss, table, options = {}) => ({
     ]
   }
 })
+
+export const lerp = (value, istart, istop, ostart, ostop) =>
+  ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
+
+export const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+export const colorMap = {
+  blue: '#0664f6',
+  purple: '#8366e4',
+  violet: '#9632b2'
+}
+
+export const pick = (o, k) => (o && o[k]) || o

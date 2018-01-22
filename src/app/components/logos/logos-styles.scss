@@ -4,7 +4,7 @@
   position: absolute;
   bottom: 0;
   height: 87px;
-  background-color: rgba($color-dark-blue, 0.2);
+  background-color: transparent;
   width: 100%;
   z-index: $zforeground + 1;
   display: flex;
@@ -70,6 +70,7 @@
 
   .contain {
     padding: $pad $site-padding;
+    padding-top: 100px;
   }
 
   h1 {
@@ -89,15 +90,9 @@
     margin-bottom: 100px;
 
     &:first-of-type {
-      padding-top: 100px;
       display: flex;
       justify-content: center;
       margin-bottom: 50px;
-      border-bottom: 1px solid rgba($color-white, 0.5);
-
-      @media screen and (min-width: 1180px) {
-        display: none;
-      }
     }
   }
 
@@ -108,6 +103,14 @@
     align-items: center;
     align-content: center;
     margin-bottom: 60px;
+
+    &.vizzLogo {
+      width: 19%;
+    }
+
+    .eoImageModal {
+      max-width: 270px;
+    }
 
     img {
       max-width: 150px;

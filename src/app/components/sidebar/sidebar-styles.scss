@@ -1,29 +1,33 @@
 @import '~styles/variables.scss';
 @import './variables.scss';
 
-$pad: 6rem;
-
 .sidebar {
   background-color: $color-mid-blue;
   position: relative;
   display: block;
+  transition: width 0.25s ease-in-out;
   width: calc(70vw + 30px);
   max-width: $max-width;
   min-width: $min-width;
-  transition: width 0.25s ease-in-out;
 
   .content {
+    $pad: 6rem;
+
     position: absolute;
-    top: 0;
     height: 100%;
     color: white;
-    padding: calc(8rem + 80px) $site-padding $pad;
+    // padding: calc(8rem + 80px) $site-padding $pad;
+    padding: $pad $site-padding;
     overflow-y: auto;
     font-size: 1.6rem;
     line-height: 2em;
     width: 100%;
     min-width: 430px;
     opacity: 0;
+
+    &Locked {
+      overflow: hidden;
+    }
 
     &Open {
       opacity: 1;
@@ -39,13 +43,13 @@ $pad: 6rem;
       left: 0;
       width: $column-width;
       z-index: $zforeground;
-      background-image:
-        linear-gradient(
-          $color-mid-blue,
-          rgba($color-mid-blue, 0) 30%,
-          rgba($color-mid-blue, 0) 80%,
-          $color-mid-blue
-        );
+      // background-image:
+      //   linear-gradient(
+      //     $color-mid-blue,
+      //     rgba($color-mid-blue, 0) 30%,
+      //     rgba($color-mid-blue, 0) 80%,
+      //     $color-mid-blue
+      //   );
     }
   }
 

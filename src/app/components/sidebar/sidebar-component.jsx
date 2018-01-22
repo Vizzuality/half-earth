@@ -1,7 +1,9 @@
 import React from 'react'
 import cx from 'classnames'
 
-import Button from './button'
+import Pane from 'components/pane'
+import Button from './components/button'
+import PaneToggle from './components/pane-toggle'
 import styles from './sidebar-styles'
 
 const analytics = {
@@ -15,7 +17,11 @@ const Sidebar = ({
   hidden,
   toggleSidebar,
   open,
-  route
+  route,
+  sidePopupOpen,
+  mode,
+  switchMode,
+  ...props
 }) => {
   const sidebarAnalytics = open ? analytics.open : analytics.close
   return (
@@ -30,8 +36,21 @@ const Sidebar = ({
         toggleSidebar={() =>
           toggleSidebar({ meta: { analytics: [route, ...sidebarAnalytics] } })}
       />
-      <div className={cx(styles.content, { [styles.contentOpen]: open })}>
-        {children}
+      {(route === 'global' || route === 'regional') &&
+      open && (
+        <PaneToggle
+          options={mode.options}
+          selected={mode.selected}
+          onSwitch={() => switchMode()}
+        />
+      )}
+      <div
+        className={cx(styles.content, {
+          [styles.contentOpen]: open,
+          [styles.contentLocked]: sidePopupOpen
+        })}
+      >
+        {mode.selected === 'st' ? children : <Pane page={route} />}
       </div>
     </div>
   )

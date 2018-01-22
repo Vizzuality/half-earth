@@ -30,6 +30,7 @@ class ImageProvider extends Component {
     visible,
     type,
     viewer,
+    opacity,
     ...props
   }) {
     if (notEmpty(cLayers)) {
@@ -42,6 +43,7 @@ class ImageProvider extends Component {
       }
       this.keep = keep
       this.layer.show = Boolean(visible)
+      this.layer.alpha = opacity / 100 || 1
     }
   }
 

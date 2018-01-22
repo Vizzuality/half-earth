@@ -1,8 +1,7 @@
 import Home from 'pages/home'
-// import Intro from 'pages/intro'
 import Global from 'pages/global'
 import Regional from 'pages/regional'
-import Local from 'pages/local'
+import Explore from 'pages/explore'
 
 export default [
   {
@@ -10,11 +9,6 @@ export default [
     exact: true,
     component: Home
   },
-  // {
-  //   path: '/intro',
-  //   exact: true,
-  //   component: Intro
-  // },
   {
     path: '/global',
     exact: true,
@@ -26,8 +20,8 @@ export default [
     component: Regional
   },
   {
-    path: '/local',
+    path: '/explore',
     exact: true,
-    component: Local
+    component: Explore
   }
 ]

@@ -1,4 +1,5 @@
 import React from 'react'
+import cx from 'classnames'
 import styles from './logos-styles.scss'
 
 const partners = [
@@ -19,10 +20,10 @@ const partners = [
   },
   {
     href: 'http://www.vizzuality.com/',
+    className: styles.vizzLogo,
     image: {
       src: '/img/partners/logo_vizz.png',
-      alt: 'vizzuality',
-      className: styles.eoImageModal
+      alt: 'vizzuality'
     }
   }
 ]
@@ -279,7 +280,7 @@ const modelConservationEffortsPartners = [
 
 const sections = [
   {
-    title: '',
+    title: 'Half-earth mapping core',
     content: partners
   },
   {
@@ -303,7 +304,7 @@ const sections = [
 const ModalContent = props => (
   <div className={styles.footerModal}>
     <div className={styles.contain}>
-      {sections.map(({ title, content }) => [
+      {sections.map(({ title, content, className }) => [
         <h1 key={title}>{title}</h1>,
         <div key={`${title}content`} className={styles.containImages}>
           {content.map(logo => <ModalLogo key={logo.href} {...logo} />)}
@@ -313,8 +314,12 @@ const ModalContent = props => (
   </div>
 )
 
-const ModalLogo = ({ href, image }) => (
-  <a href={href} target="_blank" className={styles.imageContainer}>
+const ModalLogo = ({ href, image, className }) => (
+  <a
+    href={href}
+    target="_blank"
+    className={cx(styles.imageContainer, className)}
+  >
     <img src={image.src} alt={image.alt} className={image.className} />
   </a>
 )

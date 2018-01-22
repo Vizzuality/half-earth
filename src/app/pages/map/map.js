@@ -6,6 +6,7 @@ import * as actions from './map-actions'
 import * as utils from './map-utils'
 import { actions as cartoActions } from 'providers/carto'
 import { actions as popUpActions } from 'components/pop-up'
+import * as regionalActions from 'pages/regional/regional-actions'
 import reducers from './map-reducers'
 
 class MapContainer extends Component {
@@ -34,5 +35,6 @@ const mapStateToProps = ({ map, regional, local, popUp, global, section }) => ({
 export default connect(mapStateToProps, {
   ...actions,
   ...cartoActions,
-  ...popUpActions
+  ...popUpActions,
+  ...regionalActions
 })(MapContainer)

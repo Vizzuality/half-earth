@@ -3,6 +3,7 @@ import React from 'react'
 import find from 'lodash/find'
 import lowerCase from 'lodash/lowerCase'
 import kebabCase from 'lodash/kebabCase'
+import shortid from 'shortid'
 
 import Dropdown from 'components/dropdown'
 import dropdownTheme from 'styles/themes/dropdown.scss'
@@ -20,7 +21,7 @@ export const renderToggle = layers => toggle => (
   return (
     <XToggle
       theme={toggleTheme}
-      key={name}
+      key={`name-${shortid.generate()}`}
       active={find(layers, { name }) && find(layers, { name }).visible}
       disabled={disabled}
       onClick={() => (enabled ? toggle({ name }) : null)}

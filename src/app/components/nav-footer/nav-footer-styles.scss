@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   padding-top: 20px;
-  position: absolute;
+  // position: absolute;
   width: 100%;
   left: 0;
   flex-direction: column;
@@ -16,46 +16,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 154px;
   margin-bottom: 50px;
-  margin-right: 77px;
 }
 
-.back {
-  position: relative;
-  color: $color-white;
-  font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: 0.4rem;
-  text-align: left;
-  text-transform: uppercase;
-  padding-right: 15px;
-  margin-right: 15px;
-  z-index: $zforeground;
-  text-decoration: none;
-
-  &:hover {
-    cursor: pointer;
-    color: rgba($color-turquoise, 0.2);
-  }
-
-  &:active {
-    outline: 0;
-  }
-
-  &::after {
-    position: absolute;
-    content: '';
-    height: 9px;
-    border-left: 1px solid $color-white;
-    background-color: $color-white;
-    left: 100%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+.label {
+  color: rgba($color-white, 0.6);
+  text-transform: capitalize;
 }
 
-.forth {
+.arrowButton {
   position: relative;
   border: 2px solid $color-white;
   height: 36px;
@@ -73,7 +42,7 @@
     background-color: rgba($color-turquoise, 0.2);
   }
 
-  &::after {
+  &::before {
     content: '';
     display: inline-block;
     position: absolute;
@@ -81,8 +50,44 @@
     height: 8px;
     border-right: 2px solid $color-white;
     border-bottom: 2px solid $color-white;
-    transform: translate(-50%, calc(-50% - 1px)) rotate(45deg);
+    transform: translate(-50%, calc(-50% + 1px)) rotate(225deg);
     left: 50%;
     top: 50%;
+  }
+}
+
+.back {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+  margin-right: 15px;
+
+  &::after {
+    position: absolute;
+    content: '';
+    height: 9px;
+    border-left: 1px solid $color-white;
+    background-color: $color-white;
+    left: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .arrowButton {
+    margin-left: 15px;
+  }
+}
+
+.forth {
+  display: flex;
+  align-items: center;
+
+  .arrowButton {
+    margin-right: 15px;
+
+    &::before {
+      transform: translate(-50%, calc(-50% - 1px)) rotate(45deg);
+    }
   }
 }

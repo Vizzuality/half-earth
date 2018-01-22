@@ -26,14 +26,6 @@ const data = [
       'IUCN, UNEP-WCMC (2017). The World Database on Protected Areas (WDPA). Cambridge (UK): UNEP World Conservation Monitoring Centre. Available at: www.protectedplanet.net'
   },
   {
-    title: 'Key Biodiversity Areas (KBAs)',
-    subtitle: '',
-    description:
-      'Key Biodiversity Areas (KBAs) are areas that have been identified as having high conservation value. KBAs account for threatened and geographically restricted biodiversity, ecological integrity, biological processes, and irreplaceability. This global standard has been implemented to help inform decision-makers on which areas should be prioritized for conservation.',
-    source:
-      'BirdLife International (2017). Key Biodiversity Area digital boundaries. Derived from the World Database of Key Biodiversity Areas. Developed by the KBA Partnership (BirdLife International, International Union for the Conservation of Nature, Amphibian Survival Alliance, Conservation International, Critical Ecosystem Partnership Fund, Global Environment Facility, Global Wildlife Conservation, NatureServe, Royal Society for the Conservation of Birds, Wildlife Conservation Society and World Wildlife Fund). Available at www.keybiodiversityareas.org'
-  },
-  {
     title: 'Alternative Conservation Areas',
     subtitle: 'Community-based reserves, Private reserves, Corridors',
     description:
@@ -47,13 +39,6 @@ const data = [
       'Shows areas where there is high anthropogenic pressure, which are represented as areas that have been highly modified or transformed from their natural state. The land use practices that typically characterize these human impacts are urban areas, roads, intensive farming, and clear-cutting. Human impacts must be considered when establishing protected areas as some species are less tolerant of human disturbance.',
     source:
       'Tuanmu, M.-N. & Jetz, W., 2014. A global 1-km consensus land-cover product for biodiversity and ecosystem modelling. Global ecology and biogeography: a journal of macroecology, 23(9), pp.1031–1045.'
-  },
-  {
-    title: 'Road building',
-    subtitle: '',
-    description:
-      'This layer shows the current road network across Southern Africa, it´s shown as a proxy of human induced pressures. This is important for conservation planning because roads affect the connectivity of the landscape and impede the ability of species movement and distribution. Roads and human impacts are both important considerations when developing protected area networks to establish corridors to maintain connectivity between suitable habitats.',
-    source: 'Open Street Maps (2017)'
   }
 ]
 
