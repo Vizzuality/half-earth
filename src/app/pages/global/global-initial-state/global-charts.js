@@ -1,16 +1,16 @@
 const { parseInt } = window
 
 const defaultFilter = d => parseInt(d.scenario, 10) === 0 && d.taxa !== 'all'
-const defaultChartSorter = key => (a, b) => {
-  if (a[key] > b[key]) return -1
-  if (a[key] < b[key]) return 1
-  return 0
-}
+// const defaultChartSorter = key => (a, b) => {
+//   if (a[key] > b[key]) return -1
+//   if (a[key] < b[key]) return 1
+//   return 0
+// }
 const defaultParser = (d, key) =>
   d
     .filter(defaultFilter)
-    .map(d => ({ ...d, [key]: parseInt(d[key]) }))
-    .sort(defaultChartSorter(key))
+    .map(d => ({ ...d, [key]: parseFloat(d[key]) }))
+    // .sort(defaultChartSorter(key))
     .map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
 
 const classifyScenarios = data =>
@@ -56,9 +56,8 @@ export default {
       classifyScenarios(
         data.filter(d => d.taxa !== 'all').map(d => ({
           ...d,
-          percentSpeciesMeetingTargetProtectedAreaViaAny: parseInt(
-            d.percentSpeciesMeetingTargetProtectedAreaViaAny,
-            10
+          percentSpeciesMeetingTargetProtectedAreaViaAny: parseFloat(
+            d.percentSpeciesMeetingTargetProtectedAreaViaAny
           )
         }))
       )
