@@ -91,7 +91,13 @@ const SidePopupComponent = ({
                   </a>
                 )}
               </span>
-              <button onClick={() => onThumbClick(thumbName(data, specie))}>
+              <button
+                onClick={() =>
+                  onThumbClick({
+                    background: thumbName(data, specie),
+                    ...specie
+                  })}
+              >
                 <img
                   src={thumbName(data, specie, true)}
                   onMouseOver={e => {
