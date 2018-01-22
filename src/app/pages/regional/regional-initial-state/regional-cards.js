@@ -373,7 +373,7 @@ export default [
         imagesLink:
           'https://www.flickr.com/photos/bwildlife/22632898475/in/photolist-AtZwcv',
         downloadLink: 'DOWNLOAD DISABLED',
-        supplier: 'NA',
+        supplier: false,
         molLink: 'https://mol.org/species/Bradypterus_sylvaticus',
         comment: 'range-restricted to coast of cape region'
       },
@@ -432,7 +432,7 @@ export default [
         commonName: 'Cheetah',
         imagesLink: 'http://eol.org/data_objects/34131005',
         downloadLink: 'NA',
-        supplier: 'NA',
+        supplier: false,
         molLink: 'https://mol.org/species/Acinonyx_jubatus',
         comment:
           'signature species of this park; lots of cheetah monitoring occurs here'
@@ -545,7 +545,7 @@ export default [
         commonName: 'Knysna Woodpecker',
         imagesLink: 'http://eol.org/pages/1177588/overview',
         downloadLink: 'NA',
-        supplier: 'NA',
+        supplier: false,
         molLink: 'https://mol.org/species/Campethera_notata',
         comment: 'endemic to South African cape region'
       },

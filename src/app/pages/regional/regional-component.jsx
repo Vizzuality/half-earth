@@ -1,6 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 import lowerCase from 'lodash/lowerCase'
+import { assign } from 'utils'
 import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
 import Scroller, { Element as P } from 'components/scroller'
 import SidePopup from 'components/side-popup'
@@ -43,14 +44,20 @@ const Regional = ({
     <div className={classname}>
       <SidePopup
         onThumbClick={e => {
-          openPopup({ background: e })
+          openPopup(e)
         }}
         onCloseSidePopup={() => resetLayers()}
         onFilter={name =>
           toggleRegionalLayer({ name: `${filterToLayer(name)}:rarity` })}
       />
       <PopUp open={regional.popup.open} close={() => closePopup()}>
-        <ImageContent content={regional.popup.selected} />
+        {regional.popup.selected && (
+          <ImageContent
+            content={assign(regional.popup.selected, {
+              attribution: regional.popup.selected.supplier
+            })}
+          />
+        )}
       </PopUp>
       <Scroller>
         <P
