@@ -23,6 +23,7 @@ const CustomBarchart = ({ data, dataKey, labelKey, color, domain, legend }) => (
           axisLine={false}
           dataKey={labelKey}
           interval={0}
+          angle={window.innerWidth < 1210 ? -35 : null}
         />
         <Bar
           background={{ fill: 'rgba(43, 77, 104, 0.3)' }}
