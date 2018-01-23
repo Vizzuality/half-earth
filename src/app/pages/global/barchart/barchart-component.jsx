@@ -49,6 +49,7 @@ const CustomBarchart = ({ data, dataKey, labelKey, color, domain, legend }) => (
 )
 
 const CustomTooltip = ({ content }) => {
+  if (!content) return null
   const [bar] = content
   const formatter = n =>
     n.toLocaleString(undefined, {
