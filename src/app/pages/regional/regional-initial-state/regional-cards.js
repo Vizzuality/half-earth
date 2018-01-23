@@ -3,7 +3,7 @@ export default [
     name: 'De Hoop Nature Reserve',
     key: 'de-hoop-nature-reserve',
     filters: [],
-    location: [20.4781038, -34.4108253],
+    location: [20.4781038, -34.4108253, 100000.0],
     description:
       'The De Hoop Nature Reserve is the largest reserve protecting the lowland fynbos in South Africa. It is a signature reserve of the Western Cape, located in the Overberg region and managed by Cape Nature. It is also home to the Bontebok and Cape zebra, where breeding programs in De Hoop were used to boost these endangered populations in other reserves.',
     species: [
@@ -153,7 +153,7 @@ export default [
     name: 'Kenilworth Racecourse Conservation Area',
     key: 'kenilworth-racecourse-conservation-area',
     filters: [],
-    location: [18.4775971, -33.9987042],
+    location: [18.4775971, -33.9987042, 10000.0],
     description:
       'Kenilworth Racecourse Conservation Area (KRCA) is a special protected area and a powerful example of urban conservation success. Bounded by a racecourse, the endangered Cape Flat Sands Fynbos vegetation type found in KRCA supports populations of birds, small mammals, and reptiles. The critically endangered Micro Frog can be found in this urban refugium. Friends of the Kenilworth Racecourse Conservation Area manages this reserve and conducts educational nature walks, weed and invasive species removal, and also collects seeds for the Millennium Seed Bank to ensure the survival of the rare vegetation found here.',
     species: [
@@ -300,7 +300,7 @@ export default [
     name: 'Grootbos Private Nature Reserve',
     key: 'grootbos-private-nature-reserve',
     filters: [],
-    location: [19.344184, -34.5066334],
+    location: [19.344184, -34.5066334, 50000.0],
     description:
       'The Grootbos Private Nature Reserve is part of the Walker Bay Fynbos Conservancy, a partnership between 25 landowners in the Walker Bay area to mitigate invasive species and worsening wildfires. The group is committed to conserving biodiversity, as well as preventing development and destructive land use practices. The conservancy has been active in the monitoring and removal of the invasive Australian Acacia.',
     species: [
@@ -421,7 +421,7 @@ export default [
     name: 'Samara Private Game Reserve',
     key: 'samara-private-game-reserve',
     filters: [],
-    location: [24.7221717, -32.4396834],
+    location: [24.7221717, -32.4396834, 100000.0],
     description:
       'An expansive 280 km2 reserve that include landscapes of savannah, grassland, Nama karoo, and valley thicket, the Samara Private Game Reserve is home to iconic species such as cheetah, zebra, white rhinos, and giraffes. Conservation of this game reserve is supported by ecotourism. After a 125 year absence from the karoo region, cheetahs were reintroduced into Samara in 2003, and their 20 offspring now account for 3% of all cheetahs in South Africa.',
     species: [
@@ -508,7 +508,7 @@ export default [
     name: 'Addo Elephant National Park',
     key: 'addo-elephant-national-park',
     filters: [],
-    location: [25.6939938, -33.4774503],
+    location: [25.6939938, -33.4774503, 198000.0],
     description:
       'Addo Elephant National Park hosts one of the densest populations of African elephant on the planet. Since its expansion into Woody Cape Nature Reserve, it is now the third largest park in South Africa, occurring at the vertex of 5 different vegetation types. Megafauna such as elephant, rhino, buffalo, lion, and leopard roam this landscape, while African penguins, gannets, southern right whales, and great white sharks patrol the waters offshore.',
     species: [
@@ -696,7 +696,7 @@ export default [
     name: 'Middle Keurbooms Conservancy',
     key: 'middle-keurbooms-conservancy',
     filters: [],
-    location: [23.1830123, -33.7589721],
+    location: [23.1830123, -33.7589721, 100000.0],
     description:
       'The Middle Keurbooms Conservancy is an initiative between private landowners and Cape Nature in an effort to preserve the native flora and fauna of the region. This conservancy serves as an important corridor in the Keurbooms River Valley, supporting a host of conservation projects involving ecotourism, eco-farming, renewable energy, water conservation, fire management, and invasive species removal.',
     species: [

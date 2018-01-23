@@ -27,7 +27,7 @@ const Map = ({
   section,
   setInteraction
 }) => {
-  // @NOTE zoom handling should be refactored and handled independently in the furure
+  // @NOTE zoom handling should be refactored and handled independently in the future
   const foundRegionalPopup = _find(regional.sidePopup.content, {
     key: regional.sidePopup.selected
   })
@@ -37,9 +37,11 @@ const Map = ({
 
   if (regional.sidePopup.open && foundRegionalPopup) {
     const { x, y, z } = Cesium.Cartesian3.fromDegrees(
-      ...foundRegionalPopup.location,
-      regional.billboardsDistance
+      foundRegionalPopup.location[0],
+      foundRegionalPopup.location[1],
+      foundRegionalPopup.location[2] || 70000.0
     )
+    // 70000.0
     if (x && y) zoom = [[x, y, z], null]
   }
 
@@ -78,8 +80,9 @@ const Map = ({
                 ? { color: new Cesium.Color(...billboard.color) }
                 : {
                   color: new Cesium.Color(
-                      ...(map.distance < regional.billboardsDistance + 1000
-                        ? [1.0, 1.0, 1.0, 0.25]
+                      ...(foundRegionalPopup &&
+                      map.distance < foundRegionalPopup.location[2] + 5000
+                        ? [1.0, 1.0, 1.0, 0]
                         : [1, 1, 1])
                     )
                 })}

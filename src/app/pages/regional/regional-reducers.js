@@ -159,8 +159,8 @@ export default {
         layerName: nameToLayer(b.pa_type),
         type: b.pa_type,
         coordinates: [b.x, b.y],
-        url: `img/billboard/dot-${nameToLayer(b.pa_type)}.png`,
-        urlHover: `img/billboard/dot-${nameToLayer(b.pa_type)}-hover.png`
+        url: `img/billboard/${nameToLayer(b.pa_type)}.png`,
+        urlHover: `img/billboard/${nameToLayer(b.pa_type)}-hover.png`
       }))
     }
   },

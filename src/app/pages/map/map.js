@@ -10,8 +10,6 @@ import { actions as popUpActions } from 'components/pop-up'
 import * as regionalActions from 'pages/regional/regional-actions'
 import reducers from './map-reducers'
 
-console.log(interActions)
-
 class MapContainer extends Component {
   constructor (props) {
     super(props)
