@@ -9,6 +9,11 @@ $backCircle: #18bab4;
   align-items: baseline;
   width: 100%;
 
+  em {
+    font-size: 0.8em;
+    font-style: normal;
+  }
+
   .simpleLegend {
     position: relative;
     width: 45%;
