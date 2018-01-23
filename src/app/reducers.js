@@ -49,6 +49,11 @@ import {
   initialState as paneState
 } from 'components/pane'
 
+import {
+  reducers as interactReducers,
+  initialState as interactState
+} from 'providers/interact'
+
 export default combineReducers({
   routing: routerReducer,
   zoom: handleActions(zoomReducers, zoomState),
@@ -60,5 +65,6 @@ export default combineReducers({
   navFooter: handleActions(navFooterReducers, navFooterState),
   legendLayers: handleActions(legendLayersReducers, legendLayersState),
   global: handleActions(globalReducers, globalState),
-  pane: handleActions(paneReducers, paneState)
+  pane: handleActions(paneReducers, paneState),
+  interactions: handleActions(interactReducers, interactState)
 })

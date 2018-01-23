@@ -11,12 +11,24 @@ import Legend, { LegendLayers } from 'components/legend'
 
 import styles from './layout-styles.scss'
 
-const Layout = ({ children, location, route, layers, section, history }) => {
+const Layout = ({
+  children,
+  location,
+  route,
+  layers,
+  section,
+  history,
+  interaction
+}) => {
   const isHome = route === 'home'
   // const isIntro = route === 'intro'
   const zoomLevel = `${route}|${section.section}`
   return (
-    <div className={styles.container}>
+    <div
+      className={cx(styles.container, {
+        [styles.containerHover]: interaction === 'hover'
+      })}
+    >
       <Header className={cx(styles.header, styles.headerHidden)} />
       <div className={styles.body}>
         {Children.map(

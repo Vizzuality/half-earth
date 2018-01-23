@@ -115,7 +115,7 @@ const Regional = ({
           onScrollFocus={() => updateSections('regional:3')}
         >
           <span className={uiStyles.innerP}>
-            Beyond traditional reserves,{' '}
+            Beyond traditional reserves, {t('Example Protected Areas')}
             {t('Community-based conservation areas')} and{' '}
             {t('private reserves')} take on a particular role in this region,
             especially pressures {t('human pressures')} on land are ongoing and

@@ -34,12 +34,12 @@ export default [
     carto: cartoConfig(
       'half-earth',
       `#layer {
-        polygon-fill: #d96fad;
+        polygon-fill: #9538BA;
         polygon-opacity: 0.9;
       }
       #layer::outline {
         line-width: 1;
-        line-color: #d96fad;
+        line-color: #9538BA;
         line-opacity: 100;
       }`,
       'wdpa_example_reserves'

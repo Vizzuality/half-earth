@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import includes from 'lodash/includes'
+import isUndefined from 'lodash/isUndefined'
 const { Cesium } = window
 
 class Billboard extends Component {
@@ -8,7 +9,7 @@ class Billboard extends Component {
     viewer.entities.remove(this.entity)
   }
   handleHover = hoverPosition => {
-    const { viewer } = this.props
+    const { viewer, onMouseHover, onMouseOut } = this.props
     if (!viewer) return false
     const { scene } = viewer
     const pickedObject = scene.pick(hoverPosition)
@@ -18,11 +19,13 @@ class Billboard extends Component {
       if (pickedObject) {
         if (pickedObject.id.id === bill.id) {
           bill.billboard.image = bill.imageHover
+          onMouseHover && onMouseHover(pickedObject.id.id)
         } else {
           bill.billboard.image = bill.image
         }
       } else {
         bill.billboard.image = bill.image
+        onMouseOut && onMouseOut()
       }
     })
   }
@@ -46,8 +49,10 @@ class Billboard extends Component {
       height,
       position: [lat, long],
       color,
+      show,
       distanceDisplayCondition
     } = this.props
+
     if (!viewer) return false
     this.entity = viewer.entities.add({
       position: Cesium.Cartesian3.fromDegrees(lat, long),
@@ -60,7 +65,8 @@ class Billboard extends Component {
         distanceDisplayCondition,
         imageHover,
         width,
-        height
+        height,
+        show
       }
     })
   }
@@ -77,6 +83,7 @@ class Billboard extends Component {
     clickedPosition,
     hoverPosition,
     color,
+    show,
     ...props
   }) {
     if (!viewer) return false
@@ -84,7 +91,12 @@ class Billboard extends Component {
     if (!includes(existing, id)) this.mountBillboard(viewer)
     if (clickedPosition) this.handleClick(clickedPosition)
     if (hoverPosition) this.handleHover(hoverPosition)
-    if (color && this.entity.billboard.color !== color) { this.entity.billboard.color = color }
+    if (color && this.entity.billboard.color !== color) {
+      this.entity.billboard.color = color
+    }
+    if (!isUndefined(show) && this.entity.billboard.show !== show) {
+      this.entity.billboard.show = show
+    }
   }
 
   render () {

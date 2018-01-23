@@ -168,10 +168,18 @@ class CesiumComponent extends Component {
   }
 
   onMouseClick = click => {
+    this.props.onMouseClick &&
+      this.props.onMouseClick({
+        position: click.startPosition
+      })
     this.setState({ clickedPosition: click.position })
   }
 
   onMouseMove = mouse => {
+    this.props.onMouseMove &&
+      this.props.onMouseMove({
+        position: mouse.startPosition
+      })
     this.setState({ hoverPosition: mouse.startPosition })
   }
 
