@@ -115,11 +115,11 @@ const Regional = ({
           onScrollFocus={() => updateSections('regional:3')}
         >
           <span className={uiStyles.innerP}>
-            Beyond traditional reserves, {t('Example Protected Areas')}
-            {t('Community-based conservation areas')} and{' '}
-            {t('private reserves')} take on a particular role in this region,
-            especially pressures {t('human pressures')} on land are ongoing and
-            growing.
+            While traditional reserves, such as these{' '}
+            {t('Example Protected Areas')}, play an important role for
+            conservation, {t('Community-based conservation areas')} and{' '}
+            {t('private reserves')} take on a key role in this region,
+            especially safe-guarding against increasing {t('human pressures')}.
           </span>
           <span className={uiStyles.innerP}>
             Highlighting the global significance of sites for biodiversity can

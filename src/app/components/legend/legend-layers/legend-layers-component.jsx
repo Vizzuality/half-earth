@@ -2,6 +2,7 @@ import React from 'react'
 import cx from 'classnames'
 import PopUp from 'components/pop-up'
 import capitalize from 'lodash/capitalize'
+import isFunction from 'lodash/isFunction'
 import ModalContent from './legend-layers-modal-component'
 
 import styles from './legend-layers-styles.scss'
@@ -58,8 +59,8 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
             <span>+</span>
           </div>
           <div className={styles.numbers}>
-            <span>{layer.min}</span>
-            <span>{layer.max}</span>
+            <span>{isFunction(layer.min) ? layer.min() : layer.min}</span>
+            <span>{isFunction(layer.max) ? layer.max() : layer.max}</span>
           </div>
         </div>
       </div>
