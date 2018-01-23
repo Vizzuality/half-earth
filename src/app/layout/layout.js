@@ -41,7 +41,7 @@ class LayoutContainer extends Component {
 function mapStateToProps (state, { location }) {
   const route = scope(location.pathname)
   const page = state[route]
-  const { section } = state
+  const { section, interactions } = state
 
   const getLayerName = layer => {
     if (layer.startsWith('prioritization-of-places')) {
@@ -71,7 +71,13 @@ function mapStateToProps (state, { location }) {
   )
 
   const layers = groupedLayers.length > 0 && groupedLayers
-  return { location, route, layers, section }
+  return {
+    location,
+    route,
+    layers,
+    section,
+    interaction: interactions.interaction
+  }
 }
 
 export default withRouter(connect(mapStateToProps, keyActions)(LayoutContainer))

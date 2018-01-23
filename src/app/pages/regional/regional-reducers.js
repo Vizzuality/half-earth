@@ -119,6 +119,13 @@ const popCloser = (state, key) => {
 const closeSidePopup = state => popCloser(state, 'sidePopup')
 const closePopup = state => popCloser(state, 'popup')
 
+const nameToLayer = name =>
+  ({
+    'community conservation area': 'community-based-conservation-areas',
+    'private game reserve': 'private-reserves',
+    'Protected Area': 'example-protected-areas'
+  }[name])
+
 export default {
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
     mapReducers.updateLayer(state, {
@@ -148,9 +155,12 @@ export default {
       ...state,
       billboards: payload.map(b => ({
         id: kebabCase(b.name),
+        name: b.name,
+        layerName: nameToLayer(b.pa_type),
+        type: b.pa_type,
         coordinates: [b.x, b.y],
-        url: 'img/billboard/dot.png',
-        urlHover: 'img/billboard/dot-hover.png'
+        url: `img/billboard/dot-${nameToLayer(b.pa_type)}.png`,
+        urlHover: `img/billboard/dot-${nameToLayer(b.pa_type)}-hover.png`
       }))
     }
   },
