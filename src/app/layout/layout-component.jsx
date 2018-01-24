@@ -52,7 +52,7 @@ const Layout = ({
         <Map className={cx(styles.col, styles.map)} zoomLevel={zoomLevel} />
         {layers && (
           <Legend>
-            <LegendLayers layers={layers} />
+            <LegendLayers section={route} layers={layers} />
           </Legend>
         )}
       </div>
