@@ -7,7 +7,13 @@ import ModalContent from './legend-layers-modal-component'
 
 import styles from './legend-layers-styles.scss'
 
-const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
+const LegendLayers = ({
+  layers,
+  openPopUpLegend,
+  popUp,
+  closePopUp,
+  section
+}) => {
   const sortLayers = (a, b) => {
     if (a.type === 'gradient' && b.type !== 'gradient') return 1
     if (a.type !== 'gradient' && b.type === 'gradient') return -1
@@ -97,7 +103,7 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
         {layers.sort(sortLayers).map((layer, i) => renderLegend(layer, i))}
       </div>
       <PopUp open={popUp} close={() => closePopUp()}>
-        <ModalContent />
+        <ModalContent section={section} />
       </PopUp>
     </div>
   )
