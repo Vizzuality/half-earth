@@ -55,7 +55,7 @@ const data = {
       title: 'Private reserves',
       subtitle: '',
       description:
-        'The World Database on Protected Areas includes most of the global area under formal protection. However, there are many conservation initiatives that are protecting biodiversity outside of these official reserves. For example, there are private reserves that are effectively protecting biodiversity and helps moderate the effect of human pressures on biodiversity.',
+        'The World Database on Protected Areas includes most of the global area under formal protection. However, there are many conservation initiatives that are protecting biodiversity outside of these official reserves. For example, there are private reserves that are effectively protecting biodiversity and help moderate the effect of human pressures on biodiversity.',
       source: 'Map of Life and supporting datasets'
     }
   ]
