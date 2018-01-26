@@ -1,6 +1,5 @@
 import includes from 'lodash/includes'
 import reduce from 'lodash/reduce'
-import concat from 'lodash/concat'
 import find from 'lodash/find'
 import kebabCase from 'lodash/kebabCase'
 import difference from 'lodash/difference'
@@ -191,10 +190,9 @@ export default {
     })
     const others = difference(state.sidePopup.content, [current])
     const withFilters = assign(current, {
-      filters: includes(current.filters, payload)
-        ? difference(current.filters, [payload])
-        : concat(current.filters, [payload])
+      filters: [payload]
     })
+
     const content = others.concat(withFilters)
     return {
       ...state,
