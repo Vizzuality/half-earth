@@ -1,11 +1,14 @@
 import includes from 'lodash/includes'
 import reduce from 'lodash/reduce'
-import concat from 'lodash/concat'
 import find from 'lodash/find'
 import kebabCase from 'lodash/kebabCase'
 import difference from 'lodash/difference'
+import uniq from 'lodash/uniq'
+import toLower from 'lodash/toLower'
+import first from 'lodash/first'
 import merge from 'lodash/fp/merge'
 import { assign } from 'utils'
+import { filterToLayer } from './regional-utils'
 import { actions as cartoActions } from 'providers/carto'
 import * as mapReducers from 'pages/map/map-reducers'
 import * as actions from './regional-actions'
@@ -17,6 +20,32 @@ const { togglePane, setLayerOpacity } = paneReducers
 const makeVisible = l => assign(l, { visible: true })
 const makeHidden = l => assign(l, { visible: false })
 const toPayload = payload => ({ payload })
+
+const toggleFilters = (state, { payload }) => {
+  const current = find(state.sidePopup.content, {
+    key: state.sidePopup.selected
+  })
+  const others = difference(state.sidePopup.content, [current])
+  const withFilters = assign(current, {
+    filters: [payload]
+  })
+
+  const filters = uniq(current.species.map(f => toLower(f.taxoGroup)))
+  const content = others.concat(withFilters)
+  return mapReducers.hideLayers(
+    mapReducers.selectLayer(
+      {
+        ...state,
+        sidePopup: {
+          ...state.sidePopup,
+          content
+        }
+      },
+      toPayload({ name: filterToLayer(payload) })
+    ),
+    toPayload(difference(filters, [payload]).map(f => filterToLayer(f)))
+  )
+}
 
 const selectSelector = (state, { payload: { section, selector, selection } }) =>
   merge(state, {
@@ -165,14 +194,21 @@ export default {
     }
   },
   [actions.openSidePopup]: (state, { payload }) => {
-    return {
-      ...state,
-      sidePopup: {
-        ...state.sidePopup,
-        open: true,
-        selected: payload
-      }
-    }
+    const current = find(state.sidePopup.content, {
+      key: payload
+    })
+    const filter = first(uniq(current.species.map(f => toLower(f.taxoGroup))))
+    return toggleFilters(
+      {
+        ...state,
+        sidePopup: {
+          ...state.sidePopup,
+          open: true,
+          selected: payload
+        }
+      },
+      toPayload(filter)
+    )
   },
   [actions.openPopup]: (state, { payload }) => {
     return {
@@ -185,27 +221,9 @@ export default {
     }
   },
   [actions.closePopup]: closePopup,
-  [actions.toggleFilters]: (state, { payload }) => {
-    const current = find(state.sidePopup.content, {
-      key: state.sidePopup.selected
-    })
-    const others = difference(state.sidePopup.content, [current])
-    const withFilters = assign(current, {
-      filters: includes(current.filters, payload)
-        ? difference(current.filters, [payload])
-        : concat(current.filters, [payload])
-    })
-    const content = others.concat(withFilters)
-    return {
-      ...state,
-      sidePopup: {
-        ...state.sidePopup,
-        content
-      }
-    }
-  },
+  [actions.toggleFilters]: toggleFilters,
   [actions.closeSidePopup]: closeSidePopup,
   [actions.setLayerOpacity]: setLayerOpacity,
   [actions.togglePane]: togglePane,
-  [actions.resetLayers]: mapReducers.resetLayers
+  [actions.hideLayers]: mapReducers.hideLayers
 }

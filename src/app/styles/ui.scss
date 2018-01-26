@@ -47,8 +47,10 @@
   }
 
   opacity: 0.2;
+  pointer-events: none;
 
   &Active {
+    pointer-events: all;
     opacity: 1;
   }
 }
