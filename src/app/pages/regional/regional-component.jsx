@@ -109,7 +109,7 @@ const Regional = ({
           })}
           onScrollFocus={() => updateSections('regional:2')}
         >
-          {t('Protected Areas')}, cover ca. 15% of this region and have been
+          {t('Protected Areas')} cover ca. 15% of this region and have been
           instrumental for the conservation of its unique flora and fauna. While
           the regional governments and institutions are dedicated to
           safeguarding this heritage, many key areas remain unprotected.
@@ -142,12 +142,11 @@ const Regional = ({
           })}
           onScrollFocus={() => updateSections('regional:4')}
         >
-          The Half-Earth Mapping Core is unlocking a new era in data driven
-          conservation. Follow us and engage, as the EO Wilson Biodiversity
-          Foundation, Map of Life and Vizzuality, alongside many partners
-          continue these efforts to provide fine-scale biodiversity information
-          to people, communities, conservationists and decision-makers
-          everywhere.
+          The Half-Earth Mapping Core is unlocking a new era in data-driven
+          conservation. Follow us and engage, as the E.O. Wilson Biodiversity
+          Foundation, Map of Life, Vizzuality and our many partners continue
+          these efforts to provide fine-scale biodiversity information to
+          people, communities, conservationists and decision-makers everywhere.
         </P>
         <Restart />
       </Scroller>

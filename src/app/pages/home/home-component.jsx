@@ -8,6 +8,10 @@ const Home = ({ onClick }) => (
     <div className={styles.titleContainer}>
       <h1 className={styles.title}>Getting To Half</h1>
     </div>
+    <p className={styles.paragraph}>
+      Half-Earth is a call to conserve half our planet’s lands and seas in order
+      to reverse the species extinction crisis.
+    </p>
     <p className={styles.intro}>
       "Unless humanity learns a great deal more about global biodiversity and
       moves quickly to protect it, we will soon lose most of the species
@@ -27,14 +31,14 @@ const Home = ({ onClick }) => (
     </div>
     <div className={styles.body}>
       <p className={styles.paragraph}>
-        How can we reach the goal of Half-Earth? One important part is by
-        mapping the biodiversity of our planet to help discover where we should
-        conserve. This will safeguard the maximum number of species.
+        How can we reach the goal of Half-Earth? By mapping the biodiversity of
+        our planet, we can identify the best places to conserve to safeguard the
+        maximum number of species
       </p>
       <p className={styles.paragraph}>
-        The Half-Earth map uses the latest science and technology to map
-        thousands of species across the planet. An information source for
-        everyone, this is critical to help realize the grand ambition of
+        The Half-Earth Project is using the latest science and technology to map
+        thousands of species around the world. As a resource for everyone, this
+        information is critical to help realize the grand ambition of
         Half-Earth.
       </p>
       <p className={styles.paragraph}>

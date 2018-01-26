@@ -155,9 +155,10 @@ class Global extends Component {
             <span className={uiStyles.innerP}>
               The Half-Earth Project is integrating high-resolution data
               worldwide to identify places where species are insufficiently
-              protected and to guide conservation priorities. Use the barometer
-              to explore how such a geographically optimized approach could
-              rapidly increase the number of species with sufficient protection.
+              protected and using this information to guide conservation
+              priorities. Use the slider below to explore how this
+              geographically optimized approach could rapidly increase the
+              number of species with sufficient protection.
             </span>
             <EarthoMeter />
             <Barchart
