@@ -38,17 +38,18 @@
 
 .slides {
   display: block;
-  padding-bottom: 20vh;
-  margin-bottom: 20vh;
-
-  &:first-of-type {
-    padding-top: 0;
-    margin-bottom: 0;
-  }
+  transition: opacity 0.5s;
+  padding-bottom: 5vh;
+  margin-bottom: 5vh;
 
   &:last-of-type {
-    padding-bottom: 25rem;
-    margin-bottom: 25rem;
+    margin-bottom: 15vh;
+  }
+
+  opacity: 0.2;
+
+  &Active {
+    opacity: 1;
   }
 }
 

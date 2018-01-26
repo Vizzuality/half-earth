@@ -20,7 +20,8 @@ class Global extends Component {
       globalScaleProtectedAreas,
       globalConservationPrioritization,
       setType,
-      selectedType
+      selectedType,
+      section
       // landSaved,
       // oceanSaved
     } = this.props
@@ -36,7 +37,9 @@ class Global extends Component {
       <div className={className}>
         <Scroller>
           <P
-            className={uiStyles.slides}
+            className={cx(uiStyles.slides, {
+              [uiStyles.slidesActive]: section === 'global:1'
+            })}
             onScrollFocus={() => updateSections('global:1')}
           >
             <span className={uiStyles.innerTitle}>
@@ -87,7 +90,9 @@ class Global extends Component {
           </P>
 
           <P
-            className={uiStyles.slides}
+            className={cx(uiStyles.slides, {
+              [uiStyles.slidesActive]: section === 'global:2'
+            })}
             onScrollFocus={() => updateSections('global:2')}
           >
             This global {t('Protected Areas')} network plays a key role in the
@@ -129,7 +134,9 @@ class Global extends Component {
           </P>
 
           <P
-            className={cx(uiStyles.slides, uiStyles.paragraphAfterChart)}
+            className={cx(uiStyles.slides, uiStyles.paragraphAfterChart, {
+              [uiStyles.slidesActive]: section === 'global:3'
+            })}
             onScrollFocus={() => updateSections('global:3')}
           >
             How can we reduce these conservation gaps and include more species
@@ -140,7 +147,9 @@ class Global extends Component {
           </P>
 
           <P
-            className={uiStyles.slides}
+            className={cx(uiStyles.slides, {
+              [uiStyles.slidesActive]: section === 'global:4'
+            })}
             onScrollFocus={() => updateSections('global:4')}
           >
             <span className={uiStyles.innerP}>
