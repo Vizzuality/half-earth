@@ -8,14 +8,10 @@ const Home = ({ onClick }) => (
     <div className={styles.titleContainer}>
       <h1 className={styles.title}>Getting To Half</h1>
     </div>
-    <p className={styles.paragraph}>
-      Half-Earth is a call to conserve half our planet’s lands and seas in order
-      to reverse the species extinction crisis.
-    </p>
     <p className={styles.intro}>
-      "Unless humanity learns a great deal more about global biodiversity and
+      “Unless humanity learns a great deal more about global biodiversity and
       moves quickly to protect it, we will soon lose most of the species
-      composing life on Earth."
+      composing life on Earth.”
     </p>
     <div className={styles.separatorBlock}>
       <div className={styles.separatorContainer}>
@@ -30,6 +26,10 @@ const Home = ({ onClick }) => (
       </div>
     </div>
     <div className={styles.body}>
+      <p className={styles.paragraph}>
+        Half-Earth is a call to conserve half our planet’s lands and seas in
+        order to reverse the species extinction crisis.
+      </p>
       <p className={styles.paragraph}>
         How can we reach the goal of Half-Earth? By mapping the biodiversity of
         our planet, we can identify the best places to conserve to safeguard the
