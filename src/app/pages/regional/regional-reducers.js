@@ -3,8 +3,11 @@ import reduce from 'lodash/reduce'
 import find from 'lodash/find'
 import kebabCase from 'lodash/kebabCase'
 import difference from 'lodash/difference'
+import uniq from 'lodash/uniq'
+import toLower from 'lodash/toLower'
 import merge from 'lodash/fp/merge'
 import { assign } from 'utils'
+import { filterToLayer } from './regional-utils'
 import { actions as cartoActions } from 'providers/carto'
 import * as mapReducers from 'pages/map/map-reducers'
 import * as actions from './regional-actions'
@@ -193,14 +196,21 @@ export default {
       filters: [payload]
     })
 
+    const filters = uniq(current.species.map(f => toLower(f.taxoGroup)))
     const content = others.concat(withFilters)
-    return {
-      ...state,
-      sidePopup: {
-        ...state.sidePopup,
-        content
-      }
-    }
+    return mapReducers.hideLayers(
+      mapReducers.selectLayer(
+        {
+          ...state,
+          sidePopup: {
+            ...state.sidePopup,
+            content
+          }
+        },
+        toPayload({ name: filterToLayer(payload) })
+      ),
+      toPayload(difference(filters, [payload]).map(f => filterToLayer(f)))
+    )
   },
   [actions.closeSidePopup]: closeSidePopup,
   [actions.setLayerOpacity]: setLayerOpacity,

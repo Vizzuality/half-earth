@@ -1,18 +1,12 @@
 import React from 'react'
 import cx from 'classnames'
-import lowerCase from 'lodash/lowerCase'
 import { assign } from 'utils'
 import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
 import Scroller, { Element as P } from 'components/scroller'
 import SidePopup from 'components/side-popup'
 import Restart from 'components/nav-footer/restart-component'
-
+import { filterToLayer } from './regional-utils'
 import uiStyles from 'app/styles/ui'
-
-const filterToLayer = name =>
-  ({
-    protea: 'protea'
-  }[lowerCase(name)] || `${lowerCase(name)}s:rarity`)
 
 const Regional = ({
   classname,
@@ -47,7 +41,6 @@ const Regional = ({
           openPopup(e)
         }}
         onCloseSidePopup={e => hideLayers(e.map(f => filterToLayer(f)))}
-        onFilter={name => toggleRegionalLayer({ name: filterToLayer(name) })}
       />
       <PopUp open={regional.popup.open} close={() => closePopup()}>
         {regional.popup.selected && (

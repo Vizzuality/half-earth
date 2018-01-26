@@ -63,8 +63,8 @@ const SidePopupComponent = ({
                   [uiStyles.tagActive]: includes(data.filters, group)
                 })}
                 onClick={() => {
-                  toggleFilters(lowerCase(group))
-                  onFilter(lowerCase(group))
+                  toggleFilters && toggleFilters(lowerCase(group))
+                  onFilter && onFilter(lowerCase(group))
                 }}
               >
                 {startCase(group)}
