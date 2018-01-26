@@ -5,6 +5,7 @@ import kebabCase from 'lodash/kebabCase'
 import difference from 'lodash/difference'
 import uniq from 'lodash/uniq'
 import toLower from 'lodash/toLower'
+import first from 'lodash/first'
 import merge from 'lodash/fp/merge'
 import { assign } from 'utils'
 import { filterToLayer } from './regional-utils'
@@ -19,6 +20,32 @@ const { togglePane, setLayerOpacity } = paneReducers
 const makeVisible = l => assign(l, { visible: true })
 const makeHidden = l => assign(l, { visible: false })
 const toPayload = payload => ({ payload })
+
+const toggleFilters = (state, { payload }) => {
+  const current = find(state.sidePopup.content, {
+    key: state.sidePopup.selected
+  })
+  const others = difference(state.sidePopup.content, [current])
+  const withFilters = assign(current, {
+    filters: [payload]
+  })
+
+  const filters = uniq(current.species.map(f => toLower(f.taxoGroup)))
+  const content = others.concat(withFilters)
+  return mapReducers.hideLayers(
+    mapReducers.selectLayer(
+      {
+        ...state,
+        sidePopup: {
+          ...state.sidePopup,
+          content
+        }
+      },
+      toPayload({ name: filterToLayer(payload) })
+    ),
+    toPayload(difference(filters, [payload]).map(f => filterToLayer(f)))
+  )
+}
 
 const selectSelector = (state, { payload: { section, selector, selection } }) =>
   merge(state, {
@@ -167,14 +194,21 @@ export default {
     }
   },
   [actions.openSidePopup]: (state, { payload }) => {
-    return {
-      ...state,
-      sidePopup: {
-        ...state.sidePopup,
-        open: true,
-        selected: payload
-      }
-    }
+    const current = find(state.sidePopup.content, {
+      key: payload
+    })
+    const filter = first(uniq(current.species.map(f => toLower(f.taxoGroup))))
+    return toggleFilters(
+      {
+        ...state,
+        sidePopup: {
+          ...state.sidePopup,
+          open: true,
+          selected: payload
+        }
+      },
+      toPayload(filter)
+    )
   },
   [actions.openPopup]: (state, { payload }) => {
     return {
@@ -187,31 +221,7 @@ export default {
     }
   },
   [actions.closePopup]: closePopup,
-  [actions.toggleFilters]: (state, { payload }) => {
-    const current = find(state.sidePopup.content, {
-      key: state.sidePopup.selected
-    })
-    const others = difference(state.sidePopup.content, [current])
-    const withFilters = assign(current, {
-      filters: [payload]
-    })
-
-    const filters = uniq(current.species.map(f => toLower(f.taxoGroup)))
-    const content = others.concat(withFilters)
-    return mapReducers.hideLayers(
-      mapReducers.selectLayer(
-        {
-          ...state,
-          sidePopup: {
-            ...state.sidePopup,
-            content
-          }
-        },
-        toPayload({ name: filterToLayer(payload) })
-      ),
-      toPayload(difference(filters, [payload]).map(f => filterToLayer(f)))
-    )
-  },
+  [actions.toggleFilters]: toggleFilters,
   [actions.closeSidePopup]: closeSidePopup,
   [actions.setLayerOpacity]: setLayerOpacity,
   [actions.togglePane]: togglePane,
