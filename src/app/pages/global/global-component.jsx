@@ -136,7 +136,7 @@ class Global extends Component {
             in an expanded network of{' '}
             {t('conservation areas', false, 'protected-areas')} while accounting
             for the growing constraints from {t('human pressures')}, such as
-            road building and urban development?
+            logging, agriculture and urban development?
           </P>
 
           <P
@@ -144,10 +144,11 @@ class Global extends Component {
             onScrollFocus={() => updateSections('global:4')}
           >
             <span className={uiStyles.innerP}>
-              The Half-Earth Project is integrating multiple layers of
-              high-resolution data to identify places where species are
-              insufficiently protected, and using this information to guide
-              conservation priorities.
+              The Half-Earth Project is integrating high-resolution data
+              worldwide to identify places where species are insufficiently
+              protected and to guide conservation priorities. Use the barometer
+              to explore how such a geographically optimized approach could
+              rapidly increase the number of species with sufficient protection.
             </span>
             <EarthoMeter />
             <Barchart
@@ -158,12 +159,6 @@ class Global extends Component {
               dataKey={globalConservationPrioritization.key}
               legend={globalConservationPrioritization.legend}
             />
-            <span className={uiStyles.innerP}>
-              By prioritizing conservation efforts in regions that are rich in
-              species, or regions that have rare species, we can rapidly
-              increase the number of species that have at least minimum
-              conservation protection.
-            </span>
             <span className={uiStyles.innerP}>
               Conservation activities that balance the needs of both humans and
               nature will require more information, in much finer detail, than
