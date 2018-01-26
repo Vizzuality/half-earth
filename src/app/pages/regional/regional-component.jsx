@@ -12,7 +12,7 @@ import uiStyles from 'app/styles/ui'
 const filterToLayer = name =>
   ({
     protea: 'protea'
-  }[lowerCase(name)] || `${lowerCase(name)}s`)
+  }[lowerCase(name)] || `${lowerCase(name)}s:rarity`)
 
 const Regional = ({
   classname,
@@ -30,7 +30,7 @@ const Regional = ({
   regional,
   closePopup,
   openPopup,
-  resetLayers,
+  hideLayers,
   ...props
 }) => {
   const t = renderToggle(toggleRegionalLayer)
@@ -46,9 +46,8 @@ const Regional = ({
         onThumbClick={e => {
           openPopup(e)
         }}
-        onCloseSidePopup={() => resetLayers()}
-        onFilter={name =>
-          toggleRegionalLayer({ name: `${filterToLayer(name)}:rarity` })}
+        onCloseSidePopup={e => hideLayers(e.map(f => filterToLayer(f)))}
+        onFilter={name => toggleRegionalLayer({ name: filterToLayer(name) })}
       />
       <PopUp open={regional.popup.open} close={() => closePopup()}>
         {regional.popup.selected && (

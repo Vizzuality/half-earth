@@ -45,7 +45,7 @@ const SidePopupComponent = ({
             <Close
               close={() => {
                 closeSidePopup()
-                onCloseSidePopup()
+                onCloseSidePopup(data.filters)
               }}
               theme={styles}
             />

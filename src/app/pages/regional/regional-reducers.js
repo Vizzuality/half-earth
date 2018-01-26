@@ -207,5 +207,5 @@ export default {
   [actions.closeSidePopup]: closeSidePopup,
   [actions.setLayerOpacity]: setLayerOpacity,
   [actions.togglePane]: togglePane,
-  [actions.resetLayers]: mapReducers.resetLayers
+  [actions.hideLayers]: mapReducers.hideLayers
 }
