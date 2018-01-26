@@ -134,11 +134,12 @@ const Regional = ({
           className={uiStyles.slides}
           onScrollFocus={() => updateSections('regional:4')}
         >
-          In the next 5 years, the EO Wilson foundation, Map of Life and
-          Vizzuality along with many partners will create fine scale maps of
-          every known species on the planet. Unlocking a new era in data driven
-          conservation, the Half Earth Mapping Core will lead the way. Contact
-          us to find out more and join the initiative.
+          The Half-Earth Mapping Core is unlocking a new era in data driven
+          conservation. Follow us and engage, as the EO Wilson Biodiversity
+          Foundation, Map of Life and Vizzuality, alongside many partners
+          continue these efforts to provide fine-scale biodiversity information
+          to people, communities, conservationists and decision-makers
+          everywhere.
         </P>
         <Restart />
       </Scroller>
