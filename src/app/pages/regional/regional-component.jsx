@@ -1,17 +1,12 @@
 import React from 'react'
 import cx from 'classnames'
-import lowerCase from 'lodash/lowerCase'
+import { assign } from 'utils'
 import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
 import Scroller, { Element as P } from 'components/scroller'
 import SidePopup from 'components/side-popup'
 import Restart from 'components/nav-footer/restart-component'
-
+import { filterToLayer } from './regional-utils'
 import uiStyles from 'app/styles/ui'
-
-const filterToLayer = name =>
-  ({
-    protea: 'protea'
-  }[lowerCase(name)] || `${lowerCase(name)}s`)
 
 const Regional = ({
   classname,
@@ -23,13 +18,13 @@ const Regional = ({
   localProtectedSpeciesSpider,
   sidebar,
   selectRegionalSelector,
-  section,
+  section: { section },
   selectedType,
   setType,
   regional,
   closePopup,
   openPopup,
-  resetLayers,
+  hideLayers,
   ...props
 }) => {
   const t = renderToggle(toggleRegionalLayer)
@@ -43,18 +38,24 @@ const Regional = ({
     <div className={classname}>
       <SidePopup
         onThumbClick={e => {
-          openPopup({ background: e })
+          openPopup(e)
         }}
-        onCloseSidePopup={() => resetLayers()}
-        onFilter={name =>
-          toggleRegionalLayer({ name: `${filterToLayer(name)}:rarity` })}
+        onCloseSidePopup={e => hideLayers(e.map(f => filterToLayer(f)))}
       />
       <PopUp open={regional.popup.open} close={() => closePopup()}>
-        <ImageContent content={regional.popup.selected} />
+        {regional.popup.selected && (
+          <ImageContent
+            content={assign(regional.popup.selected, {
+              attribution: regional.popup.selected.supplier
+            })}
+          />
+        )}
       </PopUp>
       <Scroller>
         <P
-          className={uiStyles.slides}
+          className={cx(uiStyles.slides, {
+            [uiStyles.slidesActive]: section === 'regional:1'
+          })}
           onScrollFocus={() => updateSections('regional:1')}
         >
           <span className={uiStyles.innerTitle}>
@@ -95,24 +96,28 @@ const Regional = ({
           </span>
         </P>
         <P
-          className={uiStyles.slides}
+          className={cx(uiStyles.slides, {
+            [uiStyles.slidesActive]: section === 'regional:2'
+          })}
           onScrollFocus={() => updateSections('regional:2')}
         >
-          {t('Protected Areas')}, cover ca. 15% of this region and have been
+          {t('Protected Areas')} cover ca. 15% of this region and have been
           instrumental for the conservation of its unique flora and fauna. While
           the regional governments and institutions are dedicated to
           safeguarding this heritage, many key areas remain unprotected.
         </P>
         <P
-          className={uiStyles.slides}
+          className={cx(uiStyles.slides, {
+            [uiStyles.slidesActive]: section === 'regional:3'
+          })}
           onScrollFocus={() => updateSections('regional:3')}
         >
           <span className={uiStyles.innerP}>
-            Beyond traditional reserves,{' '}
-            {t('Community-based conservation areas')} and{' '}
-            {t('private reserves')} take on a particular role in this region,
-            especially pressures {t('human pressures')} on land are ongoing and
-            growing.
+            While traditional reserves, such as these{' '}
+            {t('Example Protected Areas')}, play an important role for
+            conservation, {t('Community-based conservation areas')} and{' '}
+            {t('private reserves')} take on a key role in this region,
+            especially safe-guarding against increasing {t('human pressures')}.
           </span>
           <span className={uiStyles.innerP}>
             Highlighting the global significance of sites for biodiversity can
@@ -124,14 +129,16 @@ const Regional = ({
           </span>
         </P>
         <P
-          className={uiStyles.slides}
+          className={cx(uiStyles.slides, {
+            [uiStyles.slidesActive]: section === 'regional:4'
+          })}
           onScrollFocus={() => updateSections('regional:4')}
         >
-          In the next 5 years, the EO Wilson foundation, Map of Life and
-          Vizzuality along with many partners will create fine scale maps of
-          every known species on the planet. Unlocking a new era in data driven
-          conservation, the Half Earth Mapping Core will lead the way. Contact
-          us to find out more and join the initiative.
+          The Half-Earth Mapping Core is unlocking a new era in data-driven
+          conservation. Follow us and engage, as the E.O. Wilson Biodiversity
+          Foundation, Map of Life, Vizzuality and our many partners continue
+          these efforts to provide fine-scale biodiversity information to
+          people, communities, conservationists and decision-makers everywhere.
         </P>
         <Restart />
       </Scroller>

@@ -1,9 +1,11 @@
+import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import capitalize from 'lodash/capitalize'
 import groupBy from 'lodash/groupBy'
 import values from 'lodash/values'
 import flatten from 'lodash/flatten'
+import * as keyActions from 'providers/keyboard/keyboard-actions'
 
 import Layout from './layout-component'
 
@@ -15,13 +17,36 @@ const sortLayers = (a, b) => {
   if (a.type === 'gradient' && b.type === 'gradient') return 0
 }
 
+class LayoutContainer extends Component {
+  constructor (props) {
+    super(props)
+    this.onkeyUp = this.onkeyUp.bind(this)
+  }
+
+  onkeyUp (e) {
+    this.props.keyUp(e)
+  }
+  componentDidMount () {
+    window.addEventListener('keyup', this.onkeyUp)
+  }
+  componentWillMount () {
+    window.removeEventListener('keyup', this.onkeyUp)
+  }
+
+  render () {
+    return createElement(Layout, this.props)
+  }
+}
+
 function mapStateToProps (state, { location }) {
   const route = scope(location.pathname)
   const page = state[route]
-  const { section } = state
+  const { section, interactions } = state
 
   const getLayerName = layer => {
-    if (layer.startsWith('prioritization-of-places')) { return 'prioritization-of-places' }
+    if (layer.startsWith('prioritization-of-places')) {
+      return 'prioritization-of-places'
+    }
     const parts = layer.split(':')
     if (parts.length === 1) return parts[0]
 
@@ -46,7 +71,13 @@ function mapStateToProps (state, { location }) {
   )
 
   const layers = groupedLayers.length > 0 && groupedLayers
-  return { location, route, layers, section }
+  return {
+    location,
+    route,
+    layers,
+    section,
+    interaction: interactions.interaction
+  }
 }
 
-export default withRouter(connect(mapStateToProps)(Layout))
+export default withRouter(connect(mapStateToProps, keyActions)(LayoutContainer))

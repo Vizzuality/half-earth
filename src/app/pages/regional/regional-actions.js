@@ -47,4 +47,4 @@ export const getBillboards = createThunkAction(
 
 export const setLayerOpacity = createAction('setLayerOpacity')
 export const togglePane = createAction('togglePane')
-export const resetLayers = createAction('resetLayers')
+export const hideLayers = createAction('hideLayers')

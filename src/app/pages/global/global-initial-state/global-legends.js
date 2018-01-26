@@ -1,3 +1,5 @@
+import React from 'react'
+
 const richnessLegend = {
   mammals: {
     type: 'gradient',
@@ -62,56 +64,112 @@ const rarityLegend = {
     type: 'gradient',
     label: 'Mammals',
     color: 'rainbow',
-    min: '2.0e-8,',
-    max: '1.8e-1',
+    min: () => (
+      <span>
+        2.0<em>e-8</em>
+      </span>
+    ),
+    max: () => (
+      <span>
+        1.8<em>e-1</em>
+      </span>
+    ),
     group: 'rarity'
   },
   birds: {
     type: 'gradient',
     label: 'Birds',
     color: 'rainbow',
-    min: '1.2e-8,',
-    max: '1.2e-6',
+    min: () => (
+      <span>
+        1.2<em>e-8</em>
+      </span>
+    ),
+    max: () => (
+      <span>
+        1.2<em>e-6</em>
+      </span>
+    ),
     group: 'rarity'
   },
   turtles: {
     type: 'gradient',
     label: 'Turtles',
     color: 'rainbow',
-    min: '2.5e-8,',
-    max: '2.7e-3',
+    min: () => (
+      <span>
+        2.5<em>e-8</em>
+      </span>
+    ),
+    max: () => (
+      <span>
+        2.7<em>e-3</em>
+      </span>
+    ),
     group: 'rarity'
   },
   amphibians: {
     type: 'gradient',
     label: 'Amphibians',
     color: 'rainbow',
-    min: '7.2e-8,',
-    max: '8.3e-2',
+    min: () => (
+      <span>
+        7.2<em>e-8</em>
+      </span>
+    ),
+    max: () => (
+      <span>
+        8.3<em>e-2</em>
+      </span>
+    ),
     group: 'rarity'
   },
   cacti: {
     type: 'gradient',
     label: 'Cacti',
     color: 'rainbow',
-    min: '5.3e-8,',
-    max: '5.2e-2',
+    min: () => (
+      <span>
+        5.3<em>e-8</em>
+      </span>
+    ),
+    max: () => (
+      <span>
+        5.2<em>e-2</em>
+      </span>
+    ),
     group: 'rarity'
   },
   conifers: {
     type: 'gradient',
     label: 'Conifers',
     color: 'rainbow',
-    min: '2.9e-8,',
-    max: '2.8e-2',
+    min: () => (
+      <span>
+        2.9<em>e-8</em>
+      </span>
+    ),
+    max: () => (
+      <span>
+        2.8<em>e-2</em>
+      </span>
+    ),
     group: 'rarity'
   },
   'all-taxa': {
     type: 'gradient',
     label: 'All Taxa',
     color: 'rainbow',
-    min: '1.3e-8,',
-    max: '5.9e-2',
+    min: () => (
+      <span>
+        1.3<em>e-8</em>
+      </span>
+    ),
+    max: () => (
+      <span>
+        5.9<em>e-2</em>
+      </span>
+    ),
     group: 'rarity'
   }
 }

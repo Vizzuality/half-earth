@@ -23,6 +23,7 @@ const CustomBarchart = ({ data, dataKey, labelKey, color, domain, legend }) => (
           axisLine={false}
           dataKey={labelKey}
           interval={0}
+          angle={window.innerWidth < 1210 ? -35 : null}
         />
         <Bar
           background={{ fill: 'rgba(43, 77, 104, 0.3)' }}
@@ -48,6 +49,7 @@ const CustomBarchart = ({ data, dataKey, labelKey, color, domain, legend }) => (
 )
 
 const CustomTooltip = ({ content }) => {
+  if (!content) return null
   const [bar] = content
   const formatter = n =>
     n.toLocaleString(undefined, {

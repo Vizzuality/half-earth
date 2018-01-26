@@ -1,21 +1,51 @@
 import includes from 'lodash/includes'
 import reduce from 'lodash/reduce'
-import concat from 'lodash/concat'
 import find from 'lodash/find'
 import kebabCase from 'lodash/kebabCase'
 import difference from 'lodash/difference'
+import uniq from 'lodash/uniq'
+import toLower from 'lodash/toLower'
+import first from 'lodash/first'
 import merge from 'lodash/fp/merge'
 import { assign } from 'utils'
+import { filterToLayer } from './regional-utils'
 import { actions as cartoActions } from 'providers/carto'
 import * as mapReducers from 'pages/map/map-reducers'
 import * as actions from './regional-actions'
 import * as paneReducers from 'components/pane/pane-reducers'
+import * as keyActions from 'providers/keyboard/keyboard-actions'
 
 const { togglePane, setLayerOpacity } = paneReducers
 
 const makeVisible = l => assign(l, { visible: true })
 const makeHidden = l => assign(l, { visible: false })
 const toPayload = payload => ({ payload })
+
+const toggleFilters = (state, { payload }) => {
+  const current = find(state.sidePopup.content, {
+    key: state.sidePopup.selected
+  })
+  const others = difference(state.sidePopup.content, [current])
+  const withFilters = assign(current, {
+    filters: [payload]
+  })
+
+  const filters = uniq(current.species.map(f => toLower(f.taxoGroup)))
+  const content = others.concat(withFilters)
+  return mapReducers.hideLayers(
+    mapReducers.selectLayer(
+      {
+        ...state,
+        sidePopup: {
+          ...state.sidePopup,
+          content
+        }
+      },
+      toPayload({ name: filterToLayer(payload) })
+    ),
+    toPayload(difference(filters, [payload]).map(f => filterToLayer(f)))
+  )
+}
 
 const selectSelector = (state, { payload: { section, selector, selection } }) =>
   merge(state, {
@@ -104,12 +134,40 @@ export const setRegionalSection = (state, { payload, __app: { section } }) => {
   return { ...state, layers: updatedLayers }
 }
 
+const popCloser = (state, key) => {
+  return {
+    ...state,
+    [key]: {
+      ...state[key],
+      open: false,
+      selected: null
+    }
+  }
+}
+
+const closeSidePopup = state => popCloser(state, 'sidePopup')
+const closePopup = state => popCloser(state, 'popup')
+
+const nameToLayer = name =>
+  ({
+    'community conservation area': 'community-based-conservation-areas',
+    'private game reserve': 'private-reserves',
+    'Protected Area': 'example-protected-areas'
+  }[name])
+
 export default {
   [cartoActions.gotCartoTiles]: (state, { payload }) =>
     mapReducers.updateLayer(state, {
       ...payload,
       payload: layer => ({ url: payload.url, carto: null })
     }),
+
+  [keyActions.keyUp]: (state, { payload }) => {
+    const escaped = payload.key === 'Escape'
+    return state.popup.open && escaped
+      ? closePopup(state)
+      : state.sidePopup.open && escaped ? closeSidePopup(state) : state
+  },
 
   [actions.selectRegionalSelector]: (state, { payload }) => {
     const { section, selector, selection } = payload
@@ -126,21 +184,31 @@ export default {
       ...state,
       billboards: payload.map(b => ({
         id: kebabCase(b.name),
+        name: b.name,
+        layerName: nameToLayer(b.pa_type),
+        type: b.pa_type,
         coordinates: [b.x, b.y],
-        url: 'img/billboard/dot.png',
-        urlHover: 'img/billboard/dot-hover.png'
+        url: `img/billboard/${nameToLayer(b.pa_type)}.png`,
+        urlHover: `img/billboard/${nameToLayer(b.pa_type)}-hover.png`
       }))
     }
   },
   [actions.openSidePopup]: (state, { payload }) => {
-    return {
-      ...state,
-      sidePopup: {
-        ...state.sidePopup,
-        open: true,
-        selected: payload
-      }
-    }
+    const current = find(state.sidePopup.content, {
+      key: payload
+    })
+    const filter = first(uniq(current.species.map(f => toLower(f.taxoGroup))))
+    return toggleFilters(
+      {
+        ...state,
+        sidePopup: {
+          ...state.sidePopup,
+          open: true,
+          selected: payload
+        }
+      },
+      toPayload(filter)
+    )
   },
   [actions.openPopup]: (state, { payload }) => {
     return {
@@ -152,46 +220,10 @@ export default {
       }
     }
   },
-  [actions.closePopup]: (state, { payload }) => {
-    return {
-      ...state,
-      popup: {
-        ...state.popup,
-        open: false,
-        selected: null
-      }
-    }
-  },
-  [actions.toggleFilters]: (state, { payload }) => {
-    const current = find(state.sidePopup.content, {
-      key: state.sidePopup.selected
-    })
-    const others = difference(state.sidePopup.content, [current])
-    const withFilters = assign(current, {
-      filters: includes(current.filters, payload)
-        ? difference(current.filters, [payload])
-        : concat(current.filters, [payload])
-    })
-    const content = others.concat(withFilters)
-    return {
-      ...state,
-      sidePopup: {
-        ...state.sidePopup,
-        content
-      }
-    }
-  },
-  [actions.closeSidePopup]: (state, { payload }) => {
-    return {
-      ...state,
-      sidePopup: {
-        ...state.sidePopup,
-        open: false,
-        selected: null
-      }
-    }
-  },
+  [actions.closePopup]: closePopup,
+  [actions.toggleFilters]: toggleFilters,
+  [actions.closeSidePopup]: closeSidePopup,
   [actions.setLayerOpacity]: setLayerOpacity,
   [actions.togglePane]: togglePane,
-  [actions.resetLayers]: mapReducers.resetLayers
+  [actions.hideLayers]: mapReducers.hideLayers
 }

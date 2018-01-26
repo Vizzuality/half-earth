@@ -134,7 +134,7 @@ export default {
   'example-protected-areas': {
     type: 'simple',
     label: 'Example Protected Areas',
-    color: 'pink'
+    color: 'xpa'
   },
   'community-based-conservation-areas': {
     type: 'simple',

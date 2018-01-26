@@ -20,7 +20,8 @@ class Global extends Component {
       globalScaleProtectedAreas,
       globalConservationPrioritization,
       setType,
-      selectedType
+      selectedType,
+      section
       // landSaved,
       // oceanSaved
     } = this.props
@@ -36,7 +37,9 @@ class Global extends Component {
       <div className={className}>
         <Scroller>
           <P
-            className={uiStyles.slides}
+            className={cx(uiStyles.slides, {
+              [uiStyles.slidesActive]: section === 'global:1'
+            })}
             onScrollFocus={() => updateSections('global:1')}
           >
             <span className={uiStyles.innerTitle}>
@@ -87,7 +90,9 @@ class Global extends Component {
           </P>
 
           <P
-            className={uiStyles.slides}
+            className={cx(uiStyles.slides, {
+              [uiStyles.slidesActive]: section === 'global:2'
+            })}
             onScrollFocus={() => updateSections('global:2')}
           >
             This global {t('Protected Areas')} network plays a key role in the
@@ -129,25 +134,31 @@ class Global extends Component {
           </P>
 
           <P
-            className={cx(uiStyles.slides, uiStyles.paragraphAfterChart)}
+            className={cx(uiStyles.slides, uiStyles.paragraphAfterChart, {
+              [uiStyles.slidesActive]: section === 'global:3'
+            })}
             onScrollFocus={() => updateSections('global:3')}
           >
             How can we reduce these conservation gaps and include more species
             in an expanded network of{' '}
             {t('conservation areas', false, 'protected-areas')} while accounting
             for the growing constraints from {t('human pressures')}, such as
-            road building and urban development?
+            logging, agriculture and urban development?
           </P>
 
           <P
-            className={uiStyles.slides}
+            className={cx(uiStyles.slides, {
+              [uiStyles.slidesActive]: section === 'global:4'
+            })}
             onScrollFocus={() => updateSections('global:4')}
           >
             <span className={uiStyles.innerP}>
-              The Half-Earth Project is integrating multiple layers of
-              high-resolution data to identify places where species are
-              insufficiently protected and using this information to guide for
-              conservation.
+              The Half-Earth Project is integrating high-resolution data
+              worldwide to identify places where species are insufficiently
+              protected and using this information to guide conservation
+              priorities. Use the slider below to explore how this
+              geographically optimized approach could rapidly increase the
+              number of species with sufficient protection.
             </span>
             <EarthoMeter />
             <Barchart
@@ -158,12 +169,6 @@ class Global extends Component {
               dataKey={globalConservationPrioritization.key}
               legend={globalConservationPrioritization.legend}
             />
-            <span className={uiStyles.innerP}>
-              By prioritizing conservation efforts in regions that are rich in
-              species, or regions that have rare species, we can rapidly
-              increase the number of species that have at least minimum
-              conservation protection.
-            </span>
             <span className={uiStyles.innerP}>
               Conservation activities that balance the needs of both humans and
               nature will require more information, in much finer detail, than

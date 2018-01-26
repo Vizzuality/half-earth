@@ -31,7 +31,7 @@ export default {
     layers: ['protected-areas']
   },
   'regional:3': {
-    layers: ['conservation-areas']
+    layers: ['conservation-areas', 'human-pressures']
   },
   'regional:4': {
     layers: []

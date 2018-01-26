@@ -2,11 +2,18 @@ import React from 'react'
 import cx from 'classnames'
 import PopUp from 'components/pop-up'
 import capitalize from 'lodash/capitalize'
+import isFunction from 'lodash/isFunction'
 import ModalContent from './legend-layers-modal-component'
 
 import styles from './legend-layers-styles.scss'
 
-const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
+const LegendLayers = ({
+  layers,
+  openPopUpLegend,
+  popUp,
+  closePopUp,
+  section
+}) => {
   const sortLayers = (a, b) => {
     if (a.type === 'gradient' && b.type !== 'gradient') return 1
     if (a.type !== 'gradient' && b.type === 'gradient') return -1
@@ -58,8 +65,8 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
             <span>+</span>
           </div>
           <div className={styles.numbers}>
-            <span>{layer.min}</span>
-            <span>{layer.max}</span>
+            <span>{isFunction(layer.min) ? layer.min() : layer.min}</span>
+            <span>{isFunction(layer.max) ? layer.max() : layer.max}</span>
           </div>
         </div>
       </div>
@@ -96,7 +103,7 @@ const LegendLayers = ({ layers, openPopUpLegend, popUp, closePopUp }) => {
         {layers.sort(sortLayers).map((layer, i) => renderLegend(layer, i))}
       </div>
       <PopUp open={popUp} close={() => closePopUp()}>
-        <ModalContent />
+        <ModalContent section={section} />
       </PopUp>
     </div>
   )

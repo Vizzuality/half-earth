@@ -9,6 +9,11 @@ $backCircle: #18bab4;
   align-items: baseline;
   width: 100%;
 
+  em {
+    font-size: 0.8em;
+    font-style: normal;
+  }
+
   .simpleLegend {
     position: relative;
     width: 45%;
@@ -64,6 +69,10 @@ $backCircle: #18bab4;
 
     &Pink::after {
       background-color: rgba(#972a6a, 0.7);
+    }
+
+    &Xpa::after {
+      background-color: rgba(#9538ba, 0.7);
     }
 
     &Black::after {

@@ -38,7 +38,6 @@ export const toggleLayer = (state, { payload: { name } }) => {
   const currentIndex = findIndex(layers, { name })
   const $exists = compose(ofPath('layers', currentIndex))
   const $currentIsVisible = compose($exists, of('visible'))
-
   return isUndefined(get($exists, state))
     ? state
     : set($currentIsVisible, !get($currentIsVisible, state), state)

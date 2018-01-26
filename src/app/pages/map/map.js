@@ -5,6 +5,7 @@ import initialState from './initial-state'
 import * as actions from './map-actions'
 import * as utils from './map-utils'
 import { actions as cartoActions } from 'providers/carto'
+import { actions as interActions } from 'providers/interact'
 import { actions as popUpActions } from 'components/pop-up'
 import * as regionalActions from 'pages/regional/regional-actions'
 import reducers from './map-reducers'
@@ -36,5 +37,6 @@ export default connect(mapStateToProps, {
   ...actions,
   ...cartoActions,
   ...popUpActions,
-  ...regionalActions
+  ...regionalActions,
+  ...interActions
 })(MapContainer)

@@ -15,7 +15,6 @@ export default {
   billboards,
   panes,
   popups,
-  billboardsDistance: 70000.0,
   popup: {
     open: false,
     selected: null

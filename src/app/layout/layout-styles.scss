@@ -5,6 +5,10 @@
   width: 100vw;
   height: 100vw;
 
+  &Hover {
+    cursor: pointer;
+  }
+
   .header {
     // height: 5rem;
     height: $header-height;
