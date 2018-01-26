@@ -24,7 +24,7 @@ const Regional = ({
   localProtectedSpeciesSpider,
   sidebar,
   selectRegionalSelector,
-  section,
+  section: { section },
   selectedType,
   setType,
   regional,
@@ -61,7 +61,9 @@ const Regional = ({
       </PopUp>
       <Scroller>
         <P
-          className={uiStyles.slides}
+          className={cx(uiStyles.slides, {
+            [uiStyles.slidesActive]: section === 'regional:1'
+          })}
           onScrollFocus={() => updateSections('regional:1')}
         >
           <span className={uiStyles.innerTitle}>
@@ -102,7 +104,9 @@ const Regional = ({
           </span>
         </P>
         <P
-          className={uiStyles.slides}
+          className={cx(uiStyles.slides, {
+            [uiStyles.slidesActive]: section === 'regional:2'
+          })}
           onScrollFocus={() => updateSections('regional:2')}
         >
           {t('Protected Areas')}, cover ca. 15% of this region and have been
@@ -111,7 +115,9 @@ const Regional = ({
           safeguarding this heritage, many key areas remain unprotected.
         </P>
         <P
-          className={uiStyles.slides}
+          className={cx(uiStyles.slides, {
+            [uiStyles.slidesActive]: section === 'regional:3'
+          })}
           onScrollFocus={() => updateSections('regional:3')}
         >
           <span className={uiStyles.innerP}>
@@ -131,7 +137,9 @@ const Regional = ({
           </span>
         </P>
         <P
-          className={uiStyles.slides}
+          className={cx(uiStyles.slides, {
+            [uiStyles.slidesActive]: section === 'regional:4'
+          })}
           onScrollFocus={() => updateSections('regional:4')}
         >
           The Half-Earth Mapping Core is unlocking a new era in data driven
