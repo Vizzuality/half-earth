@@ -20,7 +20,7 @@ export default [
   MOLLayer('restio:richness', 'restio', 'richness_1km'),
 
   MOLLayer('mammals:rarity', 'mammals', 'rarity_1km'),
-  MOLLayer('amphibians:rarity', 'amphibians', 'rarity_1km'),
+  // MOLLayer('amphibians:rarity', 'amphibians', 'rarity_1km'),
   MOLLayer('birds:rarity', 'birds', 'rarity_1km'),
   MOLLayer('protea:rarity', 'protea', 'rarity_1km'),
   MOLLayer('restio:rarity', 'restio', 'rarity_1km'),

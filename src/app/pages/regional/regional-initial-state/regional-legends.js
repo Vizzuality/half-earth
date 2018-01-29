@@ -111,11 +111,6 @@ export default {
     label: 'Roads',
     color: 'purple'
   },
-  'private-reserves': {
-    type: 'simple',
-    label: 'Private Reserves',
-    color: 'pink'
-  },
   'community-based-reserves': {
     type: 'simple',
     label: 'Community Based Reserves',
@@ -139,7 +134,7 @@ export default {
   'community-based-conservation-areas': {
     type: 'simple',
     label: 'Community Based Conservation Areas',
-    color: 'violet'
+    color: 'cbca'
   },
   'human-pressures': {
     type: 'gradient',
@@ -147,6 +142,11 @@ export default {
     color: 'black',
     min: 0,
     max: 100
+  },
+  'private-reserves': {
+    type: 'simple',
+    label: 'Private Reserves',
+    color: 'pr'
   },
   // 'conservation-areas': {
   //   type: 'simple',

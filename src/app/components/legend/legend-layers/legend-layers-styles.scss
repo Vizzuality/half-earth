@@ -71,16 +71,24 @@ $backCircle: #18bab4;
       background-color: rgba(#972a6a, 0.7);
     }
 
-    &Xpa::after {
-      background-color: rgba(#9538ba, 0.7);
-    }
-
     &Black::after {
       background-color: $color-black;
     }
 
     &Red::after {
       background-color: #e75457;
+    }
+
+    &Pr::after {
+      background-color: #e521ff;
+    }
+
+    &Cbca::after {
+      background-color: #611181;
+    }
+
+    &Xpa::after {
+      background-color: #9d1bcc;
     }
   }
 
