@@ -21,6 +21,7 @@
     "react-click-outside": "tj/react-click-outside",
     "react-css-themr": "^2.1.2",
     "react-dom": "^16.0.0",
+    "react-player": "^1.1.1",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-config": "^1.0.0-beta.4",

@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './home-styles.scss'
 import NavFooter from 'components/nav-footer'
 import HomeNavFooter from './home-nav-footer.scss'
+import ReactPlayer from 'react-player'
 
 const Home = ({ onClick }) => (
   <div className={styles.container}>
@@ -18,10 +19,16 @@ const Home = ({ onClick }) => (
         <p className={styles.separator}>E.O. WILSON</p>
       </div>
       <div className={styles.videoContainer}>
-        <span className={styles.playButton} />
-        <video
-          poster="/img/home-video-placeholder.png"
-          className={styles.video}
+        <ReactPlayer
+          playing
+          width="100%"
+          height="100%"
+          url="https://youtu.be/ycGNkwgv5vg"
+          controls
+          youtubeConfig={{
+            playerVars: { playsinline: 0 },
+            preload: true
+          }}
         />
       </div>
     </div>
