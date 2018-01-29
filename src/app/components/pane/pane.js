@@ -8,18 +8,21 @@ import last from 'lodash/last'
 import { assign, pick } from 'app/utils'
 import { actions as regionalActions } from 'pages/regional'
 import { actions as globalActions } from 'pages/global'
+import { layersInfo } from 'data/layers-info'
 
 import reducers from './pane-reducers'
 import * as actions from './pane-actions'
 import initialState from './pane-initial-state'
 
-const addInfo = (data, infos) =>
+const dToKey = d => kebabCase(last(d.name.split(':')))
+const addInfo = (data, infos, page) =>
   data &&
   data.map(
     datum =>
       assign(datum, {
         info: pick(
-          find(infos, { key: kebabCase(last(datum.name.split(':'))) }),
+          find(infos, { key: dToKey(datum) }) ||
+            find(infos, { key: `${page}-${dToKey(datum)}` }),
           'key'
         )
       }) || []
@@ -27,14 +30,15 @@ const addInfo = (data, infos) =>
 
 const mapStateToProps = (state, { page, ...props }) => {
   const { popup, opacities } = state.pane
-  const { layers, panes, popups } = state[page]
-
+  const { layers, panes } = state[page]
   return {
-    layers: addInfo(layers, popups),
-    panes: addInfo(panes, popups),
+    layers: addInfo(layers, layersInfo, page),
+    panes: addInfo(panes, layersInfo, page),
     opacities,
     popup,
-    selectedPopup: find(popups, { key: popup.selected }),
+    selectedPopup:
+      find(layersInfo, { key: popup.selected }) ||
+      find(layersInfo, { key: `${page}-${popup.selected}` }),
     page
   }
 }

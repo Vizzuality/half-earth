@@ -32,9 +32,18 @@
     bottom: $pad;
     left: $pad;
     max-width: calc(100% - (2 * #{$pad}));
-    padding: ($pad / 2) ($pad * 2);
+    padding: ($pad / 2) (($pad / 2) * 3);
     line-height: 2;
     letter-spacing: 0.8px;
+
+    .popupTitle {
+      line-height: 1.3em;
+      margin-bottom: 0.6em;
+    }
+
+    .popupSubtitle {
+      line-height: 1.3em;
+    }
 
     p {
       margin-bottom: 2em;

@@ -1,5 +1,6 @@
 import React from 'react'
 import find from 'lodash/find'
+import isFunction from 'lodash/isFunction'
 import cx from 'classnames'
 
 import PopUp from 'components/pop-up/pop-up'
@@ -101,21 +102,30 @@ const PaneList = props => {
 
 const Pane = props => {
   const { popup, closePopup, selectedPopup } = props
+  console.log(selectedPopup)
   return [
     <PopUp key="pane-info-popup" open={popup.open} close={() => closePopup()}>
       <div className={styles.popup}>
         <div className={styles.popupContent}>
           {selectedPopup &&
-          selectedPopup.title && <h1>{selectedPopup.title}</h1>}
+          selectedPopup.title && (
+            <h1 className={styles.popupTitle}>{selectedPopup.title}</h1>
+          )}
           {selectedPopup &&
-            selectedPopup.content &&
-            selectedPopup.content.map(p => <p key={p}>{p}</p>)}
+          selectedPopup.subtitle && (
+            <h2 className={styles.popupSubtitle}>{selectedPopup.subtitle}</h2>
+          )}
           {selectedPopup &&
-            selectedPopup.formulas &&
-            selectedPopup.formulas.map(f => (
-              <pre key={f} className={styles.formula}>
-                {f}
-              </pre>
+            (isFunction(selectedPopup.content) ? (
+              <selectedPopup.content />
+            ) : (
+              selectedPopup.content
+            ))}
+          {selectedPopup &&
+            (isFunction(selectedPopup.description) ? (
+              <selectedPopup.description />
+            ) : (
+              selectedPopup.description
             ))}
           {selectedPopup &&
           selectedPopup.keywords && (

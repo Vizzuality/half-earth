@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import cx from 'classnames'
 import katex from 'katex'
+import styles from './katex-styles'
 
 class Katex extends Component {
   componentDidMount () {
@@ -9,7 +11,7 @@ class Katex extends Component {
     const { className } = this.props
     return (
       <span
-        className={className}
+        className={cx(className, styles.latexBlock)}
         ref={el => {
           this.el = el
         }}

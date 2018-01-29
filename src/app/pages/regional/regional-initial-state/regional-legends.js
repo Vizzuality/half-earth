@@ -136,6 +136,11 @@ export default {
     label: 'Community Based Conservation Areas',
     color: 'cbca'
   },
+  'private-reserves': {
+    type: 'simple',
+    label: 'Private Reserves',
+    color: 'pr'
+  },
   'human-pressures': {
     type: 'gradient',
     label: 'Human Pressures',
@@ -143,11 +148,7 @@ export default {
     min: 0,
     max: 100
   },
-  'private-reserves': {
-    type: 'simple',
-    label: 'Private Reserves',
-    color: 'pr'
-  },
+
   // 'conservation-areas': {
   //   type: 'simple',
   //   label: 'Conservation Areas',
