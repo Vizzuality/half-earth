@@ -3,12 +3,9 @@ import React from 'react'
 import PaneToggle from './components/pane-toggle'
 import Toggle from './components/toggle'
 import Opacity from './components/opacity'
-import Info from './components/info'
 import Expand from './components/expand'
 import Row from './components/row'
 import rowStyles from './components/row/row-styles'
-
-const openInfo = console.log.bind(console)
 
 const Explore = ({
   landCoverFold,
@@ -49,7 +46,6 @@ const Explore = ({
             update={value =>
               updateOpacity({ path: ['opacity', 'value'], value })}
           />
-          <Info onClick={() => openInfo('Human Pressures')} />
         </div>
       </Row>
     </Expand>
@@ -75,7 +71,6 @@ const Explore = ({
             update={value =>
               updateOpacity({ path: ['opacity', 'value'], value })}
           />
-          <Info onClick={() => openInfo('Human Pressures')} />
         </div>
       </Row>
     </Expand>

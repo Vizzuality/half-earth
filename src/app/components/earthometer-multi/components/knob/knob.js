@@ -128,7 +128,6 @@ class Knob extends Component {
       trackDashOffset +
       handleWidth
 
-    // console.log(handleWidth)
     const handleDashOffset =
       handleOffset * (1 - percent) + trackDashOffset + 2 * handleWidth
 

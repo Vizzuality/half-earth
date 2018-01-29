@@ -102,7 +102,7 @@ const PaneList = props => {
 
 const Pane = props => {
   const { popup, closePopup, selectedPopup } = props
-  console.log(selectedPopup)
+
   return [
     <PopUp key="pane-info-popup" open={popup.open} close={() => closePopup()}>
       <div className={styles.popup}>
