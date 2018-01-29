@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './home-styles.scss'
 import NavFooter from 'components/nav-footer'
 import HomeNavFooter from './home-nav-footer.scss'
-import ReactPlayer from 'react-player'
 
 const Home = ({ onClick }) => (
   <div className={styles.container}>
@@ -19,16 +18,12 @@ const Home = ({ onClick }) => (
         <p className={styles.separator}>E.O. WILSON</p>
       </div>
       <div className={styles.videoContainer}>
-        <ReactPlayer
-          playing
+        <iframe
+          src="https://player.vimeo.com/video/253291731"
           width="100%"
           height="100%"
-          url="https://youtu.be/ycGNkwgv5vg"
-          controls
-          youtubeConfig={{
-            playerVars: { playsinline: 0 },
-            preload: true
-          }}
+          frameBorder="0"
+          allowFullScreen
         />
       </div>
     </div>
