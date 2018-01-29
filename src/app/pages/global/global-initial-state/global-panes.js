@@ -24,17 +24,8 @@ const species = type => ({
 })
 
 export default [
-  {
-    name: 'Land cover',
-    key: 'land-cover',
-    isOpen: true,
-    layers: [
-      {
-        key: 'human-pressures',
-        label: 'Human pressures'
-      }
-    ]
-  },
+  species('richness'),
+  species('rarity'),
   {
     name: 'Conservation Management',
     key: 'conservation-management',
@@ -44,6 +35,15 @@ export default [
       { key: 'prioritization-of-places', label: 'Prioritization areas' }
     ]
   },
-  species('richness'),
-  species('rarity')
+  {
+    name: 'Land Use',
+    key: 'land-use',
+    isOpen: true,
+    layers: [
+      {
+        key: 'human-pressures',
+        label: 'Human pressures'
+      }
+    ]
+  }
 ]

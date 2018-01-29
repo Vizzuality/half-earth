@@ -38,5 +38,11 @@ export default [
       { key: 'protected-areas', label: 'Protected areas' },
       { key: 'human-pressures', label: 'Human pressures' }
     ]
+  },
+  {
+    name: 'Land Use',
+    key: 'land-use',
+    isOpen: true,
+    layers: [{ key: 'human-pressures', label: 'Human pressures' }]
   }
 ]
