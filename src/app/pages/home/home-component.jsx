@@ -33,7 +33,7 @@ const Home = ({ onClick }) => (
       <p className={styles.paragraph}>
         How can we reach the goal of Half-Earth? By mapping the biodiversity of
         our planet, we can identify the best places to conserve to safeguard the
-        maximum number of species
+        maximum number of species.
       </p>
       <p className={styles.paragraph}>
         The Half-Earth Project is using the latest science and technology to map

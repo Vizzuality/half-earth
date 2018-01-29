@@ -23,7 +23,7 @@ const Tabs = ({ tabs, selected, setTab }) => (
 const Earthometer = ({ className, tabs, setTab, selected, ...props }) => {
   return (
     <div className={cx(className, styles.earthometer)}>
-      <div>Half-Earth Progress Meter</div>
+      <div>Half-Earth</div>
       <Knob
         min={0.15}
         max={0.5}

@@ -135,7 +135,7 @@ const Regional = ({
           onScrollFocus={() => updateSections('regional:4')}
         >
           The Half-Earth Mapping Core is unlocking a new era in data-driven
-          conservation. Follow us and engage, as the E.O. Wilson Biodiversity
+          conservation. Follow us and engage as the E.O. Wilson Biodiversity
           Foundation, Map of Life, Vizzuality and our many partners continue
           these efforts to provide fine-scale biodiversity information to
           people, communities, conservationists and decision-makers everywhere.

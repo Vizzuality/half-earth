@@ -156,8 +156,8 @@ class Global extends Component {
               The Half-Earth Project is integrating high-resolution data
               worldwide to identify places where species are insufficiently
               protected and using this information to guide conservation
-              priorities. Use the slider below to explore how this
-              geographically optimized approach could rapidly increase the
+              priorities. Use the Half-Earth progress meter below to explore how
+              this geographically optimized approach could rapidly increase the
               number of species with sufficient protection.
             </span>
             <EarthoMeter />

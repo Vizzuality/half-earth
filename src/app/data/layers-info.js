@@ -12,7 +12,7 @@ export const layersInfo = [
     source: 'Map of Life and supporting datasets'
   },
   {
-    title: 'Regional Species Richness',
+    title: 'Southern Africa Species Richness',
     key: 'regional-species-richness',
     subtitle: 'Birds, Mammals, Proteas and Restios',
     description:
@@ -73,8 +73,8 @@ export const layersInfo = [
     source: 'Map of Life and supporting datasets'
   },
   {
-    title: 'Regional Species Rarity',
-    key: 'global-species-rarity',
+    title: 'Southern Africa Species Rarity',
+    key: 'regional-species-rarity',
     subtitle:
       'Birds, Mammals, Amphibians, Conifers, Cacti, Turtles and All Taxa',
     description: ({ styles }) => (
