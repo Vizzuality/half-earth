@@ -3,7 +3,7 @@ import styles from './home-styles.scss'
 import NavFooter from 'components/nav-footer'
 import HomeNavFooter from './home-nav-footer.scss'
 
-const Home = ({ onClick }) => (
+const Home = () => (
   <div className={styles.container}>
     <div className={styles.titleContainer}>
       <h1 className={styles.title}>Getting To Half</h1>
@@ -19,10 +19,12 @@ const Home = ({ onClick }) => (
       </div>
       <div className={styles.videoContainer}>
         <iframe
-          src="https://player.vimeo.com/video/253291731"
+          src="https://player.vimeo.com/video/253291731?autoplay=1"
           width="100%"
           height="100%"
           frameBorder="0"
+          webkitallowfullscreen="webkitallowfullscreen"
+          mozallowfullscreen="mozallowfullscreen"
           allowFullScreen
         />
       </div>

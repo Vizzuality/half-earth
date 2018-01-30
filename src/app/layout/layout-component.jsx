@@ -31,19 +31,20 @@ const Layout = ({
     >
       <Header className={cx(styles.header, styles.headerHidden)} />
       <div className={styles.body}>
-        {Children.map(
-          children,
-          child =>
-            child.key === location.pathname && (
-              <Sidebar
-                route={route}
-                hidden={isHome /* || isIntro */}
-                className={cx(styles.col, styles.sidebar)}
-              >
-                {cloneElement(child)}
-              </Sidebar>
-            )
-        )}
+        {!isHome &&
+          Children.map(
+            children,
+            child =>
+              child.key === location.pathname && (
+                <Sidebar
+                  route={route}
+                  hidden={isHome /* || isIntro */}
+                  className={cx(styles.col, styles.sidebar)}
+                >
+                  {cloneElement(child)}
+                </Sidebar>
+              )
+          )}
         {!isHome /* && !isIntro */ && (
           <Locator route={route} history={history} />
         )}
