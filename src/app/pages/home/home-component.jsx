@@ -19,6 +19,7 @@ const Home = () => (
       </div>
       <div className={styles.videoContainer}>
         <iframe
+          sandbox="allow-scripts"
           src="https://player.vimeo.com/video/253291731?autoplay=1title=0&byline=0&portrait=0"
           width="100%"
           height="100%"
@@ -26,7 +27,6 @@ const Home = () => (
           webkitallowfullscreen="webkitallowfullscreen"
           mozallowfullscreen="mozallowfullscreen"
           allowFullScreen
-          allow-scripts="allow-scripts"
         />
       </div>
     </div>
