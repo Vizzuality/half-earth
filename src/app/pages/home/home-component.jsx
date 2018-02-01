@@ -19,7 +19,7 @@ const Home = () => (
       </div>
       <div className={styles.videoContainer}>
         <iframe
-          src="https://player.vimeo.com/video/253291731??autoplay=1title=0&byline=0&portrait=0"
+          src="https://player.vimeo.com/video/253291731?autoplay=1title=0&byline=0&portrait=0"
           width="100%"
           height="100%"
           frameBorder="0"
