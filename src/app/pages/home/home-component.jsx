@@ -26,7 +26,7 @@ const Home = () => (
           webkitallowfullscreen="webkitallowfullscreen"
           mozallowfullscreen="mozallowfullscreen"
           allowFullScreen
-          allow-scripts
+          allow-scripts="allow-scripts"
         />
       </div>
     </div>
