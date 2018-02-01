@@ -1,5 +1,3 @@
-import React from 'react'
-
 const richnessLegend = {
   mammals: {
     type: 'gradient',
@@ -64,112 +62,56 @@ const rarityLegend = {
     type: 'gradient',
     label: 'Mammals',
     color: 'rainbow',
-    min: () => (
-      <span>
-        2.0<em>e-8</em>
-      </span>
-    ),
-    max: () => (
-      <span>
-        1.8<em>e-1</em>
-      </span>
-    ),
+    min: 0,
+    max: 1,
     group: 'rarity'
   },
   birds: {
     type: 'gradient',
     label: 'Birds',
     color: 'rainbow',
-    min: () => (
-      <span>
-        1.2<em>e-8</em>
-      </span>
-    ),
-    max: () => (
-      <span>
-        1.2<em>e-6</em>
-      </span>
-    ),
+    min: 0,
+    max: 1,
     group: 'rarity'
   },
   turtles: {
     type: 'gradient',
     label: 'Turtles',
     color: 'rainbow',
-    min: () => (
-      <span>
-        2.5<em>e-8</em>
-      </span>
-    ),
-    max: () => (
-      <span>
-        2.7<em>e-3</em>
-      </span>
-    ),
+    min: 0,
+    max: 1,
     group: 'rarity'
   },
   amphibians: {
     type: 'gradient',
     label: 'Amphibians',
     color: 'rainbow',
-    min: () => (
-      <span>
-        7.2<em>e-8</em>
-      </span>
-    ),
-    max: () => (
-      <span>
-        8.3<em>e-2</em>
-      </span>
-    ),
+    min: 0,
+    max: 1,
     group: 'rarity'
   },
   cacti: {
     type: 'gradient',
     label: 'Cacti',
     color: 'rainbow',
-    min: () => (
-      <span>
-        5.3<em>e-8</em>
-      </span>
-    ),
-    max: () => (
-      <span>
-        5.2<em>e-2</em>
-      </span>
-    ),
+    min: 0,
+    max: 1,
     group: 'rarity'
   },
   conifers: {
     type: 'gradient',
     label: 'Conifers',
     color: 'rainbow',
-    min: () => (
-      <span>
-        2.9<em>e-8</em>
-      </span>
-    ),
-    max: () => (
-      <span>
-        2.8<em>e-2</em>
-      </span>
-    ),
+    min: 0,
+    max: 1,
     group: 'rarity'
   },
   'all-taxa': {
     type: 'gradient',
     label: 'All Taxa',
     color: 'rainbow',
-    min: () => (
-      <span>
-        1.3<em>e-8</em>
-      </span>
-    ),
-    max: () => (
-      <span>
-        5.9<em>e-2</em>
-      </span>
-    ),
+    min: 0,
+    max: 1,
     group: 'rarity'
   }
 }
