@@ -3,6 +3,9 @@ import styles from './home-styles.scss'
 import NavFooter from 'components/nav-footer'
 import HomeNavFooter from './home-nav-footer.scss'
 
+const autoplay =
+  navigator.userAgent.toLowerCase().indexOf('safari/') > -1 ? '' : 'autoplay=1&'
+
 const Home = () => (
   <div className={styles.container}>
     <div className={styles.titleContainer}>
@@ -20,7 +23,7 @@ const Home = () => (
       <div className={styles.videoContainer}>
         <iframe
           sandbox="allow-scripts"
-          src="https://player.vimeo.com/video/253291731?autoplay=1title=0&byline=0&portrait=0"
+          src={`https://player.vimeo.com/video/253291731?${autoplay}title=0&byline=0&portrait=0`}
           width="100%"
           height="100%"
           frameBorder="0"
