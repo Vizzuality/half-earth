@@ -76,9 +76,9 @@ export const layersInfo = [
       'The World Database on Protected Areas includes most of the global area under formal protection. However, there are many conservation initiatives that are protecting biodiversity outside of these official reserves. For example, there are community-based conservation approaches that involve collaborations between private landowners and government bodies.',
     source: () => (
       <span>
-        <a target="_blank" href="https://mol.org/datasets/">
-          Map of Life and supporting datasets
-        </a>
+        {/* <a target="_blank" href="https://mol.org/datasets/"> */}
+        Map of Life and supporting datasets
+        {/* </a> */}
       </span>
     )
   },
@@ -90,9 +90,9 @@ export const layersInfo = [
       'The World Database on Protected Areas includes most of the global area under formal protection. However, there are many conservation initiatives that are protecting biodiversity outside of these official reserves. For example, there are private reserves that are effectively protecting biodiversity and helps moderate the effect of human pressures on biodiversity.',
     source: () => (
       <span>
-        <a target="_blank" href="https://mol.org/datasets/">
-          Map of Life and supporting datasets
-        </a>
+        {/* <a target="_blank" href="https://mol.org/datasets/"> */}
+        Map of Life and supporting datasets
+        {/* </a> */}
       </span>
     )
   },
