@@ -5,7 +5,7 @@ export const speciesSelector = selected => ({
     cacti: 'Cacti',
     birds: 'Birds',
     conifers: 'Conifers',
-    all: 'All Taxa',
+    'all-taxa': 'All Taxa',
     turtles: 'Turtles'
   },
   selected
@@ -16,7 +16,7 @@ export const speciesSelections = type => ({
   cacti: `cacti:${type}`,
   birds: `birds:${type}`,
   conifers: `conifers:${type}`,
-  all: `all-taxa:${type}`,
+  'all-taxa': `all-taxa:${type}`,
   turtles: `turtles:${type}`
 })
 
