@@ -347,6 +347,15 @@ $backCircle: #18bab4;
       font-size: 10px;
       color: rgba($color-white, 0.7);
       // font-weight: 700;
+
+      a {
+        color: $color-turquoise;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

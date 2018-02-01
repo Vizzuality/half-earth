@@ -17,7 +17,14 @@ const ModalContent = ({ section = 'global' }) => (
             item.description
           )}
         </p>
-        <p className={styles.source}>Source: {item.source}</p>
+        <p className={styles.source}>
+          Source:{' '}
+          {isFunction(item.source) ? (
+            <item.source styles={styles} />
+          ) : (
+            item.source
+          )}
+        </p>
       </div>
     ))}
   </div>
