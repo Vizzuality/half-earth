@@ -14,12 +14,12 @@ class Global extends Component {
       renderDropdown,
       className,
       setSection,
-      setGlobalSection,
+      setGlobalSectionThunk,
       selectGlobalSelector,
       globalScaleBiodiversity,
       globalScaleProtectedAreas,
       globalConservationPrioritization,
-      setType,
+      setTypeThunk,
       selectedType,
       section
       // landSaved,
@@ -27,7 +27,7 @@ class Global extends Component {
     } = this.props
 
     const updateSections = s => {
-      setGlobalSection(s)
+      setGlobalSectionThunk(s)
       setSection(s)
     }
 
@@ -56,7 +56,7 @@ class Global extends Component {
               understanding of species{' '}
               {
                 <button
-                  onClick={() => setType('richness')}
+                  onClick={() => setTypeThunk('richness')}
                   className={cx(uiStyles.toggle, {
                     [uiStyles.toggleActive]: selectedType === 'richness'
                   })}
@@ -67,7 +67,7 @@ class Global extends Component {
               and{' '}
               {
                 <button
-                  onClick={() => setType('rarity')}
+                  onClick={() => setTypeThunk('rarity')}
                   className={cx(uiStyles.toggle, {
                     [uiStyles.toggleActive]: selectedType === 'rarity'
                   })}
@@ -100,7 +100,7 @@ class Global extends Component {
             overlaying global species{' '}
             {
               <button
-                onClick={() => setType('richness')}
+                onClick={() => setTypeThunk('richness')}
                 className={cx(uiStyles.toggle, {
                   [uiStyles.toggleActive]: selectedType === 'richness'
                 })}
@@ -111,7 +111,7 @@ class Global extends Component {
             and{' '}
             {
               <button
-                onClick={() => setType('rarity')}
+                onClick={() => setTypeThunk('rarity')}
                 className={cx(uiStyles.toggle, {
                   [uiStyles.toggleActive]: selectedType === 'rarity'
                 })}

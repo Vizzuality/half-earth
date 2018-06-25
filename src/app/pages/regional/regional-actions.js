@@ -24,6 +24,13 @@ export const toggleRegionalLayer = createAction(
 )
 
 export const setRegionalSection = createAction('setRegionalSection')
+export const setRegionalSectionThunk = createThunkAction(
+  'setRegionalSectionThunk',
+  type => (dispatch, getState) => {
+    const { section } = getState().section
+    dispatch(setRegionalSection({ type, section }))
+  }
+)
 export const setType = createAction('setType')
 
 export const openPopup = createAction('openPopup')

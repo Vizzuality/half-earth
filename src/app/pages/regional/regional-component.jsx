@@ -13,14 +13,14 @@ const Regional = ({
   renderDropdown,
   renderToggle,
   setSection,
-  setRegionalSection,
+  setRegionalSectionThunk,
   toggleRegionalLayer,
   localProtectedSpeciesSpider,
   sidebar,
   selectRegionalSelector,
   section: { section },
   selectedType,
-  setType,
+  setTypeThunk,
   regional,
   closePopup,
   openPopup,
@@ -30,7 +30,7 @@ const Regional = ({
   const t = renderToggle(toggleRegionalLayer)
   const d = renderDropdown(selectRegionalSelector)
   const updateSections = s => {
-    setRegionalSection(s)
+    setRegionalSectionThunk(s)
     setSection(s)
   }
 
@@ -70,7 +70,7 @@ const Regional = ({
             Using remote sensing data and models, we have mapped the{' '}
             {
               <button
-                onClick={() => setType('richness')}
+                onClick={() => setTypeThunk('richness')}
                 className={cx(uiStyles.toggle, {
                   [uiStyles.toggleActive]: selectedType === 'richness'
                 })}
@@ -81,7 +81,7 @@ const Regional = ({
             and{' '}
             {
               <button
-                onClick={() => setType('rarity')}
+                onClick={() => setTypeThunk('rarity')}
                 className={cx(uiStyles.toggle, {
                   [uiStyles.toggleActive]: selectedType === 'rarity'
                 })}
