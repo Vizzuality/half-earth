@@ -67,22 +67,21 @@ const filterSelector = (state, { payload: { section, selection } }) => {
   )
 }
 
-export const setType = (state, { payload, __app }) => {
-  const currentSectionName = __app.section.section
-  const currentSection = state.sections[currentSectionName]
+export const setType = (state, { payload: { type, section } }) => {
+  const currentSection = state.sections[section]
   const { selections } = currentSection
   // should be configurable ?
   const currentSelector = currentSection.selectors.birds
   const selection = currentSelector.selected
 
-  if (currentSection.selectionType === payload) return state
+  if (currentSection.selectionType === type) return state
 
   // hide all current dropdown values
   const toHide = Object.keys(selections).map(v => selections[v])
   const matchingLayers = state.layers.filter(l => includes(toHide, l.name))
   const hiddenLayers = matchingLayers.map(makeHidden)
   const otherLayers = difference(state.layers, matchingLayers).map(l => {
-    if (l.name === `${selection}:${payload}`) l.visible = true
+    if (l.name === `${selection}:${type}`) l.visible = true
     return l
   })
   // merge hidden and visible
@@ -92,7 +91,7 @@ export const setType = (state, { payload, __app }) => {
   const updatedSelections = reduce(
     currentSection.selections,
     (sections, value, key) => {
-      sections[key] = `${key}:${payload}`
+      sections[key] = `${key}:${type}`
       return sections
     },
     {}
@@ -103,19 +102,19 @@ export const setType = (state, { payload, __app }) => {
     layers,
     sections: {
       ...state.sections,
-      [currentSectionName]: {
+      [section]: {
         ...currentSection,
-        selectionType: payload,
+        selectionType: type,
         selections: updatedSelections
       }
     }
   }
 }
 
-export const setRegionalSection = (state, { payload, __app: { section } }) => {
-  if (payload === section.section) return state
+export const setRegionalSection = (state, { payload: { type, section } }) => {
+  if (type === section.section) return state
   const reset = mapReducers.resetLayers(state)
-  const block = reset.sections[payload]
+  const block = reset.sections[type]
   const { layers, selectors, selections } = block
 
   const visibleLayers = layers.concat(
@@ -166,7 +165,9 @@ export default {
     const escaped = payload.key === 'Escape'
     return state.popup.open && escaped
       ? closePopup(state)
-      : state.sidePopup.open && escaped ? closeSidePopup(state) : state
+      : state.sidePopup.open && escaped
+        ? closeSidePopup(state)
+        : state
   },
 
   [actions.selectRegionalSelector]: (state, { payload }) => {

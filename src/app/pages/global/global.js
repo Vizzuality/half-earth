@@ -18,13 +18,13 @@ class GlobalContainer extends Component {
     super(props)
     const {
       getCartoTiles,
-      setGlobalSection,
+      setGlobalSectionThunk,
       setSection,
       layers,
       getChartData
     } = props
     requestCartos({ layers, getCartoTiles })
-    setGlobalSection('global:1')
+    setGlobalSectionThunk('global:1')
     setSection('global:1')
     getChartData()
   }
@@ -39,8 +39,9 @@ const mapStateToProps = state => {
   const index = Math.round(earthometer.landSaved.value)
   const globalConservationPrioritization = {
     ...global.charts.globalConservationPrioritization,
-    data: (global.charts.globalConservationPrioritization.data[index] || [])
-      .map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
+    data: (
+      global.charts.globalConservationPrioritization.data[index] || []
+    ).map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
   }
   return {
     map,
@@ -57,8 +58,11 @@ const mapStateToProps = state => {
 }
 
 export { actions, reducers, initialState }
-export default connect(mapStateToProps, {
-  ...actions,
-  ...cartoActions,
-  ...sectionActions
-})(GlobalContainer)
+export default connect(
+  mapStateToProps,
+  {
+    ...actions,
+    ...cartoActions,
+    ...sectionActions
+  }
+)(GlobalContainer)

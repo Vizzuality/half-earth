@@ -4,6 +4,13 @@ import isEmpty from 'lodash/isEmpty'
 const { fetch } = window
 
 export const setGlobalSection = createAction('setGlobalSection')
+export const setGlobalSectionThunk = createThunkAction(
+  'setGlobalSectionThunk',
+  type => (dispatch, getState) => {
+    const { section } = getState().section
+    dispatch(setGlobalSection({ type, section }))
+  }
+)
 export const setWhereToProtectData = createAction('setWhereToProtectData')
 
 export const selectGlobalSelector = createAction(
@@ -59,5 +66,12 @@ export const getChartData = createThunkAction(
 )
 
 export const setType = createAction('setType:global')
+export const setTypeThunk = createThunkAction(
+  'setType:globalThunk',
+  type => (dispatch, getState) => {
+    const { section } = getState().section
+    dispatch(setType({ type, section }))
+  }
+)
 export const togglePane = createAction('global:togglePane')
 export const setLayerOpacity = createAction('setLayerOpacity')
