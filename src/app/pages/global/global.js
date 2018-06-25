@@ -39,12 +39,12 @@ const mapStateToProps = state => {
   const index = Math.round(earthometer.landSaved.value)
   const globalConservationPrioritization = {
     ...global.charts.globalConservationPrioritization,
-    data: (
-      global.charts.globalConservationPrioritization.data[index] || []
-    ).map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
+    data: (global.charts.globalConservationPrioritization.data[index] || [])
+      .map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
   }
   return {
     map,
+    sidebarOpen: state.sidebar.open,
     selectedType: getType(getSection(state)),
     layers: global.layers,
     section: section.section,
@@ -58,11 +58,8 @@ const mapStateToProps = state => {
 }
 
 export { actions, reducers, initialState }
-export default connect(
-  mapStateToProps,
-  {
-    ...actions,
-    ...cartoActions,
-    ...sectionActions
-  }
-)(GlobalContainer)
+export default connect(mapStateToProps, {
+  ...actions,
+  ...cartoActions,
+  ...sectionActions
+})(GlobalContainer)
