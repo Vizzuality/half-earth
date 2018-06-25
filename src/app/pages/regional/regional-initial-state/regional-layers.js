@@ -1,7 +1,8 @@
 import { cartoConfig } from 'app/utils'
 import { utils } from 'pages/map'
 
-const { MAPBOX_TOKEN, MOLLayer } = utils
+const { MOLLayer } = utils
+const { MAPBOX_TOKEN } = process.env
 
 export default [
   {

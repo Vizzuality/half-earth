@@ -4,6 +4,9 @@ import isEqual from 'lodash/isEqual'
 
 import { assign } from 'utils'
 import CesiumMapComponent from './map-component'
+
+const { MAPBOX_TOKEN } = process.env
+
 const { Cesium } = window
 
 const mapId = `map-${new Date().getTime()}`
@@ -49,7 +52,7 @@ class CesiumComponent extends Component {
       fullscreenButton: false,
       skyAtmosphere: false,
       imageryProvider: new Cesium.UrlTemplateImageryProvider({
-        url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNoYWxmZWFydGgiLCJhIjoiY2o4Mnh4aDN6MGNqazMzc2FkeTlnajBoeiJ9.5Su3_JeAsjM0slTkaGFihw&`
+        url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`
       })
     }
 
@@ -193,7 +196,7 @@ class CesiumComponent extends Component {
   addTick () {
     const { viewer } = this.state
     if (this.ticking) return
-    viewer.clock.onTick.addEventListener(c => this.onTick(c))
+    viewer.clock.onTick.addEventListener(this.onTick)
     this.ticking = true
   }
 
