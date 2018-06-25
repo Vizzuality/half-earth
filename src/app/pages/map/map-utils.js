@@ -7,8 +7,7 @@ export const requestCartos = ({ layers, getCartoTiles }) => {
   })
 }
 
-export const MAPBOX_TOKEN =
-  'pk.eyJ1IjoiamNoYWxmZWFydGgiLCJhIjoiY2o4Mnh4aDN6MGNqazMzc2FkeTlnajBoeiJ9.5Su3_JeAsjM0slTkaGFihw'
+export const { MAPBOX_TOKEN } = process.env
 
 export const MOLLayer = (name, species, type) => ({
   name,

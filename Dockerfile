@@ -11,7 +11,7 @@ WORKDIR /app
 RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
 
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-RUN yarn install && mkdir -p /app/src && mkdir -p /app/config && mkdir -p /app/public 
+RUN yarn install && mkdir -p /app/src && mkdir -p /app/config && mkdir -p /app/public
 
 
 COPY .babelrc .postcssrc ./
@@ -19,8 +19,8 @@ COPY src ./src
 COPY config ./config
 COPY public ./public
 
-## Build the angular app in production mode and store the artifacts in dist folder
-
+## Build the app in production mode and store the artifacts in dist folder
+ENV NODE_ENV=production
 ENV GOOGLE_ANALYTICS=UA-28439074-2
 RUN npm run build
 
