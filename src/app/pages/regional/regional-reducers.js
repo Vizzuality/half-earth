@@ -7,7 +7,6 @@ import uniq from 'lodash/uniq'
 import toLower from 'lodash/toLower'
 import first from 'lodash/first'
 import merge from 'lodash/fp/merge'
-import { assign } from 'utils'
 import { filterToLayer } from './regional-utils'
 import { actions as cartoActions } from 'providers/carto'
 import * as mapReducers from 'pages/map/map-reducers'
@@ -17,8 +16,8 @@ import * as keyActions from 'providers/keyboard/keyboard-actions'
 
 const { togglePane, setLayerOpacity } = paneReducers
 
-const makeVisible = l => assign(l, { visible: true })
-const makeHidden = l => assign(l, { visible: false })
+const makeVisible = l => ({ ...l, visible: true })
+const makeHidden = l => ({ ...l, visible: false })
 const toPayload = payload => ({ payload })
 
 const toggleFilters = (state, { payload }) => {
@@ -26,9 +25,10 @@ const toggleFilters = (state, { payload }) => {
     key: state.sidePopup.selected
   })
   const others = difference(state.sidePopup.content, [current])
-  const withFilters = assign(current, {
+  const withFilters = {
+    ...current,
     filters: [payload]
-  })
+  }
 
   const filters = uniq(current.species.map(f => toLower(f.taxoGroup)))
   const content = others.concat(withFilters)
@@ -165,9 +165,7 @@ export default {
     const escaped = payload.key === 'Escape'
     return state.popup.open && escaped
       ? closePopup(state)
-      : state.sidePopup.open && escaped
-        ? closeSidePopup(state)
-        : state
+      : state.sidePopup.open && escaped ? closeSidePopup(state) : state
   },
 
   [actions.selectRegionalSelector]: (state, { payload }) => {

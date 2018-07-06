@@ -1,6 +1,5 @@
 import { createElement, Component } from 'react'
 import isUndefined from 'lodash/isUndefined'
-import { assign } from 'utils'
 import { clickOutside } from 'utils/react'
 
 import DropdownComponent from './dropdown-component'
@@ -43,18 +42,16 @@ class DropdownContainer extends Component {
     const { getContainer, selectItem, open, close, toggleOpen } = this
     const { sort } = this.props
     const { closed } = this.state
-    return createElement(
-      DropdownComponent,
-      assign(this.props, {
-        closed,
-        sort: isUndefined(sort) ? true : sort,
-        selectItem,
-        toggleOpen,
-        open,
-        close,
-        getContainer
-      })
-    )
+    return createElement(DropdownComponent, {
+      ...this.props,
+      closed,
+      sort: isUndefined(sort) ? true : sort,
+      selectItem,
+      toggleOpen,
+      open,
+      close,
+      getContainer
+    })
   }
 }
 

@@ -3,7 +3,6 @@ import { Provider } from 'react-redux'
 import { Route, Router } from 'react-router-dom'
 import 'app/styles/global.scss'
 
-import { assign } from 'utils'
 import store, { history } from 'app/store'
 import routes from 'app/routes'
 import Layout from 'app/layout'
@@ -16,10 +15,7 @@ export default () => {
       <Router history={history}>
         <Layout>
           {routes.map(route =>
-            createElement(
-              Route,
-              assign(route, { key: route.key || route.path })
-            )
+            createElement(Route, { ...route, key: route.key || route.path })
           )}
           <Route component={NoMatch} />
         </Layout>

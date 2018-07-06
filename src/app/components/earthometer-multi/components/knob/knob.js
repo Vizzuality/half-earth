@@ -1,10 +1,7 @@
 import { createElement, Component } from 'react'
 import KnobComponent from './knob-component'
-import { assign } from 'utils'
 import { getAngle } from './knob-utils'
-import { lerp, clamp } from 'app/utils'
-
-export const π = Math.PI
+import { lerp, maxClamp } from 'app/utils'
 
 class Knob extends Component {
   constructor (props) {
@@ -15,8 +12,8 @@ class Knob extends Component {
     this.getContainer = this.getContainer.bind(this)
 
     const { halfTickWidth, handleWidth, trackWidth, radius } = props
-    const C = 2 * π * radius
-    const trackDashOffset = 2 * π * (radius / 6)
+    const C = 2 * Math.PI * radius
+    const trackDashOffset = 2 * Math.PI * (radius / 6)
     const halfOffset = C - trackDashOffset - halfTickWidth
 
     const halfDashOffset =
@@ -71,7 +68,7 @@ class Knob extends Component {
     if (angle < 0) angle += 360
     if (angle > 330) angle = 0 // reset going going over center
 
-    const percent = clamp(
+    const percent = maxClamp(
       lerp(angle, 0, 300, 0, 1),
       this.props.min || 0,
       this.props.max || 1
@@ -131,22 +128,20 @@ class Knob extends Component {
     const handleDashOffset =
       handleOffset * (1 - percent) + trackDashOffset + 2 * handleWidth
 
-    return createElement(
-      KnobComponent,
-      assign({}, this.props, {
-        radius: R,
-        percent,
-        trackWidth,
-        dashArray: C,
-        trackDashOffset,
-        progressDashOffset,
-        halfDashOffset,
-        halfDashArray,
-        handleDashOffset,
-        handleDashArray,
-        getContainer: this.getContainer
-      })
-    )
+    return createElement(KnobComponent, {
+      ...this.props,
+      radius: R,
+      percent,
+      trackWidth,
+      dashArray: C,
+      trackDashOffset,
+      progressDashOffset,
+      halfDashOffset,
+      halfDashArray,
+      handleDashOffset,
+      handleDashArray,
+      getContainer: this.getContainer
+    })
   }
 }
 

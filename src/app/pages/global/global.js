@@ -1,8 +1,6 @@
 import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
 
-import { assign } from 'utils'
-
 import { renderDropdown, renderToggle } from 'components/explorable'
 import GlobalComponent from './global-component'
 import { requestCartos } from 'pages/map/map-utils'
@@ -29,7 +27,7 @@ class GlobalContainer extends Component {
     getChartData()
   }
   render () {
-    return createElement(GlobalComponent, assign(this.props))
+    return createElement(GlobalComponent, this.props)
   }
 }
 

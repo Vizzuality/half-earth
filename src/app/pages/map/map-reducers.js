@@ -7,7 +7,6 @@ import find from 'lodash/find'
 import findIndex from 'lodash/findIndex'
 import difference from 'lodash/difference'
 import { get, ofPath, of, set, compose } from 'js-lenses'
-import { assign } from 'app/utils'
 import * as actions from './map-actions'
 
 export const updateLayer = (state, { payload, ...rest }) => {
@@ -16,12 +15,12 @@ export const updateLayer = (state, { payload, ...rest }) => {
   const layer = find(layers, { name })
   if (!layer) return state
   const filtered = difference(layers, [layer]).map(
-    reset ? l => assign(l, { visible: false }) : identity
+    reset ? l => ({ ...l, visible: false }) : identity
   )
 
   return {
     ...state,
-    layers: sortBy(filtered.concat([assign(layer, payload(layer))]), 'name')
+    layers: sortBy(filtered.concat([{ ...layer, ...payload(layer) }]), 'name')
   }
 }
 

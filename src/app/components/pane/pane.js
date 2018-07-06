@@ -5,7 +5,7 @@ import identity from 'lodash/identity'
 import find from 'lodash/find'
 import kebabCase from 'lodash/kebabCase'
 import last from 'lodash/last'
-import { assign, pick } from 'app/utils'
+import { pick } from 'app/utils'
 import { actions as regionalActions } from 'pages/regional'
 import { actions as globalActions } from 'pages/global'
 import { layersInfo } from 'data/layers-info'
@@ -19,13 +19,14 @@ const addInfo = (data, infos, page) =>
   data &&
   data.map(
     datum =>
-      assign(datum, {
+      ({
+        ...datum,
         info: pick(
           find(infos, { key: dToKey(datum) }) ||
             find(infos, { key: `${page}-${dToKey(datum)}` }),
           'key'
         )
-      }) || []
+      } || [])
   )
 
 const mapStateToProps = (state, { page, ...props }) => {

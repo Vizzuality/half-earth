@@ -2,7 +2,6 @@ import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
 import isEqual from 'lodash/isEqual'
 
-import { assign } from 'utils'
 import CesiumMapComponent from './map-component'
 
 const { MAPBOX_TOKEN } = process.env
@@ -12,7 +11,7 @@ const { Cesium } = window
 const mapId = `map-${new Date().getTime()}`
 
 const bindFlyTo = v => (lat, long, z = 15000.0, rest = {}) =>
-  v.camera.flyTo(assign({ destination: { x: lat, y: long, z } }, rest))
+  v.camera.flyTo({ destination: { x: lat, y: long, z }, ...rest })
 
 const disablePanning = v => {
   const { scene } = v
@@ -100,7 +99,7 @@ class CesiumComponent extends Component {
 
   componentDidMount () {
     const { props } = this
-    this.bindMap(Object.assign(props))
+    this.bindMap(props)
     if (props.zoomLevel) this.handleZoom(props.zoomLevel)
     if (props.onTick) this.addTick()
   }

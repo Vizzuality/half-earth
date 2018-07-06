@@ -1,8 +1,10 @@
 import * as actions from './earthometer-multi-actions'
-import { assign, clamp } from 'app/utils'
+import { maxClamp } from 'app/utils'
 
-const setValue = (saved, min, max) => (state, { payload }) =>
-  assign(state, { [`${saved}Saved`]: { value: clamp(payload, min, max) } })
+const setValue = (saved, min, max) => (state, { payload }) => ({
+  ...state,
+  [`${saved}Saved`]: { value: maxClamp(payload, min, max) }
+})
 
 export default {
   [actions.setLandSaved]: setValue('land', 15, 50),

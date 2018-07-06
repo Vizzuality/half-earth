@@ -43,7 +43,6 @@ export const clickOutside = Comp =>
     }
   }
 
-const assign = (o, ...rest) => Object.assign({}, o, ...rest)
 const isFunction = object => typeof object === 'function'
 const isSymbol = object => typeof object === 'symbol'
 
@@ -88,6 +87,10 @@ export const withReducers = ({ actions, reducers, initialState }) => Comp =>
     }
 
     render () {
-      return createElement(Comp, assign(this.props, this.state, this.actions))
+      return createElement(Comp, {
+        ...this.props,
+        ...this.state,
+        ...this.actions
+      })
     }
   }

@@ -1,6 +1,5 @@
 import React from 'react'
 import cx from 'classnames'
-import { assign } from 'utils'
 import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
 import Scroller, { Element as P } from 'components/scroller'
 import SidePopup from 'components/side-popup'
@@ -45,9 +44,10 @@ const Regional = ({
       <PopUp open={regional.popup.open} close={() => closePopup()}>
         {regional.popup.selected && (
           <ImageContent
-            content={assign(regional.popup.selected, {
+            content={{
+              ...regional.popup.selected,
               attribution: regional.popup.selected.supplier
-            })}
+            }}
           />
         )}
       </PopUp>

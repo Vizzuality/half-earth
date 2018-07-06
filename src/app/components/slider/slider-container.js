@@ -8,7 +8,7 @@ function capitalize (str) {
   return str.charAt(0).toUpperCase() + str.substr(1)
 }
 
-function clamp (value, min, max) {
+function minClamp (value, min, max) {
   return Math.min(Math.max(value, min), max)
 }
 
@@ -48,7 +48,7 @@ class SliderContainer extends Component {
     const diffValMin = value - min
     const percentage = diffValMin / diffMaxMin
     return Math.round(percentage * limit)
-  };
+  }
 
   /**
    * Translate position of slider to slider value
@@ -59,7 +59,7 @@ class SliderContainer extends Component {
     let value = null
     const { limit } = this.state
     const { orientation, min, max, step } = this.props
-    const percentage = clamp(pos, 0, limit) / (limit || 1)
+    const percentage = minClamp(pos, 0, limit) / (limit || 1)
     const baseVal = step * Math.round(percentage * (max - min) / step)
 
     if (orientation === 'horizontal') {
@@ -72,7 +72,7 @@ class SliderContainer extends Component {
     if (value <= min) value = min
 
     return value
-  };
+  }
 
   /**
    * Calculate position of slider based on value
@@ -101,7 +101,7 @@ class SliderContainer extends Component {
       : coordinate - direction - grabOffset
 
     return this.getValueFromPosition(pos)
-  };
+  }
 
   /**
    * Update slider state on change
@@ -117,7 +117,7 @@ class SliderContainer extends Component {
       limit: sliderPos, // - handlePos,
       grab: handlePos / 2
     })
-  };
+  }
 
   /**
    * Handle drag/mousemove event
@@ -132,7 +132,7 @@ class SliderContainer extends Component {
     if (!onChange) return
     const value = this.position(e)
     this.state.mouseDown && onChange && onChange(value, e)
-  };
+  }
 
   /**
    * Attach event listeners to mousemove/mouseup events
@@ -145,7 +145,7 @@ class SliderContainer extends Component {
     document.addEventListener('mousemove', this.handleDrag)
     document.addEventListener('mouseup', this.handleEnd)
     this.handleDrag(e)
-  };
+  }
 
   /**
    * Detach event listeners to mousemove/mouseup events
@@ -157,7 +157,7 @@ class SliderContainer extends Component {
     this.state.mouseDown = false
     document.removeEventListener('mousemove', this.handleDrag)
     document.removeEventListener('mouseup', this.handleEnd)
-  };
+  }
 
   /**
    * Prevent default event and bubbling
@@ -167,7 +167,7 @@ class SliderContainer extends Component {
   handleNoop = e => {
     e.stopPropagation()
     e.preventDefault()
-  };
+  }
 
   /**
    * Grab coordinates of slider
@@ -194,7 +194,7 @@ class SliderContainer extends Component {
       fill: fillPos,
       handle: handlePos
     }
-  };
+  }
 
   render () {
     const {
