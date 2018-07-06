@@ -16,7 +16,7 @@ const defaultRegional = {
   south: -34.437568,
   east: 42.014225,
   west: 13.532018
-}
+};
 
 export default [
   {
@@ -31,4 +31,4 @@ export default [
     ...defaultRegional,
     position: [24.876767, -15.93911]
   }
-]
+];

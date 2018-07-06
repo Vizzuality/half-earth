@@ -1,17 +1,17 @@
-import React from 'react'
-import find from 'lodash/find'
-import isFunction from 'lodash/isFunction'
-import cx from 'classnames'
+import React from 'react';
+import find from 'lodash/find';
+import isFunction from 'lodash/isFunction';
+import cx from 'classnames';
 
-import PopUp from 'components/pop-up/pop-up'
-import Expand from './components/expand'
-import Row from './components/row'
-import Toggle from './components/toggle'
-import Info from './components/info'
-import Opacity from './components/opacity'
+import PopUp from 'components/pop-up/pop-up';
+import Expand from './components/expand';
+import Row from './components/row';
+import Toggle from './components/toggle';
+import Info from './components/info';
+import Opacity from './components/opacity';
 
-import rowStyles from './components/row/row-styles'
-import styles from './pane-styles'
+import rowStyles from './components/row/row-styles';
+import styles from './pane-styles';
 
 const Layer = ({
   l,
@@ -39,7 +39,7 @@ const Layer = ({
       />
     </div>
   </Row>
-)
+);
 
 const PaneList = props => {
   const {
@@ -52,7 +52,7 @@ const PaneList = props => {
     opacities,
     openPopup,
     className
-  } = props
+  } = props;
   return panes ? (
     <ul key="pane-info-rows" className={cx(className, styles.panes)}>
       {panes.map(pane => (
@@ -66,7 +66,7 @@ const PaneList = props => {
           >
             {pane.layers &&
               pane.layers.map(l => {
-                const layer = find(layers, { name: l.key })
+                const layer = find(layers, { name: l.key });
                 return (
                   layer && (
                     <Layer
@@ -82,7 +82,7 @@ const PaneList = props => {
                       }}
                     />
                   )
-                )
+                );
               })}
             {pane.panes && (
               <PaneList
@@ -97,24 +97,24 @@ const PaneList = props => {
         </li>
       ))}
     </ul>
-  ) : null
-}
+  ) : null;
+};
 
 const Pane = props => {
-  const { popup, closePopup, selectedPopup } = props
+  const { popup, closePopup, selectedPopup } = props;
 
   return [
     <PopUp key="pane-info-popup" open={popup.open} close={() => closePopup()}>
       <div className={styles.popup}>
         <div className={styles.popupContent}>
           {selectedPopup &&
-          selectedPopup.title && (
-            <h1 className={styles.popupTitle}>{selectedPopup.title}</h1>
-          )}
+            selectedPopup.title && (
+              <h1 className={styles.popupTitle}>{selectedPopup.title}</h1>
+            )}
           {selectedPopup &&
-          selectedPopup.subtitle && (
-            <h2 className={styles.popupSubtitle}>{selectedPopup.subtitle}</h2>
-          )}
+            selectedPopup.subtitle && (
+              <h2 className={styles.popupSubtitle}>{selectedPopup.subtitle}</h2>
+            )}
           {selectedPopup &&
             (isFunction(selectedPopup.content) ? (
               <selectedPopup.content />
@@ -128,21 +128,21 @@ const Pane = props => {
               selectedPopup.description
             ))}
           {selectedPopup &&
-          selectedPopup.keywords && (
-            <p className={styles.keyWords}>
-              <h2 className={styles.keywordLabel}>Keywords</h2>
-              <div className={styles.keywordList}>
-                {selectedPopup.keywords.join(', ')}
-              </div>
-            </p>
-          )}
+            selectedPopup.keywords && (
+              <p className={styles.keyWords}>
+                <h2 className={styles.keywordLabel}>Keywords</h2>
+                <div className={styles.keywordList}>
+                  {selectedPopup.keywords.join(', ')}
+                </div>
+              </p>
+            )}
         </div>
       </div>
     </PopUp>,
     <div key="pane-list" className={styles.paneContainer}>
       <PaneList {...props} />
     </div>
-  ]
-}
+  ];
+};
 
-export default Pane
+export default Pane;

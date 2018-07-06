@@ -1,1 +1,1 @@
-export { default } from './info-component'
+export { default } from './info-component';

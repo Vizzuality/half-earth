@@ -2,17 +2,17 @@
 
 class Flock {
   constructor () {
-    this.boids = [] // Initialize the ArrayList
+    this.boids = []; // Initialize the ArrayList
   }
 
   run (renderBoid) {
-    const { boids } = this
-    boids.map(boid => renderBoid(boid.update(boids)))
+    const { boids } = this;
+    boids.map(boid => renderBoid(boid.update(boids)));
   }
 
   addBoid (b) {
-    this.boids.push(b)
+    this.boids.push(b);
   }
 }
 
-export default Flock
+export default Flock;

@@ -9,7 +9,7 @@ export const speciesSelector = selected => ({
     turtles: 'Turtles'
   },
   selected
-})
+});
 export const speciesSelections = type => ({
   mammals: `mammals:${type}`,
   amphibians: `amphibians:${type}`,
@@ -18,18 +18,18 @@ export const speciesSelections = type => ({
   conifers: `conifers:${type}`,
   'all-taxa': `all-taxa:${type}`,
   turtles: `turtles:${type}`
-})
+});
 
 export const allTaxaSelector = selected => ({
   options: {
     'all-taxa': 'All taxa'
   },
   selected
-})
+});
 
 export const allTaxaSelections = type => ({
   'all-taxa': `all-taxa:${type}`
-})
+});
 
 export default {
   'global:1': {
@@ -54,4 +54,4 @@ export default {
   'global:4': {
     layers: ['human-pressures', 'prioritization-of-places-15']
   }
-}
+};

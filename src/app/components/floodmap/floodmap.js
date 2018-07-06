@@ -1,1 +1,1 @@
-export { default } from './floodmap-component'
+export { default } from './floodmap-component';

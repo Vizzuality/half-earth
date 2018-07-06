@@ -1,38 +1,38 @@
-import { Component, createElement } from 'react'
-import { connect } from 'react-redux'
-import { renderDropdown, renderToggle } from 'components/explorable'
-import { requestCartos } from 'pages/map/map-utils'
-import * as actions from './regional-actions'
-import { getSection, getType } from './regional-selectors'
-import { actions as cartoActions } from 'providers/carto'
-import { actions as sectionActions } from 'providers/section'
+import { Component, createElement } from 'react';
+import { connect } from 'react-redux';
+import { renderDropdown, renderToggle } from 'components/explorable';
+import { requestCartos } from 'pages/map/map-utils';
+import * as actions from './regional-actions';
+import { getSection, getType } from './regional-selectors';
+import { actions as cartoActions } from 'providers/carto';
+import { actions as sectionActions } from 'providers/section';
 
-import reducers from './regional-reducers'
-import initialState from './regional-initial-state'
-import RegionalComponent from './regional-component'
+import reducers from './regional-reducers';
+import initialState from './regional-initial-state';
+import RegionalComponent from './regional-component';
 
 class RegionalConTainer extends Component {
   constructor (props) {
-    super(props)
+    super(props);
     const {
       getCartoTiles,
       setRegionalSectionThunk,
       setSection,
       getBillboards
-    } = props
-    const { layers } = props.regional
-    requestCartos({ layers, getCartoTiles })
-    setRegionalSectionThunk('regional:1')
-    setSection('regional:1')
-    getBillboards()
+    } = props;
+    const { layers } = props.regional;
+    requestCartos({ layers, getCartoTiles });
+    setRegionalSectionThunk('regional:1');
+    setSection('regional:1');
+    getBillboards();
   }
   render () {
-    return createElement(RegionalComponent, this.props)
+    return createElement(RegionalComponent, this.props);
   }
 }
 
 const mapStateToProps = state => {
-  const { map, regional, section } = state
+  const { map, regional, section } = state;
 
   return {
     map,
@@ -41,10 +41,10 @@ const mapStateToProps = state => {
     section,
     renderToggle: renderToggle(regional.layers),
     renderDropdown: renderDropdown(regional.sections)
-  }
-}
+  };
+};
 
-export { reducers, initialState, actions }
+export { reducers, initialState, actions };
 export default connect(
   mapStateToProps,
   {
@@ -52,4 +52,4 @@ export default connect(
     ...actions,
     ...sectionActions
   }
-)(RegionalConTainer)
+)(RegionalConTainer);

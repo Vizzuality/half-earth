@@ -1,1 +1,1 @@
-export { default } from './text-content-component'
+export { default } from './text-content-component';

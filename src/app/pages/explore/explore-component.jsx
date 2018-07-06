@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-import PaneToggle from './components/pane-toggle'
-import Toggle from './components/toggle'
-import Opacity from './components/opacity'
-import Expand from './components/expand'
-import Row from './components/row'
-import rowStyles from './components/row/row-styles'
+import PaneToggle from './components/pane-toggle';
+import Toggle from './components/toggle';
+import Opacity from './components/opacity';
+import Expand from './components/expand';
+import Row from './components/row';
+import rowStyles from './components/row/row-styles';
 
 const Explore = ({
   landCoverFold,
@@ -44,7 +44,8 @@ const Explore = ({
             value={opacity.value}
             options={opacity.options}
             update={value =>
-              updateOpacity({ path: ['opacity', 'value'], value })}
+              updateOpacity({ path: ['opacity', 'value'], value })
+            }
           />
         </div>
       </Row>
@@ -69,12 +70,13 @@ const Explore = ({
             value={opacity.value}
             options={opacity.options}
             update={value =>
-              updateOpacity({ path: ['opacity', 'value'], value })}
+              updateOpacity({ path: ['opacity', 'value'], value })
+            }
           />
         </div>
       </Row>
     </Expand>
   </div>
-)
+);
 
-export default Explore
+export default Explore;

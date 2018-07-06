@@ -1,1 +1,1 @@
-export { default } from './expand-component'
+export { default } from './expand-component';

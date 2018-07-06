@@ -1,7 +1,7 @@
-import Home from 'pages/home'
-import Global from 'pages/global'
-import Regional from 'pages/regional'
-import Explore from 'pages/explore'
+import Home from 'pages/home';
+import Global from 'pages/global';
+import Regional from 'pages/regional';
+import Explore from 'pages/explore';
 
 export default [
   {
@@ -24,4 +24,4 @@ export default [
     exact: true,
     component: Explore
   }
-]
+];

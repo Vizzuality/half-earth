@@ -1,8 +1,12 @@
-const { PI } = Math
-const toRadians = deg => deg * (PI / 180)
-const PI_OVER_FOUR = PI / 4
+const { PI } = Math;
+const toRadians = deg => deg * (PI / 180);
+const PI_OVER_FOUR = PI / 4;
 
-export const home = [1553050.2420231537, -7982538.989058298, 208217.95614838324]
+export const home = [
+  1553050.2420231537,
+  -7982538.989058298,
+  208217.95614838324
+];
 
 const homeZoom = [
   home,
@@ -30,7 +34,7 @@ const homeZoom = [
       z: 1589391.5741452249
     }
   }
-]
+];
 
 export default {
   home: homeZoom,
@@ -52,4 +56,4 @@ export default {
   ],
   // global: [[18164909.39474914, -5635861.180443844, -985462.2374030603], null]
   global: [[16950078.329516124, 6216309.802733912, -985462.2374030603], null]
-}
+};

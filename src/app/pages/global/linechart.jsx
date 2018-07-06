@@ -1,5 +1,5 @@
-import React from 'react'
-import uiStyles from 'app/styles/ui'
+import React from 'react';
+import uiStyles from 'app/styles/ui';
 
 const LineChart = props => (
   <div className={uiStyles.lineChartGlobal}>
@@ -222,6 +222,6 @@ const LineChart = props => (
       </g>
     </svg>
   </div>
-)
+);
 
-export default LineChart
+export default LineChart;

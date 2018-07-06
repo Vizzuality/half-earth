@@ -1,13 +1,13 @@
-import React, { createElement } from 'react'
-import { Provider } from 'react-redux'
-import { Route, Router } from 'react-router-dom'
-import 'app/styles/global.scss'
+import React, { createElement } from 'react';
+import { Provider } from 'react-redux';
+import { Route, Router } from 'react-router-dom';
+import 'app/styles/global.scss';
 
-import store, { history } from 'app/store'
-import routes from 'app/routes'
-import Layout from 'app/layout'
+import store, { history } from 'app/store';
+import routes from 'app/routes';
+import Layout from 'app/layout';
 
-const NoMatch = props => <h1>404</h1>
+const NoMatch = props => <h1>404</h1>;
 
 export default () => {
   return (
@@ -21,5 +21,5 @@ export default () => {
         </Layout>
       </Router>
     </Provider>
-  )
-}
+  );
+};

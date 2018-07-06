@@ -1,58 +1,58 @@
-import { combineReducers } from 'redux'
-import { handleActions } from 'redux-tools'
-import { routerReducer } from 'react-router-redux'
+import { combineReducers } from 'redux';
+import { handleActions } from 'redux-tools';
+import { routerReducer } from 'react-router-redux';
 
 import {
   reducers as zoomReducers,
   initialState as zoomState
-} from 'components/zoom'
+} from 'components/zoom';
 
 import {
   reducers as earthometerReducers,
   initialState as earthometerState
-} from 'components/earthometer-multi'
+} from 'components/earthometer-multi';
 
-import { reducers as mapReducers, initialState as mapState } from 'pages/map'
+import { reducers as mapReducers, initialState as mapState } from 'pages/map';
 
 import {
   reducers as sidebarReducers,
   initialState as sidebarState
-} from 'components/sidebar'
+} from 'components/sidebar';
 
 import {
   reducers as sectionReducers,
   initialState as sectionState
-} from 'providers/section'
+} from 'providers/section';
 
 import {
   reducers as regionalReducers,
   initialState as regionalState
-} from 'pages/regional'
+} from 'pages/regional';
 
 import {
   reducers as globalReducers,
   initialState as globalState
-} from 'pages/global'
+} from 'pages/global';
 
 import {
   reducers as navFooterReducers,
   initialState as navFooterState
-} from 'components/nav-footer'
+} from 'components/nav-footer';
 
 import {
   reducers as legendLayersReducers,
   initialState as legendLayersState
-} from 'components/legend/legend-layers/legend-layers'
+} from 'components/legend/legend-layers/legend-layers';
 
 import {
   reducers as paneReducers,
   initialState as paneState
-} from 'components/pane'
+} from 'components/pane';
 
 import {
   reducers as interactReducers,
   initialState as interactState
-} from 'providers/interact'
+} from 'providers/interact';
 
 export default combineReducers({
   routing: routerReducer,
@@ -67,4 +67,4 @@ export default combineReducers({
   global: handleActions(globalReducers, globalState),
   pane: handleActions(paneReducers, paneState),
   interactions: handleActions(interactReducers, interactState)
-})
+});

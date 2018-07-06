@@ -1,10 +1,10 @@
-import React from 'react'
-import cx from 'classnames'
+import React from 'react';
+import cx from 'classnames';
 
-import styles from './video-content-styles.scss'
+import styles from './video-content-styles.scss';
 
 const VideoContent = ({ className, content, playing, onClickPlay }) => {
-  const { description, background, video } = content
+  const { description, background, video } = content;
   return (
     <div
       className={cx([className, styles.videoContent])}
@@ -31,6 +31,6 @@ const VideoContent = ({ className, content, playing, onClickPlay }) => {
         </div>
       )}
     </div>
-  )
-}
-export default VideoContent
+  );
+};
+export default VideoContent;

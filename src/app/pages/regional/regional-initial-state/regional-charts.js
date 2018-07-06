@@ -28,4 +28,4 @@ export default {
     ],
     dimensions: [{ key: 'percent' }]
   }
-}
+};

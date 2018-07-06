@@ -1,8 +1,8 @@
-import React from 'react'
-import cx from 'classnames'
-import styles from './toggle-styles'
+import React from 'react';
+import cx from 'classnames';
+import styles from './toggle-styles';
 
-const onOff = isOn => (isOn ? 'On' : 'Off')
+const onOff = isOn => (isOn ? 'On' : 'Off');
 
 const Toggle = ({ isOn, toggle, label, ...props }) => (
   <div className={styles.container}>
@@ -23,6 +23,6 @@ const Toggle = ({ isOn, toggle, label, ...props }) => (
       </button>
     </div>
   </div>
-)
+);
 
-export default Toggle
+export default Toggle;

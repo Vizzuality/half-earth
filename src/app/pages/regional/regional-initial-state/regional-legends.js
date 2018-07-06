@@ -44,7 +44,7 @@ const richnessLegend = {
     max: 68,
     group: 'richness'
   }
-}
+};
 
 const rarityLegend = {
   mammals: {
@@ -92,13 +92,13 @@ const rarityLegend = {
     max: 69,
     group: 'rarity'
   }
-}
+};
 
 const pressureLegend = {
   label: 'Human Pressures',
   color: 'burgundy',
   type: 'simple'
-}
+};
 
 export default {
   'key-biodiversity-areas': {
@@ -189,4 +189,4 @@ export default {
     type: 'multiple',
     elements: [richnessLegend.restio, pressureLegend]
   }
-}
+};

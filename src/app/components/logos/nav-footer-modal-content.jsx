@@ -1,6 +1,6 @@
-import React from 'react'
-import cx from 'classnames'
-import styles from './logos-styles.scss'
+import React from 'react';
+import cx from 'classnames';
+import styles from './logos-styles.scss';
 
 const partners = [
   {
@@ -26,7 +26,7 @@ const partners = [
       alt: 'vizzuality'
     }
   }
-]
+];
 
 const dataPartners = [
   {
@@ -155,7 +155,7 @@ const dataPartners = [
       alt: 'wwf'
     }
   }
-]
+];
 
 const researchPartners = [
   {
@@ -235,7 +235,7 @@ const researchPartners = [
       alt: 'Google Earth Engine'
     }
   }
-]
+];
 
 const engagementPartners = [
   {
@@ -252,7 +252,7 @@ const engagementPartners = [
       alt: 'OPS'
     }
   }
-]
+];
 
 const modelConservationEffortsPartners = [
   {
@@ -276,7 +276,7 @@ const modelConservationEffortsPartners = [
       alt: 'tompkings conservation'
     }
   }
-]
+];
 
 const sections = [
   {
@@ -299,7 +299,7 @@ const sections = [
     title: 'Model Conservation Efforts Partners',
     content: modelConservationEffortsPartners
   }
-]
+];
 
 const ModalContent = props => (
   <div className={styles.footerModal}>
@@ -312,7 +312,7 @@ const ModalContent = props => (
       ])}
     </div>
   </div>
-)
+);
 
 const ModalLogo = ({ href, image, className }) => (
   <a
@@ -322,6 +322,6 @@ const ModalLogo = ({ href, image, className }) => (
   >
     <img src={image.src} alt={image.alt} className={image.className} />
   </a>
-)
+);
 
-export default ModalContent
+export default ModalContent;

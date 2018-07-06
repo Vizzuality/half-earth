@@ -1,28 +1,28 @@
-import { Component } from 'react'
-const { Cesium } = window
+import { Component } from 'react';
+const { Cesium } = window;
 
-const notEmpty = o => o && o._layers && Boolean(o._layers.length)
+const notEmpty = o => o && o._layers && Boolean(o._layers.length);
 
 const formatParams = (type, props) => {
   switch (type) {
     case 'WebMapService':
-      const { url, layers, ...parameters } = props
-      return { url, layers, parameters }
+      const { url, layers, ...parameters } = props;
+      return { url, layers, parameters };
 
     default:
-      return props
+      return props;
   }
-}
+};
 
 class ImageProvider extends Component {
   constructor (props) {
-    super(props)
-    this.layer = null
-    this.keep = false
+    super(props);
+    this.layer = null;
+    this.keep = false;
   }
   componentWillUnmount () {
-    const { viewer } = this.props
-    if (!this.keep) viewer.imageryLayers.remove(this.layer)
+    const { viewer } = this.props;
+    if (!this.keep) viewer.imageryLayers.remove(this.layer);
   }
   componentWillReceiveProps ({
     cLayers,
@@ -37,19 +37,19 @@ class ImageProvider extends Component {
       if (!this.layer) {
         const provider = new Cesium[`${type}ImageryProvider`](
           formatParams(type, props)
-        )
-        provider.errorEvent.addEventListener(e => false)
-        this.layer = cLayers.addImageryProvider(provider)
+        );
+        provider.errorEvent.addEventListener(e => false);
+        this.layer = cLayers.addImageryProvider(provider);
       }
-      this.keep = keep
-      this.layer.show = Boolean(visible)
-      this.layer.alpha = opacity / 100 || 1
+      this.keep = keep;
+      this.layer.show = Boolean(visible);
+      this.layer.alpha = opacity / 100 || 1;
     }
   }
 
   render () {
-    return null
+    return null;
   }
 }
 
-export default ImageProvider
+export default ImageProvider;

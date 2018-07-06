@@ -1,20 +1,20 @@
-import PaneComponent from './pane-component'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import identity from 'lodash/identity'
-import find from 'lodash/find'
-import kebabCase from 'lodash/kebabCase'
-import last from 'lodash/last'
-import { pick } from 'app/utils'
-import { actions as regionalActions } from 'pages/regional'
-import { actions as globalActions } from 'pages/global'
-import { layersInfo } from 'data/layers-info'
+import PaneComponent from './pane-component';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import identity from 'lodash/identity';
+import find from 'lodash/find';
+import kebabCase from 'lodash/kebabCase';
+import last from 'lodash/last';
+import { pick } from 'app/utils';
+import { actions as regionalActions } from 'pages/regional';
+import { actions as globalActions } from 'pages/global';
+import { layersInfo } from 'data/layers-info';
 
-import reducers from './pane-reducers'
-import * as actions from './pane-actions'
-import initialState from './pane-initial-state'
+import reducers from './pane-reducers';
+import * as actions from './pane-actions';
+import initialState from './pane-initial-state';
 
-const dToKey = d => kebabCase(last(d.name.split(':')))
+const dToKey = d => kebabCase(last(d.name.split(':')));
 const addInfo = (data, infos, page) =>
   data &&
   data.map(
@@ -27,11 +27,11 @@ const addInfo = (data, infos, page) =>
           'key'
         )
       } || [])
-  )
+  );
 
 const mapStateToProps = (state, { page, ...props }) => {
-  const { popup, opacities } = state.pane
-  const { layers, panes } = state[page]
+  const { popup, opacities } = state.pane;
+  const { layers, panes } = state[page];
   return {
     layers: addInfo(layers, layersInfo, page),
     panes: addInfo(panes, layersInfo, page),
@@ -41,31 +41,40 @@ const mapStateToProps = (state, { page, ...props }) => {
       find(layersInfo, { key: popup.selected }) ||
       find(layersInfo, { key: `${page}-${popup.selected}` }),
     page
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch, { page }) => {
   // page dependent actions
   const toggleLayer =
     page === 'regional'
       ? regionalActions.toggleRegionalLayer
-      : page === 'global' ? globalActions.toggleGlobalLayer : identity
+      : page === 'global'
+        ? globalActions.toggleGlobalLayer
+        : identity;
 
   const setLayerOpacity =
     page === 'regional'
       ? regionalActions.setLayerOpacity
-      : page === 'global' ? globalActions.setLayerOpacity : identity
+      : page === 'global'
+        ? globalActions.setLayerOpacity
+        : identity;
 
   const togglePane =
     page === 'regional'
       ? regionalActions.togglePane
-      : page === 'global' ? globalActions.togglePane : identity
+      : page === 'global'
+        ? globalActions.togglePane
+        : identity;
 
   return bindActionCreators(
     { ...actions, toggleLayer, setLayerOpacity, togglePane },
     dispatch
-  )
-}
+  );
+};
 
-export { actions, reducers, initialState }
-export default connect(mapStateToProps, mapDispatchToProps)(PaneComponent)
+export { actions, reducers, initialState };
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaneComponent);

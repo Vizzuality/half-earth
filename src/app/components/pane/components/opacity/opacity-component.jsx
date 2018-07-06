@@ -1,12 +1,12 @@
-import React from 'react'
-import cx from 'classnames'
-import styles from './opacity-styles'
+import React from 'react';
+import cx from 'classnames';
+import styles from './opacity-styles';
 
 const next = (options, value) => {
-  const index = options.indexOf(value)
-  const nextIndex = index + 1
-  return nextIndex === options.length ? options[0] : options[nextIndex]
-}
+  const index = options.indexOf(value);
+  const nextIndex = index + 1;
+  return nextIndex === options.length ? options[0] : options[nextIndex];
+};
 
 const Opacity = ({
   value,
@@ -43,6 +43,6 @@ const Opacity = ({
       ))}
     </ul>
   </div>
-)
+);
 
-export default Opacity
+export default Opacity;

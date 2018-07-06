@@ -1,15 +1,15 @@
-import React, { cloneElement, Children } from 'react'
-import cx from 'classnames'
+import React, { cloneElement, Children } from 'react';
+import cx from 'classnames';
 
-import Header from 'components/header'
-import Map from 'pages/map'
-import Locator from 'components/locator'
-import Home from 'pages/home'
+import Header from 'components/header';
+import Map from 'pages/map';
+import Locator from 'components/locator';
+import Home from 'pages/home';
 // import Intro from 'pages/intro'
-import Sidebar from 'components/sidebar'
-import Legend, { LegendLayers } from 'components/legend'
+import Sidebar from 'components/sidebar';
+import Legend, { LegendLayers } from 'components/legend';
 
-import styles from './layout-styles.scss'
+import styles from './layout-styles.scss';
 
 const Layout = ({
   children,
@@ -20,9 +20,9 @@ const Layout = ({
   history,
   interaction
 }) => {
-  const isHome = route === 'home'
+  const isHome = route === 'home';
   // const isIntro = route === 'intro'
-  const zoomLevel = `${route}|${section.section}`
+  const zoomLevel = `${route}|${section.section}`;
   return (
     <div
       className={cx(styles.container, {
@@ -58,7 +58,7 @@ const Layout = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

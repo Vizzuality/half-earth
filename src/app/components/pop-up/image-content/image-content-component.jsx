@@ -1,10 +1,10 @@
-import React from 'react'
-import cx from 'classnames'
+import React from 'react';
+import cx from 'classnames';
 
-import styles from './image-content-styles.scss'
+import styles from './image-content-styles.scss';
 
 const ImageContent = ({ className, content }) => {
-  const { description, background, attribution, watermark } = content
+  const { description, background, attribution, watermark } = content;
   return (
     <figure
       className={cx([className, styles.imageContent])}
@@ -21,6 +21,6 @@ const ImageContent = ({ className, content }) => {
         <cite className={styles.attribution}>{`Photo: ${attribution}`}</cite>
       )}
     </figure>
-  )
-}
-export default ImageContent
+  );
+};
+export default ImageContent;

@@ -1,3 +1,3 @@
-import { createAction } from 'redux-tools'
+import { createAction } from 'redux-tools';
 
-export const setHomeSection = createAction('setHomeSection')
+export const setHomeSection = createAction('setHomeSection');

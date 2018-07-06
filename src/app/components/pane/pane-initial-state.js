@@ -4,4 +4,4 @@ export default {
     selected: null
   },
   opacities: [25, 50, 75, 100]
-}
+};

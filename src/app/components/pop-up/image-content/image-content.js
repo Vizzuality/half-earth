@@ -1,1 +1,1 @@
-export { default } from './image-content-component'
+export { default } from './image-content-component';

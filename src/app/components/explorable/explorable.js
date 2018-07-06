@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-import find from 'lodash/find'
-import lowerCase from 'lodash/lowerCase'
-import kebabCase from 'lodash/kebabCase'
-import shortid from 'shortid'
+import find from 'lodash/find';
+import lowerCase from 'lodash/lowerCase';
+import kebabCase from 'lodash/kebabCase';
+import shortid from 'shortid';
 
-import Dropdown from 'components/dropdown'
-import dropdownTheme from 'styles/themes/dropdown.scss'
+import Dropdown from 'components/dropdown';
+import dropdownTheme from 'styles/themes/dropdown.scss';
 
-import XToggle from './toggle'
-import toggleTheme from 'styles/themes/toggle.scss'
+import XToggle from './toggle';
+import toggleTheme from 'styles/themes/toggle.scss';
 
 export const renderToggle = layers => toggle => (
   label,
@@ -17,7 +17,7 @@ export const renderToggle = layers => toggle => (
   n,
   enabled = true
 ) => {
-  const name = n || kebabCase(lowerCase(label))
+  const name = n || kebabCase(lowerCase(label));
   return (
     <XToggle
       theme={toggleTheme}
@@ -29,13 +29,13 @@ export const renderToggle = layers => toggle => (
     >
       {label}
     </XToggle>
-  )
-}
+  );
+};
 
 export const renderDropdown = sections => selectOption => (section, name) => {
-  if (!sections[section]) return <span>{name}</span>
-  const { selections: sel } = sections[section]
-  const { options, selected } = sections[section].selectors[name]
+  if (!sections[section]) return <span>{name}</span>;
+  const { selections: sel } = sections[section];
+  const { options, selected } = sections[section].selectors[name];
   return (
     <Dropdown
       options={options}
@@ -47,8 +47,9 @@ export const renderDropdown = sections => selectOption => (section, name) => {
           layers: sel[layerName],
           section,
           selector: name
-        })}
+        })
+      }
       selected={selected}
     />
-  )
-}
+  );
+};

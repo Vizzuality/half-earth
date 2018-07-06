@@ -1,11 +1,11 @@
-import React from 'react'
-import cx from 'classnames'
-import { default as PopUp, ImageContent } from 'components/pop-up/pop-up'
-import Scroller, { Element as P } from 'components/scroller'
-import SidePopup from 'components/side-popup'
-import Restart from 'components/nav-footer/restart-component'
-import { filterToLayer } from './regional-utils'
-import uiStyles from 'app/styles/ui'
+import React from 'react';
+import cx from 'classnames';
+import { default as PopUp, ImageContent } from 'components/pop-up/pop-up';
+import Scroller, { Element as P } from 'components/scroller';
+import SidePopup from 'components/side-popup';
+import Restart from 'components/nav-footer/restart-component';
+import { filterToLayer } from './regional-utils';
+import uiStyles from 'app/styles/ui';
 
 const Regional = ({
   classname,
@@ -26,18 +26,18 @@ const Regional = ({
   hideLayers,
   ...props
 }) => {
-  const t = renderToggle(toggleRegionalLayer)
-  const d = renderDropdown(selectRegionalSelector)
+  const t = renderToggle(toggleRegionalLayer);
+  const d = renderDropdown(selectRegionalSelector);
   const updateSections = s => {
-    setRegionalSectionThunk(s)
-    setSection(s)
-  }
+    setRegionalSectionThunk(s);
+    setSection(s);
+  };
 
   return (
     <div className={classname}>
       <SidePopup
         onThumbClick={e => {
-          openPopup(e)
+          openPopup(e);
         }}
         onCloseSidePopup={e => hideLayers(e.map(f => filterToLayer(f)))}
       />
@@ -143,7 +143,7 @@ const Regional = ({
         <Restart />
       </Scroller>
     </div>
-  )
-}
+  );
+};
 
-export default Regional
+export default Regional;

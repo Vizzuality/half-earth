@@ -1,4 +1,4 @@
-export const ns = (s, sep = '|') => s.split(sep)
+export const ns = (s, sep = '|') => s.split(sep);
 
 // quick helper, can be further improved
 export const cartoConfig = (account, cartocss, table, options = {}) => ({
@@ -19,17 +19,17 @@ export const cartoConfig = (account, cartocss, table, options = {}) => ({
       }
     ]
   }
-})
+});
 
 export const lerp = (value, istart, istop, ostart, ostop) =>
-  ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
+  ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
 
-export const maxClamp = (v, min, max) => Math.max(min, Math.min(max, v))
+export const maxClamp = (v, min, max) => Math.max(min, Math.min(max, v));
 
 export const colorMap = {
   blue: '#0664f6',
   purple: '#8366e4',
   violet: '#9632b2'
-}
+};
 
-export const pick = (o, k) => (o && o[k]) || o
+export const pick = (o, k) => (o && o[k]) || o;

@@ -1,7 +1,7 @@
-import { utils } from 'pages/map'
-import { cartoConfig } from 'utils'
+import { utils } from 'pages/map';
+import { cartoConfig } from 'utils';
 
-const { MOLLayer } = utils
+const { MOLLayer } = utils;
 
 //
 const sliderLayers = steps => {
@@ -36,8 +36,8 @@ const sliderLayers = steps => {
       }
     ),
     visible: false
-  }))
-}
+  }));
+};
 
 export default [
   ...sliderLayers([
@@ -103,4 +103,4 @@ export default [
 
   MOLLayer('human-pressures', 'esa/1km/80p', 'human-pressures'),
   MOLLayer('protected-areas', 'existing-network', 'reserve-coverage')
-]
+];

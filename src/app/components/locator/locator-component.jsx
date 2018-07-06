@@ -1,8 +1,8 @@
-import React from 'react'
-import cx from 'classnames'
-import styles from './locator-styles'
-import Dropdown from 'components/dropdown'
-import dropdownTheme from './locator-dropdown-theme.scss'
+import React from 'react';
+import cx from 'classnames';
+import styles from './locator-styles';
+import Dropdown from 'components/dropdown';
+import dropdownTheme from './locator-dropdown-theme.scss';
 
 const Locator = ({ className, route, history, options }) => {
   return (
@@ -16,7 +16,7 @@ const Locator = ({ className, route, history, options }) => {
         sort={false}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Locator
+export default Locator;
