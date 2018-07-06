@@ -1,17 +1,13 @@
 .DS*
 .vscode
+.env
 node_modules
 config/credentials.js
 designs
-<<<<<<< HEAD
 public/data
 public/**/*json
 public/**/*tif
-=======
-public/**/*json
-public/**/*tif
 public/**/*tf
->>>>>>> 5a08e8919d253fb43381813d4df86ae33cb3bca0
 public/**/*xml
 public/**/*sh
 public/**/*glb
