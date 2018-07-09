@@ -7,7 +7,7 @@ import values from 'lodash/values';
 import flatten from 'lodash/flatten';
 import * as keyActions from 'providers/keyboard/keyboard-actions';
 
-import Layout from './layout-component';
+import Layout from './app-layout-component';
 
 const scope = path => path.replace('/', '') || 'home';
 

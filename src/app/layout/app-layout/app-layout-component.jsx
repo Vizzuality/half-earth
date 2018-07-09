@@ -9,7 +9,7 @@ import Home from 'pages/home';
 import Sidebar from 'components/sidebar';
 import Legend, { LegendLayers } from 'components/legend';
 
-import styles from './layout-styles.scss';
+import styles from './app-layout-styles.scss';
 
 const Layout = ({
   children,
@@ -23,6 +23,7 @@ const Layout = ({
   const isHome = route === 'home';
   // const isIntro = route === 'intro'
   const zoomLevel = `${route}|${section.section}`;
+
   return (
     <div
       className={cx(styles.container, {
