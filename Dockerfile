@@ -22,6 +22,8 @@ COPY public ./public
 ## Build the app in production mode and store the artifacts in dist folder
 ENV NODE_ENV=production
 ENV GOOGLE_ANALYTICS=UA-28439074-2
+ARG MAPBOX_TOKEN
+ENV MAPBOX_TOKEN $MAPBOX_TOKEN
 RUN npm run build
 
 

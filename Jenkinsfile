@@ -30,7 +30,7 @@ node {
   try {
 
     stage ('Build docker') {
-      sh("docker -H :2375 build -t ${imageTag} .")
+      sh("docker -H :2375 build --build-arg MAPBOX_TOKEN=${env.HA_MAPBOX} -t ${imageTag} .")
       sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest .")
     }
 
