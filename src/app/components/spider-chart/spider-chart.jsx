@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import {
   Radar,
@@ -8,13 +8,17 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
   Tooltip
-} from 'recharts'
+} from 'recharts';
 
-import uiStyles from 'app/styles/ui'
+import uiStyles from 'app/styles/ui';
 
 const SpiderChart = ({ data, dimensions }) => {
-  const defaultStyle = { stroke: '#0664f6', fill: '#0664f6', fillOpacity: 0.18 }
-  const styles = d => ({ ...defaultStyle, ...d.style })
+  const defaultStyle = {
+    stroke: '#0664f6',
+    fill: '#0664f6',
+    fillOpacity: 0.18
+  };
+  const styles = d => ({ ...defaultStyle, ...d.style });
   return (
     <ResponsiveContainer width="100%" height={400}>
       <RadarChart
@@ -51,15 +55,15 @@ const SpiderChart = ({ data, dimensions }) => {
         />
       </RadarChart>
     </ResponsiveContainer>
-  )
-}
+  );
+};
 
 const SpiderTooltip = ({ payload }) => {
   const formatter = n =>
     n.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
-    })
+    });
   return payload.length > 0 ? (
     <div className={uiStyles.radarChartTooltip}>
       {payload.map(({ payload }, k) => (
@@ -79,7 +83,7 @@ const SpiderTooltip = ({ payload }) => {
         </div>
       ))}
     </div>
-  ) : null
-}
+  ) : null;
+};
 
-export default SpiderChart
+export default SpiderChart;

@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from './info-styles'
+import React from 'react';
+import styles from './info-styles';
 
 const Info = ({ onClick }) => (
   <div className={styles.container}>
@@ -7,6 +7,6 @@ const Info = ({ onClick }) => (
       ⓘ
     </button>
   </div>
-)
+);
 
-export default Info
+export default Info;

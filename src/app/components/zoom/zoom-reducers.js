@@ -1,5 +1,5 @@
-import * as actions from './zoom-actions'
+import * as actions from './zoom-actions';
 
 export default {
   [actions.setZoom]: (state, { payload }) => payload
-}
+};

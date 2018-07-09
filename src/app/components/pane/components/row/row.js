@@ -1,1 +1,1 @@
-export { default } from './row-component'
+export { default } from './row-component';

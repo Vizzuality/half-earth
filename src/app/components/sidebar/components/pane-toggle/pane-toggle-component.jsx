@@ -1,7 +1,7 @@
-import React from 'react'
-import upperFirst from 'lodash/upperFirst'
-import cx from 'classnames'
-import styles from './pane-toggle-styles'
+import React from 'react';
+import upperFirst from 'lodash/upperFirst';
+import cx from 'classnames';
+import styles from './pane-toggle-styles';
 
 const PaneToggle = ({ options, selected, onSwitch }) => (
   <div className={styles.container}>
@@ -21,6 +21,6 @@ const PaneToggle = ({ options, selected, onSwitch }) => (
       ))}
     </ul>
   </div>
-)
+);
 
-export default PaneToggle
+export default PaneToggle;

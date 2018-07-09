@@ -7,4 +7,4 @@ export default {
   },
   selected: 'land',
   tabs: [{ key: 'land', label: 'Land' }, { key: 'ocean', label: 'Ocean' }]
-}
+};

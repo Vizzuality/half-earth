@@ -1,10 +1,10 @@
-import React, { Component, cloneElement } from 'react'
-import { v1 as uuid } from 'uuid'
-import cx from 'classnames'
+import React, { Component, cloneElement } from 'react';
+import { v1 as uuid } from 'uuid';
+import cx from 'classnames';
 
-import styles from './map-styles.scss'
+import styles from './map-styles.scss';
 
-const layerId = layer => `${layer.type.name}-${uuid()}`
+const layerId = layer => `${layer.type.name}-${uuid()}`;
 
 class CesiumMap extends Component {
   render () {
@@ -16,12 +16,12 @@ class CesiumMap extends Component {
       viewer,
       clickedPosition,
       hoverPosition
-    } = this.props
+    } = this.props;
     return (
       <div className={cx(className, styles.map)} id={mapId}>
         {React.Children.map(children, ch => {
-          if (!ch) return null
-          const id = layerId(ch)
+          if (!ch) return null;
+          const id = layerId(ch);
 
           return cloneElement(ch, {
             cLayers,
@@ -29,13 +29,13 @@ class CesiumMap extends Component {
             clickedPosition,
             hoverPosition,
             ref: el => {
-              this[id] = Boolean(ch.props.url)
+              this[id] = Boolean(ch.props.url);
             }
-          })
+          });
         })}
       </div>
-    )
+    );
   }
 }
 
-export default CesiumMap
+export default CesiumMap;

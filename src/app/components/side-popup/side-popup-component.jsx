@@ -1,23 +1,23 @@
-import React from 'react'
-import cx from 'classnames'
-import kebabCase from 'lodash/kebabCase'
-import startCase from 'lodash/startCase'
-import lowerCase from 'lodash/lowerCase'
-import includes from 'lodash/includes'
+import React from 'react';
+import cx from 'classnames';
+import kebabCase from 'lodash/kebabCase';
+import startCase from 'lodash/startCase';
+import lowerCase from 'lodash/lowerCase';
+import includes from 'lodash/includes';
 
-import Close from 'components/close-button'
-import uiStyles from 'styles/ui'
-import styles from './side-popup-styles'
+import Close from 'components/close-button';
+import uiStyles from 'styles/ui';
+import styles from './side-popup-styles';
 
 const notInFilters = filters => d =>
-  filters.length ? includes(filters, d.taxoGroup) : true
+  filters.length ? includes(filters, d.taxoGroup) : true;
 
 const thumbName = (data, specie, thumb = false, hover = false) =>
   `/img/reserves/species/${data.key}/${kebabCase(specie.taxoGroup)}-${kebabCase(
     specie.scientificName
-  )}-${kebabCase(specie.commonName)}${thumb ? '-thumb' : ''}${hover
-    ? '-hover'
-    : ''}.jpg`
+  )}-${kebabCase(specie.commonName)}${thumb ? '-thumb' : ''}${
+    hover ? '-hover' : ''
+  }.jpg`;
 
 const SidePopupComponent = ({
   open,
@@ -44,8 +44,8 @@ const SidePopupComponent = ({
           <div className={styles.col}>
             <Close
               close={() => {
-                closeSidePopup()
-                onCloseSidePopup(data.filters)
+                closeSidePopup();
+                onCloseSidePopup(data.filters);
               }}
               theme={styles}
             />
@@ -63,8 +63,8 @@ const SidePopupComponent = ({
                   [uiStyles.tagActive]: includes(data.filters, group)
                 })}
                 onClick={() => {
-                  toggleFilters && toggleFilters(lowerCase(group))
-                  onFilter && onFilter(lowerCase(group))
+                  toggleFilters && toggleFilters(lowerCase(group));
+                  onFilter && onFilter(lowerCase(group));
                 }}
               >
                 {startCase(group)}
@@ -96,15 +96,16 @@ const SidePopupComponent = ({
                   onThumbClick({
                     background: thumbName(data, specie),
                     ...specie
-                  })}
+                  })
+                }
               >
                 <img
                   src={thumbName(data, specie, true)}
                   onMouseOver={e => {
-                    e.target.src = thumbName(data, specie, true, true)
+                    e.target.src = thumbName(data, specie, true, true);
                   }}
                   onMouseOut={e => {
-                    e.target.src = thumbName(data, specie, true, false)
+                    e.target.src = thumbName(data, specie, true, false);
                   }}
                   className={styles.thumb}
                 />
@@ -115,6 +116,6 @@ const SidePopupComponent = ({
       </div>
     </div>
   )) ||
-  null
+  null;
 
-export default SidePopupComponent
+export default SidePopupComponent;

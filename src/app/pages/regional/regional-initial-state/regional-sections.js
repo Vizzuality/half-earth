@@ -7,7 +7,7 @@ const speciesSelector = selected => ({
     restio: 'Restio'
   },
   selected
-})
+});
 
 const speciesSelections = type => ({
   birds: `birds:${type}`,
@@ -15,7 +15,7 @@ const speciesSelections = type => ({
   // amphibians: `amphibians:${type}`,
   protea: `protea:${type}`,
   restio: `restio:${type}`
-})
+});
 
 export default {
   'regional:1': {
@@ -36,4 +36,4 @@ export default {
   'regional:4': {
     layers: []
   }
-}
+};

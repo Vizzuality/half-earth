@@ -55,7 +55,7 @@ const richnessLegend = {
     color: 'rainbow',
     group: 'richness'
   }
-}
+};
 
 const rarityLegend = {
   mammals: {
@@ -114,7 +114,7 @@ const rarityLegend = {
     max: 1,
     group: 'rarity'
   }
-}
+};
 
 export default {
   'key-biodiversity-areas': {
@@ -175,4 +175,4 @@ export default {
   conifersRarity: rarityLegend.conifers,
   turtlesRarity: rarityLegend.turtles,
   'all-taxaRarity': rarityLegend['all-taxa']
-}
+};

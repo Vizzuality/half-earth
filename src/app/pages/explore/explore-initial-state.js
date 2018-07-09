@@ -11,4 +11,4 @@ export default {
     options: [{ key: 'st', label: 'Story' }, { key: 'xp', label: 'Explore' }],
     selected: 'xp'
   }
-}
+};

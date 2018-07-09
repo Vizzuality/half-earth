@@ -1,14 +1,14 @@
-import React from 'react'
-import styles from './home-styles.scss'
-import NavFooter from 'components/nav-footer'
-import HomeNavFooter from './home-nav-footer.scss'
+import React from 'react';
+import styles from './home-styles.scss';
+import NavFooter from 'components/nav-footer';
+import HomeNavFooter from './home-nav-footer.scss';
 
 const isSafari =
   /constructor/i.test(window.HTMLElement) ||
   (function (p) {
-    return p.toString() === '[object SafariRemoteNotification]'
-  })(!window['safari'] || window.safari.pushNotification)
-const autoplay = isSafari ? '' : 'autoplay=1&'
+    return p.toString() === '[object SafariRemoteNotification]';
+  })(!window['safari'] || window.safari.pushNotification);
+const autoplay = isSafari ? '' : 'autoplay=1&';
 
 const Home = () => (
   <div className={styles.container}>
@@ -67,6 +67,6 @@ const Home = () => (
       <p className={styles.navFooterCaption}>continue</p>
     </div>
   </div>
-)
+);
 
-export default Home
+export default Home;

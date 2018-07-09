@@ -1,5 +1,5 @@
-import React from 'react'
-import cx from 'classnames'
+import React from 'react';
+import cx from 'classnames';
 import {
   BarChart,
   ResponsiveContainer,
@@ -7,11 +7,11 @@ import {
   YAxis,
   Bar,
   Tooltip
-} from 'recharts'
+} from 'recharts';
 
-import styles from './barchart-styles.scss'
-import { colorMap } from 'utils/utils'
-import capitalize from 'lodash/capitalize'
+import styles from './barchart-styles.scss';
+import { colorMap } from 'utils/utils';
+import capitalize from 'lodash/capitalize';
 
 const CustomBarchart = ({ data, dataKey, labelKey, color, domain, legend }) => (
   <div className={styles.outerContainer}>
@@ -46,16 +46,16 @@ const CustomBarchart = ({ data, dataKey, labelKey, color, domain, legend }) => (
       </span>
     </div>
   </div>
-)
+);
 
 const CustomTooltip = ({ content }) => {
-  if (!content) return null
-  const [bar] = content
+  if (!content) return null;
+  const [bar] = content;
   const formatter = n =>
     n.toLocaleString(undefined, {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
-    })
+    });
   return bar ? (
     <div
       className={cx(styles.customTooltip, {
@@ -68,7 +68,7 @@ const CustomTooltip = ({ content }) => {
         </div>
       </div>
     </div>
-  ) : null
-}
+  ) : null;
+};
 
-export default CustomBarchart
+export default CustomBarchart;

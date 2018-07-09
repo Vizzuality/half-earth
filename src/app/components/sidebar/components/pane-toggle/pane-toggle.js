@@ -1,1 +1,1 @@
-export { default } from './pane-toggle-component'
+export { default } from './pane-toggle-component';

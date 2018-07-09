@@ -1,5 +1,5 @@
-import React, { Children } from 'react'
-import styles from './row-styles.scss'
+import React, { Children } from 'react';
+import styles from './row-styles.scss';
 
 const Row = ({
   children,
@@ -8,6 +8,8 @@ const Row = ({
   opacity,
   updateOpacity,
   openInfo
-}) => <div className={styles.row}>{Children.map(children, Child => Child)}</div>
+}) => (
+  <div className={styles.row}>{Children.map(children, Child => Child)}</div>
+);
 
-export default Row
+export default Row;

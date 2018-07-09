@@ -13,6 +13,6 @@ const constants = {
       coordinate: 'y'
     }
   }
-}
+};
 
-export default constants
+export default constants;

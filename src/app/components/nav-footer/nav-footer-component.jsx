@@ -1,7 +1,7 @@
-import React from 'react'
-import cx from 'classnames'
-import { themr } from 'react-css-themr'
-import styles from './nav-footer-styles.scss'
+import React from 'react';
+import cx from 'classnames';
+import { themr } from 'react-css-themr';
+import styles from './nav-footer-styles.scss';
 
 const NavFooter = ({ className, from, to, onClickTo, onClickFrom, theme }) => (
   <div className={cx(theme.container, className)}>
@@ -24,5 +24,5 @@ const NavFooter = ({ className, from, to, onClickTo, onClickFrom, theme }) => (
       </div>
     </div>
   </div>
-)
-export default themr('NavFooter', styles)(NavFooter)
+);
+export default themr('NavFooter', styles)(NavFooter);

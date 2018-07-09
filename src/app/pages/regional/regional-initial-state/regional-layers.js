@@ -1,8 +1,8 @@
-import { cartoConfig } from 'app/utils'
-import { utils } from 'pages/map'
+import { cartoConfig } from 'app/utils';
+import { utils } from 'pages/map';
 
-const { MOLLayer } = utils
-const { MAPBOX_TOKEN } = process.env
+const { MOLLayer } = utils;
+const { MAPBOX_TOKEN } = process.env;
 
 export default [
   {
@@ -98,4 +98,4 @@ export default [
     url: '',
     visible: false
   }
-]
+];

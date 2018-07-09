@@ -1,43 +1,42 @@
-import { Component, createElement } from 'react'
-import { connect } from 'react-redux'
-import throttle from 'lodash/throttle'
-import isEqual from 'lodash/isEqual'
+import { Component, createElement } from 'react';
+import { connect } from 'react-redux';
+import isEqual from 'lodash/isEqual';
+import throttle from 'lodash/throttle';
 
-import { assign } from 'utils'
-import CesiumMapComponent from './map-component'
+import CesiumMapComponent from './map-component';
 
-const { MAPBOX_TOKEN } = process.env
+const { MAPBOX_TOKEN } = process.env;
 
-const { Cesium } = window
+const { Cesium } = window;
 
-const mapId = `map-${new Date().getTime()}`
+const mapId = `map-${new Date().getTime()}`;
 
 const bindFlyTo = v => (lat, long, z = 15000.0, rest = {}) =>
-  v.camera.flyTo(assign({ destination: { x: lat, y: long, z } }, rest))
+  v.camera.flyTo({ destination: { x: lat, y: long, z }, ...rest });
 
 const disablePanning = v => {
-  const { scene } = v
-  scene.screenSpaceCameraController.enableRotate = false
-  scene.screenSpaceCameraController.enableTranslate = false
-  scene.screenSpaceCameraController.enableZoom = false
-  scene.screenSpaceCameraController.enableTilt = false
-  scene.screenSpaceCameraController.enableLook = false
-  return v
-}
+  const { scene } = v;
+  scene.screenSpaceCameraController.enableRotate = false;
+  scene.screenSpaceCameraController.enableTranslate = false;
+  scene.screenSpaceCameraController.enableZoom = false;
+  scene.screenSpaceCameraController.enableTilt = false;
+  scene.screenSpaceCameraController.enableLook = false;
+  return v;
+};
 
 class CesiumComponent extends Component {
   constructor (props) {
-    super(props)
-    this.rotating = false
-    this.distance = 0
-    this.ticking = false
+    super(props);
+    this.rotating = false;
+    this.distance = 0;
+    this.ticking = false;
 
     this.state = {
       layers: {},
       viewer: null,
       clickedPosition: null,
       hoverPosition: { x: 0, y: 0 }
-    }
+    };
   }
 
   mountMap ({ lockNavigation, zoomLevel, globe }) {
@@ -55,23 +54,23 @@ class CesiumComponent extends Component {
       imageryProvider: new Cesium.UrlTemplateImageryProvider({
         url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`
       })
-    }
+    };
 
     const viewer = (window.viewer =
-      this.state.viewer || new Cesium.Viewer(mapId, mapConfig))
-    this.flyTo = bindFlyTo(viewer)
+      this.state.viewer || new Cesium.Viewer(mapId, mapConfig));
+    this.flyTo = bindFlyTo(viewer);
 
-    if (zoomLevel) this.handleZoom(zoomLevel)
-    if (lockNavigation) return disablePanning(viewer)
-    this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    if (zoomLevel) this.handleZoom(zoomLevel);
+    if (lockNavigation) return disablePanning(viewer);
+    this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
     this.handler.setInputAction(
       this.onMouseClick,
       Cesium.ScreenSpaceEventType.LEFT_CLICK
-    )
+    );
     this.handler.setInputAction(
       this.onMouseMove,
       Cesium.ScreenSpaceEventType.MOUSE_MOVE
-    )
+    );
 
     // var scene = viewer.scene
     // var sglobe = scene.globe
@@ -83,151 +82,151 @@ class CesiumComponent extends Component {
 
     // viewer.terrainProvider = vrTheWorldProvider
 
-    this.state.viewer = viewer
-    return viewer
+    this.state.viewer = viewer;
+    return viewer;
   }
 
   bindMap (props) {
-    const viewer = this.mountMap(props)
+    const viewer = this.mountMap(props);
     const layers = Object.keys(this.state.layers).length
       ? this.state.layers
-      : viewer.imageryLayers
+      : viewer.imageryLayers;
 
     this.setState({
       layers,
       viewer
-    })
+    });
   }
 
   componentDidMount () {
-    const { props } = this
-    this.bindMap(Object.assign(props))
-    if (props.zoomLevel) this.handleZoom(props.zoomLevel)
-    if (props.onTick) this.addTick()
+    const { props } = this;
+    this.bindMap(props);
+    if (props.zoomLevel) this.handleZoom(props.zoomLevel);
+    if (props.onTick) this.addTick();
   }
 
   componentWillUnmount () {
-    this.removeTicking()
-    this.removeRotation()
+    this.removeTicking();
+    this.removeRotation();
   }
 
   handleZoom (zoom) {
-    const { state: { viewer } } = this
-    const [zLevel, opts, cameraProps] = zoom
+    const { state: { viewer } } = this;
+    const [zLevel, opts, cameraProps] = zoom;
     if (zLevel && !isEqual(zoom, this.zLevel)) {
-      this.flyTo(...zLevel, opts)
-      this.zLevel = zoom
+      this.flyTo(...zLevel, opts);
+      this.zLevel = zoom;
     }
 
     if (viewer && cameraProps) {
       Object.keys(cameraProps).map(p => {
-        viewer.camera[p] = cameraProps[p]
-      })
+        viewer.camera[p] = cameraProps[p];
+      });
     }
   }
 
   componentWillReceiveProps (props) {
     if (this.props.zoomLevel !== props.zoomLevel) {
-      this.handleZoom(props.zoomLevel)
+      this.handleZoom(props.zoomLevel);
     }
   }
 
   componentDidUpdate () {
-    this.state.clickedPosition = null
+    this.state.clickedPosition = null;
   }
 
   rotate = clock => {
-    const { startTime, currentTime } = clock
-    const { viewer } = this.state
-    const lastNow = startTime.secondsOfDay
-    const now = currentTime.secondsOfDay
-    const spinRate = 0.8
-    const delta = (now - lastNow) / 1000
-    viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate * delta)
-    clock.startTime.secondsOfDay = now - 1
-  }
+    const { startTime, currentTime } = clock;
+    const { viewer } = this.state;
+    const lastNow = startTime.secondsOfDay;
+    const now = currentTime.secondsOfDay;
+    const spinRate = 0.8;
+    const delta = (now - lastNow) / 1000;
+    viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate * delta);
+    clock.startTime.secondsOfDay = now - 1;
+  };
 
   onTick = clock => {
-    const { viewer } = this.state
+    const { viewer } = this.state;
 
-    if (this.rotating) this.rotate(clock)
-    const cameraPosition = viewer.scene.camera.positionWC
+    if (this.rotating) this.rotate(clock);
+    const cameraPosition = viewer.scene.camera.positionWC;
     const ellipsoidPosition = viewer.scene.globe.ellipsoid.scaleToGeodeticSurface(
       cameraPosition
-    )
+    );
     const distance = Cesium.Cartesian3.magnitude(
       Cesium.Cartesian3.subtract(
         cameraPosition,
         ellipsoidPosition,
         new Cesium.Cartesian3()
       )
-    )
+    );
 
     if (distance !== this.distance) {
       this.props.onTick({
         distance
-      })
-      this.distance = distance
+      });
+      this.distance = distance;
     }
-  }
+  };
 
   onMouseClick = click => {
     this.props.onMouseClick &&
       this.props.onMouseClick({
         position: click.startPosition
-      })
-    this.setState({ clickedPosition: click.position })
-  }
+      });
+    this.setState({ clickedPosition: click.position });
+  };
 
   onMouseMove = throttle(mouse => {
     this.props.onMouseMove &&
       this.props.onMouseMove({
         position: mouse.startPosition
-      })
-    this.setState({ hoverPosition: mouse.startPosition })
-  }, 200)
+      });
+    this.setState({ hoverPosition: mouse.startPosition });
+  }, 200);
 
   addRotation () {
-    const { viewer } = this.state
-    if (this.rotating) return
-    viewer.clock.onTick.addEventListener(this.onTick)
-    this.rotating = true
+    const { viewer } = this.state;
+    if (this.rotating) return;
+    viewer.clock.onTick.addEventListener(this.onTick);
+    this.rotating = true;
   }
 
   addTick () {
-    const { viewer } = this.state
-    if (this.ticking) return
-    viewer.clock.onTick.addEventListener(this.onTick)
-    this.ticking = true
+    const { viewer } = this.state;
+    if (this.ticking) return;
+    viewer.clock.onTick.addEventListener(this.onTick);
+    this.ticking = true;
   }
 
   removeRotation () {
-    const { viewer } = this.state
-    viewer.clock.onTick.removeEventListener(this.onTick)
-    this.rotating = false
+    const { viewer } = this.state;
+    viewer.clock.onTick.removeEventListener(this.onTick);
+    this.rotating = false;
   }
 
   removeTicking () {
-    const { viewer } = this.state
-    viewer.clock.onTick.removeEventListener(this.onTick)
-    this.ticking = false
+    const { viewer } = this.state;
+    viewer.clock.onTick.removeEventListener(this.onTick);
+    this.ticking = false;
   }
 
   render () {
-    const { props, state } = this
-    const { rotate } = props
-    const { layers, viewer, clickedPosition, hoverPosition } = state
-    if (viewer) this[rotate ? 'addRotation' : 'removeRotation']()
+    const { props, state } = this;
+    const { rotate } = props;
+    const { layers, viewer, clickedPosition, hoverPosition } = state;
+    if (viewer) this[rotate ? 'addRotation' : 'removeRotation']();
 
     const getPos = (window.getPos = () => {
-      const c = viewer.camera.positionCartographic
+      const c = viewer.camera.positionCartographic;
       console.log(
         Object.keys(c).reduce((a, k) => {
-          a[k] = Cesium.Math.toDegrees(c[k])
-          return a
+          a[k] = Cesium.Math.toDegrees(c[k]);
+          return a;
         }, {})
-      )
-    })
+      );
+    });
     return createElement(CesiumMapComponent, {
       mapId,
       layers,
@@ -236,10 +235,10 @@ class CesiumComponent extends Component {
       clickedPosition,
       hoverPosition,
       ...props
-    })
+    });
   }
 }
 
-const mapStateToProps = ({ zoom }) => ({ zoom })
+const mapStateToProps = ({ zoom }) => ({ zoom });
 
-export default connect(mapStateToProps)(CesiumComponent)
+export default connect(mapStateToProps)(CesiumComponent);

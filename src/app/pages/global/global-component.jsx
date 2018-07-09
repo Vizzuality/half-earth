@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
-import cx from 'classnames'
-import Scroller, { Element as P } from 'components/scroller'
-import NavFooter from 'components/nav-footer'
-import EarthoMeter from 'components/earthometer-multi'
-import Barchart from './barchart'
-import uiStyles from 'app/styles/ui'
+import React, { Component } from 'react';
+import cx from 'classnames';
+import Scroller, { Element as P } from 'components/scroller';
+import NavFooter from 'components/nav-footer';
+import EarthoMeter from 'components/earthometer-multi';
+import Barchart from './barchart';
+import uiStyles from 'app/styles/ui';
 
 class Global extends Component {
   updateSections = s => {
-    const { sidebarOpen, setSection, setGlobalSectionThunk } = this.props
+    const { sidebarOpen, setSection, setGlobalSectionThunk } = this.props;
     if (sidebarOpen) {
-      setGlobalSectionThunk(s)
-      setSection(s)
+      setGlobalSectionThunk(s);
+      setSection(s);
     }
-  }
+  };
 
   render () {
     const {
@@ -30,10 +30,10 @@ class Global extends Component {
       section
       // landSaved,
       // oceanSaved
-    } = this.props
+    } = this.props;
 
-    const t = renderToggle(toggleGlobalLayer)
-    const d = renderDropdown(selectGlobalSelector)
+    const t = renderToggle(toggleGlobalLayer);
+    const d = renderDropdown(selectGlobalSelector);
     return (
       <div className={className}>
         <Scroller>
@@ -183,8 +183,8 @@ class Global extends Component {
           <NavFooter from="/" to="/regional" />
         </Scroller>
       </div>
-    )
+    );
   }
 }
 
-export default Global
+export default Global;

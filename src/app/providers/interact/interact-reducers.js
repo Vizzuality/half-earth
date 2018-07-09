@@ -1,4 +1,4 @@
-import * as actions from './interact-actions'
+import * as actions from './interact-actions';
 
 export default {
   [actions.setInteraction]: (state, { payload }) =>
@@ -8,4 +8,4 @@ export default {
         interaction: payload
       }
       : state
-}
+};

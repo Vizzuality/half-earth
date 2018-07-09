@@ -2,6 +2,7 @@
   "extends": ["standard", "standard-react"],
   "parser": "babel-eslint",
   "rules": {
+    "semi": ["error", "always"],
     "jsx-quotes": ["error", "prefer-double"],
     "react/prop-types": [0]
   }

@@ -1,1 +1,1 @@
-export { default } from './close-button-component'
+export { default } from './close-button-component';

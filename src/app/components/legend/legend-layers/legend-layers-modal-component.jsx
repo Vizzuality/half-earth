@@ -1,8 +1,8 @@
-import React from 'react'
-import isFunction from 'lodash/isFunction'
-import styles from './legend-layers-styles.scss'
+import React from 'react';
+import isFunction from 'lodash/isFunction';
+import styles from './legend-layers-styles.scss';
 // import Latex from 'react-latex'
-import data from 'data/layers-info'
+import data from 'data/layers-info';
 
 const ModalContent = ({ section = 'global' }) => (
   <div className={styles.legendPopUp}>
@@ -28,6 +28,6 @@ const ModalContent = ({ section = 'global' }) => (
       </div>
     ))}
   </div>
-)
+);
 
-export default ModalContent
+export default ModalContent;

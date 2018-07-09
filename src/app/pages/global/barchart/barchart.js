@@ -1,1 +1,1 @@
-export { default } from './barchart-component'
+export { default } from './barchart-component';

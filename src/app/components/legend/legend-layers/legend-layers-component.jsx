@@ -1,11 +1,11 @@
-import React from 'react'
-import cx from 'classnames'
-import PopUp from 'components/pop-up'
-import capitalize from 'lodash/capitalize'
-import isFunction from 'lodash/isFunction'
-import ModalContent from './legend-layers-modal-component'
+import React from 'react';
+import cx from 'classnames';
+import PopUp from 'components/pop-up';
+import capitalize from 'lodash/capitalize';
+import isFunction from 'lodash/isFunction';
+import ModalContent from './legend-layers-modal-component';
 
-import styles from './legend-layers-styles.scss'
+import styles from './legend-layers-styles.scss';
 
 const LegendLayers = ({
   layers,
@@ -15,10 +15,10 @@ const LegendLayers = ({
   section
 }) => {
   const sortLayers = (a, b) => {
-    if (a.type === 'gradient' && b.type !== 'gradient') return 1
-    if (a.type !== 'gradient' && b.type === 'gradient') return -1
-    if (a.type === 'gradient' && b.type === 'gradient') return 0
-  }
+    if (a.type === 'gradient' && b.type !== 'gradient') return 1;
+    if (a.type !== 'gradient' && b.type === 'gradient') return -1;
+    if (a.type === 'gradient' && b.type === 'gradient') return 0;
+  };
   const simpleLegend = layer => (
     <span
       key={`legend-item-${layer.label}`}
@@ -29,7 +29,7 @@ const LegendLayers = ({
     >
       {layer.label}
     </span>
-  )
+  );
 
   const gradientLegend = (layer, i) => (
     <div
@@ -71,28 +71,28 @@ const LegendLayers = ({
         </div>
       </div>
     </div>
-  )
+  );
 
   const multipleLegend = (layer, i) => {
-    if (!layer.type) throw new Error('Layer type is required')
+    if (!layer.type) throw new Error('Layer type is required');
     const renderer = {
       simple: simpleLegend,
       gradient: gradientLegend
-    }
+    };
 
-    return layer.elements.map(element => renderer[element.type](element, i))
-  }
+    return layer.elements.map(element => renderer[element.type](element, i));
+  };
 
   const renderLegend = (layer, i) => {
     const renderer = {
       simple: simpleLegend,
       gradient: gradientLegend,
       multiple: multipleLegend
-    }[layer.type]
+    }[layer.type];
 
-    if (renderer) return renderer(layer, i)
-    return null
-  }
+    if (renderer) return renderer(layer, i);
+    return null;
+  };
 
   return (
     <div>
@@ -106,7 +106,7 @@ const LegendLayers = ({
         <ModalContent section={section} />
       </PopUp>
     </div>
-  )
-}
+  );
+};
 
-export default LegendLayers
+export default LegendLayers;

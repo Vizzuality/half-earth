@@ -1,5 +1,5 @@
-import React from 'react'
-import uiStyles from 'app/styles/ui'
+import React from 'react';
+import uiStyles from 'app/styles/ui';
 
 const Shapes = props => (
   <div className={uiStyles.visualisationsContainer}>
@@ -19,6 +19,6 @@ const Shapes = props => (
       <span className={uiStyles.category}>Ocean</span>
     </div>
   </div>
-)
+);
 
-export default Shapes
+export default Shapes;

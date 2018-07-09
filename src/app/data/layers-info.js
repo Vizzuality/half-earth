@@ -1,5 +1,5 @@
-import Katex from 'components/katex'
-import React from 'react'
+import Katex from 'components/katex';
+import React from 'react';
 
 export const layersInfo = [
   {
@@ -147,9 +147,9 @@ export const layersInfo = [
       </span>
     )
   }
-]
+];
 
 export default {
   global: layersInfo,
   regional: layersInfo
-}
+};

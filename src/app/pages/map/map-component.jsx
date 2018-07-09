@@ -1,18 +1,18 @@
-import React from 'react'
-import _find from 'lodash/find'
-import debounce from 'lodash/debounce'
-import { ns } from 'utils'
-import CesiumMap from 'components/cesium/map'
-import ImageProvider from 'components/cesium/image-provider'
-import zoomLevels from 'data/zoom-levels'
-import Billboard from 'components/cesium/billboard'
-import Logos from 'components/logos'
+import React from 'react';
+import _find from 'lodash/find';
+import debounce from 'lodash/debounce';
+import { ns } from 'utils';
+import CesiumMap from 'components/cesium/map';
+import ImageProvider from 'components/cesium/image-provider';
+import zoomLevels from 'data/zoom-levels';
+import Billboard from 'components/cesium/billboard';
+import Logos from 'components/logos';
 
-const { Cesium } = window
+const { Cesium } = window;
 
 const analytics = {
   openPopUp: ['Map hotspots']
-}
+};
 
 const Map = ({
   map,
@@ -31,25 +31,28 @@ const Map = ({
   // @NOTE zoom handling should be refactored and handled independently in the future
   const foundRegionalPopup = _find(regional.sidePopup.content, {
     key: regional.sidePopup.selected
-  })
-  const [route, zoomLevel] = ns(routeLevel, '|')
+  });
+  const [route, zoomLevel] = ns(routeLevel, '|');
 
-  let zoom = zoomLevels[zoomLevel] || zoomLevels[route]
+  let zoom = zoomLevels[zoomLevel] || zoomLevels[route];
 
   if (regional.sidePopup.open && foundRegionalPopup) {
     const { x, y, z } = Cesium.Cartesian3.fromDegrees(
       foundRegionalPopup.location[0],
       foundRegionalPopup.location[1],
       foundRegionalPopup.location[2] || 70000.0
-    )
+    );
     // 70000.0
-    if (x && y) zoom = [[x, y, z], null]
+    if (x && y) zoom = [[x, y, z], null];
   }
 
   const getBillboardLayer = (billboard, layers) =>
-    _find(layers, { name: billboard.layerName })
+    _find(layers, { name: billboard.layerName });
 
-  const onTickDebounced = debounce(({ distance }) => setDistance(distance), 200)
+  const onTickDebounced = debounce(
+    ({ distance }) => setDistance(distance),
+    200
+  );
 
   return (
     <CesiumMap
@@ -100,7 +103,8 @@ const Map = ({
                 openSidePopup({
                   payload: id,
                   meta: ['local', ...analytics.openPopUp, id]
-                })}
+                })
+              }
               position={billboard.coordinates}
             />
           ))}
@@ -118,7 +122,7 @@ const Map = ({
         )}
       {route !== 'home' && <Logos key="Logos" />}
     </CesiumMap>
-  )
-}
+  );
+};
 
-export default Map
+export default Map;

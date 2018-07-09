@@ -1,5 +1,5 @@
-import { home } from 'data/zoom-levels'
+import { home } from 'data/zoom-levels';
 
 export default {
   ...home
-}
+};

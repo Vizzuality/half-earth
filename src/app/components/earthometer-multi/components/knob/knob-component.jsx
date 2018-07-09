@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from './knob-styles.scss'
+import React from 'react';
+import styles from './knob-styles.scss';
 
 const Knob = ({
   radius,
@@ -14,7 +14,7 @@ const Knob = ({
   handleDashArray,
   getContainer
 }) => {
-  const dim = 2 * radius + 2 * trackWidth
+  const dim = 2 * radius + 2 * trackWidth;
 
   return (
     <svg
@@ -78,7 +78,7 @@ const Knob = ({
         strokeWidth={trackWidth + 10}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default Knob
+export default Knob;

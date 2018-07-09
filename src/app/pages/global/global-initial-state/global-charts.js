@@ -1,6 +1,6 @@
-const { parseInt } = window
+const { parseInt } = window;
 
-const defaultFilter = d => parseInt(d.scenario, 10) === 0 && d.taxa !== 'all'
+const defaultFilter = d => parseInt(d.scenario, 10) === 0 && d.taxa !== 'all';
 // const defaultChartSorter = key => (a, b) => {
 //   if (a[key] > b[key]) return -1
 //   if (a[key] < b[key]) return 1
@@ -11,16 +11,16 @@ const defaultParser = (d, key) =>
     .filter(defaultFilter)
     .map(d => ({ ...d, [key]: parseFloat(d[key]) }))
     // .sort(defaultChartSorter(key))
-    .map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
+    .map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }));
 
 const classifyScenarios = data =>
   Array.isArray(data) &&
   data.reduce((acc, next) => {
-    const scenario = acc[next.scenario] || []
-    const scenarios = [...scenario, next]
+    const scenario = acc[next.scenario] || [];
+    const scenarios = [...scenario, next];
 
-    return { ...acc, [next.scenario]: scenarios }
-  }, {})
+    return { ...acc, [next.scenario]: scenarios };
+  }, {});
 
 export default {
   globalScaleBiodiversity: {
@@ -62,4 +62,4 @@ export default {
         }))
       )
   }
-}
+};

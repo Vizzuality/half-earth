@@ -1,7 +1,7 @@
-import React from 'react'
-import cx from 'classnames'
-import BaseSlider from 'components/slider'
-import styles from './slider-styles'
+import React from 'react';
+import cx from 'classnames';
+import BaseSlider from 'components/slider';
+import styles from './slider-styles';
 
 const Slider = ({ onChange, value, label, ...props }) => (
   <div className={styles.container}>
@@ -18,6 +18,6 @@ const Slider = ({ onChange, value, label, ...props }) => (
       {Math.round(value * 100)}
     </span>
   </div>
-)
+);
 
-export default Slider
+export default Slider;

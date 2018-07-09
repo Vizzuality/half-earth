@@ -43,4 +43,4 @@ export default [
       'Protected areas in this dataset include national parks, state parks, nature reserves, wilderness areas, and national forests.'
     ]
   }
-]
+];

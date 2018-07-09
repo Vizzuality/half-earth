@@ -1,7 +1,7 @@
-import React from 'react'
-import cx from 'classnames'
-import { themr } from 'react-css-themr'
-import styles from './toggle-styles.scss'
+import React from 'react';
+import cx from 'classnames';
+import { themr } from 'react-css-themr';
+import styles from './toggle-styles.scss';
 
 const XToggle = ({ className, active, disabled, children, theme, onClick }) => (
   <span
@@ -15,6 +15,6 @@ const XToggle = ({ className, active, disabled, children, theme, onClick }) => (
   >
     {children}
   </span>
-)
+);
 
-export default themr('XToggle', styles)(XToggle)
+export default themr('XToggle', styles)(XToggle);

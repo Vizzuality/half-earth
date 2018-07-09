@@ -1,3 +1,3 @@
-import * as actions from './selectors-actions'
+import * as actions from './selectors-actions';
 
-export { actions }
+export { actions };

@@ -1,4 +1,4 @@
-import upperFirst from 'lodash/upperFirst'
+import upperFirst from 'lodash/upperFirst';
 
 const species = type => ({
   name: `Species ${upperFirst(type)}`,
@@ -21,7 +21,7 @@ const species = type => ({
       ]
     }
   ]
-})
+});
 
 export default [
   species('richness'),
@@ -46,4 +46,4 @@ export default [
       }
     ]
   }
-]
+];
