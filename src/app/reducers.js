@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import { handleActions } from 'redux-tools';
 import { routerReducer } from 'react-router-redux';
 
@@ -54,7 +53,7 @@ import {
   initialState as interactState
 } from 'providers/interact';
 
-export default combineReducers({
+export default {
   routing: routerReducer,
   zoom: handleActions(zoomReducers, zoomState),
   earthometer: handleActions(earthometerReducers, earthometerState),
@@ -67,4 +66,4 @@ export default combineReducers({
   global: handleActions(globalReducers, globalState),
   pane: handleActions(paneReducers, paneState),
   interactions: handleActions(interactReducers, interactState)
-});
+};
