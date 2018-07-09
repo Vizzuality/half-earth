@@ -1,5 +1,6 @@
 import { Component, createElement } from 'react'
 import { connect } from 'react-redux'
+import throttle from 'lodash/throttle'
 import isEqual from 'lodash/isEqual'
 
 import { assign } from 'utils'
@@ -107,7 +108,7 @@ class CesiumComponent extends Component {
 
   componentWillUnmount () {
     this.removeTicking()
-    this.removeRotating()
+    this.removeRotation()
   }
 
   handleZoom (zoom) {
@@ -178,13 +179,13 @@ class CesiumComponent extends Component {
     this.setState({ clickedPosition: click.position })
   }
 
-  onMouseMove = mouse => {
+  onMouseMove = throttle(mouse => {
     this.props.onMouseMove &&
       this.props.onMouseMove({
         position: mouse.startPosition
       })
     this.setState({ hoverPosition: mouse.startPosition })
-  }
+  }, 200)
 
   addRotation () {
     const { viewer } = this.state
