@@ -32,11 +32,23 @@ export const setRegionalSectionThunk = createThunkAction(
   }
 );
 export const setType = createAction('setType');
+export const setTypeThunk = createThunkAction(
+  'setTypeThunk',
+  type => (dispatch, getState) => {
+    const { section } = getState().section;
+    dispatch(setType({ type, section }));
+  }
+);
 
 export const openPopup = createAction('openPopup');
 export const closePopup = createAction('closePopup');
 
-export const openSidePopup = createAction('openSidePopup');
+export const openSidePopup = createAction(
+  'openSidePopup',
+  ({ meta, payload }) => payload,
+  ({ meta }) => meta
+);
+
 export const closeSidePopup = createAction('closeSidePopup');
 
 export const toggleFilters = createAction('toggleFilters');

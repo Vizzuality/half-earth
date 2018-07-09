@@ -4,30 +4,35 @@ import isUndefined from 'lodash/isUndefined';
 const { Cesium } = window;
 
 class Billboard extends Component {
+  hasEntered = false;
+
   componentWillUnmount () {
     const { viewer } = this.props;
     viewer.entities.remove(this.entity);
   }
+
   handleHover = hoverPosition => {
     const { viewer, onMouseHover, onMouseOut } = this.props;
     if (!viewer) return false;
     const { scene } = viewer;
     const pickedObject = scene.pick(hoverPosition);
-
-    viewer.entities.values.map(bill => {
-      if (!bill.billboard) return bill;
-      if (pickedObject) {
-        if (pickedObject.id.id === bill.id) {
-          bill.billboard.image = bill.imageHover;
-          onMouseHover && onMouseHover(pickedObject.id.id);
-        } else {
-          bill.billboard.image = bill.image;
-        }
-      } else {
-        bill.billboard.image = bill.image;
-        onMouseOut && onMouseOut();
+    if (pickedObject) {
+      const pickedBill = viewer.entities.values.find(
+        bill => pickedObject.id.id === bill.id && bill.id === this.props.id
+      );
+      if (pickedBill && !this.hasEntered) {
+        this.hasEntered = true;
+        pickedBill.billboard.image = pickedBill.imageHover;
+        onMouseHover && onMouseHover(pickedBill.id);
       }
-    });
+    } else if (this.hasEntered) {
+      this.hasEntered = false;
+      const mydBill = viewer.entities.values.find(
+        bill => bill.id === this.props.id
+      );
+      mydBill.billboard.image = mydBill.image;
+      onMouseOut && onMouseOut();
+    }
   };
 
   handleClick = clickedPosition => {

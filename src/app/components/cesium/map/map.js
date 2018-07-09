@@ -1,6 +1,7 @@
 import { Component, createElement } from 'react';
 import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
+import throttle from 'lodash/throttle';
 
 import CesiumMapComponent from './map-component';
 
@@ -106,13 +107,11 @@ class CesiumComponent extends Component {
 
   componentWillUnmount () {
     this.removeTicking();
-    this.removeRotating();
+    this.removeRotation();
   }
 
   handleZoom (zoom) {
-    const {
-      state: { viewer }
-    } = this;
+    const { state: { viewer } } = this;
     const [zLevel, opts, cameraProps] = zoom;
     if (zLevel && !isEqual(zoom, this.zLevel)) {
       this.flyTo(...zLevel, opts);
@@ -179,13 +178,13 @@ class CesiumComponent extends Component {
     this.setState({ clickedPosition: click.position });
   };
 
-  onMouseMove = mouse => {
+  onMouseMove = throttle(mouse => {
     this.props.onMouseMove &&
       this.props.onMouseMove({
         position: mouse.startPosition
       });
     this.setState({ hoverPosition: mouse.startPosition });
-  };
+  }, 200);
 
   addRotation () {
     const { viewer } = this.state;
