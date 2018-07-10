@@ -1,6 +1,5 @@
 import React from 'react';
 import _find from 'lodash/find';
-import debounce from 'lodash/debounce';
 import { ns } from 'utils';
 import CesiumMap from 'components/cesium/map';
 import ImageProvider from 'components/cesium/image-provider';
@@ -22,7 +21,6 @@ const Map = ({
   lockNavigation,
   local,
   openPopUp,
-  setDistance,
   openSidePopup,
   className,
   section,
@@ -49,18 +47,12 @@ const Map = ({
   const getBillboardLayer = (billboard, layers) =>
     _find(layers, { name: billboard.layerName });
 
-  const onTickDebounced = debounce(
-    ({ distance }) => setDistance(distance),
-    200
-  );
-
   return (
     <CesiumMap
       key="CesiumMap"
       className={className}
       lockNavigation={lockNavigation}
-      zoomLevel={zoom}
-      onTick={onTickDebounced}
+      zoom={zoom}
     >
       {route === 'regional' &&
         section.section === 'regional:3' &&
@@ -86,17 +78,17 @@ const Map = ({
                 ? { color: new Cesium.Color(...billboard.color) }
                 : {
                   color: new Cesium.Color(
-                      ...(foundRegionalPopup &&
+                    ...(foundRegionalPopup &&
                       map.distance < foundRegionalPopup.location[2] + 5000
-                        ? [1.0, 1.0, 1.0, 0]
-                        : [1, 1, 1])
-                    )
+                      ? [1.0, 1.0, 1.0, 0]
+                      : [1, 1, 1])
+                  )
                 })}
               {...(billboard.distanceDisplayCondition
                 ? {
                   distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                      ...billboard.distanceDisplayCondition
-                    )
+                    ...billboard.distanceDisplayCondition
+                  )
                 }
                 : {})}
               onClick={id =>
