@@ -180,7 +180,7 @@ class Global extends Component {
             </span>
           </P>
 
-          <NavFooter from="/" to="/regional" />
+          <NavFooter from="" to="regional" />
         </Scroller>
       </div>
     );

@@ -39,12 +39,12 @@ const Sidebar = ({
       />
       {(route === 'global' || route === 'regional') &&
         open && (
-          <PaneToggle
-            options={mode.options}
-            selected={mode.selected}
-            onSwitch={() => switchMode()}
-          />
-        )}
+        <PaneToggle
+          options={mode.options}
+          selected={mode.selected}
+          onSwitch={switchMode}
+        />
+      )}
       <div
         className={cx(styles.content, {
           [styles.contentOpen]: open,

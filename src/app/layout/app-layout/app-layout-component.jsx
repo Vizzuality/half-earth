@@ -1,56 +1,42 @@
-import React, { cloneElement, Children } from 'react';
+import React from 'react';
 import cx from 'classnames';
 
 import Header from 'components/header';
 import Map from 'pages/map';
 import Locator from 'components/locator';
 import Home from 'pages/home';
-// import Intro from 'pages/intro'
 import Sidebar from 'components/sidebar';
 import Legend, { LegendLayers } from 'components/legend';
 
 import styles from './app-layout-styles.scss';
 
-const Layout = ({
-  children,
-  location,
-  route,
-  layers,
-  section,
-  history,
-  interaction
-}) => {
-  const isHome = route === 'home';
-  // const isIntro = route === 'intro'
-  const zoomLevel = `${route}|${section.section}`;
+import Global from 'pages/global';
+import Regional from 'pages/regional';
+import Explore from 'pages/explore';
 
+const pages = {
+  global: Global,
+  regional: Regional,
+  explore: Explore
+};
+
+const Layout = ({ isHome, route, layers, section }) => {
+  const zoomLevel = `${route}|${section.section}`;
+  const Component = pages[route];
   return (
-    <div
-      className={cx(styles.container, {
-        [styles.containerHover]: interaction === 'hover'
-      })}
-    >
+    <div className={cx(styles.container)}>
       <Header className={cx(styles.header, styles.headerHidden)} />
       <div className={styles.body}>
-        {!isHome &&
-          Children.map(
-            children,
-            child =>
-              child.key === location.pathname && (
-                <Sidebar
-                  route={route}
-                  hidden={isHome /* || isIntro */}
-                  className={cx(styles.col, styles.sidebar)}
-                >
-                  {cloneElement(child)}
-                </Sidebar>
-              )
-          )}
-        {!isHome /* && !isIntro */ && (
-          <Locator route={route} history={history} />
+        {!isHome && (
+          <Sidebar
+            route={route}
+            hidden={isHome}
+            className={cx(styles.col, styles.sidebar)}
+          >
+            <Component />
+          </Sidebar>
         )}
-        {isHome && <Home />}
-        {/* {isIntro && <Intro />} */}
+        {isHome ? <Home /> : <Locator route={route} />}
         <Map className={cx(styles.col, styles.map)} zoomLevel={zoomLevel} />
         {layers && (
           <Legend>
