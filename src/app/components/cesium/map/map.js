@@ -20,6 +20,21 @@ const disablePanning = v => {
 };
 
 class CesiumComponent extends Component {
+  static mapConfig = {
+    geocoder: false,
+    homeButton: false,
+    sceneModePicker: false,
+    baseLayerPicker: false,
+    navigationHelpButton: false,
+    animation: false,
+    timeline: false,
+    creditsDisplay: false,
+    fullscreenButton: false,
+    skyAtmosphere: false,
+    imageryProvider: new Cesium.UrlTemplateImageryProvider({
+      url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`
+    })
+  };
   rotating = false;
   ticking = false;
   distance = 0;
@@ -30,42 +45,7 @@ class CesiumComponent extends Component {
     hoverPosition: { x: 0, y: 0 }
   };
 
-  mountMap () {
-    const mapConfig = {
-      geocoder: false,
-      homeButton: false,
-      sceneModePicker: false,
-      baseLayerPicker: false,
-      navigationHelpButton: false,
-      animation: false,
-      timeline: false,
-      creditsDisplay: false,
-      fullscreenButton: false,
-      skyAtmosphere: false,
-      imageryProvider: new Cesium.UrlTemplateImageryProvider({
-        url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`
-      })
-    };
-
-    const viewer = new Cesium.Viewer(mapId, mapConfig);
-    this.flyTo = bindFlyTo(viewer);
-    this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-
-    return viewer;
-  }
-
-  setEventHandlers () {
-    this.handler.setInputAction(
-      this.onMouseClick,
-      Cesium.ScreenSpaceEventType.LEFT_CLICK
-    );
-    this.handler.setInputAction(
-      this.onMouseMove,
-      Cesium.ScreenSpaceEventType.MOUSE_MOVE
-    );
-  }
-
-  componentDidMount () {
+  componentDidMount() {
     this.viewer = this.mountMap();
     const layers = Object.keys(this.state.layers).length
       ? this.state.layers
@@ -74,13 +54,14 @@ class CesiumComponent extends Component {
     this.setState({ layers });
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.removeTicking();
     this.removeRotation();
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     const { onTick, lockNavigation, rotate, zoom } = this.props;
+    this.state.clickedPosition = null;
     if (this.viewer) {
       if (!this.rotating && rotate) this.addRotation();
       if (this.rotating && !rotate) this.removeRotation();
@@ -93,12 +74,31 @@ class CesiumComponent extends Component {
     }
   }
 
-  setCoordinates () {
+  mountMap() {
+    const viewer = new Cesium.Viewer(mapId, CesiumComponent.mapConfig);
+    this.flyTo = bindFlyTo(viewer);
+    this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+    return viewer;
+  }
+
+  setEventHandlers() {
+    this.handler.setInputAction(
+      this.onMouseClick,
+      Cesium.ScreenSpaceEventType.LEFT_CLICK
+    );
+    this.handler.setInputAction(
+      this.onMouseMove,
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE
+    );
+  }
+
+  setCoordinates() {
     const [coordinates, options] = this.props.zoom;
     this.flyTo(...coordinates, options);
   }
 
-  setCamera () {
+  setCamera() {
     const [, , camera] = this.props.zoom;
     Object.assign(this.viewer.camera, camera);
   }
@@ -129,11 +129,8 @@ class CesiumComponent extends Component {
         new Cesium.Cartesian3()
       )
     );
-
     if (distance !== this.distance) {
-      this.props.onTick({
-        distance
-      });
+      this.props.onTick({ distance });
       this.distance = distance;
     }
   };
@@ -141,7 +138,7 @@ class CesiumComponent extends Component {
   onMouseClick = click => {
     this.props.onMouseClick &&
       this.props.onMouseClick({
-        position: click.startPosition
+        position: click.position
       });
     this.setState({ clickedPosition: click.position });
   };
@@ -154,27 +151,27 @@ class CesiumComponent extends Component {
     this.setState({ hoverPosition: mouse.startPosition });
   }, 200);
 
-  addRotation () {
+  addRotation() {
     this.viewer.clock.onTick.addEventListener(this.onTick);
     this.rotating = true;
   }
 
-  addTick () {
+  addTick() {
     this.viewer.clock.onTick.addEventListener(this.onTick);
     this.ticking = true;
   }
 
-  removeRotation () {
+  removeRotation() {
     this.viewer.clock.onTick.removeEventListener(this.onTick);
     this.rotating = false;
   }
 
-  removeTicking () {
+  removeTicking() {
     this.viewer.clock.onTick.removeEventListener(this.onTick);
     this.ticking = false;
   }
 
-  render () {
+  render() {
     const { layers, clickedPosition, hoverPosition } = this.state;
     return createElement(CesiumMapComponent, {
       mapId,
