@@ -1,10 +1,11 @@
 import { connectRoutes, NOT_FOUND, redirect } from 'redux-first-router';
+
 import createHistory from 'history/createBrowserHistory';
 import querySerializer from 'query-string';
 const history = createHistory();
 
+export const MAP = 'location/MAP';
 export const APP = 'location/APP';
-export const MAP = 'location/HOME';
 
 export const routes = {
   [MAP]: {
