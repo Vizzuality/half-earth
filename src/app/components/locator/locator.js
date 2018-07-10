@@ -1,6 +1,8 @@
 import { createElement, Component } from 'react';
+import { connect } from 'react-redux';
 
 import LocatorComponent from './locator-component';
+import * as actions from './locator-actions';
 
 const options = new Map();
 
@@ -13,9 +15,20 @@ class LocatorContainer extends Component {
     options
   };
 
-  render () {
-    return createElement(LocatorComponent, { ...this.props });
+  onSelect = section => {
+    this.props.navigateSection({ section });
+  };
+
+  render() {
+    return createElement(LocatorComponent, {
+      ...this.props,
+      onSelect: this.onSelect
+    });
   }
 }
 
-export default LocatorContainer;
+export { actions };
+export default connect(
+  null,
+  actions
+)(LocatorContainer);

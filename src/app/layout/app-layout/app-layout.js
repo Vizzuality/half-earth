@@ -1,15 +1,12 @@
 import { Component, createElement } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import capitalize from 'lodash/capitalize';
 import groupBy from 'lodash/groupBy';
 import values from 'lodash/values';
 import flatten from 'lodash/flatten';
 import * as keyActions from 'providers/keyboard/keyboard-actions';
 
-import Layout from './layout-component';
-
-const scope = path => path.replace('/', '') || 'home';
+import Layout from './app-layout-component';
 
 const sortLayers = (a, b) => {
   if (a.type === 'gradient' && b.type !== 'gradient') return 1;
@@ -18,30 +15,33 @@ const sortLayers = (a, b) => {
 };
 
 class LayoutContainer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.onkeyUp = this.onkeyUp.bind(this);
   }
 
-  onkeyUp (e) {
+  onkeyUp(e) {
     this.props.keyUp(e);
   }
-  componentDidMount () {
+
+  componentDidMount() {
     window.addEventListener('keyup', this.onkeyUp);
   }
-  componentWillMount () {
+
+  componentWillUnmount() {
     window.removeEventListener('keyup', this.onkeyUp);
   }
 
-  render () {
+  render() {
     return createElement(Layout, this.props);
   }
 }
 
-function mapStateToProps (state, { location }) {
-  const route = scope(location.pathname);
-  const page = state[route];
-  const { section, interactions } = state;
+function mapStateToProps(state) {
+  const route = state.location.payload.section || 'home';
+  const isHome = route === 'home';
+  const page = state[route] || '';
+  const { section } = state;
 
   const getLayerName = layer => {
     if (layer.startsWith('prioritization-of-places')) {
@@ -55,13 +55,13 @@ function mapStateToProps (state, { location }) {
   const activeLayers =
     page && Array.isArray(page.layers)
       ? page.layers
-          .filter(layer => layer.visible)
-          .sort(sortLayers)
-          .map(layer => ({ ...layer, group: layer.group || '' }))
-          .map(layer => layer.name)
-          .map(getLayerName)
-          .map(layer => page.legend && page.legend[layer])
-          .filter(layer => !!layer)
+        .filter(layer => layer.visible)
+        .sort(sortLayers)
+        .map(layer => ({ ...layer, group: layer.group || '' }))
+        .map(layer => layer.name)
+        .map(getLayerName)
+        .map(layer => page.legend && page.legend[layer])
+        .filter(layer => !!layer)
       : [];
 
   const groupedLayers = flatten(
@@ -72,17 +72,15 @@ function mapStateToProps (state, { location }) {
 
   const layers = groupedLayers.length > 0 && groupedLayers;
   return {
-    location,
+    page,
     route,
+    isHome,
     layers,
-    section,
-    interaction: interactions.interaction
+    section
   };
 }
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    keyActions
-  )(LayoutContainer)
-);
+export default connect(
+  mapStateToProps,
+  keyActions
+)(LayoutContainer);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'redux-first-router-link';
 import cx from 'classnames';
 
 import styles from './header-styles.scss';
