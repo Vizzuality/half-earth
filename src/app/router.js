@@ -1,9 +1,6 @@
 import { connectRoutes, NOT_FOUND, redirect } from 'redux-first-router';
 import createHistory from 'history/createBrowserHistory';
 import querySerializer from 'query-string';
-import MapLayoutComponent from 'app/layout/map-layout';
-import AppLayoutComponent from 'app/layout/app-layout';
-
 const history = createHistory();
 
 export const APP = 'location/APP';
@@ -12,11 +9,11 @@ export const MAP = 'location/HOME';
 export const routes = {
   [MAP]: {
     path: '/map',
-    component: MapLayoutComponent
+    page: 'map-layout'
   },
   [APP]: {
     path: '/:section?',
-    component: AppLayoutComponent
+    page: 'app-layout'
   },
   [NOT_FOUND]: {
     path: '/404',
