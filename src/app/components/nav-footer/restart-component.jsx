@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
-import { Link } from 'react-router-dom';
+import Link from 'redux-first-router-link';
+
 import styles from './nav-footer-styles';
 
 const Restart = ({ className }) => (

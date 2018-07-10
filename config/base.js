@@ -35,14 +35,13 @@ module.exports = {
   },
   sassConfig,
   config: {
-    entry: join(sourcePath, 'main.jsx'),
-
+    entry: ['babel-polyfill', join(sourcePath, 'main.jsx')],
     output: {
-      filename: 'scripts/[name].js',
+      filename: 'scripts/[name].[chunkhash].js',
+      chunkFilename: 'scripts/[name].[chunkhash].js',
       path: publicPath,
       publicPath: '/'
     },
-
     module: {
       rules: [
         {
