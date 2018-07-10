@@ -20,11 +20,15 @@ const pages = {
   explore: Explore
 };
 
-const Layout = ({ isHome, route, layers, section }) => {
+const Layout = ({ isHome, route, layers, section, interaction }) => {
   const zoomLevel = `${route}|${section.section}`;
   const Component = pages[route];
   return (
-    <div className={cx(styles.container)}>
+    <div
+      className={cx(styles.container, {
+        [styles.containerHover]: interaction === 'hover'
+      })}
+    >
       <Header className={cx(styles.header, styles.headerHidden)} />
       <div className={styles.body}>
         {!isHome && (

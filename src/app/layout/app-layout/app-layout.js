@@ -41,7 +41,7 @@ function mapStateToProps(state) {
   const route = state.location.payload.section || 'home';
   const isHome = route === 'home';
   const page = state[route] || '';
-  const { section } = state;
+  const { section, interactions } = state;
 
   const getLayerName = layer => {
     if (layer.startsWith('prioritization-of-places')) {
@@ -76,7 +76,8 @@ function mapStateToProps(state) {
     route,
     isHome,
     layers,
-    section
+    section,
+    interaction: interactions.interaction
   };
 }
 
