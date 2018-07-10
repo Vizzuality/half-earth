@@ -12,17 +12,15 @@ import styles from './app-layout-styles.scss';
 
 import Global from 'pages/global';
 import Regional from 'pages/regional';
-import Explore from 'pages/explore';
 
 const pages = {
   global: Global,
-  regional: Regional,
-  explore: Explore
+  regional: Regional
 };
 
 const Layout = ({ isHome, route, layers, section, interaction }) => {
   const zoomLevel = `${route}|${section.section}`;
-  const Component = pages[route];
+  const Component = pages[route] || null;
   return (
     <div
       className={cx(styles.container, {
@@ -37,7 +35,7 @@ const Layout = ({ isHome, route, layers, section, interaction }) => {
             hidden={isHome}
             className={cx(styles.col, styles.sidebar)}
           >
-            <Component />
+            {Component && <Component />}
           </Sidebar>
         )}
         {isHome ? <Home /> : <Locator route={route} />}
