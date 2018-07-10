@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import { renderDropdown, renderToggle } from 'components/explorable';
 import GlobalComponent from './global-component';
 import { requestCartos } from 'pages/map/map-utils';
-import { actions as cartoActions } from 'providers/carto';
-import { actions as sectionActions } from 'providers/section';
+import * as cartoActions from 'providers/carto/carto-actions';
+import * as sectionActions from 'providers/section/section-actions';
 import { getSection, getType } from './global-selectors';
 import * as actions from './global-actions';
-import reducers from './global-reducers';
+import * as reducers from './global-reducers';
 import initialState from './global-initial-state/global-initial-state';
 
 class GlobalContainer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     const {
       getCartoTiles,
@@ -26,7 +26,7 @@ class GlobalContainer extends Component {
     setSection('global:1');
     getChartData();
   }
-  render () {
+  render() {
     return createElement(GlobalComponent, this.props);
   }
 }
@@ -56,7 +56,7 @@ const mapStateToProps = state => {
   };
 };
 
-export { actions, reducers, initialState };
+export const redux = { actions, reducers, initialState };
 export default connect(
   mapStateToProps,
   {

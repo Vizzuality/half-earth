@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from './sidebar-actions';
-import reducers from './sidebar-reducers';
-import styles from './sidebar-styles';
+import * as reducers from './sidebar-reducers';
 import initialState from './sidebar-initial-state';
 import SidebarComponent from './sidebar-component';
 
@@ -11,7 +10,7 @@ const mapStateToProps = ({ sidebar, ...state }) => ({
   sidePopupOpen: state.regional.sidePopup.open
 });
 
-export { actions, reducers, initialState, styles };
+export const redux = { actions, reducers, initialState };
 export default connect(
   mapStateToProps,
   actions

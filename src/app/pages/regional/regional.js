@@ -4,15 +4,15 @@ import { renderDropdown, renderToggle } from 'components/explorable';
 import { requestCartos } from 'pages/map/map-utils';
 import * as actions from './regional-actions';
 import { getSection, getType } from './regional-selectors';
-import { actions as cartoActions } from 'providers/carto';
-import { actions as sectionActions } from 'providers/section';
+import * as cartoActions from 'providers/carto/carto-actions';
+import * as sectionActions from 'providers/section/section-actions';
 
-import reducers from './regional-reducers';
+import * as reducers from './regional-reducers';
 import initialState from './regional-initial-state';
 import RegionalComponent from './regional-component';
 
 class RegionalConTainer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     const {
       getCartoTiles,
@@ -26,7 +26,7 @@ class RegionalConTainer extends Component {
     setSection('regional:1');
     getBillboards();
   }
-  render () {
+  render() {
     return createElement(RegionalComponent, this.props);
   }
 }
@@ -44,7 +44,7 @@ const mapStateToProps = state => {
   };
 };
 
-export { reducers, initialState, actions };
+export const redux = { reducers, initialState, actions };
 export default connect(
   mapStateToProps,
   {

@@ -6,11 +6,11 @@ import find from 'lodash/find';
 import kebabCase from 'lodash/kebabCase';
 import last from 'lodash/last';
 import { pick } from 'app/utils';
-import { actions as regionalActions } from 'pages/regional';
-import { actions as globalActions } from 'pages/global';
+import * as regionalActions from 'pages/regional/regional-actions';
+import * as globalActions from 'pages/global/global-actions';
 import { layersInfo } from 'data/layers-info';
 
-import reducers from './pane-reducers';
+import * as reducers from './pane-reducers';
 import * as actions from './pane-actions';
 import initialState from './pane-initial-state';
 
@@ -73,7 +73,7 @@ const mapDispatchToProps = (dispatch, { page }) => {
   );
 };
 
-export { actions, reducers, initialState };
+export const redux = { actions, reducers, initialState };
 export default connect(
   mapStateToProps,
   mapDispatchToProps

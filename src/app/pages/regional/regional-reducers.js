@@ -8,7 +8,7 @@ import toLower from 'lodash/toLower';
 import first from 'lodash/first';
 import merge from 'lodash/fp/merge';
 import { filterToLayer } from './regional-utils';
-import { actions as cartoActions } from 'providers/carto';
+import * as cartoActions from 'providers/carto/carto-actions';
 import * as mapReducers from 'pages/map/map-reducers';
 import * as actions from './regional-actions';
 import * as paneReducers from 'components/pane/pane-reducers';

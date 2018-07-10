@@ -2,9 +2,9 @@ import { Component, createElement } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from './home-actions';
-import { actions as mapActions } from 'pages/map';
-import { actions as sectionActions } from 'providers/section';
-import { actions as analyticsActions } from 'providers/analytics';
+import * as mapActions from 'pages/map/map-actions';
+import * as sectionActions from 'providers/section/section-actions';
+import * as analyticsActions from 'providers/analytics/analytics-actions';
 import HomeComponent from './home-component';
 
 const mergedActions = {
