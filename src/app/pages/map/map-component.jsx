@@ -59,7 +59,7 @@ const Map = ({
       key="CesiumMap"
       className={className}
       lockNavigation={lockNavigation}
-      zoomLevel={zoom}
+      zoom={zoom}
       onTick={onTickDebounced}
     >
       {route === 'regional' &&
@@ -86,17 +86,17 @@ const Map = ({
                 ? { color: new Cesium.Color(...billboard.color) }
                 : {
                   color: new Cesium.Color(
-                      ...(foundRegionalPopup &&
+                    ...(foundRegionalPopup &&
                       map.distance < foundRegionalPopup.location[2] + 5000
-                        ? [1.0, 1.0, 1.0, 0]
-                        : [1, 1, 1])
-                    )
+                      ? [1.0, 1.0, 1.0, 0]
+                      : [1, 1, 1])
+                  )
                 })}
               {...(billboard.distanceDisplayCondition
                 ? {
                   distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                      ...billboard.distanceDisplayCondition
-                    )
+                    ...billboard.distanceDisplayCondition
+                  )
                 }
                 : {})}
               onClick={id =>

@@ -1,14 +1,10 @@
 import { Component, createElement } from 'react';
-import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 import throttle from 'lodash/throttle';
-
 import CesiumMapComponent from './map-component';
 
 const { MAPBOX_TOKEN } = process.env;
-
 const { Cesium } = window;
-
 const mapId = `map-${new Date().getTime()}`;
 
 const bindFlyTo = v => (lat, long, z = 15000.0, rest = {}) =>
@@ -25,21 +21,17 @@ const disablePanning = v => {
 };
 
 class CesiumComponent extends Component {
-  constructor (props) {
-    super(props);
-    this.rotating = false;
-    this.distance = 0;
-    this.ticking = false;
+  rotating = false;
+  distance = 0;
+  ticking = false;
+  state = {
+    layers: {},
+    viewer: null,
+    clickedPosition: null,
+    hoverPosition: { x: 0, y: 0 }
+  };
 
-    this.state = {
-      layers: {},
-      viewer: null,
-      clickedPosition: null,
-      hoverPosition: { x: 0, y: 0 }
-    };
-  }
-
-  mountMap ({ lockNavigation, zoomLevel, globe }) {
+  mountMap () {
     const mapConfig = {
       geocoder: false,
       homeButton: false,
@@ -56,33 +48,10 @@ class CesiumComponent extends Component {
       })
     };
 
-    const viewer = (window.viewer =
-      this.state.viewer || new Cesium.Viewer(mapId, mapConfig));
+    const viewer = new Cesium.Viewer(mapId, mapConfig);
     this.flyTo = bindFlyTo(viewer);
-
-    if (zoomLevel) this.handleZoom(zoomLevel);
-    if (lockNavigation) return disablePanning(viewer);
     this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-    this.handler.setInputAction(
-      this.onMouseClick,
-      Cesium.ScreenSpaceEventType.LEFT_CLICK
-    );
-    this.handler.setInputAction(
-      this.onMouseMove,
-      Cesium.ScreenSpaceEventType.MOUSE_MOVE
-    );
 
-    // var scene = viewer.scene
-    // var sglobe = scene.globe
-    // sglobe.depthTestAgainstTerrain = true
-    // var vrTheWorldProvider = new Cesium.VRTheWorldTerrainProvider({
-    //   url: '//www.vr-theworld.com/vr-theworld/tiles1.0.0/73/',
-    //   credit: 'Terrain data courtesy VT MÄK'
-    // })
-
-    // viewer.terrainProvider = vrTheWorldProvider
-
-    this.state.viewer = viewer;
     return viewer;
   }
 
@@ -91,18 +60,27 @@ class CesiumComponent extends Component {
     const layers = Object.keys(this.state.layers).length
       ? this.state.layers
       : viewer.imageryLayers;
+    this.setEventHandlers();
+    this.setState({ layers, viewer });
+  }
 
-    this.setState({
-      layers,
-      viewer
-    });
+  setEventHandlers () {
+    this.handler.setInputAction(
+      this.onMouseClick,
+      Cesium.ScreenSpaceEventType.LEFT_CLICK
+    );
+    this.handler.setInputAction(
+      this.onMouseMove,
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE
+    );
   }
 
   componentDidMount () {
-    const { props } = this;
-    this.bindMap(props);
-    if (props.zoomLevel) this.handleZoom(props.zoomLevel);
-    if (props.onTick) this.addTick();
+    const { zoom, onTick, lockNavigation } = this.props;
+    this.bindMap(this.props);
+    if (zoom) this.handleZoom(zoom);
+    if (onTick) this.addTick();
+    if (lockNavigation) return disablePanning(this.state.viewer);
   }
 
   componentWillUnmount () {
@@ -110,8 +88,16 @@ class CesiumComponent extends Component {
     this.removeRotation();
   }
 
+  componentWillReceiveProps (props) {
+    if (this.props.zoom !== props.zoom) {
+      this.handleZoom(props.zoom);
+    }
+  }
+
   handleZoom (zoom) {
-    const { state: { viewer } } = this;
+    const {
+      state: { viewer }
+    } = this;
     const [zLevel, opts, cameraProps] = zoom;
     if (zLevel && !isEqual(zoom, this.zLevel)) {
       this.flyTo(...zLevel, opts);
@@ -119,20 +105,8 @@ class CesiumComponent extends Component {
     }
 
     if (viewer && cameraProps) {
-      Object.keys(cameraProps).map(p => {
-        viewer.camera[p] = cameraProps[p];
-      });
+      Object.assign(viewer.camera, cameraProps);
     }
-  }
-
-  componentWillReceiveProps (props) {
-    if (this.props.zoomLevel !== props.zoomLevel) {
-      this.handleZoom(props.zoomLevel);
-    }
-  }
-
-  componentDidUpdate () {
-    this.state.clickedPosition = null;
   }
 
   rotate = clock => {
@@ -218,19 +192,9 @@ class CesiumComponent extends Component {
     const { layers, viewer, clickedPosition, hoverPosition } = state;
     if (viewer) this[rotate ? 'addRotation' : 'removeRotation']();
 
-    const getPos = (window.getPos = () => {
-      const c = viewer.camera.positionCartographic;
-      console.log(
-        Object.keys(c).reduce((a, k) => {
-          a[k] = Cesium.Math.toDegrees(c[k]);
-          return a;
-        }, {})
-      );
-    });
     return createElement(CesiumMapComponent, {
       mapId,
       layers,
-      getPos,
       viewer,
       clickedPosition,
       hoverPosition,
@@ -239,6 +203,4 @@ class CesiumComponent extends Component {
   }
 }
 
-const mapStateToProps = ({ zoom }) => ({ zoom });
-
-export default connect(mapStateToProps)(CesiumComponent);
+export default CesiumComponent;
