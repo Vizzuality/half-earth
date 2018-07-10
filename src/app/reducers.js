@@ -4,7 +4,6 @@ import router from './router';
 
 import layersReducer from 'app/ducks/layers';
 
-import { redux as zoomRedux } from 'components/zoom';
 import { redux as earthometerRedux } from 'components/earthometer-multi';
 import { redux as mapRedux } from 'pages/map';
 import { redux as globalRedux } from 'pages/global';
@@ -19,7 +18,6 @@ import { redux as interactRedux } from 'providers/interact';
 export default combineReducers({
   layers: layersReducer,
   location: router.reducer,
-  zoom: handleModule(zoomRedux),
   earthometer: handleModule(earthometerRedux),
   sidebar: handleModule(sidebarRedux),
   map: handleModule(mapRedux),

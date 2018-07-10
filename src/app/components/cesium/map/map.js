@@ -1,5 +1,4 @@
 import { Component, createElement } from 'react';
-import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 import throttle from 'lodash/throttle';
 
@@ -25,7 +24,7 @@ const disablePanning = v => {
 };
 
 class CesiumComponent extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.rotating = false;
     this.distance = 0;
@@ -39,7 +38,7 @@ class CesiumComponent extends Component {
     };
   }
 
-  mountMap ({ lockNavigation, zoomLevel, globe }) {
+  mountMap({ lockNavigation, zoomLevel, globe }) {
     const mapConfig = {
       geocoder: false,
       homeButton: false,
@@ -86,7 +85,7 @@ class CesiumComponent extends Component {
     return viewer;
   }
 
-  bindMap (props) {
+  bindMap(props) {
     const viewer = this.mountMap(props);
     const layers = Object.keys(this.state.layers).length
       ? this.state.layers
@@ -98,20 +97,22 @@ class CesiumComponent extends Component {
     });
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { props } = this;
     this.bindMap(props);
     if (props.zoomLevel) this.handleZoom(props.zoomLevel);
     if (props.onTick) this.addTick();
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.removeTicking();
     this.removeRotation();
   }
 
-  handleZoom (zoom) {
-    const { state: { viewer } } = this;
+  handleZoom(zoom) {
+    const {
+      state: { viewer }
+    } = this;
     const [zLevel, opts, cameraProps] = zoom;
     if (zLevel && !isEqual(zoom, this.zLevel)) {
       this.flyTo(...zLevel, opts);
@@ -125,13 +126,13 @@ class CesiumComponent extends Component {
     }
   }
 
-  componentWillReceiveProps (props) {
+  componentWillReceiveProps(props) {
     if (this.props.zoomLevel !== props.zoomLevel) {
       this.handleZoom(props.zoomLevel);
     }
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this.state.clickedPosition = null;
   }
 
@@ -186,33 +187,33 @@ class CesiumComponent extends Component {
     this.setState({ hoverPosition: mouse.startPosition });
   }, 200);
 
-  addRotation () {
+  addRotation() {
     const { viewer } = this.state;
     if (this.rotating) return;
     viewer.clock.onTick.addEventListener(this.onTick);
     this.rotating = true;
   }
 
-  addTick () {
+  addTick() {
     const { viewer } = this.state;
     if (this.ticking) return;
     viewer.clock.onTick.addEventListener(this.onTick);
     this.ticking = true;
   }
 
-  removeRotation () {
+  removeRotation() {
     const { viewer } = this.state;
     viewer.clock.onTick.removeEventListener(this.onTick);
     this.rotating = false;
   }
 
-  removeTicking () {
+  removeTicking() {
     const { viewer } = this.state;
     viewer.clock.onTick.removeEventListener(this.onTick);
     this.ticking = false;
   }
 
-  render () {
+  render() {
     const { props, state } = this;
     const { rotate } = props;
     const { layers, viewer, clickedPosition, hoverPosition } = state;
@@ -239,6 +240,4 @@ class CesiumComponent extends Component {
   }
 }
 
-const mapStateToProps = ({ zoom }) => ({ zoom });
-
-export default connect(mapStateToProps)(CesiumComponent);
+export default CesiumComponent;
