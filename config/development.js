@@ -1,9 +1,13 @@
-const merge = require('webpack-merge')
-const { config, sassConfig, paths: { publicPath } } = require('./base')
+const merge = require('webpack-merge');
+const {
+  config,
+  sassConfig,
+  paths: { publicPath }
+} = require('./base');
 
 module.exports = merge(config, {
+  mode: 'development',
   devtool: '#eval-source-map',
-
   module: {
     rules: [
       {
@@ -12,15 +16,12 @@ module.exports = merge(config, {
       }
     ]
   },
-
   stats: {
     errorDetails: true
   },
-
   output: {
     pathinfo: true
   },
-
   devServer: {
     contentBase: publicPath,
     compress: true,
@@ -30,4 +31,4 @@ module.exports = merge(config, {
       ignored: /node_modules/
     }
   }
-})
+});

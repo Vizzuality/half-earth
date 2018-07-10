@@ -2,17 +2,17 @@
 
 /* eslint global-require: 0 */
 /* eslint import/no-dynamic-require: 0 */
-const dotenv = require('dotenv').config() // eslint-disable-line
+const dotenv = require('dotenv').config(); // eslint-disable-line
 
-const { join, resolve } = require('path')
-const webpack = require('webpack')
-const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { join, resolve } = require('path');
+const webpack = require('webpack');
+const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const basePath = resolve(__dirname, '../')
-const sourcePath = resolve(basePath, 'src')
-const publicPath = join(basePath, 'public')
-const appPath = resolve(sourcePath, 'app')
+const basePath = resolve(__dirname, '../');
+const sourcePath = resolve(basePath, 'src');
+const publicPath = join(basePath, 'public');
+const appPath = resolve(sourcePath, 'app');
 
 const sassConfig = [
   {
@@ -24,7 +24,7 @@ const sassConfig = [
   },
   { loader: 'postcss-loader' },
   { loader: `sass-loader?includePaths[]='${appPath}'` }
-]
+];
 
 module.exports = {
   paths: {
@@ -83,7 +83,10 @@ module.exports = {
         inject: 'body',
         GOOGLE_ANALYTICS: JSON.stringify(process.env.GOOGLE_ANALYTICS)
       }),
-      new webpack.EnvironmentPlugin(['NODE_ENV', 'MAPBOX_TOKEN'])
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'development',
+        MAPBOX_TOKEN: null
+      })
     ],
 
     resolveLoader: {
@@ -95,4 +98,4 @@ module.exports = {
       net: 'empty'
     }
   }
-}
+};
