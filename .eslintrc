@@ -5,6 +5,7 @@
     "semi": ["error", "always"],
     "jsx-quotes": ["error", "prefer-double"],
     "react/prop-types": [0],
-    "space-before-function-paren": 0
+    "space-before-function-paren": 0,
+    "comma-dangle": 0
   }
 }

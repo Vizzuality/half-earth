@@ -3,7 +3,7 @@ import { handleModule } from 'redux-tools';
 import router from './router';
 
 // Redux-modules
-import { redux as layersRedux } from 'providers/layers';
+import { redux as layersRedux } from 'redux-modules/layers';
 
 // Providers
 import { redux as sectionRedux } from 'providers/section';
@@ -20,13 +20,13 @@ import { redux as navFooterRedux } from 'components/nav-footer';
 import { redux as legendLayersRedux } from 'components/legend/legend-layers';
 import { redux as paneRedux } from 'components/pane';
 import { redux as sidebarRedux } from 'components/sidebar';
+console.log(layersRedux);
 
 const reduxModulesReducers = {
   layers: handleModule(layersRedux)
 };
 
 const providersReducers = {
-  layers: handleModule(layersRedux),
   interactions: handleModule(interactRedux),
   section: handleModule(sectionRedux)
 };
