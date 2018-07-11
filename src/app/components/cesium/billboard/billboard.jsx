@@ -6,7 +6,7 @@ const { Cesium } = window;
 class Billboard extends Component {
   hasEntered = false;
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     const { viewer } = this.props;
     viewer.entities.remove(this.entity);
   }
@@ -76,7 +76,7 @@ class Billboard extends Component {
     });
   };
 
-  componentWillReceiveProps ({
+  componentWillReceiveProps({
     viewer,
     id,
     url: image,
@@ -88,8 +88,7 @@ class Billboard extends Component {
     clickedPosition,
     hoverPosition,
     color,
-    show,
-    ...props
+    show
   }) {
     if (!viewer) return false;
     const existing = viewer.entities.values.map(e => e.id);
@@ -104,7 +103,7 @@ class Billboard extends Component {
     }
   }
 
-  render () {
+  render() {
     return null;
   }
 }

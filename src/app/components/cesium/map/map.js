@@ -6,9 +6,6 @@ const { MAPBOX_TOKEN } = process.env;
 const { Cesium } = window;
 const mapId = `map-${new Date().getTime()}`;
 
-const bindFlyTo = v => (lat, long, z = 15000.0, rest = {}) =>
-  v.camera.flyTo({ destination: { x: lat, y: long, z }, ...rest });
-
 const disablePanning = v => {
   const { scene } = v;
   scene.screenSpaceCameraController.enableRotate = false;
@@ -50,11 +47,6 @@ class CesiumComponent extends Component {
     this.setEventHandlers();
   }
 
-  componentWillUnmount() {
-    this.removeTicking();
-    this.removeRotation();
-  }
-
   componentDidUpdate() {
     const { onTick, lockNavigation, rotate, zoom } = this.props;
     this.state.clickedPosition = null;
@@ -70,9 +62,13 @@ class CesiumComponent extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.removeTicking();
+    this.removeRotation();
+  }
+
   mountMap() {
     const viewer = new Cesium.Viewer(mapId, CesiumComponent.mapConfig);
-    this.flyTo = bindFlyTo(viewer);
     this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
     return viewer;
@@ -97,6 +93,10 @@ class CesiumComponent extends Component {
   setCamera() {
     const [, , camera] = this.props.zoom;
     Object.assign(this.viewer.camera, camera);
+  }
+
+  flyTo(lat, long, z = 15000.0, rest = {}) {
+    this.viewer.camera.flyTo({ destination: { x: lat, y: long, z }, ...rest });
   }
 
   rotate = clock => {
@@ -173,11 +173,10 @@ class CesiumComponent extends Component {
 
   render() {
     const { clickedPosition, hoverPosition } = this.state;
-    const layers = this.viewer && this.viewer.imageryLayers;
 
     return createElement(CesiumMapComponent, {
       mapId,
-      layers,
+      layersCollection: this.viewer && this.viewer.imageryLayers,
       viewer: this.viewer,
       clickedPosition,
       hoverPosition,

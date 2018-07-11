@@ -6,7 +6,7 @@ import styles from './map-styles.scss';
 function CesiumMap(props) {
   const {
     className,
-    layers: cLayers,
+    layersCollection,
     mapId,
     children,
     viewer,
@@ -18,7 +18,7 @@ function CesiumMap(props) {
       {React.Children.map(children, child => {
         if (!child) return null;
         return cloneElement(child, {
-          cLayers,
+          layersCollection,
           viewer,
           clickedPosition,
           hoverPosition
