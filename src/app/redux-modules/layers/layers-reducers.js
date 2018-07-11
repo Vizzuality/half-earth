@@ -1,13 +1,16 @@
 import * as actions from './layers-actions';
 
-const addLayer = state => ({
-  state,
+const enableLayerReady = (state, { payload }) => ({
+  ...state,
   byId: {
     ...state.byId,
-    [Date.now()]: ''
+    [payload.id]: {
+      ...payload,
+      active: true
+    }
   }
 });
 
 export default {
-  [actions.addLayer]: addLayer
+  [actions.enableLayerReady]: enableLayerReady
 };

@@ -20,7 +20,6 @@ import { redux as navFooterRedux } from 'components/nav-footer';
 import { redux as legendLayersRedux } from 'components/legend/legend-layers';
 import { redux as paneRedux } from 'components/pane';
 import { redux as sidebarRedux } from 'components/sidebar';
-console.log(layersRedux);
 
 const reduxModulesReducers = {
   layers: handleModule(layersRedux)
