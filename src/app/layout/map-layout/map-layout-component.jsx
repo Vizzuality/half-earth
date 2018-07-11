@@ -1,6 +1,6 @@
 import React from 'react';
 import CesiumMap from 'components/cesium/map';
-import ImageProvider from 'components/cesium/image-provider';
+import CesiumLayer from 'components/cesium/layer';
 
 const zoom = [
   [1553050.2420231537, -7982538.989058298, 208217.95614838324],
@@ -31,7 +31,7 @@ const zoom = [
 ];
 
 const MapLayoutComponent = () => {
-  return <CesiumMap zoom={zoom}>{false && <ImageProvider />}</CesiumMap>;
+  return <CesiumMap zoom={zoom}>{false && <CesiumLayer />}</CesiumMap>;
 };
 
 export default MapLayoutComponent;

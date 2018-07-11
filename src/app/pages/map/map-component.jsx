@@ -2,7 +2,7 @@ import React from 'react';
 import _find from 'lodash/find';
 import { ns } from 'utils';
 import CesiumMap from 'components/cesium/map';
-import ImageProvider from 'components/cesium/image-provider';
+import CesiumLayer from 'components/cesium/layer';
 import zoomLevels from 'data/zoom-levels';
 import Billboard from 'components/cesium/billboard';
 import Logos from 'components/logos';
@@ -103,14 +103,12 @@ const Map = ({
       {route === 'regional' &&
         regional.layers.map(
           layer =>
-            layer.url ? (
-              <ImageProvider keep={layer.keep} key={layer.name} {...layer} />
-            ) : null
+            layer.url ? <CesiumLayer key={layer.name} {...layer} /> : null
         )}
       {route === 'global' &&
         global.layers.map(
           layer =>
-            layer.url ? <ImageProvider key={layer.name} {...layer} /> : null
+            layer.url ? <CesiumLayer key={layer.name} {...layer} /> : null
         )}
       {route !== 'home' && <Logos key="Logos" />}
     </CesiumMap>

@@ -47,11 +47,7 @@ class CesiumComponent extends Component {
 
   componentDidMount() {
     this.viewer = this.mountMap();
-    const layers = Object.keys(this.state.layers).length
-      ? this.state.layers
-      : this.viewer.imageryLayers;
     this.setEventHandlers();
-    this.setState({ layers });
   }
 
   componentWillUnmount() {
@@ -136,18 +132,22 @@ class CesiumComponent extends Component {
   };
 
   onMouseClick = click => {
-    this.props.onMouseClick &&
-      this.props.onMouseClick({
+    const { onMouseClick } = this.props;
+    if (onMouseClick) {
+      onMouseClick({
         position: click.position
       });
+    }
     this.setState({ clickedPosition: click.position });
   };
 
   onMouseMove = throttle(mouse => {
-    this.props.onMouseMove &&
-      this.props.onMouseMove({
+    const { onMouseMove } = this.props;
+    if (onMouseMove) {
+      onMouseMove({
         position: mouse.startPosition
       });
+    }
     this.setState({ hoverPosition: mouse.startPosition });
   }, 200);
 
@@ -172,7 +172,9 @@ class CesiumComponent extends Component {
   }
 
   render() {
-    const { layers, clickedPosition, hoverPosition } = this.state;
+    const { clickedPosition, hoverPosition } = this.state;
+    const layers = this.viewer && this.viewer.imageryLayers;
+
     return createElement(CesiumMapComponent, {
       mapId,
       layers,
