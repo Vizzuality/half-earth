@@ -1,10 +1,21 @@
+import layersData from './layers-data';
 import { getLayerConfig } from './layers-utils';
 import upperFirst from 'lodash/upperFirst';
 
-const speciesNames = ['mammals', 'amphibians', 'birds', 'protea', 'restio'];
-const speciesTypes = ['richness', 'rarity', 'richness_1km', 'rarity_1km'];
-const getSpeciesLayers = () =>
-  speciesNames.reduce(
+function getSpeciesLayers() {
+  const speciesNames = [
+    'mammals',
+    'amphibians',
+    'birds',
+    'protea',
+    'restio',
+    'cacti',
+    'conifers',
+    'turtles',
+    'all-taxa'
+  ];
+  const speciesTypes = ['richness', 'rarity', 'richness_1km', 'rarity_1km'];
+  return speciesNames.reduce(
     (acc, name) => ({
       ...acc,
       ...speciesTypes.reduce(
@@ -14,15 +25,13 @@ const getSpeciesLayers = () =>
             id: `${name}:${type}`,
             category: ['global, regional'],
             config: getLayerConfig({ type: 'mol', name: `${name}:${type}` }),
-            active: false,
             legend: {
               type: 'gradient',
               label: upperFirst(name),
               color: 'rainbow',
               size: 'big',
-              min: 8, // TO DEFINE WHERE TO GET IT
-              max: 49, // TO DEFINE WHERE TO GET IT
-              group: type
+              group: type,
+              ...((layersData[name] && layersData[name][type]) || {})
             }
           }
         }),
@@ -31,9 +40,29 @@ const getSpeciesLayers = () =>
     }),
     {}
   );
+}
+
+const layers = {
+  'private-reserves': {
+    id: 'private-reserves',
+    config: {
+      name: 'private-reserves',
+      opacity: 100,
+      url: null,
+      type: 'UrlTemplate',
+      visible: false
+    },
+    carto: {
+      cartocss: `#layer { polygon-fill: #972a6a; polygon-opacity: 0.7; } #layer::outline { line-width: 1; line-color: #972a6a; line-opacity: 100; }`,
+      sql: 'select * from private_nature_reserve'
+    },
+    legend: {}
+  }
+};
 
 export default {
   byId: {
-    ...getSpeciesLayers()
+    ...getSpeciesLayers(),
+    ...layers
   }
 };
