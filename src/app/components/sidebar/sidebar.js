@@ -7,7 +7,7 @@ import SidebarComponent from './sidebar-component';
 
 const mapStateToProps = ({ sidebar, ...state }) => ({
   ...sidebar,
-  section: state.location.payload.section || 'home',
+  section: (state.location.payload && state.location.payload.section) || 'home',
   sidePopupOpen: state.regional.sidePopup.open
 });
 

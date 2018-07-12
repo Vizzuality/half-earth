@@ -36,8 +36,6 @@ class CesiumComponent extends Component {
   ticking = false;
   distance = 0;
   state = {
-    layers: {},
-    viewer: null,
     clickedPosition: null,
     hoverPosition: { x: 0, y: 0 }
   };

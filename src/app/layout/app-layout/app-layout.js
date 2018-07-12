@@ -15,29 +15,29 @@ const sortLayers = (a, b) => {
 };
 
 class LayoutContainer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.onkeyUp = this.onkeyUp.bind(this);
   }
 
-  onkeyUp (e) {
+  onkeyUp(e) {
     this.props.keyUp(e);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     window.addEventListener('keyup', this.onkeyUp);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('keyup', this.onkeyUp);
   }
 
-  render () {
+  render() {
     return createElement(Layout, this.props);
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   const route = state.location.payload.section || 'home';
   const isHome = route === 'home';
   const page = state[route] || '';
@@ -57,9 +57,7 @@ function mapStateToProps (state) {
       ? page.layers
         .filter(layer => layer.visible)
         .sort(sortLayers)
-        .map(layer => ({ ...layer, group: layer.group || '' }))
-        .map(layer => layer.name)
-        .map(getLayerName)
+        .map(layer => getLayerName(layer.name))
         .map(layer => page.legend && page.legend[layer])
         .filter(layer => !!layer)
       : [];
