@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-tools';
-import { routerReducer } from 'react-router-redux';
+import router from './router';
 
 import {
   reducers as zoomReducers,
@@ -55,7 +55,7 @@ import {
 } from 'providers/interact';
 
 export default combineReducers({
-  routing: routerReducer,
+  location: router.reducer,
   zoom: handleActions(zoomReducers, zoomState),
   earthometer: handleActions(earthometerReducers, earthometerState),
   sidebar: handleActions(sidebarReducers, sidebarState),

@@ -63,7 +63,7 @@ const Home = () => (
       conservation.
     </h2>
     <div className={styles.navFooterContainer}>
-      <NavFooter to={'/global'} theme={HomeNavFooter} />
+      <NavFooter to="global" theme={HomeNavFooter} />
       <p className={styles.navFooterCaption}>continue</p>
     </div>
   </div>

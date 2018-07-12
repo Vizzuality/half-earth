@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import cx from 'classnames';
 
 import Pane from 'components/pane';
@@ -11,50 +11,69 @@ const analytics = {
   close: ['Sidebar', 'Close Sidebar']
 };
 
-const Sidebar = ({
-  children,
-  className,
-  hidden,
-  toggleSidebar,
-  open,
-  route,
-  sidePopupOpen,
-  mode,
-  switchMode,
-  ...props
-}) => {
-  const sidebarAnalytics = open ? analytics.open : analytics.close;
-  return (
-    <div
-      className={cx(className, styles.sidebar, {
-        [styles.sidebarClosed]: !open,
-        [styles.sidebarHidden]: hidden
-      })}
-    >
-      <Button
-        open={open}
-        toggleSidebar={() =>
-          toggleSidebar({ meta: { analytics: [route, ...sidebarAnalytics] } })
-        }
-      />
-      {(route === 'global' || route === 'regional') &&
-        open && (
+class Sidebar extends Component {
+  elemId = 'sidebar-content';
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.section !== prevProps.section) {
+      this.scrollSectionTop();
+    }
+  }
+
+  scrollSectionTop() {
+    const sidebar = document.getElementById(this.elemId);
+    if (sidebar && sidebar.scrollTop > 0) {
+      sidebar.scrollTop = 0;
+    }
+  }
+
+  render() {
+    const {
+      children,
+      className,
+      hidden,
+      toggleSidebar,
+      open,
+      route,
+      sidePopupOpen,
+      mode,
+      switchMode
+    } = this.props;
+
+    const sidebarAnalytics = open ? analytics.open : analytics.close;
+    return (
+      <div
+        className={cx(className, styles.sidebar, {
+          [styles.sidebarClosed]: !open,
+          [styles.sidebarHidden]: hidden
+        })}
+      >
+        <Button
+          open={open}
+          toggleSidebar={() =>
+            toggleSidebar({ meta: { analytics: [route, ...sidebarAnalytics] } })
+          }
+        />
+        {(route === 'global' || route === 'regional') &&
+          open && (
           <PaneToggle
             options={mode.options}
             selected={mode.selected}
-            onSwitch={() => switchMode()}
+            onSwitch={switchMode}
           />
         )}
-      <div
-        className={cx(styles.content, {
-          [styles.contentOpen]: open,
-          [styles.contentLocked]: sidePopupOpen
-        })}
-      >
-        {mode.selected === 'st' ? children : <Pane page={route} />}
+        <div
+          id={this.elemId}
+          className={cx(styles.content, {
+            [styles.contentOpen]: open,
+            [styles.contentLocked]: sidePopupOpen
+          })}
+        >
+          {mode.selected === 'st' ? children : <Pane page={route} />}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Sidebar;
