@@ -70,12 +70,6 @@ export default {
       ...payload,
       payload: layer => ({ url: payload.url, carto: null })
     }),
-
-  [actions.setDistance]: (state, { payload }) => ({
-    ...state,
-    distance: payload
-  }),
-
   [actions.hideLayers]: hideLayers,
   [actions.toggleLayer]: toggleLayer,
   [actions.selectLayer]: selectLayer,

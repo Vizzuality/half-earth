@@ -57,9 +57,7 @@ function mapStateToProps(state) {
       ? page.layers
         .filter(layer => layer.visible)
         .sort(sortLayers)
-        .map(layer => ({ ...layer, group: layer.group || '' }))
-        .map(layer => layer.name)
-        .map(getLayerName)
+        .map(layer => getLayerName(layer.name))
         .map(layer => page.legend && page.legend[layer])
         .filter(layer => !!layer)
       : [];
