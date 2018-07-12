@@ -43,35 +43,30 @@ class CesiumComponent extends Component {
   };
 
   componentDidMount() {
-    this.viewer = this.mountMap();
+    this.viewer = new Cesium.Viewer(mapId, CesiumComponent.mapConfig);
+    this.handler = new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas);
     this.setEventHandlers();
+    this.setCoordinates();
+    this.setCamera();
   }
 
   componentDidUpdate() {
-    const { onTick, lockNavigation, rotate, zoom } = this.props;
+    const { onTick, lockNavigation, rotate, coordinates, camera } = this.props;
+    console.log(camera);
     this.state.clickedPosition = null;
     if (this.viewer) {
       if (!this.rotating && rotate) this.addRotation();
       if (this.rotating && !rotate) this.removeRotation();
       if (onTick && !this.ticking) this.addTick();
-      if (zoom) {
-        this.setCoordinates();
-        this.setCamera();
-      }
-      if (lockNavigation) return disablePanning(this.viewer);
+      if (coordinates) this.setCoordinates();
+      if (camera) this.setCamera();
+      if (lockNavigation) disablePanning(this.viewer);
     }
   }
 
   componentWillUnmount() {
     this.removeTicking();
     this.removeRotation();
-  }
-
-  mountMap() {
-    const viewer = new Cesium.Viewer(mapId, CesiumComponent.mapConfig);
-    this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-
-    return viewer;
   }
 
   setEventHandlers() {
@@ -86,12 +81,12 @@ class CesiumComponent extends Component {
   }
 
   setCoordinates() {
-    const [coordinates, options] = this.props.zoom;
-    this.flyTo(...coordinates, options);
+    const [xyz, options] = this.props.coordinates;
+    this.flyTo(...xyz, options);
   }
 
   setCamera() {
-    const [, , camera] = this.props.zoom;
+    const { camera } = this.props;
     Object.assign(this.viewer.camera, camera);
   }
 

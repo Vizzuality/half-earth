@@ -58,7 +58,7 @@ Interesting [read](https://github.com/faceyspacey/redux-first-router#motivation-
 - Routes are defined as another reducer
 - Navigation are just actions
 - You can grab the piece of state from the url that you need in any component
-- Easily code splitting using [react-universal-component](https://github.com/faceyspacey/react-universal-component)
+- Seamless code splitting using [react-universal-component](https://github.com/faceyspacey/react-universal-component)
 
 ## Modules
 

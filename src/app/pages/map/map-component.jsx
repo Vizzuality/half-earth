@@ -32,7 +32,10 @@ const Map = ({
   });
   const [route, zoomLevel] = ns(routeLevel, '|');
 
-  let zoom = zoomLevels[zoomLevel] || zoomLevels[route];
+  const [xyz, coordinatesOptions, camera] =
+    zoomLevels[zoomLevel] || zoomLevels[route];
+
+  let coordsConfig = [xyz, coordinatesOptions];
 
   if (regional.sidePopup.open && foundRegionalPopup) {
     const { x, y, z } = Cesium.Cartesian3.fromDegrees(
@@ -41,7 +44,7 @@ const Map = ({
       foundRegionalPopup.location[2] || 70000.0
     );
     // 70000.0
-    if (x && y) zoom = [[x, y, z], null];
+    if (x && y) coordsConfig = [[x, y, z], null];
   }
 
   const getBillboardLayer = (billboard, layers) =>
@@ -52,7 +55,8 @@ const Map = ({
       key="CesiumMap"
       className={className}
       lockNavigation={lockNavigation}
-      zoom={zoom}
+      coordinates={coordsConfig}
+      camera={camera}
     >
       {route === 'regional' &&
         section.section === 'regional:3' &&
