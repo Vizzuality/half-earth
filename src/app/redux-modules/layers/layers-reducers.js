@@ -1,16 +1,23 @@
 import * as actions from './layers-actions';
 
-const enableLayerReady = (state, { payload }) => ({
-  ...state,
-  byId: {
-    ...state.byId,
-    [payload.id]: {
-      ...payload,
-      active: true
-    }
+const setLayerConfig = (state, { payload }) => {
+  const { id } = payload;
+  const layer = { ...state.byId[id] };
+  if (layer) {
+    layer.config = {
+      ...layer.config,
+      ...payload.config
+    };
   }
-});
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [id]: layer
+    }
+  };
+};
 
 export default {
-  [actions.enableLayerReady]: enableLayerReady
+  [actions.setLayerConfig]: setLayerConfig
 };

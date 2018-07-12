@@ -1,12 +1,22 @@
 import { createAction, createThunkAction } from 'redux-tools';
+import { getCartoUrl } from './layers-utils';
 
-export const enableLayerReady = createAction('layers/ENABLE_LAYER_READY');
-export const enableLayer = createThunkAction(
-  'layers/ENABLE_LAYER',
-  layer => (dispatch, getState) => {
-    console.log(
-      'TODO: get carto layers url before enable it or just dispatch it when ready'
-    );
-    dispatch(enableLayerReady(layer));
+export const setLayerConfig = createAction('layers/SET_CONFIG');
+export const fetchLayer = createThunkAction(
+  'layers/FETCH_CARTO_URL',
+  ({ id, config }) => async (dispatch, getState) => {
+    const layerData = getState().layers.byId[id];
+
+    if (layerData) {
+      const url = await getCartoUrl({ config: layerData.carto });
+      const layerConfig = {
+        id,
+        config: {
+          ...config,
+          url
+        }
+      };
+      dispatch(setLayerConfig(layerConfig));
+    }
   }
 );
