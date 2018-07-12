@@ -10,7 +10,7 @@ const mapStateToProps = ({ sidebar, ...state }) => ({
   sidePopupOpen: state.regional.sidePopup.open
 });
 
-export const redux = { actions, reducers, initialState };
+export const reduxConfig = { actions, reducers, initialState };
 export default connect(
   mapStateToProps,
   actions

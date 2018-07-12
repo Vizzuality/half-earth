@@ -73,7 +73,7 @@ const mapDispatchToProps = (dispatch, { page }) => {
   );
 };
 
-export const redux = { actions, reducers, initialState };
+export const reduxConfig = { actions, reducers, initialState };
 export default connect(
   mapStateToProps,
   mapDispatchToProps

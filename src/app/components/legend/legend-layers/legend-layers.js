@@ -10,7 +10,7 @@ const mapStateToProps = ({ legendLayers }) => ({
   popUp: legendLayers.popUp
 });
 
-export const redux = { reducers, initialState };
+export const reduxConfig = { reducers, initialState };
 export default connect(
   mapStateToProps,
   popUpActions

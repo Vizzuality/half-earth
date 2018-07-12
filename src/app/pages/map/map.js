@@ -24,7 +24,7 @@ class MapContainer extends Component {
 }
 
 export { utils };
-export const redux = { actions, reducers, initialState };
+export const reduxConfig = { actions, reducers, initialState };
 const mapStateToProps = ({ map, regional, local, popUp, global, section }) => ({
   map,
   regional,

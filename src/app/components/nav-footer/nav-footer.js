@@ -5,7 +5,7 @@ import initialState from './initial-state';
 
 import NavFooter from './nav-footer-component';
 
-export const redux = { reducers, initialState };
+export const reduxConfig = { reducers, initialState };
 export default connect(
   null,
   analyticsActions

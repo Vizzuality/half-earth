@@ -3,23 +3,23 @@ import { handleModule } from 'redux-tools';
 import router from './router';
 
 // Redux-modules
-import { redux as layersRedux } from 'redux-modules/layers';
+import { reduxConfig as layersRedux } from 'redux-modules/layers';
 
 // Providers
-import { redux as sectionRedux } from 'providers/section';
-import { redux as interactRedux } from 'providers/interact';
+import { reduxConfig as sectionRedux } from 'providers/section';
+import { reduxConfig as interactRedux } from 'providers/interact';
 
 // Pages
-import { redux as mapRedux } from 'pages/map';
-import { redux as globalRedux } from 'pages/global';
-import { redux as regionalRedux } from 'pages/regional';
+import { reduxConfig as mapRedux } from 'pages/map';
+import { reduxConfig as globalRedux } from 'pages/global';
+import { reduxConfig as regionalRedux } from 'pages/regional';
 
 // Components
-import { redux as earthometerRedux } from 'components/earthometer-multi';
-import { redux as navFooterRedux } from 'components/nav-footer';
-import { redux as legendLayersRedux } from 'components/legend/legend-layers';
-import { redux as paneRedux } from 'components/pane';
-import { redux as sidebarRedux } from 'components/sidebar';
+import { reduxConfig as earthometerRedux } from 'components/earthometer-multi';
+import { reduxConfig as navFooterRedux } from 'components/nav-footer';
+import { reduxConfig as legendLayersRedux } from 'components/legend/legend-layers';
+import { reduxConfig as paneRedux } from 'components/pane';
+import { reduxConfig as sidebarRedux } from 'components/sidebar';
 
 const reduxModulesReducers = {
   layers: handleModule(layersRedux)

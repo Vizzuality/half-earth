@@ -44,7 +44,7 @@ const mapStateToProps = state => {
   };
 };
 
-export const redux = { reducers, initialState, actions };
+export const reduxConfig = { reducers, initialState, actions };
 export default connect(
   mapStateToProps,
   {
