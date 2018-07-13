@@ -26,25 +26,22 @@ export const getCartoUrl = ({ account = 'half-earth', config = {} }) => {
     });
 };
 
-export const getMolLayerConfig = name => {
-  const data = name.split(':');
-  const species = data[0];
-  const type = data[1];
+export const getMolLayerConfig = (name, group, type) => {
   return {
     name,
     opacity: 100,
-    url: `https://cdn.mol.org/half-earth/tiles/${type}/${species}/{z}/{x}/{y}`,
+    url: `https://cdn.mol.org/half-earth/tiles/${type}/${group}/{z}/{x}/{y}`,
     type: 'UrlTemplate',
     visible: false
   };
 };
 
-export const getLayerConfig = ({ type, name }) => {
-  switch (type) {
+export const getLayerConfig = (provider, { name, type, group }) => {
+  switch (provider) {
     case 'mol':
-      return getMolLayerConfig(name);
+      return getMolLayerConfig(name, group, type);
     default:
-      console.warning('No layer config type provided for', name);
+      console.warn('No layer config type provided for', name);
       return {};
   }
 };
