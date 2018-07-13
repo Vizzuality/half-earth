@@ -1,4 +1,4 @@
-import layersData from './layers-data';
+import { legends } from './layers-data';
 import { getLayerConfig } from './layers-utils';
 import upperFirst from 'lodash/upperFirst';
 
@@ -31,7 +31,7 @@ function getSpeciesLayers() {
               color: 'rainbow',
               size: 'big',
               group: type,
-              ...((layersData[name] && layersData[name][type]) || {})
+              ...(legends[`${name}:${type}`] || {})
             }
           }
         }),
@@ -56,7 +56,7 @@ const layers = {
       cartocss: `#layer { polygon-fill: #972a6a; polygon-opacity: 0.7; } #layer::outline { line-width: 1; line-color: #972a6a; line-opacity: 100; }`,
       sql: 'select * from private_nature_reserve'
     },
-    legend: {}
+    legend: legends['private-reserves']
   }
 };
 
