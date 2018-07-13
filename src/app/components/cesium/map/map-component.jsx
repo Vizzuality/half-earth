@@ -14,7 +14,7 @@ function CesiumMap(props) {
     hoverPosition
   } = props;
   return (
-    <div className={cx(className, styles.map)} id={mapId}>
+    <div className={cx(styles.map, className)} id={mapId}>
       {React.Children.map(children, child => {
         if (!child) return null;
         return cloneElement(child, {
