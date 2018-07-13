@@ -2,8 +2,12 @@ import * as actions from './layers-actions';
 export async function layersThunk(dispatch, getState) {
   const { layers, location } = getState();
   const sanitizeLayerId = id => {
-    if (id.endsWith('richness') || id.endsWith('rarity')) {
-      return id.replace('-', ':');
+    if (
+      id.endsWith('richness') ||
+      id.endsWith('rarity') ||
+      id.endsWith('-1km')
+    ) {
+      return id.replace('-1km', '_1km').replace('-', ':');
     }
     return id;
   };
