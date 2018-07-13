@@ -2,20 +2,24 @@ import * as actions from './layers-actions';
 
 const setLayerConfig = (state, { payload }) => {
   const { id } = payload;
-  const layer = { ...state.byId[id] };
+  const layer = state.byId[id];
   if (layer) {
-    layer.config = {
-      ...layer.config,
-      ...payload.config
+    const newLayer = {
+      ...layer,
+      config: {
+        ...layer.config,
+        ...payload.config
+      }
+    };
+    return {
+      ...state,
+      byId: {
+        ...state.byId,
+        [id]: newLayer
+      }
     };
   }
-  return {
-    ...state,
-    byId: {
-      ...state.byId,
-      [id]: layer
-    }
-  };
+  return state;
 };
 
 export default {

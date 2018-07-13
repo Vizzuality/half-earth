@@ -41,24 +41,37 @@ class CesiumComponent extends Component {
   };
 
   componentDidMount() {
+    const { coordinates, camera } = this.props;
     this.viewer = new Cesium.Viewer(mapId, CesiumComponent.mapConfig);
     this.handler = new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas);
     this.setEventHandlers();
-    this.setCoordinates();
-    this.setCamera();
+    if (coordinates) this.setCoordinates();
+    if (camera) this.setCamera();
   }
 
-  componentDidUpdate() {
-    const { onTick, lockNavigation, rotate, coordinates, camera } = this.props;
-    console.log(camera);
+  componentDidUpdate(prevProps) {
+    const {
+      onTick,
+      lockNavigation = false,
+      rotate,
+      coordinates,
+      coordinatesOptions,
+      camera
+    } = this.props;
     this.state.clickedPosition = null;
     if (this.viewer) {
       if (!this.rotating && rotate) this.addRotation();
       if (this.rotating && !rotate) this.removeRotation();
       if (onTick && !this.ticking) this.addTick();
-      if (coordinates) this.setCoordinates();
-      if (camera) this.setCamera();
+      if (camera && prevProps.camera !== camera) this.setCamera();
       if (lockNavigation) disablePanning(this.viewer);
+      if (
+        coordinates &&
+        (prevProps.coordinates !== coordinates ||
+          prevProps.coordinatesOptions !== coordinatesOptions)
+      ) {
+        this.setCoordinates();
+      }
     }
   }
 
@@ -79,8 +92,8 @@ class CesiumComponent extends Component {
   }
 
   setCoordinates() {
-    const [xyz, options] = this.props.coordinates;
-    this.flyTo(...xyz, options);
+    const { coordinates, coordinatesOptions } = this.props;
+    this.flyTo(...coordinates, coordinatesOptions);
   }
 
   setCamera() {
