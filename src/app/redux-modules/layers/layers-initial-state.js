@@ -26,8 +26,8 @@ function getSpeciesLayers() {
             category: ['global, regional'],
             config: getLayerConfig({ type: 'mol', name: `${name}:${type}` }),
             legend: {
+              label: `${upperFirst(name)} ${type}`,
               type: 'gradient',
-              label: upperFirst(name),
               color: 'rainbow',
               size: 'big',
               group: type,

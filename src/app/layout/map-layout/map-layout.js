@@ -24,7 +24,7 @@ function mapDispatchToProps(state) {
   );
   return {
     coordinates,
-    activeLayers,
+    layers: activeLayers,
     coordinatesOptions
   };
 }
