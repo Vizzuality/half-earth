@@ -5,6 +5,7 @@ import range from 'lodash/range';
 
 const getPrioritizationLayers = range(14, 51).reduce((acc, step) => {
   const id = `prioritization-of-places-${step}`;
+  const legend = legends['prioritization-of-places'];
   return {
     ...acc,
     [id]: {
@@ -20,7 +21,10 @@ const getPrioritizationLayers = range(14, 51).reduce((acc, step) => {
         cartocss: `#layer { [zoom >= 1]{ marker-width: 2;} [zoom >= 2]{ marker-width: 3;} [zoom >= 3]{ marker-width: 5;} [zoom >= 4]{ marker-width: 10;} [zoom >= 5]{ marker-width: 20;} [zoom >= 6]{ marker-width: 40;} [zoom >= 7]{ marker-width: 80;} [zoom >= 8]{ marker-width: 160;} [zoom >= 9]{ marker-width: 320;} marker-fill: ramp([cell_prior], (#ff2955, #e2254c, #c02847, #911c34, #93345d, #350a13), quantiles(6)); marker-fill-opacity: ramp([cell_prior], (0.8, 0.7, 0.6, 0.5, 0.4, 0.3), quantiles(6)); marker-allow-overlap: true; marker-line-width: 0; marker-line-color: #FFFFFF; marker-line-opacity: 1; }`,
         sql: `select * from half_earth_priority_centroids where cpr_pr_any <= ${step}`
       },
-      legend: {}
+      legend: {
+        ...legend,
+        label: `${legend.label} ${step}`
+      }
     }
   };
 });

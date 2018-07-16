@@ -6,6 +6,7 @@ import styles from './map-layout-styles';
 
 const MapLayoutComponent = props => {
   const { layers, coordinates, coordinatesOptions } = props;
+  const hasLayers = layers && !!layers.length;
   return (
     <React.Fragment>
       <CesiumMap
@@ -13,15 +14,20 @@ const MapLayoutComponent = props => {
         coordinates={coordinates}
         coordinatesOptions={coordinatesOptions}
       >
-        {layers.map(layer => <CesiumLayer key={layer.id} {...layer.config} />)}
+        {hasLayers &&
+          layers.map(layer => <CesiumLayer key={layer.id} {...layer.config} />)}
       </CesiumMap>
-      {layers && (
+      {hasLayers && (
         <Legend>
           <LegendLayers layers={layers.map(l => l.legend)} />
         </Legend>
       )}
     </React.Fragment>
   );
+};
+
+MapLayoutComponent.defaultProps = {
+  layers: []
 };
 
 export default MapLayoutComponent;

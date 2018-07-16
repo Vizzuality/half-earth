@@ -1,5 +1,8 @@
+import { createElement, Component } from 'react';
 import { connect } from 'react-redux';
+import * as actions from './map-layout-actions';
 import MapLayout from './map-layout-component';
+import postRobot from 'post-robot';
 
 function mapDispatchToProps(state) {
   const { layers, location } = state;
@@ -23,10 +26,61 @@ function mapDispatchToProps(state) {
     layer => layer.config.visible
   );
   return {
+    location,
     coordinates,
     layers: activeLayers,
     coordinatesOptions
   };
 }
 
-export default connect(mapDispatchToProps)(MapLayout);
+class MapLayoutContainer extends Component {
+  componentDidMount() {
+    const { location } = this.props;
+    if (location.query && location.query.listeners === 'true') {
+      this.attachPostRobotListeners();
+    }
+  }
+
+  attachPostRobotListeners() {
+    postRobot.on('mapFlyToCoordinates', event => {
+      const { coordinates = [], orientation = [] } = event.data;
+      if (coordinates.length || orientation.length) {
+        const params = {
+          coordinates: coordinates.join(','),
+          orientation: orientation.join(',')
+        };
+        this.updateMapParams(params);
+        return { done: true };
+      }
+      return { done: false };
+    });
+    postRobot.on('setMapLayers', event => {
+      const { layers = [] } = event.data;
+      const params = { layers: layers.join(',') };
+      this.updateMapParams(params);
+      return { done: true };
+    });
+  }
+
+  updateMapParams = params => {
+    const { location, updateMapParams } = this.props;
+    updateMapParams({
+      query: {
+        ...location.query,
+        ...params
+      }
+    });
+  };
+
+  render() {
+    return createElement(MapLayout, {
+      ...this.props,
+      updateMapCoordinates: this.updateMapCoordinates
+    });
+  }
+}
+
+export default connect(
+  mapDispatchToProps,
+  actions
+)(MapLayoutContainer);
