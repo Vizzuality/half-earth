@@ -2,6 +2,7 @@
 
 # We label our stage as 'builder'
 FROM node:10.6.0-alpine as builder
+RUN apk add --no-cache --update make gcc g++ libc-dev libpng-dev automake autoconf libtool
 
 RUN mkdir /app
 COPY package.json yarn.lock ./app/
@@ -9,7 +10,6 @@ COPY package.json yarn.lock ./app/
 WORKDIR /app
 
 RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
-
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
 RUN yarn install && mkdir -p /app/src && mkdir -p /app/config && mkdir -p /app/public
 
