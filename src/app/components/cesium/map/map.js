@@ -50,7 +50,7 @@ class CesiumComponent extends Component {
 
   componentDidUpdate() {
     const { onTick, lockNavigation, rotate, coordinates, camera } = this.props;
-    console.log(camera);
+
     this.state.clickedPosition = null;
     if (this.viewer) {
       if (!this.rotating && rotate) this.addRotation();
