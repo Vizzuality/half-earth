@@ -1,8 +1,8 @@
 # Embeddable map
 
-## Query params availables
+## Available query params
 
-The options availables for the new `/map` route are:
+The options available for the new `/map` route are:
 - coordinates=X,Y,Z
 - orientation=heading,pitch,roll
 - layers=layer1,layer2
@@ -11,11 +11,11 @@ So for example:
 ```
 /map?coordinates=6117078,2713298,-4028512&layer=mammals-rarity
 ```
-will load only the globe and leyend on the desired position with the mamals rarity layer enabled.
+will load only the globe and leyend on the desired position with the mammals rarity layer enabled.
 
 ## Interacting with the iframe
 
-Another query params called `listeners` is available to include [postRobot](https://github.com/krakenjs/post-robot#parent-to-popup-messaging) listeners so now we could handle the iframed version of the globe from parent containers.
+There is another query param called `listeners` that includes [postRobot](https://github.com/krakenjs/post-robot#parent-to-popup-messaging) listeners. This way we can handle the iframed version of the globe from parent containers.
 
 Public API:
 - Embed the globe:
