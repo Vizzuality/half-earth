@@ -16,13 +16,13 @@ class RegionalConTainer extends Component {
     super(props)
     const {
       getCartoTiles,
-      setRegionalSection,
+      setRegionalSectionThunk,
       setSection,
       getBillboards
     } = props
     const { layers } = props.regional
     requestCartos({ layers, getCartoTiles })
-    setRegionalSection('regional:1')
+    setRegionalSectionThunk('regional:1')
     setSection('regional:1')
     getBillboards()
   }
@@ -45,8 +45,11 @@ const mapStateToProps = state => {
 }
 
 export { reducers, initialState, actions }
-export default connect(mapStateToProps, {
-  ...cartoActions,
-  ...actions,
-  ...sectionActions
-})(RegionalConTainer)
+export default connect(
+  mapStateToProps,
+  {
+    ...cartoActions,
+    ...actions,
+    ...sectionActions
+  }
+)(RegionalConTainer)

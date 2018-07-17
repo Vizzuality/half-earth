@@ -7,29 +7,30 @@ import Barchart from './barchart'
 import uiStyles from 'app/styles/ui'
 
 class Global extends Component {
+  updateSections = s => {
+    const { sidebarOpen, setSection, setGlobalSectionThunk } = this.props
+    if (sidebarOpen) {
+      setGlobalSectionThunk(s)
+      setSection(s)
+    }
+  }
+
   render () {
     const {
       toggleGlobalLayer,
       renderToggle,
       renderDropdown,
       className,
-      setSection,
-      setGlobalSection,
       selectGlobalSelector,
       globalScaleBiodiversity,
       globalScaleProtectedAreas,
       globalConservationPrioritization,
-      setType,
+      setTypeThunk,
       selectedType,
       section
       // landSaved,
       // oceanSaved
     } = this.props
-
-    const updateSections = s => {
-      setGlobalSection(s)
-      setSection(s)
-    }
 
     const t = renderToggle(toggleGlobalLayer)
     const d = renderDropdown(selectGlobalSelector)
@@ -40,7 +41,7 @@ class Global extends Component {
             className={cx(uiStyles.slides, {
               [uiStyles.slidesActive]: section === 'global:1'
             })}
-            onScrollFocus={() => updateSections('global:1')}
+            onScrollFocus={() => this.updateSections('global:1')}
           >
             <span className={uiStyles.innerTitle}>
               Biodiversity at the planetary scale.
@@ -56,7 +57,7 @@ class Global extends Component {
               understanding of species{' '}
               {
                 <button
-                  onClick={() => setType('richness')}
+                  onClick={() => setTypeThunk('richness')}
                   className={cx(uiStyles.toggle, {
                     [uiStyles.toggleActive]: selectedType === 'richness'
                   })}
@@ -67,7 +68,7 @@ class Global extends Component {
               and{' '}
               {
                 <button
-                  onClick={() => setType('rarity')}
+                  onClick={() => setTypeThunk('rarity')}
                   className={cx(uiStyles.toggle, {
                     [uiStyles.toggleActive]: selectedType === 'rarity'
                   })}
@@ -93,14 +94,14 @@ class Global extends Component {
             className={cx(uiStyles.slides, {
               [uiStyles.slidesActive]: section === 'global:2'
             })}
-            onScrollFocus={() => updateSections('global:2')}
+            onScrollFocus={() => this.updateSections('global:2')}
           >
             This global {t('Protected Areas')} network plays a key role in the
             conservation of nature and safeguarding of species. However, by
             overlaying global species{' '}
             {
               <button
-                onClick={() => setType('richness')}
+                onClick={() => setTypeThunk('richness')}
                 className={cx(uiStyles.toggle, {
                   [uiStyles.toggleActive]: selectedType === 'richness'
                 })}
@@ -111,7 +112,7 @@ class Global extends Component {
             and{' '}
             {
               <button
-                onClick={() => setType('rarity')}
+                onClick={() => setTypeThunk('rarity')}
                 className={cx(uiStyles.toggle, {
                   [uiStyles.toggleActive]: selectedType === 'rarity'
                 })}
@@ -137,7 +138,7 @@ class Global extends Component {
             className={cx(uiStyles.slides, uiStyles.paragraphAfterChart, {
               [uiStyles.slidesActive]: section === 'global:3'
             })}
-            onScrollFocus={() => updateSections('global:3')}
+            onScrollFocus={() => this.updateSections('global:3')}
           >
             How can we reduce these conservation gaps and include more species
             in an expanded network of{' '}
@@ -150,7 +151,7 @@ class Global extends Component {
             className={cx(uiStyles.slides, {
               [uiStyles.slidesActive]: section === 'global:4'
             })}
-            onScrollFocus={() => updateSections('global:4')}
+            onScrollFocus={() => this.updateSections('global:4')}
           >
             <span className={uiStyles.innerP}>
               The Half-Earth Project is integrating high-resolution data

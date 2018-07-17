@@ -9,6 +9,7 @@
   width: calc(70vw + 30px);
   max-width: $max-width;
   min-width: $min-width;
+  will-change: width;
 
   .content {
     $pad: 6rem;

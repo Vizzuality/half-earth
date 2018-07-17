@@ -24,12 +24,31 @@ export const toggleRegionalLayer = createAction(
 )
 
 export const setRegionalSection = createAction('setRegionalSection')
+export const setRegionalSectionThunk = createThunkAction(
+  'setRegionalSectionThunk',
+  type => (dispatch, getState) => {
+    const { section } = getState().section
+    dispatch(setRegionalSection({ type, section }))
+  }
+)
 export const setType = createAction('setType')
+export const setTypeThunk = createThunkAction(
+  'setTypeThunk',
+  type => (dispatch, getState) => {
+    const { section } = getState().section
+    dispatch(setType({ type, section }))
+  }
+)
 
 export const openPopup = createAction('openPopup')
 export const closePopup = createAction('closePopup')
 
-export const openSidePopup = createAction('openSidePopup')
+export const openSidePopup = createAction(
+  'openSidePopup',
+  ({ meta, payload }) => payload,
+  ({ meta }) => meta
+)
+
 export const closeSidePopup = createAction('closeSidePopup')
 
 export const toggleFilters = createAction('toggleFilters')

@@ -18,13 +18,13 @@ class GlobalContainer extends Component {
     super(props)
     const {
       getCartoTiles,
-      setGlobalSection,
+      setGlobalSectionThunk,
       setSection,
       layers,
       getChartData
     } = props
     requestCartos({ layers, getCartoTiles })
-    setGlobalSection('global:1')
+    setGlobalSectionThunk('global:1')
     setSection('global:1')
     getChartData()
   }
@@ -44,6 +44,7 @@ const mapStateToProps = state => {
   }
   return {
     map,
+    sidebarOpen: state.sidebar.open,
     selectedType: getType(getSection(state)),
     layers: global.layers,
     section: section.section,
