@@ -97,12 +97,15 @@ const LegendLayers = ({
   return (
     <div>
       <div className={styles.legendLayers}>
-        <div className={styles.legendModal} onClick={() => openPopUpLegend()}>
+        <button
+          className={styles.legendModal}
+          onClick={() => openPopUpLegend()}
+        >
           <span>?</span>
-        </div>
+        </button>
         {layers.sort(sortLayers).map((layer, i) => renderLegend(layer, i))}
       </div>
-      <PopUp open={popUp} close={() => closePopUp()}>
+      <PopUp open={popUp} close={closePopUp}>
         <ModalContent section={section} />
       </PopUp>
     </div>

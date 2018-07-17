@@ -2,9 +2,9 @@ import { Component, createElement } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from './home-actions';
-import { actions as mapActions } from 'pages/map';
-import { actions as sectionActions } from 'providers/section';
-import { actions as analyticsActions } from 'providers/analytics';
+import * as mapActions from 'pages/map/map-actions';
+import * as sectionActions from 'providers/section/section-actions';
+import * as analyticsActions from 'providers/analytics/analytics-actions';
 import HomeComponent from './home-component';
 
 const mergedActions = {
@@ -15,14 +15,14 @@ const mergedActions = {
 };
 
 class HomeContainer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     props.setHomeSection('regional:1');
     props.setSection('home');
     props.resetLayers();
   }
 
-  render () {
+  render() {
     return createElement(HomeComponent, {
       ...this.props,
       onClick: this.onClick

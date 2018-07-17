@@ -4,26 +4,27 @@ import MapComponent from './map-component';
 import initialState from './initial-state';
 import * as actions from './map-actions';
 import * as utils from './map-utils';
-import { actions as cartoActions } from 'providers/carto';
-import { actions as interActions } from 'providers/interact';
-import { actions as popUpActions } from 'components/pop-up';
+import * as cartoActions from 'providers/carto/carto-actions';
+import * as interActions from 'providers/interact/interact-actions';
+import * as popUpActions from 'components/pop-up/pop-up-actions';
 import * as regionalActions from 'pages/regional/regional-actions';
-import reducers from './map-reducers';
+import * as reducers from './map-reducers';
 
 class MapContainer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     const { getCartoTiles } = props;
     const { layers } = props.map;
     utils.requestCartos({ layers, getCartoTiles });
   }
 
-  render () {
+  render() {
     return createElement(MapComponent, this.props);
   }
 }
 
-export { actions, reducers, initialState, utils };
+export { utils };
+export const reduxConfig = { actions, reducers, initialState };
 const mapStateToProps = ({ map, regional, local, popUp, global, section }) => ({
   map,
   regional,

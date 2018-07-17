@@ -1,4 +1,4 @@
-import { actions as popUpActions } from 'components/pop-up';
+import * as popUpActions from 'components/pop-up/pop-up-actions';
 import * as keyActions from 'providers/keyboard/keyboard-actions';
 
 const closePopup = state => ({

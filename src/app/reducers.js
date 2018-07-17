@@ -1,70 +1,54 @@
 import { combineReducers } from 'redux';
-import { handleActions } from 'redux-tools';
+import { handleModule } from 'redux-tools';
 import router from './router';
 
-import {
-  reducers as zoomReducers,
-  initialState as zoomState
-} from 'components/zoom';
+// Redux-modules
+import { reduxConfig as layersRedux } from 'redux-modules/layers';
 
-import {
-  reducers as earthometerReducers,
-  initialState as earthometerState
-} from 'components/earthometer-multi';
+// Providers
+import { reduxConfig as sectionRedux } from 'providers/section';
+import { reduxConfig as interactRedux } from 'providers/interact';
 
-import { reducers as mapReducers, initialState as mapState } from 'pages/map';
+// Pages
+import { reduxConfig as mapRedux } from 'pages/map';
+import { reduxConfig as globalRedux } from 'pages/global';
+import { reduxConfig as regionalRedux } from 'pages/regional';
 
-import {
-  reducers as sidebarReducers,
-  initialState as sidebarState
-} from 'components/sidebar';
+// Components
+import { reduxConfig as earthometerRedux } from 'components/earthometer-multi';
+import { reduxConfig as navFooterRedux } from 'components/nav-footer';
+import { reduxConfig as legendLayersRedux } from 'components/legend/legend-layers';
+import { reduxConfig as paneRedux } from 'components/pane';
+import { reduxConfig as sidebarRedux } from 'components/sidebar';
 
-import {
-  reducers as sectionReducers,
-  initialState as sectionState
-} from 'providers/section';
+const reduxModulesReducers = {
+  layers: handleModule(layersRedux)
+};
 
-import {
-  reducers as regionalReducers,
-  initialState as regionalState
-} from 'pages/regional';
+const providersReducers = {
+  interactions: handleModule(interactRedux),
+  section: handleModule(sectionRedux)
+};
 
-import {
-  reducers as globalReducers,
-  initialState as globalState
-} from 'pages/global';
+const pagesReducers = {
+  regional: handleModule(regionalRedux),
+  global: handleModule(globalRedux),
+  map: handleModule(mapRedux)
+};
 
-import {
-  reducers as navFooterReducers,
-  initialState as navFooterState
-} from 'components/nav-footer';
-
-import {
-  reducers as legendLayersReducers,
-  initialState as legendLayersState
-} from 'components/legend/legend-layers/legend-layers';
-
-import {
-  reducers as paneReducers,
-  initialState as paneState
-} from 'components/pane';
-
-import {
-  reducers as interactReducers,
-  initialState as interactState
-} from 'providers/interact';
+const componentReducers = {
+  location: router.reducer,
+  earthometer: handleModule(earthometerRedux),
+  navFooter: handleModule(navFooterRedux),
+  legendLayers: handleModule(legendLayersRedux),
+  pane: handleModule(paneRedux),
+  sidebar: handleModule(sidebarRedux)
+};
 
 export default combineReducers({
   location: router.reducer,
-  zoom: handleActions(zoomReducers, zoomState),
-  earthometer: handleActions(earthometerReducers, earthometerState),
-  sidebar: handleActions(sidebarReducers, sidebarState),
-  map: handleActions(mapReducers, mapState),
-  section: handleActions(sectionReducers, sectionState),
-  regional: handleActions(regionalReducers, regionalState),
-  navFooter: handleActions(navFooterReducers, navFooterState),
-  legendLayers: handleActions(legendLayersReducers, legendLayersState),
-  global: handleActions(globalReducers, globalState),
-  pane: handleActions(paneReducers, paneState),
-  interactions: handleActions(interactReducers, interactState)
+  ...reduxModulesReducers,
+  ...providersReducers,
+  ...pagesReducers,
+  ...componentReducers
 });

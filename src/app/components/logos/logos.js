@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actions as popUpActions } from 'components/pop-up';
+import * as popUpActions from 'components/pop-up/pop-up-actions';
 import LogosComponent from './logos-component';
 
 const mapStateToProps = ({ navFooter }) => ({

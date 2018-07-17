@@ -5,7 +5,7 @@ import HomeNavFooter from './home-nav-footer.scss';
 
 const isSafari =
   /constructor/i.test(window.HTMLElement) ||
-  (function (p) {
+  (function(p) {
     return p.toString() === '[object SafariRemoteNotification]';
   })(!window['safari'] || window.safari.pushNotification);
 const autoplay = isSafari ? '' : 'autoplay=1&';

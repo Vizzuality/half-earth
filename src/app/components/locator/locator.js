@@ -19,7 +19,7 @@ class LocatorContainer extends Component {
     this.props.navigateSection({ section });
   };
 
-  render () {
+  render() {
     return createElement(LocatorComponent, {
       ...this.props,
       onSelect: this.onSelect

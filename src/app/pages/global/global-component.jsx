@@ -15,7 +15,7 @@ class Global extends Component {
     }
   };
 
-  render () {
+  render() {
     const {
       toggleGlobalLayer,
       renderToggle,

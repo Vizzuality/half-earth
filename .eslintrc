@@ -1,10 +1,12 @@
 {
   "extends": ["standard", "standard-react"],
   "parser": "babel-eslint",
+  "globals": { "fetch": true },
   "rules": {
     "semi": ["error", "always"],
     "jsx-quotes": ["error", "prefer-double"],
     "react/prop-types": [0],
-    "space-before-function-paren": 0
+    "space-before-function-paren": 0,
+    "comma-dangle": 0
   }
 }

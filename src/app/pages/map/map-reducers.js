@@ -1,4 +1,4 @@
-import { actions as cartoActions } from 'providers/carto';
+import * as cartoActions from 'providers/carto/carto-actions';
 import includes from 'lodash/includes';
 import sortBy from 'lodash/sortBy';
 import identity from 'lodash/identity';

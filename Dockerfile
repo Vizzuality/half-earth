@@ -10,6 +10,7 @@ COPY package.json yarn.lock ./app/
 WORKDIR /app
 
 RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
+
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
 RUN yarn install && mkdir -p /app/src && mkdir -p /app/config && mkdir -p /app/public
 
