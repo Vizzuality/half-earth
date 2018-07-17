@@ -35,4 +35,4 @@ postRobot.send(document.getElementById('map-iframe'), 'setMapLayers',{
 }
 ```
 
-Example available in `/public/embed-map.html`
+Example available in `/app/examples/iframe-controlled-map.html`
