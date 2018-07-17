@@ -1,7 +1,7 @@
 import { createElement, Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from './map-layout-actions';
-import MapLayout from './map-layout-component';
+import * as actions from './map-iframe-actions';
+import MapLayout from './map-iframe-component';
 import postRobot from 'post-robot';
 
 function mapDispatchToProps(state) {

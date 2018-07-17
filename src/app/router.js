@@ -11,7 +11,7 @@ export const APP = 'location/APP';
 export const routes = {
   [MAP]: {
     path: '/map',
-    page: 'map-layout',
+    page: 'embed-layout',
     thunk: layersThunk
   },
   [APP]: {

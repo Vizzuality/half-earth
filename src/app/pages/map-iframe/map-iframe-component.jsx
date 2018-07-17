@@ -2,9 +2,9 @@ import React from 'react';
 import CesiumMap from 'components/cesium/map';
 import CesiumLayer from 'components/cesium/layer';
 import Legend, { LegendLayers } from 'components/legend';
-import styles from './map-layout-styles';
+import styles from './map-iframe-styles';
 
-const MapLayoutComponent = props => {
+const MapIframeComponent = props => {
   const { layers, coordinates, coordinatesOptions } = props;
   const hasLayers = layers && !!layers.length;
   return (
@@ -26,8 +26,8 @@ const MapLayoutComponent = props => {
   );
 };
 
-MapLayoutComponent.defaultProps = {
+MapIframeComponent.defaultProps = {
   layers: []
 };
 
-export default MapLayoutComponent;
+export default MapIframeComponent;
