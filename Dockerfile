@@ -1,7 +1,7 @@
 ### STAGE 1: Build ###
 
 # We label our stage as 'builder'
-FROM node:8-alpine as builder
+FROM node:10.6.0-alpine as builder
 
 RUN mkdir /app
 COPY package.json yarn.lock ./app/
