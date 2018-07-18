@@ -15,8 +15,7 @@ const MapIframeComponent = props => {
         coordinatesOptions={coordinatesOptions}
         onMoveEnd={updateMapParams}
       >
-        {hasLayers &&
-          layers.map(layer => <CesiumLayer key={layer.id} {...layer.config} />)}
+        {layers.map(layer => <CesiumLayer key={layer.id} {...layer.config} />)}
       </CesiumMap>
       {hasLayers && (
         <Legend>

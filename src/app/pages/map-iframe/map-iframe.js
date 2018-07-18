@@ -1,18 +1,19 @@
 import { createElement, Component } from 'react';
 import { connect } from 'react-redux';
+import { sanitizeLayerId } from 'redux-modules/layers/layers-utils';
 import * as actions from './map-iframe-actions';
 import MapLayout from './map-iframe-component';
 import postRobot from 'post-robot';
 
-function mapDispatchToProps(state) {
+function mapStateToProps(state) {
   const { layers, location } = state;
-  let coordinates, coordinatesOptions;
-
+  let coordinates, coordinatesOptions, activeLayers;
   const sanitizeVector = vector =>
     vector
       .split(',')
       .slice(0, 3)
-      .map(n => parseFloat(n));
+      .map(parseFloat);
+
   if (location.query) {
     coordinates =
       location.query.coordinates && sanitizeVector(location.query.coordinates);
@@ -26,10 +27,17 @@ function mapDispatchToProps(state) {
         }
       };
     }
+
+    if (location.query.layers) {
+      const urlLayers = location.query
+        ? location.query.layers.split(',').map(sanitizeLayerId)
+        : [];
+      activeLayers = Object.values(layers.byId).filter(layer =>
+        urlLayers.includes(layer.id)
+      );
+    }
   }
-  const activeLayers = Object.values(layers.byId).filter(
-    layer => layer.config.visible
-  );
+
   return {
     location,
     coordinates,
@@ -82,14 +90,15 @@ class MapLayoutContainer extends Component {
   };
 
   render() {
+    const { location, ...props } = this.props;
     return createElement(MapLayout, {
-      ...this.props,
+      ...props,
       updateMapParams: this.updateMapParams
     });
   }
 }
 
 export default connect(
-  mapDispatchToProps,
+  mapStateToProps,
   actions
 )(MapLayoutContainer);

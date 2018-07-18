@@ -1,4 +1,4 @@
-export const getCartoUrl = ({ account = 'half-earth', config = {} }) => {
+export const getCartoUrl = ({ account = 'half-earth', carto = {} }) => {
   const cartoConfig = {
     version: '1.3.0',
     layers: [
@@ -6,7 +6,7 @@ export const getCartoUrl = ({ account = 'half-earth', config = {} }) => {
         type: 'mapnik',
         options: {
           cartocss_version: '2.3.0',
-          ...config
+          ...carto
         }
       }
     ]
@@ -44,4 +44,11 @@ export const getLayerConfig = (provider, { name, type, group }) => {
       console.warn('No layer config type provided for', name);
       return {};
   }
+};
+
+export const sanitizeLayerId = id => {
+  if (id.endsWith('richness') || id.endsWith('rarity') || id.endsWith('-1km')) {
+    return id.replace('-1km', '_1km').replace('-', ':');
+  }
+  return id;
 };

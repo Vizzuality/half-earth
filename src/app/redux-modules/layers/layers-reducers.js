@@ -1,27 +1,30 @@
 import * as actions from './layers-actions';
 
-const setLayerConfig = (state, { payload }) => {
-  const { id } = payload;
+const setLayerUrl = (state, action) => {
+  const { url, id } = action.payload;
   const layer = state.byId[id];
-  if (layer) {
-    const newLayer = {
-      ...layer,
-      config: {
-        ...layer.config,
-        ...payload.config
-      }
-    };
-    return {
-      ...state,
-      byId: {
-        ...state.byId,
-        [id]: newLayer
-      }
-    };
-  }
-  return state;
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [id]: { ...layer, url }
+    }
+  };
+};
+
+const setLayerVisibility = (state, action) => {
+  const { visible, id } = action.payload;
+  const layer = state.byId[id];
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [id]: { ...layer, config: { ...layer.config, visible } }
+    }
+  };
 };
 
 export default {
-  [actions.setLayerConfig]: setLayerConfig
+  [actions.setLayerUrl]: setLayerUrl,
+  [actions.setLayerVisibility]: setLayerVisibility
 };
