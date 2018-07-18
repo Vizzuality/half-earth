@@ -7,7 +7,12 @@ import postRobot from 'post-robot';
 function mapDispatchToProps(state) {
   const { layers, location } = state;
   let coordinates, coordinatesOptions;
-  const sanitizeVector = vector => vector.split(',').slice(0, 3);
+
+  const sanitizeVector = vector =>
+    vector
+      .split(',')
+      .slice(0, 3)
+      .map(n => parseFloat(n));
   if (location.query) {
     coordinates =
       location.query.coordinates && sanitizeVector(location.query.coordinates);
@@ -45,29 +50,33 @@ class MapLayoutContainer extends Component {
     postRobot.on('mapFlyToCoordinates', event => {
       const { coordinates = [], orientation = [] } = event.data;
       if (coordinates.length || orientation.length) {
-        const params = {
-          coordinates: coordinates.join(','),
-          orientation: orientation.join(',')
-        };
-        this.updateMapParams(params);
+        this.updateMapParams({ coordinates, orientation });
         return { done: true };
       }
       return { done: false };
     });
     postRobot.on('setMapLayers', event => {
       const { layers = [] } = event.data;
-      const params = { layers: layers.join(',') };
-      this.updateMapParams(params);
+      this.updateMapParams({ layers });
       return { done: true };
     });
   }
 
   updateMapParams = params => {
     const { location, updateMapParams } = this.props;
+    const parsedParams = Object.keys(params).reduce(
+      (acc, next) => ({
+        ...acc,
+        [next]: Array.isArray(params[next])
+          ? params[next].join(',')
+          : params[next]
+      }),
+      {}
+    );
     updateMapParams({
       query: {
         ...location.query,
-        ...params
+        ...parsedParams
       }
     });
   };
@@ -75,7 +84,7 @@ class MapLayoutContainer extends Component {
   render() {
     return createElement(MapLayout, {
       ...this.props,
-      updateMapCoordinates: this.updateMapCoordinates
+      updateMapParams: this.updateMapParams
     });
   }
 }

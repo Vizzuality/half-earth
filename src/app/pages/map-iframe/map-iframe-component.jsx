@@ -5,7 +5,7 @@ import Legend, { LegendLayers } from 'components/legend';
 import styles from './map-iframe-styles';
 
 const MapIframeComponent = props => {
-  const { layers, coordinates, coordinatesOptions } = props;
+  const { layers, coordinates, coordinatesOptions, updateMapParams } = props;
   const hasLayers = layers && !!layers.length;
   return (
     <React.Fragment>
@@ -13,6 +13,7 @@ const MapIframeComponent = props => {
         className={styles.mapContainer}
         coordinates={coordinates}
         coordinatesOptions={coordinatesOptions}
+        onMoveEnd={updateMapParams}
       >
         {hasLayers &&
           layers.map(layer => <CesiumLayer key={layer.id} {...layer.config} />)}

@@ -89,6 +89,9 @@ class CesiumComponent extends Component {
       this.onMouseMove,
       Cesium.ScreenSpaceEventType.MOUSE_MOVE
     );
+    if (this.props.onMoveEnd) {
+      this.viewer.camera.moveEnd.addEventListener(this.onMoveEnd);
+    }
   }
 
   setCoordinates() {
@@ -145,6 +148,26 @@ class CesiumComponent extends Component {
       });
     }
     this.setState({ clickedPosition: click.position });
+  };
+
+  onMoveEnd = () => {
+    const { coordinates = [], coordinatesOptions = {} } = this.props;
+    const { orientation = {} } = coordinatesOptions;
+    const { x, y, z } = this.viewer.camera.position;
+    const { heading, pitch, roll } = this.viewer.camera;
+    const isDifferentCoordinates =
+      coordinates[0] !== x || coordinates[1] !== y || coordinates[2] !== z;
+    const isDifferentOrientation =
+      orientation.heading !== heading ||
+      orientation.pitch !== pitch ||
+      orientation.roll !== roll;
+
+    if (isDifferentCoordinates || isDifferentOrientation) {
+      this.props.onMoveEnd({
+        coordinates: [x, y, z],
+        orientation: [heading, pitch, roll]
+      });
+    }
   };
 
   onMouseMove = throttle(mouse => {
