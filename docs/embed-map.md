@@ -20,7 +20,7 @@ will load only the globe and leyend on the desired position with the mammals rar
 - private-reserves
 - human-pressures
 - protected-areas
-- Species layers: combine any of the following species with the layer type:
+- Species layers: combine any of the following species with the layer type, separated by a dash (e.g.: mammals-richness):
   - Species:
     - mammals, amphibians, birds, protea, restio, cacti, conifers, turtles, all-taxa
   - Types:
