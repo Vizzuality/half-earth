@@ -13,6 +13,20 @@ So for example:
 ```
 will load only the globe and leyend on the desired position with the mammals rarity layer enabled.
 
+### Layers available
+- prioritization-of-places-{n} // Where n is the value of prioritization from 15 to 50
+- south-africa-protected-areas
+- community-based-conservation-areas
+- private-reserves
+- human-pressures
+- protected-areas
+- Species layers: combine any of the following species with the layer type:
+  - Species:
+    - mammals, amphibians, birds, protea, restio, cacti, conifers, turtles, all-taxa
+  - Types:
+    - richness, rarity, richness_1km, rarity_1km
+
+
 ## Interacting with the iframe
 
 There is another query param called `listeners` that includes [postRobot](https://github.com/krakenjs/post-robot#parent-to-popup-messaging) listeners. This way we can handle the iframed version of the globe from parent containers.
