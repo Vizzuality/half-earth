@@ -1,6 +1,7 @@
 import React from 'react';
 import CesiumMap from 'components/cesium/map';
 import CesiumLayer from 'components/cesium/layer';
+import Grid from 'components/cesium/grid';
 import Legend, { LegendLayers } from 'components/legend';
 import styles from './map-iframe-styles';
 
@@ -14,6 +15,7 @@ const MapIframeComponent = props => {
         coordinates={coordinates}
         coordinatesOptions={coordinatesOptions}
       >
+        <Grid />
         {hasLayers &&
           layers.map(layer => <CesiumLayer key={layer.id} {...layer.config} />)}
       </CesiumMap>
