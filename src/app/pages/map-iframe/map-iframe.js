@@ -32,8 +32,8 @@ function mapStateToProps(state) {
       const urlLayers = location.query
         ? location.query.layers.split(',').map(sanitizeLayerId)
         : [];
-      activeLayers = Object.values(layers.byId).filter(layer =>
-        urlLayers.includes(layer.id)
+      activeLayers = Object.values(layers.byId).filter(
+        layer => urlLayers.includes(layer.id) && layer.config.url
       );
     }
   }

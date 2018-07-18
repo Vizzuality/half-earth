@@ -12,8 +12,7 @@ export async function fetchLayersThunk(dispatch, getState) {
       const isCartoLayer = layer && !!layer.carto;
       const hasUrl = isCartoLayer && layer.config.url;
       if (isCartoLayer && !hasUrl) {
-        console.log(layer.id);
-        dispatch(actions.fetchLayer(layer.id, layer.carto));
+        dispatch(actions.fetchLayer(layer));
       }
       if (!layer.config.visible) {
         dispatch(actions.setLayerVisibility({ id: layer.id, visible: true }));

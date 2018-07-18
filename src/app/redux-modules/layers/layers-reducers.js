@@ -7,7 +7,7 @@ const setLayerUrl = (state, action) => {
     ...state,
     byId: {
       ...state.byId,
-      [id]: { ...layer, url }
+      [id]: { ...layer, config: { ...layer.config, url } }
     }
   };
 };

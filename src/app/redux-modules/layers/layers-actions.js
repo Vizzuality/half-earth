@@ -3,7 +3,7 @@ import { getCartoUrl } from './layers-utils';
 
 export const fetchLayer = createThunkAction(
   'layers/FETCH_CARTO_URL',
-  (id, carto) => async dispatch => {
+  ({ id, carto }) => async dispatch => {
     const url = await getCartoUrl({ carto });
     dispatch(setLayerUrl({ id, url }));
   }
