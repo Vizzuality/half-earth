@@ -1,5 +1,6 @@
 import React from 'react';
 import { SwitchInput, Sidebar } from 'he-components';
+import Legend from './legend';
 
 import styles from './root-styles';
 
@@ -28,6 +29,7 @@ class RootPageComponent extends React.Component {
     return (
       <div className={styles.container}>
         <Sidebar
+          theme={styles}
           visible={this.state.sidebarOpen}
           onToggle={this.handleOnToggle}
         >
@@ -55,7 +57,8 @@ class RootPageComponent extends React.Component {
               );
             })}
         </Sidebar>
-        <h1>Hola v2</h1>;
+        <h1>Hola v2</h1>
+        <Legend layers={datasets} />
       </div>
     );
   }

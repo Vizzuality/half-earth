@@ -2,4 +2,12 @@
 
 .container {
   height: 100vh;
+  background-color: aqua;
+  padding: 40%;
+}
+
+.sidebar {
+  position: absolute;
+  left: 0;
+  top: 0;
 }

@@ -35,7 +35,8 @@
     "semiotic": "1.14.0",
     "serve-static": "^1.13.2",
     "shortid": "^2.2.11",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "wri-api-components": "2.1.8"
   },
   "devDependencies": {
     "autoprefixer": "^8.6.5",
@@ -78,6 +79,7 @@
     "stylelint": "^9.3.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-webpack-plugin": "^0.10.5",
+    "svg-sprite-loader": "3.9.2",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8",
