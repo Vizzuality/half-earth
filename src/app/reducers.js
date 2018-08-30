@@ -3,7 +3,9 @@ import { handleModule } from 'redux-tools';
 import router from './router';
 
 // Redux-modules
-import { reduxConfig as layersRedux } from 'redux-modules/layers';
+import { reduxConfig as layerRedux } from 'redux-modules/layers';
+import { reduxConfig as datasetsRedux } from 'redux-modules/datasets';
+import { reduxConfig as categoriesRedux } from 'redux-modules/categories';
 
 // Providers
 import { reduxConfig as sectionRedux } from 'providers/section';
@@ -22,7 +24,9 @@ import { reduxConfig as paneRedux } from 'components/pane';
 import { reduxConfig as sidebarRedux } from 'components/sidebar';
 
 const reduxModulesReducers = {
-  layers: handleModule(layersRedux)
+  layers: handleModule(layerRedux),
+  datasets: handleModule(datasetsRedux),
+  categories: handleModule(categoriesRedux)
 };
 
 const providersReducers = {

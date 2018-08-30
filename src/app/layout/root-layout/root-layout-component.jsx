@@ -4,7 +4,7 @@ import universal from 'react-universal-component';
 
 const PageComponent = universal((
   { page } /* webpackChunkName: "[request]" */
-) => import(`../${page}/${page}.js`));
+) => import(`../../${page}`));
 
 class Root extends PureComponent {
   render() {
