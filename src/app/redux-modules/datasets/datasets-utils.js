@@ -63,7 +63,7 @@ function parseLayer(layer) {
 }
 
 export function parseCartoLayersToWRI(layers = [], datasets = []) {
-  return layers.map(parseLayer).reduce((acc, layer) => {
+  return layers.reduce((acc, layer) => {
     const parsedLayer = parseLayer(layer);
     const { dataset: layerDataset } = parsedLayer;
     const dataset = datasets.find(d => d.slug === layerDataset);
