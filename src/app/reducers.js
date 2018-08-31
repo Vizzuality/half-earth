@@ -22,6 +22,7 @@ import { reduxConfig as navFooterRedux } from 'components/nav-footer';
 import { reduxConfig as legendLayersRedux } from 'components/legend/legend-layers';
 import { reduxConfig as paneRedux } from 'components/pane';
 import { reduxConfig as sidebarRedux } from 'components/sidebar';
+import { reduxConfig as modalMetadataRedux } from 'components/v2/modal-metadata';
 
 const reduxModulesReducers = {
   layers: handleModule(layerRedux),
@@ -46,7 +47,8 @@ const componentReducers = {
   navFooter: handleModule(navFooterRedux),
   legendLayers: handleModule(legendLayersRedux),
   pane: handleModule(paneRedux),
-  sidebar: handleModule(sidebarRedux)
+  sidebar: handleModule(sidebarRedux),
+  modalMetadata: handleModule(modalMetadataRedux)
 };
 
 export default combineReducers({
