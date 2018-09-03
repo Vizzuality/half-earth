@@ -1,42 +1,51 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Legend, {
   LegendItemTimeline,
   LegendItemTypes,
-  LegendListItem
+  LegendListItem,
+  LegendItemToolbar
 } from 'wri-api-components/dist/legend';
-import LegendToolBar from './toolbar';
 
 // Icons neccesaries for the legend component
-import arrowUpIcon from 'assets/icons/icon-arrow-up.svg'; // eslint-disable-line
-import arrowDownIcon from 'assets/icons/icon-arrow-down.svg'; // eslint-disable-line
-import dragDotsIcon from 'assets/icons/icon-drag-dots.svg'; // eslint-disable-line
+import 'assets/icons/icon-arrow-up.svg';
+import 'assets/icons/icon-arrow-down.svg';
+import 'assets/icons/icon-drag-dots.svg';
+import 'assets/icons/icon-info.svg';
+import 'assets/icons/icon-cross.svg';
+import 'assets/icons/icon-opacity.svg';
+import 'assets/icons/icon-hide.svg';
+import 'assets/icons/icon-show.svg';
 
 import styles from './legend-styles.scss';
 
-const LegendComponent = ({ layers }) =>
-  console.log(layers) || (
-    <div className={styles.legend}>
-      <Legend
-        onChangeOrder={datasetIds => {
-          console.info(datasetIds);
-        }}
-      >
-        {layers.map((lg, i) => (
-          <LegendListItem
-            index={i}
-            key={lg.dataset}
-            layerGroup={lg}
-            toolbar={<LegendToolBar />}
-          >
-            <LegendItemTypes />
-            <LegendItemTimeline onChangeLayer={l => console.info(l)} />
-          </LegendListItem>
-        ))}
-      </Legend>
-    </div>
-  );
+class LegendComponent extends PureComponent {
+  render() {
+    const { layers, handleRemoveLayer, handleInfoClick } = this.props;
+    const toolbar = <LegendItemToolbar onChangeInfo={handleInfoClick} onRemoveLayer={handleRemoveLayer} />;
+
+    return (
+      <div className={styles.legend}>
+        <Legend
+          onChangeOrder={datasetIds => {
+            console.info(datasetIds);
+          }}
+        >
+          {layers.map((layer, i) => (
+            <LegendListItem index={i} key={layer.slug} sortable={false} layerGroup={layer} toolbar={toolbar}>
+              <LegendItemTypes />
+              <LegendItemTimeline onChangeLayer={l => console.info(l)} />
+            </LegendListItem>
+          ))}
+        </Legend>
+      </div>
+    );
+  }
+}
 
 LegendComponent.defaultProps = {
+  handleInfoClick: PropTypes.func.isRequired,
+  handleRemoveLayer: PropTypes.func.isRequired,
   layers: []
 };
 

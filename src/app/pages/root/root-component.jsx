@@ -21,12 +21,10 @@ class RootPageComponent extends React.Component {
   render() {
     return (
       <div className={styles.container}>
-        <Sidebar
-          theme={styles}
-          visible={this.state.sidebarOpen}
-          onToggle={this.handleOnToggle}
-        >
-          <CategoriesList />
+        <Sidebar theme={styles} visible={this.state.sidebarOpen} onToggle={this.handleOnToggle}>
+          <div className={styles.sidebarContainer}>
+            <CategoriesList />
+          </div>
         </Sidebar>
         <h1>Hola v2</h1>
         <Legend />

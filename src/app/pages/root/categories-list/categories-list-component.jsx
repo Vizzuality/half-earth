@@ -1,32 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { SwitchInput, Button, Icon, Loading } from 'he-components';
 
-import infoIcon from 'assets/icons/info.svg';
+import infoIcon from 'assets/icons/icon-info.svg';
 import styles from './categories-list-styles';
 
-class CategoriesListComponent extends React.Component {
-  handleLayerClick = ({ slug, active }) => {
-    const { updateQueryParam, query } = this.props;
-    updateQueryParam({
-      query: { ...query, activeLayers: slug }
-    });
-  };
-
-  handleSwitchChange = ({ layers, active }) => {
-    const { updateQueryParam, query } = this.props;
-    const activeLayers = active ? '' : layers[0].slug;
-    updateQueryParam({
-      query: { ...query, activeLayers }
-    });
-  };
-
-  handleMetadataClick = ({ slug }) => {
-    const { setModalMetadataParams } = this.props;
-    setModalMetadataParams({ slug, title: 'Category metadata', isOpen: true });
-  };
-
+class CategoriesListComponent extends Component {
   render() {
-    const { categories, loading } = this.props;
+    const { loading, categories, handleMetadataClick, handleSwitchChange, handleLayerClick } = this.props;
 
     if (loading) return <Loading height={300} />;
     const hasCategories = categories && !!categories.length;
@@ -35,20 +16,14 @@ class CategoriesListComponent extends React.Component {
       <div className={styles.container}>
         {hasCategories &&
           categories.map(category => (
-            <div className={styles.category}>
+            <div className={styles.category} key={category.slug}>
               <div className={styles.categorySection}>
                 <h2 className={styles.categoryTitle}>{category.name}</h2>
               </div>
               <div className={styles.categorySection}>
-                <p className={styles.categoryDescription}>
-                  {category.description}
-                </p>
+                <p className={styles.categoryDescription}>{category.description}</p>
                 {category.metadata && (
-                  <Button
-                    circle
-                    theme={{ button: styles.metadataBtn }}
-                    onClick={() => this.handleMetadataClick(category)}
-                  >
+                  <Button circle theme={{ button: styles.metadataBtn }} onClick={() => handleMetadataClick(category)}>
                     <Icon icon={infoIcon} />
                   </Button>
                 )}
@@ -63,7 +38,7 @@ class CategoriesListComponent extends React.Component {
                       key={slug}
                       id={slug}
                       checked={active}
-                      onChange={value => this.handleSwitchChange(dataset)}
+                      onChange={value => handleSwitchChange(dataset, value)}
                       label={name}
                     />
                     {active &&
@@ -71,14 +46,13 @@ class CategoriesListComponent extends React.Component {
                       <div>
                         {layers.map(layer => {
                           const buttonTheme = {
-                            button: layer.active
-                              ? styles.buttonActive
-                              : styles.button
+                            button: layer.active ? styles.buttonActive : styles.button
                           };
                           return (
                             <Button
+                              key={layer.slug}
                               theme={buttonTheme}
-                              onClick={() => this.handleLayerClick(layer)}
+                              onClick={() => handleLayerClick(dataset, layer)}
                             >
                               {layer.name}
                             </Button>
@@ -96,7 +70,16 @@ class CategoriesListComponent extends React.Component {
   }
 }
 
+CategoriesListComponent.propTypes = {
+  loading: PropTypes.bool,
+  categories: PropTypes.array,
+  handleMetadataClick: PropTypes.func.isRequired,
+  handleSwitchChange: PropTypes.func.isRequired,
+  handleLayerClick: PropTypes.func.isRequired
+};
+
 CategoriesListComponent.defaultProps = {
+  loading: false,
   categories: []
 };
 

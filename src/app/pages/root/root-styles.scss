@@ -6,9 +6,16 @@
   padding: 40%;
 }
 
+.sidebarContainer {
+  height: 100vh;
+  overflow: auto;
+  padding-right: 30px;
+}
+
 .sidebar {
   position: absolute;
   left: 0;
   top: 0;
   width: 400px;
+  padding-right: 0;
 }
