@@ -13,27 +13,28 @@ import dragDotsIcon from 'assets/icons/icon-drag-dots.svg'; // eslint-disable-li
 
 import styles from './legend-styles.scss';
 
-const LegendComponent = ({ layers }) => (
-  <div className={styles.legend}>
-    <Legend
-      onChangeOrder={datasetIds => {
-        console.info(datasetIds);
-      }}
-    >
-      {layers.map((lg, i) => (
-        <LegendListItem
-          index={i}
-          key={lg.dataset}
-          layerGroup={lg}
-          toolbar={<LegendToolBar />}
-        >
-          <LegendItemTypes />
-          <LegendItemTimeline onChangeLayer={l => console.info(l)} />
-        </LegendListItem>
-      ))}
-    </Legend>
-  </div>
-);
+const LegendComponent = ({ layers }) =>
+  console.log(layers) || (
+    <div className={styles.legend}>
+      <Legend
+        onChangeOrder={datasetIds => {
+          console.info(datasetIds);
+        }}
+      >
+        {layers.map((lg, i) => (
+          <LegendListItem
+            index={i}
+            key={lg.dataset}
+            layerGroup={lg}
+            toolbar={<LegendToolBar />}
+          >
+            <LegendItemTypes />
+            <LegendItemTimeline onChangeLayer={l => console.info(l)} />
+          </LegendListItem>
+        ))}
+      </Legend>
+    </div>
+  );
 
 LegendComponent.defaultProps = {
   layers: []

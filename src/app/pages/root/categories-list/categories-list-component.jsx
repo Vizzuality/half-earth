@@ -54,17 +54,17 @@ class CategoriesListComponent extends React.Component {
                 )}
               </div>
               {category.datasets.map(dataset => {
-                const { layers, active } = dataset;
+                const { layers, active, slug, name } = dataset;
                 const layersLength = layers && layers.length;
                 if (!layersLength) return;
                 return (
-                  <div key={dataset.slug} className={styles.dataset}>
+                  <div key={slug} className={styles.dataset}>
                     <SwitchInput
-                      key={dataset.slug}
-                      id={dataset.slug}
-                      checked={dataset.active}
+                      key={slug}
+                      id={slug}
+                      checked={active}
                       onChange={value => this.handleSwitchChange(dataset)}
-                      label={dataset.name}
+                      label={name}
                     />
                     {active &&
                       layersLength > 1 && (
