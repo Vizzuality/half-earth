@@ -27,6 +27,7 @@ class LegendComponent extends PureComponent {
     return (
       <div className={styles.legend}>
         <Legend
+          sortable={false}
           onChangeOrder={datasetIds => {
             console.info(datasetIds);
           }}

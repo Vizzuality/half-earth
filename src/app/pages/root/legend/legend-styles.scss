@@ -2,7 +2,23 @@
 
 .legend {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: $site-gutter;
+  right: $site-gutter;
   width: 400px;
+
+  :global {
+    .wri_api__c-legend-map {
+      border: none;
+      border-radius: 0;
+    }
+
+    .wri_api__toggle-legend {
+      background-color: white;
+      width: 32px;
+
+      &:hover {
+        background-color: white;
+      }
+    }
+  }
 }
