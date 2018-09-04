@@ -1,8 +1,8 @@
 function parseLayer(layer) {
   const { legendconfig, layerconfig, ...rest } = layer;
   return {
-    legendConfig: layer.legendconfig,
-    layerConfig: layer.layerconfig,
+    legendConfig: JSON.parse(layer.legendconfig.replace(/'/g, '"')),
+    layerConfig: JSON.parse(layer.layerconfig.replace(/'/g, '"')),
     ...rest
   };
 }

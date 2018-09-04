@@ -7,7 +7,18 @@ export const getDatasetsFiltered = createSelector([getDatasets], datasets => {
   return datasets.filter(d => d.active);
 });
 
+export const getDatasetLayersParsed = createSelector([getDatasetsFiltered], datasets => {
+  if (!datasets) return;
+  return datasets.map(dataset => ({
+    ...dataset,
+    layers: dataset.layers.map(layer => ({
+      ...layer,
+      name: `${dataset.name} ${layer.name}`
+    }))
+  }));
+});
+
 export const getLegendState = createStructuredSelector({
   query: selectQueryParams,
-  layers: getDatasetsFiltered
+  layers: getDatasetLayersParsed
 });

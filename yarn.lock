@@ -5449,7 +5449,7 @@ labella@1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/labella/-/labella-1.1.4.tgz#c6cc5a340e8df340eb335633683ea59b828c322d"
 
-layer-manager@^1.0.4:
+layer-manager@^1.0.4, layer-manager@layer-manager:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.1.2.tgz#8a4c4d25ffc95ea80c8d5294095c8b7b14fc18ac"
   dependencies:

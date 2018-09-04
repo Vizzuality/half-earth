@@ -2,8 +2,7 @@
 
 .container {
   height: 100vh;
-  background-color: aqua;
-  padding: 40%;
+  background-color: #081116;
 }
 
 .sidebarContainer {
@@ -16,6 +15,17 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 400px;
+  width: $sidebar-width;
   padding-right: 0;
+  z-index: 20;
+}
+
+.mapContainer {
+  transition: all 0.3s linear;
+  will-change: padding;
+  transition-delay: 0.3s; // Waiting to do it when sidebar finishes
+}
+
+.mapPaddingLeft {
+  padding-left: $sidebar-width;
 }
