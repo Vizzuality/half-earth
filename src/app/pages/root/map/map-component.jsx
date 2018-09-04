@@ -12,12 +12,19 @@ class LegendComponent extends PureComponent {
   render() {
     const { className, layers } = this.props;
     return (
-      <CesiumMap className={cx(styles.mapContainer, className)}>
+      <CesiumMap
+        ref={map => {
+          this.map = map && map.viewer;
+        }}
+        className={cx(styles.mapContainer, className)}
+      >
         {this.map && (
           <LayerManager map={this.map} plugin={PluginCesium}>
-            {layers.map(l => {
-              return <Layer key={l.slug} {...l} />;
-            })}
+            {layerManager =>
+              layers.map(l => {
+                return <Layer key={l.slug} {...l} layerManager={layerManager} />;
+              })
+            }
           </LayerManager>
         )}
       </CesiumMap>
