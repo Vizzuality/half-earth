@@ -3,6 +3,7 @@ function parseLayer(layer) {
   return {
     legendConfig: JSON.parse(layer.legendconfig.replace(/'/g, '"')),
     layerConfig: JSON.parse(layer.layerconfig.replace(/'/g, '"')),
+    id: layer.slug,
     ...rest
   };
 }
