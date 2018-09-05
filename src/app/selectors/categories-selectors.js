@@ -8,7 +8,7 @@ export const selectCategoriesLoading = ({ categories = {} }) =>
 export const getDatasetsByCategory = createSelector(
   [getDatasets, selectCategories],
   (datasets, categories) => {
-    if (!datasets) return;
+    if (!datasets || !categories) return;
     return categories.map(category => {
       const categoryDatasets = datasets.filter(
         d => d.category === category.slug

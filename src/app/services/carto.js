@@ -2,7 +2,7 @@ export const config = {
   account: 'half-earth',
   layersTable:
     'SELECT dataset, env, to_json(interactionconfig) interactionconfig, iso, to_json(layerconfig) layerconfig, to_json(legendconfig) legendconfig, name, provider, slug FROM layers',
-  categoriesTable: 'SELECT * from categories',
+  categoriesTable: 'SELECT * from categories ORDER BY position',
   datasetsTable: 'SELECT * from datasets'
 };
 
