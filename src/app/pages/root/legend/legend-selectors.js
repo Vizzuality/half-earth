@@ -18,7 +18,7 @@ export const getDatasetLayersParsed = createSelector([getDatasetsFiltered], data
   }));
 });
 
-export const getLegendState = createStructuredSelector({
+export const mapStateToProps = createStructuredSelector({
   query: selectQueryParams,
-  layers: getDatasetLayersParsed
+  datasets: getDatasetLayersParsed
 });

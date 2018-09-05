@@ -9,6 +9,6 @@ export const getDatasetsFiltered = createSelector([getDatasets], datasets => {
   }, []);
 });
 
-export const getMapState = createStructuredSelector({
+export const mapStateToProps = createStructuredSelector({
   layers: getDatasetsFiltered
 });

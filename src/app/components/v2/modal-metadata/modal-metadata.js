@@ -3,9 +3,7 @@ import * as actions from './modal-metadata-actions';
 import reducers, { initialState } from './modal-metadata-reducers';
 
 import ModalMetadataComponent from './modal-metadata-component';
-import { getMetadataState } from './modal-metadata-selectors';
-
-const mapStateToProps = getMetadataState;
+import { mapStateToProps } from './modal-metadata-selectors';
 
 export const reduxConfig = { actions, reducers, initialState };
 

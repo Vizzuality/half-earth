@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getMapState } from './map-selectors';
+import { mapStateToProps } from './map-selectors';
 import MapComponent from './map-component';
-
-const mapStateToProps = getMapState;
 
 class MapContainer extends Component {
   render() {
