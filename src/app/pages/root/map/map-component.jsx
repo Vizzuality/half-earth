@@ -9,16 +9,27 @@ import { PluginCesium } from 'layer-manager';
 import styles from './map-styles.scss';
 
 class LegendComponent extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mapReady: false
+    };
+    // Instance of the map passed as a callback
+    this.map = null;
+  }
+
+  setMapReady = map => {
+    this.map = map;
+    this.setState({ mapReady: true });
+  };
+
   render() {
+    const { mapReady } = this.state;
     const { className, layers } = this.props;
     return (
-      <CesiumMap
-        ref={map => {
-          this.map = map && map.viewer;
-        }}
-        className={cx(styles.mapContainer, className)}
-      >
-        {this.map && (
+      <CesiumMap onReady={this.setMapReady} className={cx(styles.mapContainer, className)}>
+        {mapReady &&
+          this.map && (
           <LayerManager map={this.map} plugin={PluginCesium}>
             {layerManager =>
               layers.map(l => {
