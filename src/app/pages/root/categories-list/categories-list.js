@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import * as ownActions from './categories-list-actions';
 import { setModalMetadataParams } from 'components/v2/modal-metadata/modal-metadata-actions';
 
-import { getCategoriesState } from './categories-list-selectors';
+import { mapStateToProps } from './categories-list-selectors';
 import CategoriesListComponent from './categories-list-component';
 
 const actions = { ...ownActions, setModalMetadataParams };
-
-const mapStateToProps = getCategoriesState;
 
 class CategoriesListContainer extends Component {
   updateLayersActive = layers => {
@@ -16,7 +14,7 @@ class CategoriesListContainer extends Component {
     const layersArray = Array.isArray(layers) ? layers : [layers];
     const activeLayers = query && query.activeLayers ? query.activeLayers.split(',') : [];
     layersArray.forEach(layer => {
-      if (!layer.active) {
+      if (layer.active) {
         activeLayers.push(layer.slug);
       } else {
         const index = activeLayers.indexOf(layer.slug);
@@ -30,17 +28,32 @@ class CategoriesListContainer extends Component {
     });
   };
 
+  handleMultiLayerClick = ({ slug, active }) => {
+    const layers = [{ slug, active }];
+    this.updateLayersActive(layers);
+  };
+
   handleLayerClick = (dataset, { slug, active }) => {
     const layers = dataset.layers.map(layer => ({
       slug: layer.slug,
-      active: layer.slug === slug ? active : true
+      active: layer.slug === slug ? !active : false
     }));
     this.updateLayersActive(layers);
   };
 
-  handleSwitchChange = ({ layers, active }) => {
-    const slugs = active ? layers.map(l => ({ slug: l.slug, active })) : { slug: layers[0].slug, active };
-    this.updateLayersActive(slugs);
+  handleSwitchChange = (category, { slug, layers, active }) => {
+    const layersToUpdate = category.datasets.reduce((acc, dataset) => {
+      const datasetLayers = dataset.layers.map((layer, index) => {
+        const isDatasetLayer = dataset.slug === slug;
+        const isDatasetLayerActive = !active && index === 0;
+        return {
+          slug: layer.slug,
+          active: isDatasetLayer && isDatasetLayerActive
+        };
+      });
+      return [...acc, ...datasetLayers];
+    }, []);
+    this.updateLayersActive(layersToUpdate);
   };
 
   handleMetadataClick = ({ slug }) => {
@@ -54,6 +67,7 @@ class CategoriesListContainer extends Component {
         {...this.props}
         handleSwitchChange={this.handleSwitchChange}
         handleLayerClick={this.handleLayerClick}
+        handleMultiLayerClick={this.handleMultiLayerClick}
         handleMetadataClick={this.handleMetadataClick}
       />
     );

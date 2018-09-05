@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import { setModalMetadataParams } from 'components/v2/modal-metadata/modal-metadata-actions';
 import * as ownActions from './legend-actions';
 
-import { getLegendState } from './legend-selectors';
+import { mapStateToProps } from './legend-selectors';
 import LegendComponent from './legend-component';
 
 const actions = { ...ownActions, setModalMetadataParams };
-
-const mapStateToProps = getLegendState;
 
 class LegendContainer extends Component {
   handleRemoveLayer = layer => {

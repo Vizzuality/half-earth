@@ -36,6 +36,22 @@
   &:first-of-type {
     margin-top: $site-gutter;
   }
+
+  &MultiLayer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.multiLayerWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: $site-gutter;
+  margin-top: $site-gutter / 2;
+}
+
+.subLayerSwitch {
+  margin: $site-gutter / 4 0;
 }
 
 // TODO: do this with real values

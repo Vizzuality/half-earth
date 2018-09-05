@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Legend, {
-  LegendItemTimeline,
-  LegendItemTypes,
-  LegendListItem,
-  LegendItemToolbar
-} from 'wri-api-components/dist/legend';
+import Legend, { LegendItemTypes, LegendListItem, LegendItemToolbar } from 'wri-api-components/dist/legend';
 
 // Icons neccesaries for the legend component
 import 'assets/icons/icon-arrow-up.svg';
@@ -21,7 +16,7 @@ import styles from './legend-styles.scss';
 
 class LegendComponent extends PureComponent {
   render() {
-    const { layers, handleRemoveLayer, handleInfoClick } = this.props;
+    const { datasets, handleRemoveLayer, handleInfoClick } = this.props;
     const toolbar = <LegendItemToolbar onChangeInfo={handleInfoClick} onRemoveLayer={handleRemoveLayer} />;
 
     return (
@@ -32,10 +27,9 @@ class LegendComponent extends PureComponent {
             console.info(datasetIds);
           }}
         >
-          {layers.map((layer, i) => (
-            <LegendListItem index={i} key={layer.slug} sortable={false} layerGroup={layer} toolbar={toolbar}>
+          {datasets.map((dataset, i) => (
+            <LegendListItem index={i} key={dataset.slug} layerGroup={dataset} toolbar={toolbar}>
               <LegendItemTypes />
-              <LegendItemTimeline onChangeLayer={l => console.info(l)} />
             </LegendListItem>
           ))}
         </Legend>
@@ -47,7 +41,7 @@ class LegendComponent extends PureComponent {
 LegendComponent.defaultProps = {
   handleInfoClick: PropTypes.func.isRequired,
   handleRemoveLayer: PropTypes.func.isRequired,
-  layers: []
+  datasets: []
 };
 
 export default LegendComponent;

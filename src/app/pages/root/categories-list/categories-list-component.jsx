@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { SwitchInput, Button, Icon, Loading } from 'he-components';
 
 import infoIcon from 'assets/icons/icon-info.svg';
@@ -7,7 +8,14 @@ import styles from './categories-list-styles';
 
 class CategoriesListComponent extends Component {
   render() {
-    const { loading, categories, handleMetadataClick, handleSwitchChange, handleLayerClick } = this.props;
+    const {
+      loading,
+      categories,
+      handleMetadataClick,
+      handleSwitchChange,
+      handleMultiLayerClick,
+      handleLayerClick
+    } = this.props;
 
     if (loading) return <Loading height={300} />;
     const hasCategories = categories && !!categories.length;
@@ -33,22 +41,33 @@ class CategoriesListComponent extends Component {
                 const layersLength = layers && layers.length;
                 if (!layersLength) return;
                 return (
-                  <div key={slug} className={styles.dataset}>
+                  <div key={slug} className={cx(styles.dataset, { [styles.datasetMultiLayer]: dataset.multilayer })}>
                     <SwitchInput
                       key={slug}
                       id={slug}
                       checked={active}
-                      onChange={value => handleSwitchChange(dataset, value)}
+                      onChange={value => handleSwitchChange(category, dataset, value)}
                       label={name}
                     />
                     {active &&
                       layersLength > 1 && (
-                      <div>
+                      <div className={cx({ [styles.multiLayerWrapper]: dataset.multilayer })}>
                         {layers.map(layer => {
+                          const buttonsMulti = (
+                            <SwitchInput
+                              key={layer.slug}
+                              id={layer.slug}
+                              theme={{ switch: styles.subLayerSwitch }}
+                              label={layer.name}
+                              checked={layer.active}
+                              onChange={() => handleMultiLayerClick(layer)}
+                            />
+                          );
+
                           const buttonTheme = {
                             button: layer.active ? styles.buttonActive : styles.button
                           };
-                          return (
+                          const buttonsUnique = (
                             <Button
                               key={layer.slug}
                               theme={buttonTheme}
@@ -57,6 +76,7 @@ class CategoriesListComponent extends Component {
                               {layer.name}
                             </Button>
                           );
+                          return dataset.multilayer ? buttonsMulti : buttonsUnique;
                         })}
                       </div>
                     )}
@@ -75,6 +95,7 @@ CategoriesListComponent.propTypes = {
   categories: PropTypes.array,
   handleMetadataClick: PropTypes.func.isRequired,
   handleSwitchChange: PropTypes.func.isRequired,
+  handleMultiLayerClick: PropTypes.func.isRequired,
   handleLayerClick: PropTypes.func.isRequired
 };
 
