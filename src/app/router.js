@@ -1,7 +1,7 @@
 import { connectRoutes, NOT_FOUND, redirect } from 'redux-first-router';
 
 import createHistory from 'history/createBrowserHistory';
-import querySerializer from 'query-string';
+import querySerializer from 'qs';
 import { fetchLayersThunk } from 'pages/map-iframe/map-iframe-thunks';
 import { fetchDatasetsThunk } from 'redux-modules/datasets/datasets-thunks';
 import { fetchCategoriesThunk } from 'redux-modules/categories/categories-thunks';
@@ -12,8 +12,7 @@ export const MAP = 'location/MAP';
 export const APP = 'location/APP';
 export const APPv2 = 'location/APPv2';
 
-const dispatchPreFetchThunks = (...thunks) => async (...params) =>
-  thunks.forEach(thunk => thunk(...params));
+const dispatchPreFetchThunks = (...thunks) => async (...params) => thunks.forEach(thunk => thunk(...params));
 
 export const routes = {
   [MAP]: {

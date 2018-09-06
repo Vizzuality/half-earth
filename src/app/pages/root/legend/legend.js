@@ -10,15 +10,23 @@ const actions = { ...ownActions, setModalMetadataParams };
 
 class LegendContainer extends Component {
   handleRemoveLayer = layer => {
-    const { updateQueryParam, query } = this.props;
-    const activeLayers = query && query.activeLayers ? query.activeLayers.split(',') : [];
-    const index = activeLayers.indexOf(layer.slug);
+    const { updateQueryParam, query = {} } = this.props;
+    const activeLayers = query.activeLayers ? [...query.activeLayers] : [];
+    const index = activeLayers.map(l => l.slug).indexOf(layer.slug);
     if (index > -1) {
       activeLayers.splice(index, 1);
     }
     updateQueryParam({
-      query: { ...query, activeLayers: activeLayers.join(',') }
+      query: { ...query, activeLayers }
     });
+  };
+
+  handleChangeOpacity = ({ slug }, opacity) => {
+    console.log(slug, opacity);
+  };
+
+  handleChangeVisibility = ({ slug }, visibility) => {
+    console.log(slug, visibility);
   };
 
   handleInfoClick = ({ slug }) => {
@@ -30,8 +38,10 @@ class LegendContainer extends Component {
     return (
       <LegendComponent
         {...this.props}
-        handleRemoveLayer={this.handleRemoveLayer}
         handleInfoClick={this.handleInfoClick}
+        handleRemoveLayer={this.handleRemoveLayer}
+        handleChangeOpacity={this.handleChangeOpacity}
+        handleChangeVisibility={this.handleChangeVisibility}
       />
     );
   }

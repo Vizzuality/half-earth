@@ -10,21 +10,25 @@ const actions = { ...ownActions, setModalMetadataParams };
 
 class CategoriesListContainer extends Component {
   updateLayersActive = layers => {
-    const { updateQueryParam, query } = this.props;
+    const { updateQueryParam, query = {} } = this.props;
     const layersArray = Array.isArray(layers) ? layers : [layers];
-    const activeLayers = query && query.activeLayers ? query.activeLayers.split(',') : [];
+
+    const activeLayers = query.activeLayers ? [...query.activeLayers] : [];
+    const activeLayersSlugs = activeLayers.map(layer => layer.slug);
     layersArray.forEach(layer => {
       if (layer.active) {
-        activeLayers.push(layer.slug);
+        activeLayers.push({
+          slug: layer.slug
+        });
       } else {
-        const index = activeLayers.indexOf(layer.slug);
+        const index = activeLayersSlugs.indexOf(layer.slug);
         if (index > -1) {
           activeLayers.splice(index, 1);
         }
       }
     });
     updateQueryParam({
-      query: { ...query, activeLayers: activeLayers.join(',') }
+      query: { ...query, activeLayers }
     });
   };
 
@@ -41,7 +45,7 @@ class CategoriesListContainer extends Component {
     this.updateLayersActive(layers);
   };
 
-  handleSwitchChange = (category, { slug, layers, active }) => {
+  handleSwitchChange = (category, { slug, active }) => {
     const layersToUpdate = category.datasets.reduce((acc, dataset) => {
       const datasetLayers = dataset.layers.map((layer, index) => {
         const isDatasetLayer = dataset.slug === slug;
