@@ -6,7 +6,7 @@
 }
 
 .sidebarContainer {
-  height: 100vh;
+  height: 100%;
   overflow: auto;
   padding-right: 30px;
 }
@@ -18,6 +18,7 @@
   width: $sidebar-width;
   padding-right: 0;
   z-index: 20;
+  bottom: 0;
 }
 
 .mapContainer {
