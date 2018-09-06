@@ -26,6 +26,7 @@ class LegendComponent extends PureComponent {
   render() {
     const {
       datasets,
+      handleChangeOrder,
       handleRemoveLayer,
       handleLayerChange,
       handleInfoClick,
@@ -46,15 +47,9 @@ class LegendComponent extends PureComponent {
         <LegendItemButtonRemove />
       </LegendItemToolbar>
     );
-
     return (
       <div className={styles.legend}>
-        <Legend
-          sortable={false}
-          onChangeOrder={datasetIds => {
-            console.info(datasetIds);
-          }}
-        >
+        <Legend sortable={datasets && datasets.length > 1} onChangeOrder={handleChangeOrder}>
           {datasets.map((dataset, i) => (
             <LegendListItem index={i} key={dataset.slug} layerGroup={dataset} toolbar={toolbar}>
               <LegendItemTypes />

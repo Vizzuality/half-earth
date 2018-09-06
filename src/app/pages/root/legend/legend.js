@@ -21,7 +21,7 @@ class LegendContainer extends Component {
   updateLayerProperty(slug, { key, value }) {
     const { updateQueryParam, query = {} } = this.props;
     const activeLayers = query.activeLayers.map(layer => {
-      if (!layer.slug === slug) return layer;
+      if (layer.slug !== slug) return layer;
       return {
         ...layer,
         [key]: value
@@ -31,6 +31,24 @@ class LegendContainer extends Component {
       query: { ...query, activeLayers }
     });
   }
+
+  handleChangeOrder = datasetsOrder => {
+    const { datasets, updateQueryParam, query } = this.props;
+    const orderedLayers = datasetsOrder.reduce((acc, datasetSlug) => {
+      const dataset = datasets.find(d => d.slug === datasetSlug);
+      if (!dataset) return acc;
+
+      const datasetLayersSlug = dataset.layers.map(l => l.slug);
+      const layer = query.activeLayers.find(l => datasetLayersSlug.includes(l.slug));
+      if (!layer) return acc;
+
+      acc.push(layer);
+      return acc;
+    }, []);
+    updateQueryParam({
+      query: { ...query, activeLayers: orderedLayers }
+    });
+  };
 
   handleRemoveLayer = ({ slug }) => {
     this.updateLayersActive([{ slug, active: false }]);
@@ -55,6 +73,7 @@ class LegendContainer extends Component {
         {...this.props}
         handleInfoClick={this.handleInfoClick}
         handleRemoveLayer={this.handleRemoveLayer}
+        handleChangeOrder={this.handleChangeOrder}
         handleChangeOpacity={this.handleChangeOpacity}
         handleChangeVisibility={this.handleChangeVisibility}
       />

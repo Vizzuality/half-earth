@@ -23,7 +23,7 @@ export function parseCartoLayersToWRI(layers = [], datasets = []) {
     if (!dataset) return acc;
 
     const newDataset = !acc[layerDataset]
-      ? { ...dataset, id: dataset.slug, layers: [parsedLayer] }
+      ? { ...dataset, dataset: dataset.slug, layers: [parsedLayer] }
       : {
         ...acc[layerDataset],
         layers: [...acc[layerDataset].layers, parsedLayer]

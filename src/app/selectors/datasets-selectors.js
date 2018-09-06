@@ -9,16 +9,19 @@ export const getLayersActive = createSelector([selectQueryParams], query => quer
 export const getDatasets = createSelector([selectDatasets, getLayersActive], (datasets, activeLayers = []) => {
   if (!datasets) return;
   return Object.values(datasets).map(dataset => {
+    let order = 0;
     const layers = dataset.layers.map(layer => {
       const layerActive = activeLayers.find(l => l.slug === layer.slug);
-      return layerActive
-        ? { ...layer, ...layerActive, active: true } // eslint-disable-line eqeqeq
-        : layer;
+      if (!layerActive) return layer;
+
+      order = activeLayers.findIndex(l => l.slug === layer.slug);
+      return { ...layer, ...layerActive, active: true, zIndex: order + 1 };
     });
     return {
       ...dataset,
       active: layers.some(l => l.active),
       visibility: layers.every(l => l.visibility),
+      order,
       layers
     };
   });
