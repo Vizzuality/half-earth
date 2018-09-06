@@ -47,7 +47,7 @@ class CesiumComponent extends Component {
     this.setEventHandlers();
     if (coordinates) this.setCoordinates();
     if (camera) this.setCamera();
-    onReady(this.viewer);
+    onReady && onReady(this.viewer);
   }
 
   componentDidUpdate(prevProps) {
