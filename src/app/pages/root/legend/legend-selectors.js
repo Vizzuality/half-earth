@@ -13,7 +13,7 @@ export const getDatasetLayersParsed = createSelector([getDatasetsFiltered], data
     ...dataset,
     layers: dataset.layers.map(layer => ({
       ...layer,
-      name: `${dataset.name} ${layer.name}`
+      name: dataset.slug === 'human-pressure' ? dataset.name : `${dataset.name} ${layer.name}`
     }))
   }));
 });

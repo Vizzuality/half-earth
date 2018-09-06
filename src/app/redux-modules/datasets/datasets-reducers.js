@@ -29,21 +29,8 @@ function setDatasetsError(state, { payload }) {
   };
 }
 
-function setLayerVisibility(state, { payload }) {
-  const { visible, id } = payload;
-  const layer = state.byId[id];
-  return {
-    ...state,
-    byId: {
-      ...state.byId,
-      [id]: { ...layer, config: { ...layer.config, visible } }
-    }
-  };
-}
-
 export default {
   [actions.setDatasetsLoading]: setDatasetsLoading,
   [actions.setDatasetsReady]: setDatasetsReady,
-  [actions.setDatasetsError]: setDatasetsError,
-  [actions.setLayerVisibility]: setLayerVisibility
+  [actions.setDatasetsError]: setDatasetsError
 };

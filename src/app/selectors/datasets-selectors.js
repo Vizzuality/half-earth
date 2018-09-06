@@ -4,26 +4,22 @@ import { selectQueryParams } from 'selectors/location-selectors';
 export const selectDatasets = ({ datasets = {} }) => datasets.data;
 export const selectDatasetsLoading = ({ datasets = {} }) => datasets.loading;
 
-export const getDatasetActives = createSelector(
-  [selectQueryParams],
-  (query = {}) => (query.activeLayers ? query.activeLayers.split(',') : [])
-);
+export const getLayersActive = createSelector([selectQueryParams], query => query && query.activeLayers);
 
-export const getDatasets = createSelector(
-  [selectDatasets, getDatasetActives],
-  (datasets, activeDatasets) => {
-    if (!datasets) return;
-
-    return Object.values(datasets).map(dataset => {
-      const layers = dataset.layers.map(layer => ({
-        ...layer,
-        active: activeDatasets.includes(layer.slug)
-      }));
-      return {
-        ...dataset,
-        active: layers.some(l => l.active),
-        layers
-      };
+export const getDatasets = createSelector([selectDatasets, getLayersActive], (datasets, activeLayers = []) => {
+  if (!datasets) return;
+  return Object.values(datasets).map(dataset => {
+    const layers = dataset.layers.map(layer => {
+      const layerActive = activeLayers.find(l => l.slug === layer.slug);
+      return layerActive
+        ? { ...layer, ...layerActive, active: true } // eslint-disable-line eqeqeq
+        : layer;
     });
-  }
-);
+    return {
+      ...dataset,
+      active: layers.some(l => l.active),
+      visibility: layers.every(l => l.visibility),
+      layers
+    };
+  });
+});

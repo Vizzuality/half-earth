@@ -1,6 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Legend, { LegendItemTypes, LegendListItem, LegendItemToolbar } from 'wri-api-components/dist/legend';
+import Legend, {
+  LegendItemButtonOpacity,
+  LegendItemButtonVisibility,
+  LegendItemButtonInfo,
+  LegendItemButtonRemove,
+  LegendItemTypes,
+  LegendListItem,
+  LegendItemToolbar
+} from 'wri-api-components/dist/legend';
 
 // Icons neccesaries for the legend component
 import 'assets/icons/icon-arrow-up.svg';
@@ -16,8 +24,28 @@ import styles from './legend-styles.scss';
 
 class LegendComponent extends PureComponent {
   render() {
-    const { datasets, handleRemoveLayer, handleInfoClick } = this.props;
-    const toolbar = <LegendItemToolbar onChangeInfo={handleInfoClick} onRemoveLayer={handleRemoveLayer} />;
+    const {
+      datasets,
+      handleRemoveLayer,
+      handleLayerChange,
+      handleInfoClick,
+      handleChangeVisibility,
+      handleChangeOpacity
+    } = this.props;
+    const toolbar = (
+      <LegendItemToolbar
+        onChangeInfo={handleInfoClick}
+        onChangeLayer={handleLayerChange}
+        onRemoveLayer={handleRemoveLayer}
+        onChangeVisibility={handleChangeVisibility}
+        onChangeOpacity={handleChangeOpacity}
+      >
+        <LegendItemButtonOpacity />
+        <LegendItemButtonVisibility />
+        <LegendItemButtonInfo />
+        <LegendItemButtonRemove />
+      </LegendItemToolbar>
+    );
 
     return (
       <div className={styles.legend}>

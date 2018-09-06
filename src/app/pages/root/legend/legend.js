@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getLayersActiveMerged } from 'redux-modules/datasets/datasets-utils';
 import { setModalMetadataParams } from 'components/v2/modal-metadata/modal-metadata-actions';
 import * as ownActions from './legend-actions';
 
@@ -9,24 +10,38 @@ import LegendComponent from './legend-component';
 const actions = { ...ownActions, setModalMetadataParams };
 
 class LegendContainer extends Component {
-  handleRemoveLayer = layer => {
+  updateLayersActive = layers => {
     const { updateQueryParam, query = {} } = this.props;
-    const activeLayers = query.activeLayers ? [...query.activeLayers] : [];
-    const index = activeLayers.map(l => l.slug).indexOf(layer.slug);
-    if (index > -1) {
-      activeLayers.splice(index, 1);
-    }
+    const activeLayers = getLayersActiveMerged(layers, query.activeLayers);
     updateQueryParam({
       query: { ...query, activeLayers }
     });
   };
 
-  handleChangeOpacity = ({ slug }, opacity) => {
-    console.log(slug, opacity);
+  updateLayerProperty(slug, { key, value }) {
+    const { updateQueryParam, query = {} } = this.props;
+    const activeLayers = query.activeLayers.map(layer => {
+      if (!layer.slug === slug) return layer;
+      return {
+        ...layer,
+        [key]: value
+      };
+    });
+    updateQueryParam({
+      query: { ...query, activeLayers }
+    });
+  }
+
+  handleRemoveLayer = ({ slug }) => {
+    this.updateLayersActive([{ slug, active: false }]);
   };
 
-  handleChangeVisibility = ({ slug }, visibility) => {
-    console.log(slug, visibility);
+  handleChangeOpacity = ({ slug }, opacity) => {
+    this.updateLayerProperty(slug, { key: 'opacity', value: opacity });
+  };
+
+  handleChangeVisibility = (layer, visibility) => {
+    this.updateLayerProperty(layer.slug, { key: 'visibility', value: visibility });
   };
 
   handleInfoClick = ({ slug }) => {

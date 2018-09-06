@@ -1,9 +1,13 @@
+import sortBy from 'lodash/sortBy';
+
 function parseLayer(layer) {
   const { legendconfig, layerconfig, ...rest } = layer;
   return {
     legendConfig: JSON.parse(layer.legendconfig.replace(/'/g, '"')),
     layerConfig: JSON.parse(layer.layerconfig.replace(/'/g, '"')),
     id: layer.slug, // necessary by the layer manager
+    visibility: true,
+    opacity: 1,
     ...rest
   };
 }
@@ -24,9 +28,16 @@ export function parseCartoLayersToWRI(layers = [], datasets = []) {
         ...acc[layerDataset],
         layers: [...acc[layerDataset].layers, parsedLayer]
       };
+    newDataset.layers = sortBy(newDataset.layers, 'name');
     return {
       ...acc,
       [layerDataset]: newDataset
     };
   }, {});
+}
+
+export function getLayersActiveMerged(newLayers = [], activeLayers = []) {
+  const layersToAdd = newLayers.filter(l => l.active).map(l => ({ slug: l.slug }));
+  const layersToRemove = newLayers.filter(l => !l.active).map(l => l.slug);
+  return activeLayers.filter(layer => !layersToRemove.includes(layer.slug)).concat(layersToAdd);
 }

@@ -1,14 +1,14 @@
-export const config = {
+const config = {
   account: 'half-earth',
-  layersTable:
-    'SELECT dataset, env, to_json(interactionconfig) interactionconfig, iso, to_json(layerconfig) layerconfig, to_json(legendconfig) legendconfig, name, provider, slug FROM layers',
-  categoriesTable: 'SELECT * from categories ORDER BY position',
-  datasetsTable: 'SELECT * from datasets'
+  layersQuery:
+    'SELECT dataset, env, to_json(interactionconfig) interactionconfig, iso, to_json(layerconfig) layerconfig, to_json(legendconfig) legendconfig, name, provider, slug FROM layers ORDER BY name',
+  categoriesQuery: 'SELECT * from categories ORDER BY position',
+  datasetsQuery: 'SELECT * from datasets ORDER BY name'
 };
 
-export function fetchCartoResource(resource) {
+function fetchCartoResource(resource) {
   const cartoUrl = `https://${config.account}.carto.com/api/v2/sql`;
-  const resourceTable = `${resource}Table`;
+  const resourceTable = `${resource}Query`;
   const query = config[resourceTable] || '';
   return fetch(`${cartoUrl}?q=${query}`).then(d =>
     d.json().then(d => {
