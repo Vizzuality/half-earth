@@ -1,3 +1,8 @@
+/*
+  This is a fork of [React slider](https://github.com/whoisandie/react-rangeslider)
+  modified for better customization.
+*/
+
 import React from 'react';
 import cx from 'classnames';
 import isEmpty from 'lodash/isEmpty';

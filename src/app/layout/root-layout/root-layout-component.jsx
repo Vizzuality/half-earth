@@ -1,10 +1,16 @@
 import React, { PureComponent } from 'react';
 import Proptypes from 'prop-types';
+import { Loading } from 'he-components';
 import universal from 'react-universal-component';
 
-const PageComponent = universal((
-  { page } /* webpackChunkName: "[request]" */
-) => import(`../${page}/${page}.js`));
+const universalConfig = {
+  loading: <Loading height="100vh" />
+};
+
+const PageComponent = universal(
+  ({ page } /* webpackChunkName: "[request]" */) => import(`../../${page}`),
+  universalConfig
+);
 
 class Root extends PureComponent {
   render() {

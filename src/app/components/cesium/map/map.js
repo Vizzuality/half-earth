@@ -41,23 +41,17 @@ class CesiumComponent extends Component {
   };
 
   componentDidMount() {
-    const { coordinates, camera } = this.props;
+    const { coordinates, camera, onReady } = this.props;
     this.viewer = new Cesium.Viewer(mapId, CesiumComponent.mapConfig);
     this.handler = new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas);
     this.setEventHandlers();
     if (coordinates) this.setCoordinates();
     if (camera) this.setCamera();
+    onReady && onReady(this.viewer);
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      onTick,
-      lockNavigation = false,
-      rotate,
-      coordinates,
-      coordinatesOptions,
-      camera
-    } = this.props;
+    const { onTick, lockNavigation = false, rotate, coordinates, coordinatesOptions, camera } = this.props;
     this.state.clickedPosition = null;
     if (this.viewer) {
       if (!this.rotating && rotate) this.addRotation();
@@ -67,8 +61,7 @@ class CesiumComponent extends Component {
       if (lockNavigation) disablePanning(this.viewer);
       if (
         coordinates &&
-        (prevProps.coordinates !== coordinates ||
-          prevProps.coordinatesOptions !== coordinatesOptions)
+        (prevProps.coordinates !== coordinates || prevProps.coordinatesOptions !== coordinatesOptions)
       ) {
         this.setCoordinates();
       }
@@ -81,14 +74,8 @@ class CesiumComponent extends Component {
   }
 
   setEventHandlers() {
-    this.handler.setInputAction(
-      this.onMouseClick,
-      Cesium.ScreenSpaceEventType.LEFT_CLICK
-    );
-    this.handler.setInputAction(
-      this.onMouseMove,
-      Cesium.ScreenSpaceEventType.MOUSE_MOVE
-    );
+    this.handler.setInputAction(this.onMouseClick, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    this.handler.setInputAction(this.onMouseMove, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
     if (this.props.onMoveEnd) {
       this.viewer.camera.moveEnd.addEventListener(this.onMoveEnd);
     }
@@ -114,25 +101,16 @@ class CesiumComponent extends Component {
     const now = currentTime.secondsOfDay;
     const spinRate = 0.8;
     const delta = (now - lastNow) / 1000;
-    this.viewer.scene.camera.rotate(
-      Cesium.Cartesian3.UNIT_Z,
-      -spinRate * delta
-    );
+    this.viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate * delta);
     clock.startTime.secondsOfDay = now - 1;
   };
 
   onTick = clock => {
     if (this.rotating) this.rotate(clock);
     const cameraPosition = this.viewer.scene.camera.positionWC;
-    const ellipsoidPosition = this.viewer.scene.globe.ellipsoid.scaleToGeodeticSurface(
-      cameraPosition
-    );
+    const ellipsoidPosition = this.viewer.scene.globe.ellipsoid.scaleToGeodeticSurface(cameraPosition);
     const distance = Cesium.Cartesian3.magnitude(
-      Cesium.Cartesian3.subtract(
-        cameraPosition,
-        ellipsoidPosition,
-        new Cesium.Cartesian3()
-      )
+      Cesium.Cartesian3.subtract(cameraPosition, ellipsoidPosition, new Cesium.Cartesian3())
     );
     if (distance !== this.distance) {
       this.props.onTick({ distance });
@@ -155,12 +133,9 @@ class CesiumComponent extends Component {
     const { orientation = {} } = coordinatesOptions;
     const { x, y, z } = this.viewer.camera.position;
     const { heading, pitch, roll } = this.viewer.camera;
-    const isDifferentCoordinates =
-      coordinates[0] !== x || coordinates[1] !== y || coordinates[2] !== z;
+    const isDifferentCoordinates = coordinates[0] !== x || coordinates[1] !== y || coordinates[2] !== z;
     const isDifferentOrientation =
-      orientation.heading !== heading ||
-      orientation.pitch !== pitch ||
-      orientation.roll !== roll;
+      orientation.heading !== heading || orientation.pitch !== pitch || orientation.roll !== roll;
 
     if (isDifferentCoordinates || isDifferentOrientation) {
       this.props.onMoveEnd({

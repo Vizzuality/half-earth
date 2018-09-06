@@ -45,12 +45,24 @@ module.exports = {
     module: {
       rules: [
         {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader']
+        },
+        {
           test: /\.(js|jsx)$/,
           include: sourcePath,
           loader: 'babel-loader'
         },
         {
-          test: /\.(jpg|jpeg|png|gif|svg|eot|ttf|woff|woff2)$/i,
+          test: /\.svg$/,
+          use: [
+            {
+              loader: 'svg-sprite-loader'
+            }
+          ]
+        },
+        {
+          test: /\.(jpg|jpeg|png|gif|eot|ttf|woff|woff2)$/i,
           use: [
             {
               loader: 'file-loader',
@@ -72,7 +84,15 @@ module.exports = {
         resolve(sourcePath, 'app'),
         'node_modules'
       ],
-      plugins: [new DirectoryNamedWebpackPlugin(true)]
+      plugins: [new DirectoryNamedWebpackPlugin(true)],
+      alias: {
+        app: 'app',
+        assets: 'app/assets',
+        routes: 'app/routes',
+        components: 'app/components',
+        constants: 'app/constants',
+        utils: 'app/utils'
+      }
     },
 
     plugins: [
