@@ -9,14 +9,12 @@
     },
     "sourceType": "module"
   },
-  "settings": {
-    "import/resolver": "webpack"
-  },
   "plugins": ["react", "prettier"],
   "rules": {
     "semi": ["error", "always"],
     "jsx-quotes": ["error", "prefer-double"],
-    "react/prop-types": [0],
+    "import/extensions": 0,
+    "import/no-unresolved": 1,
     "space-before-function-paren": 0,
     "import/prefer-default-export": 0,
     "react/prefer-stateless-function": 0,

@@ -7,7 +7,6 @@ import { SwitchInput, Button, Icon } from 'he-components';
 
 import shareIcon from 'assets/icons/share.svg';
 import infoIcon from 'assets/icons/icon-info.svg';
-import layersIcon from 'assets/icons/layers.svg';
 import globeIcon from 'assets/icons/globe.svg';
 import locateIcon from 'assets/icons/locate.svg';
 
@@ -47,9 +46,6 @@ class ToolbarComponent extends PureComponent {
         </Button>
         <Button theme={styles} onClick={handleInfoClick}>
           <Icon icon={infoIcon} />
-        </Button>
-        <Button theme={styles} onClick={onClick}>
-          <Icon icon={layersIcon} />
         </Button>
         <Tooltip
           placement="left"

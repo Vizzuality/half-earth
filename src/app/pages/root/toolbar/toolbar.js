@@ -13,24 +13,19 @@ class ToolbarContainer extends Component {
   updateLayersActive = layers => {
     const { updateQueryParam, query = {} } = this.props;
     const activeLayers = getLayersActiveMerged(layers, query.activeLayers);
-    updateQueryParam({
-      query: { ...query, activeLayers }
-    });
+    updateQueryParam({ query: { ...query, activeLayers } });
   };
 
   handleShareClick = () => {
     this.props.setModalMetadataParams({ title: 'Share modal', isOpen: true });
-  }
-
+  };
   handleInfoClick = () => {
     this.props.setModalMetadataParams({ title: 'App information', isOpen: true });
-  }
-
+  };
   handleGridChange = ({ slug, active }) => {
-    const layers = [{ slug, active: !active }];
+    const layers = [ { slug, active: !active } ];
     this.updateLayersActive(layers);
-  }
-
+  };
   render() {
     return (
       <ToolbarComponent
@@ -43,7 +38,4 @@ class ToolbarContainer extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(ToolbarContainer);
+export default connect(mapStateToProps, actions)(ToolbarContainer);
