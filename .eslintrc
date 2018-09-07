@@ -1,6 +1,18 @@
 {
   "extends": ["vizzuality"],
-  "globals": { "fetch": true },
+  "globals": { "fetch": true, "navigator": true },
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    },
+    "sourceType": "module"
+  },
+  "settings": {
+    "import/resolver": "webpack"
+  },
+  "plugins": ["react", "prettier"],
   "rules": {
     "semi": ["error", "always"],
     "jsx-quotes": ["error", "prefer-double"],
@@ -10,6 +22,7 @@
     "react/prefer-stateless-function": 0,
     "import/no-extraneous-dependencies": 1,
     "react/jsx-one-expression-per-line": 0,
+    "react/destructuring-assignment": 0,
     "comma-dangle": 0
   }
 }
