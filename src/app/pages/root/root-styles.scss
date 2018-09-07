@@ -3,6 +3,7 @@
 .container {
   height: 100vh;
   background-color: #081116;
+  position: relative;
 }
 
 .sidebarContainer {
@@ -21,6 +22,12 @@
   bottom: 0;
 }
 
+.toolbar {
+  position: absolute;
+  top: $site-gutter;
+  right: $site-gutter;
+}
+
 .mapContainer {
   transition: all 0.3s linear;
   will-change: padding;
@@ -30,3 +37,4 @@
 .mapPaddingLeft {
   padding-left: $sidebar-width;
 }
+

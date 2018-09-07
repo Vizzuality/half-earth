@@ -50,7 +50,7 @@ class LegendComponent extends PureComponent {
     return (
       <div className={styles.legend}>
         <Legend sortable={datasets && datasets.length > 1} onChangeOrder={handleChangeOrder}>
-          {datasets.map((dataset, i) => (
+          {datasets && datasets.map((dataset, i) => (
             <LegendListItem index={i} key={dataset.slug} layerGroup={dataset} toolbar={toolbar}>
               <LegendItemTypes />
             </LegendListItem>

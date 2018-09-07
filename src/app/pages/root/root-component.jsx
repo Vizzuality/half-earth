@@ -5,6 +5,7 @@ import ModalMetadata from 'components/v2/modal-metadata';
 
 import CategoriesList from './categories-list';
 import Map from './map';
+import Toolbar from './toolbar';
 import Legend from './legend';
 
 import styles from './root-styles';
@@ -12,9 +13,7 @@ import styles from './root-styles';
 class RootPageComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      sidebarOpen: true
-    };
+    this.state = { sidebarOpen: true };
   }
 
   handleOnToggle = sidebarOpen => {
@@ -31,6 +30,7 @@ class RootPageComponent extends React.Component {
           </div>
         </Sidebar>
         <Map className={cx(styles.mapContainer, { [styles.mapPaddingLeft]: sidebarOpen })} />
+        <Toolbar className={styles.toolbar} />
         <Legend />
         <ModalMetadata />
       </div>
@@ -38,8 +38,6 @@ class RootPageComponent extends React.Component {
   }
 }
 
-RootPageComponent.defaultProps = {
-  datasets: []
-};
+RootPageComponent.defaultProps = { datasets: [] };
 
 export default RootPageComponent;

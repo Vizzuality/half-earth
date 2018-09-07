@@ -18,10 +18,11 @@ class LegendContainer extends Component {
     });
   };
 
-  updateLayerProperty(slug, { key, value }) {
+  updateLayersProperty(slugs, { key, value }) {
     const { updateQueryParam, query = {} } = this.props;
+    const slugsArray = Array.isArray(slugs) ? slugs : [slugs];
     const activeLayers = query.activeLayers.map(layer => {
-      if (layer.slug !== slug) return layer;
+      if (!slugsArray.includes(layer.slug)) return layer;
       return {
         ...layer,
         [key]: value
@@ -54,12 +55,20 @@ class LegendContainer extends Component {
     this.updateLayersActive([{ slug, active: false }]);
   };
 
-  handleChangeOpacity = ({ slug }, opacity) => {
-    this.updateLayerProperty(slug, { key: 'opacity', value: opacity });
+  getMultiLayers(datasetSlug) {
+    const { datasets } = this.props;
+    const dataset = datasets.find(d => d.slug === datasetSlug);
+    return dataset ? dataset.layers.map(l => l.slug) : [];
+  }
+
+  handleChangeOpacity = (layer, opacity) => {
+    const layersSlug = layer.dataset === 'human-pressure' ? this.getMultiLayers(layer.dataset) : layer.slug;
+    this.updateLayersProperty(layersSlug, { key: 'opacity', value: opacity });
   };
 
   handleChangeVisibility = (layer, visibility) => {
-    this.updateLayerProperty(layer.slug, { key: 'visibility', value: visibility });
+    const layersSlug = layer.dataset === 'human-pressure' ? this.getMultiLayers(layer.dataset) : layer.slug;
+    this.updateLayersProperty(layersSlug, { key: 'visibility', value: visibility });
   };
 
   handleInfoClick = ({ slug }) => {

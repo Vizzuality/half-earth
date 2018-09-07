@@ -1,12 +1,26 @@
 {
-  "extends": ["standard", "standard-react"],
-  "parser": "babel-eslint",
-  "globals": { "fetch": true },
+  "extends": ["vizzuality"],
+  "globals": { "fetch": true, "navigator": true },
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier"],
   "rules": {
     "semi": ["error", "always"],
     "jsx-quotes": ["error", "prefer-double"],
-    "react/prop-types": [0],
+    "import/extensions": 0,
+    "import/no-unresolved": 1,
     "space-before-function-paren": 0,
+    "import/prefer-default-export": 0,
+    "react/prefer-stateless-function": 0,
+    "import/no-extraneous-dependencies": 1,
+    "react/jsx-one-expression-per-line": 0,
+    "react/destructuring-assignment": 0,
     "comma-dangle": 0
   }
 }

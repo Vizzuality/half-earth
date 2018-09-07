@@ -39,7 +39,7 @@ class CategoriesListComponent extends Component {
               {category.datasets.map(dataset => {
                 const { layers, active, slug, name } = dataset;
                 const layersLength = layers && layers.length;
-                if (!layersLength) return;
+                if (!layersLength) return null;
                 return (
                   <div key={slug} className={cx(styles.dataset, { [styles.datasetMultiLayer]: dataset.multilayer })}>
                     <SwitchInput
