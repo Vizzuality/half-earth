@@ -15,7 +15,7 @@ class LegendComponent extends PureComponent {
       <CesiumMap className={cx(styles.mapContainer, className)}>
         {map => (
           <LayerManager map={map} plugin={PluginCesium}>
-            {layerManager => layers.map(l => <Layer key={l.slug} {...l} layerManager={layerManager} />)}
+            {layerManager => layers && layers.map(l => <Layer key={l.slug} {...l} layerManager={layerManager} />)}
           </LayerManager>
         )}
       </CesiumMap>
