@@ -3,7 +3,7 @@ import { Sidebar } from 'he-components';
 import cx from 'classnames';
 import ModalMetadata from 'components/v2/modal-metadata';
 
-import CategoriesList from './categories-list';
+import GroupCardList from './group-card-list';
 import Map from './map';
 import Toolbar from './toolbar';
 import Legend from './legend';
@@ -26,7 +26,7 @@ class RootPageComponent extends React.Component {
       <div className={styles.container}>
         <Sidebar theme={styles} visible={sidebarOpen} onToggle={this.handleOnToggle}>
           <div className={styles.sidebarContainer}>
-            <CategoriesList />
+            <GroupCardList />
           </div>
         </Sidebar>
         <Map className={cx(styles.mapContainer, { [styles.mapPaddingLeft]: sidebarOpen })} />
