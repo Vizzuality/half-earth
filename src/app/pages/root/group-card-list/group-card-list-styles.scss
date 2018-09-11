@@ -1,0 +1,32 @@
+@import '~styles/variables.scss';
+
+.cardContainer {
+  padding: $sidebar-card-padding;
+  background-color: $color-white;
+  margin-bottom: 10px;
+
+  .groupTitle {
+    font-size: 20px;
+  }
+
+  &.customCard {
+    background-color: $color-group-card-dark-blue;
+    color: $color-white;
+    margin-bottom: 0;
+
+    .groupTitle {
+      font-size: 40px;
+    }
+  }
+}
+
+.headerContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.icon {
+  transform: rotate(90deg);
+  stroke: $color-turquoise;
+}
