@@ -1,5 +1,6 @@
 import { createSelector, createStructuredSelector } from 'reselect';
 import { getDatasets } from 'selectors/datasets-selectors';
+import { selectQueryParams } from 'selectors/location-selectors';
 
 export const getDatasetsFiltered = createSelector([ getDatasets ], datasets => {
   if (!datasets) return null;
@@ -12,4 +13,19 @@ export const getDatasetsFiltered = createSelector([ getDatasets ], datasets => {
   );
 });
 
-export const mapStateToProps = createStructuredSelector({ layers: getDatasetsFiltered });
+export const getCoordinates = createSelector([ selectQueryParams ], query => {
+  if (!query) return null;
+  return {};
+});
+
+export const getCoordinatesOptions = createSelector([ selectQueryParams ], query => {
+  if (!query) return null;
+  return {};
+});
+
+export const mapStateToProps = createStructuredSelector({
+  layers: getDatasetsFiltered,
+  query: selectQueryParams,
+  coordinates: getCoordinates,
+  coordinatesOptions: getCoordinatesOptions
+});
