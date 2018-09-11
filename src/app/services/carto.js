@@ -1,6 +1,8 @@
+import camelCase from 'lodash/camelCase';
+
 const config = {
   account: 'half-earth',
-  layersQuery: 'SELECT dataset, env, to_json(interactionconfig) interactionconfig, iso, to_json(layerconfig) layerconfig, to_json(legendconfig) legendconfig, name, provider, slug FROM layers ORDER BY name',
+  layersQuery: 'SELECT dataset, env, interaction_config, iso, layer_config, legend_config, name, provider, slug FROM layers ORDER BY name',
   categoriesQuery: 'SELECT name, slug, description, metadata, position from categories ORDER BY position',
   datasetsQuery: 'SELECT name, description, slug, multilayer, category, featured from datasets ORDER BY name'
 };
@@ -12,7 +14,13 @@ function fetchCartoResource(resource) {
   return fetch(`${cartoUrl}?q=${query}`).then(
     d => d.json().then(data => {
       if (!data || !data.rows) return [];
-      return data.rows;
+      return data.rows.map(row => {
+        const camelCasedKeys = {};
+        Object.keys(row).forEach(key => {
+          camelCasedKeys[camelCase(key)] = row[key];
+        });
+        return camelCasedKeys;
+      });
     })
   );
 }

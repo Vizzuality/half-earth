@@ -1,11 +1,12 @@
 import sortBy from 'lodash/sortBy';
 
 function parseLayer(layer) {
-  const { legendconfig, layerconfig, ...rest } = layer;
+  const { legendConfig, layerConfig, interactionConfig, ...rest } = layer;
   try {
     return {
-      legendConfig: JSON.parse(layer.legendconfig.replace(/'/g, '"')),
-      layerConfig: JSON.parse(layer.layerconfig.replace(/'/g, '"')),
+      legendConfig: JSON.parse(legendConfig),
+      layerConfig: JSON.parse(layerConfig),
+      interactionConfig: JSON.parse(interactionConfig),
       id: layer.slug,
       // necessary by the layer manager
       visibility: true,
