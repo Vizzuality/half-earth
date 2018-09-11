@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import throttle from 'lodash/throttle';
+import cx from 'classnames';
 
 import CesiumMap from 'components/v2/map';
 import { LayerManager, Layer } from 'layer-manager/dist/react';
@@ -19,15 +19,22 @@ class LegendComponent extends PureComponent {
   }
 
   onMouseClick = (e, position) => {
-    console.log(e, position);
+    console.info(e, position);
   };
+
   onMouseMove = (e, position) => {
-    console.log(e, position);
+    console.info(e, position);
   };
+
   render() {
-    const { className, layers, updateMapParams } = this.props;
+    const { className, layers, coordinates, coordinatesOptions, updateMapParams } = this.props;
     return (
-      <CesiumMap className={cx(styles.mapContainer, className)} onMoveEnd={updateMapParams}>
+      <CesiumMap
+        className={cx(styles.mapContainer, className)}
+        coordinates={coordinates}
+        coordinatesOptions={coordinatesOptions}
+        onMoveEnd={updateMapParams}
+      >
         {map => (
           <LayerManager map={map} plugin={PluginCesium}>
             {layerManager =>
@@ -39,8 +46,21 @@ class LegendComponent extends PureComponent {
   }
 }
 
-LegendComponent.propTypes = { layers: PropTypes.array, className: PropTypes.string, onMoveEnd: PropTypes.func };
+LegendComponent.propTypes = {
+  layers: PropTypes.array,
+  className: PropTypes.string,
+  coordinates: PropTypes.array,
+  coordinatesOptions: PropTypes.object,
+  updateMapParams: PropTypes.func
+};
 
-LegendComponent.defaultProps = { layers: [], className: '', onMoveEnd: null };
+LegendComponent.defaultProps = {
+  layers: [],
+  className: '',
+  coordinates: undefined,
+  coordinatesOptions: undefined,
+  updateMapParams: () => {
+  }
+};
 
 export default LegendComponent;
