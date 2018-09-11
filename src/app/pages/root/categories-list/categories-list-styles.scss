@@ -25,6 +25,19 @@
     line-height: 20px;
     margin: 0 $site-gutter / 2 0 0;
   }
+
+  &.featuredCategory {
+    border: 1px solid $color-light-gray;
+    border-radius: 4px;
+    overflow: hidden;
+
+    .featuredImage {
+      width: 100%;
+      height: 150px;
+      background-position: center;
+      background-size: cover;
+    }
+  }
 }
 
 .dataset {
