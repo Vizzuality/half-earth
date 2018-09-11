@@ -1,0 +1,43 @@
+{
+    "is_tile_layer": true,
+    "layer_name": "Drifting longlines",
+    "dataset": "fishing",
+    "slug":"fishing-longlines",
+    "description": null,
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/fishing-hours/gfw/drifting_longlines/{z}/{x}/{y}",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+        "items": [{
+                        "value": "0",
+                        "color": "#174664"
+                    },{
+                        "value": "",
+                        "color": "#226482"
+                    },{
+                        "value": "",
+                        "color": "#2D82A1"
+                    },{
+                        "value": "",
+                        "color": "#38A0BF"
+                    },{
+                        "value": "",
+                        "color": "#44BEDD"
+                    },{
+                        "value": "",
+                        "color": "#7CCDE6"
+                    },{
+                        "value": "",
+                        "color": "#A7DCEF"
+                    },{
+                        "value": "",
+                        "color": "#CDECF7"
+                    },{
+                        "value": "88 hours",
+                        "color": "#F1FBFF"
+                    }
+                ],
+                    "type": "gradient"
+        }
+
+ }

@@ -1,0 +1,38 @@
+{
+    "is_tile_layer": true,
+    "layer_name": "All human pressure",
+    "dataset": "human-pressure",
+    "category":"human",
+    "slug":"human-pressures-all",
+    "description": null,
+    "global": "true",
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/human-pressures/esa/1km/100p-layers/all/{z}/{x}/{y}",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+                     "items": [{
+                                     "value": "0",
+                                     "color": "#3a4264"
+                                 }, {
+                                     "value": "",
+                                     "color": "#535978"
+                                 },{
+                                     "value": "",
+                                     "color": "#6c718d"
+                                 },{
+                                     "value": "",
+                                     "color": "#868aa2"
+                                 },{
+                                     "value": "",
+                                     "color": "#a1a3b8"
+                                 },{
+                                     "value": "",
+                                     "color": "#bcbece"
+                                 },{
+                                     "value": "100 %",
+                                     "color": "#d8d9e5"
+                                 }
+                             ],
+                                 "type": "gradient"
+                     }
+   }
