@@ -1,7 +1,7 @@
 const config = {
   account: 'half-earth',
   layersQuery: 'SELECT dataset, env, to_json(interactionconfig) interactionconfig, iso, to_json(layerconfig) layerconfig, to_json(legendconfig) legendconfig, name, provider, slug FROM layers ORDER BY name',
-  categoriesQuery: 'SELECT name, slug, description, metadata, position from categories ORDER BY position',
+  categoriesQuery: 'SELECT name, slug, description, metadata, position, group_name, group_slug, featured, image_url from categories ORDER BY position',
   datasetsQuery: 'SELECT name, description, slug, multilayer, category, featured from datasets ORDER BY name'
 };
 
