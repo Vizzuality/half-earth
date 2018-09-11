@@ -1,0 +1,38 @@
+{
+    "is_tile_layer": true,
+    "layer_name": "Rarity",
+    "dataset": "restio-regional",
+    "category": "terrestrial",
+    "slug":"restio-rare-sa",
+    "description": null,
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/rarity_1km/restio/{z}/{x}/{y}",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+        "items": [{
+                        "value": "0",
+                        "color": "#309B7E"
+                    },{
+                        "value": "",
+                        "color": "#299292"
+                    },{
+                        "value": "",
+                        "color": "#2289A6"
+                    },{
+                        "value": "",
+                        "color": "#1B7FBA"
+                    },{
+                        "value": "",
+                        "color": "#1476CE"
+                    },{
+                        "value": "",
+                        "color": "#0D6DE2"
+                    },{
+                        "value": "100 %",
+                        "color": "#0664f6"
+                    }
+                ],
+                    "type": "gradient"
+        }
+
+ }

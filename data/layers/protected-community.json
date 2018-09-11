@@ -1,0 +1,42 @@
+{
+    "slug":"community-conservation",
+    "is_tile_layer": false,
+    "layer_name": "Community-based conservation areas",
+    "dataset":"protected-community",
+    "description": null,
+    "global": "true",
+    "sql": "SELECT * FROM community_conservation_areas",
+    "cartocss": "#community_conservation_areas[source='wdpa']{ polygon-opacity: 0.7; polygon-fill: #FFCA00;} #community_conservation_areas[source='raisg']{ polygon-opacity: 0.7; polygon-fill: #FF6200;}",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+                     "items": [
+                                 {
+                                 "color": "#FF6200",
+                                 "name": "Indigenous RAISG"
+                                 },{
+                                    "color": "#FFCA00",
+                                    "name": "Indigenous WDPA"
+                                    }
+                             ],
+                     "type": "basic"
+                   },
+    "interactionConfig": {
+    "output": [
+                {
+                "column": "name",
+                "prefix": "",
+                "property": "Name",
+                "suffix": "",
+                "type": "string"
+                },
+                {
+                "column": "status",
+                "prefix": "",
+                "property": "Status",
+                "suffix": "",
+                "type": "string"
+                }
+            ]
+    }
+ }

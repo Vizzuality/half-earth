@@ -1,0 +1,39 @@
+{
+    "is_tile_layer": true,
+    "featured": "true",
+    "category": "south_africa",
+    "dataset": "butterflies-regional",
+    "layer_name": "Richness",
+    "slug":"butterflies-richness-sa",
+    "description": null,
+    "url": "",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+        "items": [{
+                        "value": "0",
+                        "color": "#309B7E"
+                    },{
+                        "value": "",
+                        "color": "#299292"
+                    },{
+                        "value": "",
+                        "color": "#2289A6"
+                    },{
+                        "value": "",
+                        "color": "#1B7FBA"
+                    },{
+                        "value": "",
+                        "color": "#1476CE"
+                    },{
+                        "value": "",
+                        "color": "#0D6DE2"
+                    },{
+                        "value": "100 %",
+                        "color": "#0664f6"
+                    }
+                ],
+                    "type": "gradient"
+        }
+
+ }
