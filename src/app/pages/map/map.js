@@ -8,7 +8,7 @@ import * as cartoActions from 'providers/carto/carto-actions';
 import * as interActions from 'providers/interact/interact-actions';
 import * as popUpActions from 'components/pop-up/pop-up-actions';
 import * as regionalActions from 'pages/regional/regional-actions';
-import * as reducers from './map-reducers';
+import reducers from './map-reducers';
 
 class MapContainer extends Component {
   constructor(props) {

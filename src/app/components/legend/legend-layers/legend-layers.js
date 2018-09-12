@@ -1,7 +1,7 @@
 import * as popUpActions from 'components/pop-up/pop-up-actions';
 import { connect } from 'react-redux';
 
-import * as reducers from './legend-layers-reducer';
+import reducers from './legend-layers-reducer';
 import initialState from './initial-state';
 
 import LegendLayers from './legend-layers-component';
