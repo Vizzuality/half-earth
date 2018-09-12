@@ -2,7 +2,7 @@
 
 # We label our stage as 'builder'
 FROM node:10.6.0-alpine as builder
-RUN apk add --no-cache --update make gcc g++ libc-dev libpng-dev automake autoconf libtool
+RUN apk add --no-cache --update make gcc g++ libc-dev libpng-dev automake autoconf libtool git
 
 RUN mkdir /app
 COPY package.json yarn.lock ./app/
