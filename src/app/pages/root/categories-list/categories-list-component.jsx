@@ -45,8 +45,10 @@ class CategoriesListComponent extends Component {
                   const { layers, active, slug, name } = dataset;
                   const layersLength = layers && layers.length;
                   if (!layersLength) return null;
+
+                  const hasMultipleOptions = layersLength > 2;
                   return (
-                    <div key={slug} className={cx(styles.dataset, { [styles.datasetMultiLayer]: dataset.multilayer })}>
+                    <div key={slug} className={cx(styles.dataset, { [styles.datasetMultiLayer]: hasMultipleOptions })}>
                       <SwitchInput
                         key={slug}
                         id={slug}
@@ -56,7 +58,7 @@ class CategoriesListComponent extends Component {
                       />
                       {
                         active && layersLength > 1 && (
-                        <div className={cx({ [styles.multiLayerWrapper]: dataset.multilayer })}>
+                        <div className={cx({ [styles.multiLayerWrapper]: hasMultipleOptions })}>
                           {layers.map(layer => {
                                 const buttonsMulti = (
                                   <SwitchInput
@@ -65,7 +67,10 @@ class CategoriesListComponent extends Component {
                                     theme={{ switch: styles.subLayerSwitch }}
                                     label={layer.name}
                                     checked={layer.active}
-                                    onChange={() => handleMultiLayerClick(layer)}
+                                    onChange={() =>
+                                      dataset.multilayer
+                                        ? handleMultiLayerClick(layer)
+                                        : handleLayerClick(dataset, layer)}
                                   />
                                 );
 
@@ -79,7 +84,7 @@ class CategoriesListComponent extends Component {
                                     {layer.name}
                                   </Button>
                                 );
-                                return dataset.multilayer ? buttonsMulti : buttonsUnique;
+                                return hasMultipleOptions ? buttonsMulti : buttonsUnique;
                               })}
                         </div>
                           )
@@ -102,5 +107,6 @@ CategoriesListComponent.propTypes = {
   handleMultiLayerClick: PropTypes.func.isRequired,
   handleLayerClick: PropTypes.func.isRequired
 };
+
 
 export default CategoriesListComponent;

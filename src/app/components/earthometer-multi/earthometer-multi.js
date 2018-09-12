@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import EarthoMulti from './earthometer-multi-component';
 import * as actions from './earthometer-multi-actions';
-import * as reducers from './earthometer-multi-reducers';
+import reducers from './earthometer-multi-reducers';
 import initialState from './earthometer-multi-initial-state';
 
 const mapStateToProps = state => {

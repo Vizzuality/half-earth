@@ -7,7 +7,7 @@ import { getSection, getType } from './regional-selectors';
 import * as cartoActions from 'providers/carto/carto-actions';
 import * as sectionActions from 'providers/section/section-actions';
 
-import * as reducers from './regional-reducers';
+import reducers from './regional-reducers';
 import initialState from './regional-initial-state';
 import RegionalComponent from './regional-component';
 

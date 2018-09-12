@@ -11,8 +11,6 @@ export const getDatasetsFiltered = createSelector([ getDatasets ], datasets => {
 function getDatasetNameByLayer(dataset, layer) {
   if (!dataset) return '';
   switch (dataset.slug) {
-    case 'human-pressure':
-      return dataset.name;
     case 'grids':
       return layer.name;
     default:

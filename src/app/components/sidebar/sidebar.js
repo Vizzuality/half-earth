@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from './sidebar-actions';
-import * as reducers from './sidebar-reducers';
+import reducers from './sidebar-reducers';
 import initialState from './sidebar-initial-state';
 import SidebarComponent from './sidebar-component';
 
