@@ -12,7 +12,7 @@ const actions = { ...ownActions, setModalMetadataParams };
 
 class CategoriesListContainer extends Component {
   updateLayersActive = layers => {
-    const { updateQueryParam, query = {} } = this.props;
+    const { updateQueryParam, query } = this.props;
     const activeLayers = getLayersActiveMerged(layers, query.activeLayers);
     updateQueryParam({ query: { ...query, activeLayers } });
   };
@@ -69,6 +69,6 @@ CategoriesListContainer.propTypes = {
   query: PropTypes.object
 };
 
-CategoriesListContainer.defaultProps = { query: null };
+CategoriesListContainer.defaultProps = { query: {} };
 
 export default connect(mapStateToProps, actions)(CategoriesListContainer);
