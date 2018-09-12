@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Sidebar } from 'he-components';
 import cx from 'classnames';
 import ModalMetadata from 'components/v2/modal-metadata';
@@ -13,7 +14,7 @@ import styles from './root-styles';
 class RootPageComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { sidebarOpen: true };
+    this.state = { sidebarOpen: props.showSidebar };
   }
 
   handleOnToggle = sidebarOpen => {
@@ -22,13 +23,18 @@ class RootPageComponent extends React.Component {
 
   render() {
     const { sidebarOpen } = this.state;
+    const { showSidebar } = this.props;
     return (
       <div className={styles.container}>
-        <Sidebar theme={styles} visible={sidebarOpen} onToggle={this.handleOnToggle}>
-          <div className={styles.sidebarContainer}>
-            <GroupCardList />
-          </div>
-        </Sidebar>
+        {
+          showSidebar && (
+            <Sidebar theme={styles} visible={sidebarOpen} onToggle={this.handleOnToggle}>
+              <div className={styles.sidebarContainer}>
+                <GroupCardList />
+              </div>
+            </Sidebar>
+            )
+        }
         <Map className={cx(styles.mapContainer, { [styles.mapPaddingLeft]: sidebarOpen })} />
         <Toolbar className={styles.toolbar} />
         <Legend />
@@ -38,6 +44,7 @@ class RootPageComponent extends React.Component {
   }
 }
 
-RootPageComponent.defaultProps = { datasets: [] };
+RootPageComponent.propTypes = { showSidebar: PropTypes.bool, datasets: PropTypes.array };
+RootPageComponent.defaultProps = { showSidebar: true, datasets: [] };
 
 export default RootPageComponent;

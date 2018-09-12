@@ -34,9 +34,7 @@ class CesiumComponent extends Component {
   rotating = false;
   ticking = false;
   distance = 0;
-  state = {
-    mapReady: false
-  };
+  state = { mapReady: false };
 
   componentDidMount() {
     const { coordinates, camera } = this.props;
@@ -44,6 +42,10 @@ class CesiumComponent extends Component {
     this.setState({ mapReady: true });
     if (coordinates) this.setCoordinates();
     if (camera) this.setCamera();
+
+    if (this.props.onMoveEnd) {
+      this.viewer.camera.moveEnd.addEventListener(this.handleMoveEnd);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -55,8 +57,7 @@ class CesiumComponent extends Component {
       if (camera && prevProps.camera !== camera) this.setCamera();
       if (lockNavigation) disablePanning(this.viewer);
       if (
-        coordinates &&
-        (prevProps.coordinates !== coordinates || prevProps.coordinatesOptions !== coordinatesOptions)
+        coordinates && (prevProps.coordinates !== coordinates || prevProps.coordinatesOptions !== coordinatesOptions)
       ) {
         this.setCoordinates();
       }
@@ -67,6 +68,21 @@ class CesiumComponent extends Component {
     this.removeTicking();
     this.removeRotation();
   }
+
+  handleMoveEnd = () => {
+    const { coordinates = [], coordinatesOptions = {} } = this.props;
+    const { orientation = {} } = coordinatesOptions;
+    const { x, y, z } = this.viewer.camera.position;
+    const { heading, pitch, roll } = this.viewer.camera;
+    const isDifferentCoordinates = coordinates[0] !== x || coordinates[1] !== y || coordinates[2] !== z;
+    const isDifferentOrientation = orientation.heading !== heading ||
+      orientation.pitch !== pitch ||
+      orientation.roll !== roll;
+
+    if (isDifferentCoordinates || isDifferentOrientation) {
+      this.props.onMoveEnd({ coordinates: [ x, y, z ], orientation: [ heading, pitch, roll ] });
+    }
+  };
 
   setCoordinates() {
     const { coordinates, coordinatesOptions } = this.props;
@@ -88,7 +104,7 @@ class CesiumComponent extends Component {
     const now = currentTime.secondsOfDay;
     const spinRate = 0.8;
     const delta = (now - lastNow) / 1000;
-    this.viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate * delta);
+    this.viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, (-spinRate) * delta);
     clock.startTime.secondsOfDay = now - 1;
   };
 
@@ -126,11 +142,7 @@ class CesiumComponent extends Component {
   }
 
   render() {
-    return createElement(CesiumMapComponent, {
-      mapId,
-      viewer: this.viewer,
-      ...this.props
-    });
+    return createElement(CesiumMapComponent, { mapId, viewer: this.viewer, ...this.props });
   }
 }
 
