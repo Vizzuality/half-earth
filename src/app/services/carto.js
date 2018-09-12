@@ -3,7 +3,7 @@ import camelCase from 'lodash/camelCase';
 const config = {
   account: 'half-earth',
   layersQuery: 'SELECT dataset, env, interaction_config, iso, layer_config, legend_config, name, provider, slug FROM layers ORDER BY name',
-  categoriesQuery: 'SELECT name, slug, description, metadata, position from categories ORDER BY position',
+  categoriesQuery: 'SELECT name, slug, description, metadata, position, multi_select from categories ORDER BY position',
   datasetsQuery: 'SELECT name, description, slug, multilayer, category, featured from datasets ORDER BY name'
 };
 
