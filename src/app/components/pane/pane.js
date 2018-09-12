@@ -10,7 +10,7 @@ import * as regionalActions from 'pages/regional/regional-actions';
 import * as globalActions from 'pages/global/global-actions';
 import { layersInfo } from 'data/layers-info';
 
-import * as reducers from './pane-reducers';
+import reducers from './pane-reducers';
 import * as actions from './pane-actions';
 import initialState from './pane-initial-state';
 

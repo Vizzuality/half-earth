@@ -23,7 +23,7 @@ class LegendComponent extends PureComponent {
   };
 
   onMouseMove = (e, position) => {
-    console.info(e, position);
+    // console.info(e, position);
   };
 
   render() {

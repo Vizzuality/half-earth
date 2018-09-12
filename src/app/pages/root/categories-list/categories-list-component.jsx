@@ -22,69 +22,80 @@ class CategoriesListComponent extends Component {
 
     return (
       <div className={styles.container}>
-        {hasCategories &&
-          categories.map(category => (
+        {
+          hasCategories && categories.map(category => (
             <div className={styles.category} key={category.slug}>
               <div className={styles.categorySection}>
                 <h2 className={styles.categoryTitle}>{category.name}</h2>
               </div>
               <div className={styles.categorySection}>
                 <p className={styles.categoryDescription}>{category.description}</p>
-                {category.metadata && (
-                  <Button circle theme={{ button: styles.metadataBtn }} onClick={() => handleMetadataClick(category)}>
-                    <Icon icon={infoIcon} />
-                  </Button>
-                )}
+                {
+                    category.metadata && (
+                    <Button
+                      circle
+                      theme={{ button: styles.metadataBtn }}
+                      onClick={() => handleMetadataClick(category)}
+                    >
+                      <Icon icon={infoIcon} />
+                    </Button>
+                      )
+                  }
               </div>
               {category.datasets.map(dataset => {
-                const { layers, active, slug, name } = dataset;
-                const layersLength = layers && layers.length;
-                if (!layersLength) return null;
-                return (
-                  <div key={slug} className={cx(styles.dataset, { [styles.datasetMultiLayer]: dataset.multilayer })}>
-                    <SwitchInput
-                      key={slug}
-                      id={slug}
-                      checked={active}
-                      onChange={value => handleSwitchChange(category, dataset, value)}
-                      label={name}
-                    />
-                    {active &&
-                      layersLength > 1 && (
-                      <div className={cx({ [styles.multiLayerWrapper]: dataset.multilayer })}>
-                        {layers.map(layer => {
-                          const buttonsMulti = (
-                            <SwitchInput
-                              key={layer.slug}
-                              id={layer.slug}
-                              theme={{ switch: styles.subLayerSwitch }}
-                              label={layer.name}
-                              checked={layer.active}
-                              onChange={() => handleMultiLayerClick(layer)}
-                            />
-                          );
+                  const { layers, active, slug, name } = dataset;
+                  const layersLength = layers && layers.length;
+                  if (!layersLength) return null;
 
-                          const buttonTheme = {
-                            button: layer.active ? styles.buttonActive : styles.button
-                          };
-                          const buttonsUnique = (
-                            <Button
-                              key={layer.slug}
-                              theme={buttonTheme}
-                              onClick={() => handleLayerClick(dataset, layer)}
-                            >
-                              {layer.name}
-                            </Button>
-                          );
-                          return dataset.multilayer ? buttonsMulti : buttonsUnique;
-                        })}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                  const hasMultipleOptions = layersLength > 2;
+                  return (
+                    <div key={slug} className={cx(styles.dataset, { [styles.datasetMultiLayer]: hasMultipleOptions })}>
+                      <SwitchInput
+                        key={slug}
+                        id={slug}
+                        checked={active}
+                        onChange={value => handleSwitchChange(category, dataset, value)}
+                        label={name}
+                      />
+                      {
+                        active && layersLength > 1 && (
+                        <div className={cx({ [styles.multiLayerWrapper]: hasMultipleOptions })}>
+                          {layers.map(layer => {
+                                const buttonsMulti = (
+                                  <SwitchInput
+                                    key={layer.slug}
+                                    id={layer.slug}
+                                    theme={{ switch: styles.subLayerSwitch }}
+                                    label={layer.name}
+                                    checked={layer.active}
+                                    onChange={() =>
+                                      dataset.multilayer
+                                        ? handleMultiLayerClick(layer)
+                                        : handleLayerClick(dataset, layer)}
+                                  />
+                                );
+
+                                const buttonTheme = { button: layer.active ? styles.buttonActive : styles.button };
+                                const buttonsUnique = (
+                                  <Button
+                                    key={layer.slug}
+                                    theme={buttonTheme}
+                                    onClick={() => handleLayerClick(dataset, layer)}
+                                  >
+                                    {layer.name}
+                                  </Button>
+                                );
+                                return hasMultipleOptions ? buttonsMulti : buttonsUnique;
+                              })}
+                        </div>
+                          )
+                      }
+                    </div>
+                  );
+                })}
             </div>
-          ))}
+            ))
+        }
       </div>
     );
   }
@@ -99,9 +110,6 @@ CategoriesListComponent.propTypes = {
   handleLayerClick: PropTypes.func.isRequired
 };
 
-CategoriesListComponent.defaultProps = {
-  loading: false,
-  categories: []
-};
+CategoriesListComponent.defaultProps = { loading: false, categories: [] };
 
 export default CategoriesListComponent;

@@ -8,7 +8,7 @@ import * as cartoActions from 'providers/carto/carto-actions';
 import * as sectionActions from 'providers/section/section-actions';
 import { getSection, getType } from './global-selectors';
 import * as actions from './global-actions';
-import * as reducers from './global-reducers';
+import reducers from './global-reducers';
 import initialState from './global-initial-state/global-initial-state';
 
 class GlobalContainer extends Component {
