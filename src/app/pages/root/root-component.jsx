@@ -28,11 +28,11 @@ class RootPageComponent extends React.Component {
       <div className={styles.container}>
         {
           showSidebar && (
-            <Sidebar theme={styles} visible={sidebarOpen} onToggle={this.handleOnToggle}>
-              <div className={styles.sidebarContainer}>
-                <GroupCardList />
-              </div>
-            </Sidebar>
+          <Sidebar theme={styles} visible={sidebarOpen} onToggle={this.handleOnToggle}>
+            <div className={styles.sidebarContainer}>
+              <GroupCardList />
+            </div>
+          </Sidebar>
             )
         }
         <Map className={cx(styles.mapContainer, { [styles.mapPaddingLeft]: sidebarOpen })} />

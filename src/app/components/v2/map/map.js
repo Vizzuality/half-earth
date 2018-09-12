@@ -31,9 +31,13 @@ class CesiumComponent extends Component {
       url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`
     })
   };
+
   rotating = false;
+
   ticking = false;
+
   distance = 0;
+
   state = { mapReady: false };
 
   componentDidMount() {
