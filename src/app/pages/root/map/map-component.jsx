@@ -49,7 +49,6 @@ class LegendComponent extends PureComponent {
 LegendComponent.propTypes = {
   layers: PropTypes.array,
   className: PropTypes.string,
-  onMoveEnd: PropTypes.func,
   coordinates: PropTypes.array,
   coordinatesOptions: PropTypes.object,
   updateMapParams: PropTypes.func
@@ -58,9 +57,8 @@ LegendComponent.propTypes = {
 LegendComponent.defaultProps = {
   layers: [],
   className: '',
-  onMoveEnd: null,
-  coordinates: [],
-  coordinatesOptions: {},
+  coordinates: undefined,
+  coordinatesOptions: undefined,
   updateMapParams: () => {
   }
 };
