@@ -14,12 +14,12 @@ export const getDatasetsFiltered = createSelector([ getDatasets ], datasets => {
 });
 
 export const getCoordinates = createSelector([ selectQueryParams ], query => {
-  if (!query || !query.coordinates) return null;
+  if (!query || !query.coordinates) return undefined;
   return query.coordinates;
 });
 
 export const getCoordinatesOptions = createSelector([ selectQueryParams ], query => {
-  if (!query || !query.orientation) return null;
+  if (!query || !query.orientation) return undefined;
   const [ heading, pitch, roll ] = query.orientation;
   return { orientation: { roll, pitch, heading } };
 });
