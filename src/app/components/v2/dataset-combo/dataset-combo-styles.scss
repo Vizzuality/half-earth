@@ -1,0 +1,61 @@
+@import '~styles/variables.scss';
+
+.datasetMultiLayer {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-right: 10px;
+}
+
+.switchWrapper {
+  display: flex;
+  padding: 1px;
+  height: 18px;
+  border-radius: 30px;
+  border: 1px solid $color-turquoise;
+}
+
+.multiLayerWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 33px;
+  margin-top: $site-gutter / 2;
+
+  &.switchWrapper {
+    border: none;
+    height: auto;
+  }
+}
+
+.button {
+  display: inline-block;
+  font-family: 'PierSans', sans-serif;
+  width: auto;
+  height: 14px;
+  padding: 0 10px;
+  text-transform: uppercase;
+  border-radius: 30px;
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: 1px;
+  box-sizing: border-box;
+  font-weight: bold;
+  color: $color-turquoise;
+  box-shadow: none;
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.buttonActive {
+  composes: button;
+  color: $color-white;
+  background-color: $color-turquoise;
+}
