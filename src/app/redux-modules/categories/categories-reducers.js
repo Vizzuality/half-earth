@@ -1,4 +1,3 @@
-import { camelCase } from 'lodash';
 import * as actions from './categories-actions';
 
 export const initialState = { loading: false, error: false, data: null };
@@ -8,14 +7,7 @@ function setCategoriesLoading(state) {
 }
 
 function setCategoriesReady(state, { payload }) {
-  const camelCasedPayload = payload.map(category => {
-    const camelCasedKeys = {};
-    Object.keys(category).forEach(key => {
-      camelCasedKeys[camelCase(key)] = category[key];
-    });
-    return camelCasedKeys;
-  });
-  return { ...state, loading: false, data: camelCasedPayload };
+  return { ...state, loading: false, data: payload };
 }
 
 function setCategoriesError(state, { payload }) {
