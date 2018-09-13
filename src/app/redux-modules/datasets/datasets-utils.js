@@ -1,22 +1,14 @@
 import sortBy from 'lodash/sortBy';
 
 function parseLayer(layer) {
-  const { legendConfig, layerConfig, interactionConfig, ...rest } = layer;
-  try {
-    return {
-      legendConfig: JSON.parse(legendConfig),
-      layerConfig: JSON.parse(layerConfig),
-      interactionConfig: JSON.parse(interactionConfig),
-      id: layer.slug,
-      // necessary by the layer manager
-      visibility: true,
-      opacity: 1,
-      ...rest
-    };
-  } catch (e) {
-    console.error(e, layer);
-    return null;
-  }
+  return {
+    ...layer,
+    // necessary by the layer manager
+    id: layer.slug,
+    active: false,
+    visibility: true,
+    opacity: 1
+  };
 }
 
 export function parseCartoLayersToWRI(layers = [], datasets = []) {
