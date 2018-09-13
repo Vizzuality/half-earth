@@ -8,8 +8,9 @@ import styles from './categories-list-styles';
 
 class CategoriesListComponent extends Component {
   renderInfoButton(category) {
+    const { handleMetadataClick } = this.props;
     return (
-      <Button circle theme={{ button: styles.metadataBtn }} onClick={() => this.handleMetadataClick(category)}>
+      <Button circle theme={{ button: styles.metadataBtn }} onClick={() => handleMetadataClick(category)}>
         <Icon icon={infoIcon} />
       </Button>
     );
