@@ -15,18 +15,20 @@ const GroupCardListComponent = props => {
   const groups = hasCategories && Object.values(groupBy(categories, 'groupSlug'));
   return (
     <div>
-      {groups.map(group => (
-        <div
-          key={group[0].groupName}
-          className={cx(styles.cardContainer, { [styles.customCard]: group[0].groupSlug === 'half-earth-view' })}
-        >
-          <div className={styles.headerContainer}>
-            <h2 className={styles.groupTitle}>{group[0].groupName}</h2>
-            <Icon icon={chevronIcon} theme={{ icon: styles.icon }} />
+      {
+        groups && groups.map(group => (
+          <div
+            key={group[0].groupName}
+            className={cx(styles.cardContainer, { [styles.customCard]: group[0].groupSlug === 'half-earth-view' })}
+          >
+            <div className={styles.headerContainer}>
+              <h2 className={styles.groupTitle}>{group[0].groupName}</h2>
+              <Icon icon={chevronIcon} theme={{ icon: styles.icon }} />
+            </div>
+            <CategoriesList categories={group} />
           </div>
-          <CategoriesList categories={group} />
-        </div>
-      ))}
+          ))
+      }
     </div>
   );
 };
