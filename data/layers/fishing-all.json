@@ -1,10 +1,10 @@
 {
     "is_tile_layer": true,
-    "layer_name": "All fishing",
+    "layer_name": "All marine pressure",
     "dataset": "fishing",
     "slug":"fishing-all",
     "description": null,
-    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/fishing-hours/gfw/fixed_gear/{z}/{x}/{y}",
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/fishing-hours/gfw/all/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
     "legendConfig": {
@@ -33,7 +33,7 @@
                         "value": "",
                         "color": "#CDECF7"
                     },{
-                        "value": "n hours",
+                        "value": "122 hours/km²",
                         "color": "#F1FBFF"
                     }
                 ],

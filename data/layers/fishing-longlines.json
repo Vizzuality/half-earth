@@ -9,7 +9,7 @@
     "minZoom": 3,
     "legendConfig": {
         "items": [{
-                        "value": "0",
+                        "value": "5",
                         "color": "#174664"
                     },{
                         "value": "",
@@ -33,7 +33,7 @@
                         "value": "",
                         "color": "#CDECF7"
                     },{
-                        "value": "88 hours",
+                        "value": "8 hours/km²",
                         "color": "#F1FBFF"
                     }
                 ],

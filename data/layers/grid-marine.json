@@ -1,0 +1,21 @@
+{
+    "is_tile_layer": false,
+    "slug":"mol-marine-grid",
+    "category": null,
+    "dataset": "grids",
+    "layer_name":"MOL Marine grid",
+    "description": null,
+    "sql": "SELECT * FROM marine_grid",
+    "cartocss": "#layer { polygon-opacity: 0; ::outline { line-color: #FFFFFF; line-width: 1; line-opacity: 0.75; } }",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "interactionConfig": {"output": [ {
+                                         "format": "null",
+                                         "type": "number",
+                                         "property": "ID",
+                                         "column": "cell_id"
+                                         }
+                                       ],
+                                 "type": "intersection"
+                             }
+ }

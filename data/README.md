@@ -16,6 +16,16 @@ python process.py
 `
 An output file will be sent to `./outputs`, which can be uploaded to the `half-earth` Carto account.
 
+After adding the layer.csv to Carto you will need to Alter the table to convert several of the columns to json type, simply copy and execute:
+
+```sql
+Alter TABLE layers Alter COLUMN layer_config type jsonb using layer_config::jsonb
+
+Alter TABLE layers Alter COLUMN legend_config type jsonb using legend_config::jsonb
+
+Alter TABLE layers Alter COLUMN interaction_config type jsonb using interaction_config::jsonb
+```
+
 ## Generate Pledge layers
 
 Execute:

@@ -1,16 +1,16 @@
 {
     "is_tile_layer": true,
     "layer_name": "Rarity",
-    "dataset": "mammals-regional",
+    "dataset": "reptiles-regional",
     "category": "terrestrial",
-    "slug":"mammals-rare-sa",
+    "slug":"reptiles-rare-sa",
     "description": null,
-    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/rarity_1km/mammals/{z}/{x}/{y}",
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/rarity_1km/reptiles/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
     "legendConfig": {
         "items": [{
-                        "value": "0",
+                        "value": "-13.9",
                         "color": "#309B7E"
                     },{
                         "value": "",
@@ -28,7 +28,7 @@
                         "value": "",
                         "color": "#0D6DE2"
                     },{
-                        "value": "x",
+                        "value": "-9.9",
                         "color": "#0664f6"
                     }
                 ],

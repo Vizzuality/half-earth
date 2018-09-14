@@ -3,7 +3,7 @@
     "layer_name": "Richness",
     "dataset": "mammals-regional",
     "category": "terrestrial",
-    "slug":"mammals-rare-sa",
+    "slug":"mammals-rich-sa",
     "description": null,
     "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/richness_1km/mammals/{z}/{x}/{y}",
     "maxZoom": 13,
@@ -28,7 +28,7 @@
                         "value": "",
                         "color": "#0D6DE2"
                     },{
-                        "value": "100 %",
+                        "value": "n species",
                         "color": "#0664f6"
                     }
                 ],

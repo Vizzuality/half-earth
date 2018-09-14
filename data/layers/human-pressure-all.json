@@ -1,6 +1,6 @@
 {
     "is_tile_layer": true,
-    "layer_name": "All human pressure",
+    "layer_name": "All terrestrial pressure",
     "dataset": "human-pressure",
     "category":"human",
     "slug":"human-pressures-all",

@@ -1,11 +1,11 @@
 {
     "is_tile_layer": false,
-    "slug":"clipped-grid-layer",
+    "slug":"mol-terrestrial-grid",
     "category": null,
     "dataset": "grids",
-    "layer_name":"Terrestrial grid",
+    "layer_name":"MOL Terrestrial grid",
     "description": null,
-    "sql": "SELECT * FROM table_360x114_clipped_coastlines",
+    "sql": "SELECT * FROM terrestrial_grid",
     "cartocss": "#layer { polygon-opacity: 0; ::outline { line-color: #FFFFFF; line-width: 1; line-opacity: 0.75; } }",
     "maxZoom": 13,
     "minZoom": 3,
@@ -13,7 +13,7 @@
                                          "format": "null",
                                          "type": "number",
                                          "property": "ID",
-                                         "column": "hbwind"
+                                         "column": "cell_id"
                                          }
                                        ],
                                  "type": "intersection"

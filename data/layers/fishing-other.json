@@ -1,10 +1,10 @@
 {
     "is_tile_layer": true,
-    "layer_name": "Squid jigger",
+    "layer_name": "Other",
     "dataset": "fishing",
-    "slug":"fishing-squid",
+    "slug":"fishing-other",
     "description": null,
-    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/fishing-hours/gfw/squid_jigger/{z}/{x}/{y}",
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/fishing-hours/gfw/other/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
     "legendConfig": {
@@ -33,7 +33,7 @@
                         "value": "",
                         "color": "#CDECF7"
                     },{
-                        "value": "12 hours",
+                        "value": "13 hours/km²",
                         "color": "#F1FBFF"
                     }
                 ],
