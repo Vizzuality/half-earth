@@ -9,21 +9,16 @@ import { PluginCesium } from 'layer-manager';
 
 import styles from './map-styles.scss';
 
-class LegendComponent extends PureComponent {
+class MapComponent extends PureComponent {
   constructor(props) {
     super(props);
     this.events = {
-      [Cesium.ScreenSpaceEventType.LEFT_CLICK]: throttle(this.onMouseClick, 300),
-      [Cesium.ScreenSpaceEventType.MOUSE_MOVE]: throttle(this.onMouseMove, 300)
+      [Cesium.ScreenSpaceEventType.LEFT_CLICK]: throttle(this.onMouseClick, 300)
     };
   }
 
   onMouseClick = (e, position) => {
     console.info(e, position);
-  };
-
-  onMouseMove = (e, position) => {
-    // console.info(e, position);
   };
 
   render() {
@@ -46,7 +41,7 @@ class LegendComponent extends PureComponent {
   }
 }
 
-LegendComponent.propTypes = {
+MapComponent.propTypes = {
   layers: PropTypes.array,
   className: PropTypes.string,
   coordinates: PropTypes.array,
@@ -54,7 +49,7 @@ LegendComponent.propTypes = {
   updateMapParams: PropTypes.func
 };
 
-LegendComponent.defaultProps = {
+MapComponent.defaultProps = {
   layers: [],
   className: '',
   coordinates: undefined,
@@ -63,4 +58,4 @@ LegendComponent.defaultProps = {
   }
 };
 
-export default LegendComponent;
+export default MapComponent;
