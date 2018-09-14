@@ -11,7 +11,7 @@
     "minZoom": 3,
     "legendConfig": {
         "items": [ {
-                    "value": "0",
+                    "value": "1",
                     "color": "#0664f6"
                 },{
                     "value": "",

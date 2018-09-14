@@ -8,9 +8,10 @@
     "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/rarity_1km/mammals/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
+    "bbox": [13, -37, 34, -27.7],
     "legendConfig": {
         "items": [{
-                        "value": "0",
+                        "value": "-15.5",
                         "color": "#309B7E"
                     },{
                         "value": "",
@@ -28,7 +29,7 @@
                         "value": "",
                         "color": "#0D6DE2"
                     },{
-                        "value": "x",
+                        "value": "-14.5",
                         "color": "#0664f6"
                     }
                 ],

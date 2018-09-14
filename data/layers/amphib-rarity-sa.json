@@ -9,9 +9,10 @@
     "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/rarity_1km/amphibians/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
+    "bbox": [13, -37, 34, -27.7],
     "legendConfig": {
         "items": [ {
-                    "value": "0",
+                    "value": "-14.7",
                     "color": "#0664f6"
                 },{
                     "value": "",
@@ -35,7 +36,7 @@
                     "value": "",
                     "color": "#bed11d"
                 },{
-                    "value": "x",
+                    "value": "-6.9",
                     "color": "#fde300"
                 }
                 ],

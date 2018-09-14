@@ -5,7 +5,7 @@
     "category": "terrestrial",
     "slug":"fishes-rarity",
     "description": null,
-    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/rarity/new-styles/fish/{z}/{x}/{y}",
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/rarity/fishes/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
     "legendConfig": {

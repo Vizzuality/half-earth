@@ -21,7 +21,8 @@ def tile_template(l):
                         "useCors": 'true'
                     },
                     "type": "tileLayer",
-                    "url": f"{l.get('url')}"
+                    "url": f"{l.get('url')}",
+                    "bbox": l.get('bbox', [])
                 },
                 "type": "tileLayer",
                 "params_config": [{
@@ -53,7 +54,8 @@ def carto_template(l):
                                             'sql': f"{l.get('sql')}"},
                                 "type": "cartodb"}
                             ],
-                    "url": f"{l.get('url')}"
+                    "url": f"{l.get('url')}",
+                    "bbox": l.get('bbox', [])
                 },
                 "account":"half-earth",
                 "type": "layer",

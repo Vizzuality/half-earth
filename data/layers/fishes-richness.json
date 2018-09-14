@@ -5,7 +5,7 @@
     "category": "terrestrial",
     "slug":"fishes-rich",
     "description": null,
-    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/richness/new-styles/fish/{z}/{x}/{y}",
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/richness/fishes/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
     "legendConfig": {
@@ -42,3 +42,4 @@
         }
 
  }
+

@@ -8,6 +8,7 @@
     "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/richness_1km/mammals/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
+    "bbox": [13, -37, 34, -27.7],
     "legendConfig": {
         "items": [{
                         "value": "0",
@@ -28,7 +29,7 @@
                         "value": "",
                         "color": "#0D6DE2"
                     },{
-                        "value": "n species",
+                        "value": "49 species",
                         "color": "#0664f6"
                     }
                 ],
