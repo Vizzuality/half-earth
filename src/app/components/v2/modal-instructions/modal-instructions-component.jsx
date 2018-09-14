@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Link from 'redux-first-router-link';
+import { APP } from 'router';
 import { Button, Icon, Modal } from 'he-components';
 
 import chevronIcon from 'assets/icons/chevron.svg';
@@ -62,10 +64,10 @@ class ModalInfoContentComponent extends Component {
             <Button theme={{ button: styles.button }} onClick={() => setModalInstructionsParams({ isOpen: false })}>
               ok
             </Button>
-            <div className={styles.mapTour}>
+            <Link className={styles.mapTour} to={{ type: APP, payload: { section: 'global' } }}>
               <span className={styles.tourText}>take a tour of the map</span>
               <Icon icon={chevronIcon} theme={{ icon: styles.chevronIcon }} />
-            </div>
+            </Link>
           </div>
         </div>
       </Modal>
