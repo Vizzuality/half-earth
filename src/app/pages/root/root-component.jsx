@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Sidebar } from 'he-components';
 import cx from 'classnames';
 import ModalMetadata from 'components/v2/modal-metadata';
+import ModalInstructions from 'components/v2/modal-instructions';
 
 import CategoriesList from './categories-list';
 import Map from './map';
@@ -28,23 +29,24 @@ class RootPageComponent extends React.Component {
       <div className={styles.container}>
         {
           showSidebar && (
-              <Sidebar theme={styles} visible={sidebarOpen} onToggle={this.handleOnToggle}>
-                <div className={styles.sidebarContainer}>
-                  <CategoriesList />
-                </div>
-              </Sidebar>
+          <Sidebar theme={styles} visible={sidebarOpen} onToggle={this.handleOnToggle}>
+            <div className={styles.sidebarContainer}>
+              <CategoriesList />
+            </div>
+          </Sidebar>
             )
         }
         <Map className={cx(styles.mapContainer, { [styles.mapPaddingLeft]: sidebarOpen })} />
         <Toolbar className={styles.toolbar} />
         <Legend />
         <ModalMetadata />
+        <ModalInstructions />
       </div>
     );
   }
 }
 
-RootPageComponent.propTypes = { showSidebar: PropTypes.bool, datasets: PropTypes.array };
-RootPageComponent.defaultProps = { showSidebar: true, datasets: [] };
+RootPageComponent.propTypes = { showSidebar: PropTypes.bool };
+RootPageComponent.defaultProps = { showSidebar: true };
 
 export default RootPageComponent;

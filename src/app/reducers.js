@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { handleModule } from 'redux-tools';
-import router from './router';
 
 // Redux-modules
 import { reduxConfig as layerRedux } from 'redux-modules/layers';
@@ -23,6 +22,8 @@ import { reduxConfig as legendLayersRedux } from 'components/legend/legend-layer
 import { reduxConfig as paneRedux } from 'components/pane';
 import { reduxConfig as sidebarRedux } from 'components/sidebar';
 import { reduxConfig as modalMetadataRedux } from 'components/v2/modal-metadata';
+import { reduxConfig as modalInstructionsRedux } from 'components/v2/modal-instructions';
+import router from './router';
 
 const reduxModulesReducers = {
   layers: handleModule(layerRedux),
@@ -30,10 +31,7 @@ const reduxModulesReducers = {
   categories: handleModule(categoriesRedux)
 };
 
-const providersReducers = {
-  interactions: handleModule(interactRedux),
-  section: handleModule(sectionRedux)
-};
+const providersReducers = { interactions: handleModule(interactRedux), section: handleModule(sectionRedux) };
 
 const pagesReducers = {
   regional: handleModule(regionalRedux),
@@ -48,7 +46,8 @@ const componentReducers = {
   legendLayers: handleModule(legendLayersRedux),
   pane: handleModule(paneRedux),
   sidebar: handleModule(sidebarRedux),
-  modalMetadata: handleModule(modalMetadataRedux)
+  modalMetadata: handleModule(modalMetadataRedux),
+  modalInstructions: handleModule(modalInstructionsRedux)
 };
 
 export default combineReducers({
