@@ -74,7 +74,10 @@ if __name__ == '__main__':
     for file in layerfiles:
         print(f'reading {file}')
         with open(f"{mypath}/{file}") as f:
-            layers.append(json.load(f))
+            try:
+                layers.append(json.load(f))
+            except:
+                raise NameError(f'Problem with layer {file}')
     print(f"loaded {len(layers)} layers")
     rows = []
     for l in layers:

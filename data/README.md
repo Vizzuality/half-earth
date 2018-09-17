@@ -40,3 +40,8 @@ The source data is not included, due to privacy, contact a project owner if you 
 
 Update the json file containing the stories data in the `inputs` folder, and execute `python stories.py`. You can upload the `./output/stories.csv` to the half-earth Carto account.
 You will need to upload the image assets seperatley.
+
+
+### Notes
+
+   // "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/human-pressures/esa/1km/100p-layers/all/{z}/{x}/{y}",

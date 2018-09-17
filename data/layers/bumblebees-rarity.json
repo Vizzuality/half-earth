@@ -9,7 +9,7 @@
     "minZoom": 3,
     "legendConfig": {
         "items": [{
-                        "value": "0",
+                        "value": "low",
                         "color": "#309B7E"
                     },{
                         "value": "",
@@ -27,7 +27,7 @@
                         "value": "",
                         "color": "#0D6DE2"
                     },{
-                        "value": "100 %",
+                        "value": "high",
                         "color": "#0664f6"
                     }
                 ],

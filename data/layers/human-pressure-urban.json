@@ -5,7 +5,7 @@
     "category":"human",
     "slug":"human-pressures-urban",
     "description": null,
-    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/human-pressures/esa/1km/100p-layers/urban/{z}/{x}/{y}",
+    "url": "https://storage.googleapis.com/gfw-climate-tiles/hp_urban/all_v1/{z}/{x}/{y}.png",
     "maxZoom": 13,
     "minZoom": 3,
     "legendConfig": {
@@ -28,7 +28,7 @@
                         "value": "",
                         "color": "#bcbece"
                     },{
-                        "value": "100 %",
+                        "value": "100 % use",
                         "color": "#d8d9e5"
                     }
                 ],
