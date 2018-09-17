@@ -25,6 +25,7 @@
 
 .instructionsContainer {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .isntructionCombo {
@@ -67,6 +68,7 @@
 .mapTour {
   display: flex;
   align-content: center;
+  text-decoration: none;
 }
 
 .tourText {
