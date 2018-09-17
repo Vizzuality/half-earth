@@ -4,7 +4,7 @@ import Link from 'redux-first-router-link';
 import { APP } from 'router';
 import { Button, Icon, Modal } from 'he-components';
 
-import chevronIcon from 'assets/icons/chevron.svg';
+import chevronIcon from 'assets/icons/icon-chevron.svg';
 // instructions svg's
 import leftClick from 'assets/gestures/desktop_01.svg';
 import rightClick from 'assets/gestures/desktop_02.svg';
