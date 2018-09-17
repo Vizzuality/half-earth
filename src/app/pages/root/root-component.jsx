@@ -18,6 +18,19 @@ class RootPageComponent extends React.Component {
     this.state = { sidebarOpen: props.showSidebar };
   }
 
+  componentDidMount() {
+    const { setIsTouchScreenState } = this.props;
+    // detect touch screens!
+    window.addEventListener(
+      'touchstart',
+      function onFirstTouch() {
+        setIsTouchScreenState();
+        window.removeEventListener('touchstart', onFirstTouch, false);
+      },
+      false
+    );
+  }
+
   handleOnToggle = sidebarOpen => {
     this.setState({ sidebarOpen });
   };
@@ -46,7 +59,7 @@ class RootPageComponent extends React.Component {
   }
 }
 
-RootPageComponent.propTypes = { showSidebar: PropTypes.bool };
+RootPageComponent.propTypes = { showSidebar: PropTypes.bool, setIsTouchScreenState: PropTypes.func.isRequired };
 RootPageComponent.defaultProps = { showSidebar: true };
 
 export default RootPageComponent;

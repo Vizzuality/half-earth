@@ -14,6 +14,7 @@ import { reduxConfig as interactRedux } from 'providers/interact';
 import { reduxConfig as mapRedux } from 'pages/map';
 import { reduxConfig as globalRedux } from 'pages/global';
 import { reduxConfig as regionalRedux } from 'pages/regional';
+import { reduxConfig as rootRedux } from 'pages/root';
 
 // Components
 import { reduxConfig as earthometerRedux } from 'components/earthometer-multi';
@@ -36,7 +37,8 @@ const providersReducers = { interactions: handleModule(interactRedux), section: 
 const pagesReducers = {
   regional: handleModule(regionalRedux),
   global: handleModule(globalRedux),
-  map: handleModule(mapRedux)
+  map: handleModule(mapRedux),
+  root: handleModule(rootRedux)
 };
 
 const componentReducers = {
