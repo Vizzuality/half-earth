@@ -28,7 +28,7 @@ class CategoriesListComponent extends Component {
           {category.datasets.map(dataset => (
             <DatasetCombo
               {...this.props}
-              {...dataset}
+              dataset={dataset}
               category={category}
               key={dataset.slug}
               className={styles.datasetComboWrapper}
@@ -51,7 +51,7 @@ class CategoriesListComponent extends Component {
           {category.datasets.map(dataset => (
             <DatasetCombo
               {...this.props}
-              {...dataset}
+              dataset={dataset}
               category={category}
               key={dataset.slug}
               className={styles.datasetComboWrapper}

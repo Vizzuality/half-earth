@@ -9,37 +9,26 @@ import halfEarthSwitchTheme from 'styles/themes/half-earth-switch-theme.scss';
 import styles from './dataset-combo-styles.scss';
 
 const DatasetComboComponent = props => {
-  const {
-    className,
-    category,
-    layers,
-    active,
-    slug,
-    name,
-    multilayer,
-    handleSwitchChange,
-    handleMultiLayerClick,
-    handleLayerClick
-  } = props;
+  const { className, category, dataset, handleSwitchChange, handleMultiLayerClick, handleLayerClick } = props;
 
-  const layersLength = layers && layers.length;
+  const layersLength = dataset && dataset.layers && dataset.layers.length;
   if (!layersLength) return null;
   const hasMultipleOptions = layersLength > 2;
   return (
-    <div key={slug} className={cx(className, { [styles.datasetMultiLayer]: hasMultipleOptions })}>
+    <div key={dataset.slug} className={cx(className, { [styles.datasetMultiLayer]: hasMultipleOptions })}>
       <SwitchInput
-        key={slug}
-        id={slug}
-        checked={active}
+        key={dataset.slug}
+        id={dataset.slug}
+        checked={dataset.active}
         theme={category.slug === 'he-movement' ? halfEarthSwitchTheme : { label: styles.label }}
-        onChange={() => handleSwitchChange(category, slug, active)}
-        label={name}
+        onChange={() => handleSwitchChange(category, dataset.slug, dataset.active)}
+        label={dataset.name}
       />
       {
         // if there's more than a layer nest the checkboxs or create a double button
-        active && layersLength > 1 && (
+        dataset && dataset.active && layersLength > 1 && (
         <div className={cx(styles.switchWrapper, { [styles.multiLayerWrapper]: hasMultipleOptions })}>
-          {layers.map(
+          {dataset.layers.map(
                 layer =>
                   hasMultipleOptions
                     ? (
@@ -49,14 +38,15 @@ const DatasetComboComponent = props => {
                         theme={checkboxTheme}
                         label={layer.name}
                         checked={layer.active}
-                        onChange={() => multilayer ? handleMultiLayerClick(layer) : handleLayerClick(layers, layer)}
+                        onChange={() =>
+                        dataset.multilayer ? handleMultiLayerClick(layer) : handleLayerClick(dataset.layers, layer)}
                       />
 )
                     : (
                       <Button
                         key={layer.slug}
                         theme={{ button: layer.active ? styles.buttonActive : styles.button }}
-                        onClick={() => handleLayerClick(layers, layer)}
+                        onClick={() => handleLayerClick(dataset.layers, layer)}
                       >
                         {layer.name}
                       </Button>
@@ -72,16 +62,18 @@ const DatasetComboComponent = props => {
 DatasetComboComponent.propTypes = {
   className: PropTypes.string,
   category: PropTypes.object.isRequired,
-  layers: PropTypes.array,
-  active: PropTypes.bool,
-  slug: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  multilayer: PropTypes.bool,
+  dataset: PropTypes.shape({
+    layers: PropTypes.array,
+    active: PropTypes.bool,
+    slug: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    multilayer: PropTypes.bool
+  }).isRequired,
   handleSwitchChange: PropTypes.func.isRequired,
   handleMultiLayerClick: PropTypes.func.isRequired,
   handleLayerClick: PropTypes.func.isRequired
 };
 
-DatasetComboComponent.defaultProps = { className: '', layers: [], active: false, multilayer: false };
+DatasetComboComponent.defaultProps = { className: '' };
 
 export default DatasetComboComponent;
