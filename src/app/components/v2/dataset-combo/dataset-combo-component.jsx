@@ -65,8 +65,8 @@ DatasetComboComponent.propTypes = {
   dataset: PropTypes.shape({
     layers: PropTypes.array,
     active: PropTypes.bool,
-    slug: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    slug: PropTypes.string,
+    name: PropTypes.string,
     multilayer: PropTypes.bool
   }).isRequired,
   handleSwitchChange: PropTypes.func.isRequired,
