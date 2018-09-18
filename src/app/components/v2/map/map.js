@@ -6,6 +6,7 @@ const { MAPBOX_TOKEN } = process.env;
 const { Cesium } = window;
 const mapId = `map-${new Date().getTime()}`;
 let gridPrimitive = null;
+let lastObj = null;
 
 const disablePanning = v => {
   const { scene } = v;
@@ -43,95 +44,88 @@ class CesiumComponent extends Component {
   async addGrid() {
     // const grid = Cesium.GeoJsonDataSource.load('/geoms/grid.topojson');
     // this.viewer.dataSources.add(grid);
-    const data = await fetch('https://half-earth.carto.com/api/v2/sql?q=SELECT cell_id, ST_AsGeoJSON(ST_SimplifyPreserveTopology(the_geom, 1)) as the_geom FROM terrestrial_grid').then(d => d.json());
-    const rectangles = data.rows.map(row => ({id: row.cell_id, coordinates: JSON.parse(row.the_geom).coordinates[0]}))
-    // const primitiveGroup = this.viewer.scene.primitives.add(new new Cesium.EntityCollection());
-    // const primitiveGroup = this.viewer.scene.primitives.add(new Cesium.PrimitiveCollection());
+    const data = await fetch(
+      'https://half-earth.carto.com/api/v2/sql?q=SELECT cell_id, ST_AsGeoJSON(ST_SimplifyPreserveTopology(the_geom, 1)) as the_geom FROM terrestrial_grid'
+    ).then(d => d.json());
+    const rectangles = data.rows.map(row => ({
+      id: row.cell_id,
+      coordinates: JSON.parse(row.the_geom).coordinates[0]
+    }));
     const geometryInstances = [];
 
     for (let i = 0; i < rectangles.length; i++) {
       if (rectangles[i] && rectangles[i].coordinates) {
-        // this.viewer.entities.add({
-        //   polygon : {
-        //     hierarchy: rectangles[i].coordinates.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1])),
-        //     fill: true,
-        //     show: true,
-        //     // material: new Cesium.PolylineOutlineMaterialProperty({
-        //     //   color: Cesium.Color.RED,
-        //     //   outlineColor: Cesium.Color.WHITE,
-        //     //   outlineWidth: 1,
-        //     // }),
-        //     material: Cesium.Color.BLACK,
-        //     outline: true,
-        //   }
-        // });
-
-        // const polygon = new Cesium.Primitive({
-        //   geometryInstances : new Cesium.GeometryInstance({
-        //     geometry : new Cesium.PolylineGeometry({
-        //       polygonHierarchy: rectangles[i].coordinates.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1])),
-        //       width : 10.0
-        //     })
+        // Polyline grid
+        // const polygon = new Cesium.GeometryInstance({
+        //   geometry : new Cesium.PolylineGeometry({
+        //     positions : rectangles[i].coordinates.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1])),
+        //     width : 1,
+        //     vertexFormat : Cesium.PolylineMaterialAppearance.VERTEX_FORMAT
         //   }),
-        //   appearance : new Cesium.PolylineMaterialAppearance()({
-        //     material : new Cesium.PolylineOutlineMaterialProperty({
-        //       color : Cesium.Color.ORANGE,
-        //       outlineWidth : 2,
-        //       outlineColor : Cesium.Color.BLACK
-        //     })
-        //   })
+        //   id: rectangles[i].id
         // });
         const polygon = new Cesium.GeometryInstance({
-          geometry : new Cesium.PolylineGeometry({
-            positions : rectangles[i].coordinates.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1])),
-            width : 1,
-            vertexFormat : Cesium.PolylineMaterialAppearance.VERTEX_FORMAT
+          geometry: new Cesium.PolygonGeometry({
+            polygonHierarchy: new Cesium.PolygonHierarchy(
+              rectangles[i].coordinates.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]))
+            ),
+            height: 0
           }),
-          id: rectangles[i].id
+          id: rectangles[i].id,
+          attributes: { color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.WHITE.withAlpha(0.3)) }
         });
-        geometryInstances.push(polygon)
+        geometryInstances.push(polygon);
       }
     }
+    // Polyline grid
+    // gridPrimitive = new Cesium.Primitive({
+    //   geometryInstances,
+    //   appearance : new Cesium.PolylineMaterialAppearance({
+    //     material : Cesium.Material.fromType('PolylineOutline', {
+    //       color : Cesium.Color.BLACK,
+    //       outlineWidth : 2,
+    //       outlineColor : Cesium.Color.WHITE.withAlpha(0.5)
+    //     })
+    //   })
+    // });
     gridPrimitive = new Cesium.Primitive({
       geometryInstances,
-      appearance : new Cesium.PolylineMaterialAppearance({
-        material : Cesium.Material.fromType('PolylineOutline', {
-          color : Cesium.Color.BLACK,
-          outlineWidth : 2,
-          outlineColor : Cesium.Color.WHITE.withAlpha(0.5)
-        })
-      })
+      // Needed to style each one on a different way
+      appearance: new Cesium.PerInstanceColorAppearance()
     });
     this.viewer.scene.primitives.add(gridPrimitive);
   }
 
-
   onMouseMove = movement => {
-    // const pickedObject = this.viewer.scene.pick(movement.endPosition);
-    // if (Cesium.defined(pickedObject)) {
-    //     console.log(pickedObject);
-    //     // pickedObject.id.polygon.material = Cesium.Color.WHITE.withAlpha(0,6);
-    //     // activeObject = pickedObject;
-    // }
+    const pickedObject = this.viewer.scene.pick(movement.endPosition);
+    if (Cesium.defined(pickedObject)) {
+      if (gridPrimitive && (!lastObj || lastObj.id !== pickedObject.id)) {
+        const attributes = gridPrimitive.getGeometryInstanceAttributes(pickedObject.id);
+        if (attributes) {
+          attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(Cesium.Color.WHITE.withAlpha(0.8));
+        }
+        if (lastObj) {
+          const lastAttributes = gridPrimitive.getGeometryInstanceAttributes(lastObj.id);
+          if (lastAttributes) {
+            lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(Cesium.Color.WHITE.withAlpha(0.3));
+          }
+        }
+        lastObj = pickedObject;
+      }
+    }
   };
 
-
-  onMouseClick = movement => {
-    const pickedObject = this.viewer.scene.pick(movement.position);
+  onMouseClick = e => {
+    const pickedObject = this.viewer.scene.pick(e.position);
     if (Cesium.defined(pickedObject)) {
-      console.info('Clicked on the cell_id', pickedObject);
       if (gridPrimitive) {
-        const attributes = gridPrimitive.getGeometryInstanceAttributes(pickedObject.id)
-        if (attributes) {
-          console.info('With attributes', attributes);
-          attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(Cesium.Color.fromRandom({alpha : 1.0}))
-        }
+        const attributes = gridPrimitive.getGeometryInstanceAttributes(pickedObject.id);
+        this.props.onMouseClick(e, { pickedObject, attributes });
       }
     } else {
       console.info('Clicked with no results');
     }
   };
-
 
   componentDidMount() {
     const { coordinates, camera, grid } = this.props;
@@ -220,11 +214,9 @@ class CesiumComponent extends Component {
     clock.startTime.secondsOfDay = now - 1;
   };
 
-
   flyTo(lat, long, z = 15000.0, rest = {}) {
     this.viewer.camera.flyTo({ destination: { x: lat, y: long, z }, ...rest });
   }
-
 
   addRotation() {
     this.viewer.clock.onTick.addEventListener(this.onTick);
@@ -259,11 +251,9 @@ CesiumComponent.propTypes = {
   rotate: PropTypes.func,
   coordinates: PropTypes.array,
   coordinatesOptions: PropTypes.object,
-  camera: PropTypes.object,
-}
+  camera: PropTypes.object
+};
 
-CesiumComponent.defaultProps = {
-  grid: true
-}
+CesiumComponent.defaultProps = { grid: true };
 
 export default CesiumComponent;
