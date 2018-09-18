@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Loading } from 'he-components';
 import AccordionCard from 'components/v2/accordion-card';
-import chevronIcon from 'assets/icons/chevron.svg';
+import chevronIcon from 'assets/icons/icon-chevron.svg';
 import CategoriesList from '../categories-list';
 
 import styles from './group-card-list-styles';
