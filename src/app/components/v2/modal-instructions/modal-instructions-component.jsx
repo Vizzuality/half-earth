@@ -51,11 +51,7 @@ class ModalInfoContentComponent extends Component {
   render() {
     const { isTouchScreen, isOpen, setModalInstructionsParams } = this.props;
     return (
-      <Modal
-        onRequestClose={() => setModalInstructionsParams({ isOpen: false })}
-        isOpen={isOpen}
-        theme={{ modalContent: styles.modalContainer }}
-      >
+      <Modal isOpen={isOpen} onRequestClose={() => setModalInstructionsParams({ isOpen: false })} theme={styles}>
         <div className={styles.contentContainer}>
           <p className={styles.subTitle}>{`Instructions - ${isTouchScreen ? 'touch' : 'mouse'}`}</p>
           <h1 className={styles.title}>How to navigate:</h1>
@@ -64,7 +60,12 @@ class ModalInfoContentComponent extends Component {
             <Button theme={{ button: styles.button }} onClick={() => setModalInstructionsParams({ isOpen: false })}>
               ok
             </Button>
-            <Link className={styles.mapTour} to={{ type: APP, payload: { section: 'global' } }}>
+            <Link
+              className={styles.mapTour}
+              to={{ type: APP, payload: { section: 'global' } }}
+              onMouseDown={undefined}
+              onTouchStart={undefined}
+            >
               <span className={styles.tourText}>take a tour of the map</span>
               <Icon icon={chevronIcon} theme={{ icon: styles.chevronIcon }} />
             </Link>
