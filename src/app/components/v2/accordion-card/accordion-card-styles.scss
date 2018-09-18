@@ -1,0 +1,58 @@
+@import '~styles/variables.scss';
+
+.cardContainer {
+  padding: $sidebar-card-padding;
+  background-color: $color-white;
+  margin-bottom: 4px;
+  overflow: hidden;
+  height: 75px;
+  transition: all 0.3s;
+
+  .groupTitle {
+    font-size: 20px;
+  }
+
+  &.open {
+    height: auto;
+    overflow: inherit;
+  }
+
+  &.customCard {
+    background-color: $color-group-card-dark-blue;
+    color: $color-white;
+    margin-bottom: 0;
+    height: auto;
+    flex-grow: 1;
+    min-height: 350px;
+
+    .groupTitle {
+      font-size: 40px;
+    }
+  }
+}
+
+.toggleButton {
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  box-shadow: none;
+
+  &:hover {
+    box-shadow: none;
+  }
+}
+
+.headerContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.icon {
+  transform: rotate(90deg);
+  fill: $color-turquoise;
+}
+
+.iconCollapse {
+  transform: rotate(270deg);
+}
