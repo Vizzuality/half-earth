@@ -9,7 +9,7 @@ export const speciesSelector = selected => ({
     turtles: 'Turtles'
   },
   selected
-})
+});
 export const speciesSelections = type => ({
   mammals: `mammals:${type}`,
   amphibians: `amphibians:${type}`,
@@ -18,40 +18,25 @@ export const speciesSelections = type => ({
   conifers: `conifers:${type}`,
   'all-taxa': `all-taxa:${type}`,
   turtles: `turtles:${type}`
-})
+});
 
-export const allTaxaSelector = selected => ({
-  options: {
-    'all-taxa': 'All taxa'
-  },
-  selected
-})
+export const allTaxaSelector = selected => ({ options: { 'all-taxa': 'All taxa' }, selected });
 
-export const allTaxaSelections = type => ({
-  'all-taxa': `all-taxa:${type}`
-})
+export const allTaxaSelections = type => ({ 'all-taxa': `all-taxa:${type}` });
 
 export default {
   'global:1': {
-    layers: ['birds:richness'],
+    layers: [ 'birds:richness' ],
     selectionType: 'richness',
     selections: speciesSelections('richness'),
-    selectors: {
-      birds: speciesSelector('birds')
-    }
+    selectors: { birds: speciesSelector('birds') }
   },
   'global:2': {
     selectionType: 'richness',
-    layers: ['all-taxa:richness'],
+    layers: [ 'all-taxa:richness' ],
     selections: allTaxaSelections('richness'),
-    selectors: {
-      birds: allTaxaSelector('all-taxa')
-    }
+    selectors: { birds: allTaxaSelector('all-taxa') }
   },
-  'global:3': {
-    layers: ['human-pressures']
-  },
-  'global:4': {
-    layers: ['human-pressures', 'prioritization-of-places-15']
-  }
-}
+  'global:3': { layers: [ 'human-pressures' ] },
+  'global:4': { layers: [ 'human-pressures', 'prioritization-of-places-15' ] }
+};

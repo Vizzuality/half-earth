@@ -1,14 +1,9 @@
-import React from 'react'
-import uiStyles from 'app/styles/ui'
+import React from 'react';
+import uiStyles from 'app/styles/ui';
 
 const LineChart = props => (
   <div className={uiStyles.lineChartGlobal}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="100%"
-      height="341"
-      viewBox="0 0 458 341"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="341" viewBox="0 0 458 341">
       <defs>
         <linearGradient id="a" x1="50%" x2="50%" y1="8.551%" y2="100%">
           <stop stopColor="#5684A2" stopOpacity="0" offset="0%" />
@@ -17,13 +12,7 @@ const LineChart = props => (
       </defs>
       <g fill="none" fillRule="evenodd" transform="translate(0 -6)">
         <rect width="301" height="46" x="1" y="301" fill="#0f2432" />
-        <text
-          fill="#FFFFFF"
-          fontFamily="PierSans"
-          fontSize="14"
-          fontWeight="800"
-          letterSpacing=".2"
-        >
+        <text fill="#FFFFFF" fontFamily="PierSans" fontSize="14" fontWeight="800" letterSpacing=".2">
           <tspan x="248.844" y="320">
             1900
           </tspan>{' '}
@@ -34,13 +23,7 @@ const LineChart = props => (
             4
           </tspan>
         </text>
-        <text
-          fill="#FFFFFF"
-          fontFamily="PierSans"
-          fontSize="14"
-          fontWeight="800"
-          letterSpacing=".2"
-        >
+        <text fill="#FFFFFF" fontFamily="PierSans" fontSize="14" fontWeight="800" letterSpacing=".2">
           <tspan x="174.085" y="320">
             1700
           </tspan>{' '}
@@ -51,13 +34,7 @@ const LineChart = props => (
             0
           </tspan>
         </text>
-        <text
-          fill="#FFFFFF"
-          fontFamily="PierSans"
-          fontSize="14"
-          fontWeight="800"
-          letterSpacing=".2"
-        >
+        <text fill="#FFFFFF" fontFamily="PierSans" fontSize="14" fontWeight="800" letterSpacing=".2">
           <tspan x="98.177" y="320">
             1600
           </tspan>{' '}
@@ -68,13 +45,7 @@ const LineChart = props => (
             0
           </tspan>
         </text>
-        <text
-          fill="#FFFFFF"
-          fontFamily="PierSans"
-          fontSize="14"
-          fontWeight="800"
-          letterSpacing=".2"
-        >
+        <text fill="#FFFFFF" fontFamily="PierSans" fontSize="14" fontWeight="800" letterSpacing=".2">
           <tspan x="22.858" y="320">
             1500
           </tspan>{' '}
@@ -85,13 +56,7 @@ const LineChart = props => (
             0
           </tspan>
         </text>
-        <text
-          fill="#FFFFFF"
-          fontFamily="PierSans"
-          fontSize="14"
-          fontWeight="500"
-          letterSpacing=".2"
-        >
+        <text fill="#FFFFFF" fontFamily="PierSans" fontSize="14" fontWeight="500" letterSpacing=".2">
           <tspan x=".5" y="40">
             Cumulative{' '}
           </tspan>{' '}
@@ -103,91 +68,37 @@ const LineChart = props => (
           stroke="url(#a)"
           d="M302.5 346.891221L302.5 67M.5 346.891221L.5 67M75.5 346.891221L75.5 67M151.5 346.891221L151.5 67M226.5 346.891221L226.5 67"
         />
-        <text
-          fill="#FFFFFF"
-          fontFamily="PierSans"
-          fontSize="14"
-          fontWeight="400"
-          letterSpacing="2.6"
-        >
+        <text fill="#FFFFFF" fontFamily="PierSans" fontSize="14" fontWeight="400" letterSpacing="2.6">
           <tspan x="356.904" y="251">
             Background
           </tspan>
         </text>
-        <path
-          stroke="#2B4D68"
-          d="M1.72265625,283.816406 L301.917969,267.8125"
-          strokeDasharray="4"
-        />
-        <text
-          fill="#FFFFFF"
-          fontFamily="PierSans"
-          fontSize="12"
-          fontWeight="400"
-          letterSpacing="3.5"
-        >
+        <path stroke="#2B4D68" d="M1.72265625,283.816406 L301.917969,267.8125" strokeDasharray="4" />
+        <text fill="#FFFFFF" fontFamily="PierSans" fontSize="12" fontWeight="400" letterSpacing="3.5">
           <tspan x="370.856" y="168">
             OTHER V.
           </tspan>
         </text>
-        <text
-          fill="#FFFFFF"
-          fontFamily="PierSans"
-          fontSize="12"
-          fontWeight="400"
-          letterSpacing="3.5"
-        >
+        <text fill="#FFFFFF" fontFamily="PierSans" fontSize="12" fontWeight="400" letterSpacing="3.5">
           <tspan x="333.02" y="103">
             VERTEBRATES
           </tspan>
         </text>
-        <text
-          fill="#FFFFFF"
-          fontFamily="PierSans"
-          fontSize="12"
-          fontWeight="400"
-          letterSpacing="3.5"
-        >
+        <text fill="#FFFFFF" fontFamily="PierSans" fontSize="12" fontWeight="400" letterSpacing="3.5">
           <tspan x="406.448" y="45">
             BIRDS
           </tspan>
         </text>
-        <text
-          fill="#FFFFFF"
-          fontFamily="PierSans"
-          fontSize="12"
-          fontWeight="400"
-          letterSpacing="3.5"
-        >
+        <text fill="#FFFFFF" fontFamily="PierSans" fontSize="12" fontWeight="400" letterSpacing="3.5">
           <tspan x="365.856" y="15">
             MAMMALS
           </tspan>
         </text>
         <path stroke="#18BAB4" strokeWidth="2" d="M2.609375,7 L15.7761327,7" />
-        <path
-          stroke="#2B4D68"
-          d="M305,24.5 L457.321754,24.5"
-          opacity=".6"
-          transform="matrix(-1 0 0 1 762.322 0)"
-        />
-        <path
-          stroke="#2B4D68"
-          d="M305,56.5 L457.321754,56.5"
-          opacity=".6"
-          transform="matrix(-1 0 0 1 762.322 0)"
-        />
-        <path
-          stroke="#2B4D68"
-          d="M305,116.5 L457.321754,116.5"
-          opacity=".6"
-          transform="matrix(-1 0 0 1 762.322 0)"
-        />
-        <path
-          stroke="#2B4D68"
-          d="M305,181.5 L457.321754,181.5"
-          opacity=".6"
-          transform="matrix(-1 0 0 1 762.322 0)"
-        />
+        <path stroke="#2B4D68" d="M305,24.5 L457.321754,24.5" opacity=".6" transform="matrix(-1 0 0 1 762.322 0)" />
+        <path stroke="#2B4D68" d="M305,56.5 L457.321754,56.5" opacity=".6" transform="matrix(-1 0 0 1 762.322 0)" />
+        <path stroke="#2B4D68" d="M305,116.5 L457.321754,116.5" opacity=".6" transform="matrix(-1 0 0 1 762.322 0)" />
+        <path stroke="#2B4D68" d="M305,181.5 L457.321754,181.5" opacity=".6" transform="matrix(-1 0 0 1 762.322 0)" />
         <path
           stroke="#2B4D68"
           d="M305,267.5 L457.321754,267.5"
@@ -222,6 +133,6 @@ const LineChart = props => (
       </g>
     </svg>
   </div>
-)
+);
 
-export default LineChart
+export default LineChart;

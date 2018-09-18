@@ -1,20 +1,14 @@
-import React from 'react'
-import cx from 'classnames'
-import capitalize from 'lodash/capitalize'
+import React from 'react';
+import cx from 'classnames';
+import capitalize from 'lodash/capitalize';
 
-import styles from './text-content-styles.scss'
+import styles from './text-content-styles.scss';
 
 const TextContent = ({ className, content }) => {
-  const { details, description, image, background } = content
+  const { details, description, image, background } = content;
   return (
-    <div
-      className={cx([className, styles.textContent])}
-      style={{ backgroundImage: `url(${background})` }}
-    >
-      <div
-        className={styles.image}
-        style={{ backgroundImage: `url(${image})` }}
-      />
+    <div className={cx([ className, styles.textContent ])} style={{ backgroundImage: `url(${background})` }}>
+      <div className={styles.image} style={{ backgroundImage: `url(${image})` }} />
       <ul className={styles.details}>
         {details.map(({ label, value }, key) => (
           <li key={`details-item-${key}`}>
@@ -24,6 +18,6 @@ const TextContent = ({ className, content }) => {
       </ul>
       <p className={styles.description}>{description}</p>
     </div>
-  )
-}
-export default TextContent
+  );
+};
+export default TextContent;

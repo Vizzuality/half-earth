@@ -1,5 +1,3 @@
-import * as actions from './section-actions'
+import * as actions from './section-actions';
 
-export default {
-  [actions.setSection]: (state, { payload }) => ({ ...state, section: payload })
-}
+export default { [actions.setSection]: (state, { payload }) => ({ ...state, section: payload }) };

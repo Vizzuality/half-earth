@@ -1,4 +1,4 @@
-import upperFirst from 'lodash/upperFirst'
+import upperFirst from 'lodash/upperFirst';
 
 const species = type => ({
   name: `Species ${upperFirst(type)}`,
@@ -15,13 +15,10 @@ const species = type => ({
       name: 'Plants',
       key: `species-${type}-plants`,
       isOpen: true,
-      layers: [
-        { key: `cacti:${type}`, label: 'Cacti' },
-        { key: `conifers:${type}`, label: 'Conifers' }
-      ]
+      layers: [ { key: `cacti:${type}`, label: 'Cacti' }, { key: `conifers:${type}`, label: 'Conifers' } ]
     }
   ]
-})
+});
 
 export default [
   species('richness'),
@@ -35,15 +32,5 @@ export default [
       { key: 'prioritization-of-places', label: 'Prioritization areas' }
     ]
   },
-  {
-    name: 'Land Use',
-    key: 'land-use',
-    isOpen: true,
-    layers: [
-      {
-        key: 'human-pressures',
-        label: 'Human pressures'
-      }
-    ]
-  }
-]
+  { name: 'Land Use', key: 'land-use', isOpen: true, layers: [ { key: 'human-pressures', label: 'Human pressures' } ] }
+];

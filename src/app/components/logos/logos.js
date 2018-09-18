@@ -1,9 +1,7 @@
-import { connect } from 'react-redux'
-import { actions as popUpActions } from 'components/pop-up'
-import LogosComponent from './logos-component'
+import { connect } from 'react-redux';
+import * as popUpActions from 'components/pop-up/pop-up-actions';
+import LogosComponent from './logos-component';
 
-const mapStateToProps = ({ navFooter }) => ({
-  popUp: navFooter.popUp
-})
+const mapStateToProps = ({ navFooter }) => ({ popUp: navFooter.popUp });
 
-export default connect(mapStateToProps, popUpActions)(LogosComponent)
+export default connect(mapStateToProps, popUpActions)(LogosComponent);

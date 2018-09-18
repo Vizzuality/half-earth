@@ -1,3 +1,1 @@
-export default {
-  interaction: null
-}
+export default { interaction: null };

@@ -1,29 +1,19 @@
-import React, { createElement } from 'react'
-import { Provider } from 'react-redux'
-import { Route, Router } from 'react-router-dom'
-import 'app/styles/global.scss'
+import React from 'react';
+import { Provider } from 'react-redux';
+import 'app/styles/global.scss';
+import 'he-components/dist/main.css';
 
-import { assign } from 'utils'
-import store, { history } from 'app/store'
-import routes from 'app/routes'
-import Layout from 'app/layout'
+import 'wri-api-components/dist/map.css';
+import 'wri-api-components/dist/legend.css';
+import 'wri-api-components/dist/tooltip.css';
 
-const NoMatch = props => <h1>404</h1>
+import store from 'app/store';
+import Root from 'app/layout/root-layout';
 
 export default () => {
   return (
     <Provider store={store}>
-      <Router history={history}>
-        <Layout>
-          {routes.map(route =>
-            createElement(
-              Route,
-              assign(route, { key: route.key || route.path })
-            )
-          )}
-          <Route component={NoMatch} />
-        </Layout>
-      </Router>
+      <Root />
     </Provider>
-  )
-}
+  );
+};

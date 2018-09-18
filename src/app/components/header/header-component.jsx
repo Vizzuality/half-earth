@@ -1,8 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import cx from 'classnames'
+import React from 'react';
+import Link from 'redux-first-router-link';
+import cx from 'classnames';
 
-import styles from './header-styles.scss'
+import styles from './header-styles.scss';
 
 const Header = ({ className }) => (
   <div className={cx(className, styles.container)}>
@@ -13,5 +13,5 @@ const Header = ({ className }) => (
       <div className={styles.menu} />
     </Link>
   </div>
-)
-export default Header
+);
+export default Header;

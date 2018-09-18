@@ -1,21 +1,21 @@
-import React, { Component } from 'react'
-import cx from 'classnames'
-import Scroller, { Element as P } from 'components/scroller'
-import NavFooter from 'components/nav-footer'
-import EarthoMeter from 'components/earthometer-multi'
-import Barchart from './barchart'
-import uiStyles from 'app/styles/ui'
+import React, { Component } from 'react';
+import cx from 'classnames';
+import Scroller, { Element as P } from 'components/scroller';
+import NavFooter from 'components/nav-footer';
+import EarthoMeter from 'components/earthometer-multi';
+import Barchart from './barchart';
+import uiStyles from 'app/styles/ui';
 
 class Global extends Component {
   updateSections = s => {
-    const { sidebarOpen, setSection, setGlobalSectionThunk } = this.props
+    const { sidebarOpen, setSection, setGlobalSectionThunk } = this.props;
     if (sidebarOpen) {
-      setGlobalSectionThunk(s)
-      setSection(s)
+      setGlobalSectionThunk(s);
+      setSection(s);
     }
-  }
+  };
 
-  render () {
+  render() {
     const {
       toggleGlobalLayer,
       renderToggle,
@@ -27,20 +27,18 @@ class Global extends Component {
       globalConservationPrioritization,
       setTypeThunk,
       selectedType,
-      section
       // landSaved,
       // oceanSaved
-    } = this.props
+      section
+    } = this.props;
 
-    const t = renderToggle(toggleGlobalLayer)
-    const d = renderDropdown(selectGlobalSelector)
+    const t = renderToggle(toggleGlobalLayer);
+    const d = renderDropdown(selectGlobalSelector);
     return (
       <div className={className}>
         <Scroller>
           <P
-            className={cx(uiStyles.slides, {
-              [uiStyles.slidesActive]: section === 'global:1'
-            })}
+            className={cx(uiStyles.slides, { [uiStyles.slidesActive]: section === 'global:1' })}
             onScrollFocus={() => this.updateSections('global:1')}
           >
             <span className={uiStyles.innerTitle}>
@@ -56,27 +54,29 @@ class Global extends Component {
               Globally, we have amassed a general, coarse-resolution
               understanding of species{' '}
               {
-                <button
-                  onClick={() => setTypeThunk('richness')}
-                  className={cx(uiStyles.toggle, {
-                    [uiStyles.toggleActive]: selectedType === 'richness'
-                  })}
-                >
-                  richness
-                </button>
+                (
+                  <button
+                    onClick={() => setTypeThunk('richness')}
+                    className={cx(uiStyles.toggle, { [uiStyles.toggleActive]: selectedType === 'richness' })}
+                  >
+                    richness
+                  </button>
+                )
               }{' '}
               and{' '}
               {
-                <button
-                  onClick={() => setTypeThunk('rarity')}
-                  className={cx(uiStyles.toggle, {
-                    [uiStyles.toggleActive]: selectedType === 'rarity'
-                  })}
-                >
-                  rarity
-                </button>
+                (
+                  <button
+                    onClick={() => setTypeThunk('rarity')}
+                    className={cx(uiStyles.toggle, { [uiStyles.toggleActive]: selectedType === 'rarity' })}
+                  >
+                    rarity
+                  </button>
+                )
               }{' '}
-              for {d('global:1', 'birds')}. This information allows us to begin
+              for{' '}
+              {d('global:1', 'birds')}
+              . This information allows us to begin
               to see the areas most important to manage to protect the bulk of
               biodiversity. Watch how the map changes as you select different
               species groups.
@@ -89,51 +89,54 @@ class Global extends Component {
               legend={globalScaleBiodiversity.legend}
             />
           </P>
-
           <P
-            className={cx(uiStyles.slides, {
-              [uiStyles.slidesActive]: section === 'global:2'
-            })}
+            className={cx(uiStyles.slides, { [uiStyles.slidesActive]: section === 'global:2' })}
             onScrollFocus={() => this.updateSections('global:2')}
           >
-            This global {t('Protected Areas')} network plays a key role in the
+            This global{' '}
+            {t('Protected Areas')}
+            {' '}
+            network plays a key role in the
             conservation of nature and safeguarding of species. However, by
-            overlaying global species{' '}
+            overlaying global species
+            {' '}
             {
-              <button
-                onClick={() => setTypeThunk('richness')}
-                className={cx(uiStyles.toggle, {
-                  [uiStyles.toggleActive]: selectedType === 'richness'
-                })}
-              >
-                richness
-              </button>
+              (
+                <button
+                  onClick={() => setTypeThunk('richness')}
+                  className={cx(uiStyles.toggle, { [uiStyles.toggleActive]: selectedType === 'richness' })}
+                >
+                  richness
+                </button>
+              )
             }{' '}
             and{' '}
             {
-              <button
-                onClick={() => setTypeThunk('rarity')}
-                className={cx(uiStyles.toggle, {
-                  [uiStyles.toggleActive]: selectedType === 'rarity'
-                })}
-              >
-                rarity
-              </button>
+              (
+                <button
+                  onClick={() => setTypeThunk('rarity')}
+                  className={cx(uiStyles.toggle, { [uiStyles.toggleActive]: selectedType === 'rarity' })}
+                >
+                  rarity
+                </button>
+              )
             }{' '}
             with the protected areas network, we can see that many species
             remain insufficiently protected.
-            {globalScaleProtectedAreas.data.length > 0 && (
-              <Barchart
-                labelKey="taxa"
-                domain={globalScaleProtectedAreas.domain}
-                color={globalScaleProtectedAreas.color}
-                data={globalScaleProtectedAreas.data}
-                dataKey={globalScaleProtectedAreas.key}
-                legend={globalScaleProtectedAreas.legend}
-              />
-            )}
+            {
+              globalScaleProtectedAreas.data.length > 0 &&
+                (
+                  <Barchart
+                    labelKey="taxa"
+                    domain={globalScaleProtectedAreas.domain}
+                    color={globalScaleProtectedAreas.color}
+                    data={globalScaleProtectedAreas.data}
+                    dataKey={globalScaleProtectedAreas.key}
+                    legend={globalScaleProtectedAreas.legend}
+                  />
+                )
+            }
           </P>
-
           <P
             className={cx(uiStyles.slides, uiStyles.paragraphAfterChart, {
               [uiStyles.slidesActive]: section === 'global:3'
@@ -141,16 +144,17 @@ class Global extends Component {
             onScrollFocus={() => this.updateSections('global:3')}
           >
             How can we reduce these conservation gaps and include more species
-            in an expanded network of{' '}
-            {t('conservation areas', false, 'protected-areas')} while accounting
-            for the growing constraints from {t('human pressures')}, such as
+            in an expanded network of
+            {' '}
+            {t('conservation areas', false, 'protected-areas')}
+            {' '}while accounting
+            for the growing constraints from{' '}
+            {t('human pressures')}
+            , such as
             logging, agriculture and urban development?
           </P>
-
           <P
-            className={cx(uiStyles.slides, {
-              [uiStyles.slidesActive]: section === 'global:4'
-            })}
+            className={cx(uiStyles.slides, { [uiStyles.slidesActive]: section === 'global:4' })}
             onScrollFocus={() => this.updateSections('global:4')}
           >
             <span className={uiStyles.innerP}>
@@ -179,12 +183,11 @@ class Global extends Component {
               support biodiversity discovery and conservation worldwide.
             </span>
           </P>
-
-          <NavFooter from="/" to="/regional" />
+          <NavFooter from="" to="regional" />
         </Scroller>
       </div>
-    )
+    );
   }
 }
 
-export default Global
+export default Global;

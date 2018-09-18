@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /**
  * A class to describe a two or three dimensional vector, specifically
@@ -42,45 +42,45 @@
  *
  */
 class Vector {
-  constructor () {
-    var x, y, z
-    x = arguments[0] || 0
-    y = arguments[1] || 0
-    z = arguments[2] || 0
+  constructor() {
+    var x, y, z;
+    x = arguments[0] || 0;
+    y = arguments[1] || 0;
+    z = arguments[2] || 0;
     /**
      * The x component of the vector
      * @property x {Number}
      */
-    this.x = x
+    this.x = x;
     /**
      * The y component of the vector
      * @property y {Number}
      */
-    this.y = y
+    this.y = y;
     /**
      * The z component of the vector
      * @property z {Number}
      */
-    this.z = z
-    this.name = 'Vector' // for friendly debugger system
+    this.z = z;
+    this.name = 'Vector'; // for friendly debugger system
   }
 
   /**
- * Returns a string representation of a vector v by calling String(v)
- * or v.toString(). This method is useful for logging vectors in the
- * console.
- * @method  toString
- * @example
- * <div class = "norender"><code>
- * function setup() {
- *   var v = createVector(20,30);
- *   print(String(v)); // prints "Vector Object : [20, 30, 0]"
- * }
- * </div></code>
- *
- */
-  toString () {
-    return 'Vector Object : [' + this.x + ', ' + this.y + ', ' + this.z + ']'
+   * Returns a string representation of a vector v by calling String(v)
+   * or v.toString(). This method is useful for logging vectors in the
+   * console.
+   * @method  toString
+   * @example
+   * <div class = "norender"><code>
+   * function setup() {
+   *   var v = createVector(20,30);
+   *   print(String(v)); // prints "Vector Object : [20, 30, 0]"
+   * }
+   * </div></code>
+   *
+   */
+  toString() {
+    return 'Vector Object : [' + this.x + ', ' + this.y + ', ' + this.z + ']';
   }
 
   /**
@@ -106,23 +106,23 @@ class Vector {
    * </code>
    * </div>
    */
-  set (x, y, z) {
+  set(x, y, z) {
     if (x instanceof Vector) {
-      this.x = x.x || 0
-      this.y = x.y || 0
-      this.z = x.z || 0
-      return this
+      this.x = x.x || 0;
+      this.y = x.y || 0;
+      this.z = x.z || 0;
+      return this;
     }
     if (x instanceof Array) {
-      this.x = x[0] || 0
-      this.y = x[1] || 0
-      this.z = x[2] || 0
-      return this
+      this.x = x[0] || 0;
+      this.y = x[1] || 0;
+      this.z = x[2] || 0;
+      return this;
     }
-    this.x = x || 0
-    this.y = y || 0
-    this.z = z || 0
-    return this
+    this.x = x || 0;
+    this.y = y || 0;
+    this.z = z || 0;
+    return this;
   }
 
   /**
@@ -140,8 +140,8 @@ class Vector {
    * </code>
    * </div>
    */
-  copy () {
-    return new Vector(this.x, this.y, this.z)
+  copy() {
+    return new Vector(this.x, this.y, this.z);
   }
 
   /**
@@ -177,23 +177,23 @@ class Vector {
    * </code>
    * </div>
    */
-  add (x, y, z) {
+  add(x, y, z) {
     if (x instanceof Vector) {
-      this.x += x.x || 0
-      this.y += x.y || 0
-      this.z += x.z || 0
-      return this
+      this.x += x.x || 0;
+      this.y += x.y || 0;
+      this.z += x.z || 0;
+      return this;
     }
     if (x instanceof Array) {
-      this.x += x[0] || 0
-      this.y += x[1] || 0
-      this.z += x[2] || 0
-      return this
+      this.x += x[0] || 0;
+      this.y += x[1] || 0;
+      this.z += x[2] || 0;
+      return this;
     }
-    this.x += x || 0
-    this.y += y || 0
-    this.z += z || 0
-    return this
+    this.x += x || 0;
+    this.y += y || 0;
+    this.z += z || 0;
+    return this;
   }
 
   /**
@@ -228,23 +228,23 @@ class Vector {
    * </code>
    * </div>
    */
-  sub (x, y, z) {
+  sub(x, y, z) {
     if (x instanceof Vector) {
-      this.x -= x.x || 0
-      this.y -= x.y || 0
-      this.z -= x.z || 0
-      return this
+      this.x -= x.x || 0;
+      this.y -= x.y || 0;
+      this.z -= x.z || 0;
+      return this;
     }
     if (x instanceof Array) {
-      this.x -= x[0] || 0
-      this.y -= x[1] || 0
-      this.z -= x[2] || 0
-      return this
+      this.x -= x[0] || 0;
+      this.y -= x[1] || 0;
+      this.z -= x[2] || 0;
+      return this;
     }
-    this.x -= x || 0
-    this.y -= y || 0
-    this.z -= z || 0
-    return this
+    this.x -= x || 0;
+    this.y -= y || 0;
+    this.z -= z || 0;
+    return this;
   }
 
   /**
@@ -273,11 +273,11 @@ class Vector {
    * </code>
    * </div>
    */
-  mult (n) {
-    this.x *= n || 0
-    this.y *= n || 0
-    this.z *= n || 0
-    return this
+  mult(n) {
+    this.x *= n || 0;
+    this.y *= n || 0;
+    this.z *= n || 0;
+    return this;
   }
 
   /**
@@ -305,11 +305,11 @@ class Vector {
    * </code>
    * </div>
    */
-  div (n) {
-    this.x /= n
-    this.y /= n
-    this.z /= n
-    return this
+  div(n) {
+    this.x /= n;
+    this.y /= n;
+    this.z /= n;
+    return this;
   }
 
   /**
@@ -327,8 +327,8 @@ class Vector {
    * </code>
    * </div>
    */
-  mag () {
-    return Math.sqrt(this.magSq())
+  mag() {
+    return Math.sqrt(this.magSq());
   }
 
   /**
@@ -348,11 +348,11 @@ class Vector {
    * </code>
    * </div>
    */
-  magSq () {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    return x * x + y * y + z * z
+  magSq() {
+    var x = this.x;
+    var y = this.y;
+    var z = this.z;
+    return x * x + y * y + z * z;
   }
 
   /**
@@ -386,11 +386,11 @@ class Vector {
    * </code>
    * </div>
    */
-  dot (x, y, z) {
+  dot(x, y, z) {
     if (x instanceof Vector) {
-      return this.dot(x.x, x.y, x.z)
+      return this.dot(x.x, x.y, x.z);
     }
-    return this.x * (x || 0) + this.y * (y || 0) + this.z * (z || 0)
+    return this.x * (x || 0) + this.y * (y || 0) + this.z * (z || 0);
   }
 
   /**
@@ -422,11 +422,11 @@ class Vector {
    * </code>
    * </div>
    */
-  cross (v) {
-    var x = this.y * v.z - this.z * v.y
-    var y = this.z * v.x - this.x * v.z
-    var z = this.x * v.y - this.y * v.x
-    return new Vector(x, y, z)
+  cross(v) {
+    var x = this.y * v.z - this.z * v.y;
+    var y = this.z * v.x - this.x * v.z;
+    var z = this.x * v.y - this.y * v.x;
+    return new Vector(x, y, z);
   }
 
   /**
@@ -456,9 +456,9 @@ class Vector {
    * </code>
    * </div>
    */
-  dist (v) {
-    var d = v.copy().sub(this)
-    return d.mag()
+  dist(v) {
+    var d = v.copy().sub(this);
+    return d.mag();
   }
 
   /**
@@ -478,8 +478,8 @@ class Vector {
    * </div>
    *
    */
-  normalize () {
-    return this.mag() === 0 ? this : this.div(this.mag())
+  normalize() {
+    return this.mag() === 0 ? this : this.div(this.mag());
   }
 
   /**
@@ -500,13 +500,14 @@ class Vector {
    * </code>
    * </div>
    */
-  limit (max) {
-    var mSq = this.magSq()
+  limit(max) {
+    var mSq = this.magSq();
     if (mSq > max * max) {
-      this.div(Math.sqrt(mSq)) // normalize it
-      this.mult(max)
+      this.div(Math.sqrt(mSq));
+      // normalize it
+      this.mult(max);
     }
-    return this
+    return this;
   }
 
   /**
@@ -526,8 +527,8 @@ class Vector {
    * </code>
    * </div>
    */
-  setMag (n) {
-    return this.normalize().mult(n)
+  setMag(n) {
+    return this.normalize().mult(n);
   }
 
   /**
@@ -549,8 +550,8 @@ class Vector {
    * }
    * </div></code>
    */
-  heading () {
-    return Math.atan2(this.y, this.x)
+  heading() {
+    return Math.atan2(this.y, this.x);
   }
 
   /**
@@ -570,12 +571,12 @@ class Vector {
    * </code>
    * </div>
    */
-  rotate (a) {
-    var newHeading = this.heading() + a
-    var mag = this.mag()
-    this.x = Math.cos(newHeading) * mag
-    this.y = Math.sin(newHeading) * mag
-    return this
+  rotate(a) {
+    var newHeading = this.heading() + a;
+    var mag = this.mag();
+    this.x = Math.cos(newHeading) * mag;
+    this.y = Math.sin(newHeading) * mag;
+    return this;
   }
 
   /**
@@ -594,14 +595,14 @@ class Vector {
    * </code>
    * </div>
    */
-  angleBetween (v) {
-    var dotmagmag = this.dot(v) / (this.mag() * v.mag())
+  angleBetween(v) {
+    var dotmagmag = this.dot(v) / (this.mag() * v.mag());
     // Mathematically speaking: the dotmagmag variable will be between -1 and 1
     // inclusive. Practically though it could be slightly outside this range due
     // to floating-point rounding issues. This can make Math.acos return NaN.
     //
     // Solution: we'll clamp the value to the -1,1 range
-    return Math.acos(Math.min(1, Math.max(-1, dotmagmag)))
+    return Math.acos(Math.min(1, Math.max(-1, dotmagmag)));
   }
 
   /**
@@ -641,14 +642,14 @@ class Vector {
    * </code>
    * </div>
    */
-  lerp (x, y, z, amt) {
+  lerp(x, y, z, amt) {
     if (x instanceof Vector) {
-      return this.lerp(x.x, x.y, x.z, y)
+      return this.lerp(x.x, x.y, x.z, y);
     }
-    this.x += (x - this.x) * amt || 0
-    this.y += (y - this.y) * amt || 0
-    this.z += (z - this.z) * amt || 0
-    return this
+    this.x += (x - this.x) * amt || 0;
+    this.y += (y - this.y) * amt || 0;
+    this.z += (z - this.z) * amt || 0;
+    return this;
   }
 
   /**
@@ -676,8 +677,8 @@ class Vector {
    * </code>
    * </div>
    */
-  array () {
-    return [this.x || 0, this.y || 0, this.z || 0]
+  array() {
+    return [ this.x || 0, this.y || 0, this.z || 0 ];
   }
 
   /**
@@ -708,27 +709,26 @@ class Vector {
    * </code>
    * </div>
    */
-  equals (x, y, z) {
-    var a, b, c
+  equals(x, y, z) {
+    var a, b, c;
     if (x instanceof Vector) {
-      a = x.x || 0
-      b = x.y || 0
-      c = x.z || 0
+      a = x.x || 0;
+      b = x.y || 0;
+      c = x.z || 0;
     } else if (x instanceof Array) {
-      a = x[0] || 0
-      b = x[1] || 0
-      c = x[2] || 0
+      a = x[0] || 0;
+      b = x[1] || 0;
+      c = x[2] || 0;
     } else {
-      a = x || 0
-      b = y || 0
-      c = z || 0
+      a = x || 0;
+      b = y || 0;
+      c = z || 0;
     }
-    return this.x === a && this.y === b && this.z === c
+    return this.x === a && this.y === b && this.z === c;
   }
 }
 
 // Static Methods
-
 /**
  * Make a new 2D unit vector from an angle
  *
@@ -773,9 +773,9 @@ class Vector {
  * </code>
  * </div>
  */
-Vector.fromAngle = function (angle) {
-  return new Vector(Math.cos(angle), Math.sin(angle), 0)
-}
+Vector.fromAngle = function(angle) {
+  return new Vector(Math.cos(angle), Math.sin(angle), 0);
+};
 
 /**
  * Make a new 2D unit vector from a random angle
@@ -794,10 +794,10 @@ Vector.fromAngle = function (angle) {
  * </code>
  * </div>
  */
-Vector.random2D = function () {
-  var angle = Math.random() * Math.PI * 2
-  return this.fromAngle(angle)
-}
+Vector.random2D = function() {
+  var angle = Math.random() * Math.PI * 2;
+  return this.fromAngle(angle);
+};
 
 /**
  * Make a new random 3D unit vector.
@@ -816,13 +816,13 @@ Vector.random2D = function () {
  * </code>
  * </div>
  */
-Vector.random3D = function () {
-  var angle = Math.random() * Math.PI * 2
-  var vz = Math.random() * 2 - 1
-  var vx = Math.sqrt(1 - vz * vz) * Math.cos(angle)
-  var vy = Math.sqrt(1 - vz * vz) * Math.sin(angle)
-  return new Vector(vx, vy, vz)
-}
+Vector.random3D = function() {
+  var angle = Math.random() * Math.PI * 2;
+  var vz = Math.random() * 2 - 1;
+  var vx = Math.sqrt(1 - vz * vz) * Math.cos(angle);
+  var vy = Math.sqrt(1 - vz * vz) * Math.sin(angle);
+  return new Vector(vx, vy, vz);
+};
 
 // Adds two vectors together and returns a new one.
 /**
@@ -840,16 +840,15 @@ Vector.random3D = function () {
  * @return {Vector} the resulting Vector
  *
  */
-
-Vector.add = function (v1, v2, target) {
+Vector.add = function(v1, v2, target) {
   if (!target) {
-    target = v1.copy()
+    target = v1.copy();
   } else {
-    target.set(v1)
+    target.set(v1);
   }
-  target.add(v2)
-  return target
-}
+  target.add(v2);
+  return target;
+};
 
 /*
  * Subtracts one Vector from another and returns a new one.  The second
@@ -869,16 +868,15 @@ Vector.add = function (v1, v2, target) {
  * @param  {Vector} v2
  * @return {Vector} the resulting Vector
  */
-
-Vector.sub = function (v1, v2, target) {
+Vector.sub = function(v1, v2, target) {
   if (!target) {
-    target = v1.copy()
+    target = v1.copy();
   } else {
-    target.set(v1)
+    target.set(v1);
   }
-  target.sub(v2)
-  return target
-}
+  target.sub(v2);
+  return target;
+};
 
 /**
  * Multiplies a vector by a scalar and returns a new vector.
@@ -897,15 +895,15 @@ Vector.sub = function (v1, v2, target) {
  * @param  {Number}  n
  * @return {Vector}  the resulting new Vector
  */
-Vector.mult = function (v, n, target) {
+Vector.mult = function(v, n, target) {
   if (!target) {
-    target = v.copy()
+    target = v.copy();
   } else {
-    target.set(v)
+    target.set(v);
   }
-  target.mult(n)
-  return target
-}
+  target.mult(n);
+  return target;
+};
 
 /**
  * Divides a vector by a scalar and returns a new vector.
@@ -924,15 +922,15 @@ Vector.mult = function (v, n, target) {
  * @param  {Number}  n
  * @return {Vector} the resulting new Vector
  */
-Vector.div = function (v, n, target) {
+Vector.div = function(v, n, target) {
   if (!target) {
-    target = v.copy()
+    target = v.copy();
   } else {
-    target.set(v)
+    target.set(v);
   }
-  target.div(n)
-  return target
-}
+  target.div(n);
+  return target;
+};
 
 /**
  * Calculates the dot product of two vectors.
@@ -944,9 +942,9 @@ Vector.div = function (v, n, target) {
  * @param  {Vector} v2 the second Vector
  * @return {Number}     the dot product
  */
-Vector.dot = function (v1, v2) {
-  return v1.dot(v2)
-}
+Vector.dot = function(v1, v2) {
+  return v1.dot(v2);
+};
 
 /**
  * Calculates the cross product of two vectors.
@@ -958,9 +956,9 @@ Vector.dot = function (v1, v2) {
  * @param  {Vector} v2 the second Vector
  * @return {Number}     the cross product
  */
-Vector.cross = function (v1, v2) {
-  return v1.cross(v2)
-}
+Vector.cross = function(v1, v2) {
+  return v1.cross(v2);
+};
 
 /**
  * Calculates the Euclidean distance between two points (considering a
@@ -973,9 +971,9 @@ Vector.cross = function (v1, v2) {
  * @param  {Vector} v2 the second Vector
  * @return {Number}     the distance
  */
-Vector.dist = function (v1, v2) {
-  return v1.dist(v2)
-}
+Vector.dist = function(v1, v2) {
+  return v1.dist(v2);
+};
 
 /**
  * Linear interpolate a vector to another vector and return the result as a
@@ -997,15 +995,15 @@ Vector.dist = function (v1, v2) {
  * @param {Number} amt
  * @return {Number}      the lerped value
  */
-Vector.lerp = function (v1, v2, amt, target) {
+Vector.lerp = function(v1, v2, amt, target) {
   if (!target) {
-    target = v1.copy()
+    target = v1.copy();
   } else {
-    target.set(v1)
+    target.set(v1);
   }
-  target.lerp(v2, amt)
-  return target
-}
+  target.lerp(v2, amt);
+  return target;
+};
 
 /**
  * @method mag
@@ -1013,12 +1011,12 @@ Vector.lerp = function (v1, v2, amt, target) {
  * @return {Number}        the magnitude of vecT
  * @static
  */
-Vector.mag = function (vecT) {
-  var x = vecT.x
-  var y = vecT.y
-  var z = vecT.z
-  var magSq = x * x + y * y + z * z
-  return Math.sqrt(magSq)
-}
+Vector.mag = function(vecT) {
+  var x = vecT.x;
+  var y = vecT.y;
+  var z = vecT.z;
+  var magSq = x * x + y * y + z * z;
+  return Math.sqrt(magSq);
+};
 
-export default Vector
+export default Vector;

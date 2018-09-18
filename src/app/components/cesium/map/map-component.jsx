@@ -1,41 +1,18 @@
-import React, { Component, cloneElement } from 'react'
-import { v1 as uuid } from 'uuid'
-import cx from 'classnames'
+import React, { cloneElement } from 'react';
+import cx from 'classnames';
 
-import styles from './map-styles.scss'
+import styles from './map-styles.scss';
 
-const layerId = layer => `${layer.type.name}-${uuid()}`
-
-class CesiumMap extends Component {
-  render () {
-    const {
-      className,
-      layers: cLayers,
-      mapId,
-      children,
-      viewer,
-      clickedPosition,
-      hoverPosition
-    } = this.props
-    return (
-      <div className={cx(className, styles.map)} id={mapId}>
-        {React.Children.map(children, ch => {
-          if (!ch) return null
-          const id = layerId(ch)
-
-          return cloneElement(ch, {
-            cLayers,
-            viewer,
-            clickedPosition,
-            hoverPosition,
-            ref: el => {
-              this[id] = Boolean(ch.props.url)
-            }
-          })
-        })}
-      </div>
-    )
-  }
+function CesiumMap(props) {
+  const { className, layersCollection, mapId, children, viewer, clickedPosition, hoverPosition } = props;
+  return (
+    <div className={cx(styles.map, className)} id={mapId}>
+      {React.Children.map(children, child => {
+        if (!child) return null;
+        return cloneElement(child, { layersCollection, viewer, clickedPosition, hoverPosition });
+      })}
+    </div>
+  );
 }
 
-export default CesiumMap
+export default CesiumMap;

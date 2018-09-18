@@ -1,3 +1,1 @@
-export default {
-  section: 'home'
-}
+export default { section: 'home' };

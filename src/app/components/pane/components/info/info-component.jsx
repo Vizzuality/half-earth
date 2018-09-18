@@ -1,6 +1,6 @@
-import React from 'react'
-import cx from 'classnames'
-import styles from './info-styles'
+import React from 'react';
+import cx from 'classnames';
+import styles from './info-styles';
 
 const Info = ({ className, onClick }) => (
   <div className={cx(styles.container, className)}>
@@ -8,6 +8,5 @@ const Info = ({ className, onClick }) => (
       ⓘ
     </button>
   </div>
-)
-
-export default Info
+);
+export default Info;

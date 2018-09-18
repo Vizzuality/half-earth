@@ -1,31 +1,27 @@
-import { cartoConfig } from 'app/utils'
-import { utils } from 'pages/map'
+import { cartoConfig } from 'app/utils';
+import { utils } from 'pages/map';
 
-const { MOLLayer } = utils
-const { MAPBOX_TOKEN } = process.env
+const { MOLLayer } = utils;
+const { MAPBOX_TOKEN } = process.env;
 
 export default [
   {
     name: 'basemap',
     opacity: 100,
     type: 'UrlTemplate',
-    keep: true,
     url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
     visible: false
   },
-
   MOLLayer('mammals:richness', 'mammals', 'richness_1km'),
   MOLLayer('amphibians:richness', 'amphibians', 'richness_1km'),
   MOLLayer('birds:richness', 'birds', 'richness_1km'),
   MOLLayer('protea:richness', 'protea', 'richness_1km'),
   MOLLayer('restio:richness', 'restio', 'richness_1km'),
-
   MOLLayer('mammals:rarity', 'mammals', 'rarity_1km'),
   // MOLLayer('amphibians:rarity', 'amphibians', 'rarity_1km'),
   MOLLayer('birds:rarity', 'birds', 'rarity_1km'),
   MOLLayer('protea:rarity', 'protea', 'rarity_1km'),
   MOLLayer('restio:rarity', 'restio', 'rarity_1km'),
-
   MOLLayer('protected-areas', 'existing-network', 'reserve-coverage'),
   {
     name: 'example-protected-areas',
@@ -47,7 +43,6 @@ export default [
     ),
     visible: false
   },
-
   {
     name: 'community-based-conservation-areas',
     opacity: 100,
@@ -68,7 +63,6 @@ export default [
     ),
     visible: false
   },
-
   {
     name: 'private-reserves',
     opacity: 100,
@@ -89,13 +83,6 @@ export default [
     ),
     visible: false
   },
-
   MOLLayer('human-pressures', 'esa/1km/80p', 'human-pressures'),
-
-  {
-    name: 'conservation-areas',
-    opacity: 100,
-    url: '',
-    visible: false
-  }
-]
+  { name: 'conservation-areas', opacity: 100, url: '', visible: false }
+];

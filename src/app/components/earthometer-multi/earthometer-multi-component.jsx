@@ -1,24 +1,19 @@
-import React from 'react'
-import cx from 'classnames'
-import startCase from 'lodash/startCase'
-import Knob from './components/knob'
+import React from 'react';
+import cx from 'classnames';
+import startCase from 'lodash/startCase';
+import Knob from './components/knob';
 
-import styles from './earthometer-styles.scss'
+import styles from './earthometer-styles.scss';
 
 const Tabs = ({ tabs, selected, setTab }) => (
   <ul className={styles.tabs}>
     {tabs.map(tab => (
-      <li
-        key={tab.key}
-        className={cx(styles.tab, {
-          [styles.tabSelected]: selected === tab.key
-        })}
-      >
+      <li key={tab.key} className={cx(styles.tab, { [styles.tabSelected]: selected === tab.key })}>
         <button onClick={() => setTab(tab.key)}>{tab.label}</button>
       </li>
     ))}
   </ul>
-)
+);
 
 const Earthometer = ({ className, tabs, setTab, selected, ...props }) => {
   return (
@@ -47,7 +42,7 @@ const Earthometer = ({ className, tabs, setTab, selected, ...props }) => {
         </span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Earthometer
+export default Earthometer;

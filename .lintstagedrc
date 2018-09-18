@@ -1,4 +1,4 @@
 {
-  "*.{js,jsx}": ["prettier --parser flow --write --single-quote --semi false", "eslint --ext .js --ext .jsx --fix", "git add"],
-  "*.scss": "stylelint --syntax=scss ./src/**/*.scss"
+  "*.{js,jsx}": ["prettier --parser flow --write --single-quote --print-width 120", "eslint --ext .js --ext .jsx --fix", "git add"],
+  "*.scss": "stylelint --syntax=scss"
 }

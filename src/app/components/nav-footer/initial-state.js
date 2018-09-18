@@ -1,3 +1,1 @@
-export default {
-  popUp: false
-}
+export default { popUp: false };

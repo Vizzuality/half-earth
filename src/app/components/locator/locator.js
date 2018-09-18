@@ -1,21 +1,26 @@
-import { createElement, Component } from 'react'
+import { createElement, Component } from 'react';
+import { connect } from 'react-redux';
 
-import LocatorComponent from './locator-component'
+import LocatorComponent from './locator-component';
+import * as actions from './locator-actions';
 
-const options = new Map()
+const options = new Map();
 
-options.set('home', 'intro')
-options.set('global', 'global')
-options.set('regional', 'regional')
+options.set('home', 'intro');
+options.set('global', 'global');
+options.set('regional', 'regional');
 
 class LocatorContainer extends Component {
-  static defaultProps = {
-    options
-  }
+  static defaultProps = { options };
 
-  render () {
-    return createElement(LocatorComponent, { ...this.props })
+  onSelect = section => {
+    this.props.navigateSection({ section });
+  };
+
+  render() {
+    return createElement(LocatorComponent, { ...this.props, onSelect: this.onSelect });
   }
 }
 
-export default LocatorContainer
+export { actions };
+export default connect(null, actions)(LocatorContainer);

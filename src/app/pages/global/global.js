@@ -1,47 +1,41 @@
-import { Component, createElement } from 'react'
-import { connect } from 'react-redux'
+import { Component, createElement } from 'react';
+import { connect } from 'react-redux';
 
-import { assign } from 'utils'
-
-import { renderDropdown, renderToggle } from 'components/explorable'
-import GlobalComponent from './global-component'
-import { requestCartos } from 'pages/map/map-utils'
-import { actions as cartoActions } from 'providers/carto'
-import { actions as sectionActions } from 'providers/section'
-import { getSection, getType } from './global-selectors'
-import * as actions from './global-actions'
-import reducers from './global-reducers'
-import initialState from './global-initial-state/global-initial-state'
+import { renderDropdown, renderToggle } from 'components/explorable';
+import GlobalComponent from './global-component';
+import { requestCartos } from 'pages/map/map-utils';
+import * as cartoActions from 'providers/carto/carto-actions';
+import * as sectionActions from 'providers/section/section-actions';
+import { getSection, getType } from './global-selectors';
+import * as actions from './global-actions';
+import reducers from './global-reducers';
+import initialState from './global-initial-state/global-initial-state';
 
 class GlobalContainer extends Component {
-  constructor (props) {
-    super(props)
-    const {
-      getCartoTiles,
-      setGlobalSectionThunk,
-      setSection,
-      layers,
-      getChartData
-    } = props
-    requestCartos({ layers, getCartoTiles })
-    setGlobalSectionThunk('global:1')
-    setSection('global:1')
-    getChartData()
+  constructor(props) {
+    super(props);
+    const { getCartoTiles, setGlobalSectionThunk, setSection, layers, getChartData } = props;
+    requestCartos({ layers, getCartoTiles });
+    setGlobalSectionThunk('global:1');
+    setSection('global:1');
+    getChartData();
   }
-  render () {
-    return createElement(GlobalComponent, assign(this.props))
+  render() {
+    return createElement(GlobalComponent, this.props);
   }
 }
 
 const mapStateToProps = state => {
-  const { map, global, section, earthometer } = state
+  const { map, global, section, earthometer } = state;
 
-  const index = Math.round(earthometer.landSaved.value)
+  const index = Math.round(earthometer.landSaved.value);
   const globalConservationPrioritization = {
     ...global.charts.globalConservationPrioritization,
-    data: (global.charts.globalConservationPrioritization.data[index] || [])
-      .map((d, i, l) => ({ ...d, isLast: i === l.length - 1 }))
-  }
+    data: (global.charts.globalConservationPrioritization.data[index] || []).map((d, i, l) => ({
+      ...d,
+      isLast: i === l.length - 1
+    }))
+  };
   return {
     map,
     sidebarOpen: state.sidebar.open,
@@ -54,12 +48,8 @@ const mapStateToProps = state => {
     landSaved: Math.round(earthometer.landSaved.value),
     oceanSaved: Math.round(earthometer.oceanSaved.value),
     globalConservationPrioritization
-  }
-}
+  };
+};
 
-export { actions, reducers, initialState }
-export default connect(mapStateToProps, {
-  ...actions,
-  ...cartoActions,
-  ...sectionActions
-})(GlobalContainer)
+export const reduxConfig = { actions, reducers, initialState };
+export default connect(mapStateToProps, { ...actions, ...cartoActions, ...sectionActions })(GlobalContainer);

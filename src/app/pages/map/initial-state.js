@@ -1,4 +1,1 @@
-export default {
-  layers: [],
-  distance: 0
-}
+export default { layers: [], distance: 0 };

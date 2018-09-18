@@ -1,1 +1,1 @@
-export { default } from './katex-component'
+export { default } from './katex-component';

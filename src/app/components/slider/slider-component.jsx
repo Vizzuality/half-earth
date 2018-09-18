@@ -1,10 +1,15 @@
-import React from 'react'
-import cx from 'classnames'
-import isEmpty from 'lodash/isEmpty'
-import { themr, themeable } from 'react-css-themr'
+/*
+  This is a fork of [React slider](https://github.com/whoisandie/react-rangeslider)
+  modified for better customization.
+*/
 
-import defaultTheme from './slider-theme.scss'
-import styles from './slider-styles.scss'
+import React from 'react';
+import cx from 'classnames';
+import isEmpty from 'lodash/isEmpty';
+import { themr, themeable } from 'react-css-themr';
+
+import defaultTheme from './slider-theme.scss';
+import styles from './slider-styles.scss';
 
 const SliderComponent = props => {
   const {
@@ -22,11 +27,11 @@ const SliderComponent = props => {
     handleDrag,
     handleEnd,
     children
-  } = props
-  const fillStyle = { [dimension]: `${coords.fill}px` }
-  const handleStyle = { [direction]: `${coords.handle}px` }
+  } = props;
+  const fillStyle = { [dimension]: `${coords.fill}px` };
+  const handleStyle = { [direction]: `${coords.handle}px` };
 
-  const thm = themeable(isEmpty(theme) ? defaultTheme : theme, styles)
+  const thm = themeable(isEmpty(theme) ? defaultTheme : theme, styles);
 
   return (
     <div
@@ -47,7 +52,7 @@ const SliderComponent = props => {
       <div ref={handleRef} className={thm.handle} style={handleStyle} />
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default themr('slider')(SliderComponent)
+export default themr('slider')(SliderComponent);

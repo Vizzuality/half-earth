@@ -1,12 +1,9 @@
-import React from 'react'
-import { ResponsiveORFrame } from 'semiotic'
+import React from 'react';
+import { ResponsiveORFrame } from 'semiotic';
 
-import styles from './barchart-styles.scss'
+import styles from './barchart-styles.scss';
 
-const axis = {
-  orient: 'left',
-  className: styles.tickLabel
-}
+const axis = { orient: 'left', className: styles.tickLabel };
 
 const Barchart = ({ data, labelKey, dataKey }) => (
   <div className={styles.barchart}>
@@ -19,11 +16,7 @@ const Barchart = ({ data, labelKey, dataKey }) => (
       oPadding={5}
       oAccessor={d => d[labelKey]}
       oLabel={d => (
-        <text
-          className={styles.tickLabel}
-          fontSize="10"
-          transform="translate(-20, 15)"
-        >
+        <text className={styles.tickLabel} fontSize="10" transform="translate(-20, 15)">
           {d}
         </text>
       )}
@@ -31,6 +24,6 @@ const Barchart = ({ data, labelKey, dataKey }) => (
       pieceClass={styles.mark}
     />
   </div>
-)
+);
 
-export default Barchart
+export default Barchart;

@@ -1,1 +1,1 @@
-export { default } from './opacity-component'
+export { default } from './opacity-component';

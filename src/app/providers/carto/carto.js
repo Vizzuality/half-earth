@@ -1,3 +1,3 @@
-import * as actions from './carto-actions'
+import * as actions from './carto-actions';
 
-export { actions }
+export { actions };

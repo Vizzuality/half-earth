@@ -7,7 +7,7 @@ const speciesSelector = selected => ({
     restio: 'Restio'
   },
   selected
-})
+});
 
 const speciesSelections = type => ({
   birds: `birds:${type}`,
@@ -15,7 +15,7 @@ const speciesSelections = type => ({
   // amphibians: `amphibians:${type}`,
   protea: `protea:${type}`,
   restio: `restio:${type}`
-})
+});
 
 export default {
   'regional:1': {
@@ -23,17 +23,9 @@ export default {
     layers: [],
     selectionType: 'richness',
     selections: speciesSelections('richness'),
-    selectors: {
-      birds: speciesSelector('mammals')
-    }
+    selectors: { birds: speciesSelector('mammals') }
   },
-  'regional:2': {
-    layers: ['protected-areas']
-  },
-  'regional:3': {
-    layers: ['conservation-areas', 'human-pressures']
-  },
-  'regional:4': {
-    layers: []
-  }
-}
+  'regional:2': { layers: [ 'protected-areas' ] },
+  'regional:3': { layers: [ 'conservation-areas', 'human-pressures' ] },
+  'regional:4': { layers: [] }
+};

@@ -48,14 +48,17 @@ Ta-da!
 
 ## Frontend Architectural choices
 
-The fronted uses react, redux and react-router.
+The fronted uses react, redux and [redux-first-router](https://github.com/faceyspacey/redux-first-router).
+
 There are some peculiarities in the architectural choices that we will outline in this section.
 
 ## Router
-The router version used in the project is `v.4.1.1`.
+Interesting [read](https://github.com/faceyspacey/redux-first-router#motivation---what-routing-in-redux-is-meant-to-be) about motivation to use it.
 
-- routes are defined as a data-structure instead of using `jsx` inside the `routes.js` file.
-- Instead of connecting the routes to the reducer via middleware we decided to use `withRouter` [HOC](https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e) instead, which means whenever you need access to the router information you will have to wrap your component with `withRouter`.
+- Routes are defined as another reducer
+- Navigation are just actions
+- You can grab the piece of state from the url that you need in any component
+- Seamless code splitting using [react-universal-component](https://github.com/faceyspacey/react-universal-component)
 
 ## Modules
 

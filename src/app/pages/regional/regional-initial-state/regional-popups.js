@@ -43,10 +43,6 @@ export default [
       'The World Database on Protected Areas includes most of the global area under formal protection. However, there are many conservation initiatives that are protecting biodiversity outside of these official reserves. For example, there are community-based conservation approaches that involve collaborations between private landowners and government bodies, while other efforts include the establishment of conservancies and the creation of private reserves.',
       'This layer highlights a handful of reserves in the cape region that play an important role in the protection of the Cape Floristic Region.'
     ],
-    keywords: [
-      'community-based conservation',
-      'private nature reserves',
-      'nature conservancies'
-    ]
+    keywords: [ 'community-based conservation', 'private nature reserves', 'nature conservancies' ]
   }
-]
+];
