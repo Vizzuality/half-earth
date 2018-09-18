@@ -41,6 +41,14 @@ class CesiumComponent extends Component {
 
   distance = 0;
 
+  setGridStatus(status) {
+    if (status) {
+      this.addGrid();
+    } else {
+      this.removeGrid();
+    }
+  }
+
   async addGrid() {
     // const grid = Cesium.GeoJsonDataSource.load('/geoms/grid.topojson');
     // this.viewer.dataSources.add(grid);
@@ -96,6 +104,10 @@ class CesiumComponent extends Component {
     this.viewer.scene.primitives.add(gridPrimitive);
   }
 
+  removeGrid() {
+    this.viewer.scene.primitives.remove(gridPrimitive);
+  }
+
   onMouseMove = movement => {
     const pickedObject = this.viewer.scene.pick(movement.endPosition);
     if (Cesium.defined(pickedObject)) {
@@ -146,7 +158,7 @@ class CesiumComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { onTick, lockNavigation = false, rotate, coordinates, coordinatesOptions, camera } = this.props;
+    const { onTick, grid, lockNavigation = false, rotate, coordinates, coordinatesOptions, camera } = this.props;
     if (this.viewer) {
       if (!this.rotating && rotate) this.addRotation();
       if (this.rotating && !rotate) this.removeRotation();
@@ -157,6 +169,9 @@ class CesiumComponent extends Component {
         coordinates && (prevProps.coordinates !== coordinates || prevProps.coordinatesOptions !== coordinatesOptions)
       ) {
         this.setCoordinates();
+      }
+      if (grid !== prevProps.grid) {
+        this.setGridStatus(grid);
       }
     }
   }
@@ -211,7 +226,7 @@ class CesiumComponent extends Component {
     const spinRate = 0.8;
     const delta = (now - lastNow) / 1000;
     this.viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, (-spinRate) * delta);
-    clock.startTime.secondsOfDay = now - 1;
+    clock.startTime.secondsOfDay = now - 1; // eslint-disable-line
   };
 
   flyTo(lat, long, z = 15000.0, rest = {}) {
@@ -247,6 +262,7 @@ CesiumComponent.propTypes = {
   grid: PropTypes.bool,
   onTick: PropTypes.func,
   onMoveEnd: PropTypes.func,
+  onMouseClick: PropTypes.func,
   lockNavigation: PropTypes.bool,
   rotate: PropTypes.func,
   coordinates: PropTypes.array,
