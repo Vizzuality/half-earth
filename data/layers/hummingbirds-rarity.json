@@ -11,7 +11,7 @@
     "bbox": [-164, -40, -35, 56],
     "legendConfig": {
         "items": [ {
-                    "value": "-16.2",
+                    "value": "low",
                     "color": "#0664f6"
                 },{
                     "value": "",
@@ -35,7 +35,7 @@
                     "value": "",
                     "color": "#bed11d"
                 },{
-                    "value": "-7.6",
+                    "value": "high",
                     "color": "#fde300"
                 }
                 ],

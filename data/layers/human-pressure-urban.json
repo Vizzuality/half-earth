@@ -5,7 +5,7 @@
     "category":"human",
     "slug":"human-pressures-urban",
     "description": null,
-    "url": "https://storage.googleapis.com/gfw-climate-tiles/hp_urban/all_v1/{z}/{x}/{y}.png",
+    "url": "https://storage.googleapis.com/gfw-climate-tiles/hp_test/urban_v1/{z}/{x}/{y}.png",
     "maxZoom": 13,
     "minZoom": 3,
     "legendConfig": {
