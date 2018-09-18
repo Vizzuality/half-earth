@@ -1,55 +1,20 @@
 @import '~styles/variables.scss';
 
-.groupCardListontainer {
+.groupCardListContainer {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.toggleButton {
-  padding: 0;
-  width: 18px;
-  height: 18px;
-  box-shadow: none;
-
-  &:hover {
-    box-shadow: none;
-  }
-}
-
 .cardContainer {
   padding: $sidebar-card-padding;
-  background-color: $color-white;
-  margin-bottom: 4px;
   overflow: hidden;
-  height: 75px;
-  transition: all 0.3s;
-
-  .groupTitle {
-    font-size: 20px;
-  }
-
-  &.open {
-    height: auto;
-    overflow: inherit;
-  }
-
-  &.customCard {
-    background-color: $color-group-card-dark-blue;
-    color: $color-white;
-    margin-bottom: 0;
-    height: auto;
-    flex-grow: 1;
-    min-height: 350px;
-
-    .groupTitle {
-      font-size: 40px;
-    }
-
-    .toggleButton {
-      display: none;
-    }
-  }
+  background-color: $color-group-card-dark-blue;
+  color: $color-white;
+  margin-bottom: 0;
+  height: auto;
+  flex-grow: 1;
+  min-height: 350px;
 }
 
 .headerContainer {
@@ -58,10 +23,6 @@
   justify-content: space-between;
 }
 
-.icon {
-  transform: rotate(90deg);
-}
-
-.iconCollapse {
-  transform: rotate(270deg);
+.groupTitle {
+  font-size: 40px;
 }
