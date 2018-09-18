@@ -2,7 +2,8 @@
 
 /* eslint global-require: 0 */
 /* eslint import/no-dynamic-require: 0 */
-const dotenv = require('dotenv').config(); // eslint-disable-line
+// eslint-disable-next-line
+const dotenv = require('dotenv').config();
 
 const { join, resolve } = require('path');
 const webpack = require('webpack');
@@ -15,76 +16,37 @@ const publicPath = join(basePath, 'public');
 const appPath = resolve(sourcePath, 'app');
 
 const sassConfig = [
-  {
-    loader: 'css-loader',
-    query: {
-      modules: true,
-      localIdentName: '[name]__[local]__[hash:base64:5]'
-    }
-  },
+  { loader: 'css-loader', query: { modules: true, localIdentName: '[name]__[local]__[hash:base64:5]' } },
   { loader: 'postcss-loader' },
   { loader: `sass-loader?includePaths[]='${appPath}'` }
 ];
 
 module.exports = {
-  paths: {
-    basePath,
-    sourcePath,
-    publicPath,
-    appPath
-  },
+  paths: { basePath, sourcePath, publicPath, appPath },
   sassConfig,
   config: {
-    entry: ['babel-polyfill', join(sourcePath, 'main.jsx')],
+    entry: [ 'babel-polyfill', join(sourcePath, 'main.jsx') ],
     output: {
-      filename: 'scripts/[name].[chunkhash].js',
-      chunkFilename: 'scripts/[name].[chunkhash].js',
+      filename: 'scripts/[name].[hash].js',
+      chunkFilename: 'scripts/[name].[hash].js',
       path: publicPath,
       publicPath: '/'
     },
     module: {
       rules: [
-        {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader']
-        },
-        {
-          test: /\.(js|jsx)$/,
-          include: sourcePath,
-          loader: 'babel-loader'
-        },
-        {
-          test: /\.svg$/,
-          use: [
-            {
-              loader: 'svg-sprite-loader'
-            }
-          ]
-        },
+        { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
+        { test: /\.(js|jsx)$/, include: sourcePath, loader: 'babel-loader' },
+        { test: /\.svg$/, use: [ { loader: 'svg-sprite-loader' } ] },
         {
           test: /\.(jpg|jpeg|png|gif|eot|ttf|woff|woff2)$/i,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                publicPath,
-                name: '[name].[ext]'
-              }
-            }
-          ]
+          use: [ { loader: 'file-loader', options: { publicPath, name: '[name].[ext]' } } ]
         }
       ]
     },
-
     resolve: {
-      extensions: ['.js', '.jsx', '.css', '.scss', '.sass'],
-      modules: [
-        resolve(sourcePath),
-        resolve(publicPath),
-        resolve(sourcePath, 'app'),
-        'node_modules'
-      ],
-      plugins: [new DirectoryNamedWebpackPlugin(true)],
+      extensions: [ '.js', '.jsx', '.css', '.scss', '.sass' ],
+      modules: [ resolve(sourcePath), resolve(publicPath), resolve(sourcePath, 'app'), 'node_modules' ],
+      plugins: [ new DirectoryNamedWebpackPlugin(true) ],
       alias: {
         app: 'app',
         assets: 'app/assets',
@@ -94,7 +56,6 @@ module.exports = {
         utils: 'app/utils'
       }
     },
-
     plugins: [
       new HtmlWebpackPlugin({
         filename: 'index.html',
@@ -102,19 +63,9 @@ module.exports = {
         inject: 'body',
         GOOGLE_ANALYTICS: JSON.stringify(process.env.GOOGLE_ANALYTICS)
       }),
-      new webpack.EnvironmentPlugin({
-        NODE_ENV: 'development',
-        MAPBOX_TOKEN: null
-      })
+      new webpack.EnvironmentPlugin({ NODE_ENV: 'development', MAPBOX_TOKEN: null })
     ],
-
-    resolveLoader: {
-      modules: ['node_modules']
-    },
-
-    node: {
-      fs: 'empty',
-      net: 'empty'
-    }
+    resolveLoader: { modules: [ 'node_modules' ] },
+    node: { fs: 'empty', net: 'empty' }
   }
 };
