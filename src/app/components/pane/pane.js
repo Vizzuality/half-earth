@@ -1,4 +1,3 @@
-import PaneComponent from './pane-component';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import identity from 'lodash/identity';
@@ -9,6 +8,7 @@ import { pick } from 'app/utils';
 import * as regionalActions from 'pages/regional/regional-actions';
 import * as globalActions from 'pages/global/global-actions';
 import { layersInfo } from 'data/layers-info';
+import PaneComponent from './pane-component';
 
 import reducers from './pane-reducers';
 import * as actions from './pane-actions';
@@ -17,14 +17,11 @@ import initialState from './pane-initial-state';
 const dToKey = d => kebabCase(last(d.name.split(':')));
 const addInfo = (data, infos, page) =>
   data &&
-    data.map(
-      datum =>
-        {
-          ...datum,
-          info: pick(find(infos, { key: dToKey(datum) }) || find(infos, { key: `${page}-${dToKey(datum)}` }), 'key')
-        } ||
-          []
-    );
+    data.map(datum => ({
+      ...datum,
+      info: pick(find(infos, { key: dToKey(datum) }) || find(infos, { key: `${page}-${dToKey(datum)}` }), 'key')
+    })) ||
+    [];
 
 const mapStateToProps = (state, { page, ...props }) => {
   const { popup, opacities } = state.pane;
