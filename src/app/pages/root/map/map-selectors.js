@@ -18,6 +18,11 @@ export const getCoordinates = createSelector([ selectQueryParams ], query => {
   return query.coordinates;
 });
 
+export const getTerrainMode = createSelector([ selectQueryParams ], query => {
+  if (!query || !query.terrain) return undefined;
+  return query.terrain;
+});
+
 export const getCoordinatesOptions = createSelector([ selectQueryParams ], query => {
   if (!query || !query.orientation) return undefined;
   const [ heading, pitch, roll ] = query.orientation;
@@ -26,6 +31,7 @@ export const getCoordinatesOptions = createSelector([ selectQueryParams ], query
 
 export const mapStateToProps = createStructuredSelector({
   layers: getDatasetsFiltered,
+  terrainMode: getTerrainMode,
   query: selectQueryParams,
   coordinates: getCoordinates,
   coordinatesOptions: getCoordinatesOptions
