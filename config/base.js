@@ -27,14 +27,14 @@ module.exports = {
   config: {
     entry: [ 'babel-polyfill', join(sourcePath, 'main.jsx') ],
     output: {
-      filename: 'scripts/[name].[hash].js',
-      chunkFilename: 'scripts/[name].[hash].js',
+      filename: 'scripts/[name].[chunkhash].js',
+      chunkFilename: 'scripts/[name].[chunkhash].js',
       path: publicPath,
       publicPath: '/'
     },
     module: {
       rules: [
-        { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
+        { test: /\.css$/, use: [ { loader: 'style-loader', options: { insertAt: 'top' } }, 'css-loader' ] },
         { test: /\.(js|jsx)$/, include: sourcePath, loader: 'babel-loader' },
         { test: /\.svg$/, use: [ { loader: 'svg-sprite-loader' } ] },
         {
@@ -63,7 +63,7 @@ module.exports = {
         inject: 'body',
         GOOGLE_ANALYTICS: JSON.stringify(process.env.GOOGLE_ANALYTICS)
       }),
-      new webpack.EnvironmentPlugin({ NODE_ENV: 'development', MAPBOX_TOKEN: null })
+      new webpack.EnvironmentPlugin({ NODE_ENV: 'production', MAPBOX_TOKEN: null })
     ],
     resolveLoader: { modules: [ 'node_modules' ] },
     node: { fs: 'empty', net: 'empty' }
