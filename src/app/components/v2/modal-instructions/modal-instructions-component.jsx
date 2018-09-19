@@ -29,7 +29,8 @@ const touchInstructions = [
   { icon: rotate, title: 'Rotate view', text: 'Two finger drag, opposite direction' }
 ];
 
-function instructionCombo(icon, title, explanation) {
+function instructionCombo(action) {
+  const { icon, title, explanation } = action;
   return (
     <div className={styles.isntructionCombo} key={title}>
       <Icon icon={icon} theme={{ icon: styles.gestures }} />
@@ -42,7 +43,7 @@ function instructionCombo(icon, title, explanation) {
 function renderInstructions(instructionsArray) {
   return (
     <div className={styles.instructionsContainer}>
-      {instructionsArray.map(action => instructionCombo(action.icon, action.title, action.text))}
+      {instructionsArray.map(action => instructionCombo(action))}
     </div>
   );
 }
