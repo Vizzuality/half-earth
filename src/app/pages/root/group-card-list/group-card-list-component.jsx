@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Loading } from 'he-components';
-import AccordionCard from 'components/v2/accordion-card';
+import { Loading, AccordionCard } from 'he-components';
 import chevronIcon from 'assets/icons/icon-chevron.svg';
 import CategoriesList from '../categories-list';
 

@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { SwitchInput, Button } from 'he-components';
-import Checkbox from 'components/v2/checkbox';
-import checkboxTheme from 'styles/themes/checkbox-theme.scss';
+import { SwitchInput, Button, Checkbox } from 'he-components';
 import halfEarthSwitchTheme from 'styles/themes/half-earth-switch-theme.scss';
 
 import styles from './dataset-combo-styles.scss';
@@ -35,7 +33,6 @@ const DatasetComboComponent = props => {
                       <Checkbox
                         key={layer.slug}
                         id={layer.slug}
-                        theme={checkboxTheme}
                         label={layer.name}
                         checked={layer.active}
                         onChange={() =>
