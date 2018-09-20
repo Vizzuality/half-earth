@@ -5,7 +5,7 @@ import cx from 'classnames';
 import ModalMetadata from 'components/v2/modal-metadata';
 import ModalInstructions from 'components/v2/modal-instructions';
 
-import CategoriesList from './categories-list';
+import GroupCardList from './group-card-list';
 import Map from './map';
 import Toolbar from './toolbar';
 import Legend from './legend';
@@ -44,7 +44,7 @@ class RootPageComponent extends React.Component {
           showSidebar && (
           <Sidebar theme={styles} visible={sidebarOpen} onToggle={this.handleOnToggle}>
             <div className={styles.sidebarContainer}>
-              <CategoriesList />
+              <GroupCardList />
             </div>
           </Sidebar>
             )

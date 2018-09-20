@@ -27,8 +27,8 @@ module.exports = {
   config: {
     entry: [ 'babel-polyfill', join(sourcePath, 'main.jsx') ],
     output: {
-      filename: 'scripts/[name].[chunkhash].js',
-      chunkFilename: 'scripts/[name].[chunkhash].js',
+      filename: 'scripts/[name].[hash].js',
+      chunkFilename: 'scripts/[name].[hash].js',
       path: publicPath,
       publicPath: '/'
     },

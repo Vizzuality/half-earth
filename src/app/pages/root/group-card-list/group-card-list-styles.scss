@@ -1,0 +1,28 @@
+@import '~styles/variables.scss';
+
+.groupCardListContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cardContainer {
+  padding: $sidebar-card-padding;
+  overflow: hidden;
+  background-color: $color-group-card-dark-blue;
+  color: $color-white;
+  margin-bottom: 0;
+  height: auto;
+  flex-grow: 1;
+  min-height: 350px;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.groupTitle {
+  font-size: 40px;
+}

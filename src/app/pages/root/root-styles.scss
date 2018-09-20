@@ -9,7 +9,6 @@
 .sidebarContainer {
   height: 100%;
   overflow: auto;
-  padding-right: 30px;
 }
 
 .sidebar {
@@ -17,9 +16,10 @@
   left: 0;
   top: 0;
   width: $sidebar-width;
-  padding-right: 0;
+  padding: 0;
   z-index: 20;
   bottom: 0;
+  background-color: $color-light-gray;
 }
 
 .toolbar {

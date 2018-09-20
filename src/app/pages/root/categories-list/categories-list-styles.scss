@@ -1,7 +1,8 @@
 @import '~styles/variables.scss';
 
 .category {
-  margin-bottom: $site-gutter;
+  margin-bottom: $site-padding;
+  color: inherit;
 
   &Section {
     display: flex;
@@ -9,49 +10,53 @@
     align-items: center;
     margin: $site-gutter / 2 0;
   }
-
-  &Title {
-    margin: 0;
-    font-size: 13px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1.25px;
-    line-height: 16px;
-  }
-
-  &Description {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 20px;
-    margin: 0 $site-gutter / 2 0 0;
-  }
 }
 
-.dataset {
+.categoryTitle,
+.featuredTitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.25px;
+  line-height: 16px;
+}
+
+.categoryDescription,
+.featuredDescription {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  margin: 0 $site-gutter / 2 0 0;
+}
+
+.featuredTitle,
+.featuredDescription {
+  margin: 10px 0;
+}
+
+.featuredCategory {
+  border: 1px solid $color-light-gray;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.featuredCategoryContentContainer {
+  padding: 20px 30px;
+}
+
+.featuredImage {
+  width: 100%;
+  height: 150px;
+  background-position: center;
+  background-size: cover;
+}
+
+.datasetComboWrapper {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin: $site-gutter / 2 0;
-
-  &:first-of-type {
-    margin-top: $site-gutter;
-  }
-
-  &MultiLayer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-.multiLayerWrapper {
-  display: flex;
-  flex-direction: column;
-  margin-left: $site-gutter;
-  margin-top: $site-gutter / 2;
-}
-
-.subLayerSwitch {
-  margin: $site-gutter / 4 0;
+  margin-top: $site-gutter;
 }
 
 // TODO: do this with real values
@@ -80,8 +85,8 @@
 }
 
 .metadataBtn {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
   padding: 0;
   align-items: center;
   min-width: 0;
