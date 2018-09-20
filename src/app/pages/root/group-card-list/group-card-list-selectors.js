@@ -1,6 +1,6 @@
 import { groupBy } from 'lodash';
 import { createSelector, createStructuredSelector } from 'reselect';
-import { selectDatasetsLoading, getDatasets } from 'selectors/datasets-selectors';
+import { selectDatasetsLoading } from 'selectors/datasets-selectors';
 import { selectCategoriesLoading, getDatasetsByCategory } from 'selectors/categories-selectors';
 import { selectQueryParams } from 'selectors/location-selectors';
 
@@ -11,40 +11,49 @@ export const getCategoriesLoading = createSelector(
 
 const getLayersActive = createSelector([ selectQueryParams ], query => query && query.activeLayers);
 
-export const getCategoriesGroups = createSelector(
-  getDatasetsByCategory,
-  categories => Object.values(groupBy(categories, 'groupSlug'))
-);
-
-export const getGroupCardsOpen = createSelector([ getCategoriesGroups, getLayersActive, getDatasets ], (
-  groups,
-  layersActive,
-  datasets
+export const getCategoriesActive = createSelector([ getDatasetsByCategory, getLayersActive ], (
+  categories,
+  layersActive
 ) =>
   {
-    const datasetsInGroups = groups.map(group => {
-      const groupDatasets = [];
-      group.forEach(cat => {
-        groupDatasets.push(cat.datasets.map(dataset => dataset.slug));
-      });
-      return { group: group[0].groupSlug, datasets: groupDatasets.reduce((acc, val) => acc.concat(val), []) };
-    });
-    const openDatasets = datasets &&
-      (datasets.filter(
-        dat =>
-          dat.layers.filter(
-            l => layersActive && layersActive.find(active => active.slug === l.slug) !== undefined
-          ).length >
-            0
-      ) ||
-        []);
-    return datasetsInGroups
-      .filter(g => g.datasets.some(d => openDatasets.find(o => o.slug === d)))
-      .map(group => group.group);
+    if (!categories) return null;
+    if (!layersActive) return categories;
+    const layerActiveSlugs = layersActive.map(layer => layer.slug);
+    const categoriesActive = categories.map(category => ({
+      ...category,
+      datasets: category.datasets.map(dataset => {
+        const layers = dataset.layers.map(layer => ({ ...layer, active: layerActiveSlugs.includes(layer.slug) }));
+        const active = layers.some(l => l.active);
+        return { ...dataset, active, layers };
+      })
+    }));
+    return categoriesActive;
   });
+
+export const getCategoriesGroups = createSelector(getCategoriesActive, categories => {
+  if (!categories) return null;
+  const groupedCategories = groupBy(categories, 'groupSlug');
+  return Object
+    .keys(groupedCategories)
+    .map(key => ({ slug: key, title: groupedCategories[key][0].groupName, categories: groupedCategories[key] }));
+});
+
+export const getGroupCardsOpen = createSelector([ getCategoriesGroups ], groups => {
+  if (!groups) return null;
+  const groupsOpen = groups.map(group => {
+    const isOpen = group.categories.reduce(
+      (acc, category) => {
+        const hasLayersActive = category.datasets.some(d => d.active);
+        return hasLayersActive || acc;
+      },
+      false
+    );
+    return { ...group, isOpen };
+  });
+  return groupsOpen;
+});
 
 export const mapStateToProps = createStructuredSelector({
   loading: getCategoriesLoading,
-  categoriesGroups: getCategoriesGroups,
-  openGroups: getGroupCardsOpen
+  categoriesGroups: getGroupCardsOpen
 });

@@ -7,29 +7,25 @@ import styles from './group-card-list-styles';
 
 class GroupCardListComponent extends Component {
   render() {
-    const { loading, categoriesGroups, openGroups } = this.props;
+    const { loading, categoriesGroups } = this.props;
     if (loading) return <Loading height={300} />;
     return (
       <div className={styles.groupCardListContainer}>
         {
           categoriesGroups && categoriesGroups.map(
               group =>
-                group[0].groupSlug !== 'half-earth-view'
+                group.slug !== 'half-earth-view'
                   ? (
-                    <AccordionCard
-                      key={group[0].groupName}
-                      isOpen={openGroups.includes(group[0].groupSlug)}
-                      title={group[0].groupName}
-                    >
-                      <CategoriesList categories={group} />
+                    <AccordionCard key={group.slug} isOpen={group.isOpen} title={group.title}>
+                      <CategoriesList categories={group.categories} />
                     </AccordionCard>
 )
                   : (
-                    <div key={group[0].groupName} className={styles.cardContainer}>
+                    <div key={group.slug} className={styles.cardContainer}>
                       <div className={styles.headerContainer}>
-                        <h2 className={styles.groupTitle}>{group[0].groupName}</h2>
+                        <h2 className={styles.groupTitle}>{group.title}</h2>
                       </div>
-                      <CategoriesList categories={group} />
+                      <CategoriesList categories={group.categories} />
                     </div>
 )
             )
@@ -39,12 +35,8 @@ class GroupCardListComponent extends Component {
   }
 }
 
-GroupCardListComponent.propTypes = {
-  loading: PropTypes.bool,
-  categoriesGroups: PropTypes.array,
-  openGroups: PropTypes.array
-};
+GroupCardListComponent.propTypes = { loading: PropTypes.bool, categoriesGroups: PropTypes.array };
 
-GroupCardListComponent.defaultProps = { loading: false, categoriesGroups: [], openGroups: [] };
+GroupCardListComponent.defaultProps = { loading: false, categoriesGroups: [] };
 
 export default GroupCardListComponent;
