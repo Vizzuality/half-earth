@@ -14,7 +14,14 @@ class MapComponent extends PureComponent {
 
   map = null;
 
-  primitives = {};
+  gridLayers = {};
+
+  componentWillUpdate(nextProps) {
+    const { terrainMode } = this.props;
+    if (nextProps.terrainMode && terrainMode === false) {
+      this.gridLayers = {};
+    }
+  }
 
   handleMouseMove = e => {
     if (this.map) {
@@ -30,7 +37,8 @@ class MapComponent extends PureComponent {
   };
 
   handleGridMove = (e, object) => {
-    const primitive = this.primitives[object.id.slug];
+    const gridLayer = this.gridLayers[object.id.slug];
+    const { primitive } = gridLayer;
     if (primitive && (!this.lastObjId || this.lastObjId.cellId !== object.id.cellId)) {
       const attributes = primitive.getGeometryInstanceAttributes(object.id);
       if (attributes) {
@@ -48,12 +56,16 @@ class MapComponent extends PureComponent {
 
   handleNoGridMove = () => {
     if (this.lastObjId) {
-      Object.values(this.primitives).forEach(primitive => {
-        const lastAttributes = primitive.getGeometryInstanceAttributes(this.lastObjId);
-        if (lastAttributes) {
-          lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(Cesium.Color.WHITE.withAlpha(0.3));
-        }
-      });
+      Object
+        .values(this.gridLayers)
+        .filter(gl => !!gl)
+        .forEach(({ primitive }) => {
+          const lastAttributes = primitive.getGeometryInstanceAttributes &&
+            primitive.getGeometryInstanceAttributes(this.lastObjId);
+          if (lastAttributes) {
+            lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(Cesium.Color.WHITE.withAlpha(0.3));
+          }
+        });
       this.lastObjId = null;
     }
   };
@@ -79,7 +91,10 @@ class MapComponent extends PureComponent {
   };
 
   setMapTerrain = (coordinates, orientation, gridId) => {
-    this.props.updateMapParams({ terrain: true, coordinates, orientation, gridId });
+    const { query } = this.props;
+    const gridLayerSlugs = Object.keys(this.gridLayers);
+    const activeLayers = query.activeLayers.filter(l => gridLayerSlugs.includes(l));
+    this.props.updateMapParams({ terrain: true, activeLayers, coordinates, orientation, gridId });
   };
 
   render() {
@@ -106,11 +121,14 @@ class MapComponent extends PureComponent {
               </LayerManager>
               {
                 hasGridLayers && gridLayers.map(layer => (
-                  <GridLayer key={layer.slug} layer={layer} map={map}>
-                    {primitive => {
-                        this.primitives[layer.slug] = primitive;
+                  <GridLayer
+                    key={layer.slug}
+                    layer={layer}
+                    map={map}
+                    ref={gridLayer => {
+                        this.gridLayers[layer.id] = gridLayer;
                       }}
-                  </GridLayer>
+                  />
                   ))
               }
             </React.Fragment>
@@ -122,6 +140,7 @@ class MapComponent extends PureComponent {
 }
 
 MapComponent.propTypes = {
+  query: PropTypes.object,
   layers: PropTypes.array,
   gridLayers: PropTypes.array,
   terrainMode: PropTypes.bool,
@@ -132,6 +151,7 @@ MapComponent.propTypes = {
 };
 
 MapComponent.defaultProps = {
+  query: null,
   layers: [],
   gridLayers: [],
   className: '',

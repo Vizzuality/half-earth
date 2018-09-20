@@ -2,40 +2,40 @@ import { createSelector, createStructuredSelector } from 'reselect';
 import { getDatasets } from 'selectors/datasets-selectors';
 import { selectQueryParams } from 'selectors/location-selectors';
 
-export const getDatasetsFiltered = createSelector([ getDatasets ], datasets => {
+export const getLayersFiltered = createSelector([ getDatasets ], datasets => {
   if (!datasets) return null;
   return datasets.reduce(
     (acc, dataset) => {
       if (!dataset.active) return acc;
-      return [ ...acc, ...dataset.layers.filter(layer => layer.active) ];
+      return [
+        ...acc,
+        ...dataset.layers
+          .filter(layer => layer.active)
+          .map(layer => ({ ...layer, slug: dataset.slug }))
+      ];
     },
     []
   );
 });
 
-export const getDatasetsFilteredWithoutGrid = createSelector([ getDatasetsFiltered ], datasets => {
-  if (!datasets) return undefined;
-  return datasets.filter(d => d.type !== 'grid');
+export const getTerrainMode = createSelector([ selectQueryParams ], query => {
+  if (!query) return undefined;
+  return typeof query.terrain === 'string' ? query.terrain === 'true' : query.terrain;
 });
 
-export const getDatasetFilteredByGrid = createSelector([ getDatasetsFiltered ], datasets => {
-  if (!datasets) return undefined;
-  return [
-    {
-      slug: 'terrain',
-      query: 'https://half-earth.carto.com/api/v2/sql?q=SELECT cell_id, ST_AsGeoJSON(ST_SimplifyPreserveTopology(the_geom, 0.1)) as the_geom FROM terrestrial_grid'
-    }
-  ];
+export const getLayersFilteredWithoutGrid = createSelector([ getLayersFiltered ], layers => {
+  if (!layers) return undefined;
+  return layers.filter(d => d.dataset !== 'grids');
+});
+
+export const getDatasetFilteredByGrid = createSelector([ getLayersFiltered ], layers => {
+  if (!layers) return undefined;
+  return layers.filter(d => d.dataset === 'grids');
 });
 
 export const getCoordinates = createSelector([ selectQueryParams ], query => {
   if (!query || !query.coordinates) return undefined;
   return query.coordinates;
-});
-
-export const getTerrainMode = createSelector([ selectQueryParams ], query => {
-  if (!query || !query.terrain) return undefined;
-  return query.terrain == 'true'; // eslint-disable-line eqeqeq
 });
 
 export const getCoordinatesOptions = createSelector([ selectQueryParams ], query => {
@@ -45,7 +45,7 @@ export const getCoordinatesOptions = createSelector([ selectQueryParams ], query
 });
 
 export const mapStateToProps = createStructuredSelector({
-  layers: getDatasetsFilteredWithoutGrid,
+  layers: getLayersFilteredWithoutGrid,
   gridLayers: getDatasetFilteredByGrid,
   terrainMode: getTerrainMode,
   query: selectQueryParams,
