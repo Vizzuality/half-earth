@@ -43,7 +43,7 @@ function instructionCombo(action) {
 function renderInstructions(instructionsArray) {
   return (
     <div className={styles.instructionsContainer}>
-      {instructionsArray.map(action => instructionCombo(action))}
+      {instructionsArray.map(instructionCombo)}
     </div>
   );
 }
@@ -56,7 +56,7 @@ class ModalInfoContentComponent extends Component {
         <div className={styles.contentContainer}>
           <p className={styles.subTitle}>{`Instructions - ${isTouchScreen ? 'touch' : 'mouse'}`}</p>
           <h1 className={styles.title}>How to navigate:</h1>
-          {isTouchScreen ? renderInstructions(touchInstructions) : renderInstructions(mouseInstructions)}
+          {renderInstructions(isTouchScreen ? touchInstructions : mouseInstructions)}
           <div className={styles.actionsRow}>
             <Button theme={{ button: styles.button }} onClick={() => setModalInstructionsParams({ isOpen: false })}>
               ok

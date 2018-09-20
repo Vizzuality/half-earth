@@ -1,5 +1,9 @@
 @import '~styles/variables.scss';
 
+.modalContainer {
+  overflow: auto;
+}
+
 .modal {
   height: auto;
   padding: 60px 90px;
