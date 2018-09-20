@@ -48,6 +48,7 @@ class CesiumComponent extends Component {
     if (coordinates) this.setCoordinates();
     if (camera) this.setCamera();
     this.setEventListeners();
+    this.forceUpdate(); // Doing this to notify childrens it is ready
   }
 
   componentDidUpdate(prevProps) {

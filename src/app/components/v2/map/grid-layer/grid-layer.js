@@ -2,18 +2,10 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class GridLayer extends Component {
-  static primitive = null;
-
-  constructor(props) {
-    super(props);
-    this.state = { ready: false };
-  }
+  primitive = null;
 
   componentDidMount() {
-    const { layer, map } = this.props;
-    if (layer && layer.query && map) {
-      this.addGrid();
-    }
+    this.addGrid();
   }
 
   componentWillUnmount() {
@@ -22,15 +14,25 @@ class GridLayer extends Component {
 
   async addGrid() {
     const { layer, map } = this.props;
-    const { rows } = await fetch(layer.query).then(d => d.json());
+    const { layerConfig } = layer;
+    let query = '';
+    try {
+      const { sql } = layerConfig && layerConfig.body.layers && layerConfig.body.layers[0].options;
+      query = `https://${layer.layerConfig.account}.carto.com/api/v2/sql?q=${sql}`;
+    } catch (e) {
+      console.warn(e);
+      return;
+    }
+    const { rows } = await fetch(query).then(d => d.json());
     let geometryInstances;
     if (rows && rows.length) {
-      geometryInstances = rows.map(row => {
+      geometryInstances = rows.reduce((acc, row) => {
         let coordinates;
         try {
           coordinates = JSON.parse(row.the_geom).coordinates[0].map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]));
         } catch (e) {
           console.warn(e);
+          return acc;
         }
         // Polyline grid
         // const polygon = new Cesium.GeometryInstance({
@@ -41,20 +43,22 @@ class GridLayer extends Component {
         //   }),
         //   id: rectangles[i].id
         // });
-        return coordinates
-          ? new Cesium.GeometryInstance({
-            geometry: new Cesium.PolygonGeometry({
-              polygonHierarchy: new Cesium.PolygonHierarchy(coordinates),
-              height: 0
-            }),
-            id: { grid: true, slug: layer.slug, cellId: row.cell_id },
-            attributes: { color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.WHITE.withAlpha(0.3)) }
-          })
-          : null;
-      });
+        const polygon = new Cesium.GeometryInstance({
+          geometry: new Cesium.PolygonGeometry({
+            polygonHierarchy: new Cesium.PolygonHierarchy(coordinates),
+            height: 0
+          }),
+          id: { grid: true, slug: layer.id, cellId: row.cell_id },
+          attributes: { color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.WHITE.withAlpha(0.3)) }
+        });
+        if (polygon) {
+          acc.push(polygon);
+        }
+        return acc;
+      }, []);
     }
     // Polyline grid
-    // GridLayer.primitive = new Cesium.Primitive({
+    // this.primitive = new Cesium.Primitive({
     //   geometryInstances,
     //   appearance : new Cesium.PolylineMaterialAppearance({
     //     material : Cesium.Material.fromType('PolylineOutline', {
@@ -64,8 +68,8 @@ class GridLayer extends Component {
     //     })
     //   })
     // });
-    if (geometryInstances && map) {
-      GridLayer.primitive = new Cesium.Primitive({
+    if (geometryInstances.length > 0 && map) {
+      this.primitive = new Cesium.Primitive({
         geometryInstances,
         // Needed to style each one on a different way
         appearance: new Cesium.PerInstanceColorAppearance(),
@@ -73,29 +77,25 @@ class GridLayer extends Component {
         vertexCacheOptimize: true,
         compressVertices: true
       });
-      map.scene.primitives.add(GridLayer.primitive);
-      this.setState({ ready: true });
+      map.scene.primitives.add(this.primitive);
+      this.forceUpdate(); // Doing this to notify childrens it is ready
     }
   }
 
   removeGrid() {
     const { map } = this.props;
     if (map) {
-      map.scene.primitives.remove(GridLayer.primitive);
+      map.scene.primitives.remove(this.primitive);
     }
   }
 
   render() {
-    return this.state.ready && this.props.children ? this.props.children(GridLayer.primitive) || null : null;
+    return this.props.children ? this.props.children(this.primitive) || null : null;
   }
 }
 
-GridLayer.propTypes = {
-  layer: PropTypes.shape({ slug: PropTypes.string, query: PropTypes.string }),
-  map: PropTypes.object,
-  children: PropTypes.func.isRequired
-};
+GridLayer.propTypes = { layer: PropTypes.object, map: PropTypes.object, children: PropTypes.func };
 
-GridLayer.defaultProps = { layer: null, map: null };
+GridLayer.defaultProps = { layer: null, map: null, children: null };
 
 export default GridLayer;
