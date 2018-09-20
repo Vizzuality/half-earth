@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { SwitchInput, Button, Checkbox } from 'he-components';
-import halfEarthSwitchTheme from 'styles/themes/half-earth-switch-theme.scss';
 
 import styles from './dataset-combo-styles.scss';
 
@@ -18,7 +17,7 @@ const DatasetComboComponent = props => {
         key={dataset.slug}
         id={dataset.slug}
         checked={dataset.active}
-        theme={category.slug === 'he-movement' ? halfEarthSwitchTheme : { label: styles.label }}
+        dark={category.slug === 'he-movement'}
         onChange={() => handleSwitchChange(category, dataset.slug, dataset.active)}
         label={dataset.name}
       />

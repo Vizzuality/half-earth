@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Loading, AccordionCard } from 'he-components';
-import chevronIcon from 'assets/icons/icon-chevron.svg';
 import CategoriesList from '../categories-list';
 
 import styles from './group-card-list-styles';
@@ -21,7 +20,6 @@ class GroupCardListComponent extends Component {
                       key={group[0].groupName}
                       isOpen={openGroups.includes(group[0].groupSlug)}
                       title={group[0].groupName}
-                      icon={chevronIcon}
                     >
                       <CategoriesList categories={group} />
                     </AccordionCard>
