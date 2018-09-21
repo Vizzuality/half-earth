@@ -22,6 +22,8 @@ In order to get your application running you'll need to setup some environment v
 ```
 NODE_ENV=
 MAPBOX_TOKEN=
+CONTENTFUL_SPACE_ID=
+CONTENTFUL_TOKEN=
 ```
 
 ### Developing The App

@@ -63,7 +63,12 @@ module.exports = {
         inject: 'body',
         GOOGLE_ANALYTICS: JSON.stringify(process.env.GOOGLE_ANALYTICS)
       }),
-      new webpack.EnvironmentPlugin({ NODE_ENV: 'production', MAPBOX_TOKEN: null })
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'production',
+        MAPBOX_TOKEN: null,
+        CONTENTFUL_SPACE_ID: null,
+        CONTENTFUL_TOKEN: null
+      })
     ],
     resolveLoader: { modules: [ 'node_modules' ] },
     node: { fs: 'empty', net: 'empty' }
