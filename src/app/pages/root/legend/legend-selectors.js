@@ -8,22 +8,12 @@ export const getDatasetsFiltered = createSelector([ getDatasets ], datasets => {
   return datasets.filter(d => d.active);
 });
 
-function getDatasetNameByLayer(dataset, layer) {
-  if (!dataset) return '';
-  switch (dataset.slug) {
-    case 'grids':
-      return layer.name;
-    default:
-      return `${dataset.name} ${layer.name}`;
-  }
-}
-
 export const getDatasetLayersParsed = createSelector([ getDatasetsFiltered ], datasets => {
   if (!datasets) return null;
   return sortBy(
     datasets.map(dataset => ({
       ...dataset,
-      layers: dataset.layers.map(layer => ({ ...layer, name: getDatasetNameByLayer(dataset, layer) }))
+      layers: dataset.layers.map(layer => ({ ...layer, name: layer.legendConfig.title || layer.name }))
     })),
     'order'
   );

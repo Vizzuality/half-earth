@@ -48,6 +48,7 @@ class CategoriesListComponent extends Component {
             <h2 className={styles.categoryTitle}>{category.name}</h2>
             {category.metadata && this.renderInfoButton(category)}
           </div>
+          <p className={styles.categoryDescription}>{category.description}</p>
           {category.datasets.map(dataset => (
             <DatasetCombo
               dataset={dataset}

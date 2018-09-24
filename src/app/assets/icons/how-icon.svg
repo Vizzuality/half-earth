@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>help-circle</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Half-Earth-map" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="HE-map---Default" transform="translate(-1234.000000, -58.000000)">
+            <g id="map-navigation" transform="translate(1228.000000, 20.000000)">
+                <g id="help" transform="translate(0.000000, 33.000000)">
+                    <g id="help-circle" transform="translate(7.000000, 6.000000)">
+                        <circle id="Oval" stroke="#0A212E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" cx="10" cy="10" r="10"></circle>
+                        <path d="M7.09,7 C7.57543688,5.62004444 8.98538362,4.79140632 10.4271763,5.0387121 C11.868969,5.28601788 12.9221794,6.53715293 12.92,8 C12.92,10 9.92,11 9.92,11" id="Shape" stroke="#0A212E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <circle id="Oval-2" fill="#0A212E" fill-rule="nonzero" cx="10" cy="15" r="1"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
