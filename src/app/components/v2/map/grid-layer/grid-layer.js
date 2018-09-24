@@ -8,12 +8,20 @@ class GridLayer extends Component {
     this.addGrid();
   }
 
+  componentDidUpdate() {
+    const { map, showOnHeight } = this.props;
+    const height = map.camera.getMagnitude();
+    if (this.primitive) {
+      this.primitive.show = height <= showOnHeight;
+    }
+  }
+
   componentWillUnmount() {
     this.removeGrid();
   }
 
   async addGrid() {
-    const { layer, map } = this.props;
+    const { layer, map, showOnHeight } = this.props;
     const { layerConfig } = layer;
     let query = '';
     try {
@@ -75,7 +83,8 @@ class GridLayer extends Component {
         appearance: new Cesium.PerInstanceColorAppearance(),
         interleave: true,
         vertexCacheOptimize: true,
-        compressVertices: true
+        compressVertices: true,
+        show: map.camera.getMagnitude() <= showOnHeight
       });
       map.scene.primitives.add(this.primitive);
       this.forceUpdate(); // Doing this to notify childrens it is ready
@@ -94,8 +103,13 @@ class GridLayer extends Component {
   }
 }
 
-GridLayer.propTypes = { layer: PropTypes.object, map: PropTypes.object, children: PropTypes.func };
+GridLayer.propTypes = {
+  layer: PropTypes.object,
+  map: PropTypes.object,
+  children: PropTypes.func,
+  showOnHeight: PropTypes.number
+};
 
-GridLayer.defaultProps = { layer: null, map: null, children: null };
+GridLayer.defaultProps = { layer: null, map: null, children: null, showOnHeight: 1000000 };
 
 export default GridLayer;

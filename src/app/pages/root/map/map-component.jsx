@@ -93,19 +93,18 @@ class MapComponent extends PureComponent {
   setMapTerrain = (coordinates, orientation, gridId) => {
     const { query } = this.props;
     const gridLayerSlugs = Object.keys(this.gridLayers);
-    const activeLayers = query.activeLayers.filter(l => gridLayerSlugs.includes(l));
+    const activeLayers = query.activeLayers ? query.activeLayers.filter(l => gridLayerSlugs.includes(l)) : null;
     this.props.updateMapParams({ terrain: true, activeLayers, coordinates, orientation, gridId });
   };
 
   render() {
-    const { terrainMode, className, gridLayers, layers, coordinates, coordinatesOptions, updateMapParams } = this.props;
+    const { className, gridLayers, layers, coordinates, coordinatesOptions, updateMapParams } = this.props;
     const hasLayers = layers && layers.length > 0;
     const hasGridLayers = gridLayers && gridLayers.length > 0;
     return (
       <CesiumMap
         className={cx(styles.mapContainer, className)}
         coordinates={coordinates}
-        grid={!terrainMode}
         coordinatesOptions={coordinatesOptions}
         onMouseMove={this.handleMouseMove}
         onMouseClick={this.handleMouseClick}
@@ -122,7 +121,8 @@ class MapComponent extends PureComponent {
               {
                 hasGridLayers && gridLayers.map(layer => (
                   <GridLayer
-                    key={layer.slug}
+                    key={layer.id}
+                    showOnHeight={8000000}
                     layer={layer}
                     map={map}
                     ref={gridLayer => {
