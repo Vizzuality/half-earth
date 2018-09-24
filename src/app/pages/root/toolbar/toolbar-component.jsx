@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { SwitchInput, Button, Icon } from 'he-components';
 
-import shareIcon from 'assets/icons/share.svg';
-import infoIcon from 'assets/icons/icon-info.svg';
+import shareIcon from 'assets/icons/share-icon.svg';
+import infoIcon from 'assets/icons/how-icon.svg';
 import globeIcon from 'assets/icons/globe.svg';
 import locateIcon from 'assets/icons/locate.svg';
 
