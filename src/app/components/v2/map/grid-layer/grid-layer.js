@@ -8,11 +8,10 @@ class GridLayer extends Component {
     this.addGrid();
   }
 
-  componentDidUpdate() {
-    const { map, showOnHeight } = this.props;
-    const height = map.camera.getMagnitude();
-    if (this.primitive) {
-      this.primitive.show = height <= showOnHeight;
+  componentDidUpdate(prevProps) {
+    const { show } = this.props;
+    if (show !== prevProps.show) {
+      this.primitive.show = show;
     }
   }
 
@@ -21,7 +20,7 @@ class GridLayer extends Component {
   }
 
   async addGrid() {
-    const { layer, map, showOnHeight } = this.props;
+    const { layer, map, show } = this.props;
     const { layerConfig } = layer;
     let query = '';
     try {
@@ -84,7 +83,7 @@ class GridLayer extends Component {
         interleave: true,
         vertexCacheOptimize: true,
         compressVertices: true,
-        show: map.camera.getMagnitude() <= showOnHeight
+        show
       });
       map.scene.primitives.add(this.primitive);
       this.forceUpdate(); // Doing this to notify childrens it is ready
@@ -107,9 +106,9 @@ GridLayer.propTypes = {
   layer: PropTypes.object,
   map: PropTypes.object,
   children: PropTypes.func,
-  showOnHeight: PropTypes.number
+  show: PropTypes.bool
 };
 
-GridLayer.defaultProps = { layer: null, map: null, children: null, showOnHeight: 1000000 };
+GridLayer.defaultProps = { layer: null, map: null, children: null, show: true };
 
 export default GridLayer;
