@@ -9,6 +9,8 @@ import * as ownActions from './toolbar-actions';
 import { mapStateToProps } from './toolbar-selectors';
 import ToolbarComponent from './toolbar-component';
 
+const hasGeolocation = 'geolocation' in navigator;
+
 const actions = { ...ownActions, setModalMetadata, setModalInstructionsParams };
 
 class ToolbarContainer extends Component {
@@ -26,18 +28,25 @@ class ToolbarContainer extends Component {
     this.props.setModalInstructionsParams({ isOpen: true });
   };
 
-  handleGridChange = ({ slug, active }) => {
-    const layers = [ { slug, active: !active } ];
-    this.updateLayersActive(layers);
+  handleCenterLocationClick = () => {
+    if (hasGeolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const { updateQueryParam, query = {} } = this.props;
+        const { x, y, z } = Cesium.Cartesian3.fromDegrees(position.coords.longitude, position.coords.latitude, 310000);
+        const coordinates = [ x, y, z ];
+        updateQueryParam({ query: { ...query, coordinates } });
+      });
+    }
   };
 
   render() {
     return (
       <ToolbarComponent
         {...this.props}
+        showLocation={hasGeolocation}
         handleInfoClick={this.handleInfoClick}
         handleShareClick={this.handleShareClick}
-        handleGridChange={this.handleGridChange}
+        handleCenterLocationClick={this.handleCenterLocationClick}
       />
     );
   }
