@@ -9,6 +9,8 @@ import { PluginCesium } from 'layer-manager';
 
 import styles from './map-styles.scss';
 
+const SHOW_GRID_HEIGHT = 8000000;
+
 class MapComponent extends PureComponent {
   lastObjId = null;
 
@@ -98,7 +100,7 @@ class MapComponent extends PureComponent {
   };
 
   render() {
-    const { className, gridLayers, layers, coordinates, coordinatesOptions, updateMapParams } = this.props;
+    const { terrainMode, className, gridLayers, layers, coordinates, coordinatesOptions, updateMapParams } = this.props;
     const hasLayers = layers && layers.length > 0;
     const hasGridLayers = gridLayers && gridLayers.length > 0;
     return (
@@ -112,6 +114,8 @@ class MapComponent extends PureComponent {
       >
         {map => {
           this.map = map;
+          const height = map.camera.getMagnitude();
+          const showGrid = !terrainMode && height < SHOW_GRID_HEIGHT;
           return (
             <React.Fragment>
               <LayerManager map={map} plugin={PluginCesium}>
@@ -122,7 +126,7 @@ class MapComponent extends PureComponent {
                 hasGridLayers && gridLayers.map(layer => (
                   <GridLayer
                     key={layer.id}
-                    showOnHeight={8000000}
+                    show={showGrid}
                     layer={layer}
                     map={map}
                     ref={gridLayer => {
