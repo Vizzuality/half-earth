@@ -41,6 +41,26 @@ The source data is not included, due to privacy, contact a project owner if you 
 Update the json file containing the stories data in the `inputs` folder, and execute `python stories.py`. You can upload the `./output/stories.csv` to the half-earth Carto account.
 You will need to upload the image assets seperatley.
 
+## Generate rich or rare populations table
+
+On the MOL HE account, run the following query:
+
+```
+
+with A as ((SELECT cell_id, taxa, the_geom_webmercator, st_centroid(the_geom_webmercator) as pin_point, rank_sr as rank_col FROM global_facets_attr_pressures_vizz
+ORDER BY rank_col DESC
+LIMIT 12)
+UNION all
+(SELECT cell_id, taxa, the_geom_webmercator, ST_centroid(the_geom_webmercator) as pin_point, rank_rsr as rank_col FROM global_facets_attr_pressures_vizz
+ORDER BY rank_col DESC
+LIMIT 12))
+
+SELECT * from A
+```
+
+Export the resulting table to the public Half-Earth carto account. (Need to do this as setting up the layers to use multiple carto account targets for map layers will require a bit more work.)
+
+
 
 ### Notes
 
