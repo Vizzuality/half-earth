@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import Tooltip from 'rc-tooltip'; // eslint-disable-line
+import Tooltip from 'rc-tooltip';
+// eslint-disable-line
 // already imported in wri-api-components
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -16,27 +17,22 @@ const showLocation = 'geolocation' in navigator;
 
 class ToolbarComponent extends PureComponent {
   render() {
-    const {
-      className,
-      onClick,
-      handleInfoClick,
-      handleShareClick,
-      handleGridChange,
-      grids
-    } = this.props;
+    const { className, onClick, handleInfoClick, handleShareClick, handleGridChange, grids } = this.props;
     const globeTooltip = (
       <React.Fragment>
-        {grids &&
-          grids.layers.map((grid) => (
-            <SwitchInput
-              id={grid.slug}
-              key={grid.slug}
-              checked={grid.active}
-              theme={styles}
-              onChange={(value) => handleGridChange(grid, value)}
-              label={grid.name}
-            />
-          ))}
+        {
+          grids &&
+            grids.layers.map(grid => (
+              <SwitchInput
+                id={grid.slug}
+                key={grid.slug}
+                checked={grid.active}
+                theme={styles}
+                onChange={value => handleGridChange(grid, value)}
+                label={grid.name}
+              />
+            ))
+        }
       </React.Fragment>
     );
     return (
@@ -50,7 +46,7 @@ class ToolbarComponent extends PureComponent {
         <Tooltip
           placement="left"
           offset={{ left: 20 }}
-          trigger={['click']}
+          trigger={[ 'click' ]}
           overlay={globeTooltip}
           overlayClassName="c-rc-tooltip toolbar-tooltip"
         >
@@ -58,21 +54,19 @@ class ToolbarComponent extends PureComponent {
             <Icon icon={globeIcon} />
           </Button>
         </Tooltip>
-        {showLocation && (
+        {
+          showLocation && (
           <Button theme={styles} onClick={onClick}>
             <Icon icon={locateIcon} />
           </Button>
-        )}
+            )
+        }
       </div>
     );
   }
 }
 
-ToolbarComponent.propTypes = {
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  grid: PropTypes.object
-};
+ToolbarComponent.propTypes = { className: PropTypes.string, onClick: PropTypes.func, grid: PropTypes.object };
 
 ToolbarComponent.defaultProps = {
   className: '',
