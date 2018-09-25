@@ -22,7 +22,7 @@ class DetailViewComponent extends Component {
         <RarityRichness taxas={taxas} data={data} handleTaxasChange={handleTaxasChange} />
         <ProgressCard data={data} />
         <ProgressCard data={data} />
-        <SpeciesToWatch />
+        {data && data.species && <SpeciesToWatch species={data.species} />}
       </div>
     );
   }
