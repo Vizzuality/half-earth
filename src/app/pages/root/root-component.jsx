@@ -6,6 +6,7 @@ import ModalMetadata from 'components/v2/modal-metadata';
 import ModalInstructions from 'components/v2/modal-instructions';
 
 import GroupCardList from './group-card-list';
+import DetailView from './detail-view';
 import Map from './map';
 import Toolbar from './toolbar';
 import Legend from './legend';
@@ -37,17 +38,17 @@ class RootPageComponent extends React.Component {
 
   render() {
     const { sidebarOpen } = this.state;
-    const { showSidebar } = this.props;
+    const { showSidebar, showDetailView } = this.props;
     return (
       <div className={styles.container}>
         {
           showSidebar && (
-            <Sidebar theme={styles} visible={sidebarOpen} onToggle={this.handleOnToggle}>
-              <div className={styles.sidebarContainer}>
-                <GroupCardList />
-              </div>
-            </Sidebar>
-          )
+          <Sidebar theme={styles} visible={sidebarOpen} onToggle={this.handleOnToggle}>
+            <div className={styles.sidebarContainer}>
+              {showDetailView ? <DetailView /> : <GroupCardList />}
+            </div>
+          </Sidebar>
+            )
         }
         <Map className={cx(styles.mapContainer, { [styles.mapPaddingLeft]: sidebarOpen })} />
         <Toolbar className={styles.toolbar} />
@@ -59,7 +60,11 @@ class RootPageComponent extends React.Component {
   }
 }
 
-RootPageComponent.propTypes = { showSidebar: PropTypes.bool, setIsTouchScreenState: PropTypes.func.isRequired };
-RootPageComponent.defaultProps = { showSidebar: true };
+RootPageComponent.propTypes = {
+  showSidebar: PropTypes.bool,
+  showDetailView: PropTypes.bool,
+  setIsTouchScreenState: PropTypes.func.isRequired
+};
+RootPageComponent.defaultProps = { showSidebar: true, showDetailView: false };
 
 export default RootPageComponent;

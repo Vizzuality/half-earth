@@ -1,6 +1,6 @@
 import { createSelector, createStructuredSelector } from 'reselect';
 import { getDatasets } from 'selectors/datasets-selectors';
-import { selectQueryParams } from 'selectors/location-selectors';
+import { selectQueryParams, getIsTerrain } from 'selectors/location-selectors';
 
 export const getLayers = createSelector([ getDatasets ], datasets => {
   if (!datasets) return null;
@@ -13,11 +13,6 @@ export const getLayers = createSelector([ getDatasets ], datasets => {
 export const getLayersFiltered = createSelector([ getLayers ], datasets => {
   if (!datasets) return null;
   return datasets.filter(layer => layer.active);
-});
-
-export const getTerrainMode = createSelector([ selectQueryParams ], query => {
-  if (!query) return undefined;
-  return typeof query.terrain === 'string' ? query.terrain === 'true' : query.terrain;
 });
 
 export const getGridLayers = createSelector([ getLayers ], layers => {
@@ -49,7 +44,7 @@ export const getLatLng = createSelector([ selectQueryParams ], query => {
 export const mapStateToProps = createStructuredSelector({
   layers: getLayersFiltered,
   gridLayers: getGridLayers,
-  terrainMode: getTerrainMode,
+  terrainMode: getIsTerrain,
   query: selectQueryParams,
   coordinates: getCoordinates,
   coordinatesOptions: getCoordinatesOptions,

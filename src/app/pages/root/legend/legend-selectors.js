@@ -9,7 +9,7 @@ export const getDatasetsFiltered = createSelector([ getDatasets ], datasets => {
 });
 
 export const getDatasetLayersParsed = createSelector([ getDatasetsFiltered ], datasets => {
-  if (!datasets) return null;
+  if (!datasets) return [];
   return sortBy(
     datasets.map(dataset => ({
       ...dataset,
