@@ -1,1 +1,46 @@
 @import '~styles/variables.scss';
+
+.modal {
+  max-width: 620px;
+  height: auto;
+}
+
+.modalContent {
+  padding: 50px 60px;
+}
+
+.metadataDescription {
+  margin: $site-gutter 0;
+}
+
+.metadataList {
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  margin: $site-gutter 0;
+
+  dt,
+  dd {
+    display: inline-block;
+    line-height: 1.5;
+  }
+
+  dt {
+    font-weight: 800;
+  }
+
+  dd {
+    margin-left: 10px;
+  }
+}
+
+.metadataSource {
+  opacity: 0.5;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.5;
+
+  a {
+    color: $color-turquoise;
+  }
+}

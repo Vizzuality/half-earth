@@ -12,7 +12,7 @@ export const initialState = {
 
 const setModalMetadataParams = (state, { payload }) => ({ ...state, ...payload });
 
-const fetchModalMetaDataInit = state => ({ ...state, loading: true, loaded: false });
+const fetchModalMetaData = state => ({ ...state, loading: true, loaded: false });
 
 const fetchModalMetaDataFail = (state, { payload }) => ({ ...state, loading: false, loaded: false, error: payload });
 
@@ -25,7 +25,7 @@ const fetchModalMetaDataReady = (state, { payload }) => ({
 
 export default {
   [actions.setModalMetadataParams]: setModalMetadataParams,
-  [actions.fetchModalMetaDataInit]: fetchModalMetaDataInit,
+  [actions.fetchModalMetaData]: fetchModalMetaData,
   [actions.fetchModalMetaDataFail]: fetchModalMetaDataFail,
   [actions.fetchModalMetaDataReady]: fetchModalMetaDataReady
 };

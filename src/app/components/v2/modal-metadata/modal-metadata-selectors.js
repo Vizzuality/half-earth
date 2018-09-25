@@ -8,8 +8,7 @@ const selectData = ({ modalMetadata }) => modalMetadata.data;
 
 export const getMetadata = createSelector([ selectSlug, selectData ], (slug, data) => {
   if (!slug || !data) return null;
-  const metadata = data[slug];
-  return metadata ? Object.entries(metadata) : null;
+  return data[slug];
 });
 
 export const mapStateToProps = createStructuredSelector({
