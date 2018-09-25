@@ -8,9 +8,9 @@ export const getSidebarVisibility = createSelector([ selectQueryParams ], query 
   return checkBoolean(query.sidebar);
 });
 
-export const getGridId = createSelector([ selectQueryParams ], query => {
+export const getCellId = createSelector([ selectQueryParams ], query => {
   if (!query) return null;
-  return query.gridId;
+  return query.cellId ? parseInt(query.cellId, 10) : null;
 });
 
 export const getIsTerrain = createSelector([ selectQueryParams ], query => {

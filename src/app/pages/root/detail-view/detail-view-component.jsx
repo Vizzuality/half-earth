@@ -4,20 +4,20 @@ import { Loading } from 'he-components';
 
 import styles from './detail-view-styles';
 
-class GroupCardListComponent extends Component {
+class DetailViewComponent extends Component {
   render() {
-    const { loading } = this.props;
+    const { loading, data } = this.props;
     if (loading) return <Loading height="100%" />;
     return (
       <div className={styles.groupCardListContainer}>
-        <h2>the sidebar</h2>
+        <h2>All richness: {data && data.all.richness}</h2>
       </div>
     );
   }
 }
 
-GroupCardListComponent.propTypes = { loading: PropTypes.bool };
+DetailViewComponent.propTypes = { loading: PropTypes.bool, data: PropTypes.object };
 
-GroupCardListComponent.defaultProps = { loading: false };
+DetailViewComponent.defaultProps = { loading: false, data: {} };
 
-export default GroupCardListComponent;
+export default DetailViewComponent;
