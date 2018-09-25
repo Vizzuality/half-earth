@@ -14,8 +14,22 @@ class DetailViewContainer extends Component {
     this.props.fetchCellDetail(cellId);
   }
 
+  handleCloseTerrainClick = () => {
+    console.info('TODO');
+  };
+
+  handleTaxasChange = () => {
+    console.info('TODO');
+  };
+
   render() {
-    return <DetailViewComponent {...this.props} />;
+    return (
+      <DetailViewComponent
+        {...this.props}
+        handleTaxasChange={this.handleTaxasChange}
+        handleCloseTerrainClick={this.handleCloseTerrainClick}
+      />
+    );
   }
 }
 
