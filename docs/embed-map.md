@@ -2,14 +2,14 @@
 
 ## Available query params
 
-The options available for the new `/map` route are:
+The options available for the embed version are:
 - coordinates=X,Y,Z
 - orientation=heading,pitch,roll
 - layers=layer1,layer2
 
 So for example:
 ```
-/map?coordinates=6117078,2713298,-4028512&layer=mammals-rarity
+/(map|v2)?coordinates=6117078,2713298,-4028512&layer=mammals-rarity
 ```
 will load only the globe and leyend on the desired position with the mammals rarity layer enabled.
 
@@ -26,6 +26,9 @@ will load only the globe and leyend on the desired position with the mammals rar
   - Types:
     - richness, rarity, richness_1km, rarity_1km
 
+### Layers available v2
+- GET https://half-earth.carto.com/api/v2/sql?q=SELECT slug FROM layers ORDER BY name
+
 
 ## Interacting with the iframe
 
@@ -34,6 +37,8 @@ There is another query param called `listeners` that includes [postRobot](https:
 Public API:
 - Embed the globe:
 `<iframe id="map-iframe" src="http://localhost:8080/map?listeners=true" />`
+- Embed the globe for v2
+`<iframe id="map-iframe" src="http://localhost:8080/?sidebar=false&listeners=true" />`
 
 - Fly to using `mapFlyToCoordinates`:
 ```js
