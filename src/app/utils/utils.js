@@ -10,12 +10,7 @@ export const cartoConfig = (account, cartocss, table, options = {}) => ({
     layers: [
       {
         type: 'mapnik',
-        options: {
-          cartocss_version: '2.3.0',
-          cartocss,
-          sql: options.sql || `select * from ${table}`,
-          ...options
-        }
+        options: { cartocss_version: '2.3.0', cartocss, sql: options.sql || `select * from ${table}`, ...options }
       }
     ]
   }
@@ -26,10 +21,8 @@ export const lerp = (value, istart, istop, ostart, ostop) =>
 
 export const maxClamp = (v, min, max) => Math.max(min, Math.min(max, v));
 
-export const colorMap = {
-  blue: '#0664f6',
-  purple: '#8366e4',
-  violet: '#9632b2'
-};
+export const colorMap = { blue: '#0664f6', purple: '#8366e4', violet: '#9632b2' };
 
-export const pick = (o, k) => (o && o[k]) || o;
+export const pick = (o, k) => o && o[k] || o;
+
+export const checkBoolean = bool => typeof bool === 'string' ? bool === 'true' : bool;
