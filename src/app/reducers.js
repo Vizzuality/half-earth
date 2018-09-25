@@ -6,6 +6,7 @@ import { reduxConfig as layerRedux } from 'redux-modules/layers';
 import { reduxConfig as datasetsRedux } from 'redux-modules/datasets';
 import { reduxConfig as categoriesRedux } from 'redux-modules/categories';
 import { reduxConfig as cellsRedux } from 'redux-modules/cell-detail';
+import { reduxConfig as speciesRedux } from 'redux-modules/species';
 
 // Providers
 import { reduxConfig as sectionRedux } from 'providers/section';
@@ -31,7 +32,8 @@ const reduxModulesReducers = {
   layers: handleModule(layerRedux),
   datasets: handleModule(datasetsRedux),
   categories: handleModule(categoriesRedux),
-  cellsDetail: handleModule(cellsRedux)
+  cellsDetail: handleModule(cellsRedux),
+  species: handleModule(speciesRedux)
 };
 
 const providersReducers = { interactions: handleModule(interactRedux), section: handleModule(sectionRedux) };
