@@ -13,9 +13,23 @@ export const getTaxaOptions = createSelector([ getCellData ], data => {
   return sortBy(Object.keys(data)).map(key => ({ slug: key, label: key }));
 });
 
+export const getTaxaSelected = createSelector([ getTaxaOptions ], taxas => {
+  if (!taxas) return null;
+  return taxas[0]; // TODO: get from url param the selected value
+});
+
+export const getCellTaxaDataSelected = createSelector(
+  [ getCellData, getTaxaSelected ],
+  (data, selected) => {
+    if (!data || !selected) return null;
+    return data[selected.slug];
+  }
+);
+
 export const mapStateToProps = createStructuredSelector({
   cellId: getCellId,
   loading: selectCellsLoading,
-  data: getCellData,
-  taxas: getTaxaOptions
+  data: getCellTaxaDataSelected,
+  taxas: getTaxaOptions,
+  taxaSelected: getTaxaSelected,
 });

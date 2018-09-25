@@ -7,7 +7,6 @@ import styles from './progress-card-styles';
 
 class DetailViewComponent extends Component {
   render() {
-    console.info(this.props.data);
     return (
       <div className={styles.container}>
         <ProgressBar percentage={57} label="Area total encroachment" />
