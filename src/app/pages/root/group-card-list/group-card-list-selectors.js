@@ -22,11 +22,14 @@ export const getCategoriesActive = createSelector([ getDatasetsByCategory, getLa
     const layerActiveSlugs = layersActive.map(layer => layer.slug);
     const categoriesActive = categories.map(category => ({
       ...category,
-      datasets: sortBy(category.datasets.map(dataset => {
-        const layers = dataset.layers.map(layer => ({ ...layer, active: layerActiveSlugs.includes(layer.slug) }));
-        const active = layers.some(l => l.active);
-        return { ...dataset, active, layers };
-      }), 'position')
+      datasets: sortBy(
+        category.datasets.map(dataset => {
+          const layers = dataset.layers.map(layer => ({ ...layer, active: layerActiveSlugs.includes(layer.slug) }));
+          const active = layers.some(l => l.active);
+          return { ...dataset, active, layers };
+        }),
+        'position'
+      )
     }));
     return categoriesActive;
   });
@@ -42,14 +45,14 @@ export const getCategoriesGroups = createSelector(getCategoriesActive, categorie
 export const getGroupCardsOpen = createSelector([ getCategoriesGroups ], groups => {
   if (!groups) return null;
   const groupsOpen = groups.map(group => {
-    const isOpen = group.categories.reduce(
+    const layersActive = group.categories.reduce(
       (acc, category) => {
-        const hasLayersActive = category.datasets.some(d => d.active);
-        return hasLayersActive || acc;
+        const datasetsActive = category.datasets.filter(d => d.active);
+        return datasetsActive ? acc + datasetsActive.length : acc;
       },
-      false
+      0
     );
-    return { ...group, isOpen };
+    return { ...group, isOpen: layersActive > 0, layersActive };
   });
   return groupsOpen;
 });
