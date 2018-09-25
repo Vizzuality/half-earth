@@ -103,11 +103,11 @@ class MapComponent extends PureComponent {
     this.setMapTerrain(latLng, TERRAIN_CAMERA_OFFSET, object.id.cellId);
   };
 
-  setMapTerrain = (latLng, terrainCameraOffset, gridId) => {
+  setMapTerrain = (latLng, terrainCameraOffset, cellId) => {
     const { query } = this.props;
     const gridLayerSlugs = Object.keys(this.gridLayers);
     const activeLayers = query.activeLayers ? query.activeLayers.filter(l => gridLayerSlugs.includes(l)) : null;
-    this.props.updateMapParams({ terrain: true, activeLayers, ...latLng, terrainCameraOffset, gridId });
+    this.props.updateMapParams({ terrain: true, activeLayers, ...latLng, terrainCameraOffset, cellId });
   };
 
   render() {

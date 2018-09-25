@@ -1,9 +1,9 @@
 import { createSelector, createStructuredSelector } from 'reselect';
-import { getSidebarVisibility, getGridId, getIsTerrain } from 'selectors/location-selectors';
+import { getSidebarVisibility, getCellId, getIsTerrain } from 'selectors/location-selectors';
 
 export const getDetailViewVisibility = createSelector(
-  [ getGridId, getIsTerrain ],
-  (gridId, isTerrain) => gridId && isTerrain
+  [ getCellId, getIsTerrain ],
+  (cellId, isTerrain) => cellId && isTerrain
 );
 
 export const mapStateToProps = createStructuredSelector({

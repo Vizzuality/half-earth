@@ -67,7 +67,8 @@ module.exports = {
         NODE_ENV: 'production',
         MAPBOX_TOKEN: null,
         CONTENTFUL_SPACE_ID: null,
-        CONTENTFUL_TOKEN: null
+        CONTENTFUL_TOKEN: null,
+        MOL_API_KEY: null
       })
     ],
     resolveLoader: { modules: [ 'node_modules' ] },
