@@ -15,14 +15,13 @@ class SpeciesToWatchContainer extends Component {
   }
 
   render() {
-    return (
-      <SpeciesToWatchComponent
-        {...this.props}
-      />
-    );
+    return <SpeciesToWatchComponent {...this.props} />;
   }
 }
 
-SpeciesToWatchContainer.propTypes = { fetchSpecies: PropTypes.func.isRequired, species: PropTypes.array.isRequired };
+SpeciesToWatchContainer.propTypes = {
+  fetchSpecies: PropTypes.func.isRequired,
+  species: PropTypes.array.isRequired
+};
 
 export default connect(mapStateToProps, actions)(SpeciesToWatchContainer);

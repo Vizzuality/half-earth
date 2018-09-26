@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ProgressBar } from 'he-components';
@@ -15,9 +14,8 @@ class DetailViewComponent extends Component {
   }
 }
 
-DetailViewComponent.propTypes = {
-  data: PropTypes.object,
-};
+// eslint-disable-next-line
+DetailViewComponent.propTypes = { data: PropTypes.object };
 
 DetailViewComponent.defaultProps = { data: {} };
 

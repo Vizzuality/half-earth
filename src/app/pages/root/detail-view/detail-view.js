@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCellDetail } from 'redux-modules/cell-detail/cell-detail-actions';
+import * as ownActions from './detail-view-actions';
 
 import { mapStateToProps } from './detail-view-selectors';
 import DetailViewComponent from './detail-view-component';
 
-const actions = { fetchCellDetail };
+const actions = { ...ownActions, fetchCellDetail };
 
 class DetailViewContainer extends Component {
   componentDidMount() {
@@ -18,8 +19,9 @@ class DetailViewContainer extends Component {
     console.info('TODO');
   };
 
-  handleTaxasChange = () => {
-    console.info('TODO');
+  handleTaxasChange = taxa => {
+    const { updateQueryParam, query } = this.props;
+    updateQueryParam({ query: { ...query, taxa: taxa.slug } });
   };
 
   render() {
@@ -33,6 +35,11 @@ class DetailViewContainer extends Component {
   }
 }
 
-DetailViewContainer.propTypes = { fetchCellDetail: PropTypes.func.isRequired, cellId: PropTypes.number.isRequired };
+DetailViewContainer.propTypes = {
+  query: PropTypes.object.isRequired,
+  fetchCellDetail: PropTypes.func.isRequired,
+  updateQueryParam: PropTypes.func.isRequired,
+  cellId: PropTypes.number.isRequired
+};
 
 export default connect(mapStateToProps, actions)(DetailViewContainer);
