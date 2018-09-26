@@ -22,17 +22,25 @@ class LegendContainer extends Component {
   };
 
   handleChangeOpacity = (layer, opacity) => {
-    const layersSlug = layer.dataset === 'human-pressure' ? this.getMultiLayers(layer.dataset) : layer.slug;
+    const layersSlug = layer.dataset === 'human-pressure'
+      ? this.getMultiLayers(layer.dataset)
+      : layer.slug;
     this.updateLayersProperty(layersSlug, { key: 'opacity', value: opacity });
   };
 
   handleChangeVisibility = (layer, visibility) => {
-    const layersSlug = layer.dataset === 'human-pressure' ? this.getMultiLayers(layer.dataset) : layer.slug;
+    const layersSlug = layer.dataset === 'human-pressure'
+      ? this.getMultiLayers(layer.dataset)
+      : layer.slug;
     this.updateLayersProperty(layersSlug, { key: 'visibility', value: visibility });
   };
 
   handleInfoClick = layer => {
-    this.props.setModalMetadata({ slug: layer.slug, title: `${layer.name} metadata`, isOpen: true });
+    this.props.setModalMetadata({
+      slug: layer.slug,
+      title: `${layer.name} metadata`,
+      isOpen: true
+    });
   };
 
   handleChangeOrder = datasetsOrder => {
@@ -88,7 +96,9 @@ LegendContainer.propTypes = {
   datasets: PropTypes.array.isRequired,
   updateQueryParam: PropTypes.func.isRequired,
   setModalMetadata: PropTypes.func.isRequired,
-  query: PropTypes.object.isRequired
+  query: PropTypes.object
 };
+
+LegendContainer.defaultProps = { query: undefined };
 
 export default connect(mapStateToProps, actions)(LegendContainer);

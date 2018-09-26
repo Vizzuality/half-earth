@@ -10,7 +10,7 @@ class GridLayer extends Component {
 
   componentDidUpdate(prevProps) {
     const { show } = this.props;
-    if (show !== prevProps.show) {
+    if (this.primitive && show !== prevProps.show) {
       this.primitive.show = show;
     }
   }
@@ -36,7 +36,9 @@ class GridLayer extends Component {
       geometryInstances = rows.reduce((acc, row) => {
         let coordinates;
         try {
-          coordinates = JSON.parse(row.the_geom).coordinates[0].map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]));
+          coordinates = JSON.parse(row.the_geom).coordinates[0].map(
+            c => Cesium.Cartesian3.fromDegrees(c[0], c[1])
+          );
         } catch (e) {
           console.warn(e);
           return acc;
@@ -56,7 +58,11 @@ class GridLayer extends Component {
             height: 0
           }),
           id: { grid: true, slug: layer.id, cellId: row.cell_id },
-          attributes: { color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.WHITE.withAlpha(0.3)) }
+          attributes: {
+            color: Cesium.ColorGeometryInstanceAttribute.fromColor(
+              Cesium.Color.WHITE.withAlpha(0.3)
+            )
+          }
         });
         if (polygon) {
           acc.push(polygon);
