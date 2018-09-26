@@ -5,7 +5,7 @@ import { Loading, Dropdown } from 'he-components';
 import Histogram from './histogram';
 import styles from './rarity-richness-styles';
 
-class DetailViewComponent extends Component {
+class RarityRichnessComponent extends Component {
   render() {
     const { loading, taxas, selected, histogram, handleTaxasChange } = this.props;
     if (loading) return <Loading height="100%" />;
@@ -22,7 +22,7 @@ class DetailViewComponent extends Component {
   }
 }
 
-DetailViewComponent.propTypes = {
+RarityRichnessComponent.propTypes = {
   loading: PropTypes.bool,
   taxas: PropTypes.array,
   selected: PropTypes.object,
@@ -30,6 +30,6 @@ DetailViewComponent.propTypes = {
   handleTaxasChange: PropTypes.func.isRequired
 };
 
-DetailViewComponent.defaultProps = { loading: false, taxas: [], selected: {}, histogram: null };
+RarityRichnessComponent.defaultProps = { loading: false, taxas: [], selected: {}, histogram: null };
 
-export default DetailViewComponent;
+export default RarityRichnessComponent;

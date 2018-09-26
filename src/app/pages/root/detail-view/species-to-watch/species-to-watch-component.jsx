@@ -4,7 +4,7 @@ import { Loading } from 'he-components';
 
 import styles from './species-to-watch-styles';
 
-class DetailViewComponent extends Component {
+class SpeciesToWatchComponent extends Component {
   render() {
     const { loading, data } = this.props;
     return (
@@ -55,8 +55,8 @@ class DetailViewComponent extends Component {
   }
 }
 
-DetailViewComponent.propTypes = { data: PropTypes.array, loading: PropTypes.bool };
+SpeciesToWatchComponent.propTypes = { data: PropTypes.array, loading: PropTypes.bool };
 
-DetailViewComponent.defaultProps = { data: null, loading: true };
+SpeciesToWatchComponent.defaultProps = { data: null, loading: true };
 
-export default DetailViewComponent;
+export default SpeciesToWatchComponent;

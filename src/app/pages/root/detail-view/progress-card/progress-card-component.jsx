@@ -4,14 +4,14 @@ import { ProgressBar, SwitchInput } from 'he-components';
 
 import styles from './progress-card-styles';
 
-class DetailViewComponent extends Component {
+class ProgressBarComponent extends Component {
   render() {
     const { legend, subtitle, layers } = this.props;
-    const percentage = layers && layers.reduce((acc, next) => acc + next.value, 0);
+    const percentage = layers && layers.reduce((acc, next) => acc + next.value, 0) || 0;
     return (
       <div className={styles.container}>
         <ProgressBar percentage={percentage} label={legend} />
-        {subtitle && <p>{subtitle}</p>}
+        {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         {
           layers && layers.map(layer => (
             <SwitchInput
@@ -31,12 +31,12 @@ class DetailViewComponent extends Component {
 }
 
 // eslint-disable-next-line
-DetailViewComponent.propTypes = {
+ProgressBarComponent.propTypes = {
   layers: PropTypes.array,
   legend: PropTypes.string,
   subtitle: PropTypes.string
 };
 
-DetailViewComponent.defaultProps = { layers: null, subtitle: '', legend: '' };
+ProgressBarComponent.defaultProps = { layers: null, subtitle: '', legend: '' };
 
-export default DetailViewComponent;
+export default ProgressBarComponent;
