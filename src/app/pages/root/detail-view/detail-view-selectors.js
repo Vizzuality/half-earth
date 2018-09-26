@@ -5,7 +5,15 @@ import {
   selectCellsHistogram
 } from 'selectors/cell-detail-selectors';
 import { selectQueryParams, getCellId, getTaxa } from 'selectors/location-selectors';
+import { getDatasetsByCategory } from 'selectors/categories-selectors';
 import sortBy from 'lodash/sortBy';
+
+const status = [ 'very low', 'low', 'average', 'high', 'very high' ];
+
+function getPosition(data, values) {
+  const position = sortBy(values).reduce((acc, next) => data > next ? acc + 1 : acc, 0);
+  return position;
+}
 
 export const getCellData = createSelector([ getCellId, selectCellsData ], (cellId, cellsData) => {
   if (!cellId || !cellsData) return null;
@@ -31,15 +39,34 @@ export const getCellTaxaDataSelected = createSelector([ getCellData, getTaxaSele
     return data[selected.slug];
   });
 
-export const getConservationLayers = createSelector([ getCellTaxaDataSelected ], data => {
-  if (!data) return null;
-  return [ { label: 'Conservation layer 1', value: 45, slug: 'cnv1' } ];
-});
+export const getHumanLayers = createSelector([ getCellTaxaDataSelected, getDatasetsByCategory ], (
+  data,
+  categories
+) =>
+  {
+    if (!data || !categories) return null;
+    const category = categories.find(d => d.slug === 'human-activities');
 
-export const getHumanLayers = createSelector([ getCellTaxaDataSelected ], data => {
-  if (!data) return null;
-  return [ { label: 'Human layer 1', value: 20, slug: 'cnv3' } ];
-});
+    if (!category) return null;
+    return category.datasets.map(d => ({
+      ...d,
+      percentage: data[d.slug.replace('protected-', '')]
+    }));
+  });
+
+export const getConservationLayers = createSelector(
+  [ getCellTaxaDataSelected, getDatasetsByCategory ],
+  (data, categories) => {
+    if (!data || !categories) return null;
+    const category = categories.find(d => d.slug === 'conservation-areas');
+
+    if (!category) return null;
+    return category.datasets.map(d => ({
+      ...d,
+      percentage: data[d.slug.replace('protected-', '')]
+    }));
+  }
+);
 
 export const getTaxaHistogram = createSelector([ selectCellsHistogram, getTaxaSelected ], (
   data,
@@ -47,28 +74,46 @@ export const getTaxaHistogram = createSelector([ selectCellsHistogram, getTaxaSe
 ) =>
   {
     if (!data || !selected) return null;
-    const histogram = {
-      rarity: data.rarity[selected.slug],
-      richness: data.richness[selected.slug]
-    };
-    const totalValues = {
-      rarity: histogram.rarity.reduce((acc, next) => acc + next, 0),
-      richness: histogram.richness.reduce((acc, next) => acc + next, 0)
-    };
-    return {
-      rarity: histogram.rarity.map(h => h * 100 / totalValues.rarity),
-      richness: histogram.richness.map(h => h * 100 / totalValues.richness)
-    };
+    return { rarity: data.rarity[selected.slug], richness: data.richness[selected.slug] };
   });
+
+export const getTaxaHistogramPercentage = createSelector([ getTaxaHistogram ], data => {
+  if (!data) return null;
+  const totalRarity = data.rarity.reduce((acc, next) => acc + next, 0);
+  const totalRichness = data.richness.reduce((acc, next) => acc + next, 0);
+
+  return {
+    rarity: data.rarity.map(h => h * 100 / totalRarity),
+    richness: data.richness.map(h => h * 100 / totalRichness)
+  };
+});
+
+export const getCellTaxaDataSelectedParsed = createSelector(
+  [ getCellTaxaDataSelected, getTaxaHistogram ],
+  (data, histogram) => {
+    if (!data || !histogram) return undefined;
+    const rarityPosition = getPosition(data.rarity, histogram.rarity);
+    const richnessPosition = getPosition(data.richness, histogram.richness);
+    return {
+      ...data,
+      rarity: { value: data.rarity, position: rarityPosition, status: status[rarityPosition] },
+      richness: {
+        value: data.richness,
+        position: richnessPosition,
+        status: status[richnessPosition]
+      }
+    };
+  }
+);
 
 export const mapStateToProps = createStructuredSelector({
   query: selectQueryParams,
   cellId: getCellId,
   loading: selectCellsLoading,
-  data: getCellTaxaDataSelected,
+  data: getCellTaxaDataSelectedParsed,
   conservationLayers: getConservationLayers,
   humanLayers: getHumanLayers,
-  histogram: getTaxaHistogram,
+  histogram: getTaxaHistogramPercentage,
   taxas: getTaxaOptions,
   taxaSelected: getTaxaSelected
 });

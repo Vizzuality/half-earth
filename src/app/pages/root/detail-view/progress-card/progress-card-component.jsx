@@ -7,7 +7,7 @@ import styles from './progress-card-styles';
 class ProgressBarComponent extends Component {
   render() {
     const { legend, subtitle, layers } = this.props;
-    const percentage = layers && layers.reduce((acc, next) => acc + next.value, 0) || 0;
+    const percentage = layers && layers.reduce((acc, next) => acc + next.percentage, 0) || 0;
     return (
       <div className={styles.container}>
         <ProgressBar percentage={percentage} label={legend} />
@@ -21,7 +21,7 @@ class ProgressBarComponent extends Component {
               onChange={() => {
                   console.info('TODO');
                 }}
-              label={layer.label}
+              label={layer.name}
             />
             ))
         }

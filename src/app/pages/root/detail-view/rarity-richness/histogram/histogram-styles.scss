@@ -1,7 +1,6 @@
 @import '~styles/variables.scss';
 
 $bar-size: 28px;
-$selection-color: black;
 $legend-color: #495a64;
 
 .histogramContainer {
@@ -43,8 +42,6 @@ $legend-color: #495a64;
     span {
       display: inline-block;
       width: $bar-size;
-      border-color: $selection-color;
-      border-style: solid;
     }
   }
 
@@ -55,8 +52,6 @@ $legend-color: #495a64;
     span {
       display: inline-block;
       height: $bar-size;
-      border-color: $selection-color;
-      border-style: solid;
     }
   }
 }
@@ -79,7 +74,10 @@ $legend-color: #495a64;
     width: $bar-size;
     height: 100%;
     box-sizing: border-box;
-    border-color: $selection-color;
-    border-style: solid;
   }
+}
+
+.cellHighlight {
+  z-index: 1;
+  box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.75);
 }

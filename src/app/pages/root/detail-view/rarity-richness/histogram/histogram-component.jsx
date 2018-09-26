@@ -16,41 +16,44 @@ const legendColors = [
 
 class HistogramComponent extends Component {
   render() {
-    const { data } = this.props;
-    if (!data) return null;
+    const { data = {}, values } = this.props;
+    const { richness, rarity } = data;
+    if (!values) return null;
     return (
       <div className={styles.histogramContainer}>
         <span className={cx(styles.legend, styles.legendY)}> - Rarity + </span>
         <span className={cx(styles.legend, styles.legendX)}> - Richness + </span>
         <div className={cx(styles.histogram, styles.histogramX)}>
-          {data.richness.map((r, i) => (
+          {values.richness.map((r, i) => (
             <span
               key={r}
-              style={{ height: r, backgroundColor: yColors[i], borderWidth: i === 2 ? 1 : 0 }}
+              style={{ height: r, backgroundColor: yColors[i] }}
+              className={cx({ [styles.cellHighlight]: i === richness.position })}
             />
           ))}
         </div>
         <div className={styles.graphContainer}>
           <div className={styles.squareLegend}>
-            {data.rarity.map((rar, ir) => (
-              <div>
-                {data.richness.map((rich, iri) => (
+            {values.rarity.map((rar, ir) => (
+              <div key={rar}>
+                {values.richness.map((rich, iri) => (
                   <span
                     key={rar + rich}
-                    style={{
-                      backgroundColor: legendColors[ir][iri],
-                      borderWidth: ir === 2 && iri === 2 ? 1 : 0
-                    }}
+                    style={{ backgroundColor: legendColors[ir][iri] }}
+                    className={cx({
+                      [styles.cellHighlight]: ir === rarity.position && iri === richness.position
+                    })}
                   />
                 ))}
               </div>
             ))}
           </div>
           <div className={cx(styles.histogram, styles.histogramY)}>
-            {data.rarity.map((r, i) => (
+            {values.rarity.map((r, i) => (
               <span
                 key={r}
-                style={{ width: r, backgroundColor: xColors[i], borderWidth: i === 2 ? 1 : 0 }}
+                style={{ width: r, backgroundColor: xColors[i] }}
+                className={cx({ [styles.cellHighlight]: i === rarity.position })}
               />
             ))}
           </div>
@@ -61,9 +64,10 @@ class HistogramComponent extends Component {
 }
 
 HistogramComponent.propTypes = {
-  data: PropTypes.shape({ richness: PropTypes.array, rarity: PropTypes.array })
+  data: PropTypes.shape({ richness: PropTypes.object, rarity: PropTypes.object }).isRequired,
+  values: PropTypes.shape({ richness: PropTypes.array, rarity: PropTypes.array })
 };
 
-HistogramComponent.defaultProps = { data: null };
+HistogramComponent.defaultProps = { values: null };
 
 export default HistogramComponent;
