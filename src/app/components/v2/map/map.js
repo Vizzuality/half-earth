@@ -1,6 +1,6 @@
 import { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
-import { mapValues } from 'lodash';
+import { mapValues, isEqual } from 'lodash';
 import CesiumMapComponent from './map-component';
 
 // const { MAPBOX_TOKEN } = process.env;
@@ -77,9 +77,7 @@ class CesiumComponent extends Component {
       ) {
         this.setCoordinates();
       }
-      if (
-        terrainMode && (!prevProps.latLng || prevProps.latLng.lat !== latLng.lat && prevProps.latLng.lng !== latLng.lng)
-      ) {
+      if (terrainMode && latLng && !isEqual(prevProps.latLng, latLng)) {
         this.setTerrainModeView(latLng, terrainCameraOffset);
       }
     }
