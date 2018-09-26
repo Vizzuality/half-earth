@@ -17,7 +17,7 @@ CesiumMap.propTypes = {
   mapId: PropTypes.string.isRequired,
   className: PropTypes.string,
   viewer: PropTypes.object,
-  children: PropTypes.object
+  children: PropTypes.func
 };
 
 CesiumMap.defaultProps = { className: '', viewer: undefined, children: null };
