@@ -10,7 +10,14 @@ import styles from './detail-view-styles';
 
 class DetailViewComponent extends Component {
   render() {
-    const { loading, data, taxas, handleCloseTerrainClick, handleTaxasChange } = this.props;
+    const {
+      loading,
+      data,
+      taxas,
+      taxaSelected,
+      handleCloseTerrainClick,
+      handleTaxasChange
+    } = this.props;
     if (loading) return <Loading height="100%" />;
     return (
       <div className={styles.detailViewContainer}>
@@ -18,8 +25,15 @@ class DetailViewComponent extends Component {
           <Icon icon={closeIcon} />
         </Button>
         <h2 className={styles.detailTitle}>Area in United States, North America</h2>
-        <h2 className={styles.detailSubTitle}>Global, ~110 km cell size mapping of terrestrial species. </h2>
-        <RarityRichness taxas={taxas} data={data} handleTaxasChange={handleTaxasChange} />
+        <h2 className={styles.detailSubTitle}>
+          Global, ~110 km cell size mapping of terrestrial species.
+        </h2>
+        <RarityRichness
+          taxas={taxas}
+          selected={taxaSelected}
+          data={data}
+          handleTaxasChange={handleTaxasChange}
+        />
         <ProgressCard data={data} />
         <ProgressCard data={data} />
         {data && data.species && <SpeciesToWatch species={data.species} />}
@@ -31,11 +45,12 @@ class DetailViewComponent extends Component {
 DetailViewComponent.propTypes = {
   loading: PropTypes.bool,
   taxas: PropTypes.array,
+  taxaSelected: PropTypes.object,
   data: PropTypes.object,
   handleCloseTerrainClick: PropTypes.func.isRequired,
   handleTaxasChange: PropTypes.func.isRequired
 };
 
-DetailViewComponent.defaultProps = { loading: false, taxas: [], data: {} };
+DetailViewComponent.defaultProps = { loading: false, taxas: [], taxaSelected: {}, data: {} };
 
 export default DetailViewComponent;

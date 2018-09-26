@@ -13,6 +13,11 @@ export const getCellId = createSelector([ selectQueryParams ], query => {
   return query.cellId ? parseInt(query.cellId, 10) : null;
 });
 
+export const getTaxa = createSelector([ selectQueryParams ], query => {
+  if (!query) return null;
+  return query.taxa;
+});
+
 export const getIsTerrain = createSelector([ selectQueryParams ], query => {
   if (!query) return null;
   return checkBoolean(query.terrain);

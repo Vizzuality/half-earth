@@ -1,7 +1,85 @@
 @import '~styles/variables.scss';
 
-.specieImg {
+.container {
+  background-color: $color-group-card-dark-blue;
+  padding: $site-gutter;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.19;
+  letter-spacing: -0.8px;
+  margin-bottom: 55px;
+  color: $color-white;
+}
+
+.speciesRow {
+  display: flex;
+  align-items: center;
+  margin: $site-gutter 0;
+}
+
+.speciesContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.speciesTitle {
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.17;
+  letter-spacing: 1.7px;
+  color: $color-white;
+  margin: 0;
+}
+
+.specieLink {
+  text-decoration: none;
+}
+
+.speciesSubTitle {
+  font-size: 14px;
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #495a64;
+  margin: 5px 0;
+}
+
+.speciesCategory {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  height: 22px;
+  font-size: 14px;
+  border-radius: 2px;
+  line-height: 1.43;
+  color: $color-white;
+  background-color: rgba($color-turquoise, 0.3);
+}
+
+.speciesImg {
   width: 100px;
   height: 100px;
+  object-fit: cover;
   border-radius: 50px;
+  margin-right: 30px;
+}
+
+.logoContainer {
+  text-align: center;
+  margin: 40px 0 20px 0;
+}
+
+.logoImg {
+  width: 100%;
+  max-width: 190px;
 }

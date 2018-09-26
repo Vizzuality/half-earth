@@ -6,12 +6,11 @@ import styles from './rarity-richness-styles';
 
 class DetailViewComponent extends Component {
   render() {
-    const { loading, taxas, handleTaxasChange } = this.props;
+    const { loading, taxas, selected, handleTaxasChange } = this.props;
     if (loading) return <Loading height="100%" />;
-    const selected = taxas && taxas[0] || {};
     return (
       <div className={styles.container}>
-        <span>For all</span>
+        <span>For</span>
         <Dropdown options={taxas} selected={selected} onSelect={handleTaxasChange} />
         <span>this area has a average rarity richness and high rarity</span>
       </div>
@@ -22,9 +21,10 @@ class DetailViewComponent extends Component {
 DetailViewComponent.propTypes = {
   loading: PropTypes.bool,
   taxas: PropTypes.array,
+  selected: PropTypes.object,
   handleTaxasChange: PropTypes.func.isRequired
 };
 
-DetailViewComponent.defaultProps = { loading: false, taxas: [] };
+DetailViewComponent.defaultProps = { loading: false, taxas: [], selected: {} };
 
 export default DetailViewComponent;
