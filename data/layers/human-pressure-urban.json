@@ -32,6 +32,7 @@
                         "color": "#d8d9e5"
                     }
                 ],
-                    "type": "gradient"
+                    "type": "gradient",
+                    "title": "Urban pressure"
         }
    }

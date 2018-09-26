@@ -16,7 +16,8 @@
                                  "name": "Other"
                                  }
                              ],
-                     "type": "basic"
+                     "type": "basic",
+                     "title": "Other protected areas"
                    },
     "interactionConfig": {
     "output": [

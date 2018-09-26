@@ -23,7 +23,8 @@
                                 }
 
                              ],
-                     "type": "basic"
+                     "type": "basic",
+                     "title": "Community-based protected areas"
                    },
     "interactionConfig": {
     "output": [

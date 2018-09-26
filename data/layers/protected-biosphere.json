@@ -16,7 +16,8 @@
                                  "name": "Biosphere reserves"
                                  }
                              ],
-                     "type": "basic"
+                     "type": "basic",
+                     "title": "Biosphere reserves"
                    },
     "interactionConfig": {
     "output": [

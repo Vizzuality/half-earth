@@ -18,6 +18,7 @@
                                  "name": "Stories"
                                  }
                              ],
-                     "type": "basic"
+                     "type": "basic",
+                     "title": "What's going on?"
                    }
  }

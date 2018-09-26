@@ -39,6 +39,7 @@
                     "color": "#fde300"
                 }
                 ],
-                    "type": "gradient"
+                    "type": "gradient",
+                    "title": "Hummingbirds richness"
         }
  }

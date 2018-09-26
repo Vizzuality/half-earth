@@ -37,7 +37,8 @@
                         "color": "#F1FBFF"
                     }
                 ],
-                    "type": "gradient"
+                    "type": "gradient",
+                    "title": "Other fishing types"
         }
 
  }

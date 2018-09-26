@@ -18,6 +18,7 @@
                                  "name": "Signed pledges"
                                  }
                              ],
-                     "type": "basic"
+                     "type": "basic",
+                     "title":"Where are you on the map?"
                    }
  }

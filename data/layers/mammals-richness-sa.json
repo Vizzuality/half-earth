@@ -33,7 +33,8 @@
                         "color": "#0664f6"
                     }
                 ],
-                    "type": "gradient"
+                    "type": "gradient",
+                    "title": "Mammals regional richness"
         }
 
  }

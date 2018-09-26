@@ -16,7 +16,8 @@
                                  "name": "Strict reserves"
                                  }
                              ],
-                     "type": "basic"
+                     "type": "basic",
+                     "title":"Strict reserves"
                    },
     "interactionConfig": {
         "output": [

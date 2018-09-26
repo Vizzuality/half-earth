@@ -38,7 +38,8 @@
                     "color": "#fde300"
                 }
                 ],
-                    "type": "gradient"
+                    "type": "gradient",
+                    "title": "Conifers richness"
         }
 
  }
