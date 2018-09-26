@@ -13,3 +13,9 @@
   letter-spacing: normal;
   color: $color-group-card-dark-blue;
 }
+
+.datasetComboWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: $site-gutter;
+}
