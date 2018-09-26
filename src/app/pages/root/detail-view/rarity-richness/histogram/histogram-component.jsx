@@ -7,14 +7,14 @@ import styles from './histogram-styles';
 const yColors = [ '#3474ef', '#538bf0', '#8bb2f5', '#c5d8f9', '#e5eeff' ];
 const xColors = [ '#fae651', '#fbea62', '#fcf090', '#fef8c5', '#e5eeff' ];
 const legendColors = [
-  [ '#fae651', '#fbea62', '#fcf090', '#fef8c5', '#e5eeff' ],
-  [ '#3474ef', '#538bf0', '#8bb2f5', '#c5d8f9', '#e5eeff' ],
-  [ '#fae651', '#fbea62', '#fcf090', '#fef8c5', '#e5eeff' ],
-  [ '#3474ef', '#538bf0', '#8bb2f5', '#c5d8f9', '#e5eeff' ],
-  [ '#fae651', '#fbea62', '#fcf090', '#fef8c5', '#e5eeff' ]
+  [ '#1E6818', '#437D18', '#81A018', '#BFC218', '#FDE619' ],
+  [ '#1D693D', '#437F3E', '#82A33E', '#C0C63F', '#FEEA40' ],
+  [ '#1D6C7B', '#43837C', '#82A87D', '#C0CC7E', '#FEF180' ],
+  [ '#1E6FB9', '#4487B9', '#83ADBC', '#C1D2BD', '#FFF8BF' ],
+  [ '#1E73F7', '#448BF8', '#83B2FB', '#C1D8FD', '#FFFFFF' ]
 ];
 
-class DetailViewComponent extends Component {
+class HistogramComponent extends Component {
   render() {
     const { data } = this.props;
     if (!data) return null;
@@ -60,10 +60,10 @@ class DetailViewComponent extends Component {
   }
 }
 
-DetailViewComponent.propTypes = {
+HistogramComponent.propTypes = {
   data: PropTypes.shape({ richness: PropTypes.array, rarity: PropTypes.array })
 };
 
-DetailViewComponent.defaultProps = { data: null };
+HistogramComponent.defaultProps = { data: null };
 
-export default DetailViewComponent;
+export default HistogramComponent;
