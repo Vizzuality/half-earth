@@ -30,10 +30,20 @@ export const getCoordinates = createSelector([ selectQueryParams ], query => {
   return query.coordinates;
 });
 
+export const getTerrainCameraOffset = createSelector([ selectQueryParams ], query => {
+  if (!query || !query.terrainCameraOffset) return undefined;
+  return { offset: query.terrainCameraOffset };
+});
+
 export const getCoordinatesOptions = createSelector([ selectQueryParams ], query => {
   if (!query || !query.orientation) return undefined;
   const [ heading, pitch, roll ] = query.orientation;
   return { orientation: { roll, pitch, heading } };
+});
+
+export const getLatLng = createSelector([ selectQueryParams ], query => {
+  if (!query || !query.lat || !query.lng) return undefined;
+  return { lat: query.lat, lng: query.lng };
 });
 
 export const mapStateToProps = createStructuredSelector({
@@ -42,5 +52,7 @@ export const mapStateToProps = createStructuredSelector({
   terrainMode: getTerrainMode,
   query: selectQueryParams,
   coordinates: getCoordinates,
-  coordinatesOptions: getCoordinatesOptions
+  coordinatesOptions: getCoordinatesOptions,
+  latLng: getLatLng,
+  terrainCameraOffset: getTerrainCameraOffset
 });
