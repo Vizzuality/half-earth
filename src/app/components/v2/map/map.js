@@ -70,15 +70,17 @@ class CesiumComponent extends Component {
       if (onTick && !this.ticking) this.addTick();
       if (camera && prevProps.camera !== camera) this.setCamera();
       if (lockNavigation) disablePanning(this.viewer);
-      if (
-        coordinates &&
-          !terrainMode &&
-          (prevProps.coordinates !== coordinates || prevProps.coordinatesOptions !== coordinatesOptions)
-      ) {
-        this.setCoordinates();
-      }
-      if (terrainMode && latLng && !isEqual(prevProps.latLng, latLng)) {
-        this.setTerrainModeView(latLng, terrainCameraOffset);
+      if (terrainMode) {
+        if (latLng && !isEqual(prevProps.latLng, latLng)) {
+          this.setTerrainModeView(latLng, terrainCameraOffset);
+        }
+      } else {
+        const coordinatesChanged = coordinates && prevProps.coordinates !== coordinates ||
+          prevProps.coordinatesOptions !== coordinatesOptions;
+        const terrainModeChanged = prevProps.terrainMode !== terrainMode;
+        if (coordinatesChanged || terrainModeChanged) {
+          this.setCoordinates();
+        }
       }
     }
   }
@@ -103,7 +105,9 @@ class CesiumComponent extends Component {
   onTick = clock => {
     if (this.rotating) this.rotate(clock);
     const cameraPosition = this.viewer.scene.camera.positionWC;
-    const ellipsoidPosition = this.viewer.scene.globe.ellipsoid.scaleToGeodeticSurface(cameraPosition);
+    const ellipsoidPosition = this.viewer.scene.globe.ellipsoid.scaleToGeodeticSurface(
+      cameraPosition
+    );
     const distance = Cesium.Cartesian3.magnitude(
       Cesium.Cartesian3.subtract(cameraPosition, ellipsoidPosition, new Cesium.Cartesian3())
     );
@@ -114,7 +118,7 @@ class CesiumComponent extends Component {
   };
 
   setTerrainModeView(latLng, terrainCameraOffset) {
-    const offset = mapValues(terrainCameraOffset.offset, v => parseFloat(v));
+    const offset = mapValues(terrainCameraOffset.offset, parseFloat);
     const center = Cesium.Cartesian3.fromDegrees(latLng.lng, latLng.lat);
     const sphere = new Cesium.BoundingSphere(center);
     this.viewer.camera.flyToBoundingSphere(sphere, { offset });
@@ -135,7 +139,9 @@ class CesiumComponent extends Component {
     const { orientation = {} } = coordinatesOptions;
     const { x, y, z } = this.viewer.camera.position;
     const { heading, pitch, roll } = this.viewer.camera;
-    const isDifferentCoordinates = coordinates[0] !== x || coordinates[1] !== y || coordinates[2] !== z;
+    const isDifferentCoordinates = coordinates[0] !== x ||
+      coordinates[1] !== y ||
+      coordinates[2] !== z;
     const isDifferentOrientation = orientation.heading !== heading ||
       orientation.pitch !== pitch ||
       orientation.roll !== roll;
