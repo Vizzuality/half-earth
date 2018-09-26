@@ -16,8 +16,8 @@ class DetailViewComponent extends Component {
       taxas,
       histogram,
       taxaSelected,
-      humanLayers,
-      conservationLayers,
+      humanCategory,
+      conservationCategory,
       handleCloseTerrainClick,
       handleTaxasChange
     } = this.props;
@@ -40,14 +40,14 @@ class DetailViewComponent extends Component {
         />
         <AccordionCard isOpen title="Mapping conservation areas">
           <ProgressCard
-            layers={conservationLayers}
+            category={conservationCategory}
             legend="Strict reserves"
             subtitle="Protections classified according to their management objectives."
           />
         </AccordionCard>
         <AccordionCard isOpen title="Mapping human activities">
           <ProgressCard
-            layers={humanLayers}
+            category={humanCategory}
             legend="Area total encroachment"
             subtitle="Human pressures are high, mainly due to agricultural practices."
           />
@@ -64,8 +64,8 @@ DetailViewComponent.propTypes = {
   taxaSelected: PropTypes.object,
   histogram: PropTypes.object,
   data: PropTypes.object,
-  humanLayers: PropTypes.array,
-  conservationLayers: PropTypes.array,
+  humanCategory: PropTypes.object,
+  conservationCategory: PropTypes.object,
   handleCloseTerrainClick: PropTypes.func.isRequired,
   handleTaxasChange: PropTypes.func.isRequired
 };
@@ -76,8 +76,8 @@ DetailViewComponent.defaultProps = {
   taxaSelected: {},
   data: {},
   histogram: null,
-  humanLayers: null,
-  conservationLayers: null
+  humanCategory: null,
+  conservationCategory: null
 };
 
 export default DetailViewComponent;

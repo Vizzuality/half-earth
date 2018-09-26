@@ -39,32 +39,36 @@ export const getCellTaxaDataSelected = createSelector([ getCellData, getTaxaSele
     return data[selected.slug];
   });
 
-export const getHumanLayers = createSelector([ getCellTaxaDataSelected, getDatasetsByCategory ], (
+export const getHumanCategory = createSelector([ getCellTaxaDataSelected, getDatasetsByCategory ], (
   data,
   categories
 ) =>
   {
     if (!data || !categories) return null;
     const category = categories.find(d => d.slug === 'human-activities');
-
     if (!category) return null;
-    return category.datasets.map(d => ({
-      ...d,
-      percentage: data[d.slug.replace('protected-', '')]
-    }));
+    return {
+      ...category,
+      datasets: category.datasets.map(d => ({
+        ...d,
+        percentage: data[d.slug.replace('protected-', '')]
+      }))
+    };
   });
 
-export const getConservationLayers = createSelector(
+export const getConservationCategory = createSelector(
   [ getCellTaxaDataSelected, getDatasetsByCategory ],
   (data, categories) => {
     if (!data || !categories) return null;
     const category = categories.find(d => d.slug === 'conservation-areas');
-
     if (!category) return null;
-    return category.datasets.map(d => ({
-      ...d,
-      percentage: data[d.slug.replace('protected-', '')]
-    }));
+    return {
+      ...category,
+      datasets: category.datasets.map(d => ({
+        ...d,
+        percentage: data[d.slug.replace('protected-', '')]
+      }))
+    };
   }
 );
 
@@ -111,8 +115,8 @@ export const mapStateToProps = createStructuredSelector({
   cellId: getCellId,
   loading: selectCellsLoading,
   data: getCellTaxaDataSelectedParsed,
-  conservationLayers: getConservationLayers,
-  humanLayers: getHumanLayers,
+  conservationCategory: getConservationCategory,
+  humanCategory: getHumanCategory,
   histogram: getTaxaHistogramPercentage,
   taxas: getTaxaOptions,
   taxaSelected: getTaxaSelected
