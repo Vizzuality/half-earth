@@ -1,5 +1,6 @@
 import { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
+import { mapValues, isEqual } from 'lodash';
 import CesiumMapComponent from './map-component';
 
 // const { MAPBOX_TOKEN } = process.env;
@@ -52,7 +53,17 @@ class CesiumComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { onTick, lockNavigation = false, rotate, coordinates, coordinatesOptions, camera } = this.props;
+    const {
+      onTick,
+      lockNavigation = false,
+      rotate,
+      coordinates,
+      coordinatesOptions,
+      camera,
+      terrainMode,
+      latLng,
+      terrainCameraOffset
+    } = this.props;
     if (this.viewer) {
       if (!this.rotating && rotate) this.addRotation();
       if (this.rotating && !rotate) this.removeRotation();
@@ -60,9 +71,14 @@ class CesiumComponent extends Component {
       if (camera && prevProps.camera !== camera) this.setCamera();
       if (lockNavigation) disablePanning(this.viewer);
       if (
-        coordinates && (prevProps.coordinates !== coordinates || prevProps.coordinatesOptions !== coordinatesOptions)
+        coordinates &&
+          !terrainMode &&
+          (prevProps.coordinates !== coordinates || prevProps.coordinatesOptions !== coordinatesOptions)
       ) {
         this.setCoordinates();
+      }
+      if (terrainMode && latLng && !isEqual(prevProps.latLng, latLng)) {
+        this.setTerrainModeView(latLng, terrainCameraOffset);
       }
     }
   }
@@ -96,6 +112,13 @@ class CesiumComponent extends Component {
       this.distance = distance;
     }
   };
+
+  setTerrainModeView(latLng, terrainCameraOffset) {
+    const offset = mapValues(terrainCameraOffset.offset, v => parseFloat(v));
+    const center = Cesium.Cartesian3.fromDegrees(latLng.lng, latLng.lat);
+    const sphere = new Cesium.BoundingSphere(center);
+    this.viewer.camera.flyToBoundingSphere(sphere, { offset });
+  }
 
   setCoordinates() {
     const { coordinates, coordinatesOptions } = this.props;
@@ -170,7 +193,10 @@ CesiumComponent.propTypes = {
   rotate: PropTypes.func,
   coordinates: PropTypes.array,
   coordinatesOptions: PropTypes.object,
-  camera: PropTypes.object
+  camera: PropTypes.object,
+  terrainMode: PropTypes.bool,
+  terrainCameraOffset: PropTypes.object,
+  latLng: PropTypes.object
 };
 
 CesiumComponent.defaultProps = {
@@ -185,7 +211,10 @@ CesiumComponent.defaultProps = {
   lockNavigation: false,
   coordinates: undefined,
   coordinatesOptions: undefined,
-  camera: null
+  camera: null,
+  terrainMode: false,
+  terrainCameraOffset: undefined,
+  latLng: undefined
 };
 
 export default CesiumComponent;

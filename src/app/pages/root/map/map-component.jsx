@@ -10,6 +10,11 @@ import { PluginCesium } from 'layer-manager';
 import styles from './map-styles.scss';
 
 const SHOW_GRID_HEIGHT = 8000000;
+const TERRAIN_CAMERA_OFFSET = new Cesium.HeadingPitchRange(
+  Cesium.Math.toRadians(0.0),
+  Cesium.Math.toRadians(-27.0),
+  50000.0
+);
 
 class MapComponent extends PureComponent {
   lastObjId = null;
@@ -86,28 +91,47 @@ class MapComponent extends PureComponent {
   };
 
   handleGridClick = (e, object) => {
+    // Allow pickPosition function to perform a 3D calculation
+    this.map.scene.pickTranslucentDepth = true;
     const cartesian = this.map.scene.pickPosition(e.position);
-    const coordinates = [ cartesian.x, cartesian.y, 5307072.629819246 ];
-    const orientation = [ 0.09975939859320615, -0.36280546028605887, 0.00032927908478175283 ];
-    this.setMapTerrain(coordinates, orientation, object.id.cellId);
+    const { ellipsoid } = this.map.scene.globe;
+    const cartographic = ellipsoid.cartesianToCartographic(cartesian);
+    const latLng = {
+      lat: Cesium.Math.toDegrees(cartographic.latitude),
+      lng: Cesium.Math.toDegrees(cartographic.longitude)
+    };
+    this.setMapTerrain(latLng, TERRAIN_CAMERA_OFFSET, object.id.cellId);
   };
 
-  setMapTerrain = (coordinates, orientation, gridId) => {
+  setMapTerrain = (latLng, terrainCameraOffset, gridId) => {
     const { query } = this.props;
     const gridLayerSlugs = Object.keys(this.gridLayers);
     const activeLayers = query.activeLayers ? query.activeLayers.filter(l => gridLayerSlugs.includes(l)) : null;
-    this.props.updateMapParams({ terrain: true, activeLayers, coordinates, orientation, gridId });
+    this.props.updateMapParams({ terrain: true, activeLayers, ...latLng, terrainCameraOffset, gridId });
   };
 
   render() {
-    const { terrainMode, className, gridLayers, layers, coordinates, coordinatesOptions, updateMapParams } = this.props;
+    const {
+      terrainMode,
+      className,
+      gridLayers,
+      layers,
+      coordinates,
+      coordinatesOptions,
+      latLng,
+      updateMapParams,
+      terrainCameraOffset
+    } = this.props;
     const hasLayers = layers && layers.length > 0;
     const hasGridLayers = gridLayers && gridLayers.length > 0;
     return (
       <CesiumMap
         className={cx(styles.mapContainer, className)}
         coordinates={coordinates}
+        terrainMode={terrainMode}
         coordinatesOptions={coordinatesOptions}
+        latLng={latLng}
+        terrainCameraOffset={terrainCameraOffset}
         onMouseMove={this.handleMouseMove}
         onMouseClick={this.handleMouseClick}
         onMoveEnd={updateMapParams}
@@ -151,6 +175,8 @@ MapComponent.propTypes = {
   className: PropTypes.string,
   coordinates: PropTypes.array,
   coordinatesOptions: PropTypes.object,
+  terrainCameraOffset: PropTypes.object,
+  latLng: PropTypes.object,
   updateMapParams: PropTypes.func
 };
 
@@ -162,6 +188,8 @@ MapComponent.defaultProps = {
   terrainMode: false,
   coordinates: undefined,
   coordinatesOptions: undefined,
+  terrainCameraOffset: undefined,
+  latLng: undefined,
   updateMapParams: () => {
   }
 };
