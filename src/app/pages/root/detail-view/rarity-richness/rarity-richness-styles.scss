@@ -1,5 +1,7 @@
 @import '~styles/variables.scss';
 
+$bar-size: 28px;
+
 .container {
   margin-bottom: $site-gutter;
   line-height: 1.8;
@@ -7,4 +9,57 @@
 
 .dropdownContainer {
   margin: 0 6px;
+}
+
+.histogramContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.histogram {
+  span {
+    display: inline-block;
+  }
+}
+
+.histogramX {
+  span {
+    display: inline-block;
+    width: $bar-size;
+    background-color: #1e73f7;
+  }
+}
+
+.histogramY {
+  display: flex;
+  flex-direction: column-reverse;
+
+  span {
+    display: inline-block;
+    height: $bar-size;
+    background-color: #fde619;
+  }
+}
+
+.graphContainer {
+  display: flex;
+}
+
+.squareLegend {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-right: 10px;
+
+  > div {
+    height: $bar-size;
+  }
+
+  span {
+    display: inline-block;
+    width: $bar-size;
+    height: 100%;
+    background-color: indianred;
+    border: 1px solid;
+    box-sizing: border-box;
+  }
 }

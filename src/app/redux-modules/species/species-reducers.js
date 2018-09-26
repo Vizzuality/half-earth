@@ -4,7 +4,12 @@ export const initialState = { data: null, loading: false, loaded: true, error: f
 
 const fetchSpecies = state => ({ ...state, loading: true, loaded: false });
 
-const fetchSpeciesFail = (state, { payload }) => ({ ...state, loading: false, loaded: false, error: payload });
+const fetchSpeciesFail = (state, { payload }) => ({
+  ...state,
+  loading: false,
+  loaded: false,
+  error: payload
+});
 
 const fetchSpeciesReady = (state, { payload }) => ({
   ...state,
