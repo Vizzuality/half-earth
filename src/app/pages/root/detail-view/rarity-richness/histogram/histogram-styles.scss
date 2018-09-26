@@ -1,0 +1,85 @@
+@import '~styles/variables.scss';
+
+$bar-size: 28px;
+$selection-color: black;
+$legend-color: #495a64;
+
+.histogramContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 30px;
+}
+
+.legend {
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: center;
+  color: $legend-color;
+  position: absolute;
+
+  &X {
+    bottom: 0;
+    left: 50px;
+  }
+
+  &Y {
+    left: -20px;
+    top: 50%;
+    transform: rotate(90deg);
+  }
+}
+
+.histogram {
+  span {
+    display: inline-block;
+  }
+
+  &X {
+    span {
+      display: inline-block;
+      width: $bar-size;
+      border-color: $selection-color;
+      border-style: solid;
+    }
+  }
+
+  &Y {
+    display: flex;
+    flex-direction: column-reverse;
+
+    span {
+      display: inline-block;
+      height: $bar-size;
+      border-color: $selection-color;
+      border-style: solid;
+    }
+  }
+}
+
+.graphContainer {
+  display: flex;
+}
+
+.squareLegend {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-right: 10px;
+
+  > div {
+    height: $bar-size;
+  }
+
+  span {
+    display: inline-block;
+    width: $bar-size;
+    height: 100%;
+    box-sizing: border-box;
+    border-color: $selection-color;
+    border-style: solid;
+  }
+}

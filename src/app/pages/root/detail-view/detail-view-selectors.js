@@ -1,5 +1,9 @@
 import { createSelector, createStructuredSelector } from 'reselect';
-import { selectCellsLoading, selectCellsData } from 'selectors/cell-detail-selectors';
+import {
+  selectCellsLoading,
+  selectCellsData,
+  selectCellsHistogram
+} from 'selectors/cell-detail-selectors';
 import { selectQueryParams, getCellId, getTaxa } from 'selectors/location-selectors';
 import sortBy from 'lodash/sortBy';
 
@@ -27,11 +31,44 @@ export const getCellTaxaDataSelected = createSelector([ getCellData, getTaxaSele
     return data[selected.slug];
   });
 
+export const getConservationLayers = createSelector([ getCellTaxaDataSelected ], data => {
+  if (!data) return null;
+  return [ { label: 'Conservation layer 1', value: 45, slug: 'cnv1' } ];
+});
+
+export const getHumanLayers = createSelector([ getCellTaxaDataSelected ], data => {
+  if (!data) return null;
+  return [ { label: 'Human layer 1', value: 20, slug: 'cnv3' } ];
+});
+
+export const getTaxaHistogram = createSelector([ selectCellsHistogram, getTaxaSelected ], (
+  data,
+  selected
+) =>
+  {
+    if (!data || !selected) return null;
+    const histogram = {
+      rarity: data.rarity[selected.slug],
+      richness: data.richness[selected.slug]
+    };
+    const totalValues = {
+      rarity: histogram.rarity.reduce((acc, next) => acc + next, 0),
+      richness: histogram.richness.reduce((acc, next) => acc + next, 0)
+    };
+    return {
+      rarity: histogram.rarity.map(h => h * 100 / totalValues.rarity),
+      richness: histogram.richness.map(h => h * 100 / totalValues.richness)
+    };
+  });
+
 export const mapStateToProps = createStructuredSelector({
   query: selectQueryParams,
   cellId: getCellId,
   loading: selectCellsLoading,
   data: getCellTaxaDataSelected,
+  conservationLayers: getConservationLayers,
+  humanLayers: getHumanLayers,
+  histogram: getTaxaHistogram,
   taxas: getTaxaOptions,
   taxaSelected: getTaxaSelected
 });

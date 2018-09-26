@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Loading, Button, Icon } from 'he-components';
+import { AccordionCard, Loading, Button, Icon } from 'he-components';
 
 import closeIcon from 'assets/icons/icon-cross.svg';
 import RarityRichness from './rarity-richness';
@@ -14,7 +14,10 @@ class DetailViewComponent extends Component {
       loading,
       data,
       taxas,
+      histogram,
       taxaSelected,
+      humanLayers,
+      conservationLayers,
       handleCloseTerrainClick,
       handleTaxasChange
     } = this.props;
@@ -29,13 +32,26 @@ class DetailViewComponent extends Component {
           Global, ~110 km cell size mapping of terrestrial species.
         </h2>
         <RarityRichness
-          taxas={taxas}
-          selected={taxaSelected}
           data={data}
+          taxas={taxas}
+          histogram={histogram}
+          selected={taxaSelected}
           handleTaxasChange={handleTaxasChange}
         />
-        <ProgressCard data={data} />
-        <ProgressCard data={data} />
+        <AccordionCard isOpen title="Mapping conservation areas">
+          <ProgressCard
+            layers={conservationLayers}
+            legend="Strict reserves"
+            subtitle="Protections classified according to their management objectives."
+          />
+        </AccordionCard>
+        <AccordionCard isOpen title="Mapping human activities">
+          <ProgressCard
+            layers={humanLayers}
+            legend="Area total encroachment"
+            subtitle="Human pressures are high, mainly due to agricultural practices."
+          />
+        </AccordionCard>
         {data && data.species && <SpeciesToWatch species={data.species} />}
       </div>
     );
@@ -46,11 +62,22 @@ DetailViewComponent.propTypes = {
   loading: PropTypes.bool,
   taxas: PropTypes.array,
   taxaSelected: PropTypes.object,
+  histogram: PropTypes.object,
   data: PropTypes.object,
+  humanLayers: PropTypes.array,
+  conservationLayers: PropTypes.array,
   handleCloseTerrainClick: PropTypes.func.isRequired,
   handleTaxasChange: PropTypes.func.isRequired
 };
 
-DetailViewComponent.defaultProps = { loading: false, taxas: [], taxaSelected: {}, data: {} };
+DetailViewComponent.defaultProps = {
+  loading: false,
+  taxas: [],
+  taxaSelected: {},
+  data: {},
+  histogram: null,
+  humanLayers: null,
+  conservationLayers: null
+};
 
 export default DetailViewComponent;
