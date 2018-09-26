@@ -77,7 +77,9 @@ class CesiumComponent extends Component {
       ) {
         this.setCoordinates();
       }
-      if (terrainMode && (prevProps.latLng.lat !== latLng.lat && prevProps.latLng.lng !== latLng.lng)) {
+      if (
+        terrainMode && (!prevProps.latLng || prevProps.latLng.lat !== latLng.lat && prevProps.latLng.lng !== latLng.lng)
+      ) {
         this.setTerrainModeView(latLng, terrainCameraOffset);
       }
     }
