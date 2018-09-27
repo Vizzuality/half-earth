@@ -1,6 +1,7 @@
 import json
 import random
 import pandas as pd
+from pprint import pprint
 from os import listdir
 from os.path import isfile, join
 from colorama import Fore, Back, Style
@@ -60,7 +61,7 @@ def carto_template(l):
                 "account":"half-earth",
                 "type": "layer",
                 "sql_config": f"{l.get('sql_config',[])}",
-                "params_config": f"{l.get('params_config',[])}"
+                "params_config": json.dumps(l.get('params_config',[]))
             },
             "legend_config": l.get('legendConfig',{}),
             "interaction_config": l.get('interactionConfig',{})
@@ -94,6 +95,12 @@ if __name__ == '__main__':
     json_layerConfig = []
     for item in df['layer_config']:
         json_layerConfig.append(json.dumps(item))
+        #if item.get('type') == 'layer' and item.get('params_config') != '[]':
+         #   print(item)
+            # test = item.get('params_config')
+            # print('raw', test)
+            # print('moded', json.dumps(test))
+
     df['layer_config'] = json_layerConfig
 
     json_legendConfig = []

@@ -1,0 +1,9 @@
+the_geom,position,name,description,slug,cartodb_id,group_name,group_slug,featured,image_url,multi_select
+,40,Human encroachment,Human pressures causing habitat loss and accelerating species extinction.,human-activities,6,Mapping human activities,mapping-human-activities,false,,
+,10,Marine Species,"Global, ~50 km² cell-size mapping of marine species. ",aquatic,3,Mapping biodiversity,mapping-biodiversity,false,,
+,30,South Africa Cape Region,Species maps at 1 km² cell size over South Africa.,south-africa,1,Mapping biodiversity,mapping-biodiversity,true,https://half-earth-staging.vizzuality.com/img/categories/south-africa.png,
+,20,Hummingbirds,"Species maps at 1km² cell-size for hummingbirds, globally.",hummingbirds,5,Mapping biodiversity,mapping-biodiversity,true,https://half-earth-staging.vizzuality.com/img/categories/hummingbirds.png,
+,0,Terrestrial Species,"Global, ~110 km cell size mapping of terrestrial species.",terrestrial,2,Mapping biodiversity,mapping-biodiversity,false,,
+,,,Take the Half-earth pledge to protect half the Earth for the long-term health of the planet.,he-movement,4,The view from Half-Earth,half-earth-view,false,,true
+,31,Areas of importance,This layer highlights locations that are of particular note to conservation efforts.,places-to-watch,9,Mapping biodiversity,mapping-biodiversity,false,,
+,35,Conservation Area Categories,Protections classified according to their management objectives.,conservation-areas,8,Mapping conservation areas,mapping-conservation-areas,false,,true
