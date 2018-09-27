@@ -30,7 +30,7 @@ node {
   try {
 
     stage ('Build docker') {
-      sh("docker -H :2375 build --build-arg MAPBOX_TOKEN=${env.HE_MAPBOX} --build-arg CONTENTFUL_SPACE_ID=${env.HE_CONTENTFUL_SPACE_ID} --build-arg CONTENTFUL_TOKEN=${env.HE_CONTENTFUL_TOKEN} -t ${imageTag} .")
+      sh("docker -H :2375 build --build-arg MAPBOX_TOKEN=${env.HE_MAPBOX} --build-arg CONTENTFUL_SPACE_ID=${env.HE_CONTENTFUL_SPACE_ID} --build-arg CONTENTFUL_TOKEN=${env.HE_CONTENTFUL_TOKEN} --build-arg MOL_API_KEY=${env.HE_MOL_API_KEY}  -t ${imageTag} .")
       sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest .")
     }
 
