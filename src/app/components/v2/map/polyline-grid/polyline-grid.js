@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class GridLayer extends Component {
+class PolylineGrid extends Component {
   primitive = null;
 
   componentDidMount() {
@@ -41,26 +41,20 @@ class GridLayer extends Component {
           console.warn(e);
           return acc;
         }
-        const polygonCoords = coordinates.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]));
+        const outlinesCoords = coordinates.reduce((ac, current) => ac.concat(current), []);
 
-        const polygon = new Cesium.GeometryInstance({
-          geometry: new Cesium.PolygonGeometry({
-            polygonHierarchy: new Cesium.PolygonHierarchy(polygonCoords),
-            height: 0,
+        const polyLine = new Cesium.GeometryInstance({
+          geometry: new Cesium.PolylineGeometry({
+            positions: Cesium.Cartesian3.fromDegreesArray(outlinesCoords),
+            width: 2,
             vertexFormat: Cesium.PolylineColorAppearance.VERTEX_FORMAT
           }),
-          id: { grid: true, slug: layer.id, cellId: row.cell_id },
-          attributes: {
-            color: Cesium.ColorGeometryInstanceAttribute.fromColor(
-              Cesium.Color.WHITE.withAlpha(0.1)
-            )
-          }
+          attributes: { color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.WHITE) }
         });
 
-        if (polygon) {
-          acc.push(polygon);
+        if (polyLine) {
+          acc.push(polyLine);
         }
-
         return acc;
       }, []);
     }
@@ -92,13 +86,13 @@ class GridLayer extends Component {
   }
 }
 
-GridLayer.propTypes = {
+PolylineGrid.propTypes = {
   layer: PropTypes.object,
   map: PropTypes.object,
   children: PropTypes.func,
   show: PropTypes.bool
 };
 
-GridLayer.defaultProps = { layer: null, map: null, children: null, show: true };
+PolylineGrid.defaultProps = { layer: null, map: null, children: null, show: true };
 
-export default GridLayer;
+export default PolylineGrid;

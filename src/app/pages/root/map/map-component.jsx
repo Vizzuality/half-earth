@@ -4,6 +4,7 @@ import cx from 'classnames';
 
 import CesiumMap from 'components/v2/map';
 import GridLayer from 'components/v2/map/grid-layer';
+import PolylineGrid from 'components/v2/map/polyline-grid';
 import { LayerManager, Layer } from 'layer-manager/dist/react';
 import { PluginCesium } from 'layer-manager';
 
@@ -49,12 +50,16 @@ class MapComponent extends PureComponent {
     if (primitive && (!this.lastObjId || this.lastObjId.cellId !== object.id.cellId)) {
       const attributes = primitive.getGeometryInstanceAttributes(object.id);
       if (attributes) {
-        attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(Cesium.Color.WHITE.withAlpha(0.8));
+        attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
+          Cesium.Color.WHITE.withAlpha(0.8)
+        );
       }
       if (this.lastObjId) {
         const lastAttributes = primitive.getGeometryInstanceAttributes(this.lastObjId);
         if (lastAttributes) {
-          lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(Cesium.Color.WHITE.withAlpha(0.3));
+          lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
+            Cesium.Color.WHITE.withAlpha(0.3)
+          );
         }
       }
       this.lastObjId = object.id;
@@ -70,7 +75,9 @@ class MapComponent extends PureComponent {
           const lastAttributes = primitive.getGeometryInstanceAttributes &&
             primitive.getGeometryInstanceAttributes(this.lastObjId);
           if (lastAttributes) {
-            lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(Cesium.Color.WHITE.withAlpha(0.3));
+            lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
+              Cesium.Color.WHITE.withAlpha(0.3)
+            );
           }
         });
       this.lastObjId = null;
@@ -106,8 +113,16 @@ class MapComponent extends PureComponent {
   setMapTerrain = (latLng, terrainCameraOffset, cellId) => {
     const { query } = this.props;
     const gridLayerSlugs = Object.keys(this.gridLayers);
-    const activeLayers = query.activeLayers ? query.activeLayers.filter(l => gridLayerSlugs.includes(l)) : null;
-    this.props.updateMapParams({ terrain: true, activeLayers, ...latLng, terrainCameraOffset, cellId });
+    const activeLayers = query.activeLayers
+      ? query.activeLayers.filter(l => gridLayerSlugs.includes(l))
+      : null;
+    this.props.updateMapParams({
+      terrain: true,
+      activeLayers,
+      ...latLng,
+      terrainCameraOffset,
+      cellId
+    });
   };
 
   render() {
@@ -144,11 +159,25 @@ class MapComponent extends PureComponent {
             <React.Fragment>
               <LayerManager map={map} plugin={PluginCesium}>
                 {layerManager =>
-                  hasLayers && layers.map(l => <Layer key={l.slug} {...l} layerManager={layerManager} />)}
+                  hasLayers &&
+                    layers.map(l => <Layer key={l.slug} {...l} layerManager={layerManager} />)}
               </LayerManager>
               {
                 hasGridLayers && gridLayers.map(layer => (
                   <GridLayer
+                    key={layer.id}
+                    show={showGrid}
+                    layer={layer}
+                    map={map}
+                    ref={gridLayer => {
+                        this.gridLayers[layer.id] = gridLayer;
+                      }}
+                  />
+                  ))
+              }
+              {
+                hasGridLayers && gridLayers.map(layer => (
+                  <PolylineGrid
                     key={layer.id}
                     show={showGrid}
                     layer={layer}
