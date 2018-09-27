@@ -29,6 +29,7 @@ class CesiumComponent extends Component {
     creditsDisplay: false,
     fullscreenButton: false,
     skyAtmosphere: false,
+    terrainExaggeration: 2.0,
     // imageryProvider: new Cesium.UrlTemplateImageryProvider({
     //   url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`
     // })

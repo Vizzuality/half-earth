@@ -85,7 +85,7 @@ class GridLayer extends Component {
       this.primitive = new Cesium.Primitive({
         geometryInstances,
         // Needed to style each one on a different way
-        appearance: new Cesium.PerInstanceColorAppearance(),
+        appearance: new Cesium.PerInstanceColorAppearance({ flat: true }),
         interleave: true,
         vertexCacheOptimize: true,
         compressVertices: true,
