@@ -2,7 +2,8 @@ import { createSelector, createStructuredSelector } from 'reselect';
 import {
   selectCellsLoading,
   selectCellsData,
-  selectCellsHistogram
+  selectCellsHistogram,
+  selectCellsHistogramBreaks
 } from 'selectors/cell-detail-selectors';
 import { selectQueryParams, getCellId, getTaxa } from 'selectors/location-selectors';
 import { getDatasetsByCategory } from 'selectors/categories-selectors';
@@ -115,6 +116,15 @@ export const getTaxaHistogram = createSelector([ selectCellsHistogram, getTaxaSe
     return { rarity: data.rarity[selected.slug], richness: data.richness[selected.slug] };
   });
 
+export const getHistogramBreaks = createSelector([ selectCellsHistogramBreaks, getTaxaSelected ], (
+  data,
+  selected
+) =>
+  {
+    if (!data || !selected) return null;
+    return { rarity: data.rarity[selected.slug], richness: data.richness[selected.slug] };
+  });
+
 export const getTaxaHistogramPercentage = createSelector([ getTaxaHistogram ], data => {
   if (!data) return null;
   const totalRarity = data.rarity.reduce((acc, next) => acc + next, 0);
@@ -127,11 +137,11 @@ export const getTaxaHistogramPercentage = createSelector([ getTaxaHistogram ], d
 });
 
 export const getCellTaxaDataSelectedParsed = createSelector(
-  [ getCellTaxaDataSelected, getTaxaHistogram ],
-  (data, histogram) => {
-    if (!data || !histogram) return undefined;
-    const rarityPosition = getPosition(data.rarity, histogram.rarity);
-    const richnessPosition = getPosition(data.richness, histogram.richness);
+  [ getCellTaxaDataSelected, getHistogramBreaks ],
+  (data, histogramBreaks) => {
+    if (!data || !histogramBreaks) return undefined;
+    const rarityPosition = getPosition(data.rarity, histogramBreaks.rarity);
+    const richnessPosition = getPosition(data.richness, histogramBreaks.richness);
     return {
       ...data,
       rarity: { value: data.rarity, position: rarityPosition, status: status[rarityPosition] },
