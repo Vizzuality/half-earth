@@ -16,19 +16,19 @@ class DetailViewComponent extends Component {
       taxas,
       histogram,
       taxaSelected,
-      humanCategory,
-      conservationCategory,
+      categories,
       handleCloseTerrainClick,
       handleTaxasChange
     } = this.props;
     if (loading) return <Loading height="100%" />;
+    const title = data && data.location ? `Area in ${data.location}` : 'Selected area';
     return (
       <div className={styles.detailViewContainer}>
         <Button theme={styles} circle onClick={handleCloseTerrainClick}>
           <Icon icon={closeIcon} />
         </Button>
         <div className={styles.header}>
-          <h2 className={styles.detailTitle}>Area in United States, North America</h2>
+          <h2 className={styles.detailTitle}>{title}</h2>
           <p className={styles.detailSubTitle}>
             Global, ~110 km cell size mapping of terrestrial species.
           </p>
@@ -40,20 +40,13 @@ class DetailViewComponent extends Component {
           selected={taxaSelected}
           handleTaxasChange={handleTaxasChange}
         />
-        <AccordionCard isOpen title="Mapping conservation areas">
-          <ProgressCard
-            category={conservationCategory}
-            legend="Strict reserves"
-            subtitle="Protections classified according to their management objectives."
-          />
-        </AccordionCard>
-        <AccordionCard isOpen title="Mapping human activities">
-          <ProgressCard
-            category={humanCategory}
-            legend="Area total encroachment"
-            subtitle="Human pressures are high, mainly due to agricultural practices."
-          />
-        </AccordionCard>
+        {
+          categories && categories.length > 0 && categories.map(category => (
+            <AccordionCard key={category.slug} isOpen title={category.name}>
+              <ProgressCard category={category} />
+            </AccordionCard>
+            ))
+        }
         {data && data.species && <SpeciesToWatch species={data.species} />}
       </div>
     );
@@ -66,8 +59,7 @@ DetailViewComponent.propTypes = {
   taxaSelected: PropTypes.object,
   histogram: PropTypes.object,
   data: PropTypes.object,
-  humanCategory: PropTypes.object,
-  conservationCategory: PropTypes.object,
+  categories: PropTypes.array,
   handleCloseTerrainClick: PropTypes.func.isRequired,
   handleTaxasChange: PropTypes.func.isRequired
 };
@@ -77,9 +69,8 @@ DetailViewComponent.defaultProps = {
   taxas: [],
   taxaSelected: {},
   data: {},
-  histogram: null,
-  humanCategory: null,
-  conservationCategory: null
+  categories: [],
+  histogram: null
 };
 
 export default DetailViewComponent;

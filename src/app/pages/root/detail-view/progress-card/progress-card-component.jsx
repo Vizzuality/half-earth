@@ -7,14 +7,14 @@ import styles from './progress-card-styles';
 
 class ProgressBarComponent extends Component {
   render() {
-    const { legend, subtitle, category } = this.props;
-    const percentage = category ? category.datasets
-        .filter(d => d.active)
-        .reduce((acc, dataset) => acc + dataset.percentage || 0, 0) : 0;
+    const { category } = this.props;
+    const layers = category &&
+      category.datasets.reduce((acc, dataset) => [ ...acc, ...dataset.layers ], []);
+    const layerActive = layers && layers.find(l => l.active) || {};
     return (
       <div className={styles.container}>
-        <ProgressBar percentage={percentage} label={legend} />
-        {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+        <ProgressBar percentage={layerActive.percentage || 0} label={layerActive.name || ''} />
+        {category.description && <p className={styles.subtitle}>{category.description}</p>}
         {
           category &&
             category.datasets.map(dataset => (
@@ -32,12 +32,8 @@ class ProgressBarComponent extends Component {
 }
 
 // eslint-disable-next-line
-ProgressBarComponent.propTypes = {
-  category: PropTypes.object,
-  legend: PropTypes.string,
-  subtitle: PropTypes.string
-};
+ProgressBarComponent.propTypes = { category: PropTypes.object };
 
-ProgressBarComponent.defaultProps = { category: null, subtitle: '', legend: '' };
+ProgressBarComponent.defaultProps = { category: null };
 
 export default ProgressBarComponent;

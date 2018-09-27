@@ -65,7 +65,9 @@ class DatasetComboContainer extends Component {
 
 DatasetComboContainer.propTypes = {
   updateQueryParam: PropTypes.func.isRequired,
-  query: PropTypes.object.isRequired
+  query: PropTypes.object
 };
+
+DatasetComboContainer.defaultProps = { query: undefined };
 
 export default connect(mapStateToProps, actions)(DatasetComboContainer);
