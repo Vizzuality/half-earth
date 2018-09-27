@@ -27,10 +27,12 @@ class DetailViewComponent extends Component {
         <Button theme={styles} circle onClick={handleCloseTerrainClick}>
           <Icon icon={closeIcon} />
         </Button>
-        <h2 className={styles.detailTitle}>Area in United States, North America</h2>
-        <h2 className={styles.detailSubTitle}>
-          Global, ~110 km cell size mapping of terrestrial species.
-        </h2>
+        <div className={styles.header}>
+          <h2 className={styles.detailTitle}>Area in United States, North America</h2>
+          <p className={styles.detailSubTitle}>
+            Global, ~110 km cell size mapping of terrestrial species.
+          </p>
+        </div>
         <RarityRichness
           data={data}
           taxas={taxas}

@@ -1,7 +1,11 @@
 @import '~styles/variables.scss';
 
 .detailViewContainer {
-  padding: $site-gutter * 2 $site-gutter;
+  padding: $site-gutter * 2 0 0;
+}
+
+.header {
+  padding: 0 $site-gutter;
 }
 
 .detailTitle {
