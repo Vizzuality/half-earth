@@ -81,7 +81,7 @@ class GridLayer extends Component {
     //     })
     //   })
     // });
-    if (geometryInstances.length > 0 && map) {
+    if (geometryInstances && geometryInstances.length > 0 && map) {
       this.primitive = new Cesium.Primitive({
         geometryInstances,
         // Needed to style each one on a different way
