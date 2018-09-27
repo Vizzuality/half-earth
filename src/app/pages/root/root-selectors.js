@@ -1,9 +1,12 @@
 import { createSelector, createStructuredSelector } from 'reselect';
-import { selectQueryParams } from 'selectors/location-selectors';
+import { getSidebarVisibility, getCellId, getIsTerrain } from 'selectors/location-selectors';
 
-export const getSidebarVisibility = createSelector([ selectQueryParams ], query => {
-  if (!query) return true;
-  return query.sidebar != 'false'; // eslint-disable-line eqeqeq
+export const getDetailViewVisibility = createSelector(
+  [ getCellId, getIsTerrain ],
+  (cellId, isTerrain) => cellId && isTerrain
+);
+
+export const mapStateToProps = createStructuredSelector({
+  showSidebar: getSidebarVisibility,
+  showDetailView: getDetailViewVisibility
 });
-
-export const mapStateToProps = createStructuredSelector({ showSidebar: getSidebarVisibility });

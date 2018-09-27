@@ -10,13 +10,17 @@ class CategoriesListComponent extends Component {
   renderInfoButton(category) {
     const { handleMetadataClick } = this.props;
     return (
-      <Button circle theme={{ button: styles.metadataBtn }} onClick={() => handleMetadataClick(category)}>
+      <Button
+        circle
+        theme={{ button: styles.metadataBtn }}
+        onClick={() => handleMetadataClick(category)}
+      >
         <Icon icon={infoIcon} />
       </Button>
     );
   }
 
-  renderRegularCategory(category, query) {
+  renderRegularCategory(category) {
     return (
       <div className={styles.category} key={category.slug}>
         <div>
@@ -29,7 +33,6 @@ class CategoriesListComponent extends Component {
             <DatasetCombo
               dataset={dataset}
               category={category}
-              query={query}
               key={dataset.slug}
               className={styles.datasetComboWrapper}
             />
@@ -39,10 +42,13 @@ class CategoriesListComponent extends Component {
     );
   }
 
-  renderFeaturedCategory(category, query) {
+  renderFeaturedCategory(category) {
     return (
       <div className={styles.featuredCategory} key={category.slug}>
-        <div style={{ backgroundImage: `url(${category.imageUrl})` }} className={styles.featuredImage} />
+        <div
+          style={{ backgroundImage: `url(${category.imageUrl})` }}
+          className={styles.featuredImage}
+        />
         <div className={styles.featuredCategoryContentContainer}>
           <div className={styles.categorySection}>
             <h2 className={styles.categoryTitle}>{category.name}</h2>
@@ -53,7 +59,6 @@ class CategoriesListComponent extends Component {
             <DatasetCombo
               dataset={dataset}
               category={category}
-              query={query}
               key={dataset.slug}
               className={styles.datasetComboWrapper}
             />
@@ -64,7 +69,7 @@ class CategoriesListComponent extends Component {
   }
 
   render() {
-    const { categories, query } = this.props;
+    const { categories } = this.props;
 
     const hasCategories = categories && !!categories.length;
     const regularCategories = hasCategories && categories.filter(category => !category.featured);
@@ -72,13 +77,16 @@ class CategoriesListComponent extends Component {
 
     return (
       <div className={styles.container}>
-        {regularCategories.length > 0 && regularCategories.map(category => this.renderRegularCategory(category, query))}
+        {
+          regularCategories.length > 0 &&
+            regularCategories.map(category => this.renderRegularCategory(category))
+        }
         {
           featuredCategories.length > 0 && (
           <div>
             <p className={styles.featuredTitle}>Featured Maps</p>
             <p className={styles.featuredDescription}>Curated, fine scale species maps.</p>
-            {featuredCategories.map(category => this.renderFeaturedCategory(category, query))}
+            {featuredCategories.map(category => this.renderFeaturedCategory(category))}
           </div>
             )
         }
@@ -89,10 +97,7 @@ class CategoriesListComponent extends Component {
 
 CategoriesListComponent.propTypes = {
   categories: PropTypes.array.isRequired,
-  query: PropTypes.object,
   handleMetadataClick: PropTypes.func.isRequired
 };
-
-CategoriesListComponent.defaultProps = { query: {} };
 
 export default CategoriesListComponent;

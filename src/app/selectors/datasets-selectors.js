@@ -11,7 +11,7 @@ export const getDatasets = createSelector([ selectDatasets, getLayersActive ], (
   return Object.values(datasets).map(dataset => {
     let order = 0;
     const layers = dataset.layers.map(layer => {
-      const layerActive = activeLayers.find(l => l.slug === layer.slug);
+      const layerActive = activeLayers && activeLayers.find(l => l.slug === layer.slug);
       if (!layerActive) return layer;
 
       order = activeLayers.findIndex(l => l.slug === layer.slug);

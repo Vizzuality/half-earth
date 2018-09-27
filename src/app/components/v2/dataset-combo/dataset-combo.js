@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 import { getLayersActiveMerged } from 'redux-modules/datasets/datasets-utils';
 import DatasetComboComponent from './dataset-combo-component';
 import * as ownActions from './dataset-combo-actions';
+import { mapStateToProps } from './dataset-combo-selectors';
 
 const actions = { ...ownActions };
 
 class DatasetComboContainer extends Component {
   updateLayersActive = layers => {
     const { updateQueryParam, query } = this.props;
-    const activeLayers = getLayersActiveMerged(layers, query.activeLayers);
+    const urlLayers = query && query.activeLayers || [];
+    const activeLayers = getLayersActiveMerged(layers, urlLayers);
     updateQueryParam({ query: { ...query, activeLayers } });
   };
 
@@ -20,7 +22,10 @@ class DatasetComboContainer extends Component {
   };
 
   handleLayerClick = (layers, { slug, active }) => {
-    const activeLayers = layers.map(layer => ({ slug: layer.slug, active: layer.slug === slug ? !active : false }));
+    const activeLayers = layers.map(layer => ({
+      slug: layer.slug,
+      active: layer.slug === slug ? !active : false
+    }));
     this.updateLayersActive(activeLayers);
   };
 
@@ -29,7 +34,10 @@ class DatasetComboContainer extends Component {
     if (category.multiSelect) {
       const dataset = category.datasets.find(d => d.slug === slug);
       layersToUpdate = dataset &&
-        dataset.layers.map((layer, index) => ({ slug: layer.slug, active: !active && index === 0 }));
+        dataset.layers.map((layer, index) => ({
+          slug: layer.slug,
+          active: !active && index === 0
+        }));
     } else {
       layersToUpdate = category.datasets.reduce((acc, dataset) => {
         const datasetLayers = dataset.layers.map((layer, index) => {
@@ -55,6 +63,9 @@ class DatasetComboContainer extends Component {
   }
 }
 
-DatasetComboContainer.propTypes = { updateQueryParam: PropTypes.func.isRequired, query: PropTypes.object.isRequired };
+DatasetComboContainer.propTypes = {
+  updateQueryParam: PropTypes.func.isRequired,
+  query: PropTypes.object.isRequired
+};
 
-export default connect(null, actions)(DatasetComboContainer);
+export default connect(mapStateToProps, actions)(DatasetComboContainer);

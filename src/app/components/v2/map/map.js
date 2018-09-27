@@ -1,7 +1,9 @@
 import { Component, createElement } from 'react';
+import PropTypes from 'prop-types';
+import { mapValues, isEqual } from 'lodash';
 import CesiumMapComponent from './map-component';
 
-const { MAPBOX_TOKEN } = process.env;
+// const { MAPBOX_TOKEN } = process.env;
 const { Cesium } = window;
 const mapId = `map-${new Date().getTime()}`;
 
@@ -27,9 +29,10 @@ class CesiumComponent extends Component {
     creditsDisplay: false,
     fullscreenButton: false,
     skyAtmosphere: false,
-    imageryProvider: new Cesium.UrlTemplateImageryProvider({
-      url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`
-    })
+    // imageryProvider: new Cesium.UrlTemplateImageryProvider({
+    //   url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`
+    // })
+    terrainProvider: Cesium.createWorldTerrain()
   };
 
   rotating = false;
@@ -38,32 +41,46 @@ class CesiumComponent extends Component {
 
   distance = 0;
 
-  state = { mapReady: false };
-
   componentDidMount() {
     const { coordinates, camera } = this.props;
     this.viewer = new Cesium.Viewer(mapId, CesiumComponent.mapConfig);
-    this.setState({ mapReady: true });
+    this.handler = new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas);
+
     if (coordinates) this.setCoordinates();
     if (camera) this.setCamera();
-
-    if (this.props.onMoveEnd) {
-      this.viewer.camera.moveEnd.addEventListener(this.handleMoveEnd);
-    }
+    this.setEventListeners();
+    this.forceUpdate(); // Doing this to notify childrens it is ready
   }
 
   componentDidUpdate(prevProps) {
-    const { onTick, lockNavigation = false, rotate, coordinates, coordinatesOptions, camera } = this.props;
+    const {
+      onTick,
+      lockNavigation = false,
+      rotate,
+      coordinates,
+      coordinatesOptions,
+      camera,
+      terrainMode,
+      latLng,
+      terrainCameraOffset
+    } = this.props;
     if (this.viewer) {
       if (!this.rotating && rotate) this.addRotation();
       if (this.rotating && !rotate) this.removeRotation();
       if (onTick && !this.ticking) this.addTick();
       if (camera && prevProps.camera !== camera) this.setCamera();
       if (lockNavigation) disablePanning(this.viewer);
-      if (
-        coordinates && (prevProps.coordinates !== coordinates || prevProps.coordinatesOptions !== coordinatesOptions)
-      ) {
-        this.setCoordinates();
+      if (terrainMode) {
+        if (latLng && !isEqual(prevProps.latLng, latLng)) {
+          this.setTerrainModeView(latLng, terrainCameraOffset);
+        }
+      } else {
+        const coordinatesChanged = coordinates && prevProps.coordinates !== coordinates ||
+          prevProps.coordinatesOptions !== coordinatesOptions;
+        const terrainModeChanged = prevProps.terrainMode !== terrainMode;
+        if (coordinatesChanged || terrainModeChanged) {
+          this.setCoordinates();
+        }
       }
     }
   }
@@ -73,20 +90,39 @@ class CesiumComponent extends Component {
     this.removeRotation();
   }
 
-  handleMoveEnd = () => {
-    const { coordinates = [], coordinatesOptions = {} } = this.props;
-    const { orientation = {} } = coordinatesOptions;
-    const { x, y, z } = this.viewer.camera.position;
-    const { heading, pitch, roll } = this.viewer.camera;
-    const isDifferentCoordinates = coordinates[0] !== x || coordinates[1] !== y || coordinates[2] !== z;
-    const isDifferentOrientation = orientation.heading !== heading ||
-      orientation.pitch !== pitch ||
-      orientation.roll !== roll;
+  setEventListeners() {
+    if (this.props.onMouseMove) {
+      this.handler.setInputAction(this.props.onMouseMove, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    }
+    if (this.props.onMouseClick) {
+      this.handler.setInputAction(this.props.onMouseClick, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    }
+    if (this.props.onMoveEnd) {
+      this.viewer.camera.moveEnd.addEventListener(this.handleMoveEnd);
+    }
+  }
 
-    if (isDifferentCoordinates || isDifferentOrientation) {
-      this.props.onMoveEnd({ coordinates: [ x, y, z ], orientation: [ heading, pitch, roll ] });
+  onTick = clock => {
+    if (this.rotating) this.rotate(clock);
+    const cameraPosition = this.viewer.scene.camera.positionWC;
+    const ellipsoidPosition = this.viewer.scene.globe.ellipsoid.scaleToGeodeticSurface(
+      cameraPosition
+    );
+    const distance = Cesium.Cartesian3.magnitude(
+      Cesium.Cartesian3.subtract(cameraPosition, ellipsoidPosition, new Cesium.Cartesian3())
+    );
+    if (distance !== this.distance) {
+      this.props.onTick({ distance });
+      this.distance = distance;
     }
   };
+
+  setTerrainModeView(latLng, terrainCameraOffset) {
+    const offset = mapValues(terrainCameraOffset.offset, parseFloat);
+    const center = Cesium.Cartesian3.fromDegrees(latLng.lng, latLng.lat);
+    const sphere = new Cesium.BoundingSphere(center);
+    this.viewer.camera.flyToBoundingSphere(sphere, { offset });
+  }
 
   setCoordinates() {
     const { coordinates, coordinatesOptions } = this.props;
@@ -98,9 +134,22 @@ class CesiumComponent extends Component {
     Object.assign(this.viewer.camera, camera);
   }
 
-  flyTo(lat, long, z = 15000.0, rest = {}) {
-    this.viewer.camera.flyTo({ destination: { x: lat, y: long, z }, ...rest });
-  }
+  handleMoveEnd = () => {
+    const { coordinates = [], coordinatesOptions = {} } = this.props;
+    const { orientation = {} } = coordinatesOptions;
+    const { x, y, z } = this.viewer.camera.position;
+    const { heading, pitch, roll } = this.viewer.camera;
+    const isDifferentCoordinates = coordinates[0] !== x ||
+      coordinates[1] !== y ||
+      coordinates[2] !== z;
+    const isDifferentOrientation = orientation.heading !== heading ||
+      orientation.pitch !== pitch ||
+      orientation.roll !== roll;
+
+    if (isDifferentCoordinates || isDifferentOrientation) {
+      this.props.onMoveEnd({ coordinates: [ x, y, z ], orientation: [ heading, pitch, roll ] });
+    }
+  };
 
   rotate = clock => {
     const { startTime, currentTime } = clock;
@@ -109,21 +158,12 @@ class CesiumComponent extends Component {
     const spinRate = 0.8;
     const delta = (now - lastNow) / 1000;
     this.viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, (-spinRate) * delta);
-    clock.startTime.secondsOfDay = now - 1;
+    clock.startTime.secondsOfDay = now - 1; // eslint-disable-line
   };
 
-  onTick = clock => {
-    if (this.rotating) this.rotate(clock);
-    const cameraPosition = this.viewer.scene.camera.positionWC;
-    const ellipsoidPosition = this.viewer.scene.globe.ellipsoid.scaleToGeodeticSurface(cameraPosition);
-    const distance = Cesium.Cartesian3.magnitude(
-      Cesium.Cartesian3.subtract(cameraPosition, ellipsoidPosition, new Cesium.Cartesian3())
-    );
-    if (distance !== this.distance) {
-      this.props.onTick({ distance });
-      this.distance = distance;
-    }
-  };
+  flyTo(lat, long, z = 15000.0, rest = {}) {
+    this.viewer.camera.flyTo({ destination: { x: lat, y: long, z }, ...rest });
+  }
 
   addRotation() {
     this.viewer.clock.onTick.addEventListener(this.onTick);
@@ -149,5 +189,38 @@ class CesiumComponent extends Component {
     return createElement(CesiumMapComponent, { mapId, viewer: this.viewer, ...this.props });
   }
 }
+
+CesiumComponent.propTypes = {
+  onTick: PropTypes.func,
+  onMoveEnd: PropTypes.func,
+  onMouseMove: PropTypes.func,
+  onMouseClick: PropTypes.func,
+  lockNavigation: PropTypes.bool,
+  rotate: PropTypes.func,
+  coordinates: PropTypes.array,
+  coordinatesOptions: PropTypes.object,
+  camera: PropTypes.object,
+  terrainMode: PropTypes.bool,
+  terrainCameraOffset: PropTypes.object,
+  latLng: PropTypes.object
+};
+
+CesiumComponent.defaultProps = {
+  onTick: null,
+  onMoveEnd: () => {
+  },
+  onMouseMove: () => {
+  },
+  onMouseClick: () => {
+  },
+  rotate: null,
+  lockNavigation: false,
+  coordinates: undefined,
+  coordinatesOptions: undefined,
+  camera: null,
+  terrainMode: false,
+  terrainCameraOffset: undefined,
+  latLng: undefined
+};
 
 export default CesiumComponent;

@@ -42,6 +42,8 @@ class MapContainer extends Component {
   }
 }
 
-MapContainer.propTypes = { query: PropTypes.object.isRequired, updateQueryParam: PropTypes.func.isRequired };
+MapContainer.propTypes = { query: PropTypes.object, updateQueryParam: PropTypes.func.isRequired };
+
+MapContainer.defaultProps = { query: null };
 
 export default connect(mapStateToProps, actions)(MapContainer);

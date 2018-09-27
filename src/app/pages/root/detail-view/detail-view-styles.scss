@@ -1,0 +1,37 @@
+@import '~styles/variables.scss';
+
+.detailViewContainer {
+  padding: $site-gutter * 2 0 0;
+}
+
+.header {
+  padding: 0 $site-gutter;
+}
+
+.detailTitle {
+  margin-bottom: 30px;
+  font-size: 42px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.19;
+  letter-spacing: -0.8px;
+  color: $color-group-card-dark-blue;
+}
+
+.detailSubTitle {
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: $color-group-card-dark-blue;
+}
+
+.button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: $color-light-gray;
+}

@@ -1,9 +1,5 @@
-import {
-  setCategoriesLoading,
-  setCategoriesReady,
-  setCategoriesError
-} from './categories-actions';
 import CARTO from 'app/services/carto';
+import { setCategoriesLoading, setCategoriesReady, setCategoriesError } from './categories-actions';
 
 export async function fetchCategoriesThunk(dispatch, getState) {
   const { data } = getState().datasets;

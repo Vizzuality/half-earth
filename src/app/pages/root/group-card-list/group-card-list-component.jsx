@@ -16,7 +16,12 @@ class GroupCardListComponent extends Component {
               group =>
                 group.slug !== 'half-earth-view'
                   ? (
-                    <AccordionCard key={group.slug} isOpen={group.isOpen} title={group.title}>
+                    <AccordionCard
+                      key={group.slug}
+                      isOpen={group.isOpen}
+                      title={group.title}
+                      counter={group.layersActive > 0 ? group.layersActive : null}
+                    >
                       <CategoriesList categories={group.categories} />
                     </AccordionCard>
 )

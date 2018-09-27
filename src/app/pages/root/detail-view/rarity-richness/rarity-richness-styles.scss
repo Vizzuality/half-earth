@@ -1,0 +1,19 @@
+@import '~styles/variables.scss';
+
+.container {
+  padding: $site-gutter;
+  line-height: 1.8;
+}
+
+.dropdownContainer {
+  margin: 0 6px;
+}
+
+.histogramContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight {
+  font-weight: bold;
+}

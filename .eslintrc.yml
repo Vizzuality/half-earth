@@ -45,6 +45,7 @@ rules:
   react/destructuring-assignment: 1
   prefer-destructuring: 1
   function-paren-newline: 0
+  react/sort-comp: 0
 
 settings:
   import/resolver: webpack
