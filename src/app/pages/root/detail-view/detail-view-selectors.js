@@ -7,6 +7,7 @@ import {
 import { selectQueryParams, getCellId, getTaxa } from 'selectors/location-selectors';
 import { getDatasetsByCategory } from 'selectors/categories-selectors';
 import sortBy from 'lodash/sortBy';
+import snakeCase from 'lodash/snakeCase';
 
 const status = [ 'very low', 'low', 'average', 'high', 'very high' ];
 
@@ -39,6 +40,19 @@ export const getCellTaxaDataSelected = createSelector([ getCellData, getTaxaSele
     return data[selected.slug];
   });
 
+function getLayersPercentage(category, data) {
+  return {
+    ...category,
+    datasets: category.datasets.map(d => ({
+      ...d,
+      layers: d.layers.map(layer => ({
+        ...layer,
+        percentage: Math.round((data[snakeCase(layer.slug)] || 0) * 100) / 100
+      }))
+    }))
+  };
+}
+
 export const getHumanCategory = createSelector([ getCellTaxaDataSelected, getDatasetsByCategory ], (
   data,
   categories
@@ -47,13 +61,20 @@ export const getHumanCategory = createSelector([ getCellTaxaDataSelected, getDat
     if (!data || !categories) return null;
     const category = categories.find(d => d.slug === 'human-activities');
     if (!category) return null;
-    return {
-      ...category,
-      datasets: category.datasets.map(d => ({
-        ...d,
-        percentage: data[d.slug.replace('protected-', '')]
-      }))
-    };
+    // We only want the human pressure layers
+    const dataset = category.datasets.find(d => d.slug === 'human-pressure');
+    if (dataset) {
+      // and show layers as datasets, hack creating a dataset per layer
+      category.datasets = dataset.layers.map(layer => ({
+        ...dataset,
+        id: layer.id,
+        active: layer.active,
+        name: layer.name,
+        slug: layer.slug,
+        layers: [ layer ]
+      }));
+    }
+    return getLayersPercentage(category, data);
   });
 
 export const getConservationCategory = createSelector(
@@ -61,14 +82,27 @@ export const getConservationCategory = createSelector(
   (data, categories) => {
     if (!data || !categories) return null;
     const category = categories.find(d => d.slug === 'conservation-areas');
-    if (!category) return null;
-    return {
-      ...category,
-      datasets: category.datasets.map(d => ({
-        ...d,
-        percentage: data[d.slug.replace('protected-', '')]
-      }))
-    };
+    // We want multiselection on the globe but not here
+    category.multiSelect = false;
+    return category ? getLayersPercentage(category, data) : null;
+  }
+);
+
+export const getFeaturedCategory = createSelector(
+  [ getCellTaxaDataSelected, getDatasetsByCategory ],
+  (data, categories) => {
+    if (!data || !data.feature_da || !categories) return null;
+
+    const category = categories.find(d => d.slug === data.feature_da.toLowerCase());
+    return category ? getLayersPercentage(category, data) : null;
+  }
+);
+
+export const getCategories = createSelector(
+  [ getFeaturedCategory, getHumanCategory, getConservationCategory ],
+  (featured, human, conservation) => {
+    if (!human || !conservation) return null;
+    return featured ? [ featured, human, conservation ] : [ human, conservation ];
   }
 );
 
@@ -115,8 +149,7 @@ export const mapStateToProps = createStructuredSelector({
   cellId: getCellId,
   loading: selectCellsLoading,
   data: getCellTaxaDataSelectedParsed,
-  conservationCategory: getConservationCategory,
-  humanCategory: getHumanCategory,
+  categories: getCategories,
   histogram: getTaxaHistogramPercentage,
   taxas: getTaxaOptions,
   taxaSelected: getTaxaSelected
