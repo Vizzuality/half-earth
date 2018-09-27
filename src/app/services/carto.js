@@ -8,7 +8,7 @@ const config = {
   layersQuery: 'SELECT dataset, env, interaction_config, iso, layer_config, legend_config, name, provider, slug FROM layers ORDER BY name',
   categoriesQuery: 'SELECT name, slug, description, position, group_name, group_slug, featured, image_url, multi_select from categories ORDER BY position',
   datasetsQuery: 'SELECT name, description, slug, multilayer, category, featured, position from datasets ORDER BY name',
-  detailQuery: 'SELECT sr as richness, ave_rsr as rarity, strict, biosphere, conservation, other, focal_spp as species, prop_land, agricultur, urban, rainfed, taxa FROM global_facets_attr_pressures_vizz'
+  detailQuery: 'SELECT sr as richness, ave_rsr as rarity, strict, biosphere, other, focal_spp as species, prop_land, agricultur, urban, rainfed, taxa FROM global_facets_attr_pressures_vizz'
 };
 
 function handleResponse(data) {
