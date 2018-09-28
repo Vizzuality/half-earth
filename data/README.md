@@ -12,7 +12,7 @@ pip install -r requirements.txt
 To generate the `layers.csv` file used as the control table, run:
 
 `
-python process.py
+// python process.py
 `
 An output file will be sent to `./outputs`, which can be uploaded to the `half-earth` Carto account.
 
