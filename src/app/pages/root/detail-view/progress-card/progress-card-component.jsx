@@ -19,6 +19,7 @@ class ProgressBarComponent extends Component {
           category &&
             category.datasets.map(dataset => (
               <DatasetCombo
+                layerDefaultOpacity={0.5}
                 dataset={dataset}
                 category={category}
                 key={dataset.slug}

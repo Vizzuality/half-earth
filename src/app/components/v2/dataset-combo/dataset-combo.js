@@ -25,9 +25,11 @@ class DatasetComboContainer extends Component {
   };
 
   handleLayerClick = (layers, { slug, active, layerConfig }) => {
+    const { layerDefaultOpacity } = this.props;
     const activeLayers = layers.map(layer => ({
       slug: layer.slug,
-      active: layer.slug === slug ? !active : false
+      active: layer.slug === slug ? !active : false,
+      opacity: layerDefaultOpacity
     }));
     const { bbox } = layerConfig.body && layerConfig.body;
     if (bbox && bbox.length === 4) {
@@ -38,6 +40,7 @@ class DatasetComboContainer extends Component {
   };
 
   handleSwitchChange = (category, slug, active) => {
+    const { layerDefaultOpacity } = this.props;
     let layersToUpdate = [];
     if (category.multiSelect) {
       const dataset = category.datasets.find(d => d.slug === slug);
@@ -45,7 +48,8 @@ class DatasetComboContainer extends Component {
         dataset.layers.map((layer, index) => ({
           slug: layer.slug,
           bbox: layer.layerConfig.body.bbox || null,
-          active: !active && index === 0
+          active: !active && index === 0,
+          opacity: layerDefaultOpacity
         }));
     } else {
       layersToUpdate = category.datasets.reduce((acc, dataset) => {
@@ -55,7 +59,8 @@ class DatasetComboContainer extends Component {
           return {
             slug: layer.slug,
             bbox: layer.layerConfig.body.bbox || null,
-            active: isDatasetLayer && isDatasetLayerActive
+            active: isDatasetLayer && isDatasetLayerActive,
+            opacity: layerDefaultOpacity
           };
         });
         return [ ...acc, ...datasetLayers ];
@@ -85,9 +90,10 @@ class DatasetComboContainer extends Component {
 
 DatasetComboContainer.propTypes = {
   updateQueryParam: PropTypes.func.isRequired,
-  query: PropTypes.object
+  query: PropTypes.object,
+  layerDefaultOpacity: PropTypes.number
 };
 
-DatasetComboContainer.defaultProps = { query: undefined };
+DatasetComboContainer.defaultProps = { query: undefined, layerDefaultOpacity: 1 };
 
 export default connect(mapStateToProps, actions)(DatasetComboContainer);

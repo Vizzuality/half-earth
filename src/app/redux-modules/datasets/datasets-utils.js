@@ -37,7 +37,7 @@ export function parseCartoLayersToWRI(layers = [], datasets = []) {
 export function getLayersActiveMerged(newLayers = [], activeLayers = []) {
   const layersToAdd = newLayers
     .filter(l => l.active)
-    .map(l => ({ slug: l.slug }));
+    .map(l => ({ slug: l.slug, opacity: l.opacity || 1 }));
   const layersToRemove = newLayers
     .filter(l => !l.active)
     .map(l => l.slug);
