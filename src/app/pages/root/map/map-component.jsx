@@ -50,14 +50,14 @@ class MapComponent extends PureComponent {
       const attributes = primitive.getGeometryInstanceAttributes(object.id);
       if (attributes) {
         attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
-          Cesium.Color.WHITE.withAlpha(0.8)
+          Cesium.Color.fromBytes(24, 186, 180, 100)
         );
       }
       if (this.lastObjId) {
         const lastAttributes = primitive.getGeometryInstanceAttributes(this.lastObjId);
         if (lastAttributes) {
           lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
-            Cesium.Color.WHITE.withAlpha(0.3)
+            Cesium.Color.WHITE.withAlpha(0.01)
           );
         }
       }
