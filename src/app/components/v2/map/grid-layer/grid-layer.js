@@ -87,12 +87,22 @@ class GridLayer extends Component {
     let query = '';
     const bounds = map.camera.computeViewRectangle();
     if (!this.bounds || !isEqual(bounds, this.bounds)) {
-      // console.log(bounds, this.bounds);
       this.bounds = bounds;
-      // Cesium.Math.toDegrees(bounds.west)
+      const west = Cesium.Math.toDegrees(bounds.west);
+      const north = Cesium.Math.toDegrees(bounds.north);
+      const east = Cesium.Math.toDegrees(bounds.east);
+      const south = Cesium.Math.toDegrees(bounds.south);
+
+      const coordinates = [
+        [ west, north ],
+        [ east, north ],
+        [ east, south ],
+        [ west, south ],
+        [ west, north ]
+      ];
       try {
         const params = {
-          bounds: '{ "type": "Polygon", "coordinates": [ [ [ -9.77783203125, 36.474306755095235 ], [ 1.0986328125, 36.474306755095235 ], [ 1.0986328125, 44.166444664458595 ], [ -9.77783203125, 44.166444664458595 ], [ -9.77783203125, 36.474306755095235 ] ] ] } } '
+          bounds: JSON.stringify({ type: 'Polygon', coordinates: [ coordinates ] })
         };
         let { sql } = layerConfig && layerConfig.body.layers && layerConfig.body.layers[0].options;
 
