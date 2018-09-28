@@ -71,7 +71,8 @@ class MapComponent extends PureComponent {
         .values(this.gridLayers)
         .filter(gl => !!gl)
         .forEach(({ primitive }) => {
-          const lastAttributes = primitive.getGeometryInstanceAttributes &&
+          const lastAttributes = primitive &&
+            primitive.getGeometryInstanceAttributes &&
             primitive.getGeometryInstanceAttributes(this.lastObjId);
           if (lastAttributes) {
             lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(

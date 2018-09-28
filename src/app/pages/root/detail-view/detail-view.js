@@ -17,7 +17,17 @@ class DetailViewContainer extends Component {
 
   handleCloseTerrainClick = () => {
     const { updateQueryParam, query } = this.props;
-    updateQueryParam({ query: { ...query, lat: undefined, lng: undefined, terrain: undefined } });
+    updateQueryParam({
+      query: {
+        ...query,
+        lat: undefined,
+        lng: undefined,
+        cellId: undefined,
+        terrain: undefined,
+        terrainCameraOffset: undefined,
+        orientation: undefined
+      }
+    });
   };
 
   handleTaxasChange = taxa => {
