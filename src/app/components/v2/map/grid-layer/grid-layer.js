@@ -2,6 +2,60 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
+const getCoordinates = row => JSON.parse(row.the_geom).coordinates[0];
+
+function createPolygon(coords, layer, row) {
+  return new Cesium.GeometryInstance({
+    geometry: new Cesium.PolygonGeometry({
+      polygonHierarchy: new Cesium.PolygonHierarchy(coords),
+      height: 0
+    }),
+    id: { grid: true, slug: layer.id, cellId: row.cell_id },
+    attributes: {
+      color: Cesium.ColorGeometryInstanceAttribute.fromColor(
+        // If alpha is 0 it does not trigger the click event
+        Cesium.Color.WHITE.withAlpha(0.01)
+      )
+    }
+  });
+}
+
+function createPolyline(coords, layer, row) {
+  return new Cesium.GeometryInstance({
+    geometry: new Cesium.PolylineGeometry({
+      positions: Cesium.Cartesian3.fromDegreesArray(coords),
+      // vertexFormat: Cesium.PolylineColorAppearance.VERTEX_FORMAT
+      width: 2
+    }),
+    id: { grid: true, slug: layer.id, cellId: row.cell_id },
+    attributes: { color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.WHITE) }
+  });
+}
+
+function createPolylinePrimitive(geometryInstances, show) {
+  return new Cesium.Primitive({
+    geometryInstances,
+    // Needed to style each one on a different way
+    appearance: new Cesium.PolylineColorAppearance({ translucent: true }),
+    interleave: true,
+    vertexCacheOptimize: true,
+    compressVertices: true,
+    show
+  });
+}
+
+function createPolygonPrimitive(geometryInstances, show) {
+  return new Cesium.Primitive({
+    geometryInstances,
+    // Needed to style each one on a different way
+    appearance: new Cesium.PerInstanceColorAppearance({ flat: true }),
+    interleave: true,
+    vertexCacheOptimize: true,
+    compressVertices: true,
+    show
+  });
+}
+
 class GridLayer extends Component {
   primitive = null;
 
@@ -28,7 +82,7 @@ class GridLayer extends Component {
   }
 
   async renderGrid() {
-    const { layer, map } = this.props;
+    const { layer, map, show } = this.props;
     const { layerConfig = {} } = layer;
     let query = '';
     const bounds = map.camera.computeViewRectangle();
@@ -61,61 +115,73 @@ class GridLayer extends Component {
         return;
       }
       const { rows } = await fetch(query).then(d => d.json());
-      let geometryInstances;
+
       if (rows && rows.length) {
-        geometryInstances = rows.reduce((acc, row) => {
-          let coordinates;
-          try {
-            coordinates = JSON.parse(row.the_geom).coordinates[0];
-          } catch (e) {
-            console.warn(e);
-            return acc;
-          }
-          const polygonCoords = coordinates.map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]));
-
-          const polygon = new Cesium.GeometryInstance({
-            geometry: new Cesium.PolygonGeometry({
-              polygonHierarchy: new Cesium.PolygonHierarchy(polygonCoords),
-              height: 0,
-              vertexFormat: Cesium.PolylineColorAppearance.VERTEX_FORMAT
-            }),
-            id: { grid: true, slug: layer.id, cellId: row.cell_id },
-            attributes: {
-              color: Cesium.ColorGeometryInstanceAttribute.fromColor(
-                Cesium.Color.WHITE.withAlpha(0.1)
-              )
-            }
-          });
-
-          if (polygon) {
-            acc.push(polygon);
-          }
-
-          return acc;
-        }, []);
-      }
-
-      if (geometryInstances && geometryInstances.length > 0 && map) {
-        this.removeGrid();
-        this.primitive = new Cesium.Primitive({
-          geometryInstances,
-          // Needed to style each one on a different way
-          appearance: new Cesium.PolylineColorAppearance({ translucent: true }),
-          interleave: true,
-          vertexCacheOptimize: true,
-          compressVertices: true,
-          show: true
-        });
-        map.scene.primitives.add(this.primitive);
+        this.addGridPolygons(rows, map, show, layer);
+        this.addGridOutlines(rows, map, show, layer);
         this.forceUpdate(); // Doing this to notify childrens it is ready
       }
     }
   }
 
-  removeGrid() {
+  addGridPolygons(rows, map, show, layer) {
+    const geometryInstances = rows.reduce(
+      (acc, row) => {
+        let polygonCoords;
+        try {
+          polygonCoords = getCoordinates(row).map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]));
+        } catch (e) {
+          console.warn(e);
+          return acc;
+        }
+        const polygon = createPolygon(polygonCoords, layer, row);
+        if (polygon) {
+          acc.push(polygon);
+        }
+        return acc;
+      },
+      []
+    );
+
+    if (geometryInstances && geometryInstances.length > 0 && map) {
+      this.removeGrid(this.primitive);
+      this.primitive = createPolygonPrimitive(geometryInstances, show);
+      map.scene.primitives.add(this.primitive);
+    }
+  }
+
+  addGridOutlines(rows, map, show, layer) {
+    const geometryInstances = rows.reduce(
+      (acc, row) => {
+        let outlinesCoords;
+        try {
+          outlinesCoords = getCoordinates(row).reduce((ac, current) => ac.concat(current), []);
+        } catch (e) {
+          console.warn(e);
+          return acc;
+        }
+
+        const polyLine = createPolyline(outlinesCoords, layer, row);
+
+        if (polyLine) {
+          acc.push(polyLine);
+        }
+        return acc;
+      },
+      []
+    );
+
+    if (geometryInstances && geometryInstances.length > 0 && map) {
+      this.removeGrid(this.primitiveOutline);
+      this.primitiveOutline = createPolylinePrimitive(geometryInstances, show);
+      map.scene.primitives.add(this.primitiveOutline);
+    }
+  }
+
+  removeGrid(primitive) {
     const { map } = this.props;
     if (map) {
-      map.scene.primitives.remove(this.primitive);
+      map.scene.primitives.remove(primitive);
     }
   }
 

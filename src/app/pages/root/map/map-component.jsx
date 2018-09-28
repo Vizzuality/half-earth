@@ -4,7 +4,6 @@ import cx from 'classnames';
 
 import CesiumMap from 'components/v2/map';
 import GridLayer from 'components/v2/map/grid-layer';
-import PolylineGrid from 'components/v2/map/polyline-grid';
 import { LayerManager, Layer } from 'layer-manager/dist/react';
 import { PluginCesium } from 'layer-manager';
 
@@ -51,14 +50,14 @@ class MapComponent extends PureComponent {
       const attributes = primitive.getGeometryInstanceAttributes(object.id);
       if (attributes) {
         attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
-          Cesium.Color.WHITE.withAlpha(0.8)
+          Cesium.Color.fromBytes(24, 186, 180, 100)
         );
       }
       if (this.lastObjId) {
         const lastAttributes = primitive.getGeometryInstanceAttributes(this.lastObjId);
         if (lastAttributes) {
           lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
-            Cesium.Color.WHITE.withAlpha(0.3)
+            Cesium.Color.WHITE.withAlpha(0.01)
           );
         }
       }
@@ -165,19 +164,6 @@ class MapComponent extends PureComponent {
               {
                 hasGridLayers && gridLayers.map(layer => (
                   <GridLayer
-                    key={layer.id}
-                    show={showGrid}
-                    layer={layer}
-                    map={map}
-                    ref={gridLayer => {
-                        this.gridLayers[layer.id] = gridLayer;
-                      }}
-                  />
-                  ))
-              }
-              {
-                hasGridLayers && gridLayers.map(layer => (
-                  <PolylineGrid
                     key={layer.id}
                     show={showGrid}
                     layer={layer}
