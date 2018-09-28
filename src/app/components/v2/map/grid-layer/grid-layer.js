@@ -74,11 +74,13 @@ class GridLayer extends Component {
     }
     if (show) {
       this.renderGrid();
+    } else {
+      this.removeAllGrids()
     }
   }
 
   componentWillUnmount() {
-    this.removeGrid();
+    this.removeAllGrids();
   }
 
   async renderGrid() {
@@ -186,6 +188,11 @@ class GridLayer extends Component {
       this.primitiveOutline = createPolylinePrimitive(geometryInstances, show);
       map.scene.primitives.add(this.primitiveOutline);
     }
+  }
+
+  removeAllGrids() {
+    if (this.primitive) this.removeGrid(this.primitive);
+    if (this.primitiveOutline) this.removeGrid(this.primitiveOutline);
   }
 
   removeGrid(primitive) {
