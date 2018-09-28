@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setModalMetadata } from 'components/v2/modal-metadata/modal-metadata-actions';
-import { setModalInstructionsParams } from 'components/v2/modal-instructions/modal-instructions-actions';
+import {
+  setModalInstructionsParams
+} from 'components/v2/modal-instructions/modal-instructions-actions';
 import { getLayersActiveMerged } from 'redux-modules/datasets/datasets-utils';
 
 import * as ownActions from './toolbar-actions';
@@ -32,8 +34,12 @@ class ToolbarContainer extends Component {
     if (hasGeolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { updateQueryParam, query = {} } = this.props;
-        const { x, y, z } = Cesium.Cartesian3.fromDegrees(position.coords.longitude, position.coords.latitude, 310000);
-        const coordinates = [ x, y, z ];
+        const { x, y, z } = Cesium.Cartesian3.fromDegrees(
+          position.coords.longitude,
+          position.coords.latitude,
+          310000
+        );
+        const coordinates = { x, y, z };
         updateQueryParam({ query: { ...query, coordinates } });
       });
     }
