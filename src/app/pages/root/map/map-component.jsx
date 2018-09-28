@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import CesiumMap from 'components/v2/map';
 import GridLayer from 'components/v2/map/grid-layer';
-import { LayerManager, Layer } from 'layer-manager/dist/react';
+import { LayerManager } from 'layer-manager/dist/react';
 import { PluginCesium } from 'layer-manager';
 
 import styles from './map-styles.scss';
@@ -156,11 +156,7 @@ class MapComponent extends PureComponent {
           const showGrid = !terrainMode && height < SHOW_GRID_HEIGHT;
           return (
             <React.Fragment>
-              <LayerManager map={map} plugin={PluginCesium}>
-                {layerManager =>
-                  hasLayers &&
-                    layers.map(l => <Layer key={l.slug} {...l} layerManager={layerManager} />)}
-              </LayerManager>
+              {hasLayers && <LayerManager map={map} plugin={PluginCesium} layersSpec={layers} />}
               {
                 hasGridLayers && gridLayers.map(layer => (
                   <GridLayer
@@ -188,7 +184,7 @@ MapComponent.propTypes = {
   gridLayers: PropTypes.array,
   terrainMode: PropTypes.bool,
   className: PropTypes.string,
-  coordinates: PropTypes.array,
+  coordinates: PropTypes.object,
   coordinatesOptions: PropTypes.object,
   terrainCameraOffset: PropTypes.object,
   latLng: PropTypes.object,

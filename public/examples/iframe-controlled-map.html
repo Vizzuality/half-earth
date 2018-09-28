@@ -25,7 +25,7 @@
   var iframe = document.getElementById('map-iframe');
   function fly() {
     var zoom = {
-      coordinates: [5760629.535260948, 2406368.791758723, -2400118.3266120856],
+      coordinates: { x: 5760629.535260948, y: 2406368.791758723, z: -2400118.3266120856 },
       orientation: [5.92122801224943, -0.29198679662794125, 6.26520814284261]
     }
     postRobot.send(iframe, 'mapFlyToCoordinates', zoom)

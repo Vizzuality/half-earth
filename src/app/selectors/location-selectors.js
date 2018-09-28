@@ -19,6 +19,6 @@ export const getTaxa = createSelector([ selectQueryParams ], query => {
 });
 
 export const getIsTerrain = createSelector([ selectQueryParams ], query => {
-  if (!query) return null;
+  if (!query) return false;
   return checkBoolean(query.terrain);
 });

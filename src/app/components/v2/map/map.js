@@ -127,7 +127,7 @@ class CesiumComponent extends Component {
 
   setCoordinates() {
     const { coordinates, coordinatesOptions } = this.props;
-    this.flyTo(...coordinates, coordinatesOptions);
+    this.flyTo(coordinates, coordinatesOptions);
   }
 
   setCamera() {
@@ -148,7 +148,7 @@ class CesiumComponent extends Component {
       orientation.roll !== roll;
 
     if (isDifferentCoordinates || isDifferentOrientation) {
-      this.props.onMoveEnd({ coordinates: [ x, y, z ], orientation: [ heading, pitch, roll ] });
+      this.props.onMoveEnd({ coordinates: { x, y, z }, orientation: [ heading, pitch, roll ] });
     }
   };
 
@@ -162,8 +162,8 @@ class CesiumComponent extends Component {
     clock.startTime.secondsOfDay = now - 1; // eslint-disable-line
   };
 
-  flyTo(lat, long, z = 15000.0, rest = {}) {
-    this.viewer.camera.flyTo({ destination: { x: lat, y: long, z }, ...rest });
+  flyTo(destination, rest = {}) {
+    this.viewer.camera.flyTo({ destination, ...rest });
   }
 
   addRotation() {
@@ -198,7 +198,7 @@ CesiumComponent.propTypes = {
   onMouseClick: PropTypes.func,
   lockNavigation: PropTypes.bool,
   rotate: PropTypes.func,
-  coordinates: PropTypes.array,
+  coordinates: PropTypes.object,
   coordinatesOptions: PropTypes.object,
   camera: PropTypes.object,
   terrainMode: PropTypes.bool,
