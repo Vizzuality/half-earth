@@ -24,7 +24,10 @@ export const getCategoriesActive = createSelector([ getDatasetsByCategory, getLa
       ...category,
       datasets: sortBy(
         category.datasets.map(dataset => {
-          const layers = dataset.layers.map(layer => ({ ...layer, active: layerActiveSlugs.includes(layer.slug) }));
+          const layers = dataset.layers.map(layer => ({
+            ...layer,
+            active: layerActiveSlugs.includes(layer.slug)
+          }));
           const active = layers.some(l => l.active);
           return { ...dataset, active, layers };
         }),
@@ -39,10 +42,14 @@ export const getCategoriesGroups = createSelector(getCategoriesActive, categorie
   const groupedCategories = groupBy(categories, 'groupSlug');
   return Object
     .keys(groupedCategories)
-    .map(key => ({ slug: key, title: groupedCategories[key][0].groupName, categories: groupedCategories[key] }));
+    .map(key => ({
+      slug: key,
+      title: groupedCategories[key][0].groupName,
+      categories: groupedCategories[key]
+    }));
 });
 
-export const getGroupCardsOpen = createSelector([ getCategoriesGroups ], groups => {
+export const getGroupCards = createSelector([ getCategoriesGroups ], groups => {
   if (!groups) return null;
   const groupsOpen = groups.map(group => {
     const layersActive = group.categories.reduce(
@@ -59,5 +66,5 @@ export const getGroupCardsOpen = createSelector([ getCategoriesGroups ], groups 
 
 export const mapStateToProps = createStructuredSelector({
   loading: getCategoriesLoading,
-  categoriesGroups: getGroupCardsOpen
+  categoriesGroups: getGroupCards
 });
