@@ -13,7 +13,10 @@ class ProgressBarComponent extends Component {
     const layerActive = layers && layers.find(l => l.active) || {};
     return (
       <div className={styles.container}>
-        <ProgressBar percentage={layerActive.percentage || 0} label={layerActive.name || ''} />
+        {
+          !category.hideProgress &&
+            <ProgressBar percentage={layerActive.percentage || 0} label={layerActive.name || ''} />
+        }
         {category.description && <p className={styles.subtitle}>{category.description}</p>}
         {
           category &&

@@ -95,7 +95,9 @@ export const getFeaturedCategory = createSelector(
     if (!data || !data.feature_da || !categories) return null;
 
     const category = categories.find(d => d.slug === data.feature_da.toLowerCase());
-    return category ? getLayersPercentage(category, data) : null;
+    if (!category) return null;
+    category.hideProgress = true;
+    return getLayersPercentage(category, data);
   }
 );
 
