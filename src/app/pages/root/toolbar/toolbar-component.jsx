@@ -15,7 +15,7 @@ class ToolbarComponent extends PureComponent {
   render() {
     const {
       className,
-      datasets,
+      halfEarthDatasets,
       handleInfoClick,
       handleDatasetChange,
       handleShareClick,
@@ -23,10 +23,11 @@ class ToolbarComponent extends PureComponent {
       showLocation
     } = this.props;
     const datasetsTooltip = (
-      <React.Fragment>
+      <div className={styles.tooltipContainer}>
+        <h4 className={styles.tooltipTitle}>The View from Half-Earth</h4>
         {
-          datasets &&
-            datasets.map(
+          halfEarthDatasets &&
+            halfEarthDatasets.map(
               dataset =>
                 dataset.layers.map(layer => (
                   <SwitchInput
@@ -40,7 +41,7 @@ class ToolbarComponent extends PureComponent {
                 ))
             )
         }
-      </React.Fragment>
+      </div>
     );
     return (
       <div className={cx(styles.toolbar, className)}>
@@ -74,7 +75,7 @@ class ToolbarComponent extends PureComponent {
 }
 
 ToolbarComponent.propTypes = {
-  datasets: PropTypes.array,
+  halfEarthDatasets: PropTypes.array,
   showLocation: PropTypes.bool,
   className: PropTypes.string,
   handleInfoClick: PropTypes.func.isRequired,
@@ -83,6 +84,6 @@ ToolbarComponent.propTypes = {
   handleCenterLocationClick: PropTypes.func.isRequired
 };
 
-ToolbarComponent.defaultProps = { datasets: null, showLocation: false, className: '' };
+ToolbarComponent.defaultProps = { halfEarthDatasets: null, showLocation: false, className: '' };
 
 export default ToolbarComponent;

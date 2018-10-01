@@ -3,6 +3,6 @@ import { getHEDatasets } from 'selectors/datasets-selectors';
 import { selectQueryParams } from 'selectors/location-selectors';
 
 export const mapStateToProps = createStructuredSelector({
-  datasets: getHEDatasets,
+  halfEarthDatasets: getHEDatasets,
   query: selectQueryParams
 });
