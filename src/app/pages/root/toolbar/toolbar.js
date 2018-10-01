@@ -30,6 +30,11 @@ class ToolbarContainer extends Component {
     this.props.setModalInstructionsParams({ isOpen: true });
   };
 
+  handleDatasetChange = ({ slug, active }) => {
+    const layers = [ { slug, active: !active } ];
+    this.updateLayersActive(layers);
+  };
+
   handleCenterLocationClick = () => {
     if (hasGeolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -52,6 +57,7 @@ class ToolbarContainer extends Component {
         showLocation={hasGeolocation}
         handleInfoClick={this.handleInfoClick}
         handleShareClick={this.handleShareClick}
+        handleDatasetChange={this.handleDatasetChange}
         handleCenterLocationClick={this.handleCenterLocationClick}
       />
     );

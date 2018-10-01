@@ -41,9 +41,8 @@ export const getDatasets = createSelector([ selectDatasets, getLayersActive ], (
     });
   });
 
-export const getGridDataset = createSelector(getDatasets, datasets => {
+export const getHEDatasets = createSelector(getDatasets, datasets => {
   if (!datasets) return null;
-  const grid = datasets.find(dataset => dataset.slug === 'grids');
-  if (!grid) return null;
-  return grid;
+  const halfEarthDatasets = datasets.filter(dataset => dataset.category === 'he-movement');
+  return halfEarthDatasets;
 });
