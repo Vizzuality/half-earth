@@ -10,7 +10,7 @@ function createPolygon(coords, layer, row) {
       polygonHierarchy: new Cesium.PolygonHierarchy(coords),
       height: 0
     }),
-    id: { grid: true, slug: layer.id, cellId: row.cell_id },
+    id: { grid: true, slug: layer.id, cellId: row.cell_id, coordinates: coords },
     attributes: {
       color: Cesium.ColorGeometryInstanceAttribute.fromColor(
         // If alpha is 0 it does not trigger the click event
@@ -75,7 +75,7 @@ class GridLayer extends Component {
     if (show) {
       this.renderGrid();
     } else {
-      this.removeAllGrids()
+      this.removeAllGrids();
     }
   }
 
