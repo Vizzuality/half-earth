@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { ProgressBar } from 'he-components';
 import DatasetCombo from 'components/v2/dataset-combo';
 
@@ -12,8 +13,11 @@ class ProgressBarComponent extends Component {
       category.datasets.reduce((acc, dataset) => [ ...acc, ...dataset.layers ], []);
     const layerActive = layers && layers.find(l => l.active) || {};
     return (
-      <div className={styles.container}>
-        <ProgressBar percentage={layerActive.percentage || 0} label={layerActive.name || ''} />
+      <div className={cx({ [styles.containerSpaced]: !category.hideProgress })}>
+        {
+          !category.hideProgress &&
+            <ProgressBar percentage={layerActive.percentage || 0} label={layerActive.name || ''} />
+        }
         {category.description && <p className={styles.subtitle}>{category.description}</p>}
         {
           category &&
