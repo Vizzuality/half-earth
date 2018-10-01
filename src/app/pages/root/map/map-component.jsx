@@ -107,10 +107,10 @@ class MapComponent extends PureComponent {
       lat: Cesium.Math.toDegrees(cartographic.latitude),
       lng: Cesium.Math.toDegrees(cartographic.longitude)
     };
-    this.setMapTerrain(latLng, TERRAIN_CAMERA_OFFSET, object.id.cellId);
+    this.setMapTerrain(latLng, TERRAIN_CAMERA_OFFSET, object.id);
   };
 
-  setMapTerrain = (latLng, terrainCameraOffset, cellId) => {
+  setMapTerrain = (latLng, terrainCameraOffset, { cellId, coordinates }) => {
     const { query } = this.props;
     const gridLayerSlugs = Object.keys(this.gridLayers);
     const activeLayers = query.activeLayers
@@ -121,6 +121,7 @@ class MapComponent extends PureComponent {
       activeLayers,
       ...latLng,
       terrainCameraOffset,
+      cellCoordinates: coordinates,
       cellId
     });
   };
