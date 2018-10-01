@@ -51,18 +51,16 @@ export const getCategoriesGroups = createSelector(getCategoriesActive, categorie
 
 export const getGroupCards = createSelector([ getCategoriesGroups ], groups => {
   if (!groups) return null;
-  const groupsOpen = groups
-    .filter(g => g.slug !== 'half-earth-view')
-    .map(group => {
-      const layersActive = group.categories.reduce(
-        (acc, category) => {
-          const datasetsActive = category.datasets.filter(d => d.active);
-          return datasetsActive ? acc + datasetsActive.length : acc;
-        },
-        0
-      );
-      return { ...group, isOpen: layersActive > 0, layersActive };
-    });
+  const groupsOpen = groups.map(group => {
+    const layersActive = group.categories.reduce(
+      (acc, category) => {
+        const datasetsActive = category.datasets.filter(d => d.active);
+        return datasetsActive ? acc + datasetsActive.length : acc;
+      },
+      0
+    );
+    return { ...group, isOpen: layersActive > 0, layersActive };
+  });
   return groupsOpen;
 });
 
