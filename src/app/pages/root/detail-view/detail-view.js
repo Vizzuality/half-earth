@@ -20,12 +20,10 @@ class DetailViewContainer extends Component {
     updateQueryParam({
       query: {
         ...query,
-        lat: undefined,
-        lng: undefined,
         cellId: undefined,
         terrain: undefined,
         terrainCameraOffset: undefined,
-        orientation: undefined
+        orientation: [ 0, -1.5707963267948966, 6.283185307179586 ]
       }
     });
   };

@@ -39,9 +39,9 @@ export const getCoordinatesOptions = createSelector([ selectQueryParams ], query
   return { orientation: { roll, pitch, heading } };
 });
 
-export const getLatLng = createSelector([ selectQueryParams ], query => {
-  if (!query || !query.lat || !query.lng) return undefined;
-  return { lat: query.lat, lng: query.lng };
+export const getGridOutlineCoords = createSelector([ selectQueryParams ], query => {
+  if (!query || !query.cellCoordinates) return undefined;
+  return query.cellCoordinates;
 });
 
 export const mapStateToProps = createStructuredSelector({
@@ -51,6 +51,6 @@ export const mapStateToProps = createStructuredSelector({
   query: selectQueryParams,
   coordinates: getCoordinates,
   coordinatesOptions: getCoordinatesOptions,
-  latLng: getLatLng,
-  terrainCameraOffset: getTerrainCameraOffset
+  terrainCameraOffset: getTerrainCameraOffset,
+  cellCoordinates: getGridOutlineCoords
 });
