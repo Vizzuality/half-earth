@@ -13,7 +13,7 @@ const SHOW_GRID_HEIGHT = 8000000;
 const TERRAIN_CAMERA_OFFSET = new Cesium.HeadingPitchRange(
   Cesium.Math.toRadians(0.0),
   Cesium.Math.toRadians(-27.0),
-  50000.0
+  200000.0
 );
 
 class MapComponent extends PureComponent {
@@ -89,7 +89,7 @@ class MapComponent extends PureComponent {
       const pickedObject = this.map.scene.pick(e.position);
       if (Cesium.defined(pickedObject)) {
         if (pickedObject.id.grid) {
-          this.handleGridClick(e, pickedObject);
+          this.handleGridClick(pickedObject);
         }
       } else {
         console.info('No picked object click');
@@ -97,29 +97,16 @@ class MapComponent extends PureComponent {
     }
   };
 
-  handleGridClick = (e, object) => {
-    // Allow pickPosition function to perform a 3D calculation
-    this.map.scene.pickTranslucentDepth = true;
-    const cartesian = this.map.scene.pickPosition(e.position);
-    const { ellipsoid } = this.map.scene.globe;
-    const cartographic = ellipsoid.cartesianToCartographic(cartesian);
-    const latLng = {
-      lat: Cesium.Math.toDegrees(cartographic.latitude),
-      lng: Cesium.Math.toDegrees(cartographic.longitude)
-    };
-    this.setMapTerrain(latLng, TERRAIN_CAMERA_OFFSET, object.id);
+  handleGridClick = object => {
+    this.setMapTerrain(TERRAIN_CAMERA_OFFSET, object.id);
   };
 
-  setMapTerrain = (latLng, terrainCameraOffset, { cellId, coordinates }) => {
+  setMapTerrain = (terrainCameraOffset, { cellId, coordinates }) => {
     const { query } = this.props;
-    const gridLayerSlugs = Object.keys(this.gridLayers);
-    const activeLayers = query.activeLayers
-      ? query.activeLayers.filter(l => gridLayerSlugs.includes(l))
-      : null;
+    const activeLayers = query.activeLayers ? query.activeLayers : null;
     this.props.updateMapParams({
       terrain: true,
       activeLayers,
-      ...latLng,
       terrainCameraOffset,
       cellCoordinates: coordinates,
       cellId
@@ -134,9 +121,9 @@ class MapComponent extends PureComponent {
       layers,
       coordinates,
       coordinatesOptions,
-      latLng,
       updateMapParams,
-      terrainCameraOffset
+      terrainCameraOffset,
+      cellCoordinates
     } = this.props;
     const hasLayers = layers && layers.length > 0;
     const hasGridLayers = gridLayers && gridLayers.length > 0;
@@ -146,8 +133,8 @@ class MapComponent extends PureComponent {
         coordinates={coordinates}
         terrainMode={terrainMode}
         coordinatesOptions={coordinatesOptions}
-        latLng={latLng}
         terrainCameraOffset={terrainCameraOffset}
+        cellCoordinates={cellCoordinates}
         onMouseMove={this.handleMouseMove}
         onMouseClick={this.handleMouseClick}
         onMoveEnd={updateMapParams}
@@ -189,7 +176,7 @@ MapComponent.propTypes = {
   coordinates: PropTypes.object,
   coordinatesOptions: PropTypes.object,
   terrainCameraOffset: PropTypes.object,
-  latLng: PropTypes.object,
+  cellCoordinates: PropTypes.object,
   updateMapParams: PropTypes.func
 };
 
@@ -202,7 +189,7 @@ MapComponent.defaultProps = {
   coordinates: undefined,
   coordinatesOptions: undefined,
   terrainCameraOffset: undefined,
-  latLng: undefined,
+  cellCoordinates: undefined,
   updateMapParams: () => {
   }
 };
