@@ -176,7 +176,7 @@ MapComponent.propTypes = {
   coordinates: PropTypes.object,
   coordinatesOptions: PropTypes.object,
   terrainCameraOffset: PropTypes.object,
-  cellCoordinates: PropTypes.object,
+  cellCoordinates: PropTypes.array,
   updateMapParams: PropTypes.func
 };
 

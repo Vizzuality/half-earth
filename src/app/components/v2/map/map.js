@@ -134,7 +134,7 @@ class CesiumComponent extends Component {
     const rectangle = Cesium.Rectangle.fromCartesianArray(cellCoordinates);
     this.sphere = Cesium.BoundingSphere.fromRectangle3D(rectangle);
     const offset = mapValues(terrainCameraOffset.offset, parseFloat);
-    this.viewer.camera.flyToBoundingSphere(this.sphere, offset);
+    this.viewer.camera.flyToBoundingSphere(this.sphere, { offset });
   }
 
   removeGridCell() {
@@ -219,7 +219,7 @@ CesiumComponent.propTypes = {
   camera: PropTypes.object,
   terrainMode: PropTypes.bool,
   terrainCameraOffset: PropTypes.object,
-  cellCoordinates: PropTypes.object
+  cellCoordinates: PropTypes.array
 };
 
 CesiumComponent.defaultProps = {
