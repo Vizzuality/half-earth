@@ -54,7 +54,9 @@ class MapComponent extends PureComponent {
         );
       }
       if (this.lastObjId) {
-        const lastAttributes = primitive.getGeometryInstanceAttributes(this.lastObjId);
+        const lastGridLayer = this.gridLayers[this.lastObjId.slug];
+        const lastAttributes = lastGridLayer &&
+          lastGridLayer.primitive.getGeometryInstanceAttributes(this.lastObjId);
         if (lastAttributes) {
           lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
             Cesium.Color.WHITE.withAlpha(0.01)
