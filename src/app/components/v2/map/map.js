@@ -69,7 +69,7 @@ class CesiumComponent extends Component {
       if (lockNavigation) disablePanning(this.viewer);
       if (terrainMode) {
         if (cellCoordinates) {
-          this.renderGridCell(cellCoordinates);
+          this.renderGridCell(cellCoordinates, this.rectangle);
           this.setTerrainModeView(cellCoordinates, terrainCameraOffset);
         }
       } else {
@@ -116,7 +116,8 @@ class CesiumComponent extends Component {
     }
   };
 
-  renderGridCell(cellCoordinates) {
+  renderGridCell(cellCoordinates, rectangle) {
+    if (rectangle) return null;
     const coordinates = Cesium.Rectangle.fromCartesianArray(cellCoordinates);
     this.rectangle = new Cesium.Entity({
       rectangle: {
@@ -127,7 +128,7 @@ class CesiumComponent extends Component {
         outlineColor: Cesium.Color.fromAlpha(Cesium.Color.WHITE, 0.9)
       }
     });
-    this.viewer.entities.add(this.rectangle);
+    return this.viewer.entities.add(this.rectangle);
   }
 
   setTerrainModeView(cellCoordinates, terrainCameraOffset) {
@@ -139,6 +140,7 @@ class CesiumComponent extends Component {
 
   removeGridCell() {
     this.viewer.entities.remove(this.rectangle);
+    this.rectangle = undefined;
   }
 
   setCoordinates() {
