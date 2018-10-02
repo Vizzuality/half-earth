@@ -14,15 +14,15 @@ class SpeciesToWatchComponent extends Component {
           loading ? <Loading height="300" /> : data && data.length > 0 && data.map(specie => (
             <div className={styles.speciesRow} key={specie.commonname}>
               {
-                    specie.image && (
-                    <a href={specie.rangemap} target="_blank" rel="noopener noreferrer">
-                      <img
-                        className={styles.speciesImg}
-                        src={specie.image.url}
-                        alt={`${specie.commonname} specie`}
-                      />
-                    </a>
-                      )
+                    (
+                      <a href={specie.rangemap} target="_blank" rel="noopener noreferrer">
+                        <img
+                          className={styles.speciesImg}
+                          src={specie.image && specie.image.url || 'img/species-placeholder@2x.png'}
+                          alt={`${specie.commonname} specie`}
+                        />
+                      </a>
+                    )
                   }
               <div className={styles.speciesContent}>
                 <h4 className={styles.speciesTitle}>{specie.commonname}</h4>
