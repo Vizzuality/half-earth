@@ -138,10 +138,7 @@ class CesiumComponent extends Component {
   }
 
   removeGridCell() {
-    if (this.rectangle) {
-      this.viewer.entities.remove(this.rectangle);
-    }
-    this.rectangle = undefined;
+    this.viewer.entities.remove(this.rectangle);
   }
 
   setCoordinates() {
