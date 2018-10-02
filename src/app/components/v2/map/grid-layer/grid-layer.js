@@ -20,30 +20,6 @@ function createPolygon(coords, layer, row) {
   });
 }
 
-function createPolyline(coords, layer, row) {
-  return new Cesium.GeometryInstance({
-    geometry: new Cesium.PolylineGeometry({
-      positions: Cesium.Cartesian3.fromDegreesArray(coords),
-      // vertexFormat: Cesium.PolylineColorAppearance.VERTEX_FORMAT
-      width: 2
-    }),
-    id: { grid: true, slug: layer.id, cellId: row.cell_id },
-    attributes: { color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.WHITE) }
-  });
-}
-
-function createPolylinePrimitive(geometryInstances, show) {
-  return new Cesium.Primitive({
-    geometryInstances,
-    // Needed to style each one on a different way
-    appearance: new Cesium.PolylineColorAppearance({ translucent: true }),
-    interleave: true,
-    vertexCacheOptimize: true,
-    compressVertices: true,
-    show
-  });
-}
-
 function createPolygonPrimitive(geometryInstances, show) {
   return new Cesium.Primitive({
     geometryInstances,
@@ -130,7 +106,6 @@ class GridLayer extends Component {
 
       if (rows && rows.length) {
         this.addGridPolygons(rows, map, show, layer);
-        this.addGridOutlines(rows, map, show, layer);
         this.forceUpdate(); // Doing this to notify childrens it is ready
       }
     }
@@ -162,37 +137,8 @@ class GridLayer extends Component {
     }
   }
 
-  addGridOutlines(rows, map, show, layer) {
-    const geometryInstances = rows.reduce(
-      (acc, row) => {
-        let outlinesCoords;
-        try {
-          outlinesCoords = getCoordinates(row).reduce((ac, current) => ac.concat(current), []);
-        } catch (e) {
-          console.warn(e);
-          return acc;
-        }
-
-        const polyLine = createPolyline(outlinesCoords, layer, row);
-
-        if (polyLine) {
-          acc.push(polyLine);
-        }
-        return acc;
-      },
-      []
-    );
-
-    if (geometryInstances && geometryInstances.length > 0 && map) {
-      this.removeGrid(this.primitiveOutline);
-      this.primitiveOutline = createPolylinePrimitive(geometryInstances, show);
-      map.scene.primitives.add(this.primitiveOutline);
-    }
-  }
-
   removeAllGrids() {
     if (this.primitive) this.removeGrid(this.primitive);
-    if (this.primitiveOutline) this.removeGrid(this.primitiveOutline);
   }
 
   removeGrid(primitive) {
