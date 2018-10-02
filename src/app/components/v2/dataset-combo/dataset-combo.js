@@ -94,6 +94,6 @@ DatasetComboContainer.propTypes = {
   layerDefaultOpacity: PropTypes.number
 };
 
-DatasetComboContainer.defaultProps = { query: undefined, layerDefaultOpacity: 0.5 };
+DatasetComboContainer.defaultProps = { query: undefined, layerDefaultOpacity: 1 };
 
 export default connect(mapStateToProps, actions)(DatasetComboContainer);
