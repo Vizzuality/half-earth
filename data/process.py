@@ -23,7 +23,8 @@ def tile_template(l):
                     },
                     "type": "tileLayer",
                     "url": f"{l.get('url')}",
-                    "bbox": l.get('bbox', [])
+                    "bbox": l.get('bbox', []),
+                    "landscape_opacity": l.get('landscape_opacity', 1),
                 },
                 "type": "tileLayer",
                 "params_config": [{
@@ -56,7 +57,8 @@ def carto_template(l):
                                 "type": "cartodb"}
                             ],
                     "url": f"{l.get('url')}",
-                    "bbox": l.get('bbox', [])
+                    "bbox": l.get('bbox', []),
+                    "landscape_opacity": l.get('landscape_opacity', 1),
                 },
                 "account":"half-earth",
                 "type": "layer",

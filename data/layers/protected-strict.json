@@ -9,6 +9,7 @@
     "cartocss": "#wdpa_protected_areas{ polygon-opacity: 0.7; polygon-fill: #F5CE9F;} ",
     "maxZoom": 13,
     "minZoom": 3,
+    "landscape_opacity": 0.9,
     "legendConfig": {
                      "items": [
                                  {

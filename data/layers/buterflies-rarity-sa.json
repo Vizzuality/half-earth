@@ -5,6 +5,7 @@
     "dataset": "butterflies-regional",
     "layer_name": "Rarity",
     "slug":"butterflies-rarity-sa",
+    "landscape_opacity": 0.5,
     "description": null,
     "url": "",
     "maxZoom": 13,

@@ -9,6 +9,7 @@
                "url": "https://storage.googleapis.com/gfw-climate-tiles/hp_test/agri_v1/{z}/{x}/{y}.png",
                "maxZoom": 13,
                "minZoom": 3,
+               "landscape_opacity": 1.0,
                "legendConfig": {
                                 "items": [{
                                                 "value": "0",

@@ -9,6 +9,7 @@
     "url": "",
     "maxZoom": 13,
     "minZoom": 3,
+    "landscape_opacity": 0.5,
     "legendConfig": {
         "items": [{
                         "value": "0",

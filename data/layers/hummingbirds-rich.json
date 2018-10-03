@@ -9,6 +9,7 @@
     "maxZoom": 13,
     "minZoom": 3,
     "bbox": [-164, -40, -35, 56],
+    "landscape_opacity": 0.5,
     "legendConfig": {
         "items": [ {
                     "value": "1",

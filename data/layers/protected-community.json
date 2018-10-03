@@ -9,6 +9,7 @@
     "cartocss": "#community_conservation_areas[source='non_indg_wdpa']{ polygon-opacity: 0.7; polygon-fill: #B9870D;} #community_conservation_areas[source='wdpa']{ polygon-opacity: 0.7; polygon-fill: #AA5609;} #community_conservation_areas[source='raisg']{ polygon-opacity: 0.7; polygon-fill: #AA2709;}",
     "maxZoom": 13,
     "minZoom": 3,
+    "landscape_opacity": 0.9,
     "legendConfig": {
                      "items": [
                                 {

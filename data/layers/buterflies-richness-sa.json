@@ -6,6 +6,7 @@
     "layer_name": "Richness",
     "slug":"butterflies-richness-sa",
     "description": null,
+    "landscape_opacity": 0.5,
     "url": "",
     "maxZoom": 13,
     "minZoom": 3,

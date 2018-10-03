@@ -7,6 +7,7 @@
     "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/fishing-hours/gfw/fixed_gear/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
+    "landscape_opacity": 0.75,
     "legendConfig": {
         "items": [{
                         "value": "0",

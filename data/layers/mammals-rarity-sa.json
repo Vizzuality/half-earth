@@ -9,30 +9,37 @@
     "maxZoom": 13,
     "minZoom": 3,
     "bbox": [13, -37, 34, -27.7],
+    "landscape_opacity": 0.5,
     "legendConfig": {
-        "items": [{
-                        "value": "-15.5",
-                        "color": "#309B7E"
-                    },{
-                        "value": "",
-                        "color": "#299292"
-                    },{
-                        "value": "",
-                        "color": "#2289A6"
-                    },{
-                        "value": "",
-                        "color": "#1B7FBA"
-                    },{
-                        "value": "",
-                        "color": "#1476CE"
-                    },{
-                        "value": "",
-                        "color": "#0D6DE2"
-                    },{
-                        "value": "-14.5",
+        "items": [ {
+                        "value": "low",
                         "color": "#0664f6"
+                    },{
+                        "value": "",
+                        "color": "#0572d6"
+                    },{
+                        "value": "",
+                        "color": "#0380b5"
+                    },{
+                        "value": "",
+                        "color": "#028e95"
+                    },{
+                        "value": "",
+                        "color": "#009c74"
+                    },{
+                        "value": "",
+                        "color": "#3fae57"
+                    },{
+                        "value": "",
+                        "color": "#7fc03a"
+                    },{
+                        "value": "",
+                        "color": "#bed11d"
+                    },{
+                        "value": "high",
+                        "color": "#fde300"
                     }
-                ],
+        ],
                     "type": "gradient",
                     "title": "Mammals regional rarity"
         }
