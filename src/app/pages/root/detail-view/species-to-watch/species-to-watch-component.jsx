@@ -12,7 +12,7 @@ class SpeciesToWatchComponent extends Component {
         <p className={styles.title}>List of species to watch in this area</p>
         {
           loading ? <Loading height="300" /> : data && data.length > 0 && data.map(specie => (
-            <div className={styles.speciesRow} key={specie.commonname}>
+            <div className={styles.speciesRow} key={specie.commonname || specie.scientificname}>
               {
                     (
                       <a href={specie.rangemap} target="_blank" rel="noopener noreferrer">
