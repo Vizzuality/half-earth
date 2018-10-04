@@ -29,7 +29,8 @@ class DatasetComboContainer extends Component {
     const activeLayers = layers.map(layer => ({
       slug: layer.slug,
       active: layer.slug === slug ? !active : false,
-      opacity: layerDefaultOpacity
+      opacity: layerDefaultOpacity,
+      layerCategory: layer.category
     }));
     const { bbox } = layerConfig.body && layerConfig.body;
     if (bbox && bbox.length === 4) {
@@ -49,7 +50,8 @@ class DatasetComboContainer extends Component {
           slug: layer.slug,
           bbox: layer.layerConfig.body.bbox || null,
           active: !active && index === 0,
-          opacity: layerDefaultOpacity
+          opacity: layerDefaultOpacity,
+          layerCategory: layer.category
         }));
     } else {
       layersToUpdate = category.datasets.reduce((acc, dataset) => {
@@ -60,7 +62,8 @@ class DatasetComboContainer extends Component {
             slug: layer.slug,
             bbox: layer.layerConfig.body.bbox || null,
             active: isDatasetLayer && isDatasetLayerActive,
-            opacity: layerDefaultOpacity
+            opacity: layerDefaultOpacity,
+            layerCategory: layer.category
           };
         });
         return [ ...acc, ...datasetLayers ];
