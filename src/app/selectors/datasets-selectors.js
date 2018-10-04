@@ -26,10 +26,16 @@ export const getDatasets = createSelector([ selectDatasets, getLayersActive ], (
         })
         .map(layer => {
           const layerActive = activeLayers && activeLayers.find(l => l.slug === layer.slug);
-          if (!layerActive) return layer;
+          if (!layerActive) return { ...layer, category: dataset.category };
 
           order = activeLayers.findIndex(l => l.slug === layer.slug);
-          return { ...layer, ...layerActive, active: true, zIndex: order + 1 };
+          return {
+            ...layer,
+            ...layerActive,
+            category: dataset.category,
+            active: true,
+            zIndex: order + 1
+          };
         });
       return {
         ...dataset,

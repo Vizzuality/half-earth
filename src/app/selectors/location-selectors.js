@@ -10,7 +10,7 @@ export const getSidebarVisibility = createSelector([ selectQueryParams ], query 
 
 export const getCellId = createSelector([ selectQueryParams ], query => {
   if (!query) return null;
-  return query.cellId ? parseInt(query.cellId, 10) : null;
+  return query.cellId;
 });
 
 export const getTaxa = createSelector([ selectQueryParams ], query => {
