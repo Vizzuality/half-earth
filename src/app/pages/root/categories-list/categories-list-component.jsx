@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Icon } from 'he-components';
-import { sortBy } from 'lodash';
 import DatasetCombo from 'components/v2/dataset-combo';
 
 import infoIcon from 'assets/icons/icon-info.svg';
@@ -23,7 +22,6 @@ class CategoriesListComponent extends Component {
 
   renderRegularCategory(category) {
     const { datasets } = category;
-    const sortedDatasets = sortBy(datasets, 'position');
     return (
       <div className={styles.category} key={category.slug}>
         <div>
@@ -32,7 +30,7 @@ class CategoriesListComponent extends Component {
             {category.metadata && this.renderInfoButton(category)}
           </div>
           <p className={styles.categoryDescription}>{category.description}</p>
-          {sortedDatasets.map(dataset => (
+          {datasets.map(dataset => (
             <DatasetCombo
               dataset={dataset}
               category={category}
