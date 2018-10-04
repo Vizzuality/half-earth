@@ -21,6 +21,7 @@ class CategoriesListComponent extends Component {
   }
 
   renderRegularCategory(category) {
+    const { datasets } = category;
     return (
       <div className={styles.category} key={category.slug}>
         <div>
@@ -29,7 +30,7 @@ class CategoriesListComponent extends Component {
             {category.metadata && this.renderInfoButton(category)}
           </div>
           <p className={styles.categoryDescription}>{category.description}</p>
-          {category.datasets.map(dataset => (
+          {datasets.map(dataset => (
             <DatasetCombo
               dataset={dataset}
               category={category}
