@@ -12,28 +12,16 @@ class GroupCardListComponent extends Component {
     return (
       <div className={styles.groupCardListContainer}>
         {
-          categoriesGroups && categoriesGroups.map(
-              group =>
-                group.slug !== 'half-earth-view'
-                  ? (
-                    <AccordionCard
-                      key={group.slug}
-                      isOpen={group.isOpen}
-                      title={group.title}
-                      counter={group.layersActive > 0 ? group.layersActive : null}
-                    >
-                      <CategoriesList categories={group.categories} />
-                    </AccordionCard>
-)
-                  : (
-                    <div key={group.slug} className={styles.cardContainer}>
-                      <div className={styles.headerContainer}>
-                        <h2 className={styles.groupTitle}>{group.title}</h2>
-                      </div>
-                      <CategoriesList categories={group.categories} />
-                    </div>
-)
-            )
+          categoriesGroups && categoriesGroups.map(group => (
+            <AccordionCard
+              key={group.slug}
+              isOpen={group.isOpen}
+              title={group.title}
+              counter={group.layersActive > 0 ? group.layersActive : null}
+            >
+              <CategoriesList categories={group.categories} />
+            </AccordionCard>
+            ))
         }
       </div>
     );
