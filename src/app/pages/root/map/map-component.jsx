@@ -105,7 +105,11 @@ class MapComponent extends PureComponent {
 
   setMapTerrain = (terrainCameraOffset, { cellId, coordinates }) => {
     const { query } = this.props;
-    const activeLayers = query.activeLayers ? query.activeLayers : null;
+    const activeLayers = query.activeLayers
+      ? query.activeLayers.filter(
+        l => l.layerCategory !== 'terrestrial' && l.layerCategory !== 'aquatic'
+      )
+      : null;
     this.props.updateMapParams({
       terrain: true,
       activeLayers,
