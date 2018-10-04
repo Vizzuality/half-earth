@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import CesiumMap from 'components/v2/map';
 import GridLayer from 'components/v2/map/grid-layer';
+import ProtectedAreasLayer from 'components/v2/map/protected-areas-layer';
 import { LayerManager } from 'layer-manager/dist/react';
 import { PluginCesium } from 'layer-manager';
 
@@ -23,6 +23,8 @@ class MapComponent extends PureComponent {
 
   gridLayers = {};
 
+  hasLayers = layers => layers && layers.length > 0;
+
   componentWillUpdate(nextProps) {
     const { terrainMode } = this.props;
     if (nextProps.terrainMode && terrainMode === false) {
@@ -34,8 +36,15 @@ class MapComponent extends PureComponent {
     if (this.map) {
       const pickedObject = this.map.scene.pick(e.endPosition);
       if (Cesium.defined(pickedObject)) {
-        if (pickedObject.id.grid) {
-          this.handleGridMove(e, pickedObject);
+        switch (pickedObject.id.type) {
+          case 'grid':
+            this.handleGridHover(e, pickedObject);
+            break;
+          case 'protected-area':
+            this.handleProtectedAreaHover(pickedObject);
+            break;
+          default:
+            this.handleNoGridMove();
         }
       } else {
         this.handleNoGridMove();
@@ -43,7 +52,7 @@ class MapComponent extends PureComponent {
     }
   };
 
-  handleGridMove = (e, object) => {
+  handleGridHover = (e, object) => {
     const gridLayer = this.gridLayers[object.id.slug];
     const { primitive } = gridLayer;
     if (primitive && (!this.lastObjId || this.lastObjId.cellId !== object.id.cellId)) {
@@ -65,6 +74,18 @@ class MapComponent extends PureComponent {
       }
       this.lastObjId = object.id;
     }
+  };
+  // console.log(object)
+
+  handleProtectedAreaHover = object => {
+    const { primitive } = object;
+    const attributes = primitive.getGeometryInstanceAttributes(object.id);
+    if (attributes) {
+      attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
+        Cesium.Color.fromCssColorString(object.id.color).withAlpha(0.3)
+      );
+    }
+    this.lastObjId = object.id;
   };
 
   handleNoGridMove = () => {
@@ -90,8 +111,15 @@ class MapComponent extends PureComponent {
     if (this.map) {
       const pickedObject = this.map.scene.pick(e.position);
       if (Cesium.defined(pickedObject)) {
-        if (pickedObject.id.grid) {
-          this.handleGridClick(pickedObject);
+        switch (pickedObject.id.type) {
+          case 'grid':
+            this.handleGridClick(pickedObject);
+            break;
+          case 'protected-area':
+            this.handleProtectedAreaClick(pickedObject);
+            break;
+          default:
+            console.info('Unknown entity type');
         }
       } else {
         console.info('No picked object click');
@@ -101,6 +129,10 @@ class MapComponent extends PureComponent {
 
   handleGridClick = object => {
     this.setMapTerrain(TERRAIN_CAMERA_OFFSET, object.id);
+  };
+
+  handleProtectedAreaClick = object => {
+    console.warn(object);
   };
 
   setMapTerrain = (terrainCameraOffset, { cellId, coordinates }) => {
@@ -119,16 +151,18 @@ class MapComponent extends PureComponent {
     const {
       terrainMode,
       className,
-      gridLayers,
       layers,
+      gridLayers,
+      protectedAreasLayer,
       coordinates,
       coordinatesOptions,
       updateMapParams,
       terrainCameraOffset,
       cellCoordinates
     } = this.props;
-    const hasLayers = layers && layers.length > 0;
-    const hasGridLayers = gridLayers && gridLayers.length > 0;
+    const hasActiveLayers = this.hasLayers(layers);
+    const hasGridLayers = this.hasLayers(gridLayers);
+    const hasProtectedAreasLayer = this.hasLayers(protectedAreasLayer);
     return (
       <CesiumMap
         className={cx(styles.mapContainer, className)}
@@ -147,7 +181,10 @@ class MapComponent extends PureComponent {
           const showGrid = !terrainMode && height < SHOW_GRID_HEIGHT;
           return (
             <React.Fragment>
-              {hasLayers && <LayerManager map={map} plugin={PluginCesium} layersSpec={layers} />}
+              {
+                hasActiveLayers &&
+                  <LayerManager map={map} plugin={PluginCesium} layersSpec={layers} />
+              }
               {
                 hasGridLayers && gridLayers.map(layer => (
                   <GridLayer
@@ -161,6 +198,11 @@ class MapComponent extends PureComponent {
                   />
                   ))
               }
+              {
+                terrainMode &&
+                  hasProtectedAreasLayer &&
+                  <ProtectedAreasLayer map={this.map} layer={protectedAreasLayer[0]} />
+              }
             </React.Fragment>
           );
         }}
@@ -173,6 +215,7 @@ MapComponent.propTypes = {
   query: PropTypes.object,
   layers: PropTypes.array,
   gridLayers: PropTypes.array,
+  protectedAreasLayer: PropTypes.array,
   terrainMode: PropTypes.bool,
   className: PropTypes.string,
   coordinates: PropTypes.object,
@@ -186,6 +229,7 @@ MapComponent.defaultProps = {
   query: null,
   layers: [],
   gridLayers: [],
+  protectedAreasLayer: [],
   className: '',
   terrainMode: false,
   coordinates: undefined,

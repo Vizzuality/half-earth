@@ -10,7 +10,7 @@ function createPolygon(coords, layer, row) {
       polygonHierarchy: new Cesium.PolygonHierarchy(coords),
       height: 0
     }),
-    id: { grid: true, slug: layer.id, cellId: row.cell_id, coordinates: coords },
+    id: { grid: true, type: 'grid', slug: layer.id, cellId: row.cell_id, coordinates: coords },
     attributes: {
       color: Cesium.ColorGeometryInstanceAttribute.fromColor(
         // If alpha is 0 it does not trigger the click event
@@ -149,7 +149,8 @@ class GridLayer extends Component {
   }
 
   render() {
-    return this.props.children ? this.props.children(this.primitive) || null : null;
+    const { children } = this.props;
+    return children ? children(this.primitive) || null : null;
   }
 }
 
