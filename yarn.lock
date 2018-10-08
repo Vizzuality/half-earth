@@ -4531,9 +4531,9 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
-"he-components@github:vizzuality/half-earth-components#0.2.0":
+"he-components@github:vizzuality/half-earth-components#0.2.1":
   version "0.1.0"
-  resolved "https://codeload.github.com/vizzuality/half-earth-components/tar.gz/82fe9cb23f9dbe38f28abdd9f21c4e9954e7e304"
+  resolved "https://codeload.github.com/vizzuality/half-earth-components/tar.gz/26d0aa41403fc33fed5167352a698eef7b225652"
   dependencies:
     dotenv "6.0.0"
     react-modal "3.5.1"
