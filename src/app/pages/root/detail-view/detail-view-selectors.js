@@ -103,11 +103,18 @@ export const getFeaturedCategory = createSelector(
   }
 );
 
+export const getGridCellType = createSelector(getCellId, cellId => {
+  if (!cellId) return null;
+  if (cellId.includes('--')) return 'marine';
+  return 'terrestrial';
+});
+
 export const getCategories = createSelector(
-  [ getFeaturedCategory, getHumanCategory, getConservationCategory ],
-  (featured, human, conservation) => {
-    if (!human || !conservation) return null;
-    return featured ? [ featured, human, conservation ] : [ human, conservation ];
+  [ getFeaturedCategory, getHumanCategory, getConservationCategory, getGridCellType ],
+  (featured, human, conservation, cellType) => {
+    if (!human || !conservation || !cellType) return null;
+    const notFeatured = cellType === 'terrestrial' ? [ human, conservation ] : [ conservation ];
+    return featured ? [ featured, ...notFeatured ] : [ ...notFeatured ];
   }
 );
 
