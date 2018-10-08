@@ -1,0 +1,18 @@
+{
+    "is_tile_layer": false,
+    "slug":"biosphere-reserves-interact",
+    "category": null,
+    "dataset": "grids",
+    "layer_name":"Biosphere Reserves interactions",
+    "description": null,
+    "sql": "WITH b as (SELECT st_setsrid(st_geomfromgeojson('{{bounds}}'), 4326) as the_geom) SELECT ST_AsGeoJSON(wdpa.the_geom) as the_geom, wdpa.name, wdpa.desig_eng, wdpa.desig_type FROM wdpa_protected_areas as wdpa, b WHERE ST_Intersects(wdpa.the_geom, b.the_geom) AND wdpa.desig_eng like '%Biosphere%'",
+    "cartocss": "#layer { polygon-opacity: 0; ::outline { line-color: #FFFFFF; line-width: 1; line-opacity: 0.75; } }",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "params_config": [
+                        {
+                        "key": "bounds",
+                        "required": true
+                        }
+                    ]
+ }
