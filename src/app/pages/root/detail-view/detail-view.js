@@ -20,6 +20,7 @@ class DetailViewContainer extends Component {
     updateQueryParam({
       query: {
         ...query,
+        taxa: undefined,
         cellId: undefined,
         terrain: undefined,
         terrainCameraOffset: undefined,
@@ -48,7 +49,7 @@ DetailViewContainer.propTypes = {
   query: PropTypes.object.isRequired,
   fetchCellDetail: PropTypes.func.isRequired,
   updateQueryParam: PropTypes.func.isRequired,
-  cellId: PropTypes.number.isRequired
+  cellId: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps, actions)(DetailViewContainer);
