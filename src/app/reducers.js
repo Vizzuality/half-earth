@@ -5,6 +5,7 @@ import { handleModule } from 'redux-tools';
 import { reduxConfig as layerRedux } from 'redux-modules/layers';
 import { reduxConfig as datasetsRedux } from 'redux-modules/datasets';
 import { reduxConfig as categoriesRedux } from 'redux-modules/categories';
+import { reduxConfig as storiesRedux } from 'redux-modules/stories';
 import { reduxConfig as cellsRedux } from 'redux-modules/cell-detail';
 import { reduxConfig as speciesRedux } from 'redux-modules/species';
 
@@ -32,11 +33,15 @@ const reduxModulesReducers = {
   layers: handleModule(layerRedux),
   datasets: handleModule(datasetsRedux),
   categories: handleModule(categoriesRedux),
+  stories: handleModule(storiesRedux),
   cellsDetail: handleModule(cellsRedux),
   species: handleModule(speciesRedux)
 };
 
-const providersReducers = { interactions: handleModule(interactRedux), section: handleModule(sectionRedux) };
+const providersReducers = {
+  interactions: handleModule(interactRedux),
+  section: handleModule(sectionRedux)
+};
 
 const pagesReducers = {
   regional: handleModule(regionalRedux),
