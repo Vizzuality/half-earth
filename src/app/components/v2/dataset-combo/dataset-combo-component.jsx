@@ -6,25 +6,38 @@ import { SwitchInput, Button, Checkbox } from 'he-components';
 import styles from './dataset-combo-styles.scss';
 
 const DatasetComboComponent = props => {
-  const { className, category, dataset, handleSwitchChange, handleMultiLayerClick, handleLayerClick } = props;
+  const {
+    className,
+    category,
+    dataset,
+    handleSwitchChange,
+    handleMultiLayerClick,
+    handleLayerClick
+  } = props;
 
   const layersLength = dataset && dataset.layers && dataset.layers.length;
   if (!layersLength) return null;
   const hasMultipleOptions = layersLength > 2;
   return (
-    <div key={dataset.slug} className={cx(className, { [styles.datasetMultiLayer]: hasMultipleOptions })}>
+    <div
+      key={dataset.slug}
+      className={cx(className, { [styles.datasetMultiLayer]: hasMultipleOptions })}
+    >
       <SwitchInput
         key={dataset.slug}
         id={dataset.slug}
         checked={dataset.active}
-        dark={category.slug === 'he-movement'}
         onChange={() => handleSwitchChange(category, dataset.slug, dataset.active)}
         label={dataset.name}
       />
       {
         // if there's more than a layer nest the checkboxs or create a double button
         dataset && dataset.active && layersLength > 1 && (
-        <div className={cx(styles.switchWrapper, { [styles.multiLayerWrapper]: hasMultipleOptions })}>
+        <div
+          className={cx(styles.switchWrapper, {
+                [styles.multiLayerWrapper]: hasMultipleOptions
+              })}
+        >
           {dataset.layers.map(
                 layer =>
                   hasMultipleOptions
@@ -35,7 +48,9 @@ const DatasetComboComponent = props => {
                         label={layer.name}
                         checked={layer.active}
                         onChange={() =>
-                        dataset.multilayer ? handleMultiLayerClick(layer) : handleLayerClick(dataset.layers, layer)}
+                        dataset.multilayer
+                          ? handleMultiLayerClick(layer)
+                          : handleLayerClick(dataset.layers, layer)}
                       />
 )
                     : (

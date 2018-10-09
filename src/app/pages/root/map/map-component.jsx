@@ -34,10 +34,12 @@ class MapComponent extends PureComponent {
     if (this.map) {
       const pickedObject = this.map.scene.pick(e.endPosition);
       if (Cesium.defined(pickedObject)) {
+        document.body.style.cursor = 'pointer';
         if (pickedObject.id.grid) {
           this.handleGridMove(e, pickedObject);
         }
       } else {
+        document.body.style.cursor = 'default';
         this.handleNoGridMove();
       }
     }
@@ -104,13 +106,11 @@ class MapComponent extends PureComponent {
   };
 
   setMapTerrain = (terrainCameraOffset, { cellId, coordinates }) => {
-    const { query } = this.props;
-    const activeLayers = query.activeLayers
-      ? query.activeLayers.filter(
-        l => l.layerCategory !== 'terrestrial' && l.layerCategory !== 'aquatic'
-      )
-      : null;
-    this.props.updateMapParams({
+    const { query, updateMapParams } = this.props;
+    const activeLayers = query.activeLayers ? query.activeLayers
+        .filter(l => l.layerCategory !== 'terrestrial' && l.layerCategory !== 'aquatic')
+        .map(l => ({ ...l, opacity: l.landscapeOpacity || l.opacity })) : null;
+    updateMapParams({
       terrain: true,
       activeLayers,
       terrainCameraOffset,
