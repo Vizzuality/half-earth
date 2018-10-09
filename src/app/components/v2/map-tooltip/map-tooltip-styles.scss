@@ -2,12 +2,14 @@
 
 .container {
   position: absolute;
-  right: 50%;
+  left: 0;
+  top: 0;
   width: 290px;
   background-color: $color-group-card-dark-blue;
   height: auto;
   z-index: 11;
   color: white;
+  transform-origin: center bottom;
 }
 
 .simpleContainer {
@@ -87,6 +89,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  text-decoration: none;
 }
 
 .actionText {
