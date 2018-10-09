@@ -26,10 +26,12 @@ class DatasetComboContainer extends Component {
 
   handleLayerClick = (layers, { slug, active, layerConfig }) => {
     const { layerDefaultOpacity } = this.props;
+    const { landscape_opacity } = layerConfig.body && layerConfig.body;
     const activeLayers = layers.map(layer => ({
       slug: layer.slug,
       active: layer.slug === slug ? !active : false,
       opacity: layerDefaultOpacity,
+      landscapeOpacity: landscape_opacity || null,
       layerCategory: layer.category
     }));
     const { bbox } = layerConfig.body && layerConfig.body;
@@ -51,6 +53,8 @@ class DatasetComboContainer extends Component {
           bbox: layer.layerConfig.body.bbox || null,
           active: !active && index === 0,
           opacity: layerDefaultOpacity,
+          landscapeOpacity: layer.layerConfig.body &&
+            (layer.layerConfig.body.landscape_opacity || null),
           layerCategory: layer.category
         }));
     } else {
@@ -63,6 +67,8 @@ class DatasetComboContainer extends Component {
             bbox: layer.layerConfig.body.bbox || null,
             active: isDatasetLayer && isDatasetLayerActive,
             opacity: layerDefaultOpacity,
+            landscapeOpacity: layer.layerConfig.body &&
+              (layer.layerConfig.body.landscape_opacity || null),
             layerCategory: layer.category
           };
         });
