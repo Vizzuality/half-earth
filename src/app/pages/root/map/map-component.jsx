@@ -169,12 +169,12 @@ class MapComponent extends PureComponent {
   handleGridClick = object => {
     this.setMapTerrain(TERRAIN_CAMERA_OFFSET, object.id);
   };
+
   // handleProtectedAreaClick = (object, objectPosition) => {
   //   // const { x, y, z } = this.map.camera.getPickRay(objectPosition).origin;
   //   // const cartesianPosition = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
   //   // Cesium.SceneTransforms.wgs84ToWindowCoordinates(this.map.scene, cartesianPosition);
   // };
-
   handleMarkerClick = (object, e) => {
     const { updateMapParams } = this.props;
     this.activeMarker = object.id;
