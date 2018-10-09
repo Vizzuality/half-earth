@@ -6,6 +6,7 @@ import { fetchLayersThunk } from 'pages/map-iframe/map-iframe-thunks';
 import { fetchDatasetsThunk } from 'redux-modules/datasets/datasets-thunks';
 import { fetchCategoriesThunk } from 'redux-modules/categories/categories-thunks';
 import { fetchStoriesThunk } from 'redux-modules/stories/stories-thunks';
+import { fetchPlacesThunk } from 'redux-modules/places/places-thunks';
 
 const history = createHistory();
 
@@ -21,7 +22,12 @@ export const routes = {
   [APPv2]: {
     path: '/v2',
     page: 'pages/root/root.js',
-    thunk: dispatchPreFetchThunks(fetchDatasetsThunk, fetchCategoriesThunk, fetchStoriesThunk)
+    thunk: dispatchPreFetchThunks(
+      fetchDatasetsThunk,
+      fetchCategoriesThunk,
+      fetchStoriesThunk,
+      fetchPlacesThunk
+    )
   },
   [APP]: { path: '/:section?', page: 'layout/app-layout/app-layout.js' },
   [NOT_FOUND]: { path: '/404', thunk: dispatch => dispatch(redirect({ type: APP })) }
