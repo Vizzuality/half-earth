@@ -28,9 +28,9 @@ export const getProtectedAreasLayer = createSelector([ getLayersFiltered ], laye
   return layers.filter(d => d.dataset.includes('protected'));
 });
 
-export const getActiveTooltip = createSelector(selectQueryParams, query => {
-  if (!query || !query.activeTooltip) return undefined;
-  return query.activeTooltip;
+export const getActiveMarker = createSelector(selectQueryParams, query => {
+  if (!query || !query.activeMarker) return undefined;
+  return query.activeMarker;
 });
 
 export const getCoordinates = createSelector([ selectQueryParams ], query => {
@@ -64,5 +64,5 @@ export const mapStateToProps = createStructuredSelector({
   coordinatesOptions: getCoordinatesOptions,
   terrainCameraOffset: getTerrainCameraOffset,
   cellCoordinates: getGridOutlineCoords,
-  activeTooltip: getActiveTooltip
+  activeMarker: getActiveMarker
 });

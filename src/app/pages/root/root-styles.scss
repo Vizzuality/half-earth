@@ -29,12 +29,14 @@
 }
 
 .mapContainer {
+  width: 100%;
   transition: all 0.3s linear;
-  will-change: padding;
+  will-change: margin-left;
   transition-delay: 0.3s; // Waiting to do it when sidebar finishes
 }
 
 .mapPaddingLeft {
-  padding-left: $sidebar-width;
+  width: calc(100% - #{$sidebar-width});
+  margin-left: $sidebar-width;
 }
 

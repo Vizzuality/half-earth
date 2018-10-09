@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 class StoriesLayer extends Component {
   componentDidMount() {
@@ -31,9 +31,10 @@ class StoriesLayer extends Component {
             lat: story.lat,
             lon: story.lon,
             type: 'story',
-            hoverImage: 'img/stories-icon-hover.png'
+            markerImage: 'img/stories-icon.png',
+            markerHoverImage: 'img/stories-icon-hover.png'
           }
-        })
+        });
       });
     }
   }
@@ -43,8 +44,6 @@ class StoriesLayer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  stories: state.stories.data || null
-})
+const mapStateToProps = state => ({ stories: state.stories.data || null });
 
 export default connect(mapStateToProps)(StoriesLayer);

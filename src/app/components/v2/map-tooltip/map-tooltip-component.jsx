@@ -29,7 +29,7 @@ class MapTooltipComponent extends Component {
           this.tooltip = tooltip;
         }}
       >
-        <div style={{ backgroundImage: `url(${image}` }} className={styles.image} />
+        <div style={{ backgroundImage: `url(img/stories/${image}` }} className={styles.image} />
         <Button onClick={handleTooltipClose} theme={{ button: styles.closeButton }}>
           <Icon icon={closeIcon} theme={{ icon: styles.closeIcon }} />
         </Button>

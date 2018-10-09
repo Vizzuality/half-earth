@@ -4,8 +4,10 @@ import cx from 'classnames';
 import CesiumMap from 'components/v2/map';
 import GridLayer from 'components/v2/map/grid-layer';
 import ProtectedAreasLayer from 'components/v2/map/protected-areas-layer';
+import StoriesLayer from 'components/v2/map/stories-layer';
 import { LayerManager } from 'layer-manager/dist/react';
 import { PluginCesium } from 'layer-manager';
+import MapTooltip from 'components/v2/map-tooltip';
 
 import styles from './map-styles.scss';
 
@@ -17,11 +19,20 @@ const TERRAIN_CAMERA_OFFSET = new Cesium.HeadingPitchRange(
 );
 
 class MapComponent extends PureComponent {
-  lastObjId = null;
+  constructor(props) {
+    super(props);
 
-  map = null;
+    this.state = { tooltipInitialPosition: null };
 
-  gridLayers = {};
+    this.map = null;
+    // config for map primitives
+    this.lastObjId = null;
+    this.lastMarkerHovered = null;
+    this.activeMarker = null;
+    this.tooltipInitialPosition = null;
+
+    this.gridLayers = {};
+  }
 
   hasLayers = layers => layers && layers.length > 0;
 
@@ -35,7 +46,17 @@ class MapComponent extends PureComponent {
   handleMouseMove = e => {
     if (this.map) {
       const pickedObject = this.map.scene.pick(e.endPosition);
+      if (this.activeMarker) {
+        const cartesianPosition = Cesium.Cartesian3.fromDegrees(
+          this.activeMarker.lon,
+          this.activeMarker.lat
+        );
+        this.setState({
+          tooltipInitialPosition: this.map.scene.cartesianToCanvasCoordinates(cartesianPosition)
+        });
+      }
       if (Cesium.defined(pickedObject)) {
+        document.body.style.cursor = 'pointer';
         switch (pickedObject.id.type) {
           case 'grid':
             this.handleGridHover(e, pickedObject);
@@ -43,11 +64,14 @@ class MapComponent extends PureComponent {
           case 'protected-area':
             this.handleProtectedAreaHover(pickedObject);
             break;
+          case 'story':
+            this.handleMarkerHovered(pickedObject);
+            break;
           default:
-            this.handleNoGridMove();
+            this.handleNoEntityHover();
         }
       } else {
-        this.handleNoGridMove();
+        this.handleNoEntityHover();
       }
     }
   };
@@ -75,7 +99,6 @@ class MapComponent extends PureComponent {
       this.lastObjId = object.id;
     }
   };
-  // console.log(object)
 
   handleProtectedAreaHover = object => {
     const { primitive } = object;
@@ -88,7 +111,18 @@ class MapComponent extends PureComponent {
     this.lastObjId = object.id;
   };
 
-  handleNoGridMove = () => {
+  handleMarkerHovered = marker => {
+    const { primitive, id } = marker;
+    primitive.setImage(id.markerHoverImage, id.markerHoverImage);
+    this.lastMarkerHovered = marker;
+  };
+
+  handleNoEntityHover = () => {
+    document.body.style.cursor = 'default';
+    if (this.lastMarkerHovered) {
+      const { primitive, id } = this.lastMarkerHovered;
+      primitive.setImage(id.markerImage, id.markerImage);
+    }
     if (this.lastObjId) {
       Object
         .values(this.gridLayers)
@@ -115,8 +149,11 @@ class MapComponent extends PureComponent {
           case 'grid':
             this.handleGridClick(pickedObject);
             break;
-          case 'protected-area':
-            this.handleProtectedAreaClick(pickedObject);
+          // case 'protected-area':
+          //   this.handleProtectedAreaClick(pickedObject, e.position);
+          //   break;
+          case 'story':
+            this.handleMarkerClick(pickedObject, e);
             break;
           default:
             console.info('Unknown entity type');
@@ -130,9 +167,21 @@ class MapComponent extends PureComponent {
   handleGridClick = object => {
     this.setMapTerrain(TERRAIN_CAMERA_OFFSET, object.id);
   };
+  // handleProtectedAreaClick = (object, objectPosition) => {
+  //   // const { x, y, z } = this.map.camera.getPickRay(objectPosition).origin;
+  //   // const cartesianPosition = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
+  //   // Cesium.SceneTransforms.wgs84ToWindowCoordinates(this.map.scene, cartesianPosition);
+  // };
 
-  handleProtectedAreaClick = object => {
-    console.warn(object);
+  handleMarkerClick = (object, e) => {
+    const { updateMapParams } = this.props;
+    this.activeMarker = object.id;
+    this.setState({ tooltipInitialPosition: { ...e.position } });
+    updateMapParams({ activeMarker: object.id.storyId });
+  };
+
+  removeTooltip = () => {
+    this.props.updateMapParams({ activeMarker: undefined });
   };
 
   setMapTerrain = (terrainCameraOffset, { cellId, coordinates }) => {
@@ -162,11 +211,13 @@ class MapComponent extends PureComponent {
       coordinatesOptions,
       updateMapParams,
       terrainCameraOffset,
-      cellCoordinates
+      cellCoordinates,
+      activeMarker
     } = this.props;
     const hasActiveLayers = this.hasLayers(layers);
     const hasGridLayers = this.hasLayers(gridLayers);
     const hasProtectedAreasLayer = this.hasLayers(protectedAreasLayer);
+    const tooltipData = activeMarker && this.activeMarker;
     return (
       <CesiumMap
         className={cx(styles.mapContainer, className)}
@@ -177,6 +228,8 @@ class MapComponent extends PureComponent {
         cellCoordinates={cellCoordinates}
         onMouseMove={this.handleMouseMove}
         onMouseClick={this.handleMouseClick}
+        onMoveStart={this.handleMapMoveStart}
+        onCameraChanged={this.handleCameraChanged}
         onMoveEnd={updateMapParams}
       >
         {map => {
@@ -207,6 +260,21 @@ class MapComponent extends PureComponent {
                   hasProtectedAreasLayer &&
                   <ProtectedAreasLayer map={this.map} layer={protectedAreasLayer[0]} />
               }
+              <StoriesLayer map={this.map} />
+              {
+                tooltipData &&
+                  (
+                    <MapTooltip
+                      {...this.state.tooltipInitialPosition}
+                      type={tooltipData.type}
+                      title={tooltipData.title}
+                      text={tooltipData.text}
+                      image={tooltipData.image}
+                      url={tooltipData.url}
+                      handleTooltipClose={this.removeTooltip}
+                    />
+                  )
+              }
             </React.Fragment>
           );
         }}
@@ -226,6 +294,7 @@ MapComponent.propTypes = {
   coordinatesOptions: PropTypes.object,
   terrainCameraOffset: PropTypes.object,
   cellCoordinates: PropTypes.array,
+  activeMarker: PropTypes.string,
   updateMapParams: PropTypes.func
 };
 
@@ -240,6 +309,7 @@ MapComponent.defaultProps = {
   coordinatesOptions: undefined,
   terrainCameraOffset: undefined,
   cellCoordinates: undefined,
+  activeMarker: undefined,
   updateMapParams: () => {
   }
 };
