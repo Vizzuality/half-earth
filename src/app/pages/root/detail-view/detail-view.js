@@ -17,9 +17,13 @@ class DetailViewContainer extends Component {
 
   handleCloseTerrainClick = () => {
     const { updateQueryParam, query } = this.props;
+    const activeLayers = query.activeLayers
+      ? query.activeLayers.map(l => ({ ...l, opacity: 1 }))
+      : null;
     updateQueryParam({
       query: {
         ...query,
+        activeLayers,
         taxa: undefined,
         cellId: undefined,
         terrain: undefined,

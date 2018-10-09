@@ -28,6 +28,16 @@
   right: $site-gutter;
 }
 
+.partnerFooter {
+  position: absolute;
+  left: $sidebar-width;
+  width: calc(100% - #{$sidebar-width});
+  bottom: 10px;
+  padding-left: $site-gutter;
+  height: $site-gutter;
+  font-size: 13px;
+}
+
 .mapContainer {
   width: 100%;
   transition: all 0.3s linear;

@@ -68,9 +68,11 @@ class MapComponent extends PureComponent {
             this.handleMarkerHovered(pickedObject);
             break;
           default:
+            document.body.style.cursor = 'default';
             this.handleNoEntityHover();
         }
       } else {
+        document.body.style.cursor = 'default';
         this.handleNoEntityHover();
       }
     }
@@ -185,13 +187,11 @@ class MapComponent extends PureComponent {
   };
 
   setMapTerrain = (terrainCameraOffset, { cellId, coordinates }) => {
-    const { query } = this.props;
-    const activeLayers = query.activeLayers
-      ? query.activeLayers.filter(
-        l => l.layerCategory !== 'terrestrial' && l.layerCategory !== 'aquatic'
-      )
-      : null;
-    this.props.updateMapParams({
+    const { query, updateMapParams } = this.props;
+    const activeLayers = query.activeLayers ? query.activeLayers
+        .filter(l => l.layerCategory !== 'terrestrial' && l.layerCategory !== 'aquatic')
+        .map(l => ({ ...l, opacity: l.landscapeOpacity || l.opacity })) : null;
+    updateMapParams({
       terrain: true,
       activeLayers,
       terrainCameraOffset,
