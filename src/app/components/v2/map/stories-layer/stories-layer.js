@@ -1,29 +1,41 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class StoriesLayer extends Component {
+  markersCollection = null;
+
   componentDidMount() {
-    const { map } = this.props;
-    if (map) {
+    const { map, show } = this.props;
+    if (map && show) {
       this.addStoriesMarkers();
     }
   }
 
   componentDidUpdate() {
-    this.addStoriesMarkers();
+    const { show } = this.props;
+    if (show) {
+      this.addStoriesMarkers();
+    } else {
+      this.removeStoriesMarkers();
+    }
+  }
+
+  componentWillUnmount() {
+    this.removeStoriesMarkers();
   }
 
   addStoriesMarkers() {
     const { stories, map } = this.props;
-    const markersCollection = map.scene.primitives.add(new Cesium.BillboardCollection());
+    this.markersCollection = map.scene.primitives.add(new Cesium.BillboardCollection());
     if (stories) {
       stories.forEach(story => {
-        markersCollection.add({
+        this.markersCollection.add({
           position: Cesium.Cartesian3.fromDegrees(story.lon, story.lat),
           image: 'img/stories-icon.png',
           scale: 0.8,
           id: {
-            storyId: story.lat + story.lon,
+            id: story.lat + story.lon,
             title: story.title,
             text: story.subtitle,
             url: story.url,
@@ -39,10 +51,25 @@ class StoriesLayer extends Component {
     }
   }
 
+  removeStoriesMarkers() {
+    const { map } = this.props;
+    if (this.markersCollection) {
+      map.scene.primitives.remove(this.markersCollection);
+    }
+  }
+
   render() {
     return null;
   }
 }
+
+StoriesLayer.propTypes = {
+  stories: PropTypes.array.isRequired,
+  show: PropTypes.bool.isRequired,
+  map: PropTypes.object
+};
+
+StoriesLayer.defaultProps = { map: {} };
 
 const mapStateToProps = state => ({ stories: state.stories.data || null });
 
