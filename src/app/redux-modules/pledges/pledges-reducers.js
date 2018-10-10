@@ -7,7 +7,10 @@ function setPledgesLoading(state) {
 }
 
 function setPledgesReady(state, { payload }) {
-  return { ...state, loading: false, data: payload };
+  const data = payload
+    .map(item => ({ id: item.cartodbId, ...JSON.parse(item.stAsgeojson) }))
+    .map(item => ({ id: item.id, lon: item.coordinates[0], lat: item.coordinates[1] }));
+  return { ...state, loading: false, data };
 }
 
 function setPledgesError(state, { payload }) {

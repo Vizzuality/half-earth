@@ -6,6 +6,7 @@ import GridLayer from 'components/v2/map/grid-layer';
 import ProtectedAreasLayer from 'components/v2/map/protected-areas-layer';
 import StoriesLayer from 'components/v2/map/stories-layer';
 import PlacesLayer from 'components/v2/map/places-layer';
+import PledgesLayer from 'components/v2/map/pledges-layer';
 import { LayerManager } from 'layer-manager/dist/react';
 import { PluginCesium } from 'layer-manager';
 import MapTooltip from 'components/v2/map-tooltip';
@@ -234,6 +235,7 @@ class MapComponent extends PureComponent {
     const hasProtectedAreasLayer = this.hasLayers(protectedAreasLayer);
     const isStoriesActive = this.hasLayers(layers) && layers.some(l => l.id === 'stories');
     const isPlacesActive = this.hasLayers(layers) && layers.some(l => l.id === 'places-to-watch');
+    const isPledgesActive = this.hasLayers(layers) && layers.some(l => l.id === 'signed-pledges');
     const tooltipData = activeMarker && this.activeMarker;
     return (
       <CesiumMap
@@ -279,6 +281,7 @@ class MapComponent extends PureComponent {
                   <ProtectedAreasLayer map={this.map} layer={protectedAreasLayer[0]} />
               }
               {isStoriesActive && <StoriesLayer map={this.map} show={isStoriesActive} />}
+              {isPledgesActive && <PledgesLayer map={this.map} show={isPledgesActive} />}
               {
                 isPlacesActive &&
                   !terrainMode &&

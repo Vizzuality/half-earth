@@ -7,6 +7,7 @@ const config = {
   molAccount: 'carto.mol.org/user/half-earth',
   layersQuery: 'SELECT dataset, env, interaction_config, iso, layer_config, legend_config, name, provider, slug FROM layers ORDER BY name',
   storiesQuery: 'SELECT image, lat, lon, title, subtitle, url FROM stories',
+  pledgesQuery: 'SELECT cartodb_id, ST_asGeoJson(the_geom) FROM pledge_locations',
   placesQuery: 'SELECT image, lat, lon, places, region, cell_id, bbox, description FROM places_to_watch',
   categoriesQuery: 'SELECT name, slug, description, position, group_name, group_slug, featured, image_url, multi_select from categories ORDER BY position',
   datasetsQuery: 'SELECT name, description, slug, multilayer, category, featured, position from datasets ORDER BY name',
