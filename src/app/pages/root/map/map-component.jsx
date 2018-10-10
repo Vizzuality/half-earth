@@ -188,6 +188,8 @@ class MapComponent extends PureComponent {
 
   handleMarkerClick = (object, e) => {
     const { updateMapParams } = this.props;
+    // clear previous marker
+    this.removeTooltip();
     const { x, y } = e.position;
     this.activeMarker = object.id;
     const coordinates = this.getDestinationCoordsFromClick(x, y - 150);
