@@ -90,7 +90,14 @@ class CesiumComponent extends Component {
   }
 
   setEventListeners() {
-    const { onMouseMove, onMouseClick, onMoveStart, onMoveEnd, onCameraChanged, onDoubleClick } = this.props;
+    const {
+      onMouseMove,
+      onMouseClick,
+      onMoveStart,
+      onMoveEnd,
+      onCameraChanged,
+      onDoubleClick
+    } = this.props;
     if (onMouseMove) {
       this.handler.setInputAction(onMouseMove, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
     }
