@@ -26,7 +26,7 @@ export const getTaxaOptions = createSelector([ getCellData ], data => {
   if (!data) return [];
   return sortBy(
     Object.keys(data)
-  ).map(key => ({ slug: key, label: key === 'all' ? 'all taxa' : key }));
+  ).map(key => ({ slug: key, label: key === 'all' ? 'all groups' : key }));
 });
 
 export const getTaxaSelected = createSelector([ getTaxaOptions, getTaxa ], (taxas, selected) => {
