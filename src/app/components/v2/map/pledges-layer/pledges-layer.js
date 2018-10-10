@@ -27,27 +27,58 @@ class PledgesLayer extends Component {
 
   addPledgesMarkers() {
     const { pledges, map } = this.props;
-    this.markersCollection = map.scene.primitives.add(new Cesium.BillboardCollection());
+    this.clustersDatasource = new Cesium.CustomDataSource('clusters');
+    this.clustersDatasource.clustering.enabled = true;
+    this.clustersDatasource.clustering.pixelRange = 15;
+    this.clustersDatasource.clustering.minimumClusterSize = 3;
     if (pledges) {
       pledges.forEach(pledge => {
-        this.markersCollection.add({
+        this.clustersDatasource.entities.add({
           position: Cesium.Cartesian3.fromDegrees(pledge.lon, pledge.lat),
-          image: 'img/stories-icon.png',
-          scale: 0.8,
-          id: {
-            type: 'pledge',
-            markerImage: 'img/stories-icon.png',
-            markerHoverImage: 'img/stories-icon-hover.png'
-          }
+          billboard: { image: 'img/pledges-point.png', scale: 0.8, id: { type: 'pledge' } }
         });
       });
+      const promise = map.dataSources.add(this.clustersDatasource);
+
+      promise.then(() => {
+        this.setDatasourceBillboards();
+      });
     }
+  }
+
+  setDatasourceBillboards() {
+    if (Cesium.defined(this.clustersListener)) {
+      this.clustersListener();
+      this.clustersListener = null;
+    } else {
+      this.clustersListener = this.clustersDatasource.clustering.clusterEvent.addEventListener((
+        clusteredEntities,
+        cluster
+      ) =>
+        {
+          /* eslint-disable no-param-reassign */
+          cluster.label.show = false;
+          cluster.billboard.show = true;
+
+          if (cluster.label.show) {
+            cluster.billboard.image = 'img/pledges-cluster.png';
+          } else {
+            cluster.billboard.image = 'img/pledges-point.png';
+          }
+          /* eslint-enable no-param-reassign */
+        });
+    }
+
+    // force a re-cluster with the new styling
+    const pixelRange = this.clustersDatasource.clustering.pixelRange;
+    this.clustersDatasource.clustering.pixelRange = 0;
+    this.clustersDatasource.clustering.pixelRange = pixelRange;
   }
 
   removeStoriesMarkers() {
     const { map } = this.props;
     if (this.markersCollection) {
-      map.scene.primitives.remove(this.markersCollection);
+      map.dataSources.remove(this.markersCollection, true);
     }
   }
 
