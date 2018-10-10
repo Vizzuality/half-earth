@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, Icon } from 'he-components';
 import cx from 'classnames';
+import isEmpty from 'lodash/isEmpty';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import styles from './modal-share-styles';
@@ -75,12 +76,20 @@ class ModalShareComponent extends Component {
               embed
             </Button>
           </div>
-          <p className={styles.text}>
-            coordinates: [{coordinates.x}, {coordinates.y}, {coordinates.z}]
-          </p>
-          <p className={styles.text}>
-            orientation: [{orientation.map((value, index) => (index ? ', ' : '') + value)}]
-          </p>
+          {
+            coordinates && !isEmpty(coordinates) && (
+            <p className={styles.text}>
+                  coordinates: [{coordinates.x}, {coordinates.y}, {coordinates.z}]
+            </p>
+              )
+          }
+          {
+            orientation && orientation.length > 0 && (
+            <p className={styles.text}>
+                  orientation: [{orientation.map((value, index) => (index ? ', ' : '') + value)}]
+            </p>
+              )
+          }
           <div className={styles.socialMediaWrapper}>
             <div className={styles.socialMediaContainer}>
               {shareSocialMedia.map(socialMedia => (

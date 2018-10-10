@@ -29,7 +29,7 @@ class ToolbarContainer extends Component {
   };
 
   handleShareClick = () => {
-    this.props.setModalShareParams({ isOpen: true });
+    this.props.setModalShareParams({ isOpen: true, currentLocation: window.location.href });
   };
 
   handleInfoClick = () => {

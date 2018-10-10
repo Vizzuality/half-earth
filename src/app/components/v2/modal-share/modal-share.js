@@ -12,8 +12,8 @@ const mapStateToProps = ({ modalShare, location }) => ({
   isOpen: modalShare.isOpen,
   currentLocation: window.location.href,
   linkActive: modalShare.linkActive,
-  coordinates: location.query.coordinates,
-  orientation: location.query.orientation,
+  coordinates: location && location.query && location.query.coordinates,
+  orientation: location && location.query && location.query.orientation,
   shareSocialMedia: [
     {
       icon: facebookIcon,
