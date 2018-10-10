@@ -19,7 +19,7 @@ const TERRAIN_CAMERA_OFFSET = new Cesium.HeadingPitchRange(
 class MapTooltipComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { tooltipPosition: { x: 0, y: 0 } };
+    this.state = { tooltipPosition: { x: -11110, y: 0 } };
     this.height = 450;
     this.width = 145;
   }
