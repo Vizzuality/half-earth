@@ -5,6 +5,7 @@ import CesiumMap from 'components/v2/map';
 import GridLayer from 'components/v2/map/grid-layer';
 import ProtectedAreasLayer from 'components/v2/map/protected-areas-layer';
 import StoriesLayer from 'components/v2/map/stories-layer';
+import PlacesLayer from 'components/v2/map/places-layer';
 import { LayerManager } from 'layer-manager/dist/react';
 import { PluginCesium } from 'layer-manager';
 import MapTooltip from 'components/v2/map-tooltip';
@@ -65,6 +66,9 @@ class MapComponent extends PureComponent {
             this.handleProtectedAreaHover(pickedObject);
             break;
           case 'story':
+            this.handleMarkerHovered(pickedObject);
+            break;
+          case 'place':
             this.handleMarkerHovered(pickedObject);
             break;
           default:
@@ -157,6 +161,9 @@ class MapComponent extends PureComponent {
           case 'story':
             this.handleMarkerClick(pickedObject, e);
             break;
+          case 'place':
+            this.handleMarkerClick(pickedObject, e);
+            break;
           default:
             console.info('Unknown entity type');
         }
@@ -166,27 +173,44 @@ class MapComponent extends PureComponent {
     }
   };
 
-  handleGridClick = object => {
-    this.setMapTerrain(TERRAIN_CAMERA_OFFSET, object.id);
+  getDestinationCoordsFromClick = (x, y, height = 5000000.0) => {
+    const cartesian = this.map.camera.pickEllipsoid(new Cesium.Cartesian2(x, y));
+    const { longitude, latitude } = this.map.scene.globe.ellipsoid.cartesianToCartographic(
+      cartesian
+    );
+    return Cesium.Cartesian3.fromDegrees(
+      Cesium.Math.toDegrees(longitude),
+      Cesium.Math.toDegrees(latitude),
+      height
+    );
   };
 
-  // handleProtectedAreaClick = (object, objectPosition) => {
-  //   // const { x, y, z } = this.map.camera.getPickRay(objectPosition).origin;
-  //   // const cartesianPosition = Cesium.Cartesian3.fromDegrees(0.0, 0.0);
-  //   // Cesium.SceneTransforms.wgs84ToWindowCoordinates(this.map.scene, cartesianPosition);
-  // };
+  handleDoubleClick = e => {
+    const { updateMapParams } = this.props;
+    if (this.map) {
+      const coordinates = this.getDestinationCoordsFromClick(e.position, 1000000.0);
+      updateMapParams({ coordinates });
+    }
+  };
+
+  handleGridClick = object => {
+    this.setMapTerrain(object.id.cellId, object.id.coordinates);
+  };
+
   handleMarkerClick = (object, e) => {
     const { updateMapParams } = this.props;
+    const { x, y } = e.position;
     this.activeMarker = object.id;
     this.setState({ tooltipInitialPosition: { ...e.position } });
-    updateMapParams({ activeMarker: object.id.storyId });
+    const coordinates = this.getDestinationCoordsFromClick(x, y - 150);
+    updateMapParams({ activeMarker: object.id.id, coordinates });
   };
 
   removeTooltip = () => {
     this.props.updateMapParams({ activeMarker: undefined });
   };
 
-  setMapTerrain = (terrainCameraOffset, { cellId, coordinates }) => {
+  setMapTerrain = (cellId, coordinates, terrainCameraOffset = TERRAIN_CAMERA_OFFSET) => {
     const { query, updateMapParams } = this.props;
     const activeLayers = query.activeLayers ? query.activeLayers
         .filter(l => l.layerCategory !== 'terrestrial' && l.layerCategory !== 'aquatic')
@@ -217,6 +241,8 @@ class MapComponent extends PureComponent {
     const hasActiveLayers = this.hasLayers(layers);
     const hasGridLayers = this.hasLayers(gridLayers);
     const hasProtectedAreasLayer = this.hasLayers(protectedAreasLayer);
+    const isStoriesActive = this.hasLayers(layers) && layers.some(l => l.id === 'stories');
+    const isPlacesActive = this.hasLayers(layers) && layers.some(l => l.id === 'places-to-watch');
     const tooltipData = activeMarker && this.activeMarker;
     return (
       <CesiumMap
@@ -228,6 +254,7 @@ class MapComponent extends PureComponent {
         cellCoordinates={cellCoordinates}
         onMouseMove={this.handleMouseMove}
         onMouseClick={this.handleMouseClick}
+        onDoubleClick={this.handleDoubleClick}
         onMoveStart={this.handleMapMoveStart}
         onCameraChanged={this.handleCameraChanged}
         onMoveEnd={updateMapParams}
@@ -260,7 +287,17 @@ class MapComponent extends PureComponent {
                   hasProtectedAreasLayer &&
                   <ProtectedAreasLayer map={this.map} layer={protectedAreasLayer[0]} />
               }
-              <StoriesLayer map={this.map} />
+              {isStoriesActive && <StoriesLayer map={this.map} show={isStoriesActive} />}
+              {
+                isPlacesActive &&
+                  (
+                    <PlacesLayer
+                      map={this.map}
+                      show={isPlacesActive}
+                      handleActionClick={this.setMapTerrain}
+                    />
+                  )
+              }
               {
                 tooltipData &&
                   (
@@ -272,6 +309,7 @@ class MapComponent extends PureComponent {
                       image={tooltipData.image}
                       url={tooltipData.url}
                       handleTooltipClose={this.removeTooltip}
+                      {...tooltipData}
                     />
                   )
               }
