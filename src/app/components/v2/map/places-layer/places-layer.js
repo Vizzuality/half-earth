@@ -30,6 +30,9 @@ class PlacesLayer extends Component {
     this.markersCollection = map.scene.primitives.add(new Cesium.BillboardCollection());
     if (places) {
       places.forEach(place => {
+        const coordinates = JSON.parse(place.bbox).coordinates[0].map(
+          c => Cesium.Cartesian3.fromDegrees(c[0], c[1])
+        );
         this.markersCollection.add({
           position: Cesium.Cartesian3.fromDegrees(place.lon, place.lat),
           image: 'img/flag-icon.png',
@@ -37,11 +40,12 @@ class PlacesLayer extends Component {
           id: {
             id: place.lat + place.lon,
             title: place.places,
-            text: place.region,
-            cellId: place.cell_id,
+            text: place.description,
+            cellId: place.cellId,
             image: place.image,
             lat: place.lat,
             lon: place.lon,
+            coordinates,
             type: 'place',
             markerImage: 'img/flag-icon.png',
             markerHoverImage: 'img/flag-icon-hover.png'
