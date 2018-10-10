@@ -26,6 +26,7 @@ import { reduxConfig as paneRedux } from 'components/pane';
 import { reduxConfig as sidebarRedux } from 'components/sidebar';
 import { reduxConfig as modalMetadataRedux } from 'components/v2/modal-metadata';
 import { reduxConfig as modalInstructionsRedux } from 'components/v2/modal-instructions';
+import { reduxConfig as modalShareRedux } from 'components/v2/modal-share';
 import router from './router';
 
 const reduxModulesReducers = {
@@ -36,7 +37,10 @@ const reduxModulesReducers = {
   species: handleModule(speciesRedux)
 };
 
-const providersReducers = { interactions: handleModule(interactRedux), section: handleModule(sectionRedux) };
+const providersReducers = {
+  interactions: handleModule(interactRedux),
+  section: handleModule(sectionRedux)
+};
 
 const pagesReducers = {
   regional: handleModule(regionalRedux),
@@ -53,7 +57,8 @@ const componentReducers = {
   pane: handleModule(paneRedux),
   sidebar: handleModule(sidebarRedux),
   modalMetadata: handleModule(modalMetadataRedux),
-  modalInstructions: handleModule(modalInstructionsRedux)
+  modalInstructions: handleModule(modalInstructionsRedux),
+  modalShare: handleModule(modalShareRedux)
 };
 
 export default combineReducers({
