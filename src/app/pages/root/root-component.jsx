@@ -4,6 +4,7 @@ import { Sidebar } from 'he-components';
 import cx from 'classnames';
 import ModalMetadata from 'components/v2/modal-metadata';
 import ModalInstructions from 'components/v2/modal-instructions';
+import ModalShare from 'components/v2/modal-share';
 import Logos from 'components/logos';
 
 import GroupCardList from './group-card-list';
@@ -57,6 +58,7 @@ class RootPageComponent extends React.Component {
         <Logos key="Logos" theme={{ partnerFooter: styles.partnerFooter }} />
         <ModalMetadata />
         <ModalInstructions />
+        <ModalShare />
       </div>
     );
   }

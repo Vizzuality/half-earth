@@ -21,6 +21,7 @@
     "postcss-font-smoothing": "0.1.0",
     "qs": "6.5.2",
     "react": "16.4.1",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-css-themr": "2.1.2",
     "react-dom": "16.4.1",
     "react-hot-loader": "^4.3.8",

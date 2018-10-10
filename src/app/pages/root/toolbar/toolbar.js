@@ -5,6 +5,7 @@ import { setModalMetadata } from 'components/v2/modal-metadata/modal-metadata-ac
 import {
   setModalInstructionsParams
 } from 'components/v2/modal-instructions/modal-instructions-actions';
+import { setModalShareParams } from 'components/v2/modal-share/modal-share-actions';
 import { getLayersActiveMerged } from 'redux-modules/datasets/datasets-utils';
 
 import * as ownActions from './toolbar-actions';
@@ -13,7 +14,12 @@ import ToolbarComponent from './toolbar-component';
 
 const hasGeolocation = 'geolocation' in navigator;
 
-const actions = { ...ownActions, setModalMetadata, setModalInstructionsParams };
+const actions = {
+  ...ownActions,
+  setModalMetadata,
+  setModalInstructionsParams,
+  setModalShareParams
+};
 
 class ToolbarContainer extends Component {
   updateLayersActive = layers => {
@@ -23,7 +29,11 @@ class ToolbarContainer extends Component {
   };
 
   handleShareClick = () => {
-    this.props.setModalMetadata({ title: 'Share modal', isOpen: true });
+    this.props.setModalShareParams({
+      isOpen: true,
+      currentLocation: window.location.href,
+      urlToCopy: window.location.href
+    });
   };
 
   handleInfoClick = () => {
@@ -68,7 +78,8 @@ ToolbarContainer.propTypes = {
   query: PropTypes.object,
   updateQueryParam: PropTypes.func.isRequired,
   setModalInstructionsParams: PropTypes.func.isRequired,
-  setModalMetadata: PropTypes.func.isRequired
+  setModalMetadata: PropTypes.func.isRequired,
+  setModalShareParams: PropTypes.func.isRequired
 };
 
 ToolbarContainer.defaultProps = { query: {} };

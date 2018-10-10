@@ -1,0 +1,126 @@
+@import '~styles/variables.scss';
+
+$button-height: 55px;
+$border-radius: 5px;
+
+.modalContainer {
+  overflow: auto;
+}
+
+.modal {
+  height: auto;
+  padding: 50px 60px;
+  width: 40%;
+}
+
+.closeBtn {
+  height: 50px;
+  width: 50px;
+}
+
+.contentContainer {
+  font-family: 'PierSans', sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 22px;
+  margin-bottom: 70px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.copyContainer {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.button {
+  border: 1px solid $color-blue-sky;
+  height: $button-height;
+  color: $color-blue-sky;
+  font-family: 'PierSans', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.copyButton {
+  margin-left: -10px;
+  width: 200px;
+
+  &:active {
+    background-color: $color-blue-sky;
+    color: $color-black;
+  }
+}
+
+.inputButton {
+  border: 1px solid $color-blue-sky;
+  background-color: transparent;
+  color: $color-white;
+  padding: 10px;
+  font-family: 'PierSans', sans-serif;
+  width: fill-available;
+  height: $button-height;
+  border-radius: $border-radius;
+  border-right-style: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.linkEmbedContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.linkEmbedButton {
+  width: 280px;
+}
+
+.activeButton {
+  background-color: $color-blue-sky;
+  color: $color-black;
+}
+
+.text {
+  color: $color-blue-sky;
+  font-size: 14px;
+}
+
+.socialMediaWrapper {
+  width: 200px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.socialMediaContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  fill: #fff;
+  height: 30px;
+  width: 30px;
+}
+
+.facebookIcon {
+  background-color: $color-facebook;
+}
+
+.twitterIcon {
+  background-color: $color-twitter;
+}
+
+.iconBackground {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
