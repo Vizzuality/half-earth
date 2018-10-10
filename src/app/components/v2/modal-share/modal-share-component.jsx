@@ -8,30 +8,20 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styles from './modal-share-styles';
 
 class ModalShareComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { urlToCopy: props.currentLocation };
-  }
-
   handleLinkButtonClick = () => {
     const { setModalShareParams, currentLocation } = this.props;
-    setModalShareParams({ linkActive: true });
-
-    this.setState({ urlToCopy: currentLocation });
+    setModalShareParams({ linkActive: true, urlToCopy: currentLocation });
   };
 
   handleEmbedButtonClick = () => {
     const { setModalShareParams, currentLocation } = this.props;
-    setModalShareParams({ linkActive: false });
-
     const embed = `<iframe id="map-iframe" src="${currentLocation}" />`;
-    this.setState({ urlToCopy: embed });
+    setModalShareParams({ linkActive: false, urlToCopy: embed });
   };
 
   handleModalClose = () => {
     const { setModalShareParams, currentLocation } = this.props;
-    setModalShareParams({ isOpen: false, linkActive: true });
-    this.setState({ urlToCopy: currentLocation });
+    setModalShareParams({ isOpen: false, linkActive: true, urlToCopy: currentLocation });
   };
 
   handleSocialMediaLink = link => {
@@ -39,8 +29,14 @@ class ModalShareComponent extends Component {
   };
 
   render() {
-    const { isOpen, linkActive, coordinates, orientation, shareSocialMedia } = this.props;
-    const { urlToCopy } = this.state;
+    const {
+      isOpen,
+      linkActive,
+      coordinates,
+      orientation,
+      shareSocialMedia,
+      urlToCopy
+    } = this.props;
 
     return (
       <Modal isOpen={isOpen} onRequestClose={this.handleModalClose} theme={styles}>
@@ -120,7 +116,8 @@ ModalShareComponent.propTypes = {
   linkActive: PropTypes.bool,
   coordinates: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number, z: PropTypes.number }),
   orientation: PropTypes.array,
-  shareSocialMedia: PropTypes.array.isRequired
+  shareSocialMedia: PropTypes.array.isRequired,
+  urlToCopy: PropTypes.string.isRequired
 };
 
 ModalShareComponent.defaultProps = {

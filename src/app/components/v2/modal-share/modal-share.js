@@ -11,6 +11,7 @@ export const reduxConfig = { actions, reducers, initialState };
 const mapStateToProps = ({ modalShare, location }) => ({
   isOpen: modalShare.isOpen,
   currentLocation: window.location.href,
+  urlToCopy: modalShare.urlToCopy,
   linkActive: modalShare.linkActive,
   coordinates: location && location.query && location.query.coordinates,
   orientation: location && location.query && location.query.orientation,
