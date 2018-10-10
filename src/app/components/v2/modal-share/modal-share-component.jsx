@@ -43,7 +43,7 @@ class ModalShareComponent extends Component {
         <div className={styles.contentContainer}>
           <h1 className={styles.title}>Share this page</h1>
           <div className={styles.copyContainer}>
-            <input type="text" value={urlToCopy} className={styles.inputButton} />
+            <input type="text" defaultValue={urlToCopy} className={styles.inputButton} />
             <CopyToClipboard text={urlToCopy}>
               <Button theme={{ button: cx(styles.button, styles.copyButton) }}>
                 copy
