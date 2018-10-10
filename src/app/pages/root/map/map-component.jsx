@@ -192,7 +192,7 @@ class MapComponent extends PureComponent {
     this.removeTooltip();
     const { x, y } = e.position;
     this.activeMarker = object.id;
-    const coordinates = this.getDestinationCoordsFromClick(x, y - 150);
+    const coordinates = this.getDestinationCoordsFromClick(x, y);
     updateMapParams({ activeMarker: object.id.id, coordinates });
   };
 
