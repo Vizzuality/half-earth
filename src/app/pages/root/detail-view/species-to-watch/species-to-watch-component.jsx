@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { snakeCase } from 'lodash';
 import { Loading } from 'he-components';
 
 import styles from './species-to-watch-styles';
@@ -15,7 +16,11 @@ class SpeciesToWatchComponent extends Component {
             <div className={styles.speciesRow} key={specie.commonname || specie.scientificname}>
               {
                     (
-                      <a href={specie.rangemap} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={`https://mol.org/species/${snakeCase(specie.scientificname)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <img
                           className={styles.speciesImg}
                           src={specie.image && specie.image.url || 'img/species-placeholder@2x.png'}
@@ -43,13 +48,18 @@ class SpeciesToWatchComponent extends Component {
             </div>
               ))
         }
-        <div className={styles.logoContainer}>
+        <a
+          className={styles.logoContainer}
+          href="https://mol.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             className={styles.logoImg}
             src="/img/partners/mol-logo-white@2x.png"
             alt="Mol logo"
           />
-        </div>
+        </a>
       </div>
     );
   }
