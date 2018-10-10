@@ -11,8 +11,12 @@ const actions = { ...ownActions };
 class DatasetComboContainer extends Component {
   updateLayersActive = (layers, bounds) => {
     const { updateQueryParam, query } = this.props;
+    const isLandscapeView = query && query.terrain;
     const urlLayers = query && query.activeLayers || [];
-    const activeLayers = getLayersActiveMerged(layers, urlLayers);
+    const updateOpacityLayers = isLandscapeView
+      ? layers.map(l => ({ ...l, opacity: l.landscapeOpacity || l.opacity }))
+      : layers;
+    const activeLayers = getLayersActiveMerged(updateOpacityLayers, urlLayers);
     const coordinates = bounds
       ? Cesium.Rectangle.fromDegrees(...bounds)
       : query && query.coordinates;
