@@ -7,6 +7,7 @@ import { fetchDatasetsThunk } from 'redux-modules/datasets/datasets-thunks';
 import { fetchCategoriesThunk } from 'redux-modules/categories/categories-thunks';
 import { fetchStoriesThunk } from 'redux-modules/stories/stories-thunks';
 import { fetchPlacesThunk } from 'redux-modules/places/places-thunks';
+import { fetchPledgesThunk } from 'redux-modules/pledges/pledges-thunks';
 
 const history = createHistory();
 
@@ -26,7 +27,8 @@ export const routes = {
       fetchDatasetsThunk,
       fetchCategoriesThunk,
       fetchStoriesThunk,
-      fetchPlacesThunk
+      fetchPlacesThunk,
+      fetchPledgesThunk
     )
   },
   [APP]: { path: '/:section?', page: 'layout/app-layout/app-layout.js' },
