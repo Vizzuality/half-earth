@@ -22,9 +22,6 @@ const TERRAIN_CAMERA_OFFSET = new Cesium.HeadingPitchRange(
 class MapComponent extends PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = { tooltipInitialPosition: null };
-
     this.map = null;
     // config for map primitives
     this.lastObjId = null;
@@ -46,16 +43,8 @@ class MapComponent extends PureComponent {
 
   handleMouseMove = e => {
     if (this.map) {
-      const pickedObject = this.map.scene.pick(e.endPosition);
-      if (this.activeMarker) {
-        const cartesianPosition = Cesium.Cartesian3.fromDegrees(
-          this.activeMarker.lon,
-          this.activeMarker.lat
-        );
-        this.setState({
-          tooltipInitialPosition: this.map.scene.cartesianToCanvasCoordinates(cartesianPosition)
-        });
-      }
+      const { scene } = this.map;
+      const pickedObject = scene.pick(e.endPosition);
       if (Cesium.defined(pickedObject)) {
         document.body.style.cursor = 'pointer';
         switch (pickedObject.id.type) {
@@ -188,7 +177,7 @@ class MapComponent extends PureComponent {
   handleDoubleClick = e => {
     const { updateMapParams } = this.props;
     if (this.map) {
-      const coordinates = this.getDestinationCoordsFromClick(e.position, 1000000.0);
+      const coordinates = this.getDestinationCoordsFromClick(e.position.x, e.position.y, 1000000.0);
       updateMapParams({ coordinates });
     }
   };
@@ -201,13 +190,13 @@ class MapComponent extends PureComponent {
     const { updateMapParams } = this.props;
     const { x, y } = e.position;
     this.activeMarker = object.id;
-    this.setState({ tooltipInitialPosition: { ...e.position } });
     const coordinates = this.getDestinationCoordsFromClick(x, y - 150);
     updateMapParams({ activeMarker: object.id.id, coordinates });
   };
 
   removeTooltip = () => {
-    this.props.updateMapParams({ activeMarker: undefined });
+    const { updateMapParams } = this.props;
+    updateMapParams({ activeMarker: undefined });
   };
 
   setMapTerrain = (cellId, coordinates, terrainCameraOffset = TERRAIN_CAMERA_OFFSET) => {
@@ -290,6 +279,7 @@ class MapComponent extends PureComponent {
               {isStoriesActive && <StoriesLayer map={this.map} show={isStoriesActive} />}
               {
                 isPlacesActive &&
+                  !terrainMode &&
                   (
                     <PlacesLayer
                       map={this.map}
@@ -302,13 +292,14 @@ class MapComponent extends PureComponent {
                 tooltipData &&
                   (
                     <MapTooltip
-                      {...this.state.tooltipInitialPosition}
                       type={tooltipData.type}
                       title={tooltipData.title}
                       text={tooltipData.text}
                       image={tooltipData.image}
                       url={tooltipData.url}
                       handleTooltipClose={this.removeTooltip}
+                      map={this.map}
+                      cellId={tooltipData.cellId}
                       {...tooltipData}
                     />
                   )
