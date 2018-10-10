@@ -19,8 +19,7 @@ class RarityRichnessComponent extends Component {
           <span>
                 this area has a{' '}
             <span className={styles.highlight}>{richness.status}</span>
-            {' '}rarity
-            richness and{' '}
+            {' '}richness and{' '}
             <span className={styles.highlight}>{rarity.status}</span>
             {' '}rarity
           </span>
