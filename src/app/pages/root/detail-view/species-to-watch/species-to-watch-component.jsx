@@ -44,11 +44,13 @@ class SpeciesToWatchComponent extends Component {
               ))
         }
         <div className={styles.logoContainer}>
-          <img
-            className={styles.logoImg}
-            src="/img/partners/mol-logo-white@2x.png"
-            alt="Mol logo"
-          />
+          <a href="https://mol.org/" target="_blank" rel="noopener noreferrer">
+            <img
+              className={styles.logoImg}
+              src="/img/partners/mol-logo-white@2x.png"
+              alt="Mol logo"
+            />
+          </a>
         </div>
       </div>
     );
