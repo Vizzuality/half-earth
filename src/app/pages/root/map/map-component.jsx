@@ -253,7 +253,7 @@ class MapComponent extends PureComponent {
         {map => {
           this.map = map;
           const height = map.camera.getMagnitude();
-          const showGrid = !terrainMode && height < SHOW_GRID_HEIGHT;
+          const showGrid = height < SHOW_GRID_HEIGHT;
           return (
             <React.Fragment>
               {
