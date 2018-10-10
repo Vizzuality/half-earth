@@ -4,8 +4,6 @@ import cx from 'classnames';
 
 import styles from './histogram-styles';
 
-const yColors = [ '#3474ef', '#538bf0', '#8bb2f5', '#c5d8f9', '#e5eeff' ];
-const xColors = [ '#fae651', '#fbea62', '#fcf090', '#fef8c5', '#e5eeff' ];
 const legendColors = [
   [ '#1E6818', '#437D18', '#81A018', '#BFC218', '#FDE619' ],
   [ '#1D693D', '#437F3E', '#82A33E', '#C0C63F', '#FEEA40' ],
@@ -23,15 +21,6 @@ class HistogramComponent extends Component {
       <div className={styles.histogramContainer}>
         <span className={cx(styles.legend, styles.legendY)}> - Rarity + </span>
         <span className={cx(styles.legend, styles.legendX)}> - Richness + </span>
-        <div className={cx(styles.histogram, styles.histogramX)}>
-          {values.richness.map((r, i) => (
-            <span
-              key={r}
-              style={{ height: r, backgroundColor: yColors[i] }}
-              className={cx({ [styles.cellHighlight]: i === richness.position })}
-            />
-          ))}
-        </div>
         <div className={styles.graphContainer}>
           <div className={styles.squareLegend}>
             {values.rarity.map((rar, ir) => (
@@ -46,15 +35,6 @@ class HistogramComponent extends Component {
                   />
                 ))}
               </div>
-            ))}
-          </div>
-          <div className={cx(styles.histogram, styles.histogramY)}>
-            {values.rarity.map((r, i) => (
-              <span
-                key={r}
-                style={{ width: r, backgroundColor: xColors[i] }}
-                className={cx({ [styles.cellHighlight]: i === rarity.position })}
-              />
             ))}
           </div>
         </div>

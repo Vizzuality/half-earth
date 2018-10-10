@@ -1,10 +1,11 @@
 @import '~styles/variables.scss';
 
-$bar-size: 28px;
+$bar-size: 35px;
 $legend-color: #495a64;
 
 .histogramContainer {
   display: flex;
+  align-items: center;
   flex-direction: column;
   position: relative;
   padding: 30px;
@@ -23,36 +24,13 @@ $legend-color: #495a64;
 
   &X {
     bottom: 0;
-    left: 50px;
+    left: 120px;
   }
 
   &Y {
-    left: -20px;
-    top: 62%;
+    left: 30px;
+    top: 47%;
     transform: rotate(-90deg);
-  }
-}
-
-.histogram {
-  span {
-    display: inline-block;
-  }
-
-  &X {
-    span {
-      display: inline-block;
-      width: $bar-size;
-    }
-  }
-
-  &Y {
-    display: flex;
-    flex-direction: column-reverse;
-
-    span {
-      display: inline-block;
-      height: $bar-size;
-    }
   }
 }
 

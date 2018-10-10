@@ -23,6 +23,16 @@ export const getGridLayers = createSelector([ getLayers ], layers => {
   return layers.filter(d => d.dataset === 'grids');
 });
 
+export const getProtectedAreasLayer = createSelector([ getLayersFiltered ], layers => {
+  if (!layers) return undefined;
+  return layers.filter(d => d.dataset.includes('protected'));
+});
+
+export const getActiveMarker = createSelector(selectQueryParams, query => {
+  if (!query || !query.activeMarker) return undefined;
+  return query.activeMarker;
+});
+
 export const getCoordinates = createSelector([ selectQueryParams ], query => {
   if (!query || !query.coordinates) return undefined;
   return query.coordinates;
@@ -47,10 +57,12 @@ export const getGridOutlineCoords = createSelector([ selectQueryParams ], query 
 export const mapStateToProps = createStructuredSelector({
   layers: getLayersFiltered,
   gridLayers: getGridLayers,
+  protectedAreasLayer: getProtectedAreasLayer,
   terrainMode: getIsTerrain,
   query: selectQueryParams,
   coordinates: getCoordinates,
   coordinatesOptions: getCoordinatesOptions,
   terrainCameraOffset: getTerrainCameraOffset,
-  cellCoordinates: getGridOutlineCoords
+  cellCoordinates: getGridOutlineCoords,
+  activeMarker: getActiveMarker
 });

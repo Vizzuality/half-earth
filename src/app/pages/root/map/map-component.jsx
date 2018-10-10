@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import CesiumMap from 'components/v2/map';
 import GridLayer from 'components/v2/map/grid-layer';
+import ProtectedAreasLayer from 'components/v2/map/protected-areas-layer';
+import StoriesLayer from 'components/v2/map/stories-layer';
+import PlacesLayer from 'components/v2/map/places-layer';
 import { LayerManager } from 'layer-manager/dist/react';
 import { PluginCesium } from 'layer-manager';
+import MapTooltip from 'components/v2/map-tooltip';
 
 import styles from './map-styles.scss';
 
@@ -17,11 +20,19 @@ const TERRAIN_CAMERA_OFFSET = new Cesium.HeadingPitchRange(
 );
 
 class MapComponent extends PureComponent {
-  lastObjId = null;
+  constructor(props) {
+    super(props);
+    this.map = null;
+    // config for map primitives
+    this.lastObjId = null;
+    this.lastMarkerHovered = null;
+    this.activeMarker = null;
+    this.tooltipInitialPosition = null;
 
-  map = null;
+    this.gridLayers = {};
+  }
 
-  gridLayers = {};
+  hasLayers = layers => layers && layers.length > 0;
 
   componentWillUpdate(nextProps) {
     const { terrainMode } = this.props;
@@ -32,20 +43,35 @@ class MapComponent extends PureComponent {
 
   handleMouseMove = e => {
     if (this.map) {
-      const pickedObject = this.map.scene.pick(e.endPosition);
+      const { scene } = this.map;
+      const pickedObject = scene.pick(e.endPosition);
       if (Cesium.defined(pickedObject)) {
         document.body.style.cursor = 'pointer';
-        if (pickedObject.id.grid) {
-          this.handleGridMove(e, pickedObject);
+        switch (pickedObject.id.type) {
+          case 'grid':
+            this.handleGridHover(e, pickedObject);
+            break;
+          case 'protected-area':
+            this.handleProtectedAreaHover(pickedObject);
+            break;
+          case 'story':
+            this.handleMarkerHovered(pickedObject);
+            break;
+          case 'place':
+            this.handleMarkerHovered(pickedObject);
+            break;
+          default:
+            document.body.style.cursor = 'default';
+            this.handleNoEntityHover();
         }
       } else {
         document.body.style.cursor = 'default';
-        this.handleNoGridMove();
+        this.handleNoEntityHover();
       }
     }
   };
 
-  handleGridMove = (e, object) => {
+  handleGridHover = (e, object) => {
     const gridLayer = this.gridLayers[object.id.slug];
     const { primitive } = gridLayer;
     if (primitive && (!this.lastObjId || this.lastObjId.cellId !== object.id.cellId)) {
@@ -69,7 +95,29 @@ class MapComponent extends PureComponent {
     }
   };
 
-  handleNoGridMove = () => {
+  handleProtectedAreaHover = object => {
+    const { primitive } = object;
+    const attributes = primitive.getGeometryInstanceAttributes(object.id);
+    if (attributes) {
+      attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
+        Cesium.Color.fromCssColorString(object.id.color).withAlpha(0.3)
+      );
+    }
+    this.lastObjId = object.id;
+  };
+
+  handleMarkerHovered = marker => {
+    const { primitive, id } = marker;
+    primitive.setImage(id.markerHoverImage, id.markerHoverImage);
+    this.lastMarkerHovered = marker;
+  };
+
+  handleNoEntityHover = () => {
+    document.body.style.cursor = 'default';
+    if (this.lastMarkerHovered) {
+      const { primitive, id } = this.lastMarkerHovered;
+      primitive.setImage(id.markerImage, id.markerImage);
+    }
     if (this.lastObjId) {
       Object
         .values(this.gridLayers)
@@ -92,8 +140,21 @@ class MapComponent extends PureComponent {
     if (this.map) {
       const pickedObject = this.map.scene.pick(e.position);
       if (Cesium.defined(pickedObject)) {
-        if (pickedObject.id.grid) {
-          this.handleGridClick(pickedObject);
+        switch (pickedObject.id.type) {
+          case 'grid':
+            this.handleGridClick(pickedObject);
+            break;
+          // case 'protected-area':
+          //   this.handleProtectedAreaClick(pickedObject, e.position);
+          //   break;
+          case 'story':
+            this.handleMarkerClick(pickedObject, e);
+            break;
+          case 'place':
+            this.handleMarkerClick(pickedObject, e);
+            break;
+          default:
+            console.info('Unknown entity type');
         }
       } else {
         console.info('No picked object click');
@@ -101,11 +162,46 @@ class MapComponent extends PureComponent {
     }
   };
 
-  handleGridClick = object => {
-    this.setMapTerrain(TERRAIN_CAMERA_OFFSET, object.id);
+  getDestinationCoordsFromClick = (x, y, height = 5000000.0) => {
+    const cartesian = this.map.camera.pickEllipsoid(new Cesium.Cartesian2(x, y));
+    const { longitude, latitude } = this.map.scene.globe.ellipsoid.cartesianToCartographic(
+      cartesian
+    );
+    return Cesium.Cartesian3.fromDegrees(
+      Cesium.Math.toDegrees(longitude),
+      Cesium.Math.toDegrees(latitude),
+      height
+    );
   };
 
-  setMapTerrain = (terrainCameraOffset, { cellId, coordinates }) => {
+  handleDoubleClick = e => {
+    const { updateMapParams } = this.props;
+    if (this.map) {
+      const coordinates = this.getDestinationCoordsFromClick(e.position.x, e.position.y, 1000000.0);
+      updateMapParams({ coordinates });
+    }
+  };
+
+  handleGridClick = object => {
+    this.setMapTerrain(object.id.cellId, object.id.coordinates);
+  };
+
+  handleMarkerClick = (object, e) => {
+    const { updateMapParams } = this.props;
+    // clear previous marker
+    this.removeTooltip();
+    const { x, y } = e.position;
+    this.activeMarker = object.id;
+    const coordinates = this.getDestinationCoordsFromClick(x, y - 100);
+    updateMapParams({ activeMarker: object.id.id, coordinates });
+  };
+
+  removeTooltip = () => {
+    const { updateMapParams } = this.props;
+    updateMapParams({ activeMarker: undefined });
+  };
+
+  setMapTerrain = (cellId, coordinates, terrainCameraOffset = TERRAIN_CAMERA_OFFSET) => {
     const { query, updateMapParams } = this.props;
     const activeLayers = query.activeLayers ? query.activeLayers
         .filter(l => l.layerCategory !== 'terrestrial' && l.layerCategory !== 'aquatic')
@@ -123,16 +219,22 @@ class MapComponent extends PureComponent {
     const {
       terrainMode,
       className,
-      gridLayers,
       layers,
+      gridLayers,
+      protectedAreasLayer,
       coordinates,
       coordinatesOptions,
       updateMapParams,
       terrainCameraOffset,
-      cellCoordinates
+      cellCoordinates,
+      activeMarker
     } = this.props;
-    const hasLayers = layers && layers.length > 0;
-    const hasGridLayers = gridLayers && gridLayers.length > 0;
+    const hasActiveLayers = this.hasLayers(layers);
+    const hasGridLayers = this.hasLayers(gridLayers);
+    const hasProtectedAreasLayer = this.hasLayers(protectedAreasLayer);
+    const isStoriesActive = this.hasLayers(layers) && layers.some(l => l.id === 'stories');
+    const isPlacesActive = this.hasLayers(layers) && layers.some(l => l.id === 'places-to-watch');
+    const tooltipData = activeMarker && this.activeMarker;
     return (
       <CesiumMap
         className={cx(styles.mapContainer, className)}
@@ -143,6 +245,9 @@ class MapComponent extends PureComponent {
         cellCoordinates={cellCoordinates}
         onMouseMove={this.handleMouseMove}
         onMouseClick={this.handleMouseClick}
+        onDoubleClick={this.handleDoubleClick}
+        onMoveStart={this.handleMapMoveStart}
+        onCameraChanged={this.handleCameraChanged}
         onMoveEnd={updateMapParams}
       >
         {map => {
@@ -151,7 +256,10 @@ class MapComponent extends PureComponent {
           const showGrid = !terrainMode && height < SHOW_GRID_HEIGHT;
           return (
             <React.Fragment>
-              {hasLayers && <LayerManager map={map} plugin={PluginCesium} layersSpec={layers} />}
+              {
+                hasActiveLayers &&
+                  <LayerManager map={map} plugin={PluginCesium} layersSpec={layers} />
+              }
               {
                 hasGridLayers && gridLayers.map(layer => (
                   <GridLayer
@@ -165,6 +273,39 @@ class MapComponent extends PureComponent {
                   />
                   ))
               }
+              {
+                terrainMode &&
+                  hasProtectedAreasLayer &&
+                  <ProtectedAreasLayer map={this.map} layer={protectedAreasLayer[0]} />
+              }
+              {isStoriesActive && <StoriesLayer map={this.map} show={isStoriesActive} />}
+              {
+                isPlacesActive &&
+                  !terrainMode &&
+                  (
+                    <PlacesLayer
+                      map={this.map}
+                      show={isPlacesActive}
+                      handleActionClick={this.setMapTerrain}
+                    />
+                  )
+              }
+              {
+                tooltipData &&
+                  (
+                    <MapTooltip
+                      type={tooltipData.type}
+                      title={tooltipData.title}
+                      text={tooltipData.text}
+                      image={tooltipData.image}
+                      url={tooltipData.url}
+                      handleTooltipClose={this.removeTooltip}
+                      map={this.map}
+                      cellId={tooltipData.cellId}
+                      {...tooltipData}
+                    />
+                  )
+              }
             </React.Fragment>
           );
         }}
@@ -177,12 +318,14 @@ MapComponent.propTypes = {
   query: PropTypes.object,
   layers: PropTypes.array,
   gridLayers: PropTypes.array,
+  protectedAreasLayer: PropTypes.array,
   terrainMode: PropTypes.bool,
   className: PropTypes.string,
   coordinates: PropTypes.object,
   coordinatesOptions: PropTypes.object,
   terrainCameraOffset: PropTypes.object,
   cellCoordinates: PropTypes.array,
+  activeMarker: PropTypes.string,
   updateMapParams: PropTypes.func
 };
 
@@ -190,12 +333,14 @@ MapComponent.defaultProps = {
   query: null,
   layers: [],
   gridLayers: [],
+  protectedAreasLayer: [],
   className: '',
   terrainMode: false,
   coordinates: undefined,
   coordinatesOptions: undefined,
   terrainCameraOffset: undefined,
   cellCoordinates: undefined,
+  activeMarker: undefined,
   updateMapParams: () => {
   }
 };

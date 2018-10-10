@@ -90,14 +90,31 @@ class CesiumComponent extends Component {
   }
 
   setEventListeners() {
-    if (this.props.onMouseMove) {
-      this.handler.setInputAction(this.props.onMouseMove, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    const {
+      onMouseMove,
+      onMouseClick,
+      onMoveStart,
+      onMoveEnd,
+      onCameraChanged,
+      onDoubleClick
+    } = this.props;
+    if (onMouseMove) {
+      this.handler.setInputAction(onMouseMove, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
     }
-    if (this.props.onMouseClick) {
-      this.handler.setInputAction(this.props.onMouseClick, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    if (onMouseClick) {
+      this.handler.setInputAction(onMouseClick, Cesium.ScreenSpaceEventType.LEFT_CLICK);
     }
-    if (this.props.onMoveEnd) {
+    if (onDoubleClick) {
+      this.handler.setInputAction(onDoubleClick, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+    }
+    if (onMoveStart) {
+      this.viewer.camera.moveStart.addEventListener(onMoveStart);
+    }
+    if (onMoveEnd) {
       this.viewer.camera.moveEnd.addEventListener(this.handleMoveEnd);
+    }
+    if (onCameraChanged) {
+      this.viewer.camera.changed.addEventListener(onCameraChanged);
     }
   }
 

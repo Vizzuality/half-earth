@@ -1,7 +1,13 @@
 @import '~styles/variables.scss';
 
 .detailViewContainer {
-  padding: $site-gutter * 2 0 0;
+  background-color: $color-light-gray;
+}
+
+.generalInfoCard {
+  background-color: $color-white;
+  padding-top: 40px;
+  margin-bottom: 5px;
 }
 
 .header {
@@ -29,9 +35,14 @@
   color: $color-group-card-dark-blue;
 }
 
+.progressBar {
+  transition: all 0.2s ease-in-out;
+}
+
 .button {
   position: absolute;
   top: 10px;
   right: 10px;
   background-color: $color-light-gray;
+  z-index: 12;
 }
