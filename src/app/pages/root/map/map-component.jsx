@@ -10,6 +10,7 @@ import PledgesLayer from 'components/v2/map/pledges-layer';
 import { LayerManager } from 'layer-manager/dist/react';
 import { PluginCesium } from 'layer-manager';
 import MapTooltip from 'components/v2/map-tooltip';
+import ProtectedAreasTooltip from 'components/v2/protected-areas-tooltip';
 
 import styles from './map-styles.scss';
 
@@ -53,7 +54,7 @@ class MapComponent extends PureComponent {
             this.handleGridHover(e, pickedObject);
             break;
           case 'protected-area':
-            this.handleProtectedAreaHover(pickedObject);
+            document.body.style.cursor = 'pointer';
             break;
           case 'story':
             this.handleMarkerHovered(pickedObject);
@@ -100,17 +101,6 @@ class MapComponent extends PureComponent {
     }
   };
 
-  handleProtectedAreaHover = object => {
-    const { primitive } = object;
-    const attributes = primitive.getGeometryInstanceAttributes(object.id);
-    if (attributes) {
-      attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
-        Cesium.Color.fromCssColorString(object.id.color).withAlpha(0.3)
-      );
-    }
-    this.lastObjId = object.id;
-  };
-
   handleMarkerHovered = marker => {
     const { primitive, id } = marker;
     primitive.setImage(id.markerHoverImage, id.markerHoverImage);
@@ -144,14 +134,19 @@ class MapComponent extends PureComponent {
   handleMouseClick = e => {
     if (this.map) {
       const pickedObject = this.map.scene.pick(e.position);
+      const entitiesArray = this.map.scene.drillPick(e.position);
+      this.removeReservesTooltip();
+      if (entitiesArray.some(en => en.id.type === 'protected-area')) {
+        this.handleProtectedAreaClick(e);
+      }
       if (Cesium.defined(pickedObject)) {
         switch (pickedObject.id.type) {
+          case 'protected-area':
+            this.handleProtectedAreaClick(e);
+            break;
           case 'grid':
             this.handleGridClick(pickedObject);
             break;
-          // case 'protected-area':
-          //   this.handleProtectedAreaClick(pickedObject, e.position);
-          //   break;
           case 'story':
             this.handleMarkerClick(pickedObject, e);
             break;
@@ -195,6 +190,22 @@ class MapComponent extends PureComponent {
     return object.id.cellId;
   };
 
+  handleProtectedAreaClick = e => {
+    const { updateMapParams } = this.props;
+    this.removeReservesTooltip();
+    const reserves = this.map.scene
+      .drillPick(e.position)
+      .filter(r => r.id.type === 'protected-area');
+    const { x, y } = e.position;
+    this.reservesTooltip = { x, y, reserves: reserves.map(r => r.id) };
+    updateMapParams({ reservesTooltip: true });
+  };
+
+  removeReservesTooltip = () => {
+    const { updateMapParams } = this.props;
+    updateMapParams({ reservesTooltip: false });
+  };
+
   handleMarkerClick = (object, e) => {
     const { updateMapParams } = this.props;
     // clear previous marker
@@ -236,7 +247,8 @@ class MapComponent extends PureComponent {
       updateMapParams,
       terrainCameraOffset,
       cellCoordinates,
-      activeMarker
+      activeMarker,
+      reservesTooltip
     } = this.props;
     const hasActiveLayers = this.hasLayers(layers);
     const hasGridLayers = this.hasLayers(gridLayers);
@@ -245,6 +257,7 @@ class MapComponent extends PureComponent {
     const isPlacesActive = this.hasLayers(layers) && layers.some(l => l.id === 'places-to-watch');
     const pledgesLayer = this.hasLayers(layers) && layers.find(l => l.id === 'signed-pledges');
     const tooltipData = activeMarker && this.activeMarker;
+    const reservesTooltipData = reservesTooltip && this.reservesTooltip;
     return (
       <CesiumMap
         className={cx(styles.mapContainer, className)}
@@ -264,11 +277,25 @@ class MapComponent extends PureComponent {
           this.map = map;
           const height = map.camera.getMagnitude();
           const showGrid = terrainMode || height < SHOW_GRID_HEIGHT;
+
           return (
             <React.Fragment>
               {
                 hasActiveLayers &&
                   <LayerManager map={map} plugin={PluginCesium} layersSpec={layers} />
+              }
+              {
+                terrainMode &&
+                  hasProtectedAreasLayer &&
+                  hasGridLayers &&
+                  (
+                    <ProtectedAreasLayer
+                      map={map}
+                      conservationAreasActive={protectedAreasLayer}
+                      gridLayers={gridLayers}
+                      gridCellCoordinates={cellCoordinates}
+                    />
+                  )
               }
               {
                 hasGridLayers && gridLayers.map(layer => (
@@ -282,11 +309,6 @@ class MapComponent extends PureComponent {
                       }}
                   />
                   ))
-              }
-              {
-                terrainMode &&
-                  hasProtectedAreasLayer &&
-                  <ProtectedAreasLayer map={this.map} layer={protectedAreasLayer[0]} />
               }
               {isStoriesActive && <StoriesLayer map={this.map} show={isStoriesActive} />}
               {pledgesLayer && <PledgesLayer map={this.map} show={pledgesLayer.visibility} />}
@@ -317,6 +339,7 @@ class MapComponent extends PureComponent {
                     />
                   )
               }
+              {reservesTooltip && terrainMode && <ProtectedAreasTooltip {...reservesTooltipData} />}
             </React.Fragment>
           );
         }}
@@ -337,6 +360,7 @@ MapComponent.propTypes = {
   terrainCameraOffset: PropTypes.object,
   cellCoordinates: PropTypes.array,
   activeMarker: PropTypes.string,
+  reservesTooltip: PropTypes.bool,
   activeGridCellId: PropTypes.string,
   updateMapParams: PropTypes.func
 };
@@ -353,6 +377,7 @@ MapComponent.defaultProps = {
   terrainCameraOffset: undefined,
   cellCoordinates: undefined,
   activeMarker: undefined,
+  reservesTooltip: false,
   activeGridCellId: undefined,
   updateMapParams: () => {
   }
