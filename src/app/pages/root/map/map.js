@@ -25,7 +25,12 @@ class MapContainer extends Component {
     postRobot.on('mapFlyToCoordinates', event => {
       const { coordinates = [], orientation = [] } = event.data;
       if (coordinates.length || orientation.length) {
-        this.updateMapParams({ coordinates, orientation });
+        const coordinatesSplit = {
+          x: coordinates[0] || 21070620.587769393,
+          y: coordinates[1] || -12184436.566539336,
+          z: coordinates[2] || 12238813.269256787
+        };
+        this.updateMapParams({ coordinates: coordinatesSplit, orientation });
         return { done: true };
       }
       return { done: false };
