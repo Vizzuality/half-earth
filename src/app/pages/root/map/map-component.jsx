@@ -76,9 +76,13 @@ class MapComponent extends PureComponent {
   handleGridHover = (e, object) => {
     const gridLayer = this.gridLayers[object.id.slug];
     const { primitive } = gridLayer;
+    const { activeGridCellId } = this.props;
+    if (activeGridCellId === object.id.cellId) {
+      document.body.style.cursor = 'default';
+    }
     if (primitive && (!this.lastObjId || this.lastObjId.cellId !== object.id.cellId)) {
       const attributes = primitive.getGeometryInstanceAttributes(object.id);
-      if (attributes) {
+      if (attributes && activeGridCellId !== object.id.cellId) {
         attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
           Cesium.Color.fromBytes(24, 186, 180, 100)
         );
@@ -175,7 +179,11 @@ class MapComponent extends PureComponent {
   };
 
   handleGridClick = object => {
+    // if we are clicking in th active grid cell do nothing
+    const { activeGridCellId } = this.props;
+    if (activeGridCellId && activeGridCellId === object.id.cellId) return null;
     this.setMapTerrain(object.id.cellId, object.id.coordinates);
+    return object.id.cellId;
   };
 
   handleProtectedAreaClick = e => {
@@ -262,7 +270,7 @@ class MapComponent extends PureComponent {
         {map => {
           this.map = map;
           const height = map.camera.getMagnitude();
-          const showGrid = !terrainMode && height < SHOW_GRID_HEIGHT;
+          const showGrid = terrainMode || height < SHOW_GRID_HEIGHT;
           return (
             <React.Fragment>
               {
@@ -346,6 +354,7 @@ MapComponent.propTypes = {
   cellCoordinates: PropTypes.array,
   activeMarker: PropTypes.string,
   reservesTooltip: PropTypes.bool,
+  activeGridCellId: PropTypes.string,
   updateMapParams: PropTypes.func
 };
 
@@ -362,6 +371,7 @@ MapComponent.defaultProps = {
   cellCoordinates: undefined,
   activeMarker: undefined,
   reservesTooltip: false,
+  activeGridCellId: undefined,
   updateMapParams: () => {
   }
 };

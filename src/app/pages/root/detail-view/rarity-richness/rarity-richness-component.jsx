@@ -9,7 +9,17 @@ class RarityRichnessComponent extends Component {
   render() {
     const { loading, data = {}, taxas, selected, histogram, handleTaxasChange } = this.props;
     const { richness, rarity } = data;
+
     if (loading) return <Loading height="100%" />;
+
+    const rRichnessState = richness && richness.ranked_richness < 0.5 ? 'bottom' : 'top';
+    const rRarityState = rarity && rarity.ranked_rarity < 0.5 ? 'bottom' : 'top';
+
+    const richnessStatement = richness &&
+      `(${rRichnessState} ${Math.floor(richness.ranked_richness * 100)}% of places)`;
+    const rarityStatement = rarity &&
+      `(${rRarityState} ${Math.floor(rarity.ranked_rarity * 100)}% of places)`;
+
     return (
       <div className={styles.container}>
         <span>For</span>
@@ -19,9 +29,9 @@ class RarityRichnessComponent extends Component {
           <span>
                 this area has{' '}
             <span className={styles.highlight}>{richness.status}</span>
-            {' '}richness and{' '}
+            {' '}richness {richnessStatement} and{' '}
             <span className={styles.highlight}>{rarity.status}</span>
-            {' '}rarity
+            {' '}rarity {rarityStatement}.
           </span>
             )
         }

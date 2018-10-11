@@ -43,7 +43,7 @@ class ModalShareComponent extends Component {
         <div className={styles.contentContainer}>
           <h1 className={styles.title}>Share this page</h1>
           <div className={styles.copyContainer}>
-            <input type="text" value={urlToCopy} className={styles.inputButton} />
+            <input type="text" value={urlToCopy} readOnly className={styles.inputButton} />
             <CopyToClipboard text={urlToCopy}>
               <Button theme={{ button: cx(styles.button, styles.copyButton) }}>
                 copy
@@ -82,7 +82,13 @@ class ModalShareComponent extends Component {
           {
             orientation && orientation.length > 0 && (
             <p className={styles.text}>
-                  orientation: [{orientation.map((value, index) => (index ? ', ' : '') + value)}]
+              <span>orientation: [</span>
+              {orientation.map((value, index) => (
+                <span key={value}>
+                  {(index ? ', ' : '') + value}
+                </span>
+                  ))}
+              <span>]</span>
             </p>
               )
           }
@@ -97,6 +103,7 @@ class ModalShareComponent extends Component {
                       [styles.twitterIcon]: socialMedia.className === 'twitterIcon'
                     })
                   }}
+                  key={socialMedia.className}
                 >
                   <Icon icon={socialMedia.icon} theme={{ icon: styles.icon }} />
                 </Button>

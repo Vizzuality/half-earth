@@ -7,12 +7,20 @@ class ModalMetadata extends PureComponent {
   render() {
     const { isOpen, loading, title, setModalMetadataParams, metadata = {} } = this.props;
     return (
-      <Modal onRequestClose={() => setModalMetadataParams({ isOpen: false })} isOpen={isOpen} theme={styles}>
+      <Modal
+        onRequestClose={() => setModalMetadataParams({ isOpen: false })}
+        isOpen={isOpen}
+        theme={styles}
+      >
         <h2>{title}</h2>
         {
           loading ? <Loading height={200} /> : (
             <React.Fragment>
-              {metadata && metadata.description && <p className={styles.metadataDescription}>{metadata.description}</p>}
+              {
+                metadata &&
+                  metadata.description &&
+                  <p className={styles.metadataDescription}>{metadata.description}</p>
+              }
               <dl className={styles.metadataList}>
                 {
                   metadata && metadata.category && (
@@ -49,14 +57,26 @@ class ModalMetadata extends PureComponent {
                   {metadata.source}
                   {' '}
                   {
-                        metadata.sourceUrl &&
-                          (
-                            <a href={metadata.sourceUrl} target="_blank" rel="noopener noreferrer">
-                              {metadata.sourceUrl}
-                            </a>
+                        metadata.sourceUrl && (
+                        <a href={metadata.sourceUrl} target="_blank" rel="noopener noreferrer">
+                          {metadata.sourceUrl}
+                        </a>
                           )
                       }
                 </p>
+                  )
+              }
+              {
+                metadata && metadata.molLogo && (
+                <div className={styles.logoContainer}>
+                  <a href="https://mol.org/" target="_blank" rel="noopener noreferrer">
+                    <img
+                      className={styles.logoImg}
+                      src="/img/partners/mol-logo.png"
+                      alt="Mol logo"
+                    />
+                  </a>
+                </div>
                   )
               }
             </React.Fragment>
