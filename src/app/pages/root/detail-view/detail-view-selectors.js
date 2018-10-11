@@ -153,9 +153,15 @@ export const getCellTaxaDataSelectedParsed = createSelector(
     const richnessPosition = getPosition(data.richness, histogramBreaks.richness);
     return {
       ...data,
-      rarity: { value: data.rarity, position: rarityPosition, status: status[rarityPosition] },
+      rarity: {
+        value: data.rarity,
+        ranked_rarity: data.ranked_rarity,
+        position: rarityPosition,
+        status: status[rarityPosition]
+      },
       richness: {
         value: data.richness,
+        ranked_richness: data.ranked_richness,
         position: richnessPosition,
         status: status[richnessPosition]
       }

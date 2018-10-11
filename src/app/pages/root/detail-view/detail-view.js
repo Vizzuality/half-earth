@@ -15,6 +15,13 @@ class DetailViewContainer extends Component {
     this.props.fetchCellDetail(cellId);
   }
 
+  componentDidUpdate(prevProps) {
+    const { cellId } = this.props;
+    if (cellId !== prevProps.cellId) {
+      this.props.fetchCellDetail(cellId);
+    }
+  }
+
   handleCloseTerrainClick = () => {
     const { updateQueryParam, query } = this.props;
     const activeLayers = query.activeLayers

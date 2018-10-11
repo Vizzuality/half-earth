@@ -54,6 +54,11 @@ export const getGridOutlineCoords = createSelector([ selectQueryParams ], query 
   return query.cellCoordinates;
 });
 
+export const getGridCellId = createSelector([ selectQueryParams ], query => {
+  if (!query || !query.cellId) return undefined;
+  return query.cellId;
+});
+
 export const mapStateToProps = createStructuredSelector({
   layers: getLayersFiltered,
   gridLayers: getGridLayers,
@@ -64,5 +69,6 @@ export const mapStateToProps = createStructuredSelector({
   coordinatesOptions: getCoordinatesOptions,
   terrainCameraOffset: getTerrainCameraOffset,
   cellCoordinates: getGridOutlineCoords,
-  activeMarker: getActiveMarker
+  activeMarker: getActiveMarker,
+  activeGridCellId: getGridCellId
 });
