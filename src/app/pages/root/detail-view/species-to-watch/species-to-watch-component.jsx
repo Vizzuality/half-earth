@@ -8,11 +8,14 @@ import styles from './species-to-watch-styles';
 class SpeciesToWatchComponent extends Component {
   render() {
     const { loading, data } = this.props;
+    const isDataPresent = data && data.length > 0;
     return (
       <div className={styles.container}>
-        <p className={styles.title}>List of species to watch in this area</p>
+        <p className={styles.title}>
+          {isDataPresent ? 'List of species to watch in this area' : 'Species data coming soon.'}
+        </p>
         {
-          loading ? <Loading height="300" /> : data && data.length > 0 && data.map(specie => (
+          loading ? <Loading height="300" /> : isDataPresent && data.map(specie => (
             <div className={styles.speciesRow} key={specie.commonname || specie.scientificname}>
               {
                     (
