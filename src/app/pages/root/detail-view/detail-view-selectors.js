@@ -85,8 +85,6 @@ export const getConservationCategory = createSelector(
   (data, categories) => {
     if (!data || !categories) return null;
     const category = categories.find(d => d.slug === 'conservation-areas');
-    // We want multiselection on the globe but not here
-    category.multiSelect = false;
     return category ? getLayersPercentage(category, data) : null;
   }
 );
