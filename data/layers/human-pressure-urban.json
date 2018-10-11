@@ -5,7 +5,7 @@
     "category":"human",
     "slug":"human-pressures-urban",
     "description": null,
-    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/human-pressures/esa/1km/100p-layers/urban/{z}/{x}/{y}.png",
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/human-pressures/esa/1km/100p-layers/urban/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
     "landscape_opacity": 1.0,
