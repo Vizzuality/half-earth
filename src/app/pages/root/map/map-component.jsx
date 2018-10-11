@@ -134,14 +134,18 @@ class MapComponent extends PureComponent {
   handleMouseClick = e => {
     if (this.map) {
       const pickedObject = this.map.scene.pick(e.position);
+      const entitiesArray = this.map.scene.drillPick(e.position);
       this.removeReservesTooltip();
+      if (entitiesArray.some(en => en.id.type === 'protected-area')) {
+        this.handleProtectedAreaClick(e);
+      }
       if (Cesium.defined(pickedObject)) {
         switch (pickedObject.id.type) {
-          case 'grid':
-            this.handleGridClick(pickedObject);
-            break;
           case 'protected-area':
             this.handleProtectedAreaClick(e);
+            break;
+          case 'grid':
+            this.handleGridClick(pickedObject);
             break;
           case 'story':
             this.handleMarkerClick(pickedObject, e);
@@ -189,7 +193,9 @@ class MapComponent extends PureComponent {
   handleProtectedAreaClick = e => {
     const { updateMapParams } = this.props;
     this.removeReservesTooltip();
-    const reserves = this.map.scene.drillPick(e.position);
+    const reserves = this.map.scene
+      .drillPick(e.position)
+      .filter(r => r.id.type === 'protected-area');
     const { x, y } = e.position;
     this.reservesTooltip = { x, y, reserves: reserves.map(r => r.id) };
     updateMapParams({ reservesTooltip: true });
@@ -271,24 +277,12 @@ class MapComponent extends PureComponent {
           this.map = map;
           const height = map.camera.getMagnitude();
           const showGrid = terrainMode || height < SHOW_GRID_HEIGHT;
+
           return (
             <React.Fragment>
               {
                 hasActiveLayers &&
                   <LayerManager map={map} plugin={PluginCesium} layersSpec={layers} />
-              }
-              {
-                hasGridLayers && gridLayers.map(layer => (
-                  <GridLayer
-                    key={layer.id}
-                    show={showGrid}
-                    layer={layer}
-                    map={map}
-                    ref={gridLayer => {
-                        this.gridLayers[layer.id] = gridLayer;
-                      }}
-                  />
-                  ))
               }
               {
                 terrainMode &&
@@ -302,6 +296,19 @@ class MapComponent extends PureComponent {
                       gridCellCoordinates={cellCoordinates}
                     />
                   )
+              }
+              {
+                hasGridLayers && gridLayers.map(layer => (
+                  <GridLayer
+                    key={layer.id}
+                    show={showGrid}
+                    layer={layer}
+                    map={map}
+                    ref={gridLayer => {
+                        this.gridLayers[layer.id] = gridLayer;
+                      }}
+                  />
+                  ))
               }
               {isStoriesActive && <StoriesLayer map={this.map} show={isStoriesActive} />}
               {pledgesLayer && <PledgesLayer map={this.map} show={pledgesLayer.visibility} />}
