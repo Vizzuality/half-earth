@@ -16,6 +16,15 @@
   color: $color-white;
 }
 
+.speciesAbsent {
+  color: $color-white;
+  margin-bottom: 70px;
+}
+
+.titleWithSubtitle {
+  margin-bottom: 30px;
+}
+
 .speciesRow {
   display: flex;
   align-items: center;
@@ -81,5 +90,5 @@
 
 .logoImg {
   width: 100%;
-  max-width: 190px;
+  max-width: 115px;
 }

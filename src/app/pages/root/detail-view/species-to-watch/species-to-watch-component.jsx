@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { snakeCase } from 'lodash';
 import { Loading } from 'he-components';
+import cx from 'classnames';
 
 import styles from './species-to-watch-styles';
 
@@ -9,11 +10,13 @@ class SpeciesToWatchComponent extends Component {
   render() {
     const { loading, data } = this.props;
     const isDataPresent = data && data.length > 0;
+    const noData = !loading && !isDataPresent;
     return (
       <div className={styles.container}>
-        <p className={styles.title}>
-          {isDataPresent ? 'List of species to watch in this area' : 'Species data coming soon.'}
+        <p className={cx(styles.title, { [styles.titleWithSubtitle]: noData })}>
+          Species to watch in this area
         </p>
+        {noData && <p className={styles.speciesAbsent}>Species data coming soon.</p>}
         {
           loading ? <Loading height="300" /> : isDataPresent && data.map(specie => (
             <div className={styles.speciesRow} key={specie.commonname || specie.scientificname}>
@@ -53,11 +56,7 @@ class SpeciesToWatchComponent extends Component {
         }
         <div className={styles.logoContainer}>
           <a href="https://mol.org/" target="_blank" rel="noopener noreferrer">
-            <img
-              className={styles.logoImg}
-              src="/img/partners/mol-logo-white@2x.png"
-              alt="Mol logo"
-            />
+            <img className={styles.logoImg} src="/img/partners/mol-logo.png" alt="Mol logo" />
           </a>
         </div>
       </div>
