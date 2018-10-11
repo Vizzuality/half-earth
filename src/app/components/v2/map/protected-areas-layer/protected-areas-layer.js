@@ -1,21 +1,16 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-function createPolygon(coords, layer, map) {
-  // return new Cesium.GeometryInstance({
-  //   geometry: new Cesium.PolygonGeometry({
-  //     polygonHierarchy: new Cesium.PolygonHierarchy(coords)
-  //   }),
-  //   id: { type: 'protected-area', slug: 'protercted', coordinates: coords, color: layer.legendConfig.items[0].color },
-  //   attributes: {
-  //     color: Cesium.ColorGeometryInstanceAttribute.fromColor(
-  //       // If alpha is 0 it does not trigger the mouse event
-  //       Cesium.Color.WHITE.withAlpha(0.01)
-  //     )
-  //   }
-  // });
-  map.entities.add({
-    polygon: { hierarchy: { positions: coords, material: Cesium.Color.BLUE.withAlpha(0.5) } }
+function createPolygon({ name, type, park, coords }) {
+  return new Cesium.GeometryInstance({
+    geometry: new Cesium.PolygonGeometry({ polygonHierarchy: new Cesium.PolygonHierarchy(coords) }),
+    id: { type, name, park },
+    attributes: {
+      color: Cesium.ColorGeometryInstanceAttribute.fromColor(
+        // If alpha is 0 it does not trigger the mouse event
+        Cesium.Color.WHITE.withAlpha(0.01)
+      )
+    }
   });
 }
 
@@ -29,34 +24,110 @@ function createPolygonPrimitive(geometryInstances) {
     compressVertices: true
   });
 }
-const polygonCoordinates = [
-  [
-    [ -8.932056427001953, 42.25558600754745 ],
-    [ -8.9154052734375, 42.17116465902176 ],
-    [ -8.87197494506836, 42.18859215815507 ],
-    [ -8.892745971679688, 42.249232907097614 ],
-    [ -8.932056427001953, 42.25558600754745 ]
-  ]
-];
 
 class ProtectedAreasLayer extends Component {
   componentDidMount() {
-    this.renderAreas();
+    const { conservationAreasActive } = this.props;
+    this.renderAreas(conservationAreasActive);
   }
 
-  addGridPolygons() {
-    const { map, layer } = this.props;
-    const polygonCoords = polygonCoordinates[0].map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]));
+  componentDidUpdate() {
+    const { conservationAreasActive } = this.props;
+    this.renderAreas(conservationAreasActive);
+  }
 
-    const polygon = createPolygon(polygonCoords, layer, map);
-    if (polygon) {
-      this.primitive = createPolygonPrimitive(polygon);
+  componentWillUnmount() {
+    this.removePolygon(this.primitive);
+  }
+
+  addGridPolygons(rows) {
+    const { map } = this.props;
+    const getCoordinates = row => JSON.parse(row.the_geom).coordinates[0];
+
+    const reserves = rows.map(row => ({
+      name: row.name,
+      park: row.desig_eng,
+      type: 'protected-area',
+      coords: getCoordinates(row)[0].map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]))
+    }));
+    const reservesPolygons = reserves.map(r => createPolygon(r));
+    if (reservesPolygons) {
+      this.primitive = createPolygonPrimitive(reservesPolygons);
       map.scene.primitives.add(this.primitive);
     }
   }
 
-  renderAreas() {
-    this.addGridPolygons();
+  async renderAreas(conservationAreasActive) {
+    const { gridCellCoordinates, gridLayers } = this.props;
+    const areasToFetch = conservationAreasActive.map(ca => ca.slug);
+    const layersConfig = gridLayers.reduce(
+      (acc, l) => {
+        let areaConfig;
+        areasToFetch.forEach(area => {
+          if (l.id.includes(area)) {
+            areaConfig = { [area]: l.layerConfig };
+          }
+        });
+        return { ...acc, ...areaConfig };
+      },
+      {}
+    );
+    const radiansCoords = gridCellCoordinates.map(c => Cesium.Cartographic.fromCartesian(c));
+    const degreesCoords = radiansCoords.map(c => [
+      Cesium.Math.toDegrees(c.longitude),
+      Cesium.Math.toDegrees(c.latitude)
+    ]);
+    const queries = [];
+    try {
+      const params = {
+        bounds: JSON.stringify({ type: 'Polygon', coordinates: [ degreesCoords ] })
+      };
+      areasToFetch.forEach((a, i) => {
+        let paramsConfig;
+        try {
+          paramsConfig = JSON.parse(layersConfig[a].params_config);
+        } catch (error) {
+          console.warn(error);
+        }
+        const replacePercentage = /%/g;
+        const sql = layersConfig[a].body.layers[0].options.sql
+          .replace(`{{${paramsConfig[0].key}}}`, params[paramsConfig[0].key])
+          .replace(replacePercentage, '%25');
+        queries[i] = `https://${layersConfig[a].account}.carto.com/api/v2/sql?q=${sql}`;
+      });
+    } catch (error) {
+      console.warn(error);
+    }
+    const reservesByCategory = [];
+    async function getReserves() {
+      try {
+        await Promise.all(
+          queries.map(async q => {
+            const { rows } = await fetch(q).then(d => d.json());
+            if (rows) {
+              reservesByCategory.push(rows);
+            }
+          })
+        );
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+
+    await getReserves();
+
+    if (reservesByCategory && reservesByCategory.length) {
+      reservesByCategory.forEach(group => {
+        this.addGridPolygons(group);
+      });
+    }
+  }
+
+  removePolygon(primitive) {
+    const { map } = this.props;
+    if (map) {
+      map.scene.primitives.remove(primitive);
+    }
   }
 
   render() {
@@ -64,7 +135,11 @@ class ProtectedAreasLayer extends Component {
   }
 }
 
-ProtectedAreasLayer.propTypes = { map: PropTypes.object, layer: PropTypes.object.isRequired };
+ProtectedAreasLayer.propTypes = {
+  map: PropTypes.object,
+  conservationAreasActive: PropTypes.array.isRequired,
+  gridCellCoordinates: PropTypes.array.isRequired
+};
 
 ProtectedAreasLayer.defaultProps = { map: null };
 

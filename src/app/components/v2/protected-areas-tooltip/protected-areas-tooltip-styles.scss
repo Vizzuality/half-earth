@@ -1,0 +1,44 @@
+@import '~styles/variables.scss';
+
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: $color-group-card-dark-blue;
+  height: auto;
+  z-index: 11;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  transform-origin: center bottom;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -13px;
+    right: 50%;
+    width: 30px;
+    border: none;
+    border-top: 18px solid white;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    transform: translateX(50%);
+  }
+}
+
+.reserve {
+  padding: 10px;
+  width: 100%;
+
+  .park {
+    font-size: 11px;
+    margin: 0;
+  }
+
+  .name {
+    font-size: 14px;
+    margin: 0;
+    padding: 5px 0;
+  }
+}
