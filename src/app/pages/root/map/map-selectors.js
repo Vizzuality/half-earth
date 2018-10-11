@@ -33,6 +33,11 @@ export const getActiveMarker = createSelector(selectQueryParams, query => {
   return query.activeMarker;
 });
 
+export const getReservesTooltip = createSelector(selectQueryParams, query => {
+  if (!query || !query.reservesTooltip) return undefined;
+  return query.reservesTooltip;
+});
+
 export const getCoordinates = createSelector([ selectQueryParams ], query => {
   if (!query || !query.coordinates) return undefined;
   return query.coordinates;
@@ -70,5 +75,6 @@ export const mapStateToProps = createStructuredSelector({
   terrainCameraOffset: getTerrainCameraOffset,
   cellCoordinates: getGridOutlineCoords,
   activeMarker: getActiveMarker,
+  reservesTooltip: getReservesTooltip,
   activeGridCellId: getGridCellId
 });
