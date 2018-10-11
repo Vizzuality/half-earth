@@ -9,6 +9,7 @@ import { reduxConfig as storiesRedux } from 'redux-modules/stories';
 import { reduxConfig as placesRedux } from 'redux-modules/places';
 import { reduxConfig as cellsRedux } from 'redux-modules/cell-detail';
 import { reduxConfig as speciesRedux } from 'redux-modules/species';
+import { reduxConfig as pledgesRedux } from 'redux-modules/pledges';
 
 // Providers
 import { reduxConfig as sectionRedux } from 'providers/section';
@@ -38,7 +39,8 @@ const reduxModulesReducers = {
   stories: handleModule(storiesRedux),
   places: handleModule(placesRedux),
   cellsDetail: handleModule(cellsRedux),
-  species: handleModule(speciesRedux)
+  species: handleModule(speciesRedux),
+  pledges: handleModule(pledgesRedux)
 };
 
 const providersReducers = {
