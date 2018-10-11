@@ -134,7 +134,10 @@ class CesiumComponent extends Component {
   };
 
   renderGridCell(cellCoordinates, rectangle) {
-    if (rectangle) return null;
+    // Clean previous grid cell
+    if (rectangle) {
+      this.viewer.entities.remove(this.rectangle);
+    }
     const coordinates = Cesium.Rectangle.fromCartesianArray(cellCoordinates);
     this.rectangle = new Cesium.Entity({
       rectangle: {
@@ -231,6 +234,9 @@ CesiumComponent.propTypes = {
   onMoveEnd: PropTypes.func,
   onMouseMove: PropTypes.func,
   onMouseClick: PropTypes.func,
+  onMoveStart: PropTypes.func,
+  onCameraChanged: PropTypes.func,
+  onDoubleClick: PropTypes.func,
   lockNavigation: PropTypes.bool,
   rotate: PropTypes.func,
   coordinates: PropTypes.object,
@@ -248,6 +254,12 @@ CesiumComponent.defaultProps = {
   onMouseMove: () => {
   },
   onMouseClick: () => {
+  },
+  onMoveStart: () => {
+  },
+  onCameraChanged: () => {
+  },
+  onDoubleClick: () => {
   },
   rotate: null,
   lockNavigation: false,
