@@ -3,12 +3,35 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class PledgesLayer extends Component {
-  markersCollection = null;
+  static billboards = {
+    POINT: { image: 'img/pledges-point.png', height: 25, width: 25, id: { type: 'pledge-point' } },
+    CLUSTER: {
+      image: 'img/pledges-cluster.png',
+      height: 64,
+      width: 64,
+      id: { type: 'pledge-cluster' }
+    }
+  };
+
+  static LABEL = {
+    // small text in webgl renders blurry,
+    // the trick is to use a bigger font size and scale it down
+    // https://stackoverflow.com/questions/33784256/cesium-label-blurred
+    font: '42px sans-serif',
+    scale: 0.30,
+    verticalOrigin: Cesium.VerticalOrigin.CENTER,
+    horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+    disableDepthTestDistance: Number.POSITIVE_INFINITY
+  };
+
+  clustersDatasource = null;
 
   componentDidMount() {
     const { map, show } = this.props;
     if (map && show) {
       this.addPledgesMarkers();
+      // antialiasing off (see LABEL link)
+      map.scene.fxaa = false;
     }
   }
 
@@ -28,25 +51,25 @@ class PledgesLayer extends Component {
   addPledgesMarkers() {
     const { pledges, map } = this.props;
     this.clustersDatasource = new Cesium.CustomDataSource('clusters');
-    this.clustersDatasource.clustering.enabled = true;
-    this.clustersDatasource.clustering.pixelRange = 15;
-    this.clustersDatasource.clustering.minimumClusterSize = 3;
     if (pledges) {
       pledges.forEach(pledge => {
         this.clustersDatasource.entities.add({
           position: Cesium.Cartesian3.fromDegrees(pledge.lon, pledge.lat),
-          billboard: { image: 'img/pledges-point.png', scale: 0.8, id: { type: 'pledge' } }
+          billboard: PledgesLayer.billboards.POINT
         });
       });
       const promise = map.dataSources.add(this.clustersDatasource);
 
-      promise.then(() => {
-        this.setDatasourceBillboards();
-      });
+      promise.then(() => this.setDatasourceBillboards());
     }
   }
 
   setDatasourceBillboards() {
+    const pixelRange = 100;
+    this.clustersDatasource.clustering.enabled = true;
+    this.clustersDatasource.clustering.pixelRange = pixelRange;
+    this.clustersDatasource.clustering.minimumClusterSize = 20;
+
     if (Cesium.defined(this.clustersListener)) {
       this.clustersListener();
       this.clustersListener = null;
@@ -57,29 +80,29 @@ class PledgesLayer extends Component {
       ) =>
         {
           /* eslint-disable no-param-reassign */
-          cluster.label.show = false;
           cluster.billboard.show = true;
 
           if (cluster.label.show) {
-            cluster.billboard.image = 'img/pledges-cluster.png';
+            Object.assign(cluster.label, PledgesLayer.LABEL);
+            Object.assign(cluster.billboard, PledgesLayer.billboards.CLUSTER);
           } else {
-            cluster.billboard.image = 'img/pledges-point.png';
+            Object.assign(cluster.billboard, PledgesLayer.billboards.POINT);
           }
           /* eslint-enable no-param-reassign */
         });
     }
 
     // force a re-cluster with the new styling
-    const pixelRange = this.clustersDatasource.clustering.pixelRange;
     this.clustersDatasource.clustering.pixelRange = 0;
     this.clustersDatasource.clustering.pixelRange = pixelRange;
   }
 
   removeStoriesMarkers() {
     const { map } = this.props;
-    if (this.markersCollection) {
-      map.dataSources.remove(this.markersCollection, true);
+    if (this.clustersDatasource) {
+      map.dataSources.remove(this.clustersDatasource, true);
     }
+    map.scene.fxaa = true;
   }
 
   render() {
