@@ -6,34 +6,40 @@
 "slug":"human-pressures-rainfed",
 "description": null,
 "global": "true",
-"url": "https://storage.googleapis.com/gfw-climate-tiles/hp_test/rainfed_v1/{z}/{x}/{y}.png",
+"url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/human-pressures/esa/1km/100p-layers/rainfed/{z}/{x}/{y}.png",
 "maxZoom": 13,
 "minZoom": 3,
 "landscape_opacity": 1.0,
 "legendConfig": {
     "items": [{
-                    "value": "0",
-                    "color": "#3a4264"
-                }, {
-                    "value": "",
-                    "color": "#535978"
-                },{
-                    "value": "",
-                    "color": "#6c718d"
-                },{
-                    "value": "",
-                    "color": "#868aa2"
-                },{
-                    "value": "",
-                    "color": "#a1a3b8"
-                },{
-                    "value": "",
-                    "color": "#bcbece"
-                },{
-                    "value": "100 % use",
-                    "color": "#d8d9e5"
-                }
-            ],
+        "value": "0",
+        "color": "#282052"
+    },{
+       "value": "",
+       "color": "#3f3576"
+   },{
+       "value": "",
+       "color": "#52478d"
+   },{
+        "value": "",
+        "color": "#63589f"
+    },{
+        "value": "",
+        "color": "#826dba"
+    },{
+        "value": "",
+        "color": "#9f82ce"
+    },{
+        "value": "",
+        "color": "#b998dd"
+    },{
+        "value": "",
+        "color": "#d1afe8"
+    },{
+        "value": "100  % use",
+        "color": "#f3e0f7"
+    }
+],
                 "type": "gradient",
                 "title": "Small and Rainfed agriculture"
     }

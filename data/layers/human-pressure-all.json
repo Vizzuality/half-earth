@@ -6,35 +6,48 @@
     "slug":"human-pressures-all",
     "description": null,
     "global": "true",
-    "url": "https://storage.googleapis.com/gfw-climate-tiles/hp_test/all_v1/{z}/{x}/{y}.png",
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/human-pressures/esa/1km/100p-layers/all/{z}/{x}/{y}.png",
     "maxZoom": 13,
     "minZoom": 3,
     "landscape_opacity": 1.0,
     "legendConfig": {
                      "items": [{
                                      "value": "0",
-                                     "color": "#3a4264"
-                                 }, {
+                                     "color": "#282052"
+                                 },{
+                                    "value": "",
+                                    "color": "#3f3576"
+                                },{
+                                    "value": "",
+                                    "color": "#52478d"
+                                },{
                                      "value": "",
-                                     "color": "#535978"
+                                     "color": "#63589f"
                                  },{
                                      "value": "",
-                                     "color": "#6c718d"
+                                     "color": "#826dba"
                                  },{
                                      "value": "",
-                                     "color": "#868aa2"
+                                     "color": "#9f82ce"
                                  },{
                                      "value": "",
-                                     "color": "#a1a3b8"
+                                     "color": "#b998dd"
                                  },{
                                      "value": "",
-                                     "color": "#bcbece"
+                                     "color": "#d1afe8"
                                  },{
                                      "value": "100  % use",
-                                     "color": "#d8d9e5"
+                                     "color": "#f3e0f7"
                                  }
                              ],
                                  "type": "gradient",
                                  "title": "All terrestrial pressure"
                      }
    }
+
+
+
+
+
+
+
