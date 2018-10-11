@@ -21,9 +21,11 @@ const ProtectedAreasTooltipComponent = ({ x, y, reserves }) => (
 );
 
 ProtectedAreasTooltipComponent.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  reserves: PropTypes.array.isRequired
+  x: PropTypes.number,
+  y: PropTypes.number,
+  reserves: PropTypes.array
 };
+
+ProtectedAreasTooltipComponent.defaultProps = { x: undefined, y: undefined, reserves: undefined };
 
 export default ProtectedAreasTooltipComponent;
