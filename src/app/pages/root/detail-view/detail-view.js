@@ -17,7 +17,20 @@ class DetailViewContainer extends Component {
 
   handleCloseTerrainClick = () => {
     const { updateQueryParam, query } = this.props;
-    updateQueryParam({ query: { ...query, lat: undefined, lng: undefined, terrain: undefined } });
+    const activeLayers = query.activeLayers
+      ? query.activeLayers.map(l => ({ ...l, opacity: 1 }))
+      : null;
+    updateQueryParam({
+      query: {
+        ...query,
+        activeLayers,
+        taxa: undefined,
+        cellId: undefined,
+        terrain: undefined,
+        terrainCameraOffset: undefined,
+        orientation: [ 0, -1.5707963267948966, 6.283185307179586 ]
+      }
+    });
   };
 
   handleTaxasChange = taxa => {
@@ -40,7 +53,7 @@ DetailViewContainer.propTypes = {
   query: PropTypes.object.isRequired,
   fetchCellDetail: PropTypes.func.isRequired,
   updateQueryParam: PropTypes.func.isRequired,
-  cellId: PropTypes.number.isRequired
+  cellId: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps, actions)(DetailViewContainer);

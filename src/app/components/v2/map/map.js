@@ -1,6 +1,6 @@
 import { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
-import { mapValues, isEqual } from 'lodash';
+import { mapValues } from 'lodash';
 import CesiumMapComponent from './map-component';
 
 // const { MAPBOX_TOKEN } = process.env;
@@ -28,11 +28,7 @@ class CesiumComponent extends Component {
     timeline: false,
     creditsDisplay: false,
     fullscreenButton: false,
-    skyAtmosphere: false,
     terrainExaggeration: 2.0,
-    // imageryProvider: new Cesium.UrlTemplateImageryProvider({
-    //   url: `https://api.mapbox.com/styles/v1/jchalfearth/cj85y2wq523um2rryqnvxzlt1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`
-    // })
     terrainProvider: Cesium.createWorldTerrain()
   };
 
@@ -62,8 +58,8 @@ class CesiumComponent extends Component {
       coordinatesOptions,
       camera,
       terrainMode,
-      latLng,
-      terrainCameraOffset
+      terrainCameraOffset,
+      cellCoordinates
     } = this.props;
     if (this.viewer) {
       if (!this.rotating && rotate) this.addRotation();
@@ -72,14 +68,16 @@ class CesiumComponent extends Component {
       if (camera && prevProps.camera !== camera) this.setCamera();
       if (lockNavigation) disablePanning(this.viewer);
       if (terrainMode) {
-        if (latLng && !isEqual(prevProps.latLng, latLng)) {
-          this.setTerrainModeView(latLng, terrainCameraOffset);
+        if (cellCoordinates) {
+          this.renderGridCell(cellCoordinates, this.rectangle);
+          this.setTerrainModeView(cellCoordinates, terrainCameraOffset);
         }
       } else {
         const coordinatesChanged = coordinates && prevProps.coordinates !== coordinates ||
           prevProps.coordinatesOptions !== coordinatesOptions;
         const terrainModeChanged = prevProps.terrainMode !== terrainMode;
         if (coordinatesChanged || terrainModeChanged) {
+          this.removeGridCell();
           this.setCoordinates();
         }
       }
@@ -92,14 +90,31 @@ class CesiumComponent extends Component {
   }
 
   setEventListeners() {
-    if (this.props.onMouseMove) {
-      this.handler.setInputAction(this.props.onMouseMove, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    const {
+      onMouseMove,
+      onMouseClick,
+      onMoveStart,
+      onMoveEnd,
+      onCameraChanged,
+      onDoubleClick
+    } = this.props;
+    if (onMouseMove) {
+      this.handler.setInputAction(onMouseMove, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
     }
-    if (this.props.onMouseClick) {
-      this.handler.setInputAction(this.props.onMouseClick, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    if (onMouseClick) {
+      this.handler.setInputAction(onMouseClick, Cesium.ScreenSpaceEventType.LEFT_CLICK);
     }
-    if (this.props.onMoveEnd) {
+    if (onDoubleClick) {
+      this.handler.setInputAction(onDoubleClick, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+    }
+    if (onMoveStart) {
+      this.viewer.camera.moveStart.addEventListener(onMoveStart);
+    }
+    if (onMoveEnd) {
       this.viewer.camera.moveEnd.addEventListener(this.handleMoveEnd);
+    }
+    if (onCameraChanged) {
+      this.viewer.camera.changed.addEventListener(onCameraChanged);
     }
   }
 
@@ -118,16 +133,36 @@ class CesiumComponent extends Component {
     }
   };
 
-  setTerrainModeView(latLng, terrainCameraOffset) {
+  renderGridCell(cellCoordinates, rectangle) {
+    if (rectangle) return null;
+    const coordinates = Cesium.Rectangle.fromCartesianArray(cellCoordinates);
+    this.rectangle = new Cesium.Entity({
+      rectangle: {
+        coordinates,
+        fill: false,
+        outline: true,
+        outlineWidth: 5.0,
+        outlineColor: Cesium.Color.fromAlpha(Cesium.Color.WHITE, 0.9)
+      }
+    });
+    return this.viewer.entities.add(this.rectangle);
+  }
+
+  setTerrainModeView(cellCoordinates, terrainCameraOffset) {
+    const rectangle = Cesium.Rectangle.fromCartesianArray(cellCoordinates);
+    this.sphere = Cesium.BoundingSphere.fromRectangle3D(rectangle);
     const offset = mapValues(terrainCameraOffset.offset, parseFloat);
-    const center = Cesium.Cartesian3.fromDegrees(latLng.lng, latLng.lat);
-    const sphere = new Cesium.BoundingSphere(center);
-    this.viewer.camera.flyToBoundingSphere(sphere, { offset });
+    this.viewer.camera.flyToBoundingSphere(this.sphere, { offset });
+  }
+
+  removeGridCell() {
+    this.viewer.entities.remove(this.rectangle);
+    this.rectangle = undefined;
   }
 
   setCoordinates() {
     const { coordinates, coordinatesOptions } = this.props;
-    this.flyTo(...coordinates, coordinatesOptions);
+    this.flyTo(coordinates, coordinatesOptions);
   }
 
   setCamera() {
@@ -136,7 +171,7 @@ class CesiumComponent extends Component {
   }
 
   handleMoveEnd = () => {
-    const { coordinates = [], coordinatesOptions = {} } = this.props;
+    const { coordinates = [], coordinatesOptions = {}, terrainMode } = this.props;
     const { orientation = {} } = coordinatesOptions;
     const { x, y, z } = this.viewer.camera.position;
     const { heading, pitch, roll } = this.viewer.camera;
@@ -147,8 +182,8 @@ class CesiumComponent extends Component {
       orientation.pitch !== pitch ||
       orientation.roll !== roll;
 
-    if (isDifferentCoordinates || isDifferentOrientation) {
-      this.props.onMoveEnd({ coordinates: [ x, y, z ], orientation: [ heading, pitch, roll ] });
+    if ((isDifferentCoordinates || isDifferentOrientation) && !terrainMode) {
+      this.props.onMoveEnd({ coordinates: { x, y, z }, orientation: [ heading, pitch, roll ] });
     }
   };
 
@@ -162,8 +197,8 @@ class CesiumComponent extends Component {
     clock.startTime.secondsOfDay = now - 1; // eslint-disable-line
   };
 
-  flyTo(lat, long, z = 15000.0, rest = {}) {
-    this.viewer.camera.flyTo({ destination: { x: lat, y: long, z }, ...rest });
+  flyTo(destination, rest = {}) {
+    this.viewer.camera.flyTo({ destination, ...rest });
   }
 
   addRotation() {
@@ -198,12 +233,12 @@ CesiumComponent.propTypes = {
   onMouseClick: PropTypes.func,
   lockNavigation: PropTypes.bool,
   rotate: PropTypes.func,
-  coordinates: PropTypes.array,
+  coordinates: PropTypes.object,
   coordinatesOptions: PropTypes.object,
   camera: PropTypes.object,
   terrainMode: PropTypes.bool,
   terrainCameraOffset: PropTypes.object,
-  latLng: PropTypes.object
+  cellCoordinates: PropTypes.array
 };
 
 CesiumComponent.defaultProps = {
@@ -221,7 +256,7 @@ CesiumComponent.defaultProps = {
   camera: null,
   terrainMode: false,
   terrainCameraOffset: undefined,
-  latLng: undefined
+  cellCoordinates: undefined
 };
 
 export default CesiumComponent;

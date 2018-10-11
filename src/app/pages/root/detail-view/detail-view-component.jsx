@@ -24,26 +24,28 @@ class DetailViewComponent extends Component {
     const title = data && data.location ? `Area in ${data.location}` : 'Selected area';
     return (
       <div className={styles.detailViewContainer}>
-        <Button theme={styles} circle onClick={handleCloseTerrainClick}>
-          <Icon icon={closeIcon} />
-        </Button>
-        <div className={styles.header}>
-          <h2 className={styles.detailTitle}>{title}</h2>
-          <p className={styles.detailSubTitle}>
-            Global, ~110 km cell size mapping of terrestrial species.
-          </p>
+        <div className={styles.generalInfoCard}>
+          <Button theme={styles} circle onClick={handleCloseTerrainClick}>
+            <Icon icon={closeIcon} />
+          </Button>
+          <div className={styles.header}>
+            <h2 className={styles.detailTitle}>{title}</h2>
+            <p className={styles.detailSubTitle}>
+              Global, ~110 km cell size mapping of terrestrial species.
+            </p>
+          </div>
+          <RarityRichness
+            data={data}
+            taxas={taxas}
+            histogram={histogram}
+            selected={taxaSelected}
+            handleTaxasChange={handleTaxasChange}
+          />
         </div>
-        <RarityRichness
-          data={data}
-          taxas={taxas}
-          histogram={histogram}
-          selected={taxaSelected}
-          handleTaxasChange={handleTaxasChange}
-        />
         {
           categories && categories.length > 0 && categories.map(category => (
             <AccordionCard key={category.slug} isOpen title={category.name}>
-              <ProgressCard category={category} />
+              <ProgressCard category={category} theme={{ progress: styles.progressBar }} />
             </AccordionCard>
             ))
         }

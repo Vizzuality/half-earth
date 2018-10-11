@@ -1,0 +1,111 @@
+@import '~styles/variables.scss';
+
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 290px;
+  background-color: $color-group-card-dark-blue;
+  height: auto;
+  z-index: 11;
+  color: white;
+  transform-origin: center bottom;
+
+  &.hide {
+    display: none;
+  }
+}
+
+.simpleContainer {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  right: 50%;
+  width: auto;
+  background-color: white;
+  height: auto;
+  z-index: 11;
+  color: $color-group-card-dark-blue;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -13px;
+    right: 50%;
+    width: 30px;
+    border: none;
+    border-top: 18px solid white;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    transform: translateX(50%);
+  }
+}
+
+.image {
+  background-size: cover;
+  height: 150px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 15px;
+  height: 15px;
+  padding: 0;
+}
+
+.closeIcon {
+  fill: white;
+  stroke: white;
+}
+
+.contentSection {
+  padding: 20px 30px;
+
+  .title {
+    font-size: $fs-big;
+    font-weight: $fw-bold;
+  }
+
+  .text {
+    font-size: $fs-regular;
+    font-weight: $fw-thin;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -13px;
+    right: 50%;
+    width: 30px;
+    border: none;
+    border-top: 18px solid $color-group-card-dark-blue;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    transform: translateX(50%);
+  }
+}
+
+.linkButton {
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+}
+
+.actionText {
+  margin-right: 10px;
+  text-transform: uppercase;
+  color: $color-turquoise;
+  font-size: $fs-sm;
+}
+
+.chevronIcon {
+  width: 12px;
+  height: 12px;
+  transform: rotate(180deg);
+  fill: $color-turquoise;
+}

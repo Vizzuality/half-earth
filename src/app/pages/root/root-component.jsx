@@ -4,6 +4,8 @@ import { Sidebar } from 'he-components';
 import cx from 'classnames';
 import ModalMetadata from 'components/v2/modal-metadata';
 import ModalInstructions from 'components/v2/modal-instructions';
+import ModalShare from 'components/v2/modal-share';
+import Logos from 'components/logos';
 
 import GroupCardList from './group-card-list';
 import DetailView from './detail-view';
@@ -53,8 +55,10 @@ class RootPageComponent extends React.Component {
         <Map className={cx(styles.mapContainer, { [styles.mapPaddingLeft]: sidebarOpen })} />
         <Toolbar className={styles.toolbar} />
         <Legend />
+        <Logos key="Logos" theme={{ partnerFooter: styles.partnerFooter }} />
         <ModalMetadata />
         <ModalInstructions />
+        <ModalShare />
       </div>
     );
   }

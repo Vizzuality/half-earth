@@ -32,7 +32,14 @@ class MapContainer extends Component {
     });
     postRobot.on('setMapLayers', event => {
       const { layers = [] } = event.data;
-      this.updateMapParams({ activeLayers: layers });
+      const activeLayers = layers.map(layer => ({
+        slug: layer,
+        active: true,
+        opacity: 1,
+        landscapeOpacity: null,
+        layerCateogry: null
+      }));
+      this.updateMapParams({ activeLayers });
       return { done: true };
     });
   }

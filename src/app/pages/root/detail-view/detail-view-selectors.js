@@ -24,7 +24,9 @@ export const getCellData = createSelector([ getCellId, selectCellsData ], (cellI
 
 export const getTaxaOptions = createSelector([ getCellData ], data => {
   if (!data) return [];
-  return sortBy(Object.keys(data)).map(key => ({ slug: key, label: key }));
+  return sortBy(
+    Object.keys(data)
+  ).map(key => ({ slug: key, label: key === 'all' ? 'all groups' : key }));
 });
 
 export const getTaxaSelected = createSelector([ getTaxaOptions, getTaxa ], (taxas, selected) => {
@@ -83,8 +85,6 @@ export const getConservationCategory = createSelector(
   (data, categories) => {
     if (!data || !categories) return null;
     const category = categories.find(d => d.slug === 'conservation-areas');
-    // We want multiselection on the globe but not here
-    category.multiSelect = false;
     return category ? getLayersPercentage(category, data) : null;
   }
 );
@@ -95,15 +95,24 @@ export const getFeaturedCategory = createSelector(
     if (!data || !data.feature_da || !categories) return null;
 
     const category = categories.find(d => d.slug === data.feature_da.toLowerCase());
-    return category ? getLayersPercentage(category, data) : null;
+    if (!category) return null;
+    category.hideProgress = true;
+    return getLayersPercentage(category, data);
   }
 );
 
+export const getGridCellType = createSelector(getCellId, cellId => {
+  if (!cellId) return null;
+  if (cellId.includes('--')) return 'marine';
+  return 'terrestrial';
+});
+
 export const getCategories = createSelector(
-  [ getFeaturedCategory, getHumanCategory, getConservationCategory ],
-  (featured, human, conservation) => {
-    if (!human || !conservation) return null;
-    return featured ? [ featured, human, conservation ] : [ human, conservation ];
+  [ getFeaturedCategory, getHumanCategory, getConservationCategory, getGridCellType ],
+  (featured, human, conservation, cellType) => {
+    if (!human || !conservation || !cellType) return null;
+    const notFeatured = cellType === 'terrestrial' ? [ human, conservation ] : [ conservation ];
+    return featured ? [ featured, ...notFeatured ] : [ ...notFeatured ];
   }
 );
 

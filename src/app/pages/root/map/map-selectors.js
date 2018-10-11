@@ -5,7 +5,10 @@ import { selectQueryParams, getIsTerrain } from 'selectors/location-selectors';
 export const getLayers = createSelector([ getDatasets ], datasets => {
   if (!datasets) return null;
   return datasets.reduce(
-    (acc, dataset) => [ ...acc, ...dataset.layers.map(layer => ({ ...layer, slug: dataset.slug })) ],
+    (acc, dataset) => [
+      ...acc,
+      ...dataset.layers.map(layer => ({ ...layer, slug: dataset.slug }))
+    ],
     []
   );
 });
@@ -17,7 +20,17 @@ export const getLayersFiltered = createSelector([ getLayers ], datasets => {
 
 export const getGridLayers = createSelector([ getLayers ], layers => {
   if (!layers) return undefined;
-  return layers.filter(d => d.dataset === 'grids' && d.id === 'mol-terrestrial-grid');
+  return layers.filter(d => d.dataset === 'grids');
+});
+
+export const getProtectedAreasLayer = createSelector([ getLayersFiltered ], layers => {
+  if (!layers) return undefined;
+  return layers.filter(d => d.dataset.includes('protected'));
+});
+
+export const getActiveMarker = createSelector(selectQueryParams, query => {
+  if (!query || !query.activeMarker) return undefined;
+  return query.activeMarker;
 });
 
 export const getCoordinates = createSelector([ selectQueryParams ], query => {
@@ -36,18 +49,20 @@ export const getCoordinatesOptions = createSelector([ selectQueryParams ], query
   return { orientation: { roll, pitch, heading } };
 });
 
-export const getLatLng = createSelector([ selectQueryParams ], query => {
-  if (!query || !query.lat || !query.lng) return undefined;
-  return { lat: query.lat, lng: query.lng };
+export const getGridOutlineCoords = createSelector([ selectQueryParams ], query => {
+  if (!query || !query.cellCoordinates) return undefined;
+  return query.cellCoordinates;
 });
 
 export const mapStateToProps = createStructuredSelector({
   layers: getLayersFiltered,
   gridLayers: getGridLayers,
+  protectedAreasLayer: getProtectedAreasLayer,
   terrainMode: getIsTerrain,
   query: selectQueryParams,
   coordinates: getCoordinates,
   coordinatesOptions: getCoordinatesOptions,
-  latLng: getLatLng,
-  terrainCameraOffset: getTerrainCameraOffset
+  terrainCameraOffset: getTerrainCameraOffset,
+  cellCoordinates: getGridOutlineCoords,
+  activeMarker: getActiveMarker
 });
