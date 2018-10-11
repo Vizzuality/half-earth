@@ -38,14 +38,18 @@ class PledgesLayer extends Component {
   componentDidUpdate() {
     const { show } = this.props;
     if (show) {
-      this.addPledgesMarkers();
-    } else {
-      this.removeStoriesMarkers();
+      if (this.clustersDatasource) {
+        this.clustersDatasource.show = true;
+      } else {
+        this.addPledgesMarkers();
+      }
+    } else if (this.clustersDatasource) {
+      this.clustersDatasource.show = false;
     }
   }
 
   componentWillUnmount() {
-    this.removeStoriesMarkers();
+    this.removeDatasource();
   }
 
   addPledgesMarkers() {
@@ -97,7 +101,7 @@ class PledgesLayer extends Component {
     this.clustersDatasource.clustering.pixelRange = pixelRange;
   }
 
-  removeStoriesMarkers() {
+  removeDatasource() {
     const { map } = this.props;
     if (this.clustersDatasource) {
       map.dataSources.remove(this.clustersDatasource, true);

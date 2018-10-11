@@ -235,7 +235,7 @@ class MapComponent extends PureComponent {
     const hasProtectedAreasLayer = this.hasLayers(protectedAreasLayer);
     const isStoriesActive = this.hasLayers(layers) && layers.some(l => l.id === 'stories');
     const isPlacesActive = this.hasLayers(layers) && layers.some(l => l.id === 'places-to-watch');
-    const isPledgesActive = this.hasLayers(layers) && layers.some(l => l.id === 'signed-pledges');
+    const pledgesLayer = this.hasLayers(layers) && layers.find(l => l.id === 'signed-pledges');
     const tooltipData = activeMarker && this.activeMarker;
     return (
       <CesiumMap
@@ -281,7 +281,7 @@ class MapComponent extends PureComponent {
                   <ProtectedAreasLayer map={this.map} layer={protectedAreasLayer[0]} />
               }
               {isStoriesActive && <StoriesLayer map={this.map} show={isStoriesActive} />}
-              {isPledgesActive && <PledgesLayer map={this.map} show={isPledgesActive} />}
+              {pledgesLayer && <PledgesLayer map={this.map} show={pledgesLayer.visibility} />}
               {
                 isPlacesActive &&
                   !terrainMode &&
