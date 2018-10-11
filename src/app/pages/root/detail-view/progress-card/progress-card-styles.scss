@@ -18,4 +18,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: $site-gutter;
+
+  &:last-child {
+    margin-bottom: 30px;
+  }
 }
