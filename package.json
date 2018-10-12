@@ -39,6 +39,7 @@
     "semiotic": "1.14.0",
     "serve-static": "1.13.2",
     "shortid": "2.2.11",
+    "universal-cookie": "^3.0.4",
     "uuid": "3.3.2",
     "vega-lib": "^4.3.0",
     "wri-api-components": "github:resource-watch/wri-api-components#2.4.0"

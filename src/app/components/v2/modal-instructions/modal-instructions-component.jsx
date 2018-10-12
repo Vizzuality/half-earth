@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Link from 'redux-first-router-link';
-import { APP } from 'router';
 import { Button, Icon, Modal } from 'he-components';
 
 import chevronIcon from 'assets/icons/icon-chevron.svg';
@@ -19,7 +17,11 @@ import styles from './modal-instructions-styles';
 const mouseInstructions = [
   { icon: leftClick, title: 'Pan view', text: 'Left click + drag' },
   { icon: rightClick, title: 'Zoom view', text: 'Right click + drag, or Mouse wheel croll' },
-  { icon: middleClick, title: 'Rotate view', text: 'Middle click + drag, or CTRL + Left/Right click + drag' }
+  {
+    icon: middleClick,
+    title: 'Rotate view',
+    text: 'Middle click + drag, or CTRL + Left/Right click + drag'
+  }
 ];
 
 const touchInstructions = [
@@ -49,27 +51,35 @@ function renderInstructions(instructionsArray) {
 }
 
 class ModalInfoContentComponent extends Component {
+  handleNavigateButton = () => {
+    const { setModalTutorialParams, setModalInstructionsParams } = this.props;
+    setModalTutorialParams({ isOpen: true });
+    setModalInstructionsParams({ isOpen: false });
+  };
+
   render() {
     const { isTouchScreen, isOpen, setModalInstructionsParams } = this.props;
     return (
-      <Modal isOpen={isOpen} onRequestClose={() => setModalInstructionsParams({ isOpen: false })} theme={styles}>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={() => setModalInstructionsParams({ isOpen: false })}
+        theme={styles}
+      >
         <div className={styles.contentContainer}>
           <p className={styles.subTitle}>{`Instructions - ${isTouchScreen ? 'touch' : 'mouse'}`}</p>
           <h1 className={styles.title}>How to navigate:</h1>
           {renderInstructions(isTouchScreen ? touchInstructions : mouseInstructions)}
           <div className={styles.actionsRow}>
-            <Button theme={{ button: styles.button }} onClick={() => setModalInstructionsParams({ isOpen: false })}>
+            <Button
+              theme={{ button: styles.button }}
+              onClick={() => setModalInstructionsParams({ isOpen: false })}
+            >
               ok
             </Button>
-            <Link
-              className={styles.mapTour}
-              to={{ type: APP, payload: { section: 'global' } }}
-              onMouseDown={undefined}
-              onTouchStart={undefined}
-            >
-              <span className={styles.tourText}>take a tour of the map</span>
+            <Button theme={{ button: styles.mapTour }} onClick={this.handleNavigateButton}>
+              <span className={styles.tourText}>Go back to instructions of the map</span>
               <Icon icon={chevronIcon} theme={{ icon: styles.chevronIcon }} />
-            </Link>
+            </Button>
           </div>
         </div>
       </Modal>
@@ -80,7 +90,8 @@ class ModalInfoContentComponent extends Component {
 ModalInfoContentComponent.propTypes = {
   isTouchScreen: PropTypes.bool,
   isOpen: PropTypes.bool,
-  setModalInstructionsParams: PropTypes.func.isRequired
+  setModalInstructionsParams: PropTypes.func.isRequired,
+  setModalTutorialParams: PropTypes.func.isRequired
 };
 
 ModalInfoContentComponent.defaultProps = { isTouchScreen: false, isOpen: false };

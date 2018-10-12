@@ -5,6 +5,7 @@ import { setModalMetadata } from 'components/v2/modal-metadata/modal-metadata-ac
 import {
   setModalInstructionsParams
 } from 'components/v2/modal-instructions/modal-instructions-actions';
+import { setModalTutorialParams } from 'components/v2/modal-tutorial/modal-tutorial-actions';
 import { setModalShareParams } from 'components/v2/modal-share/modal-share-actions';
 import { getLayersActiveMerged } from 'redux-modules/datasets/datasets-utils';
 
@@ -18,7 +19,8 @@ const actions = {
   ...ownActions,
   setModalMetadata,
   setModalInstructionsParams,
-  setModalShareParams
+  setModalShareParams,
+  setModalTutorialParams
 };
 
 class ToolbarContainer extends Component {
@@ -37,7 +39,7 @@ class ToolbarContainer extends Component {
   };
 
   handleInfoClick = () => {
-    this.props.setModalInstructionsParams({ isOpen: true });
+    this.props.setModalTutorialParams({ isOpen: true });
   };
 
   handleDatasetChange = ({ slug, active }) => {
@@ -78,6 +80,7 @@ ToolbarContainer.propTypes = {
   query: PropTypes.object,
   updateQueryParam: PropTypes.func.isRequired,
   setModalInstructionsParams: PropTypes.func.isRequired,
+  setModalTutorialParams: PropTypes.func.isRequired,
   setModalMetadata: PropTypes.func.isRequired,
   setModalShareParams: PropTypes.func.isRequired
 };
