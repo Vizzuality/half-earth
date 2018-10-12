@@ -87,7 +87,9 @@ class DatasetComboContainer extends Component {
 
     const layerToActive = layersToUpdate && layersToUpdate.find(l => l.active);
 
-    this.props.fetchModalMetaData(layerToActive.slug);
+    if (layerToActive) {
+      this.props.fetchModalMetaData(layerToActive.slug);
+    }
 
     const bbox = layerToActive && layerToActive.bbox;
     if (bbox && bbox.length === 4) {
