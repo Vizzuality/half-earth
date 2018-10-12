@@ -47,6 +47,7 @@ class LegendComponent extends PureComponent {
         <LegendItemButtonRemove />
       </LegendItemToolbar>
     );
+
     return (
       <div className={styles.legend}>
         <Legend sortable={datasets && datasets.length > 1} onChangeOrder={handleChangeOrder}>

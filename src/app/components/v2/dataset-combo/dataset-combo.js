@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getLayersActiveMerged } from 'redux-modules/datasets/datasets-utils';
+import { fetchModalMetaData } from 'components/v2/modal-metadata/modal-metadata-actions';
 import DatasetComboComponent from './dataset-combo-component';
 import * as ownActions from './dataset-combo-actions';
 import { mapStateToProps } from './dataset-combo-selectors';
 
-const actions = { ...ownActions };
+const actions = { ...ownActions, fetchModalMetaData };
 
 class DatasetComboContainer extends Component {
   updateLayersActive = (layers, bounds) => {
@@ -38,6 +39,10 @@ class DatasetComboContainer extends Component {
       landscapeOpacity: landscape_opacity || null,
       layerCategory: layer.category
     }));
+
+    const activeLayer = activeLayers.find(layer => layer.active);
+    this.props.fetchModalMetaData(activeLayer.slug);
+
     const { bbox } = layerConfig.body && layerConfig.body;
     if (bbox && bbox.length === 4) {
       this.updateLayersActive(activeLayers, bbox);
@@ -81,6 +86,9 @@ class DatasetComboContainer extends Component {
     }
 
     const layerToActive = layersToUpdate && layersToUpdate.find(l => l.active);
+
+    this.props.fetchModalMetaData(layerToActive.slug);
+
     const bbox = layerToActive && layerToActive.bbox;
     if (bbox && bbox.length === 4) {
       this.updateLayersActive(layersToUpdate, bbox);
@@ -103,6 +111,7 @@ class DatasetComboContainer extends Component {
 
 DatasetComboContainer.propTypes = {
   updateQueryParam: PropTypes.func.isRequired,
+  fetchModalMetaData: PropTypes.func.isRequired,
   query: PropTypes.object,
   layerDefaultOpacity: PropTypes.number
 };
