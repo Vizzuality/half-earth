@@ -30,6 +30,7 @@ import { reduxConfig as sidebarRedux } from 'components/sidebar';
 import { reduxConfig as modalMetadataRedux } from 'components/v2/modal-metadata';
 import { reduxConfig as modalInstructionsRedux } from 'components/v2/modal-instructions';
 import { reduxConfig as modalShareRedux } from 'components/v2/modal-share';
+import { reduxConfig as modalTutorialRedux } from 'components/v2/modal-tutorial';
 import router from './router';
 
 const reduxModulesReducers = {
@@ -64,7 +65,8 @@ const componentReducers = {
   sidebar: handleModule(sidebarRedux),
   modalMetadata: handleModule(modalMetadataRedux),
   modalInstructions: handleModule(modalInstructionsRedux),
-  modalShare: handleModule(modalShareRedux)
+  modalShare: handleModule(modalShareRedux),
+  modalTutorial: handleModule(modalTutorialRedux)
 };
 
 export default combineReducers({

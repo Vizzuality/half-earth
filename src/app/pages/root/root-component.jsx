@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Sidebar } from 'he-components';
 import cx from 'classnames';
 import ModalMetadata from 'components/v2/modal-metadata';
+import ModalTutorial from 'components/v2/modal-tutorial';
 import ModalInstructions from 'components/v2/modal-instructions';
 import ModalShare from 'components/v2/modal-share';
 import Logos from 'components/logos';
@@ -57,6 +58,7 @@ class RootPageComponent extends React.Component {
         <Legend />
         <Logos key="Logos" theme={{ partnerFooter: styles.partnerFooter }} />
         <ModalMetadata />
+        <ModalTutorial />
         <ModalInstructions />
         <ModalShare />
       </div>

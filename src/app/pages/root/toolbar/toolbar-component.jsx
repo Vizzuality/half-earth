@@ -6,7 +6,7 @@ import { SwitchInput, Button, Icon } from 'he-components';
 
 import shareIcon from 'assets/icons/share-icon.svg';
 import gaficasIcon from 'assets/icons/icon-binoculars.svg';
-import infoIcon from 'assets/icons/icon-info.svg';
+import helpIcon from 'assets/icons/help-icon.svg';
 import locateIcon from 'assets/icons/locate.svg';
 
 import styles from './toolbar-styles.scss';
@@ -49,7 +49,7 @@ class ToolbarComponent extends PureComponent {
           <Icon icon={shareIcon} />
         </Button>
         <Button theme={styles} onClick={handleInfoClick}>
-          <Icon icon={infoIcon} />
+          <Icon icon={helpIcon} />
         </Button>
         <Tooltip
           placement="left"
