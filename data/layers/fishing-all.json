@@ -1,6 +1,6 @@
 {
     "is_tile_layer": true,
-    "layer_name": "All marine pressure",
+    "layer_name": "All marine fishing types",
     "dataset": "fishing",
     "slug":"fishing-all",
     "description": null,
@@ -39,7 +39,7 @@
                     }
                 ],
                     "type": "gradient",
-                    "title": "All marine pressure"
+                    "title": "All marine fishing types"
         }
 
  }

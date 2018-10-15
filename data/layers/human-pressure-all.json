@@ -1,6 +1,6 @@
 {
     "is_tile_layer": true,
-    "layer_name": "All terrestrial pressure",
+    "layer_name": "All land-use pressures",
     "dataset": "human-pressure",
     "category":"human",
     "slug":"human-pressures-all",
@@ -41,7 +41,7 @@
                                  }
                              ],
                                  "type": "gradient",
-                                 "title": "All terrestrial pressure"
+                                 "title": "All land-use pressures"
                      }
    }
 
