@@ -29,6 +29,7 @@ class CesiumComponent extends Component {
     creditsDisplay: false,
     fullscreenButton: false,
     terrainExaggeration: 2.0,
+    requestRenderMode: true,
     terrainProvider: Cesium.createWorldTerrain()
   };
 
