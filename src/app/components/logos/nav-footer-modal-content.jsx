@@ -21,39 +21,51 @@ const partners = [
 ];
 
 const dataPartners = [
-  { href: 'https://mol.org/', image: { src: '/img/partners/mol_logo.png', alt: 'Map of Life' } },
+  {
+    href: 'https://mol.org/',
+    image: { src: '/img/partners/partner_image/mol_logo.png', alt: 'Map of Life' }
+  },
   {
     href: 'http://coru.oceans.ubc.ca/',
-    image: { src: '/img/partners/mol_logo.png', alt: 'Changing Ocean Research Unit' }
+    image: {
+      src: '/img/partners/partner_image/changing_ocean.png',
+      alt: 'Changing Ocean Research Unit'
+    }
   },
   {
     href: 'https://www.gbif.org/',
-    image: { src: '/img/partners/partner_image/7.png', alt: 'GBIF' }
+    image: { src: '/img/partners/partner_image/GBIF-2015.png', alt: 'GBIF' }
   },
-  { href: 'https://ebird.org/home', image: { src: '/img/partners/mol_logo.png', alt: 'eBird' } },
+  {
+    href: 'https://ebird.org/home',
+    image: { src: '/img/partners/partner_image/ebird-logo.png', alt: 'eBird' }
+  },
   {
     href: 'https://www.iucn.org/',
-    image: { src: '/img/partners/partner_image/11.png', alt: 'iucn' }
+    image: { src: '/img/partners/partner_image/iucn.png', alt: 'iucn' }
   },
   {
     href: 'http://globalfishingwatch.org/',
-    image: { src: '/img/partners/partner_image/11.png', alt: 'Global Fishing Watch' }
+    image: {
+      src: '/img/partners/partner_image/global_fishing_watch.png',
+      alt: 'Global Fishing Watch'
+    }
   },
   {
     href: 'https://www.unep-wcmc.org/',
-    image: { src: '/img/partners/partner_image/19.png', alt: 'UNEP-WCMC' }
+    image: { src: '/img/partners/partner_image/wcmc.png', alt: 'UNEP-WCMC' }
   },
   {
     href: 'https://www.esa-landcover-cci.org/',
-    image: { src: '/img/partners/partner_image/19.png', alt: 'ESA' }
+    image: { src: '/img/partners/partner_image/esa.png', alt: 'ESA' }
   },
   {
     href: 'https://raisg.socioambiental.org/',
-    image: { src: '/img/partners/partner_image/19.png', alt: 'RAISG' }
+    image: { src: '/img/partners/partner_image/raisg.png', alt: 'RAISG' }
   },
   {
     href: 'http://eol.org/',
-    image: { src: '/img/partners/partner_image/19.png', alt: 'Encyclopedia of Life' }
+    image: { src: '/img/partners/partner_image/eol.png', alt: 'Encyclopedia of Life' }
   }
 ];
 
@@ -64,26 +76,26 @@ const researchPartners = [
   },
   {
     href: 'https://www.ubc.ca/',
-    image: { src: '/img/partners/partner_image/33.png', alt: 'University of British Columbia' }
+    image: { src: '/img/partners/partner_image/ubc.png', alt: 'University of British Columbia' }
   },
   {
     href: 'http://www.ufl.edu/',
-    image: { src: '/img/partners/partner_image/33.png', alt: 'University of Florida' }
-  },
-  {
-    href: 'https://cloud.google.com',
-    image: { src: '/img/partners/partner_image/34.png', alt: 'Google Cloud Platform' }
+    image: { src: '/img/partners/partner_image/uf.png', alt: 'University of Florida' }
   },
   {
     href: 'https://earthengine.google.com/',
     image: { src: '/img/partners/partner_image/35.png', alt: 'Google Earth Engine' }
+  },
+  {
+    href: 'https://cloud.google.com',
+    image: { src: '/img/partners/partner_image/google_cloud.png', alt: 'Google Cloud Platform' }
   }
 ];
 
 const sections = [
   {
     title: 'Half-earth mapping core',
-    subtitle: 'The Half-Earth Project is a program of the E.O. Wilson Biodiversity Foundation. Map of Life mobilizes, integrates and analyzes data on species and their environment to provide information, tools and services in support of global biodiversity monitoring, research, decision-making, and education. Vizzuality brings this information to life.',
+    subtitle: 'The Half-Earth Project and Half-Earth Map are initiatives of the E.O. Wilson Biodiversity Foundation. As part of the Half-Earth Project Mapping Core, the Map of Life team mobilizes and analyzes high resolution geospatial species distribution data to guide where we have the best opportunity to protect the most species.  Vizzuality brings this data to life through cutting-edge mapping engineering and visualization that integrates multiple layers of information to support conservation management decision-making and engage people in the grand ambition of Half-Earth.',
     content: partners
   },
   { title: 'Sponsors', subtitle: 'Jeff and Laurie Ubben' },
