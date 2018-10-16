@@ -22,107 +22,53 @@ const partners = [
 
 const dataPartners = [
   { href: 'https://mol.org/', image: { src: '/img/partners/mol_logo.png', alt: 'Map of Life' } },
-  // {
-  //   href: 'http://www.amphibians.org/',
-  //   image: { src: '/img/partners/partner_image/1.png', alt: 'amphibians' }
-  // },
-  // {
-  //   href: 'http://www.birdlife.org/',
-  //   image: { src: '/img/partners/partner_image/2.png', alt: 'BirdLife International' }
-  // },
-  // {
-  //   href: 'https://www.rspb.org.uk/',
-  //   image: { src: '/img/partners/partner_image/3.png', alt: 'rspb' }
-  // },
-  // {
-  //   href: 'http://www.cambridgeconservation.org/',
-  //   image: { src: '/img/partners/partner_image/4.png', alt: 'Cambridge conservation initiative' }
-  // },
-  // {
-  //   href: 'https://www.conservation.org/',
-  //   image: { src: '/img/partners/partner_image/5.png', alt: 'conservation international' }
-  // },
-  // {
-  //   href: 'http://www.dlr.de/dlr/en/desktopdefault.aspx/tabid-10002/',
-  //   image: { src: '/img/partners/partner_image/6.png', alt: 'dlr' }
-  // },
+  {
+    href: 'http://coru.oceans.ubc.ca/',
+    image: { src: '/img/partners/mol_logo.png', alt: 'Changing Ocean Research Unit' }
+  },
   {
     href: 'https://www.gbif.org/',
-    image: { src: '/img/partners/partner_image/7.png', alt: 'gbif' }
+    image: { src: '/img/partners/partner_image/7.png', alt: 'GBIF' }
   },
-  // {
-  //   href: 'https://www.thegef.org/',
-  //   image: { src: '/img/partners/partner_image/8.png', alt: 'gef' }
-  // },
-  // {
-  //   href: 'https://www.globalwildlife.org/',
-  //   image: { src: '/img/partners/partner_image/9.png', alt: 'global wildlife conservation' }
-  // },
-  // {
-  //   href: 'https://www.islandconservation.org/',
-  //   image: { src: '/img/partners/partner_image/10.png', alt: 'island conservation' }
-  // },
+  { href: 'https://ebird.org/home', image: { src: '/img/partners/mol_logo.png', alt: 'eBird' } },
   {
     href: 'https://www.iucn.org/',
     image: { src: '/img/partners/partner_image/11.png', alt: 'iucn' }
   },
-  // {
-  //   href: 'http://luchoffmanninstitute.org/',
-  //   image: { src: '/img/partners/partner_image/12.png', alt: 'luc hoffmann institute' }
-  // },
-  // {
-  //   href: 'http://www.nhm.ac.uk/',
-  //   image: { src: '/img/partners/partner_image/15.png', alt: 'natural history museum' }
-  // },
-  // {
-  //   href: 'http://www.natureserve.org/',
-  //   image: { src: '/img/partners/partner_image/16.png', alt: 'nature serve' }
-  // },
-  // {
-  //   href: 'https://www.nature.org/',
-  //   image: { src: '/img/partners/partner_image/17.png', alt: 'the nature conservancy' }
-  // },
-  // { href: 'https://www.wcs.org', image: { src: '/img/partners/partner_image/21.png', alt: 'wcs' } },
-  // {
-  //   href: 'https://www.worldwildlife.org/',
-  //   image: { src: '/img/partners/partner_image/22.png', alt: 'wwf' }
-  // }
+  {
+    href: 'http://globalfishingwatch.org/',
+    image: { src: '/img/partners/partner_image/11.png', alt: 'Global Fishing Watch' }
+  },
   {
     href: 'https://www.unep-wcmc.org/',
-    image: { src: '/img/partners/partner_image/19.png', alt: 'unep-wcmc' }
+    image: { src: '/img/partners/partner_image/19.png', alt: 'UNEP-WCMC' }
+  },
+  {
+    href: 'https://www.esa-landcover-cci.org/',
+    image: { src: '/img/partners/partner_image/19.png', alt: 'ESA' }
+  },
+  {
+    href: 'https://raisg.socioambiental.org/',
+    image: { src: '/img/partners/partner_image/19.png', alt: 'RAISG' }
+  },
+  {
+    href: 'http://eol.org/',
+    image: { src: '/img/partners/partner_image/19.png', alt: 'Encyclopedia of Life' }
   }
 ];
 
 const researchPartners = [
-  // {
-  //   href: 'https://www.amnh.org/',
-  //   image: { src: '/img/partners/partner_image/23.png', alt: 'American Museum of Natural History' }
-  // },
-  // {
-  //   href: 'https://www.calacademy.org/',
-  //   image: { src: '/img/partners/partner_image/24.png', alt: 'California academy of sciences' }
-  // },
-  // {
-  //   href: 'http://www.mcz.harvard.edu',
-  //   image: { src: '/img/partners/partner_image/26.png', alt: 'missouri botanical garden' }
-  // },
-  // {
-  //   href: 'http://www.mncn.csic.es',
-  //   image: { src: '/img/partners/partner_image/27.png', alt: 'museum of comparative zoology' }
-  // },
-  // {
-  //   href: 'https://www.nybg.org',
-  //   image: { src: '/img/partners/partner_image/28.png', alt: 'mncn' }
-  // },
-  // {
-  //   href: 'http://www.missouribotanicalgarden.org/',
-  //   image: { src: '/img/partners/partner_image/25.png', alt: 'nybg' }
-  // },
-  // { href: 'http://www.esf.org/', image: { src: '/img/partners/partner_image/29.png', alt: 'esf' } },
-  // { href: 'http://dlia.org/', image: { src: '/img/partners/partner_image/30.png', alt: 'DLiA' } },
   {
     href: 'https://www.yale.edu/',
     image: { src: '/img/partners/partner_image/33.png', alt: 'Yale University' }
+  },
+  {
+    href: 'https://www.ubc.ca/',
+    image: { src: '/img/partners/partner_image/33.png', alt: 'University of British Columbia' }
+  },
+  {
+    href: 'http://www.ufl.edu/',
+    image: { src: '/img/partners/partner_image/33.png', alt: 'University of Florida' }
   },
   {
     href: 'https://cloud.google.com',
