@@ -38,7 +38,10 @@ class MapComponent extends PureComponent {
   hasLayers = layers => layers && layers.length > 0;
 
   componentWillUpdate(nextProps) {
-    const { terrainMode } = this.props;
+    const { terrainMode, updateMapParams } = this.props;
+    if (nextProps.terrainCameraOffset && nextProps.terrainCameraOffset.offset.range > 650000) {
+      updateMapParams({ terrain: false, terrainCameraOffset: undefined });
+    }
     if (nextProps.terrainMode && terrainMode === false) {
       this.gridLayers = {};
     }

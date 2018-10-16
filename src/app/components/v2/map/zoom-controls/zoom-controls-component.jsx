@@ -23,7 +23,7 @@ const ZoomControlsComponent = props => {
 };
 
 ZoomControlsComponent.propTypes = {
-  className: PropTypes.object,
+  className: PropTypes.string,
   handleZoomOut: PropTypes.func.isRequired,
   handleZoomIn: PropTypes.func.isRequired
 };
