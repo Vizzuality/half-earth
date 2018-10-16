@@ -53,7 +53,10 @@ class RootPageComponent extends React.Component {
           </Sidebar>
             )
         }
-        <Map className={cx(styles.mapContainer, { [styles.mapPaddingLeft]: sidebarOpen })} />
+        <Map
+          className={cx(styles.mapContainer, { [styles.mapPaddingLeft]: sidebarOpen })}
+          zoomControls
+        />
         <Toolbar className={styles.toolbar} />
         <Legend />
         <Logos key="Logos" theme={{ partnerFooter: styles.partnerFooter }} />
