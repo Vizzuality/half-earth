@@ -177,5 +177,6 @@ export const mapStateToProps = createStructuredSelector({
   categories: getCategories,
   histogram: getTaxaHistogramPercentage,
   taxas: getTaxaOptions,
-  taxaSelected: getTaxaSelected
+  taxaSelected: getTaxaSelected,
+  cellType: getGridCellType
 });

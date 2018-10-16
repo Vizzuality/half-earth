@@ -18,10 +18,14 @@ class DetailViewComponent extends Component {
       taxaSelected,
       categories,
       handleCloseTerrainClick,
-      handleTaxasChange
+      handleTaxasChange,
+      cellType
     } = this.props;
     if (loading) return <Loading height="100%" />;
     const title = data && data.location ? `Area in ${data.location}` : 'Selected area';
+    const subtitle = cellType && cellType === 'terrestrial'
+      ? 'Global maps with 110km cell size.'
+      : 'Global maps with ~50 km cell size.';
     return (
       <div className={styles.detailViewContainer}>
         <div className={styles.generalInfoCard}>
@@ -31,7 +35,7 @@ class DetailViewComponent extends Component {
           <div className={styles.header}>
             <h2 className={styles.detailTitle}>{title}</h2>
             <p className={styles.detailSubTitle}>
-              Global, ~110 km cell size mapping of terrestrial species.
+              {subtitle}
             </p>
           </div>
           <RarityRichness
@@ -62,6 +66,7 @@ DetailViewComponent.propTypes = {
   histogram: PropTypes.object,
   data: PropTypes.object,
   categories: PropTypes.array,
+  cellType: PropTypes.string,
   handleCloseTerrainClick: PropTypes.func.isRequired,
   handleTaxasChange: PropTypes.func.isRequired
 };
@@ -72,6 +77,7 @@ DetailViewComponent.defaultProps = {
   taxaSelected: {},
   data: {},
   categories: [],
+  cellType: 'terrestrial',
   histogram: null
 };
 
