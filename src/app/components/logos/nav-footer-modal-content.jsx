@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 import styles from './logos-styles.scss';
 
 const partners = [
@@ -20,104 +21,105 @@ const partners = [
 ];
 
 const dataPartners = [
-  {
-    href: 'http://www.amphibians.org/',
-    image: { src: '/img/partners/partner_image/1.png', alt: 'amphibians' }
-  },
-  {
-    href: 'http://www.birdlife.org/',
-    image: { src: '/img/partners/partner_image/2.png', alt: 'BirdLife International' }
-  },
-  {
-    href: 'https://www.rspb.org.uk/',
-    image: { src: '/img/partners/partner_image/3.png', alt: 'rspb' }
-  },
-  {
-    href: 'http://www.cambridgeconservation.org/',
-    image: { src: '/img/partners/partner_image/4.png', alt: 'Cambridge conservation initiative' }
-  },
-  {
-    href: 'https://www.conservation.org/',
-    image: { src: '/img/partners/partner_image/5.png', alt: 'conservation international' }
-  },
-  {
-    href: 'http://www.dlr.de/dlr/en/desktopdefault.aspx/tabid-10002/',
-    image: { src: '/img/partners/partner_image/6.png', alt: 'dlr' }
-  },
+  { href: 'https://mol.org/', image: { src: '/img/partners/mol_logo.png', alt: 'Map of Life' } },
+  // {
+  //   href: 'http://www.amphibians.org/',
+  //   image: { src: '/img/partners/partner_image/1.png', alt: 'amphibians' }
+  // },
+  // {
+  //   href: 'http://www.birdlife.org/',
+  //   image: { src: '/img/partners/partner_image/2.png', alt: 'BirdLife International' }
+  // },
+  // {
+  //   href: 'https://www.rspb.org.uk/',
+  //   image: { src: '/img/partners/partner_image/3.png', alt: 'rspb' }
+  // },
+  // {
+  //   href: 'http://www.cambridgeconservation.org/',
+  //   image: { src: '/img/partners/partner_image/4.png', alt: 'Cambridge conservation initiative' }
+  // },
+  // {
+  //   href: 'https://www.conservation.org/',
+  //   image: { src: '/img/partners/partner_image/5.png', alt: 'conservation international' }
+  // },
+  // {
+  //   href: 'http://www.dlr.de/dlr/en/desktopdefault.aspx/tabid-10002/',
+  //   image: { src: '/img/partners/partner_image/6.png', alt: 'dlr' }
+  // },
   {
     href: 'https://www.gbif.org/',
     image: { src: '/img/partners/partner_image/7.png', alt: 'gbif' }
   },
-  {
-    href: 'https://www.thegef.org/',
-    image: { src: '/img/partners/partner_image/8.png', alt: 'gef' }
-  },
-  {
-    href: 'https://www.globalwildlife.org/',
-    image: { src: '/img/partners/partner_image/9.png', alt: 'global wildlife conservation' }
-  },
-  {
-    href: 'https://www.islandconservation.org/',
-    image: { src: '/img/partners/partner_image/10.png', alt: 'island conservation' }
-  },
+  // {
+  //   href: 'https://www.thegef.org/',
+  //   image: { src: '/img/partners/partner_image/8.png', alt: 'gef' }
+  // },
+  // {
+  //   href: 'https://www.globalwildlife.org/',
+  //   image: { src: '/img/partners/partner_image/9.png', alt: 'global wildlife conservation' }
+  // },
+  // {
+  //   href: 'https://www.islandconservation.org/',
+  //   image: { src: '/img/partners/partner_image/10.png', alt: 'island conservation' }
+  // },
   {
     href: 'https://www.iucn.org/',
     image: { src: '/img/partners/partner_image/11.png', alt: 'iucn' }
   },
-  {
-    href: 'http://luchoffmanninstitute.org/',
-    image: { src: '/img/partners/partner_image/12.png', alt: 'luc hoffmann institute' }
-  },
-  {
-    href: 'http://www.nhm.ac.uk/',
-    image: { src: '/img/partners/partner_image/15.png', alt: 'natural history museum' }
-  },
-  {
-    href: 'http://www.natureserve.org/',
-    image: { src: '/img/partners/partner_image/16.png', alt: 'nature serve' }
-  },
-  {
-    href: 'https://www.nature.org/',
-    image: { src: '/img/partners/partner_image/17.png', alt: 'the nature conservancy' }
-  },
+  // {
+  //   href: 'http://luchoffmanninstitute.org/',
+  //   image: { src: '/img/partners/partner_image/12.png', alt: 'luc hoffmann institute' }
+  // },
+  // {
+  //   href: 'http://www.nhm.ac.uk/',
+  //   image: { src: '/img/partners/partner_image/15.png', alt: 'natural history museum' }
+  // },
+  // {
+  //   href: 'http://www.natureserve.org/',
+  //   image: { src: '/img/partners/partner_image/16.png', alt: 'nature serve' }
+  // },
+  // {
+  //   href: 'https://www.nature.org/',
+  //   image: { src: '/img/partners/partner_image/17.png', alt: 'the nature conservancy' }
+  // },
+  // { href: 'https://www.wcs.org', image: { src: '/img/partners/partner_image/21.png', alt: 'wcs' } },
+  // {
+  //   href: 'https://www.worldwildlife.org/',
+  //   image: { src: '/img/partners/partner_image/22.png', alt: 'wwf' }
+  // }
   {
     href: 'https://www.unep-wcmc.org/',
     image: { src: '/img/partners/partner_image/19.png', alt: 'unep-wcmc' }
-  },
-  { href: 'https://www.wcs.org', image: { src: '/img/partners/partner_image/21.png', alt: 'wcs' } },
-  {
-    href: 'https://www.worldwildlife.org/',
-    image: { src: '/img/partners/partner_image/22.png', alt: 'wwf' }
   }
 ];
 
 const researchPartners = [
-  {
-    href: 'https://www.amnh.org/',
-    image: { src: '/img/partners/partner_image/23.png', alt: 'American Museum of Natural History' }
-  },
-  {
-    href: 'https://www.calacademy.org/',
-    image: { src: '/img/partners/partner_image/24.png', alt: 'California academy of sciences' }
-  },
-  {
-    href: 'http://www.mcz.harvard.edu',
-    image: { src: '/img/partners/partner_image/26.png', alt: 'missouri botanical garden' }
-  },
-  {
-    href: 'http://www.mncn.csic.es',
-    image: { src: '/img/partners/partner_image/27.png', alt: 'museum of comparative zoology' }
-  },
-  {
-    href: 'https://www.nybg.org',
-    image: { src: '/img/partners/partner_image/28.png', alt: 'mncn' }
-  },
-  {
-    href: 'http://www.missouribotanicalgarden.org/',
-    image: { src: '/img/partners/partner_image/25.png', alt: 'nybg' }
-  },
-  { href: 'http://www.esf.org/', image: { src: '/img/partners/partner_image/29.png', alt: 'esf' } },
-  { href: 'http://dlia.org/', image: { src: '/img/partners/partner_image/30.png', alt: 'DLiA' } },
+  // {
+  //   href: 'https://www.amnh.org/',
+  //   image: { src: '/img/partners/partner_image/23.png', alt: 'American Museum of Natural History' }
+  // },
+  // {
+  //   href: 'https://www.calacademy.org/',
+  //   image: { src: '/img/partners/partner_image/24.png', alt: 'California academy of sciences' }
+  // },
+  // {
+  //   href: 'http://www.mcz.harvard.edu',
+  //   image: { src: '/img/partners/partner_image/26.png', alt: 'missouri botanical garden' }
+  // },
+  // {
+  //   href: 'http://www.mncn.csic.es',
+  //   image: { src: '/img/partners/partner_image/27.png', alt: 'museum of comparative zoology' }
+  // },
+  // {
+  //   href: 'https://www.nybg.org',
+  //   image: { src: '/img/partners/partner_image/28.png', alt: 'mncn' }
+  // },
+  // {
+  //   href: 'http://www.missouribotanicalgarden.org/',
+  //   image: { src: '/img/partners/partner_image/25.png', alt: 'nybg' }
+  // },
+  // { href: 'http://www.esf.org/', image: { src: '/img/partners/partner_image/29.png', alt: 'esf' } },
+  // { href: 'http://dlia.org/', image: { src: '/img/partners/partner_image/30.png', alt: 'DLiA' } },
   {
     href: 'https://www.yale.edu/',
     image: { src: '/img/partners/partner_image/33.png', alt: 'Yale University' }
@@ -132,66 +134,50 @@ const researchPartners = [
   }
 ];
 
-const engagementPartners = [
-  {
-    href: 'http://www.msichicago.org/',
-    image: { src: '/img/partners/partner_image/31.png', alt: 'msic' }
-  },
-  {
-    href: 'http://www.opsociety.org/',
-    image: { src: '/img/partners/partner_image/32.png', alt: 'OPS' }
-  }
-];
-
-const modelConservationEffortsPartners = [
-  { href: 'http://tesf.org/', image: { src: '/img/partners/partner_image/14.png', alt: 'tesf' } },
-  {
-    href: 'http://www.gorongosa.org/',
-    image: { src: '/img/partners/partner_image/13.png', alt: 'gorongosa' }
-  },
-  {
-    href: 'http://www.tompkinsconservation.org/home.htm',
-    image: { src: '/img/partners/partner_image/18.png', alt: 'tompkings conservation' }
-  }
-];
-
 const sections = [
   {
     title: 'Half-earth mapping core',
-    subtitle: 'The Half-Earth Project is a program of the E.O. Wilson Biodiversity Foundation.',
+    subtitle: 'The Half-Earth Project is a program of the E.O. Wilson Biodiversity Foundation. Map of Life mobilizes, integrates and analyzes data on species and their environment to provide information, tools and services in support of global biodiversity monitoring, research, decision-making, and education. Vizzuality brings this information to life.',
     content: partners
   },
-  {
-    title: 'Half-Earth Mapping Initiative',
-    subtitle: 'The Map of Life team provides a tool that collects and analyzes species distribution datasets that help us understand our world. Vizzuality brings this data to life through cutting-edge mapping engineering and visualization.'
-  },
+  { title: 'Sponsors', subtitle: 'Jeff and Laurie Ubben' },
   { title: 'Data Partners', content: dataPartners },
-  { title: 'Research Partners', content: researchPartners },
-  { title: 'Engagement Partners', content: engagementPartners },
-  { title: 'Model Conservation Efforts Partners', content: modelConservationEffortsPartners },
-  { title: 'Sponsors', subtitle: 'Jeff and Laurie Ubben' }
+  { title: 'Research Partners', content: researchPartners }
 ];
 
-const ModalContent = props => (
+const ModalContent = () => (
   <div className={styles.footerModal}>
     <div className={styles.contain}>
-      {sections.map(({ title, subtitle, content, className }) => [
+      {sections.map(({ title, subtitle, content }) => [
         <h1 className={subtitle ? styles.smallerBottomMargin : ''} key={title}>{title}</h1>,
-        <p className={styles.subtitle} key={subtitle}>{subtitle}</p>,
         (
           <div key={`${title}content`} className={content ? styles.containImages : ''}>
-            {content && content.map(logo => <ModalLogo key={logo.href} {...logo} />)}
+            {content && content.map(logo => <ModalLogo key={logo.href} {...logo} className />)}
           </div>
-        )
+        ),
+        <p className={styles.subtitle} key={subtitle}>{subtitle}</p>
       ])}
     </div>
   </div>
 );
 
 const ModalLogo = ({ href, image, className }) => (
-  <a href={href} target="_blank" className={cx(styles.imageContainer, className)}>
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={cx(styles.imageContainer, className)}
+  >
     <img src={image.src} alt={image.alt} className={image.className} />
   </a>
 );
+
+ModalLogo.propTypes = {
+  href: PropTypes.string.isRequired,
+  image: PropTypes.object.isRequired,
+  className: PropTypes.string
+};
+
+ModalLogo.defaultProps = { className: '' };
 
 export default ModalContent;
