@@ -7,6 +7,7 @@ import ProtectedAreasLayer from 'components/v2/map/protected-areas-layer';
 import StoriesLayer from 'components/v2/map/stories-layer';
 import PlacesLayer from 'components/v2/map/places-layer';
 import PledgesLayer from 'components/v2/map/pledges-layer';
+import ZoomControls from 'components/v2/map/zoom-controls';
 import { LayerManager } from 'layer-manager/dist/react';
 import { PluginCesium } from 'layer-manager';
 import MapTooltip from 'components/v2/map-tooltip';
@@ -37,7 +38,10 @@ class MapComponent extends PureComponent {
   hasLayers = layers => layers && layers.length > 0;
 
   componentWillUpdate(nextProps) {
-    const { terrainMode } = this.props;
+    const { terrainMode, updateMapParams } = this.props;
+    if (nextProps.terrainCameraOffset && nextProps.terrainCameraOffset.offset.range > 650000) {
+      updateMapParams({ terrain: false, terrainCameraOffset: undefined });
+    }
     if (nextProps.terrainMode && terrainMode === false) {
       this.gridLayers = {};
     }
@@ -248,7 +252,8 @@ class MapComponent extends PureComponent {
       terrainCameraOffset,
       cellCoordinates,
       activeMarker,
-      reservesTooltip
+      reservesTooltip,
+      zoomControls
     } = this.props;
     const hasActiveLayers = this.hasLayers(layers);
     const hasGridLayers = this.hasLayers(gridLayers);
@@ -280,6 +285,7 @@ class MapComponent extends PureComponent {
 
           return (
             <React.Fragment>
+              {zoomControls && <ZoomControls map={map} className={styles.zoomControls} />}
               {
                 hasActiveLayers &&
                   <LayerManager map={map} plugin={PluginCesium} layersSpec={layers} />
@@ -354,6 +360,7 @@ MapComponent.propTypes = {
   gridLayers: PropTypes.array,
   protectedAreasLayer: PropTypes.array,
   terrainMode: PropTypes.bool,
+  zoomControls: PropTypes.bool,
   className: PropTypes.string,
   coordinates: PropTypes.object,
   coordinatesOptions: PropTypes.object,
@@ -372,6 +379,7 @@ MapComponent.defaultProps = {
   protectedAreasLayer: [],
   className: '',
   terrainMode: false,
+  zoomControls: false,
   coordinates: undefined,
   coordinatesOptions: undefined,
   terrainCameraOffset: undefined,
