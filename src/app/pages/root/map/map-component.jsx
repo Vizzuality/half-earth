@@ -50,12 +50,16 @@ class MapComponent extends PureComponent {
   handleMouseMove = e => {
     if (this.map) {
       const { scene } = this.map;
+      const outOfBounds = e.endPosition.x < 7 || e.endPosition.y < 7;
       const pickedObject = scene.pick(e.endPosition);
-      if (Cesium.defined(pickedObject)) {
+      if (outOfBounds) {
+        this.handleOutOfBoundsHover(scene);
+      }
+      if (Cesium.defined(pickedObject) && !outOfBounds) {
         document.body.style.cursor = 'pointer';
         switch (pickedObject.id.type) {
           case 'grid':
-            this.handleGridHover(e, pickedObject);
+            this.handleGridHover(e, pickedObject, scene);
             break;
           case 'protected-area':
             document.body.style.cursor = 'pointer';
@@ -72,12 +76,12 @@ class MapComponent extends PureComponent {
         }
       } else {
         document.body.style.cursor = 'default';
-        this.handleNoEntityHover();
+        this.handleOutOfBoundsHover(scene);
       }
     }
   };
 
-  handleGridHover = (e, object) => {
+  handleGridHover = (e, object, scene) => {
     const gridLayer = this.gridLayers[object.id.slug];
     const { primitive } = gridLayer;
     const { activeGridCellId } = this.props;
@@ -90,6 +94,7 @@ class MapComponent extends PureComponent {
         attributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
           Cesium.Color.fromBytes(24, 186, 180, 100)
         );
+        scene.requestRender();
       }
       if (this.lastObjId) {
         const lastGridLayer = this.gridLayers[this.lastObjId.slug];
@@ -99,6 +104,7 @@ class MapComponent extends PureComponent {
           lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
             Cesium.Color.WHITE.withAlpha(0.01)
           );
+          scene.requestRender();
         }
       }
       this.lastObjId = object.id;
@@ -133,6 +139,25 @@ class MapComponent extends PureComponent {
         });
       this.lastObjId = null;
     }
+  };
+
+  handleOutOfBoundsHover = scene => {
+    this.cleanGridEntities(scene);
+  };
+
+  cleanGridEntities = scene => {
+    if (this.lastObjId) {
+      const lastGridLayer = this.gridLayers[this.lastObjId.slug];
+      const lastAttributes = lastGridLayer &&
+        lastGridLayer.primitive.getGeometryInstanceAttributes(this.lastObjId);
+      if (lastAttributes) {
+        lastAttributes.color = Cesium.ColorGeometryInstanceAttribute.toValue(
+          Cesium.Color.WHITE.withAlpha(0.01)
+        );
+        scene.requestRender();
+      }
+    }
+    this.lastObjId = null;
   };
 
   handleMouseClick = e => {
@@ -245,7 +270,8 @@ class MapComponent extends PureComponent {
       className,
       layers,
       gridLayers,
-      protectedAreasLayer,
+      protectedAreasAcive,
+      protectedAreasLayers,
       coordinates,
       coordinatesOptions,
       updateMapParams,
@@ -257,7 +283,7 @@ class MapComponent extends PureComponent {
     } = this.props;
     const hasActiveLayers = this.hasLayers(layers);
     const hasGridLayers = this.hasLayers(gridLayers);
-    const hasProtectedAreasLayer = this.hasLayers(protectedAreasLayer);
+    const hasProtectedAreasLayer = this.hasLayers(protectedAreasAcive);
     const isStoriesActive = this.hasLayers(layers) && layers.some(l => l.id === 'stories');
     const isPlacesActive = this.hasLayers(layers) && layers.some(l => l.id === 'places-to-watch');
     const pledgesLayer = this.hasLayers(layers) && layers.find(l => l.id === 'signed-pledges');
@@ -293,12 +319,11 @@ class MapComponent extends PureComponent {
               {
                 terrainMode &&
                   hasProtectedAreasLayer &&
-                  hasGridLayers &&
                   (
                     <ProtectedAreasLayer
                       map={map}
-                      conservationAreasActive={protectedAreasLayer}
-                      gridLayers={gridLayers}
+                      conservationAreasActive={protectedAreasAcive}
+                      layers={protectedAreasLayers}
                       gridCellCoordinates={cellCoordinates}
                     />
                   )
@@ -358,7 +383,8 @@ MapComponent.propTypes = {
   query: PropTypes.object,
   layers: PropTypes.array,
   gridLayers: PropTypes.array,
-  protectedAreasLayer: PropTypes.array,
+  protectedAreasAcive: PropTypes.array,
+  protectedAreasLayers: PropTypes.array,
   terrainMode: PropTypes.bool,
   zoomControls: PropTypes.bool,
   className: PropTypes.string,
@@ -376,7 +402,8 @@ MapComponent.defaultProps = {
   query: null,
   layers: [],
   gridLayers: [],
-  protectedAreasLayer: [],
+  protectedAreasAcive: [],
+  protectedAreasLayers: [],
   className: '',
   terrainMode: false,
   zoomControls: false,
