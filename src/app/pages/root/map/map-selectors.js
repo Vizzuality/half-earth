@@ -20,10 +20,15 @@ export const getLayersFiltered = createSelector([ getLayers ], datasets => {
 
 export const getGridLayers = createSelector([ getLayers ], layers => {
   if (!layers) return undefined;
-  return layers.filter(d => d.dataset === 'grids');
+  return layers.filter(d => d.dataset === 'grids' && !d.id.includes('protected'));
 });
 
-export const getProtectedAreasLayer = createSelector([ getLayersFiltered ], layers => {
+export const getProtectedAreasLayers = createSelector([ getLayers ], layers => {
+  if (!layers) return undefined;
+  return layers.filter(d => d.dataset === 'grids' && d.id.includes('protected'));
+});
+
+export const getProtectedAreasActive = createSelector([ getLayersFiltered ], layers => {
   if (!layers) return undefined;
   return layers.filter(d => d.dataset.includes('protected'));
 });
@@ -67,7 +72,8 @@ export const getGridCellId = createSelector([ selectQueryParams ], query => {
 export const mapStateToProps = createStructuredSelector({
   layers: getLayersFiltered,
   gridLayers: getGridLayers,
-  protectedAreasLayer: getProtectedAreasLayer,
+  protectedAreasAcive: getProtectedAreasActive,
+  protectedAreasLayers: getProtectedAreasLayers,
   terrainMode: getIsTerrain,
   query: selectQueryParams,
   coordinates: getCoordinates,
