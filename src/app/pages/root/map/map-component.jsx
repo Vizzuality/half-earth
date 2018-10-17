@@ -292,6 +292,7 @@ class MapComponent extends PureComponent {
     return (
       <CesiumMap
         className={cx(styles.mapContainer, className)}
+        layers={layers}
         coordinates={coordinates}
         terrainMode={terrainMode}
         coordinatesOptions={coordinatesOptions}
