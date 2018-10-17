@@ -29,8 +29,12 @@ class CesiumComponent extends Component {
     creditsDisplay: false,
     fullscreenButton: false,
     terrainExaggeration: 2.0,
+    terrainProvider: Cesium.createWorldTerrain({ requestWaterMask: true }),
+    // Performance improvements
+    // for more context check:
+    // https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/
     requestRenderMode: true,
-    terrainProvider: Cesium.createWorldTerrain()
+    maximumRenderTimeChange: Infinity
   };
 
   rotating = false;
@@ -43,7 +47,6 @@ class CesiumComponent extends Component {
     const { coordinates, camera } = this.props;
     this.viewer = new Cesium.Viewer(mapId, CesiumComponent.mapConfig);
     this.handler = new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas);
-
     if (coordinates) this.setCoordinates();
     if (camera) this.setCamera();
     this.setEventListeners();
@@ -63,6 +66,7 @@ class CesiumComponent extends Component {
       cellCoordinates
     } = this.props;
     if (this.viewer) {
+      this.updateAtmosphereState(terrainMode);
       if (!this.rotating && rotate) this.addRotation();
       if (this.rotating && !rotate) this.removeRotation();
       if (onTick && !this.ticking) this.addTick();
@@ -134,8 +138,21 @@ class CesiumComponent extends Component {
     }
   };
 
+  updateAtmosphereState = terrainMode => {
+    if (!terrainMode) {
+      setTimeout(
+        () => {
+          this.viewer.scene.skyAtmosphere.show = false;
+        },
+        2000
+      );
+    } else {
+      this.viewer.scene.skyAtmosphere.show = true;
+    }
+  };
+
+  // Clean previous grid cell
   renderGridCell(cellCoordinates, rectangle) {
-    // Clean previous grid cell
     if (rectangle) {
       this.viewer.entities.remove(this.rectangle);
     }
