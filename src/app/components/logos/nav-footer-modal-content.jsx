@@ -95,7 +95,7 @@ const researchPartners = [
 const sections = [
   {
     title: 'Half-earth mapping core',
-    subtitle: 'The Half-Earth Project and Half-Earth Map are initiatives of the E.O. Wilson Biodiversity Foundation. As part of the Half-Earth Project Mapping Core, the Map of Life team mobilizes and analyzes high resolution geospatial species distribution data to guide where we have the best opportunity to protect the most species.  Vizzuality brings this data to life through cutting-edge mapping engineering and visualization that integrates multiple layers of information to support conservation management decision-making and engage people in the grand ambition of Half-Earth.',
+    subtitle: 'The Half-Earth Project is an initiative of the E.O. Wilson Biodiversity Foundation. Map of Life utilizes geospatial species distribution data and analytics to guide where we have the best opportunity to conserve the most species. Vizzuality brings this information to life.',
     content: partners
   },
   { title: 'Sponsors', subtitle: 'Jeff and Laurie Ubben' },
