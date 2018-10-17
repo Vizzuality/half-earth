@@ -1,0 +1,18 @@
+@import '~styles/variables.scss';
+
+.zoomContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-white;
+  width: 32px;
+  border-radius: 4px;
+}
+
+.button {
+  padding: 0;
+  height: 32px;
+
+  &:hover {
+    background-color: $color-turquoise;
+  }
+}

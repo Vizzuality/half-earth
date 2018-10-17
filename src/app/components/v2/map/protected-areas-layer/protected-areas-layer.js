@@ -58,9 +58,9 @@ class ProtectedAreasLayer extends Component {
   }
 
   async renderAreas(conservationAreasActive) {
-    const { gridCellCoordinates, gridLayers } = this.props;
+    const { gridCellCoordinates, layers } = this.props;
     const areasToFetch = conservationAreasActive.map(ca => ca.slug);
-    const layersConfig = gridLayers.reduce(
+    const layersConfig = layers.reduce(
       (acc, l) => {
         let areaConfig;
         areasToFetch.forEach(area => {

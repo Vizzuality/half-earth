@@ -3,3 +3,10 @@
 .mapContainer {
   height: 100vh;
 }
+
+.zoomControls {
+  position: absolute;
+  // tooltip component height plus gutter
+  top: calc(128px + #{$site-gutter * 2});
+  right: $site-gutter;
+}
