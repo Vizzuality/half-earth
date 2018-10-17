@@ -2,7 +2,7 @@
     "is_tile_layer": false,
     "slug":"protected-community-interact",
     "category": null,
-    "dataset": "interact",
+    "dataset": "grids",
     "layer_name":"Community-based conservation areas interactions",
     "description": null,
     "sql": "WITH b as (SELECT st_setsrid(st_geomfromgeojson('{{bounds}}'), 4326) as the_geom) SELECT ST_AsGeoJSON(cca.the_geom) as the_geom, cca.name, cca.status, cca.source FROM community_conservation_areas as cca, b WHERE ST_Intersects(cca.the_geom, b.the_geom)",
