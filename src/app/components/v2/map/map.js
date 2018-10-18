@@ -104,8 +104,9 @@ class CesiumComponent extends Component {
       onMouseClick,
       onMoveStart,
       onMoveEnd,
-      onCameraChanged,
-      onDoubleClick
+      onDoubleClick,
+      onMouseDown,
+      onMouseUp
     } = this.props;
 
     if (onMouseMove) {
@@ -117,14 +118,17 @@ class CesiumComponent extends Component {
     if (onDoubleClick) {
       this.handler.setInputAction(onDoubleClick, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
     }
+    if (onMouseDown) {
+      this.handler.setInputAction(onMouseDown, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+    }
+    if (onMouseUp) {
+      this.handler.setInputAction(onMouseUp, Cesium.ScreenSpaceEventType.LEFT_UP);
+    }
     if (onMoveStart) {
       this.viewer.camera.moveStart.addEventListener(onMoveStart);
     }
     if (onMoveEnd) {
       this.viewer.camera.moveEnd.addEventListener(this.handleMoveEnd);
-    }
-    if (onCameraChanged) {
-      this.viewer.camera.changed.addEventListener(onCameraChanged);
     }
   }
 
@@ -270,7 +274,8 @@ CesiumComponent.propTypes = {
   onMouseMove: PropTypes.func,
   onMouseClick: PropTypes.func,
   onMoveStart: PropTypes.func,
-  onCameraChanged: PropTypes.func,
+  onMouseDown: PropTypes.func,
+  onMouseUp: PropTypes.func,
   onDoubleClick: PropTypes.func,
   lockNavigation: PropTypes.bool,
   rotate: PropTypes.func,
@@ -293,7 +298,9 @@ CesiumComponent.defaultProps = {
   },
   onMoveStart: () => {
   },
-  onCameraChanged: () => {
+  onMouseDown: () => {
+  },
+  onMouseUp: () => {
   },
   onDoubleClick: () => {
   },
