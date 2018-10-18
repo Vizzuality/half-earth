@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Loading, Dropdown } from 'he-components';
+import { Loading, Dropdown, Button, Icon } from 'he-components';
+
+import infoIcon from 'assets/icons/icon-info.svg';
 
 import Histogram from './histogram';
 import styles from './rarity-richness-styles';
 
 class RarityRichnessComponent extends Component {
   render() {
-    const { loading, data = {}, taxas, selected, histogram, handleTaxasChange } = this.props;
+    const {
+      loading,
+      data = {},
+      taxas,
+      selected,
+      histogram,
+      handleTaxasChange,
+      handleMetadataClick
+    } = this.props;
     const { richness, rarity } = data;
 
     if (loading) return <Loading height="100%" />;
@@ -35,7 +45,12 @@ class RarityRichnessComponent extends Component {
           </span>
             )
         }
-        <Histogram data={data} values={histogram} />
+        <div className={styles.histogramContainer}>
+          <Histogram data={data} values={histogram} />
+          <Button theme={styles} onClick={handleMetadataClick}>
+            <Icon icon={infoIcon} />
+          </Button>
+        </div>
       </div>
     );
   }
@@ -47,7 +62,8 @@ RarityRichnessComponent.propTypes = {
   taxas: PropTypes.array,
   selected: PropTypes.object,
   histogram: PropTypes.shape({ richness: PropTypes.array, rarity: PropTypes.array }),
-  handleTaxasChange: PropTypes.func.isRequired
+  handleTaxasChange: PropTypes.func.isRequired,
+  handleMetadataClick: PropTypes.func.isRequired
 };
 
 RarityRichnessComponent.defaultProps = {

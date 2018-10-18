@@ -5,8 +5,25 @@
 }
 
 .modal {
-  height: auto;
-  padding: 60px 90px;
+  padding: 20px 0;
+  max-width: 100%;
+  height: 100vh;
+  position: absolute;
+
+  @media #{$tablet-landscape} {
+    position: relative;
+    max-width: 80%;
+    height: auto;
+    padding: 60px 90px;
+  }
+}
+
+.closeBtn {
+  top: 20px;
+
+  @media #{$tablet-portrait} {
+    top: 35px;
+  }
 }
 
 .contentContainer {
@@ -59,19 +76,29 @@
 
 .row {
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  @media #{$tablet-portrait} {
+    flex-direction: row;
+  }
 }
 
 .column {
-  flex: 50%;
   display: flex;
-  padding-right: 20px;
+  flex-direction: row;
+  margin-left: 15px;
 }
 
 .columnText {
   line-height: 1.3;
   font-size: 14px;
+  padding: 10px 0;
+  width: 160px;
 }
 
 .image {
   height: 115px;
+  width: 115px;
+  margin-left: 15px;
 }
