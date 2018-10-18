@@ -26,6 +26,7 @@ class MapComponent extends PureComponent {
   constructor(props) {
     super(props);
     this.map = null;
+    this.grabbing = false;
     // config for map primitives
     this.lastObjId = null;
     this.lastMarkerHovered = null;
@@ -38,10 +39,7 @@ class MapComponent extends PureComponent {
   hasLayers = layers => layers && layers.length > 0;
 
   componentWillUpdate(nextProps) {
-    const { terrainMode, updateMapParams } = this.props;
-    if (nextProps.terrainCameraOffset && nextProps.terrainCameraOffset.offset.range > 650000) {
-      updateMapParams({ terrain: false, terrainCameraOffset: undefined });
-    }
+    const { terrainMode } = this.props;
     if (nextProps.terrainMode && terrainMode === false) {
       this.gridLayers = {};
     }
@@ -50,11 +48,15 @@ class MapComponent extends PureComponent {
   handleMouseMove = e => {
     if (this.map) {
       const { scene } = this.map;
+      // out of the maps clearings
       const outOfBounds = e.endPosition.x < 7 || e.endPosition.y < 7;
-      const pickedObject = scene.pick(e.endPosition);
       if (outOfBounds) {
         this.handleOutOfBoundsHover(scene);
       }
+      // set default cursor
+      document.body.style.cursor = this.grabbing ? 'grabbing' : 'grab';
+      // handle entities hover
+      const pickedObject = scene.pick(e.endPosition);
       if (Cesium.defined(pickedObject) && !outOfBounds) {
         document.body.style.cursor = 'pointer';
         switch (pickedObject.id.type) {
@@ -71,12 +73,8 @@ class MapComponent extends PureComponent {
             this.handleMarkerHovered(pickedObject);
             break;
           default:
-            document.body.style.cursor = 'default';
             this.handleNoEntityHover();
         }
-      } else {
-        document.body.style.cursor = 'default';
-        this.handleOutOfBoundsHover(scene);
       }
     }
   };
@@ -191,6 +189,28 @@ class MapComponent extends PureComponent {
     }
   };
 
+  handleOnMouseDown = e => {
+    if (this.map) {
+      const pickedObject = this.map.scene.pick(e.position);
+      if (!pickedObject) {
+        this.grabbing = true;
+        document.body.style.cursor = 'grabbing';
+      }
+    }
+  };
+
+  handleOnMouseUp = e => {
+    if (this.map) {
+      const pickedObject = this.map.scene.pick(e.position);
+      if (!pickedObject) {
+        this.grabbing = false;
+        document.body.style.cursor = 'grab';
+      } else {
+        document.body.style.cursor = 'default';
+      }
+    }
+  };
+
   getDestinationCoordsFromClick = (x, y, height = 5000000.0) => {
     const cartesian = this.map.camera.pickEllipsoid(new Cesium.Cartesian2(x, y));
     const { longitude, latitude } = this.map.scene.globe.ellipsoid.cartesianToCartographic(
@@ -301,8 +321,9 @@ class MapComponent extends PureComponent {
         onMouseMove={this.handleMouseMove}
         onMouseClick={this.handleMouseClick}
         onDoubleClick={this.handleDoubleClick}
+        onMouseDown={this.handleOnMouseDown}
+        onMouseUp={this.handleOnMouseUp}
         onMoveStart={this.handleMapMoveStart}
-        onCameraChanged={this.handleCameraChanged}
         onMoveEnd={updateMapParams}
       >
         {map => {

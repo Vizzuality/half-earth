@@ -90,7 +90,7 @@ class ModalMetadata extends PureComponent {
 ModalMetadata.propTypes = {
   title: PropTypes.string,
   loading: PropTypes.bool,
-  metadata: PropTypes.array,
+  metadata: PropTypes.object,
   isOpen: PropTypes.bool.isRequired,
   setModalMetadataParams: PropTypes.func.isRequired
 };
