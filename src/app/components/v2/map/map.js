@@ -1,6 +1,6 @@
 import { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
-import { mapValues } from 'lodash';
+import { mapValues, isEqual } from 'lodash';
 import CesiumMapComponent from './map-component';
 
 // const { MAPBOX_TOKEN } = process.env;
@@ -63,9 +63,13 @@ class CesiumComponent extends Component {
       camera,
       terrainMode,
       terrainCameraOffset,
-      cellCoordinates
+      cellCoordinates,
+      layers
     } = this.props;
     if (this.viewer) {
+      if (!isEqual(prevProps.layers, layers)) {
+        this.viewer.scene.requestRender();
+      }
       this.updateAtmosphereState(terrainMode);
       if (!this.rotating && rotate) this.addRotation();
       if (this.rotating && !rotate) this.removeRotation();
@@ -262,7 +266,8 @@ CesiumComponent.propTypes = {
   camera: PropTypes.object,
   terrainMode: PropTypes.bool,
   terrainCameraOffset: PropTypes.object,
-  cellCoordinates: PropTypes.array
+  cellCoordinates: PropTypes.array,
+  layers: PropTypes.array
 };
 
 CesiumComponent.defaultProps = {
@@ -286,7 +291,8 @@ CesiumComponent.defaultProps = {
   camera: null,
   terrainMode: false,
   terrainCameraOffset: undefined,
-  cellCoordinates: undefined
+  cellCoordinates: undefined,
+  layers: []
 };
 
 export default CesiumComponent;
