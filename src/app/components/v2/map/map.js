@@ -70,10 +70,10 @@ class CesiumComponent extends Component {
       if (!isEqual(prevProps.layers, layers)) {
         this.viewer.scene.requestRender();
       }
-      this.updateAtmosphereState(terrainMode);
       if (!this.rotating && rotate) this.addRotation();
       if (this.rotating && !rotate) this.removeRotation();
       if (onTick && !this.ticking) this.addTick();
+      this.updateAtmosphereState(terrainMode);
       if (camera && prevProps.camera !== camera) this.setCamera();
       if (lockNavigation) disablePanning(this.viewer);
       if (terrainMode) {
@@ -104,9 +104,11 @@ class CesiumComponent extends Component {
       onMouseClick,
       onMoveStart,
       onMoveEnd,
-      onCameraChanged,
-      onDoubleClick
+      onDoubleClick,
+      onMouseDown,
+      onMouseUp
     } = this.props;
+
     if (onMouseMove) {
       this.handler.setInputAction(onMouseMove, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
     }
@@ -116,14 +118,17 @@ class CesiumComponent extends Component {
     if (onDoubleClick) {
       this.handler.setInputAction(onDoubleClick, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
     }
+    if (onMouseDown) {
+      this.handler.setInputAction(onMouseDown, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+    }
+    if (onMouseUp) {
+      this.handler.setInputAction(onMouseUp, Cesium.ScreenSpaceEventType.LEFT_UP);
+    }
     if (onMoveStart) {
       this.viewer.camera.moveStart.addEventListener(onMoveStart);
     }
     if (onMoveEnd) {
       this.viewer.camera.moveEnd.addEventListener(this.handleMoveEnd);
-    }
-    if (onCameraChanged) {
-      this.viewer.camera.changed.addEventListener(onCameraChanged);
     }
   }
 
@@ -196,9 +201,11 @@ class CesiumComponent extends Component {
   }
 
   handleMoveEnd = () => {
-    const { coordinates = [], coordinatesOptions = {}, terrainMode } = this.props;
+    const { coordinates = [], coordinatesOptions = {}, terrainMode, onMoveEnd } = this.props;
     const { orientation = {} } = coordinatesOptions;
-    const { x, y, z } = this.viewer.camera.position;
+    const { position, positionCartographic } = this.viewer.camera;
+    const { x, y, z } = position;
+    const { height } = positionCartographic;
     const { heading, pitch, roll } = this.viewer.camera;
     const isDifferentCoordinates = coordinates[0] !== x ||
       coordinates[1] !== y ||
@@ -208,7 +215,17 @@ class CesiumComponent extends Component {
       orientation.roll !== roll;
 
     if ((isDifferentCoordinates || isDifferentOrientation) && !terrainMode) {
-      this.props.onMoveEnd({ coordinates: { x, y, z }, orientation: [ heading, pitch, roll ] });
+      onMoveEnd({ coordinates: { x, y, z }, orientation: [ heading, pitch, roll ] });
+    }
+    // Exit terrain mode when zooming out beyond a threshold
+    if (terrainMode && height > 250000.0) {
+      onMoveEnd({
+        taxa: undefined,
+        cellId: undefined,
+        terrain: undefined,
+        terrainCameraOffset: undefined,
+        orientation: [ 0, -1.5707963267948966, 6.283185307179586 ]
+      });
     }
   };
 
@@ -257,7 +274,8 @@ CesiumComponent.propTypes = {
   onMouseMove: PropTypes.func,
   onMouseClick: PropTypes.func,
   onMoveStart: PropTypes.func,
-  onCameraChanged: PropTypes.func,
+  onMouseDown: PropTypes.func,
+  onMouseUp: PropTypes.func,
   onDoubleClick: PropTypes.func,
   lockNavigation: PropTypes.bool,
   rotate: PropTypes.func,
@@ -280,7 +298,9 @@ CesiumComponent.defaultProps = {
   },
   onMoveStart: () => {
   },
-  onCameraChanged: () => {
+  onMouseDown: () => {
+  },
+  onMouseUp: () => {
   },
   onDoubleClick: () => {
   },
