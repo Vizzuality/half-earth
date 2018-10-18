@@ -31,7 +31,8 @@ export const getTaxaOptions = createSelector([ getCellData ], data => {
 
 export const getTaxaSelected = createSelector([ getTaxaOptions, getTaxa ], (taxas, selected) => {
   if (!taxas) return null;
-  return selected ? taxas.find(taxa => taxa.slug === selected) : taxas[0];
+  const selectedTaxa = taxas.find(taxa => taxa.slug === selected);
+  return selectedTaxa || taxas[0];
 });
 
 export const getCellTaxaDataSelected = createSelector([ getCellData, getTaxaSelected ], (
