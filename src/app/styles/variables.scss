@@ -23,12 +23,24 @@ $column-width: 40vw;
 $header-height: 0px;/* stylelint-disable-line */
 $max-width: 600px;
 $min-width: 430px;
-// $sidebar-header-height: 115px;
 $sidebar-header-height: 65px;
 
 $pop-up-button-top: 35px;
 $pop-up-button-right: 60px;
 
+// Breakpoints
+$breakpoint-mobile-only: 37.4375rem; // 599px / 16px
+$breakpoint-tablet-portrait: 37.5rem; // 600px / 16px
+$breakpoint-tablet-landscape: 56.25rem; // 900px / 16px
+$breakpoint-desktop: 75rem; // 1200px / 16px
+
+// Media queries
+$mobile-only: 'screen and (max-width: #{$breakpoint-mobile-only})';
+$tablet-portrait: 'screen and (min-width: #{$breakpoint-tablet-portrait})';
+$tablet-landscape: 'screen and (min-width: #{$breakpoint-tablet-landscape})';
+$desktop: 'screen and (min-width: #{$breakpoint-desktop})';
+
+// color palette
 $color-white: #fff;
 $color-black: #000;
 $color-light-gray: #eff3f5;
