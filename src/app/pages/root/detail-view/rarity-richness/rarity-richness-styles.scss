@@ -9,11 +9,19 @@
   margin: 0 6px;
 }
 
-.histogramContainer {
-  display: flex;
-  flex-direction: column;
-}
-
 .highlight {
   font-weight: bold;
+}
+
+.histogramContainer {
+  position: relative;
+}
+
+.button {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  position: absolute;
+  top: 25px;
+  right: 0;
 }
