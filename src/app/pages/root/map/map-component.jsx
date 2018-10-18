@@ -38,10 +38,7 @@ class MapComponent extends PureComponent {
   hasLayers = layers => layers && layers.length > 0;
 
   componentWillUpdate(nextProps) {
-    const { terrainMode, updateMapParams } = this.props;
-    if (nextProps.terrainCameraOffset && nextProps.terrainCameraOffset.offset.range > 650000) {
-      updateMapParams({ terrain: false, terrainCameraOffset: undefined });
-    }
+    const { terrainMode } = this.props;
     if (nextProps.terrainMode && terrainMode === false) {
       this.gridLayers = {};
     }
@@ -71,11 +68,11 @@ class MapComponent extends PureComponent {
             this.handleMarkerHovered(pickedObject);
             break;
           default:
-            document.body.style.cursor = 'default';
+            document.body.style.cursor = 'grab';
             this.handleNoEntityHover();
         }
       } else {
-        document.body.style.cursor = 'default';
+        document.body.style.cursor = 'grab';
         this.handleOutOfBoundsHover(scene);
       }
     }
@@ -183,9 +180,11 @@ class MapComponent extends PureComponent {
             this.handleMarkerClick(pickedObject, e);
             break;
           default:
+            document.body.style.cursor = 'grabbing';
             console.info('Unknown entity type');
         }
       } else {
+        document.body.style.cursor = 'grabbing';
         console.info('No picked object click');
       }
     }
