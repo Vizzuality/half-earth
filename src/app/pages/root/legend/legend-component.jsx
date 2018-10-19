@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
 import Legend, {
   LegendItemButtonOpacity,
   LegendItemButtonVisibility,
@@ -9,6 +10,7 @@ import Legend, {
   LegendListItem,
   LegendItemToolbar
 } from 'wri-api-components/dist/legend';
+import LegendTitle from './legend-title';
 
 // Icons neccesaries for the legend component
 import 'assets/icons/icon-arrow-up.svg';
@@ -23,6 +25,12 @@ import 'assets/icons/icon-show.svg';
 import styles from './legend-styles.scss';
 
 class LegendComponent extends PureComponent {
+
+  componentDidUpdate(prevProps) {
+    const { datasets, fetchModalMetaData } = this.props;
+    if (!isEqual(prevProps.datasets,datasets)) { datasets.forEach(d => fetchModalMetaData(d.layers[0].slug))};
+  }
+
   render() {
     const {
       datasets,
@@ -48,11 +56,12 @@ class LegendComponent extends PureComponent {
       </LegendItemToolbar>
     );
 
+
     return (
       <div className={styles.legend}>
         <Legend sortable={datasets && datasets.length > 1} onChangeOrder={handleChangeOrder}>
           {datasets && datasets.map((dataset, i) => (
-            <LegendListItem index={i} key={dataset.slug} layerGroup={dataset} toolbar={toolbar}>
+            <LegendListItem index={i} key={dataset.slug} layerGroup={dataset} toolbar={toolbar} title={<LegendTitle {...dataset} />}>
               <LegendItemTypes />
             </LegendListItem>
           ))}
