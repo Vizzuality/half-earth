@@ -9,6 +9,7 @@ import Legend, {
   LegendListItem,
   LegendItemToolbar
 } from 'wri-api-components/dist/legend';
+import LegendTitle from './legend-title';
 
 // Icons neccesaries for the legend component
 import 'assets/icons/icon-arrow-up.svg';
@@ -48,11 +49,12 @@ class LegendComponent extends PureComponent {
       </LegendItemToolbar>
     );
 
+
     return (
       <div className={styles.legend}>
         <Legend sortable={datasets && datasets.length > 1} onChangeOrder={handleChangeOrder}>
           {datasets && datasets.map((dataset, i) => (
-            <LegendListItem index={i} key={dataset.slug} layerGroup={dataset} toolbar={toolbar}>
+            <LegendListItem index={i} key={dataset.slug} layerGroup={dataset} toolbar={toolbar} title={<LegendTitle {...dataset} />}>
               <LegendItemTypes />
             </LegendListItem>
           ))}

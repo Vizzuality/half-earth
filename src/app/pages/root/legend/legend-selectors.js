@@ -15,10 +15,11 @@ export const getDatasetLayersParsed = createSelector([ getDatasetsFiltered, getM
   return sortBy(
     datasets.map(dataset => ({
       ...dataset,
-      layers: dataset.layers.map(layer => ({ 
-        ...layer, 
+      layers: dataset.layers.map(layer => ({
+        ...layer,
         name: layer.legendConfig.title || layer.name,
-        molLogo: metadata && metadata[layer.id] && metadata[layer.id].molLogo
+        molLogo: metadata && metadata[layer.id] && metadata[layer.id].molLogo,
+        logoUrl: metadata && metadata[layer.id] && metadata[layer.id].sourceUrl
       }))
     })),
     'order'
