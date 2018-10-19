@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { snakeCase } from 'lodash';
 import { Loading } from 'he-components';
 import cx from 'classnames';
+import MolSpeciesLink from './mol-species-link';
 
 import styles from './species-to-watch-styles';
 
@@ -22,22 +22,28 @@ class SpeciesToWatchComponent extends Component {
             <div className={styles.speciesRow} key={specie.commonname || specie.scientificname}>
               {
                     (
-                      <a
-                        href={`https://mol.org/species/${snakeCase(specie.scientificname)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <MolSpeciesLink scientificName={specie.scientificname}>
                         <img
                           className={styles.speciesImg}
                           src={specie.image && specie.image.url || 'img/species-placeholder@2x.png'}
                           alt={`${specie.commonname} specie`}
                         />
-                      </a>
+                      </MolSpeciesLink>
                     )
                   }
               <div className={styles.speciesContent}>
-                <h4 className={styles.speciesTitle}>{specie.commonname}</h4>
-                <p className={styles.speciesSubTitle}>{specie.scientificname}</p>
+                <MolSpeciesLink
+                  scientificName={specie.scientificname}
+                  className={styles.speciesTitle}
+                >
+                  {specie.commonname}
+                </MolSpeciesLink>
+                <MolSpeciesLink
+                  scientificName={specie.scientificname}
+                  className={styles.speciesSubTitle}
+                >
+                  {specie.scientificname}
+                </MolSpeciesLink>
                 {
                       specie.iucn && (
                       <a

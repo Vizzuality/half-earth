@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Loading, Dropdown, Button, Icon } from 'he-components';
+import { Loading, Dropdown } from 'he-components';
 
-import infoIcon from 'assets/icons/icon-info.svg';
-
-import Histogram from './histogram';
 import styles from './rarity-richness-styles';
 
 class RarityRichnessComponent extends Component {
@@ -14,9 +11,9 @@ class RarityRichnessComponent extends Component {
       data = {},
       taxas,
       selected,
-      histogram,
-      handleTaxasChange,
-      handleMetadataClick
+      // histogram,
+      // handleMetadataClick
+      handleTaxasChange
     } = this.props;
     const { richness, rarity } = data;
 
@@ -41,16 +38,11 @@ class RarityRichnessComponent extends Component {
             <span className={styles.highlight}>{richness.status}</span>
             {' '}richness {richnessStatement} and{' '}
             <span className={styles.highlight}>{rarity.status}</span>
-            {' '}rarity {rarityStatement}.
+            {' '}range rarity {rarityStatement}.
           </span>
             )
         }
-        <div className={styles.histogramContainer}>
-          <Histogram data={data} values={histogram} />
-          <Button theme={styles} onClick={handleMetadataClick}>
-            <Icon icon={infoIcon} />
-          </Button>
-        </div>
+        {}
       </div>
     );
   }
@@ -61,17 +53,17 @@ RarityRichnessComponent.propTypes = {
   loading: PropTypes.bool,
   taxas: PropTypes.array,
   selected: PropTypes.object,
-  histogram: PropTypes.shape({ richness: PropTypes.array, rarity: PropTypes.array }),
-  handleTaxasChange: PropTypes.func.isRequired,
-  handleMetadataClick: PropTypes.func.isRequired
+  // histogram: PropTypes.shape({ richness: PropTypes.array, rarity: PropTypes.array }),
+  // handleMetadataClick: PropTypes.func.isRequired
+  handleTaxasChange: PropTypes.func.isRequired
 };
 
 RarityRichnessComponent.defaultProps = {
   loading: false,
   data: undefined,
   taxas: [],
-  selected: {},
-  histogram: null
+  // histogram: null
+  selected: {}
 };
 
 export default RarityRichnessComponent;
