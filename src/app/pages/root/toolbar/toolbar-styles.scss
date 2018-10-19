@@ -6,6 +6,7 @@
   background-color: $color-white;
   width: 32px;
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .button {
@@ -15,6 +16,12 @@
   &:hover {
     background-color: $color-turquoise;
   }
+}
+
+.info-tooltip {
+  padding: 3px;
+  background-color: $color-white;
+  color: $color-group-card-dark-blue;
 }
 
 .switch {
@@ -47,6 +54,20 @@
       border-width: 12px 0 12px 12px;
       margin-top: -12px;
       right: -12px;
+    }
+  }
+
+  .toolbar-info-tooltip {
+    padding: 2px;
+    font-size: 11px;
+    font-weight: 300;
+    border-radius: 4px;
+    max-width: 190px;
+    background-color: $color-white;
+    color: $color-group-card-dark-blue;
+
+    .rc-tooltip-arrow {
+      border-left-color: $color-white;
     }
   }
 }

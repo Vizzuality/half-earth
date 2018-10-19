@@ -22,6 +22,11 @@ class ToolbarComponent extends PureComponent {
       handleCenterLocationClick,
       showLocation
     } = this.props;
+    const infoTooltipText = {
+      share: 'Click to obtain a share link, embed code, and share on social networks',
+      info: 'Introduction to key features of navigation and the map',
+      location: 'Focus the map on your current location'
+    };
     const datasetsTooltip = (
       <div className={styles.tooltipContainer}>
         <h4 className={styles.tooltipTitle}>The View from Half-Earth</h4>
@@ -45,12 +50,26 @@ class ToolbarComponent extends PureComponent {
     );
     return (
       <div className={cx(styles.toolbar, className)}>
-        <Button theme={styles} onClick={handleShareClick}>
-          <Icon icon={shareIcon} />
-        </Button>
-        <Button theme={styles} onClick={handleInfoClick}>
-          <Icon icon={helpIcon} />
-        </Button>
+        <Tooltip
+          placement="left"
+          offset={{ left: 20 }}
+          overlay={<div>{infoTooltipText.share}</div>}
+          overlayClassName="c-rc-tooltip toolbar-info-tooltip"
+        >
+          <button className={styles.button} type="button" onClick={handleShareClick}>
+            <Icon icon={shareIcon} />
+          </button>
+        </Tooltip>
+        <Tooltip
+          placement="left"
+          offset={{ left: 20 }}
+          overlay={<div>{infoTooltipText.info}</div>}
+          overlayClassName="c-rc-tooltip toolbar-info-tooltip"
+        >
+          <button className={styles.button} type="button" onClick={handleInfoClick}>
+            <Icon icon={helpIcon} />
+          </button>
+        </Tooltip>
         <Tooltip
           placement="left"
           offset={{ left: 20 }}
@@ -64,9 +83,16 @@ class ToolbarComponent extends PureComponent {
         </Tooltip>
         {
           showLocation && (
-          <Button theme={styles} onClick={handleCenterLocationClick}>
-            <Icon icon={locateIcon} />
-          </Button>
+          <Tooltip
+            placement="left"
+            offset={{ left: 20 }}
+            overlay={<div>{infoTooltipText.location}</div>}
+            overlayClassName="c-rc-tooltip toolbar-info-tooltip"
+          >
+            <button className={styles.button} type="button" onClick={handleCenterLocationClick}>
+              <Icon icon={locateIcon} />
+            </button>
+          </Tooltip>
             )
         }
       </div>
