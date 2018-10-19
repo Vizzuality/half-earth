@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getLayersActiveMerged } from 'redux-modules/datasets/datasets-utils';
-import { setModalMetadata } from 'components/v2/modal-metadata/modal-metadata-actions';
+import { setModalMetadata, fetchModalMetaData } from 'components/v2/modal-metadata/modal-metadata-actions';
 import * as ownActions from './legend-actions';
 
 import { mapStateToProps } from './legend-selectors';
 import LegendComponent from './legend-component';
 
-const actions = { ...ownActions, setModalMetadata };
+const actions = { ...ownActions, setModalMetadata, fetchModalMetaData };
 
 class LegendContainer extends Component {
   getMultiLayers(datasetSlug) {

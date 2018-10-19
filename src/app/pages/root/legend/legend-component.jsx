@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
 import Legend, {
   LegendItemButtonOpacity,
   LegendItemButtonVisibility,
@@ -24,6 +25,12 @@ import 'assets/icons/icon-show.svg';
 import styles from './legend-styles.scss';
 
 class LegendComponent extends PureComponent {
+
+  componentDidUpdate(prevProps) {
+    const { datasets, fetchModalMetaData } = this.props;
+    if (!isEqual(prevProps.datasets,datasets)) { datasets.forEach(d => fetchModalMetaData(d.layers[0].slug))};
+  }
+
   render() {
     const {
       datasets,
