@@ -14,7 +14,12 @@ const LegendTitleComponent = (props) => {
           overlay={<div>Information from Map of Life</div>}
           overlayClassName="c-rc-tooltip legend-info-tooltip"
         >
-          <a href={layers[0].logoUrl} className={styles.imageLink}>
+          <a
+            href={layers[0].logoUrl}
+            className={styles.imageLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src='/img/mol_short_logo.png'
               alt="logo"
