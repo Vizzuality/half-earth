@@ -18,10 +18,10 @@ const MolSpeciesLinkComponent = props => {
 
 MolSpeciesLinkComponent.propTypes = {
   scientificName: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   className: PropTypes.string
 };
 
-MolSpeciesLinkComponent.defaultProps = { className: '' };
+MolSpeciesLinkComponent.defaultProps = { className: '', children: {} };
 
 export default MolSpeciesLinkComponent;
