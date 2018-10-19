@@ -33,9 +33,8 @@ class ToolbarContainer extends Component {
   handleShareClick = () => {
     this.props.setModalShareParams({
       isOpen: true,
-      currentLocation: `https://www.half-earthproject.org/maps?${ 
-        window.location.href.split('?')[1]}`,
-      urlToCopy: `https://www.half-earthproject.org/maps?${  window.location.href.split('?')[1]}`
+      currentLocation: `https://www.half-earthproject.org/maps${window.location.search}`,
+      urlToCopy: `https://www.half-earthproject.org/maps${window.location.search}`
     });
   };
 
