@@ -25,6 +25,7 @@ class ToolbarComponent extends PureComponent {
     const infoTooltipText = {
       share: 'Click to obtain a share link, embed code, and share on social networks',
       info: 'Introduction to key features of navigation and the map',
+      halfEarth: 'The view from Half-Earth',
       location: 'Focus the map on your current location'
     };
     const datasetsTooltip = (
@@ -73,13 +74,22 @@ class ToolbarComponent extends PureComponent {
         <Tooltip
           placement="left"
           offset={{ left: 20 }}
-          trigger={[ 'click' ]}
-          overlay={datasetsTooltip}
-          overlayClassName="c-rc-tooltip toolbar-tooltip"
+          overlay={<div>{infoTooltipText.halfEarth}</div>}
+          overlayClassName="c-rc-tooltip toolbar-info-tooltip"
         >
-          <Button theme={styles}>
-            <Icon icon={gaficasIcon} />
-          </Button>
+          <div>
+            <Tooltip
+              placement="left"
+              offset={{ left: 20 }}
+              trigger={[ 'click' ]}
+              overlay={datasetsTooltip}
+              overlayClassName="c-rc-tooltip toolbar-tooltip"
+            >
+              <Button theme={styles}>
+                <Icon icon={gaficasIcon} />
+              </Button>
+            </Tooltip>
+          </div>
         </Tooltip>
         {
           showLocation && (

@@ -43,6 +43,12 @@
   text-transform: uppercase;
 }
 
+.infoTooltipContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
 :global {
   .toolbar-tooltip {
     background-color: $color-white;
@@ -58,7 +64,7 @@
   }
 
   .toolbar-info-tooltip {
-    padding: 2px;
+    padding: 0 2px;
     font-size: 11px;
     font-weight: 300;
     border-radius: 4px;
@@ -68,6 +74,11 @@
 
     .rc-tooltip-arrow {
       border-left-color: $color-white;
+    }
+
+    .rc-tooltip-inner {
+      display: flex;
+      align-items: center;
     }
   }
 }
