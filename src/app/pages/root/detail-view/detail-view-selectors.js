@@ -10,11 +10,22 @@ import { getDatasetsByCategory } from 'selectors/categories-selectors';
 import sortBy from 'lodash/sortBy';
 import snakeCase from 'lodash/snakeCase';
 
-const status = [ 'very low', 'low', 'average', 'high', 'very high' ];
+const status = [
+  { slug: 'very low', minValue: 0, maxValue: 0.20 },
+  { slug: 'low', minValue: 0.21, maxValue: 0.40 },
+  { slug: 'average', minValue: 0.41, maxValue: 0.60 },
+  { slug: 'high', minValue: 0.61, maxValue: 0.80 },
+  { slug: 'very high', minValue: 0.81, maxValue: 1 }
+];
 
-function getPosition(data, values) {
-  const position = sortBy(values).reduce((acc, next) => data > next ? acc + 1 : acc, 0);
-  return position;
+// Position from vibariate bins
+// function getPosition(data, values) {
+//   const position = sortBy(values).reduce((acc, next) => data > next ? acc + 1 : acc, 0);
+//   return position;
+// }
+function getStatus(rank) {
+  const st = status.find(s => rank > s.minValue && rank < s.maxValue);
+  return st.slug;
 }
 
 export const getCellData = createSelector([ getCellId, selectCellsData ], (cellId, cellsData) => {
@@ -150,21 +161,17 @@ export const getCellTaxaDataSelectedParsed = createSelector(
   [ getCellTaxaDataSelected, getHistogramBreaks ],
   (data, histogramBreaks) => {
     if (!data || !histogramBreaks) return undefined;
-    const rarityPosition = getPosition(data.rarity, histogramBreaks.rarity);
-    const richnessPosition = getPosition(data.richness, histogramBreaks.richness);
     return {
       ...data,
       rarity: {
         value: data.rarity,
         ranked_rarity: data.ranked_rarity,
-        position: rarityPosition,
-        status: status[rarityPosition]
+        status: getStatus(data.ranked_rarity)
       },
       richness: {
         value: data.richness,
         ranked_richness: data.ranked_richness,
-        position: richnessPosition,
-        status: status[richnessPosition]
+        status: getStatus(data.ranked_richness)
       }
     };
   }
