@@ -1,0 +1,17 @@
+@import '~styles/variables.scss';
+
+.attributionsContainer {
+  position: absolute;
+  bottom: 5px;
+  right: $site-gutter;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $map-attribution-height;
+  z-index: $zforeground;
+}
+
+.att {
+  cursor: pointer;
+  padding-left: 15px;
+}
