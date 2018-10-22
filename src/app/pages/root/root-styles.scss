@@ -32,11 +32,25 @@
 .partnerFooter {
   position: absolute;
   left: $sidebar-width;
-  width: calc(100% - #{$sidebar-width});
   bottom: 10px;
   padding-left: $site-gutter;
+  width: 200px;
   height: $site-gutter;
   font-size: 13px;
+  transition: all 0.3s linear;
+  will-change: left;
+}
+
+.partnerFooterLeft {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  padding-left: $site-gutter;
+  width: 200px;
+  height: $site-gutter;
+  font-size: 13px;
+  transition: all 0.3s linear;
+  will-change: left;
 }
 
 .mapContainer {

@@ -40,7 +40,8 @@ export const getActiveMarker = createSelector(selectQueryParams, query => {
 
 export const getReservesTooltip = createSelector(selectQueryParams, query => {
   if (!query || !query.reservesTooltip) return undefined;
-  return query.reservesTooltip;
+  const hasTooltip = query.reservesTooltip === 'true' || query.reservesTooltip === true;
+  return hasTooltip;
 });
 
 export const getCoordinates = createSelector([ selectQueryParams ], query => {

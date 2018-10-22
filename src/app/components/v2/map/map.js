@@ -171,7 +171,7 @@ class CesiumComponent extends Component {
         coordinates,
         fill: false,
         outline: true,
-        outlineWidth: 5.0,
+        outlineWidth: 3.0,
         outlineColor: Cesium.Color.fromAlpha(Cesium.Color.WHITE, 0.9)
       }
     });
@@ -240,7 +240,7 @@ class CesiumComponent extends Component {
   };
 
   flyTo(destination, rest = {}) {
-    this.viewer.camera.flyTo({ destination, ...rest });
+    this.viewer.camera.flyTo({ destination, duration: 1.5, ...rest });
   }
 
   addRotation() {

@@ -121,7 +121,7 @@ ModalShareComponent.propTypes = {
   currentLocation: PropTypes.string,
   setModalShareParams: PropTypes.func.isRequired,
   linkActive: PropTypes.bool,
-  coordinates: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number, z: PropTypes.number }),
+  coordinates: PropTypes.shape({}),
   orientation: PropTypes.array,
   shareSocialMedia: PropTypes.array.isRequired,
   urlToCopy: PropTypes.string.isRequired

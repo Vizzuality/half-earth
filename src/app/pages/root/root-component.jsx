@@ -13,6 +13,7 @@ import DetailView from './detail-view';
 import Map from './map';
 import Toolbar from './toolbar';
 import Legend from './legend';
+import MapAttributions from './map-attributions';
 
 import styles from './root-styles';
 
@@ -59,7 +60,11 @@ class RootPageComponent extends React.Component {
         />
         <Toolbar className={styles.toolbar} />
         <Legend />
-        <Logos key="Logos" theme={{ partnerFooter: styles.partnerFooter }} />
+        <MapAttributions />
+        <Logos
+          key="Logos"
+          theme={{ partnerFooter: sidebarOpen ? styles.partnerFooter : styles.partnerFooterLeft }}
+        />
         <ModalMetadata />
         <ModalTutorial />
         <ModalInstructions />

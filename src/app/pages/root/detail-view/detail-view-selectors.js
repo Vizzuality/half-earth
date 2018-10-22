@@ -25,7 +25,7 @@ const status = [
 // }
 function getStatus(rank) {
   const st = status.find(s => rank > s.minValue && rank < s.maxValue);
-  return st.slug;
+  return st && st.slug;
 }
 
 export const getCellData = createSelector([ getCellId, selectCellsData ], (cellId, cellsData) => {

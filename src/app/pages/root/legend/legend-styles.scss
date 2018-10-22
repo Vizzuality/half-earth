@@ -2,7 +2,7 @@
 
 .legend {
   position: absolute;
-  bottom: $site-gutter;
+  bottom: calc(#{$site-gutter} + #{$map-attribution-height});
   right: $site-gutter;
   width: 400px;
 
