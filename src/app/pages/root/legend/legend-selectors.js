@@ -10,20 +10,27 @@ export const getDatasetsFiltered = createSelector([ getDatasets ], datasets => {
   return datasets.filter(d => d.active);
 });
 
-export const getDatasetLayersParsed = createSelector([ getDatasetsFiltered, getMetaData ], (datasets, metadata) => {
-  if (!datasets) return [];
-  return sortBy(
-    datasets.map(dataset => ({
-      ...dataset,
-      layers: dataset.layers.map(layer => ({
-        ...layer,
-        name: layer.legendConfig.title || layer.name,
-        molLogo: metadata && metadata[layer.id] && metadata[layer.id].molLogo,
-        logoUrl: metadata && metadata[layer.id] && metadata[layer.id].sourceUrl
-      }))
-    })),
-    'order'
-  );
-});
+export const getDatasetLayersParsed = createSelector([ getDatasetsFiltered, getMetaData ], (
+  datasets,
+  metadata
+) =>
+  {
+    if (!datasets) return [];
+    return sortBy(
+      datasets.map(dataset => ({
+        ...dataset,
+        layers: dataset.layers.map(layer => ({
+          ...layer,
+          name: layer.legendConfig.title || layer.name,
+          molLogo: metadata && metadata[layer.id] && metadata[layer.id].molLogo,
+          logoUrl: metadata && metadata[layer.id] && metadata[layer.id].logoUrl
+        }))
+      })),
+      'order'
+    );
+  });
 
-export const mapStateToProps = createStructuredSelector({ query: selectQueryParams, datasets: getDatasetLayersParsed });
+export const mapStateToProps = createStructuredSelector({
+  query: selectQueryParams,
+  datasets: getDatasetLayersParsed
+});

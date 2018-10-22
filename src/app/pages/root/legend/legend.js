@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getLayersActiveMerged } from 'redux-modules/datasets/datasets-utils';
-import { setModalMetadata, fetchModalMetaData } from 'components/v2/modal-metadata/modal-metadata-actions';
+import {
+  setModalMetadata,
+  fetchModalMetaData
+} from 'components/v2/modal-metadata/modal-metadata-actions';
 import * as ownActions from './legend-actions';
 
 import { mapStateToProps } from './legend-selectors';
@@ -65,7 +68,7 @@ class LegendContainer extends Component {
   updateLayersActive = layers => {
     const { updateQueryParam, query = {} } = this.props;
     const activeLayers = getLayersActiveMerged(layers, query.activeLayers);
-    updateQueryParam({ query: { ...query, activeLayers } });
+    updateQueryParam({ query: { ...query, activeLayers, activeMarker: undefined } });
   };
 
   updateLayersProperty(slugs, { key, value }) {

@@ -27,7 +27,7 @@ class ToolbarContainer extends Component {
   updateLayersActive = layers => {
     const { updateQueryParam, query = {} } = this.props;
     const activeLayers = getLayersActiveMerged(layers, query.activeLayers);
-    updateQueryParam({ query: { ...query, activeLayers } });
+    updateQueryParam({ query: { ...query, activeLayers, activeMarker: undefined } });
   };
 
   handleShareClick = () => {
