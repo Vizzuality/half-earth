@@ -68,13 +68,17 @@ class MapComponent extends PureComponent {
             break;
           case 'story':
             this.handleMarkerHovered(pickedObject);
+            scene.requestRender();
             break;
           case 'place':
             this.handleMarkerHovered(pickedObject);
+            scene.requestRender();
             break;
           default:
-            this.handleNoEntityHover();
+            this.handleNoEntityHover(scene);
         }
+      } else {
+        this.handleNoEntityHover(scene);
       }
     }
   };
@@ -115,11 +119,13 @@ class MapComponent extends PureComponent {
     this.lastMarkerHovered = marker;
   };
 
-  handleNoEntityHover = () => {
+  handleNoEntityHover = scene => {
     document.body.style.cursor = 'default';
     if (this.lastMarkerHovered) {
       const { primitive, id } = this.lastMarkerHovered;
       primitive.setImage(id.markerImage, id.markerImage);
+      this.lastMarkerHovered = null;
+      scene.requestRender();
     }
     if (this.lastObjId) {
       Object
@@ -158,11 +164,37 @@ class MapComponent extends PureComponent {
     this.lastObjId = null;
   };
 
+  handleOnMouseDown = e => {
+    if (this.map) {
+      this.removeReservesTooltip();
+      this.removeTooltip();
+      const pickedObject = this.map.scene.pick(e.position);
+      if (!pickedObject) {
+        this.grabbing = true;
+        document.body.style.cursor = 'grabbing';
+      }
+    }
+  };
+
+  handleOnMouseUp = e => {
+    if (this.map) {
+      const pickedObject = this.map.scene.pick(e.position);
+      if (!pickedObject) {
+        this.grabbing = false;
+        document.body.style.cursor = 'grab';
+      } else {
+        document.body.style.cursor = 'default';
+      }
+    }
+  };
+
+  // CLICK HANDLERS
   handleMouseClick = e => {
     if (this.map) {
       const pickedObject = this.map.scene.pick(e.position);
       const entitiesArray = this.map.scene.drillPick(e.position);
       this.removeReservesTooltip();
+      this.removeTooltip();
       if (entitiesArray.some(en => en.id.type === 'protected-area')) {
         this.handleProtectedAreaClick(e);
       }
@@ -185,28 +217,6 @@ class MapComponent extends PureComponent {
         }
       } else {
         console.info('No picked object click');
-      }
-    }
-  };
-
-  handleOnMouseDown = e => {
-    if (this.map) {
-      const pickedObject = this.map.scene.pick(e.position);
-      if (!pickedObject) {
-        this.grabbing = true;
-        document.body.style.cursor = 'grabbing';
-      }
-    }
-  };
-
-  handleOnMouseUp = e => {
-    if (this.map) {
-      const pickedObject = this.map.scene.pick(e.position);
-      if (!pickedObject) {
-        this.grabbing = false;
-        document.body.style.cursor = 'grab';
-      } else {
-        document.body.style.cursor = 'default';
       }
     }
   };
