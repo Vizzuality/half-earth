@@ -120,7 +120,6 @@ class MapComponent extends PureComponent {
   };
 
   handleNoEntityHover = scene => {
-    document.body.style.cursor = 'default';
     if (this.lastMarkerHovered) {
       const { primitive, id } = this.lastMarkerHovered;
       primitive.setImage(id.markerImage, id.markerImage);
