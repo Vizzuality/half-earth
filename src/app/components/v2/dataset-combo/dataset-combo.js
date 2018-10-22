@@ -21,7 +21,7 @@ class DatasetComboContainer extends Component {
     const coordinates = bounds
       ? Cesium.Rectangle.fromDegrees(...bounds)
       : query && query.coordinates;
-    updateQueryParam({ query: { ...query, activeLayers, coordinates } });
+    updateQueryParam({ query: { ...query, activeLayers, coordinates, activeMarker: undefined } });
   };
 
   handleMultiLayerClick = ({ slug, active }) => {
