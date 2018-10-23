@@ -64,6 +64,7 @@ class CesiumComponent extends Component {
       terrainMode,
       terrainCameraOffset,
       cellCoordinates,
+      cellId,
       layers
     } = this.props;
     if (this.viewer) {
@@ -77,7 +78,7 @@ class CesiumComponent extends Component {
       if (camera && prevProps.camera !== camera) this.setCamera();
       if (lockNavigation) disablePanning(this.viewer);
       if (terrainMode) {
-        if (cellCoordinates) {
+        if (cellCoordinates && prevProps.cellId !== cellId) {
           this.renderGridCell(cellCoordinates, this.rectangle);
           this.setTerrainModeView(cellCoordinates, terrainCameraOffset);
         }
@@ -280,6 +281,7 @@ CesiumComponent.propTypes = {
   lockNavigation: PropTypes.bool,
   rotate: PropTypes.func,
   coordinates: PropTypes.object,
+  cellId: PropTypes.number,
   coordinatesOptions: PropTypes.object,
   camera: PropTypes.object,
   terrainMode: PropTypes.bool,
@@ -307,6 +309,7 @@ CesiumComponent.defaultProps = {
   rotate: null,
   lockNavigation: false,
   coordinates: undefined,
+  cellId: undefined,
   coordinatesOptions: undefined,
   camera: null,
   terrainMode: false,

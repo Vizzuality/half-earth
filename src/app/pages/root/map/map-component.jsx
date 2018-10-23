@@ -302,6 +302,7 @@ class MapComponent extends PureComponent {
       protectedAreasAcive,
       protectedAreasLayers,
       coordinates,
+      activeGridCellId,
       coordinatesOptions,
       updateMapParams,
       terrainCameraOffset,
@@ -327,6 +328,7 @@ class MapComponent extends PureComponent {
         coordinatesOptions={coordinatesOptions}
         terrainCameraOffset={terrainCameraOffset}
         cellCoordinates={cellCoordinates}
+        cellId={activeGridCellId}
         onMouseMove={this.handleMouseMove}
         onMouseClick={this.handleMouseClick}
         onDoubleClick={this.handleDoubleClick}
@@ -425,7 +427,7 @@ MapComponent.propTypes = {
   cellCoordinates: PropTypes.array,
   activeMarker: PropTypes.string,
   reservesTooltip: PropTypes.bool,
-  activeGridCellId: PropTypes.string,
+  activeGridCellId: PropTypes.number,
   updateMapParams: PropTypes.func
 };
 

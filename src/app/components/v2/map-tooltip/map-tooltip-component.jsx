@@ -77,8 +77,8 @@ class MapTooltipComponent extends Component {
       <div
         className={styles.container}
         style={{
-          transform: `translate(${tooltipPosition.x - this.width}px, ${tooltipPosition.y -
-            this.height}px)`
+          transform: `translate(calc(${tooltipPosition.x}px - 50%), calc(${tooltipPosition.y -
+            18}px - 100%)`
         }}
         ref={tooltip => {
           this.tooltip = tooltip;

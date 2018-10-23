@@ -68,7 +68,9 @@ class LegendContainer extends Component {
   updateLayersActive = layers => {
     const { updateQueryParam, query = {} } = this.props;
     const activeLayers = getLayersActiveMerged(layers, query.activeLayers);
-    updateQueryParam({ query: { ...query, activeLayers, activeMarker: undefined } });
+    updateQueryParam({
+      query: { ...query, activeLayers, activeMarker: undefined, reservesTooltip: undefined }
+    });
   };
 
   updateLayersProperty(slugs, { key, value }) {
