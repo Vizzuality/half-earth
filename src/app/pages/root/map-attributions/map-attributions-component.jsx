@@ -8,7 +8,13 @@ const MapAttributionComponent = props => {
   return (
     <div className={styles.attributionsContainer}>
       {attributions.map(att => (
-        <a href={att.href} className={styles.att} target="_blank" rel="noopener noreferrer">
+        <a
+          key={att.alt}
+          href={att.href}
+          className={styles.att}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src={att.src} alt={att.alt} />
         </a>
       ))}
@@ -16,6 +22,14 @@ const MapAttributionComponent = props => {
   );
 };
 
-MapAttributionComponent.propTypes = { attributions: PropTypes.shape([]).isRequired };
+MapAttributionComponent.propTypes = {
+  attributions: PropTypes.arrayOf(
+    PropTypes.shape({
+      alt: PropTypes.string.isRequired,
+      src: PropTypes.string.isRequired,
+      href: PropTypes.string.isRequired
+    })
+  ).isRequired
+};
 
 export default MapAttributionComponent;
