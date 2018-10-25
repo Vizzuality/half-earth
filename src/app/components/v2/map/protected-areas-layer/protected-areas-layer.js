@@ -62,6 +62,8 @@ class ProtectedAreasLayer extends Component {
   }
 
   componentWillUnmount() {
+    this.protectedAreasPolygonsReferences = [];
+    this.removeAll();
   }
 
   addPolygons(rows) {
@@ -161,7 +163,19 @@ class ProtectedAreasLayer extends Component {
       const primitiveToRemove = this.protectedAreasPolygonsReferences.filter(
         primitive => primitive.geometryInstances[0].id.subtype === area
       );
-      map.scene.primitives.remove(primitiveToRemove[0]);
+      // remove the last primitive from this type
+      map.scene.primitives.remove(primitiveToRemove[primitiveToRemove.length - 1]);
+    }
+  }
+
+  removeAll() {
+    const { map } = this.props;
+    if (map) {
+      this.protectedAreasPolygonsReferences.forEach(p => {
+        // console.log(p)
+        map.scene.primitives.remove(p);
+        // console.log(map.scene.primitives)
+      });
     }
   }
 
