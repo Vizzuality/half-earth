@@ -10,7 +10,7 @@ function createPolygon({ name, type, subtype, park, coords }) {
     attributes: {
       color: Cesium.ColorGeometryInstanceAttribute.fromColor(
         // If alpha is 0 it does not trigger the mouse event
-        Cesium.Color.RED.withAlpha(0.5)
+        Cesium.Color.WHITE.withAlpha(0.01)
       )
     }
   });
@@ -32,38 +32,46 @@ class ProtectedAreasLayer extends Component {
   protectedAreasPolygonsReferences = [];
 
   componentDidMount() {
-    const { conservationAreasActive } = this.props;
-    this.renderAreas(conservationAreasActive);
-  }
+    const { conservationAreasActive, show } = this.props;
 
-  componentDidUpdate(prevProps) {
-    const { conservationAreasActive } = this.props;
-    if (!isEqual(prevProps.conservationAreasActive, conservationAreasActive)) {
-      let newAreasToRender = [];
-      let areasToRemove = [];
-
-      if (prevProps.conservationAreasActive.length > conservationAreasActive.length) {
-        areasToRemove = differenceBy(
-          prevProps.conservationAreasActive,
-          conservationAreasActive,
-          'dataset'
-        );
-      } else if (prevProps.conservationAreasActive.length < conservationAreasActive.length) {
-        newAreasToRender = conservationAreasActive.reduce(
-          (acc, ca) =>
-            prevProps.conservationAreasActive.some(pca => isEqual(pca, ca)) ? acc : [ ...acc, ca ],
-          []
-        );
-      }
-
-      if (newAreasToRender.length > 0) this.renderAreas(newAreasToRender);
-      if (areasToRemove.length > 0) areasToRemove.forEach(area => this.removePolygon(area.dataset));
+    if (show) {
+      this.renderAreas(conservationAreasActive);
     }
   }
 
-  componentWillUnmount() {
-    this.protectedAreasPolygonsReferences = [];
-    this.removeAll();
+  componentDidUpdate(prevProps) {
+    const { conservationAreasActive, show } = this.props;
+    if (!show) {
+      this.removeAll();
+    }
+    if (!prevProps.show && show) {
+      if (conservationAreasActive.length > 0) this.renderAreas(conservationAreasActive);
+    }
+    if (prevProps.show && show) {
+      if (!isEqual(prevProps.conservationAreasActive, conservationAreasActive)) {
+        let newAreasToRender = [];
+        let areasToRemove = [];
+
+        if (prevProps.conservationAreasActive.length > conservationAreasActive.length) {
+          areasToRemove = differenceBy(
+            prevProps.conservationAreasActive,
+            conservationAreasActive,
+            'dataset'
+          );
+        } else if (prevProps.conservationAreasActive.length < conservationAreasActive.length) {
+          newAreasToRender = conservationAreasActive.reduce(
+            (acc, ca) =>
+              prevProps.conservationAreasActive.some(pca => isEqual(pca, ca))
+                ? acc
+                : [ ...acc, ca ],
+            []
+          );
+        }
+        if (newAreasToRender.length > 0) this.renderAreas(newAreasToRender);
+        if (areasToRemove.length > 0)
+          areasToRemove.forEach(area => this.removePolygon(area.dataset));
+      }
+    }
   }
 
   addPolygons(rows) {
@@ -84,7 +92,6 @@ class ProtectedAreasLayer extends Component {
       this.protectedAreasPolygonsReferences.push(primitive);
       map.scene.primitives.add(primitive);
     }
-    // console.log('this.protectedAreasPolygonsReferences', this.protectedAreasPolygonsReferences)
   }
 
   async renderAreas(conservationAreasActive) {
@@ -170,12 +177,12 @@ class ProtectedAreasLayer extends Component {
 
   removeAll() {
     const { map } = this.props;
-    if (map) {
+    const hasAreas = this.protectedAreasPolygonsReferences.length > 0;
+    if (map && hasAreas) {
       this.protectedAreasPolygonsReferences.forEach(p => {
-        // console.log(p)
         map.scene.primitives.remove(p);
-        // console.log(map.scene.primitives)
       });
+      this.protectedAreasPolygonsReferences = [];
     }
   }
 
@@ -187,7 +194,8 @@ class ProtectedAreasLayer extends Component {
 ProtectedAreasLayer.propTypes = {
   map: PropTypes.object,
   conservationAreasActive: PropTypes.array.isRequired,
-  gridCellCoordinates: PropTypes.array.isRequired
+  gridCellCoordinates: PropTypes.array.isRequired,
+  show: PropTypes.bool.isRequired
 };
 
 ProtectedAreasLayer.defaultProps = { map: null };
