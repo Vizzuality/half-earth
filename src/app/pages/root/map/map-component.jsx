@@ -341,6 +341,7 @@ class MapComponent extends PureComponent {
           this.map = map;
           const height = map.camera.getMagnitude();
           const showGrid = terrainMode || height < SHOW_GRID_HEIGHT;
+          const showProtectedAreas = terrainMode && hasProtectedAreasLayer;
 
           return (
             <React.Fragment>
@@ -350,16 +351,15 @@ class MapComponent extends PureComponent {
                   <LayerManager map={map} plugin={PluginCesium} layersSpec={layers} />
               }
               {
-                terrainMode &&
-                  hasProtectedAreasLayer &&
-                  (
-                    <ProtectedAreasLayer
-                      map={map}
-                      conservationAreasActive={protectedAreasAcive}
-                      layers={protectedAreasLayers}
-                      gridCellCoordinates={cellCoordinates}
-                    />
-                  )
+                (
+                  <ProtectedAreasLayer
+                    map={map}
+                    show={showProtectedAreas}
+                    conservationAreasActive={protectedAreasAcive}
+                    layers={protectedAreasLayers}
+                    gridCellCoordinates={cellCoordinates}
+                  />
+                )
               }
               {
                 hasGridLayers && gridLayers.map(layer => (
