@@ -52,3 +52,4 @@ if (typeof exports === 'object' && typeof module === 'object')
     define([], function() { return DracoDecoderModule; });
   else if (typeof exports === 'object')
     exports["DracoDecoderModule"] = DracoDecoderModule;
+  
