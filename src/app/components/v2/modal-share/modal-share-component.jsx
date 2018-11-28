@@ -9,14 +9,16 @@ import styles from './modal-share-styles';
 
 class ModalShareComponent extends Component {
   handleLinkButtonClick = () => {
-    const { setModalShareParams, currentLocation } = this.props;
+    const { setModalShareParams, currentLocation, urlShareAnalyticsEvent } = this.props;
     setModalShareParams({ linkActive: true, urlToCopy: currentLocation });
+    urlShareAnalyticsEvent({ url: currentLocation, shareType: 'Link' });
   };
 
   handleEmbedButtonClick = () => {
-    const { setModalShareParams, currentLocation } = this.props;
+    const { setModalShareParams, currentLocation, urlShareAnalyticsEvent } = this.props;
     const embed = `<iframe id="map-iframe" src="${currentLocation}" />`;
     setModalShareParams({ linkActive: false, urlToCopy: embed });
+    urlShareAnalyticsEvent({ url: currentLocation, shareType: 'Embed' });
   };
 
   handleModalClose = () => {
@@ -120,6 +122,7 @@ ModalShareComponent.propTypes = {
   isOpen: PropTypes.bool,
   currentLocation: PropTypes.string,
   setModalShareParams: PropTypes.func.isRequired,
+  urlShareAnalyticsEvent: PropTypes.func.isRequired,
   linkActive: PropTypes.bool,
   coordinates: PropTypes.shape({}),
   orientation: PropTypes.array,
