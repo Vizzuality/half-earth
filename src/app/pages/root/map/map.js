@@ -38,9 +38,9 @@ class MapContainer extends Component {
     postRobot.on('setMapLayers', event => {
       const { layers = [] } = event.data;
       const activeLayers = layers.map(layer => ({
-        slug: layer,
+        slug: layer.slug,
         active: true,
-        opacity: 1,
+        opacity: layer.opacity || 1,
         landscapeOpacity: null,
         layerCateogry: null
       }));
