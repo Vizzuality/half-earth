@@ -27,7 +27,7 @@ class ToolbarComponent extends PureComponent {
     const infoTooltipText = {
       share: 'Click to obtain a share link, embed code, and share on social networks',
       info: 'Introduction to key features of navigation and the map',
-      borders: 'Add country borders to the map',
+      borders: 'Add country borders and labels to the map',
       halfEarth: 'The view from Half-Earth',
       location: 'Focus the map on your current location'
     };
