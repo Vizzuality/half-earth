@@ -24,7 +24,12 @@ class RootPageComponent extends React.Component {
   }
 
   componentDidMount() {
-    const { setIsTouchScreenState } = this.props;
+    const { setIsTouchScreenState, updateQueryParam } = this.props;
+    // Activate borders and labels layer on first visit
+    const activeLayers = [
+      { landscapeOpacity: null, layerCategory: null, opacity: 1, slug: 'gadm-grid' }
+    ];
+    updateQueryParam({ query: { activeLayers } });
     // detect touch screens!
     window.addEventListener(
       'touchstart',
@@ -77,7 +82,8 @@ class RootPageComponent extends React.Component {
 RootPageComponent.propTypes = {
   showSidebar: PropTypes.bool,
   showDetailView: PropTypes.bool,
-  setIsTouchScreenState: PropTypes.func.isRequired
+  setIsTouchScreenState: PropTypes.func.isRequired,
+  updateQueryParam: PropTypes.func.isRequired
 };
 RootPageComponent.defaultProps = { showSidebar: true, showDetailView: false };
 
