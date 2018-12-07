@@ -6,7 +6,7 @@
     "layer_name":"GADM",
     "description": null,
     "sql": "SELECT * FROM gadm36_countries",
-    "cartocss": "#layer { polygon-fill: #826dba; polygon-opacity: 0; } #layer::outline { line-width: 1; line-color: #ffe600; line-opacity: 0.85; } #layer::labels { text-name: [name_engli]; text-face-name: 'Open Sans Regular'; text-size: 10; text-fill: #FFFFFF; text-label-position-tolerance: 0; text-halo-radius: 1; text-halo-fill: #6F808D; text-dy: -10; text-allow-overlap: false; text-placement: point; text-placement-type: dummy; }",
+    "cartocss": "#layer { polygon-fill: #826dba; polygon-opacity: 0; } #layer::outline { line-width: 1; line-color: #ffe600; line-opacity: 0.85; } #layer::labels [zoom > 3]{ text-name: [name_engli]; text-face-name: 'Open Sans Regular'; text-size: 10; text-fill: #FFFFFF; text-label-position-tolerance: 0; text-halo-radius: 1; text-halo-fill: #6F808D; text-dy: -10; text-allow-overlap: false; text-placement: point; text-placement-type: dummy; }",
     "maxZoom": 13,
     "minZoom": 3
  }
