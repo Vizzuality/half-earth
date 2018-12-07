@@ -47,6 +47,11 @@ class ToolbarContainer extends Component {
     this.updateLayersActive(layers);
   };
 
+  handleBordersLayerClick = () => {
+    const layers = [ { slug: 'gadm-grid', active: true } ];
+    this.updateLayersActive(layers);
+  };
+
   handleCenterLocationClick = () => {
     if (hasGeolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -71,6 +76,7 @@ class ToolbarContainer extends Component {
         handleShareClick={this.handleShareClick}
         handleDatasetChange={this.handleDatasetChange}
         handleCenterLocationClick={this.handleCenterLocationClick}
+        handleBordersLayerClick={this.handleBordersLayerClick}
       />
     );
   }
