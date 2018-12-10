@@ -4,38 +4,38 @@
     "dataset": "fishing",
     "slug":"fishing-all",
     "description": null,
-    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/fishing-hours/gfw/all/{z}/{x}/{y}",
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/fishing-hours/gfw_purple/all/{z}/{x}/{y}",
     "maxZoom": 13,
     "minZoom": 3,
     "landscape_opacity": 0.75,
     "legendConfig": {
-        "items": [{
+                    "items": [{
                         "value": "0",
-                        "color": "#174664"
+                        "color": "#282052"
+                    },{
+                       "value": "",
+                       "color": "#3f3576"
+                   },{
+                       "value": "",
+                       "color": "#52478d"
+                   },{
+                        "value": "",
+                        "color": "#63589f"
                     },{
                         "value": "",
-                        "color": "#226482"
+                        "color": "#826dba"
                     },{
                         "value": "",
-                        "color": "#2D82A1"
+                        "color": "#9f82ce"
                     },{
                         "value": "",
-                        "color": "#38A0BF"
+                        "color": "#b998dd"
                     },{
                         "value": "",
-                        "color": "#44BEDD"
-                    },{
-                        "value": "",
-                        "color": "#7CCDE6"
-                    },{
-                        "value": "",
-                        "color": "#A7DCEF"
-                    },{
-                        "value": "",
-                        "color": "#CDECF7"
+                        "color": "#d1afe8"
                     },{
                         "value": "122 hours/km²",
-                        "color": "#F1FBFF"
+                        "color": "#f3e0f7"
                     }
                 ],
                     "type": "gradient",
