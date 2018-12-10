@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Icon } from 'he-components';
 import DatasetCombo from 'components/v2/dataset-combo';
+import { filenameFromPath } from 'utils';
 
 import infoIcon from 'assets/icons/icon-info.svg';
 import styles from './categories-list-styles';
@@ -44,10 +45,12 @@ class CategoriesListComponent extends Component {
   }
 
   renderFeaturedCategory(category) {
+    const imgUrl = category.imageUrl;
+    const imgFileName = filenameFromPath(imgUrl);
     return (
       <div className={styles.featuredCategory} key={category.slug}>
         <div
-          style={{ backgroundImage: `url(${category.imageUrl})` }}
+          style={{ backgroundImage: `url(img/categories/${imgFileName})` }}
           className={styles.featuredImage}
         />
         <div className={styles.featuredCategoryContentContainer}>

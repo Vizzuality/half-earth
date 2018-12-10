@@ -38,7 +38,12 @@ class DatasetComboContainer extends Component {
   };
 
   handleLayerClick = (layers, { slug, active, layerConfig }) => {
-    const { layerDefaultOpacity } = this.props;
+    const {
+      layerDefaultOpacity,
+      addLayerAnalyticsEvent,
+      removeLayerAnalyticsEvent,
+      query
+    } = this.props;
     const { landscape_opacity } = layerConfig.body && layerConfig.body;
     const activeLayers = layers.map(layer => ({
       slug: layer.slug,
@@ -49,7 +54,12 @@ class DatasetComboContainer extends Component {
     }));
 
     const activeLayer = activeLayers.find(layer => layer.active);
-    this.props.fetchModalMetaData(activeLayer.slug);
+    if (activeLayer) {
+      addLayerAnalyticsEvent({ slug, query });
+    } else {
+      removeLayerAnalyticsEvent({ slug, query });
+    }
+    fetchModalMetaData(activeLayer.slug);
 
     const { bbox } = layerConfig.body && layerConfig.body;
     if (bbox && bbox.length === 4) {
@@ -60,7 +70,12 @@ class DatasetComboContainer extends Component {
   };
 
   handleSwitchChange = (category, slug, active) => {
-    const { layerDefaultOpacity } = this.props;
+    const {
+      layerDefaultOpacity,
+      addLayerAnalyticsEvent,
+      removeLayerAnalyticsEvent,
+      query
+    } = this.props;
     let layersToUpdate = [];
     if (category.multiSelect) {
       const dataset = category.datasets.find(d => d.slug === slug);
@@ -96,7 +111,10 @@ class DatasetComboContainer extends Component {
     const layerToActive = layersToUpdate && layersToUpdate.find(l => l.active);
 
     if (layerToActive) {
-      this.props.fetchModalMetaData(layerToActive.slug);
+      fetchModalMetaData(layerToActive.slug);
+      addLayerAnalyticsEvent({ slug: layerToActive.slug, query });
+    } else {
+      removeLayerAnalyticsEvent({ slug, query });
     }
 
     const bbox = layerToActive && layerToActive.bbox;
@@ -122,6 +140,8 @@ class DatasetComboContainer extends Component {
 DatasetComboContainer.propTypes = {
   updateQueryParam: PropTypes.func.isRequired,
   fetchModalMetaData: PropTypes.func.isRequired,
+  addLayerAnalyticsEvent: PropTypes.func.isRequired,
+  removeLayerAnalyticsEvent: PropTypes.func.isRequired,
   query: PropTypes.object,
   layerDefaultOpacity: PropTypes.number
 };

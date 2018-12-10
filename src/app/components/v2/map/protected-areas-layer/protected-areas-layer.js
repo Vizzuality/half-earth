@@ -1,10 +1,12 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { isEqual, differenceBy } from 'lodash';
 
-function createPolygon({ name, type, park, coords }) {
+function createPolygon({ name, type, subtype, park, coords }) {
   return new Cesium.GeometryInstance({
-    geometry: new Cesium.PolygonGeometry({ polygonHierarchy: new Cesium.PolygonHierarchy(coords) }),
-    id: { type, name, park },
+    geometry: new Cesium.PolygonGeometry({ polygonHierarchy: { positions: coords } }),
+    // geometry: new Cesium.PolygonGeometry({ polygonHierarchy: new Cesium.PolygonHierarchy(coords) }),
+    id: { type, name, park, subtype },
     attributes: {
       color: Cesium.ColorGeometryInstanceAttribute.fromColor(
         // If alpha is 0 it does not trigger the mouse event
@@ -15,32 +17,64 @@ function createPolygon({ name, type, park, coords }) {
 }
 
 function createPolygonPrimitive(geometryInstances) {
-  return new Cesium.Primitive({
+  return new Cesium.GroundPrimitive({
     geometryInstances,
     // Needed to style each one on a different way
     appearance: new Cesium.PerInstanceColorAppearance({ flat: true }),
     interleave: true,
     vertexCacheOptimize: true,
-    compressVertices: true
+    compressVertices: true,
+    releaseGeometryInstances: false
   });
 }
 
 class ProtectedAreasLayer extends Component {
+  protectedAreasPolygonsReferences = [];
+
   componentDidMount() {
-    const { conservationAreasActive } = this.props;
-    this.renderAreas(conservationAreasActive);
+    const { conservationAreasActive, show } = this.props;
+
+    if (show) {
+      this.renderAreas(conservationAreasActive);
+    }
   }
 
-  componentDidUpdate() {
-    const { conservationAreasActive } = this.props;
-    this.renderAreas(conservationAreasActive);
+  componentDidUpdate(prevProps) {
+    const { conservationAreasActive, show } = this.props;
+    if (!show) {
+      this.removeAll();
+    }
+    if (!prevProps.show && show) {
+      if (conservationAreasActive.length > 0) this.renderAreas(conservationAreasActive);
+    }
+    if (prevProps.show && show) {
+      if (!isEqual(prevProps.conservationAreasActive, conservationAreasActive)) {
+        let newAreasToRender = [];
+        let areasToRemove = [];
+
+        if (prevProps.conservationAreasActive.length > conservationAreasActive.length) {
+          areasToRemove = differenceBy(
+            prevProps.conservationAreasActive,
+            conservationAreasActive,
+            'dataset'
+          );
+        } else if (prevProps.conservationAreasActive.length < conservationAreasActive.length) {
+          newAreasToRender = conservationAreasActive.reduce(
+            (acc, ca) =>
+              prevProps.conservationAreasActive.some(pca => isEqual(pca, ca))
+                ? acc
+                : [ ...acc, ca ],
+            []
+          );
+        }
+        if (newAreasToRender.length > 0) this.renderAreas(newAreasToRender);
+        if (areasToRemove.length > 0)
+          areasToRemove.forEach(area => this.removePolygon(area.dataset));
+      }
+    }
   }
 
-  componentWillUnmount() {
-    this.removePolygon(this.primitive);
-  }
-
-  addGridPolygons(rows) {
+  addPolygons(rows) {
     const { map } = this.props;
     const getCoordinates = row => JSON.parse(row.the_geom).coordinates[0];
 
@@ -48,12 +82,15 @@ class ProtectedAreasLayer extends Component {
       name: row.name,
       park: row.desig_eng,
       type: 'protected-area',
+      subtype: row.areaSubtype,
       coords: getCoordinates(row)[0].map(c => Cesium.Cartesian3.fromDegrees(c[0], c[1]))
     }));
     const reservesPolygons = reserves.map(r => createPolygon(r));
-    if (reservesPolygons) {
-      this.primitive = createPolygonPrimitive(reservesPolygons);
-      map.scene.primitives.add(this.primitive);
+
+    if (reservesPolygons.length > 0) {
+      const primitive = createPolygonPrimitive(reservesPolygons);
+      this.protectedAreasPolygonsReferences.push(primitive);
+      map.scene.primitives.add(primitive);
     }
   }
 
@@ -82,7 +119,7 @@ class ProtectedAreasLayer extends Component {
       const params = {
         bounds: JSON.stringify({ type: 'Polygon', coordinates: [ degreesCoords ] })
       };
-      areasToFetch.forEach((a, i) => {
+      areasToFetch.forEach(a => {
         let paramsConfig;
         try {
           paramsConfig = JSON.parse(layersConfig[a].params_config);
@@ -93,7 +130,10 @@ class ProtectedAreasLayer extends Component {
         const sql = layersConfig[a].body.layers[0].options.sql
           .replace(`{{${paramsConfig[0].key}}}`, params[paramsConfig[0].key])
           .replace(replacePercentage, '%25');
-        queries[i] = `https://${layersConfig[a].account}.carto.com/api/v2/sql?q=${sql}`;
+        queries.push({
+          areaSubtype: a,
+          query: `https://${layersConfig[a].account}.carto.com/api/v2/sql?q=${sql}`
+        });
       });
     } catch (error) {
       console.warn(error);
@@ -103,9 +143,10 @@ class ProtectedAreasLayer extends Component {
       try {
         await Promise.all(
           queries.map(async q => {
-            const { rows } = await fetch(q).then(d => d.json());
+            const { rows } = await fetch(q.query).then(d => d.json());
             if (rows) {
-              reservesByCategory.push(rows);
+              const rowsWithSubtype = rows.map(row => ({ ...row, areaSubtype: q.areaSubtype }));
+              reservesByCategory.push(rowsWithSubtype);
             }
           })
         );
@@ -118,15 +159,30 @@ class ProtectedAreasLayer extends Component {
 
     if (reservesByCategory && reservesByCategory.length) {
       reservesByCategory.forEach(group => {
-        this.addGridPolygons(group);
+        this.addPolygons(group);
       });
     }
   }
 
-  removePolygon(primitive) {
+  removePolygon(area) {
     const { map } = this.props;
     if (map) {
-      map.scene.primitives.remove(primitive);
+      const primitiveToRemove = this.protectedAreasPolygonsReferences.filter(
+        primitive => primitive.geometryInstances[0].id.subtype === area
+      );
+      // remove the last primitive from this type
+      map.scene.primitives.remove(primitiveToRemove[primitiveToRemove.length - 1]);
+    }
+  }
+
+  removeAll() {
+    const { map } = this.props;
+    const hasAreas = this.protectedAreasPolygonsReferences.length > 0;
+    if (map && hasAreas) {
+      this.protectedAreasPolygonsReferences.forEach(p => {
+        map.scene.primitives.remove(p);
+      });
+      this.protectedAreasPolygonsReferences = [];
     }
   }
 
@@ -138,7 +194,8 @@ class ProtectedAreasLayer extends Component {
 ProtectedAreasLayer.propTypes = {
   map: PropTypes.object,
   conservationAreasActive: PropTypes.array.isRequired,
-  gridCellCoordinates: PropTypes.array.isRequired
+  gridCellCoordinates: PropTypes.array.isRequired,
+  show: PropTypes.bool.isRequired
 };
 
 ProtectedAreasLayer.defaultProps = { map: null };

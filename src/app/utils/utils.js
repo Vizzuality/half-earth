@@ -10,7 +10,12 @@ export const cartoConfig = (account, cartocss, table, options = {}) => ({
     layers: [
       {
         type: 'mapnik',
-        options: { cartocss_version: '2.3.0', cartocss, sql: options.sql || `select * from ${table}`, ...options }
+        options: {
+          cartocss_version: '2.3.0',
+          cartocss,
+          sql: options.sql || `select * from ${table}`,
+          ...options
+        }
       }
     ]
   }
@@ -26,3 +31,5 @@ export const colorMap = { blue: '#0664f6', purple: '#8366e4', violet: '#9632b2' 
 export const pick = (o, k) => o && o[k] || o;
 
 export const checkBoolean = bool => typeof bool === 'string' ? bool === 'true' : bool;
+
+export const filenameFromPath = path => path.substring(path.lastIndexOf('/') + 1);

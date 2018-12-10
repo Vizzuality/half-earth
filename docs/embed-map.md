@@ -5,13 +5,13 @@
 The options available for the embed version are:
 - coordinates={x,y,z} || { west, north, east, south }
 - orientation=heading,pitch,roll
-- activeLayers=layer1,layer2
+- activeLayers=[{slug, opacity}]
 
 So for example:
 ```
-/(map|v2)?coordinates[x]=-2300162.524459119&coordinates[y]=-13745229.246067157&coordinates[z]&layer=mammals-rarity
+/(map|v2)?coordinates[x]=-2300162.524459119&coordinates[y]=-13745229.246067157&coordinates[z]&activeLayers[0][slug]=mammals-rarity&activeLayers[0][opacity]=1
 ```
-will load only the globe and leyend on the desired position with the mammals rarity layer enabled.
+will load only the globe and legend on the desired position with the mammals rarity layer enabled.
 
 ### Layers available
 - prioritization-of-places-{n} // Where n is the value of prioritization from 15 to 50
@@ -43,14 +43,14 @@ Public API:
 - Fly to using `mapFlyToCoordinates`:
 ```js
 postRobot.send(document.getElementById('map-iframe'), 'mapFlyToCoordinates', {
-  coordinates: { x: 5760629.535260948, y: 2406368.791758723, z: -2400118.3266120856 },
+  coordinates: [5760629.535260948, 2406368.791758723, -2400118.3266120856],
   orientation: [5.92122801224943, -0.29198679662794125, 6.26520814284261]
 }
 ```
 - Toggle layers using `setMapLayers`:
 ```js
 postRobot.send(document.getElementById('map-iframe'), 'setMapLayers',{
-  layers: [slugs]
+  layers: [{slug: 'layer-slug', opacity: 0.8} ]
 }
 ```
 

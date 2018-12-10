@@ -1,5 +1,10 @@
 import { createSelector, createStructuredSelector } from 'reselect';
-import { getSidebarVisibility, getCellId, getIsTerrain } from 'selectors/location-selectors';
+import {
+  getSidebarVisibility,
+  getCellId,
+  getIsTerrain,
+  selectQueryParams
+} from 'selectors/location-selectors';
 
 export const getDetailViewVisibility = createSelector(
   [ getCellId, getIsTerrain ],
@@ -8,5 +13,6 @@ export const getDetailViewVisibility = createSelector(
 
 export const mapStateToProps = createStructuredSelector({
   showSidebar: getSidebarVisibility,
-  showDetailView: getDetailViewVisibility
+  showDetailView: getDetailViewVisibility,
+  query: selectQueryParams
 });

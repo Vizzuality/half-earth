@@ -41,8 +41,9 @@ class DetailViewContainer extends Component {
   };
 
   handleTaxasChange = taxa => {
-    const { updateQueryParam, query } = this.props;
+    const { updateQueryParam, query, taxasChangeAnalyticsEvent } = this.props;
     updateQueryParam({ query: { ...query, taxa: taxa.slug } });
+    taxasChangeAnalyticsEvent(taxa.slug);
   };
 
   render() {
@@ -60,6 +61,7 @@ DetailViewContainer.propTypes = {
   query: PropTypes.object.isRequired,
   fetchCellDetail: PropTypes.func.isRequired,
   updateQueryParam: PropTypes.func.isRequired,
+  taxasChangeAnalyticsEvent: PropTypes.func.isRequired,
   cellId: PropTypes.string.isRequired
 };
 
