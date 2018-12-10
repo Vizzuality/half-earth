@@ -7,6 +7,6 @@
 .zoomControls {
   position: absolute;
   // tooltip component height plus gutter
-  top: calc(128px + #{$site-gutter * 2});
+  top: calc(160px + #{$site-gutter * 2});
   right: $site-gutter;
 }

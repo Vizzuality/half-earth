@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Sidebar } from 'he-components';
 import cx from 'classnames';
+import { getLayersActiveMerged } from 'redux-modules/datasets/datasets-utils';
 import ModalMetadata from 'components/v2/modal-metadata';
 import ModalTutorial from 'components/v2/modal-tutorial';
 import ModalInstructions from 'components/v2/modal-instructions';
@@ -23,8 +24,16 @@ class RootPageComponent extends React.Component {
     this.state = { sidebarOpen: props.showSidebar };
   }
 
+  updateLayersActive = layers => {
+    const { updateQueryParam, query = {} } = this.props;
+    const activeLayers = getLayersActiveMerged(layers, query.activeLayers);
+    updateQueryParam({ query: { ...query, activeLayers, activeMarker: undefined } });
+  };
+
   componentDidMount() {
     const { setIsTouchScreenState } = this.props;
+    // Activate borders and labels layer on first visit
+    this.updateLayersActive([ { slug: 'gadm-grid', active: true } ]);
     // detect touch screens!
     window.addEventListener(
       'touchstart',
@@ -77,8 +86,10 @@ class RootPageComponent extends React.Component {
 RootPageComponent.propTypes = {
   showSidebar: PropTypes.bool,
   showDetailView: PropTypes.bool,
-  setIsTouchScreenState: PropTypes.func.isRequired
+  setIsTouchScreenState: PropTypes.func.isRequired,
+  updateQueryParam: PropTypes.func.isRequired,
+  query: PropTypes.shape({})
 };
-RootPageComponent.defaultProps = { showSidebar: true, showDetailView: false };
+RootPageComponent.defaultProps = { showSidebar: true, showDetailView: false, query: {} };
 
 export default RootPageComponent;

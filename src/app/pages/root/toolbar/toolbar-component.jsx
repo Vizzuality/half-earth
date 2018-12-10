@@ -7,6 +7,7 @@ import { SwitchInput, Button, Icon } from 'he-components';
 import shareIcon from 'assets/icons/share-icon.svg';
 import gaficasIcon from 'assets/icons/icon-binoculars.svg';
 import helpIcon from 'assets/icons/help-icon.svg';
+import gridIcon from 'assets/icons/globe.svg';
 import locateIcon from 'assets/icons/locate.svg';
 
 import styles from './toolbar-styles.scss';
@@ -20,11 +21,13 @@ class ToolbarComponent extends PureComponent {
       handleDatasetChange,
       handleShareClick,
       handleCenterLocationClick,
+      handleBordersLayerClick,
       showLocation
     } = this.props;
     const infoTooltipText = {
       share: 'Click to obtain a share link, embed code, and share on social networks',
       info: 'Introduction to key features of navigation and the map',
+      borders: 'Add country borders and labels to the map',
       halfEarth: 'The view from Half-Earth',
       location: 'Focus the map on your current location'
     };
@@ -74,6 +77,16 @@ class ToolbarComponent extends PureComponent {
         <Tooltip
           placement="left"
           offset={{ left: 20 }}
+          overlay={<div>{infoTooltipText.borders}</div>}
+          overlayClassName="c-rc-tooltip toolbar-info-tooltip"
+        >
+          <button className={styles.button} type="button" onClick={handleBordersLayerClick}>
+            <Icon icon={gridIcon} />
+          </button>
+        </Tooltip>
+        <Tooltip
+          placement="left"
+          offset={{ left: 20 }}
           overlay={<div>{infoTooltipText.halfEarth}</div>}
           overlayClassName="c-rc-tooltip toolbar-info-tooltip"
         >
@@ -117,7 +130,8 @@ ToolbarComponent.propTypes = {
   handleInfoClick: PropTypes.func.isRequired,
   handleShareClick: PropTypes.func.isRequired,
   handleDatasetChange: PropTypes.func.isRequired,
-  handleCenterLocationClick: PropTypes.func.isRequired
+  handleCenterLocationClick: PropTypes.func.isRequired,
+  handleBordersLayerClick: PropTypes.func.isRequired
 };
 
 ToolbarComponent.defaultProps = { halfEarthDatasets: null, showLocation: false, className: '' };

@@ -242,9 +242,10 @@ class MapComponent extends PureComponent {
 
   handleGridClick = object => {
     // if we are clicking in th active grid cell do nothing
-    const { activeGridCellId } = this.props;
+    const { activeGridCellId, gridCellSelectionAnalyticsEvent } = this.props;
     if (activeGridCellId && activeGridCellId === object.id.cellId) return null;
     this.setMapTerrain(object.id.cellId, object.id.coordinates);
+    gridCellSelectionAnalyticsEvent(object.id.cellId);
     return object.id.cellId;
   };
 
@@ -341,6 +342,7 @@ class MapComponent extends PureComponent {
           this.map = map;
           const height = map.camera.getMagnitude();
           const showGrid = terrainMode || height < SHOW_GRID_HEIGHT;
+          const showProtectedAreas = terrainMode && hasProtectedAreasLayer;
 
           return (
             <React.Fragment>
@@ -350,16 +352,15 @@ class MapComponent extends PureComponent {
                   <LayerManager map={map} plugin={PluginCesium} layersSpec={layers} />
               }
               {
-                terrainMode &&
-                  hasProtectedAreasLayer &&
-                  (
-                    <ProtectedAreasLayer
-                      map={map}
-                      conservationAreasActive={protectedAreasAcive}
-                      layers={protectedAreasLayers}
-                      gridCellCoordinates={cellCoordinates}
-                    />
-                  )
+                (
+                  <ProtectedAreasLayer
+                    map={map}
+                    show={showProtectedAreas}
+                    conservationAreasActive={protectedAreasAcive}
+                    layers={protectedAreasLayers}
+                    gridCellCoordinates={cellCoordinates}
+                  />
+                )
               }
               {
                 hasGridLayers && gridLayers.map(layer => (
@@ -428,7 +429,8 @@ MapComponent.propTypes = {
   activeMarker: PropTypes.string,
   reservesTooltip: PropTypes.bool,
   activeGridCellId: PropTypes.number,
-  updateMapParams: PropTypes.func
+  updateMapParams: PropTypes.func,
+  gridCellSelectionAnalyticsEvent: PropTypes.func.isRequired
 };
 
 MapComponent.defaultProps = {

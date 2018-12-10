@@ -5,6 +5,7 @@
   bottom: calc(#{$site-gutter} + #{$map-attribution-height});
   right: $site-gutter;
   width: 400px;
+  z-index: $zforeground + 1;
 
   :global {
     .wri_api__c-legend-map {
