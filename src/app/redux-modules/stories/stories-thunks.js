@@ -1,4 +1,4 @@
-import CARTO from 'app/services/carto';
+import CONTENTFUL from 'app/services/contentful';
 import { setStoriesLoading, setStoriesReady, setStoriesError } from './stories-actions';
 
 export async function fetchStoriesThunk(dispatch, getState) {
@@ -6,7 +6,7 @@ export async function fetchStoriesThunk(dispatch, getState) {
   if (!data) {
     dispatch(setStoriesLoading());
     try {
-      const stories = await CARTO.get('stories');
+      const stories = await CONTENTFUL.getStories();
       dispatch(setStoriesReady(stories));
     } catch (e) {
       console.warn(e);
