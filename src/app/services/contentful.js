@@ -10,19 +10,22 @@ const contentfulClient = createClient({
 
 const config = {
   baseUrl: 'https://cdn.contentful.com',
-  assetsBaseUrl: 'https://images.ctfassets.net',
   space: CONTENTFUL_SPACE_ID,
   token: CONTENTFUL_TOKEN,
   env: 'master'
 };
+
+function formatText(paragraphs) {
+  return paragraphs.map(p => p.value).join(',');
+}
 
 function parseStories(stories) {
   return stories.reduce(
     async (acc, story) => {
       const parsedStory = {
         id: story.fields.position.lat + story.fields.position.lon,
-        title: story.fields.title || 'no title',
-        text: story.fields.text.content[0].content[0].value,
+        title: story.fields.title,
+        text: formatText(story.fields.text.content[0].content),
         url: story.fields.link,
         lat: story.fields.position.lat,
         lon: story.fields.position.lon
