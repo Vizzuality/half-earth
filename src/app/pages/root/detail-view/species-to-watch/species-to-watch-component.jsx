@@ -2,9 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Loading } from 'he-components';
 import cx from 'classnames';
+import { camelCase } from 'lodash';
 import MolSpeciesLink from './mol-species-link';
 
 import styles from './species-to-watch-styles';
+
+const ENDANGERED_COLORS = {
+  criticallyEndangered: '#aa3535',
+  endangered: '#bf531e',
+  vulnerable: '#a67b00',
+  nearThreatened: '#2b7153',
+  leastConcern: '#155551',
+  dataDeficient: '#495a64',
+  notEvaluated: '#495a64'
+};
 
 class SpeciesToWatchComponent extends Component {
   render() {
@@ -52,7 +63,12 @@ class SpeciesToWatchComponent extends Component {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <p className={styles.speciesCategory}>{specie.iucn}</p>
+                        <p
+                          className={styles.speciesCategory}
+                          style={{ backgroundColor: ENDANGERED_COLORS[camelCase(specie.iucn)] }}
+                        >
+                          {specie.iucn}
+                        </p>
                       </a>
                         )
                     }
