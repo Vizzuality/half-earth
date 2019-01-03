@@ -66,6 +66,10 @@ const dataPartners = [
   {
     href: 'http://eol.org/',
     image: { src: '/img/partners/partner_image/eol.png', alt: 'Encyclopedia of Life' }
+  },
+  {
+    href: 'https://carto.com/',
+    image: { src: '/img/partners/partner_image/logo_carto.png', alt: 'Carto' }
   }
 ];
 
