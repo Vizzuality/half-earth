@@ -69,7 +69,7 @@ const dataPartners = [
   },
   {
     href: 'https://carto.com/',
-    image: { src: '/img/partners/partner_image/logo_carto.png', alt: 'Carto' }
+    image: { src: '/img/partners/partner_image/logo_CARTO_solid@1x.png', alt: 'Carto' }
   }
 ];
 
