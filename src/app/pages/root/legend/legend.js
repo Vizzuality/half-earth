@@ -21,29 +21,37 @@ class LegendContainer extends Component {
   }
 
   handleRemoveLayer = ({ slug }) => {
+    const { legendInteractionAnalyticsEvent } = this.props;
     this.updateLayersActive([ { slug, active: false } ]);
+    legendInteractionAnalyticsEvent('Remove layer', `${slug}`);
   };
 
   handleChangeOpacity = (layer, opacity) => {
+    const { legendInteractionAnalyticsEvent } = this.props;
     const layersSlug = layer.dataset === 'human-pressure'
       ? this.getMultiLayers(layer.dataset)
       : layer.slug;
     this.updateLayersProperty(layersSlug, { key: 'opacity', value: opacity });
+    legendInteractionAnalyticsEvent(`Change ${layer.slug} opacity`, `${opacity}`);
   };
 
   handleChangeVisibility = (layer, visibility) => {
+    const { legendInteractionAnalyticsEvent } = this.props;
     const layersSlug = layer.dataset === 'human-pressure'
       ? this.getMultiLayers(layer.dataset)
       : layer.slug;
     this.updateLayersProperty(layersSlug, { key: 'visibility', value: visibility });
+    legendInteractionAnalyticsEvent(`Is layer visible? ${visibility}`, `${layer.slug}`);
   };
 
   handleInfoClick = layer => {
+    const { legendInteractionAnalyticsEvent } = this.props;
     this.props.setModalMetadata({
       slug: layer.slug,
       title: `${layer.name} metadata`,
       isOpen: true
     });
+    legendInteractionAnalyticsEvent('Layer info', `${layer.slug}`);
   };
 
   handleChangeOrder = datasetsOrder => {
@@ -100,6 +108,7 @@ class LegendContainer extends Component {
 LegendContainer.propTypes = {
   datasets: PropTypes.array.isRequired,
   updateQueryParam: PropTypes.func.isRequired,
+  legendInteractionAnalyticsEvent: PropTypes.func.isRequired,
   setModalMetadata: PropTypes.func.isRequired,
   query: PropTypes.object
 };
