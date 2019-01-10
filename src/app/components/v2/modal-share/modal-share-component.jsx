@@ -26,8 +26,10 @@ class ModalShareComponent extends Component {
     setModalShareParams({ isOpen: false, linkActive: true, urlToCopy: currentLocation });
   };
 
-  handleSocialMediaLink = link => {
+  handleSocialMediaLink = ({ link, icon: { id } }) => {
+    const { socialShareAnalyticsEvent } = this.props;
     window.open(link);
+    socialShareAnalyticsEvent({ linkShared: `${link}`, sharePlatform: `${id}` });
   };
 
   render() {
@@ -98,7 +100,7 @@ class ModalShareComponent extends Component {
             <div className={styles.socialMediaContainer}>
               {shareSocialMedia.map(socialMedia => (
                 <Button
-                  onClick={() => this.handleSocialMediaLink(socialMedia.link)}
+                  onClick={() => this.handleSocialMediaLink(socialMedia)}
                   theme={{
                     button: cx(styles.iconBackground, {
                       [styles.facebookIcon]: socialMedia.className === 'facebookIcon',
@@ -123,6 +125,7 @@ ModalShareComponent.propTypes = {
   currentLocation: PropTypes.string,
   setModalShareParams: PropTypes.func.isRequired,
   urlShareAnalyticsEvent: PropTypes.func.isRequired,
+  socialShareAnalyticsEvent: PropTypes.func.isRequired,
   linkActive: PropTypes.bool,
   coordinates: PropTypes.shape({}),
   orientation: PropTypes.array,

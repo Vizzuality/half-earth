@@ -46,7 +46,9 @@ class RootPageComponent extends React.Component {
   }
 
   handleOnToggle = sidebarOpen => {
+    const { sidebarAnalyticsEvent } = this.props;
     this.setState({ sidebarOpen });
+    sidebarAnalyticsEvent(sidebarOpen);
   };
 
   render() {
@@ -88,6 +90,7 @@ RootPageComponent.propTypes = {
   showDetailView: PropTypes.bool,
   setIsTouchScreenState: PropTypes.func.isRequired,
   updateQueryParam: PropTypes.func.isRequired,
+  sidebarAnalyticsEvent: PropTypes.func.isRequired,
   query: PropTypes.shape({})
 };
 RootPageComponent.defaultProps = { showSidebar: true, showDetailView: false, query: {} };
