@@ -8,7 +8,7 @@ import styles from './map-tooltip-styles.scss';
 
 const ACTION_TEXT = { story: 'go to story', place: 'go to landscape view' };
 
-const BACKGROUND_URL = { story: 'img/stories/', place: 'img/places/' };
+const BACKGROUND_URL = { story: 'http:', place: 'img/places/' };
 
 const TERRAIN_CAMERA_OFFSET = new Cesium.HeadingPitchRange(
   Cesium.Math.toRadians(0.0),
