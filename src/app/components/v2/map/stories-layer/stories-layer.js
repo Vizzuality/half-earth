@@ -35,9 +35,9 @@ class StoriesLayer extends Component {
           image: 'img/stories-icon.png',
           scale: 0.8,
           id: {
-            id: story.lat + story.lon,
+            id: story.id,
             title: story.title,
-            text: story.subtitle,
+            text: story.text,
             url: story.url,
             image: story.image,
             lat: story.lat,
