@@ -39,7 +39,9 @@ class ToolbarContainer extends Component {
   };
 
   handleInfoClick = () => {
+    const { toolbarAnalyticsEvent } = this.props;
     this.props.setModalTutorialParams({ isOpen: true });
+    toolbarAnalyticsEvent('How to navigate', 'Open info modal');
   };
 
   handleDatasetChange = ({ slug, active }) => {
@@ -54,6 +56,7 @@ class ToolbarContainer extends Component {
 
   handleCenterLocationClick = () => {
     if (hasGeolocation) {
+      const { toolbarAnalyticsEvent } = this.props;
       navigator.geolocation.getCurrentPosition(position => {
         const { updateQueryParam, query = {} } = this.props;
         const { x, y, z } = Cesium.Cartesian3.fromDegrees(
@@ -64,6 +67,7 @@ class ToolbarContainer extends Component {
         const coordinates = { x, y, z };
         updateQueryParam({ query: { ...query, coordinates } });
       });
+      toolbarAnalyticsEvent('Center on location', null);
     }
   };
 
@@ -88,7 +92,8 @@ ToolbarContainer.propTypes = {
   setModalInstructionsParams: PropTypes.func.isRequired,
   setModalTutorialParams: PropTypes.func.isRequired,
   setModalMetadata: PropTypes.func.isRequired,
-  setModalShareParams: PropTypes.func.isRequired
+  setModalShareParams: PropTypes.func.isRequired,
+  toolbarAnalyticsEvent: PropTypes.func.isRequired
 };
 
 ToolbarContainer.defaultProps = { query: {} };
