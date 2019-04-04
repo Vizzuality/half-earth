@@ -16,7 +16,10 @@ const publicPath = join(basePath, 'public');
 const appPath = resolve(sourcePath, 'app');
 
 const sassConfig = [
-  { loader: 'css-loader', query: { modules: true, localIdentName: '[name]__[local]__[hash:base64:5]' } },
+  {
+    loader: 'css-loader',
+    query: { modules: true, localIdentName: '[name]__[local]__[hash:base64:5]' }
+  },
   { loader: 'postcss-loader' },
   { loader: `sass-loader?includePaths[]='${appPath}'` }
 ];
@@ -34,7 +37,10 @@ module.exports = {
     },
     module: {
       rules: [
-        { test: /\.css$/, use: [ { loader: 'style-loader', options: { insertAt: 'top' } }, 'css-loader' ] },
+        {
+          test: /\.css$/,
+          use: [ { loader: 'style-loader', options: { insertAt: 'top' } }, 'css-loader' ]
+        },
         { test: /\.(js|jsx)$/, include: sourcePath, loader: 'babel-loader' },
         { test: /\.svg$/, use: [ { loader: 'svg-sprite-loader' } ] },
         {
@@ -45,7 +51,12 @@ module.exports = {
     },
     resolve: {
       extensions: [ '.js', '.jsx', '.css', '.scss', '.sass' ],
-      modules: [ resolve(sourcePath), resolve(publicPath), resolve(sourcePath, 'app'), 'node_modules' ],
+      modules: [
+        resolve(sourcePath),
+        resolve(publicPath),
+        resolve(sourcePath, 'app'),
+        'node_modules'
+      ],
       plugins: [ new DirectoryNamedWebpackPlugin(true) ],
       alias: {
         app: 'app',
@@ -68,7 +79,8 @@ module.exports = {
         MAPBOX_TOKEN: null,
         CONTENTFUL_SPACE_ID: null,
         CONTENTFUL_TOKEN: null,
-        MOL_API_KEY: null
+        MOL_API_KEY: null,
+        ION_TOKEN: null
       })
     ],
     resolveLoader: { modules: [ 'node_modules' ] },
