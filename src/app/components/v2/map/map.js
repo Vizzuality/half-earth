@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { mapValues, isEqual } from 'lodash';
 import CesiumMapComponent from './map-component';
 
-// const { MAPBOX_TOKEN } = process.env;
 const { Cesium } = window;
-const mapId = `map-${new Date().getTime()}`;
 
+const { ION_TOKEN } = process.env;
+Cesium.Ion.defaultAccessToken = ION_TOKEN;
+const mapId = `map-${new Date().getTime()}`;
 const disablePanning = v => {
   const { scene } = v;
   scene.screenSpaceCameraController.enableRotate = false;
@@ -20,9 +21,9 @@ const disablePanning = v => {
 class CesiumComponent extends Component {
   static mapConfig = {
     geocoder: false,
+    baseLayerPicker: false,
     homeButton: false,
     sceneModePicker: false,
-    baseLayerPicker: false,
     navigationHelpButton: false,
     animation: false,
     timeline: false,
