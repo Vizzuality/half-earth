@@ -1,0 +1,37 @@
+{
+    "is_tile_layer": true,
+    "dataset": "bumblebees",
+    "layer_name": "Rarity",
+    "slug":"bumblebees-rarity",
+    "description": null,
+    "url": "",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+        "items": [{
+                        "value": "low",
+                        "color": "#309B7E"
+                    },{
+                        "value": "",
+                        "color": "#299292"
+                    },{
+                        "value": "",
+                        "color": "#2289A6"
+                    },{
+                        "value": "",
+                        "color": "#1B7FBA"
+                    },{
+                        "value": "",
+                        "color": "#1476CE"
+                    },{
+                        "value": "",
+                        "color": "#0D6DE2"
+                    },{
+                        "value": "high",
+                        "color": "#0664f6"
+                    }
+                ],
+                    "type": "gradient"
+        }
+
+ }

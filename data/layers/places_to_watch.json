@@ -1,0 +1,24 @@
+{
+    "slug":"places-to-watch",
+    "is_tile_layer": false,
+    "layer_name": "Places to watch",
+    "dataset":"places-to-watch",
+    "category":"terrestrial",
+    "description": null,
+    "global": "true",
+    "sql": "SELECT * FROM places_to_watch",
+    "cartocss": "#layer { polygon-opacity: 0; ::outline { line-color: #FFFFFF; line-width: 0; line-opacity: 0.75; } }",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+                     "items": [
+                                 {
+                                 "color": "#FFFFFF",
+                                 "icon": "https://half-earth-staging.vizzuality.com/img/icons/flag-icon.png",
+                                 "name": "\"The Best Places in the Biosphere\""
+                                 }
+                             ],
+                     "type": "basic",
+                     "title":"The Best Places in the Biosphere"
+                   }
+ }

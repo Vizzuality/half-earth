@@ -1,0 +1,18 @@
+{
+    "is_tile_layer": false,
+    "slug":"protected-community-interact",
+    "category": null,
+    "dataset": "grids",
+    "layer_name":"Community-based conservation areas interactions",
+    "description": null,
+    "sql": "WITH b as (SELECT st_setsrid(st_geomfromgeojson('{{bounds}}'), 4326) as the_geom) SELECT ST_AsGeoJSON(cca.the_geom) as the_geom, cca.name, cca.status, cca.source FROM community_conservation_areas as cca, b WHERE ST_Intersects(cca.the_geom, b.the_geom)",
+    "cartocss": "#layer { polygon-opacity: 0; ::outline { line-color: #FFFFFF; line-width: 1; line-opacity: 0.75; } }",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "params_config": [
+                        {
+                        "key": "bounds",
+                        "required": true
+                        }
+                    ]
+ }

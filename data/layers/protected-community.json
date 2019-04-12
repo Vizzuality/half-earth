@@ -1,0 +1,48 @@
+{
+    "slug":"community-conservation",
+    "is_tile_layer": false,
+    "layer_name": "Community-based conservation areas",
+    "dataset":"protected-community",
+    "description": null,
+    "global": "true",
+    "sql": "SELECT * FROM community_conservation_areas",
+    "cartocss": "#community_conservation_areas[source='non_indg_wdpa']{ polygon-opacity: 0.7; polygon-fill: #B9870D;} #community_conservation_areas[source='wdpa']{ polygon-opacity: 0.7; polygon-fill: #AA5609;} #community_conservation_areas[source='raisg']{ polygon-opacity: 0.7; polygon-fill: #AA2709;}",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "landscape_opacity": 0.9,
+    "legendConfig": {
+                     "items": [
+                                {
+                                 "color": "#AA2709",
+                                 "name": "Indigenous RAISG"
+                                },{
+                                 "color": "#AA5609",
+                                 "name": "Indigenous WDPA"
+                                },{
+                                 "color": "#B9870D",
+                                 "name": "Non-Indigenous WDPA"
+                                }
+
+                             ],
+                     "type": "basic",
+                     "title": "Community-based protected areas"
+                   },
+    "interactionConfig": {
+    "output": [
+                {
+                "column": "name",
+                "prefix": "",
+                "property": "Name",
+                "suffix": "",
+                "type": "string"
+                },
+                {
+                "column": "status",
+                "prefix": "",
+                "property": "Status",
+                "suffix": "",
+                "type": "string"
+                }
+            ]
+    }
+ }

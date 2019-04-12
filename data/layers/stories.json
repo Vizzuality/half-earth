@@ -1,0 +1,24 @@
+{
+    "slug":"stories",
+    "is_tile_layer": false,
+    "layer_name": "Stories",
+    "dataset":"stories",
+    "category":"he-movement",
+    "description": null,
+    "global": "true",
+    "sql": "SELECT * FROM stories",
+    "cartocss": "#layer { polygon-opacity: 0; ::outline { line-color: #FFFFFF; line-width: 0; line-opacity: 0.75; } }",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+                     "items": [
+                                 {
+                                 "color": "#FFFFFF",
+                                 "icon": "https://half-earth-staging.vizzuality.com/img/stories-icon.png",
+                                 "name": "What's important about these places?"
+                                 }
+                             ],
+                     "type": "basic",
+                     "title": ""
+                   }
+ }

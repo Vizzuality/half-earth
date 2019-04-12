@@ -1,0 +1,45 @@
+{
+    "is_tile_layer": true,
+    "layer_name": "Other",
+    "dataset": "fishing",
+    "slug":"fishing-other",
+    "description": null,
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/fishing-hours/gfw_purple/other/{z}/{x}/{y}",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "landscape_opacity": 0.75,
+    "legendConfig": {
+                    "items": [{
+                        "value": "0",
+                        "color": "#282052"
+                    },{
+                       "value": "",
+                       "color": "#3f3576"
+                   },{
+                       "value": "",
+                       "color": "#52478d"
+                   },{
+                        "value": "",
+                        "color": "#63589f"
+                    },{
+                        "value": "",
+                        "color": "#826dba"
+                    },{
+                        "value": "",
+                        "color": "#9f82ce"
+                    },{
+                        "value": "",
+                        "color": "#b998dd"
+                    },{
+                        "value": "",
+                        "color": "#d1afe8"
+                    },{
+                        "value": "13 hours/km²",
+                        "color": "#f3e0f7"
+                    }
+                ],
+                    "type": "gradient",
+                    "title": "Other fishing types"
+        }
+
+ }

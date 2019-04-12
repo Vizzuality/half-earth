@@ -1,0 +1,45 @@
+{
+    "is_tile_layer": true,
+    "layer_name": "Richness",
+    "dataset": "mammals",
+    "category": "terrestrial",
+    "slug":"mammals-rich",
+    "description": null,
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/richness/mammals/{z}/{x}/{y}",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+        "items": [ {
+                    "value": "0",
+                    "color": "#0664f6"
+                },{
+                    "value": "",
+                    "color": "#0572d6"
+                },{
+                    "value": "",
+                    "color": "#0380b5"
+                },{
+                    "value": "",
+                    "color": "#028e95"
+                },{
+                    "value": "",
+                    "color": "#009c74"
+                },{
+                    "value": "",
+                    "color": "#3fae57"
+                },{
+                    "value": "",
+                    "color": "#7fc03a"
+                },{
+                    "value": "",
+                    "color": "#bed11d"
+                },{
+                    "value": "225 species",
+                    "color": "#fde300"
+                }
+                ],
+                    "type": "gradient",
+                    "title": "Mammals richness"
+        }
+
+ }

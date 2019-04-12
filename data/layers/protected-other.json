@@ -1,0 +1,41 @@
+{
+    "slug":"protected-other",
+    "is_tile_layer": false,
+    "layer_name": "Other",
+    "dataset":"protected-other",
+    "description": null,
+    "global": "true",
+    "sql": "SELECT * FROM wdpa_protected_areas WHERE desig_eng not like '%Biosphere%' AND iucn_cat not in ('Ia', 'Ib', 'II', 'III') AND desig_eng not like '%Commun%' AND desig_eng not like '%Conservanc%' AND desig_eng not like '%Local%' AND desig_eng not like '%Region%' AND desig_eng not like '%Trust%' AND desig_eng not like '%Conservator%' AND desig_eng not like '%Private%' AND desig_eng not like '%Nature Center%' AND desig_eng not like '%Indigenous%' AND desig_eng not like '%Aborig%'",
+    "cartocss": "#wdpa_protected_areas { polygon-opacity: 0.7; polygon-fill: #F2AB52;}",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "landscape_opacity": 0.9,
+    "legendConfig": {
+                     "items": [
+                                 {
+                                 "color": "#F2AB52",
+                                 "name": "Other"
+                                 }
+                             ],
+                     "type": "basic",
+                     "title": "Other protected areas"
+                   },
+    "interactionConfig": {
+    "output": [
+                {
+                "column": "name",
+                "prefix": "",
+                "property": "Name",
+                "suffix": "",
+                "type": "string"
+                },
+                {
+                "column": "desig_eng",
+                "prefix": "",
+                "property": "Type",
+                "suffix": "",
+                "type": "string"
+                }
+            ]
+    }
+ }

@@ -1,0 +1,24 @@
+{
+    "slug":"signed-pledges",
+    "is_tile_layer": false,
+    "layer_name": "Signed pledges",
+    "dataset":"pledges",
+    "category":"he-movement",
+    "description": null,
+    "global": "true",
+    "sql": "SELECT * FROM pledge_locations",
+    "cartocss": "#layer { polygon-opacity: 0; ::outline { line-color: #FFFFFF; line-width: 0; line-opacity: 0.75; } }",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+                     "items": [
+                                 {
+                                 "color": "#FFFFFF",
+                                 "icon": "https://half-earth-staging.vizzuality.com/img/pledges-point.png",
+                                 "name": "Signed pledges"
+                                 }
+                             ],
+                     "type": "basic",
+                     "title":"Where are you on the map?"
+                   }
+ }

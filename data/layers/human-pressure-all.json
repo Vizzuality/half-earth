@@ -1,0 +1,53 @@
+{
+    "is_tile_layer": true,
+    "layer_name": "All land-use pressures",
+    "dataset": "human-pressure",
+    "category":"human",
+    "slug":"human-pressures-all",
+    "description": null,
+    "global": "true",
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/human-pressures/esa/1km/100p-layers/all/{z}/{x}/{y}",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "landscape_opacity": 1.0,
+    "legendConfig": {
+                     "items": [{
+                                     "value": "0",
+                                     "color": "#282052"
+                                 },{
+                                    "value": "",
+                                    "color": "#3f3576"
+                                },{
+                                    "value": "",
+                                    "color": "#52478d"
+                                },{
+                                     "value": "",
+                                     "color": "#63589f"
+                                 },{
+                                     "value": "",
+                                     "color": "#826dba"
+                                 },{
+                                     "value": "",
+                                     "color": "#9f82ce"
+                                 },{
+                                     "value": "",
+                                     "color": "#b998dd"
+                                 },{
+                                     "value": "",
+                                     "color": "#d1afe8"
+                                 },{
+                                     "value": "100  % use",
+                                     "color": "#f3e0f7"
+                                 }
+                             ],
+                                 "type": "gradient",
+                                 "title": "All land-use pressures"
+                     }
+   }
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+{
+    "is_tile_layer": true,
+    "layer_name": "Rarity",
+    "dataset": "conifers",
+    "category": "terrestrial",
+    "slug":"conifers-rarity",
+    "description": null,
+    "url": "https://storage.googleapis.com/cdn.mol.org/half-earth/tiles/phase2/rarity/conifers/{z}/{x}/{y}",
+    "maxZoom": 13,
+    "minZoom": 3,
+    "legendConfig": {
+        "items": [ {
+                    "value": "low",
+                    "color": "#0664f6"
+                },{
+                    "value": "",
+                    "color": "#0572d6"
+                },{
+                    "value": "",
+                    "color": "#0380b5"
+                },{
+                    "value": "",
+                    "color": "#028e95"
+                },{
+                    "value": "",
+                    "color": "#009c74"
+                },{
+                    "value": "",
+                    "color": "#3fae57"
+                },{
+                    "value": "",
+                    "color": "#7fc03a"
+                },{
+                    "value": "",
+                    "color": "#bed11d"
+                },{
+                    "value": "high",
+                    "color": "#fde300"
+                }
+                ],
+                    "type": "gradient",
+                    "title": "Conifers rarity"
+        }
+
+ }
